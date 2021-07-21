@@ -54,6 +54,7 @@ path = [
   # Packages
   '/home/taupiqueur/.cargo/bin',
   '/home/taupiqueur/.gem/ruby/3.0.0/bin',
+  '/home/taupiqueur/.rvm/bin',
   'node_modules/.bin',
   '/home/taupiqueur/.npm-packages/bin',
   '/home/taupiqueur/.yarn/bin',

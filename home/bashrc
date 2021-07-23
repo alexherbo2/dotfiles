@@ -231,15 +231,9 @@ alias ta='exa --tree --all'
 # Batch
 # https://github.com/alexherbo2/batch
 alias batch='batch --editor kak'
-rn() {
-  batch --editor kak --map 'rename "$1" "$2"'
-}
-rl() {
-  batch --editor kak --map 'relink "$1" "$2"'
-}
-cv() {
-  batch --editor kak --map 'convert "$1" "$2"'
-}
+alias rn='batch --map '"'"'rename "$1" "$2"'"'"''
+alias cv='batch --map '"'"'convert "$1" "$2"'"'"''
+alias rl='batch --map '"'"'relink "$1" "$2"'"'"''
 
 # Chronic
 # https://github.com/alexherbo2/chronic

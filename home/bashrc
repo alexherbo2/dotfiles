@@ -215,6 +215,26 @@ gc() {
   gh repo clone "$repository" ~/repositories/github.com/"$repository"
 }
 
+gg() {
+  git add .
+  git discard
+  git-gc-all-ferocious
+  git push
+  git pull
+}
+
+GG() {
+  for repository in ~/projects/* ~/projects/fork/* ~/projects/dracula/* ~/gist/* ~/repositories/github.com/*/* ~/repositories/gitlab.com/*/* ~/repositories/gitlab.freedesktop.org/*/*
+  do
+    cd $repository
+    pwd | pastel paint green
+    git add .
+    git discard
+    git-gc-all-ferocious
+    git pull
+  done
+}
+
 # Broot
 # https://dystroy.org/broot/
 alias .='br .'
@@ -231,15 +251,9 @@ alias ta='exa --tree --all'
 # Batch
 # https://github.com/alexherbo2/batch
 alias batch='batch --editor kak'
-rn() {
-  batch --editor kak --map 'rename "$1" "$2"'
-}
-rl() {
-  batch --editor kak --map 'relink "$1" "$2"'
-}
-cv() {
-  batch --editor kak --map 'convert "$1" "$2"'
-}
+alias rn='batch --map '"'"'rename "$1" "$2"'"'"''
+alias cv='batch --map '"'"'convert "$1" "$2"'"'"''
+alias rl='batch --map '"'"'relink "$1" "$2"'"'"''
 
 # Chronic
 # https://github.com/alexherbo2/chronic

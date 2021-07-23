@@ -277,6 +277,14 @@ startup = [
     gh repo clone $repository `~/repositories/github.com/{{$repository}}`
   }
 
+  def gg [] {
+    git add .
+    git discard
+    git-gc-all-ferocious
+    git push
+    git pull
+  }
+
   # Broot
   # https://dystroy.org/broot/
   def br [...rest] {

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Paste content from the clipboard.
+OS=$(uname -s)
+case "$OS" in
+  Darwin) pbpaste ;;
+  Linux|FreeBSD|OpenBSD) wl-paste ;;
+esac

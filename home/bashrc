@@ -114,7 +114,7 @@ alias curl='curl -sSL'
 alias x='arc unarchive'
 
 # https://github.com/bugaevc/wl-clipboard
-alias yk='wl-copy'
+alias yk='clipboard-copy'
 
 # wf-recorder
 # https://github.com/ammen99/wf-recorder
@@ -298,7 +298,7 @@ alias pe='password edit'
 pm() {
   password menu | fzf --header='Select a password to copy' --prompt='(p)>' |
   xargs password get -- |
-  wl-copy
+  clipboard-copy
 }
 
 # Ruby on Rails

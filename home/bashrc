@@ -1,3 +1,147 @@
+# Bash
+# https://gnu.org/software/bash/
+
+# Starship
+# https://starship.rs
+eval "$(starship init bash)"
+
+# McFly
+# https://github.com/cantino/mcfly
+eval "$(mcfly init bash)"
+
+# Aliases ──────────────────────────────────────────────────────────────────────
+
+alias p=echo
+alias _='rm -Rf'
+alias md='mkdir -p'
+alias cp='cp -R'
+
+# NixOS
+# https://nixos.org
+alias nix-update='sudo nixos-rebuild switch'
+alias nix-upgrade='sudo nixos-rebuild switch --upgrade --keep-going --fallback'
+alias nix-gc='sudo nix-collect-garbage --delete-old'
+
+# Compiling
+alias nix-cargo="nix-shell --run 'cargo build --release' --packages pkg-config rustup openssl"
+alias nix-shards="nix-shell --run 'shards build --release --production' --packages pkg-config crystal shards"
+
+# nginx
+# https://nginx.org
+alias nginx='sudo nginx -c /etc/nginx/nginx.conf'
+
+# procs
+# https://github.com/dalance/procs
+alias ps=procs
+
+# htop
+# https://htop.dev
+alias top=htop
+
+# rsync
+# https://rsync.samba.org
+alias rsync='rsync --archive --compress --hard-links --info=progress2 --delete'
+
+# bat
+# https://github.com/sharkdp/bat
+alias cat=bat
+
+# fd
+# https://github.com/sharkdp/fd
+alias find=fd
+
+# ripgrep
+# https://github.com/BurntSushi/ripgrep
+alias grep='rg --smart-case'
+
+# curl
+# https://curl.haxx.se
+alias curl='curl -sSL'
+
+# archiver
+# https://github.com/mholt/archiver
+alias x='arc unarchive'
+
+# Zellij
+# https://zellij.dev
+alias mux=zellij
+
+# kakoune.cr
+# https://github.com/alexherbo2/kakoune.cr
+alias k='kcr edit'
+alias K='kcr-fzf-shell'
+alias KK='K --working-directory .'
+alias ks='kcr shell --session'
+alias kl='kcr list'
+alias a='kcr attach'
+
+# Git
+# https://git-scm.com
+alias g=git
+
+# gitui
+# https://github.com/extrawurst/gitui
+alias G=gitui
+
+# GitHub CLI
+# https://cli.github.com
+alias gist='gh gist create --web'
+alias gv='gh repo view --web'
+
+gc() {
+  gh repo clone "$1" ~/repositories/github.com/"$1"
+}
+
+gg() {
+  git add .
+  git discard
+  git-gc-all-ferocious
+  git push
+  git pull
+}
+
+# exa
+# https://the.exa.website
+alias l='exa --icons'
+alias la='exa --icons --all'
+alias ll='exa --icons --git --long'
+alias lla='exa --icons --git --long --all'
+alias T='exa --tree'
+alias ta='exa --tree --all'
+
+# Batch
+# https://github.com/alexherbo2/batch
+alias batch='batch --editor kak'
+alias rn='batch --map '"'"'rename "$1" "$2"'"'"''
+alias cv='batch --map '"'"'convert "$1" "$2"'"'"''
+alias rl='batch --map '"'"'relink "$1" "$2"'"'"''
+
+# File manager
+alias o=dolphin
+
+# Web browser
+alias b=chromium
+
+# mpv
+# https://mpv.io
+alias m=mpv
+alias ms='mpv -shuffle'
+
+# youtube-dl
+# https://ytdl-org.github.io/youtube-dl/
+alias y=youtube-dl
+
+# Pandoc
+# https://pandoc.org
+alias pandoc='pandoc --pdf-engine tectonic'
+
+# Ruby on Rails
+# https://rubyonrails.org
+alias r=rails
+alias rr='rails routes --grep'
+
+# Functions ────────────────────────────────────────────────────────────────────
+
 # RVM
 # https://rvm.io
 [ -s ~/.rvm/scripts/rvm ] && . ~/.rvm/scripts/rvm

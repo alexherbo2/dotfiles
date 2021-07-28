@@ -1,3 +1,64 @@
-# macOS
+# Bash
+# https://gnu.org/software/bash/
+
+# Paths ────────────────────────────────────────────────────────────────────────
+
+# Prepend the given directory to paths.
+path() {
+  export PATH=$1:$PATH
+}
+
+# Home
+path ~/configuration/bin
+path ~/configuration/local/bin
+path ~/.local/bin
+
+# Projects
+# kakoune.cr – https://github.com/alexherbo2/kakoune.cr
+path ~/projects/kakoune.cr/bin
+path ~/projects/kakoune.cr/share/kcr/commands/edit
+path ~/projects/kakoune.cr/share/kcr/commands/fzf
+
+# Batch – https://github.com/alexherbo2/batch
+path ~/projects/batch/bin
+path ~/projects/batch/share/batch/scripts
+path ~/projects/batch.kak/bin
+
+# Chronic – https://github.com/alexherbo2/chronic
+path ~/projects/chronic/bin
+
+# Tools – https://github.com/alexherbo2/{tool}
+path ~/projects/snippets/bin
+path ~/projects/launcher/bin
+path ~/projects/password/bin
+
+# Tools – https://github.com/alexherbo2/{tool}
+path ~/projects/git-tools/bin
+path ~/projects/ffmpeg-tools/bin
+path ~/projects/sway-tools/bin
+
+# Kakoune – https://kakoune.org
+path ~/repositories/github.com/mawww/kakoune/src
+path ~/repositories/github.com/kak-lsp/kak-lsp/target/release
+
+# Packages
+path ~/.cargo/bin
+
+# Environment variables ────────────────────────────────────────────────────────
+
+# Desktop environment
+# Get icons.
+export XDG_CURRENT_DESKTOP=kde
+
+# Applications
+export EDITOR='kcr edit'
+export BROWSER=chromium
+export KAKOUNE_POSIX_SHELL=/bin/dash
+
+# fzf – https://github.com/junegunn/fzf
+export FZF_DEFAULT_OPTS='--multi --layout=reverse --preview-window=down:60%'
+
+# macOS ────────────────────────────────────────────────────────────────────────
+
 # Homebrew – https://brew.sh
 [ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"

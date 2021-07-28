@@ -115,7 +115,7 @@
     # In other words, set a bunch of options for us.
     # https://search.nixos.org/options?query=isNormalUser
     isNormalUser = true;
-    shell = pkgs.nushell;
+    shell = pkgs.bash;
     extraGroups = [
       "audio"
       "disk"
@@ -234,6 +234,7 @@
 
     nushell # https://nushell.sh
     dash # http://gondor.apana.org.au/~herbert/dash/
+    bash # https://gnu.org/software/bash/
 
     # Shell prompts
     starship # https://starship.rs

@@ -208,10 +208,8 @@
     konsole # https://konsole.kde.org
 
     # Terminal multiplexers
-    # zellij
-    # https://zellij.dev
-    # tab-rs
-    # https://github.com/austinjones/tab-rs
+    zellij # https://zellij.dev
+    tab-rs # https://github.com/austinjones/tab-rs
     pueue # https://github.com/Nukesor/pueue
 
     # Fuzzy finders
@@ -254,8 +252,7 @@
 
     dolphin # https://apps.kde.org/en/dolphin
     broot # https://dystroy.org/broot/
-    # xplr
-    # https://github.com/sayanarijit/xplr
+    xplr # https://github.com/sayanarijit/xplr
     # sidetree
     # https://github.com/topisani/sidetree
 
@@ -390,8 +387,7 @@
     mupen64plus # Nintendo 64 – https://mupen64plus.org
     # m64p
     # Mupen64Plus GUI – https://github.com/loganmc10/m64p
-    # sameboy
-    # Game Boy and Game Boy Color – https://sameboy.github.io
+    sameboy # Game Boy and Game Boy Color – https://sameboy.github.io
     mgba # GBA – https://mgba.io
     mednafen # PlayStation 1 – https://mednafen.github.io
     mednaffe # Mednafen GUI – https://github.com/AmatCoder/mednaffe

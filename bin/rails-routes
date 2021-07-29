@@ -1,4 +1,0 @@
-#!/bin/sh
-
-# Rails – Show routes
-rails routes --grep "$*"

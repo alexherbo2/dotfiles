@@ -5,8 +5,8 @@ set open_cmd 'open "${sidetree_entry}"'
 map <c-c> quit
 map H cd ..
 map L cd
-map $ shell 'alacritty --working-directory "${sidetree_entry}" &'
+map $ shell 'alacritty --working-directory "${sidetree_entry}" < /dev/null > /dev/null 2>&1 &'
 map / shell 'kcr send cd "${sidetree_entry}"'
 map e shell 'kcr edit "${sidetree_entry}"'
 map x shell 'arc unarchive "${sidetree_entry}"'
-map m shell 'mpv "${sidetree_entry}" &'
+map m shell 'mpv -no-terminal "${sidetree_entry}" < /dev/null > /dev/null 2>&1 &'

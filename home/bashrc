@@ -145,3 +145,9 @@ alias rr='rails routes --grep'
 # RVM
 # https://rvm.io
 [ -s ~/.rvm/scripts/rvm ] && . ~/.rvm/scripts/rvm
+
+# macOS ────────────────────────────────────────────────────────────────────────
+
+# Homebrew – https://brew.sh
+# https://maxfierke.com/blog/posts/so-you-want-to-compile-crystal-on-arm64-macos
+alias ibrew='arch -x86_64 /usr/local/bin/brew'

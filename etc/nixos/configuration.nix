@@ -283,7 +283,7 @@
     # For testing
     google-chrome # https://google.com/chrome/
     firefox # https://mozilla.org/firefox/
-    # opera # https://opera.com
+    opera # https://opera.com
     vivaldi # https://vivaldi.com
     brave # https://brave.com
 
@@ -318,7 +318,7 @@
     # Document converters
     pandoc # https://pandoc.org
     tectonic # https://tectonic-typesetting.github.io
-    # img2pdf # https://gitlab.mister-muffin.de/josch/img2pdf
+    img2pdf # https://gitlab.mister-muffin.de/josch/img2pdf
 
     # Desktop environments ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 

@@ -40,6 +40,7 @@ path ~/projects/sway-tools/bin
 # Kakoune – https://kakoune.org
 path ~/repositories/github.com/mawww/kakoune/src
 path ~/repositories/github.com/kak-lsp/kak-lsp/target/release
+path ~/repositories/github.com/topisani/sidetree/target/release
 
 # Packages
 path ~/.cargo/bin

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Open a file or folder.
+OS=$(uname -s)
+case "$OS" in
+  Darwin) /usr/bin/open "$@" ;;
+  Linux|FreeBSD|OpenBSD) xdg-open "$@" ;;
+esac

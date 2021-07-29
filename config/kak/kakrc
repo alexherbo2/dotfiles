@@ -101,7 +101,7 @@ map -docstring 'math' global normal = ':math<ret>'
 # Windowing
 map -docstring 'new client' global normal <c-t> ':new<ret>'
 map -docstring 'terminal' global normal <c-n> ':connect-terminal<ret>'
-map -docstring 'file explorer' global normal <c-e> ':$ dolphin .<ret>'
+map -docstring 'file explorer' global normal <c-e> ':> sidetree<ret>'
 map -docstring 'file picker' global normal <c-f> ':+ kcr-fzf-files<ret>'
 map -docstring 'buffer picker' global normal <c-b> ':+ kcr-fzf-buffers<ret>'
 map -docstring 'grep picker' global normal <c-g> ':+ kcr-fzf-grep<ret>'

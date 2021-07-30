@@ -13,7 +13,7 @@ Host paris8
   User ili900
   HostName bocal.cs.univ-paris8.fr
 
-Host trustpair
+Host git.trustpair.fr
   User mablasou
   HostName git.trustpair.fr
   IdentityFile ~/.ssh/id_rsa_trustpair

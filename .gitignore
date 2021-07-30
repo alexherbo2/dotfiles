@@ -1,4 +1,5 @@
 home/ssh/id_rsa
+home/ssh/id_rsa_*
 home/ssh/known_hosts
 home/icons
 home/thelounge/certificates

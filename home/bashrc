@@ -66,6 +66,13 @@ alias x='arc unarchive'
 # https://zellij.dev
 alias mux=zellij
 
+# tab
+# https://github.com/austinjones/tab-rs
+alias t=tab
+alias tl='tab --list'
+alias tw='tab --close'
+alias tW='tab --shutdown'
+
 # kakoune.cr
 # https://github.com/alexherbo2/kakoune.cr
 alias k='kcr edit'

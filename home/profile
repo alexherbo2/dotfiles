@@ -28,11 +28,6 @@ path ~/projects/batch.kak/bin
 path ~/projects/chronic/bin
 
 # Tools – https://github.com/alexherbo2/{tool}
-path ~/projects/snippets/bin
-path ~/projects/launcher/bin
-path ~/projects/password/bin
-
-# Tools – https://github.com/alexherbo2/{tool}
 path ~/projects/git-tools/bin
 path ~/projects/ffmpeg-tools/bin
 path ~/projects/sway-tools/bin

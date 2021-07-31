@@ -22,7 +22,7 @@ eval "$(mcfly init bash)"
 # Sway – https://swaywm.org
 #
 # Application launcher: Open the resulting window on the original workspace that the command was run on.
-if [ -n "$SWAYSOCK" ]; then
+if [ -S "$SWAYSOCK" ]; then
   alias @='swaymsg exec --'
 fi
 

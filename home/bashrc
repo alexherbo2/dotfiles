@@ -9,6 +9,10 @@ eval "$(starship init bash)"
 # https://github.com/cantino/mcfly
 eval "$(mcfly init bash)"
 
+# tab
+# https://github.com/austinjones/tab-rs
+. ~/.local/share/tab/completion/tab.bash
+
 # Aliases ──────────────────────────────────────────────────────────────────────
 
 alias p=echo

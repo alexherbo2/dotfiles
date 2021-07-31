@@ -13,6 +13,13 @@ eval "$(mcfly init bash)"
 # https://github.com/austinjones/tab-rs
 . ~/.local/share/tab/completion/tab.bash
 
+# Sway – https://swaywm.org
+#
+# Application launcher: Open the resulting window on the original workspace that the command was run on.
+if [ -n "$SWAYSOCK" ]; then
+  alias @='swaymsg exec --'
+fi
+
 # Aliases ──────────────────────────────────────────────────────────────────────
 
 alias p=echo

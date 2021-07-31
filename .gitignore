@@ -7,8 +7,6 @@ home/thelounge/logs
 home/thelounge/packages
 home/thelounge/users
 home/thelounge/vapid.json
-config/kak/autoload/plugins
-config/passwords.yml
 config/mpv/socket
 config/mpv/watch_later
 config/cachix/cachix.dhall

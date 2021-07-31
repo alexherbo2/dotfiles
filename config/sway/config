@@ -7,9 +7,7 @@
 set $terminal alacritty
 
 # Application launcher
-# Note: Pass the final command to `swaymsg` so that the resulting window can be opened
-# on the original workspace that the command was run on.
-set $launcher launcher menu | dmenu | xargs swaymsg exec launcher run --
+set $launcher [floating app_id="Alacritty"] scratchpad show
 
 # Options ──────────────────────────────────────────────────────────────────────
 
@@ -132,14 +130,11 @@ bindsym --to-code {
 
   # Basics ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-  # Plumbing
-  Mod4+q exec plumb mpv pandoc xdg-open
-
-  # Terminal
+  # Terminal emulator
   Mod4+Return exec $terminal
 
-  # Launcher
-  Mod4+Shift+Return exec $launcher
+  # Application launcher
+  Mod4+Shift+Return $launcher
 
   # Reload
   Mod4+F5 reload
@@ -296,10 +291,7 @@ bindsym --to-code {
   Mod4+F7 exec find -L documents | dmenu | xargs zathura --
 
   # Password manager
-  Mod4+p exec password menu | dmenu | xargs password get -- | wl-copy
-
-  # Snippets
-  Mod4+y exec snippets-to-clipboard
+  Mod4+p exec chromium https://passwords.google.com
 
   # Screenshots
   Print exec sway-grim $(new-file).webp

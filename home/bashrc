@@ -1,6 +1,12 @@
 # Bash
 # https://gnu.org/software/bash/
 
+# Hot reloading
+f5() {
+  . ~/.bash_profile
+  printf 'reloaded bashrc'
+}
+
 # Starship
 # https://starship.rs
 eval "$(starship init bash)"

@@ -209,7 +209,6 @@
 
     # Terminal multiplexers
     tmux # https://github.com/tmux/tmux
-    tab-rs # https://github.com/austinjones/tab-rs
 
     # Fuzzy finders
     fzf # https://github.com/junegunn/fzf

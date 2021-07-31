@@ -15,10 +15,6 @@ eval "$(starship init bash)"
 # https://github.com/cantino/mcfly
 eval "$(mcfly init bash)"
 
-# tab
-# https://github.com/austinjones/tab-rs
-. ~/.local/share/tab/completion/tab.bash
-
 # Sway – https://swaywm.org
 #
 # Application launcher: Open the resulting window on the original workspace that the command was run on.
@@ -84,16 +80,11 @@ alias curl='curl -sSL'
 # https://github.com/mholt/archiver
 alias x='arc unarchive'
 
-# Zellij
-# https://zellij.dev
-alias mux=zellij
-
-# tab
-# https://github.com/austinjones/tab-rs
-alias t=tab
-alias tl='tab --list'
-alias tw='tab --close'
-alias tW='tab --shutdown'
+# tmux
+# https://github.com/tmux/tmux
+alias t=tmux
+alias ta='tmux attach-session'
+alias tl='tmux list-sessions'
 
 # kakoune.cr
 # https://github.com/alexherbo2/kakoune.cr

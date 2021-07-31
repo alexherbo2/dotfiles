@@ -1,8 +1,0 @@
-#!/bin/sh
-
-# Copy content to the clipboard.
-OS=$(uname -s)
-case "$OS" in
-  Darwin) pbcopy ;;
-  Linux|FreeBSD|OpenBSD) wl-copy ;;
-esac

@@ -208,9 +208,7 @@
     konsole # https://konsole.kde.org
 
     # Terminal multiplexers
-    zellij # https://zellij.dev
     tab-rs # https://github.com/austinjones/tab-rs
-    pueue # https://github.com/Nukesor/pueue
 
     # Fuzzy finders
     fzf # https://github.com/junegunn/fzf
@@ -230,7 +228,6 @@
 
     # Shells ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-    nushell # https://nushell.sh
     dash # http://gondor.apana.org.au/~herbert/dash/
     bash # https://gnu.org/software/bash/
 
@@ -251,8 +248,6 @@
     # File managers ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
     dolphin # https://apps.kde.org/en/dolphin
-    broot # https://dystroy.org/broot/
-    xplr # https://github.com/sayanarijit/xplr
     # sidetree
     # https://github.com/topisani/sidetree
 
@@ -262,19 +257,10 @@
     gitAndTools.gh # https://cli.github.com
     gitAndTools.gitui # https://github.com/extrawurst/gitui
 
-    # Email clients ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-    aerc # https://aerc-mail.org
-
     # Torrents ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-    synapse-bt # https://synapse-bt.org
     transmission # https://transmissionbt.com
     transmission-qt # https://transmissionbt.com
-
-    # IRC ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-    thelounge # https://thelounge.chat
 
     # Web browsers ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -370,8 +356,6 @@
     # Messaging ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
     discord # https://discord.com
-    gitter # https://gitter.im
-    element-desktop # https://element.io
 
     # Games ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 

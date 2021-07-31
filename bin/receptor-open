@@ -1,7 +1,0 @@
-#!/bin/sh
-
-# receptor
-# https://git.sr.ht/~sircmpwn/receptor
-
-# Open in application mode
-chromium --app=http://localhost:3000

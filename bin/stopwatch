@@ -1,3 +1,0 @@
-#!/bin/sh
-
-chromium --app=https://google.com/search?q=stopwatch

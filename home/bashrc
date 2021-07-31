@@ -43,6 +43,10 @@ alias nix-gc='sudo nix-collect-garbage --delete-old'
 alias nix-cargo="nix-shell --run 'cargo build --release' --packages pkg-config rustup openssl"
 alias nix-shards="nix-shell --run 'shards build --release --production' --packages pkg-config crystal shards"
 
+# ifconfig.co
+# https://ifconfig.co
+alias ipd='curl ifconfig.co'
+
 # nginx
 # https://nginx.org
 alias nginx='sudo nginx -c /etc/nginx/nginx.conf'
@@ -169,6 +173,21 @@ alias rr='rails routes --grep'
 # RVM
 # https://rvm.io
 [ -s ~/.rvm/scripts/rvm ] && . ~/.rvm/scripts/rvm
+
+# OS-specific settings ─────────────────────────────────────────────────────────
+
+os=$(uname -s)
+case "$os" in
+  Darwin)
+    alias copy=pbcopy
+    alias paste=pbpaste
+    ;;
+  Linux|FreeBSD|OpenBSD)
+    alias open=xdg-open
+    alias copy=wl-copy
+    alias paste=wl-paste
+    ;;
+esac
 
 # macOS ────────────────────────────────────────────────────────────────────────
 

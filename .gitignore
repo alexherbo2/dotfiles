@@ -2,11 +2,6 @@ home/ssh/id_rsa
 home/ssh/id_rsa_*
 home/ssh/known_hosts
 home/icons
-home/thelounge/certificates
-home/thelounge/logs
-home/thelounge/packages
-home/thelounge/users
-home/thelounge/vapid.json
 config/mpv/socket
 config/mpv/watch_later
 config/cachix/cachix.dhall

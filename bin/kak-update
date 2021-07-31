@@ -1,8 +1,0 @@
-#!/bin/sh
-
-# Kakoune
-# https://kakoune.org
-
-cd ~/repositories/github.com/mawww/kakoune
-git pull
-make -j 8

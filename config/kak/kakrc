@@ -8,6 +8,7 @@ try %sh{
 try lsp-enable
 
 source ~/projects/alacritty.kak/rc/alacritty.kak
+source ~/projects/tmux.kak/rc/tmux.kak
 
 # Options ──────────────────────────────────────────────────────────────────────
 
@@ -68,6 +69,7 @@ set-option global grepcmd 'rg --column'
 
 # Windowing
 alacritty-integration-enable
+tmux-integration-enable
 
 # Mappings ─────────────────────────────────────────────────────────────────────
 

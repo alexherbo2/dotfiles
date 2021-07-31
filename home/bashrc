@@ -29,6 +29,7 @@ fi
 # Aliases ──────────────────────────────────────────────────────────────────────
 
 alias p=echo
+alias q=exit
 alias _='rm -Rf'
 alias md='mkdir -p'
 alias cp='cp -R'

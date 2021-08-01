@@ -31,6 +31,7 @@ path ~/projects/chronic/bin
 path ~/projects/git-tools/bin
 path ~/projects/ffmpeg-tools/bin
 path ~/projects/sway-tools/bin
+path ~/projects/tmux-tools/bin
 
 # Kakoune – https://kakoune.org
 path ~/repositories/github.com/mawww/kakoune/src

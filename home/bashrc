@@ -127,7 +127,7 @@ alias la='exa --icons --all'
 alias ll='exa --icons --git --long'
 alias lla='exa --icons --git --long --all'
 alias T='exa --tree'
-alias ta='exa --tree --all'
+alias Ta='exa --tree --all'
 
 # Batch
 # https://github.com/alexherbo2/batch

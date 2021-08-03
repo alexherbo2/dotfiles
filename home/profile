@@ -49,7 +49,6 @@ export XDG_CURRENT_DESKTOP=kde
 
 # Applications
 export EDITOR='kcr edit'
-export BROWSER=chromium
 export KAKOUNE_POSIX_SHELL=/bin/dash
 
 # fzf – https://github.com/junegunn/fzf

@@ -463,6 +463,7 @@
     rustc
     cargo # https://crates.io
     rustup # https://rustup.rs
+    rust-analyzer # https://rust-analyzer.github.io
 
     # Crystal
     # https://crystal-lang.org

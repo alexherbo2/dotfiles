@@ -19,7 +19,7 @@ delete-scratch-message
 
 # Color scheme
 # Dracula – https://draculatheme.com/kakoune
-colorscheme dracula-transparent
+source ~/projects/dracula/kakoune/colors/dracula-transparent.kak
 
 # Status line
 add-cursor-character-unicode-expansion

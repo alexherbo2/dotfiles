@@ -1,1 +1,94 @@
-/home/taupiqueur/repositories/github.com/kak-lsp/kak-lsp/kak-lsp.toml
+# kak-lsp
+# https://github.com/kak-lsp/kak-lsp
+# https://github.com/kak-lsp/kak-lsp/blob/master/kak-lsp.toml
+
+snippet_support = false
+verbosity = 2
+
+# Semantic tokens
+# https://microsoft.github.io/language-server-protocol/specification#textDocument_semanticTokens
+
+[[semantic_tokens]]
+token = "comment"
+face = "documentation"
+modifiers = ["documentation"]
+
+[[semantic_tokens]]
+token = "comment"
+face = "comment"
+
+[[semantic_tokens]]
+token = "function"
+face = "function"
+
+[[semantic_tokens]]
+token = "keyword"
+face = "keyword"
+
+[[semantic_tokens]]
+token = "namespace"
+face = "module"
+
+[[semantic_tokens]]
+token = "operator"
+face = "operator"
+
+[[semantic_tokens]]
+token = "string"
+face = "string"
+
+[[semantic_tokens]]
+token = "type"
+face = "type"
+
+[[semantic_tokens]]
+token = "variable"
+face = "default+d"
+modifiers = ["readonly"]
+
+[[semantic_tokens]]
+token = "variable"
+face = "default+d"
+modifiers = ["constant"]
+
+[[semantic_tokens]]
+token = "variable"
+face = "variable"
+
+[server]
+
+timeout = 1800 # seconds (30 minutes)
+
+# rust-analyzer
+# https://rust-analyzer.github.io
+[language.rust]
+filetypes = ["rust"]
+roots = ["Cargo.toml"]
+command = "rust-analyzer"
+
+# Options
+[language.rust.initialization_options]
+diagnostics.disabled = ["unresolved-proc-macro"]
+
+# Scry
+# https://github.com/crystal-lang-tools/scry
+[language.crystal]
+filetypes = ["crystal"]
+roots = ["shard.yml"]
+command = "scry"
+
+# Flow
+# https://flow.org
+[language.javascript]
+filetypes = ["javascript"]
+roots = [".flowconfig"]
+command = "flow"
+args = ["lsp"]
+
+# Solargraph
+# https://solargraph.org
+[language.ruby]
+filetypes = ["ruby"]
+roots = ["Gemfile"]
+command = "solargraph"
+args = ["stdio"]

@@ -10,14 +10,6 @@ import:
   # CSI u mode – https://github.com/alexherbo2/alacritty-extended-keys
   - projects/alacritty-extended-keys/keys.yml
 
-# General ──────────────────────────────────────────────────────────────────────
-
-# Initial terminal size:
-window:
-  dimensions:
-    columns: 80
-    lines: 24
-
 # Appearance ───────────────────────────────────────────────────────────────────
 
 # Add a bit of transparency to reduce eye strain.
@@ -32,19 +24,7 @@ cursor:
   style:
     blinking: On
 
-# Sound ────────────────────────────────────────────────────────────────────────
-
-# Audio bell
-#
-# XDG sound theme
-# https://gitlab.freedesktop.org/xdg/xdg-sound-theme
-bell:
-  command:
-    program: mpv
-    args: ['-no-config', '-no-video', '-no-terminal', 'repositories/gitlab.freedesktop.org/xdg/xdg-sound-theme/stereo/bell.oga']
-
 # Keyboard ─────────────────────────────────────────────────────────────────────
 
 key_bindings:
-  - { key: F1, mods: Shift, command: { program: chromium, args: ['https://github.com/alacritty/alacritty/blob/master/alacritty.yml'] } }
   - { key: N, mods: Control|Shift, action: SpawnNewInstance }

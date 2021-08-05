@@ -19,6 +19,7 @@ try %{
   source-runtime rc/filetype/crystal.kak
   source-runtime rc/filetype/css.kak
   source-runtime rc/filetype/eruby.kak
+  source-runtime rc/filetype/etc.kak
   source-runtime rc/filetype/git.kak
   source-runtime rc/filetype/html.kak
   source-runtime rc/filetype/ini.kak

@@ -6,6 +6,7 @@ map <c-c> quit
 map H cd ..
 map L cd
 map $ shell 'nohup alacritty --working-directory "${sidetree_entry}" < /dev/null > /dev/null 2>&1 &'
+map $ shell 'nohup tmux display-popup -d "${sidetree_entry}" -E < /dev/null > /dev/null 2>&1 &'
 map / shell 'kcr send cd "${sidetree_entry}"'
 map e shell 'kcr edit "${sidetree_entry}"'
 map x shell 'arc unarchive "${sidetree_entry}"'

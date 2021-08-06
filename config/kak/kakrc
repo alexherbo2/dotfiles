@@ -1,3 +1,14 @@
+# Kakoune
+# https://kakoune.org
+#
+# Configuration:
+#
+# https://github.com/Delapouite/dot-in-the-sky/blob/master/.config/kak/kakrc
+# https://github.com/mawww/config/blob/master/kakrc
+# https://github.com/occivink/config/blob/master/.config/kak/kakrc
+# https://github.com/topisani/dotfiles/blob/master/config/kak/kakrc
+# https://gitlab.com/vbauerster/dotfiles/-/blob/master/.config/kak/kakrc
+
 # Preamble ─────────────────────────────────────────────────────────────────────
 
 try %sh{

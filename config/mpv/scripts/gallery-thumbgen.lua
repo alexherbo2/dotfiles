@@ -1,1 +1,1 @@
-/home/taupiqueur/repositories/github.com/occivink/mpv-gallery-view/scripts/gallery-thumbgen.lua
+../../../../../repositories/github.com/occivink/mpv-gallery-view/scripts/gallery-thumbgen.lua

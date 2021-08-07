@@ -87,6 +87,11 @@ alias t=tmux
 alias ta='tmux attach-session'
 alias tl='tmux list-sessions'
 
+# Kakoune
+# https://kakoune.org
+alias kn='kak -n'
+alias kr='sudo kak -n'
+
 # kakoune.cr
 # https://github.com/alexherbo2/kakoune.cr
 alias k='kcr edit'

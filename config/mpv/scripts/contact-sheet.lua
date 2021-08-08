@@ -1,1 +1,1 @@
-../../../../../repositories/github.com/occivink/mpv-gallery-view/scripts/contact-sheet.lua
+/Users/taupiqueur/repositories/github.com/occivink/mpv-gallery-view/scripts/contact-sheet.lua

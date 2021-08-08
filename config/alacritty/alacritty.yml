@@ -5,10 +5,10 @@
 import:
 
   # Color scheme – https://draculatheme.com/alacritty
-  - repositories/github.com/dracula/alacritty/dracula.yml
+  - /Users/taupiqueur/repositories/github.com/dracula/alacritty/dracula.yml
 
   # CSI u mode – https://github.com/alexherbo2/alacritty-extended-keys
-  - projects/alacritty-extended-keys/keys.yml
+  - /Users/taupiqueur/projects/alacritty-extended-keys/keys.yml
 
 # Appearance ───────────────────────────────────────────────────────────────────
 

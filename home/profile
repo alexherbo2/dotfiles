@@ -54,6 +54,11 @@ export KAKOUNE_POSIX_SHELL=/bin/dash
 # fzf – https://github.com/junegunn/fzf
 export FZF_DEFAULT_OPTS='--multi --layout=reverse --preview-window=down:60%'
 
+# Linux ────────────────────────────────────────────────────────────────────────
+
+# Same home folder with macOS
+[ -d "/Users/$USER" ] && export HOME=/Users/$USER
+
 # macOS ────────────────────────────────────────────────────────────────────────
 
 # Homebrew – https://brew.sh

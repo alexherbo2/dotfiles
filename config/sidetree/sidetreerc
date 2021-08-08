@@ -21,7 +21,7 @@ set highlight_style +r
 map <c-c> quit
 map H cd ..
 map L cd
-map $ shell 'nohup alacritty --class popup --working-directory "${sidetree_entry}" < /dev/null > /dev/null 2>&1 &'
+map ! shell 'nohup alacritty --class popup --working-directory "${sidetree_entry}" < /dev/null > /dev/null 2>&1 &'
 map $ shell 'nohup tmux display-popup -d "${sidetree_entry}" -E < /dev/null > /dev/null 2>&1 &'
 map / shell 'kcr send cd "${sidetree_entry}"'
 map e shell 'kcr edit "${sidetree_entry}"'

@@ -126,6 +126,16 @@ gg() {
   git pull
 }
 
+GG() {
+  set -- ~/repositories/github.com/*/* ~/repositories/gitlab.com/*/*
+
+  for repository do
+    pastel paint green "$repository"
+    cd "$repository"
+    gg
+  done
+}
+
 # exa
 # https://the.exa.website
 alias l='exa --icons'

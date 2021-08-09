@@ -132,7 +132,10 @@ GG() {
   for repository do
     pastel paint green "$repository"
     cd "$repository"
-    gg
+    git add .
+    git discard
+    git-gc-all-ferocious
+    git pull
   done
 }
 

@@ -31,6 +31,11 @@ alias md='mkdir -p'
 alias cp='cp -R'
 alias rm='rm -Rf'
 
+# Navigation
+alias ..='cd ..'
+alias ...='cd ...'
+alias ....='cd "$(git rev-parse --show-toplevel)"'
+
 # NixOS
 # https://nixos.org
 alias nix-update='sudo nixos-rebuild switch'

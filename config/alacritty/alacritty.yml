@@ -16,7 +16,7 @@ import:
 background_opacity: 0.99
 
 font:
-  size: 11.0
+  size: 16.0
   normal:
     family: PragmataPro
 

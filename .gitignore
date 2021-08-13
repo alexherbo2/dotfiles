@@ -2,6 +2,8 @@ home/ssh/id_rsa
 home/ssh/id_rsa_*
 home/ssh/known_hosts
 home/icons
+config/gh
+config/iterm2
 config/mpv/socket
 config/mpv/watch_later
 config/cachix/cachix.dhall
@@ -9,3 +11,4 @@ local/share/icons/candy-icons
 local/share/konsole
 local/share/applications
 local/share/icons
+local/state

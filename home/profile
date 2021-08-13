@@ -38,6 +38,9 @@ path ~/repositories/github.com/mawww/kakoune/src
 path ~/repositories/github.com/kak-lsp/kak-lsp/target/release
 path ~/repositories/github.com/topisani/sidetree/target/release
 
+# yabai – https://github.com/koekeishiya/yabai
+path ~/repositories/github.com/koekeishiya/limelight/bin
+
 # Packages
 path ~/.cargo/bin
 

@@ -32,3 +32,11 @@ set window_border_width 6
 set active_window_border_color $green
 set normal_window_border_color $white
 set insert_feedback_color $red
+
+# Rules ────────────────────────────────────────────────────────────────────────
+
+disable_for_app() {
+  yabai --message rule --add app="$1" manage=off
+}
+
+disable_for_app 'System Preferences'

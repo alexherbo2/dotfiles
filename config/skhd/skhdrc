@@ -54,12 +54,16 @@ ctrl + alt + shift - l : yabai --message window --resize right:20:0
 # Spaces ───────────────────────────────────────────────────────────────────────
 
 # Switch to the next or previous space
-# ctrl + alt - n : yabai --message space --focus next
-# ctrl + alt - p : yabai --message space --focus prev
+# ctrl - left : yabai --message space --focus prev || yabai --message space --focus last
+# ctrl - right : yabai --message space --focus next || yabai --message space --focus first
+
+# Move with focused window to the next or previous space
+ctrl + shift - left : yabai --message window --space prev && yabai --message window --focus recent
+ctrl + shift - right : yabai --message window --space next && yabai --message window --focus recent
 
 # Switch to the last space
-# ctrl - tab : yabai --message space --focus recent
-# ctrl + shift - tab : yabai --message window --space recent
+ctrl - tab : yabai --message space --focus recent
+ctrl + shift - tab : yabai --message window --space recent
 
 # Switch to space
 # ctrl - 1 : yabai --message space --focus 1
@@ -73,12 +77,12 @@ ctrl + alt + shift - l : yabai --message window --resize right:20:0
 # ctrl - 9 : yabai --message space --focus 9
 
 # Move focused window to space
-# ctrl + shift - 1 : yabai --message window --space 1
-# ctrl + shift - 2 : yabai --message window --space 2
-# ctrl + shift - 3 : yabai --message window --space 3
-# ctrl + shift - 4 : yabai --message window --space 4
-# ctrl + shift - 5 : yabai --message window --space 5
-# ctrl + shift - 6 : yabai --message window --space 6
-# ctrl + shift - 7 : yabai --message window --space 7
-# ctrl + shift - 8 : yabai --message window --space 8
-# ctrl + shift - 9 : yabai --message window --space 9
+ctrl + shift - 1 : yabai --message window --space 1
+ctrl + shift - 2 : yabai --message window --space 2
+ctrl + shift - 3 : yabai --message window --space 3
+ctrl + shift - 4 : yabai --message window --space 4
+ctrl + shift - 5 : yabai --message window --space 5
+ctrl + shift - 6 : yabai --message window --space 6
+ctrl + shift - 7 : yabai --message window --space 7
+ctrl + shift - 8 : yabai --message window --space 8
+ctrl + shift - 9 : yabai --message window --space 9

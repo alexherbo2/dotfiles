@@ -34,10 +34,10 @@ ctrl + alt - k : yabai --message window --focus north
 ctrl + alt - l : yabai --message window --focus east
 
 # Move the focused window with the same, but add Shift.
-ctrl + alt + shift - h : yabai --message window --warp west
-ctrl + alt + shift - j : yabai --message window --warp south
-ctrl + alt + shift - k : yabai --message window --warp north
-ctrl + alt + shift - l : yabai --message window --warp east
+ctrl + shift - h : yabai --message window --warp west
+ctrl + shift - j : yabai --message window --warp south
+ctrl + shift - k : yabai --message window --warp north
+ctrl + shift - l : yabai --message window --warp east
 
 # Resize in these directions:
 # ╭────╮ →
@@ -46,10 +46,10 @@ ctrl + alt + shift - l : yabai --message window --warp east
 # │    │ →
 # ╰────╯ →
 # ↓ ↓ ↓  ↘
-ctrl + shift - h : yabai --message window --resize right:-20:0
-ctrl + shift - j : yabai --message window --resize bottom:0:20
-ctrl + shift - k : yabai --message window --resize bottom:0:-20
-ctrl + shift - l : yabai --message window --resize right:20:0
+ctrl + alt + shift - h : yabai --message window --resize right:-20:0
+ctrl + alt + shift - j : yabai --message window --resize bottom:0:20
+ctrl + alt + shift - k : yabai --message window --resize bottom:0:-20
+ctrl + alt + shift - l : yabai --message window --resize right:20:0
 
 # Spaces ───────────────────────────────────────────────────────────────────────
 

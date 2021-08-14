@@ -10,7 +10,7 @@
 # Basics ───────────────────────────────────────────────────────────────────────
 
 # Terminal emulator
-ctrl - return : alacritty
+cmd + shift - space : alacritty
 
 # Reload yabai
 ctrl + alt - r : launchctl kickstart -k gui/${UID}/homebrew.mxcl.yabai

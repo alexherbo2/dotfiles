@@ -27,17 +27,17 @@ ctrl + alt - space : yabai --message window --toggle float
 
 # Windows ──────────────────────────────────────────────────────────────────────
 
-# Move your focus around
-ctrl + alt - h : yabai --message window --focus west
-ctrl + alt - j : yabai --message window --focus south
-ctrl + alt - k : yabai --message window --focus north
-ctrl + alt - l : yabai --message window --focus east
+# Move your focus around across displays
+ctrl + alt - h : yabai --message window --focus west || yabai --message display --focus west
+ctrl + alt - j : yabai --message window --focus south || yabai --message display --focus south
+ctrl + alt - k : yabai --message window --focus north || yabai --message display --focus north
+ctrl + alt - l : yabai --message window --focus east || yabai --message display --focus east
 
 # Move the focused window with the same, but add Shift.
-ctrl + shift - h : yabai --message window --warp west
-ctrl + shift - j : yabai --message window --warp south
-ctrl + shift - k : yabai --message window --warp north
-ctrl + shift - l : yabai --message window --warp east
+ctrl + shift - h : yabai --message window --warp west || (yabai --message window --display west && yabai --message window --focus recent)
+ctrl + shift - j : yabai --message window --warp south || (yabai --message window --display south && yabai --message window --focus recent)
+ctrl + shift - k : yabai --message window --warp north || (yabai --message window --display north && yabai --message window --focus recent)
+ctrl + shift - l : yabai --message window --warp east || (yabai --message window --display east && yabai --message window --focus recent)
 
 # Resize in these directions:
 # ╭────╮ →

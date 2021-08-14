@@ -40,3 +40,4 @@ disable_for_app() {
 }
 
 disable_for_app 'System Preferences'
+disable_for_app 'Transmission'

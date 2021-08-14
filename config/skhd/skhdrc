@@ -1,0 +1,84 @@
+# skhd
+# https://github.com/koekeishiya/skhd
+#
+# yabai
+# https://github.com/koekeishiya/yabai
+#
+# Keyboard guidelines:
+# https://developer.apple.com/design/human-interface-guidelines/macos/user-interaction/keyboard/
+
+# Basics ───────────────────────────────────────────────────────────────────────
+
+# Terminal emulator
+ctrl - return : alacritty
+
+# Reload yabai
+ctrl + alt - r : launchctl kickstart -k gui/${UID}/homebrew.mxcl.yabai
+
+# Layouts ──────────────────────────────────────────────────────────────────────
+
+# Layouts
+ctrl + alt - o : yabai --message window --toggle split
+ctrl + alt - f : yabai --message window --toggle zoom-fullscreen
+ctrl + alt - x : yabai --message window --toggle sticky
+
+# Tiling and floating
+ctrl + alt - space : yabai --message window --toggle float
+
+# Windows ──────────────────────────────────────────────────────────────────────
+
+# Move your focus around
+ctrl + alt - h : yabai --message window --focus west
+ctrl + alt - j : yabai --message window --focus south
+ctrl + alt - k : yabai --message window --focus north
+ctrl + alt - l : yabai --message window --focus east
+
+# Move the focused window with the same, but add Shift.
+ctrl + alt + shift - h : yabai --message window --warp west
+ctrl + alt + shift - j : yabai --message window --warp south
+ctrl + alt + shift - k : yabai --message window --warp north
+ctrl + alt + shift - l : yabai --message window --warp east
+
+# Resize in these directions:
+# ╭────╮ →
+# │    │ →
+# │    │ →
+# │    │ →
+# ╰────╯ →
+# ↓ ↓ ↓  ↘
+ctrl + shift - h : yabai --message window --resize right:-20:0
+ctrl + shift - j : yabai --message window --resize bottom:0:20
+ctrl + shift - k : yabai --message window --resize bottom:0:-20
+ctrl + shift - l : yabai --message window --resize right:20:0
+
+# Spaces ───────────────────────────────────────────────────────────────────────
+
+# Switch to the next or previous space
+ctrl + alt - n : yabai --message space --focus next
+ctrl + alt - p : yabai --message space --focus prev
+
+# Switch to the last space
+ctrl - tab : yabai --message space --focus recent
+ctrl + shift - tab : yabai --message window --space recent
+
+# Switch to space
+ctrl - 1 : yabai --message space --focus 1
+ctrl - 2 : yabai --message space --focus 2
+ctrl - 3 : yabai --message space --focus 3
+ctrl - 4 : yabai --message space --focus 4
+ctrl - 5 : yabai --message space --focus 5
+ctrl - 6 : yabai --message space --focus 6
+ctrl - 7 : yabai --message space --focus 7
+ctrl - 8 : yabai --message space --focus 8
+ctrl - 9 : yabai --message space --focus 9
+
+# Move focused window to space
+ctrl + shift - 1 : yabai --message window --space 1
+ctrl + shift - 2 : yabai --message window --space 2
+ctrl + shift - 3 : yabai --message window --space 3
+ctrl + shift - 4 : yabai --message window --space 4
+ctrl + shift - 5 : yabai --message window --space 5
+ctrl + shift - 6 : yabai --message window --space 6
+ctrl + shift - 7 : yabai --message window --space 7
+ctrl + shift - 8 : yabai --message window --space 8
+ctrl + shift - 9 : yabai --message window --space 9

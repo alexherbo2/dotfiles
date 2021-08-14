@@ -16,6 +16,12 @@ red=0xffff5555 # Dracula
 green=0xff50fa7b # Dracula
 white=0xffeaeaea # macOS
 
+# Global settings ──────────────────────────────────────────────────────────────
+
+set mouse_follows_focus on
+set focus_follows_mouse autoraise
+set window_topmost on
+
 # Space settings ───────────────────────────────────────────────────────────────
 
 set layout bsp

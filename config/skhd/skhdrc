@@ -17,7 +17,11 @@ ctrl + alt - r : launchctl kickstart -k gui/${UID}/homebrew.mxcl.yabai
 
 # Layouts ──────────────────────────────────────────────────────────────────────
 
-# Layouts
+# Change layout of desktop
+ctrl + alt - a : yabai --message space --layout bsp
+ctrl + alt - d : yabai --message space --layout float
+
+# Change layout of container
 ctrl + alt - o : yabai --message window --toggle split
 ctrl + alt - f : yabai --message window --toggle zoom-fullscreen
 ctrl + alt - x : yabai --message window --toggle sticky
@@ -50,6 +54,15 @@ ctrl + alt + shift - h : yabai --message window --resize right:-20:0
 ctrl + alt + shift - j : yabai --message window --resize bottom:0:20
 ctrl + alt + shift - k : yabai --message window --resize bottom:0:-20
 ctrl + alt + shift - l : yabai --message window --resize right:20:0
+
+# Stack ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# Set insertion point in focused container
+ctrl + alt - i : yabai --message window --insert stack
+
+# Move in the stack
+ctrl + alt - [ : yabai --message window --focus stack.prev
+ctrl + alt - ] : yabai --message window --focus stack.next
 
 # Spaces ───────────────────────────────────────────────────────────────────────
 

@@ -68,4 +68,4 @@ export FZF_DEFAULT_OPTS='--multi --layout=reverse --preview-window=down:60%'
 [ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Sets the path environment variable for macOS
-[ -x /bin/launchctl ] && sudo launchctl config user path "$PATH"
+# [ -x /bin/launchctl ] && sudo launchctl config user path "$PATH"

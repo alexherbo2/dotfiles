@@ -66,8 +66,8 @@ ctrl + alt - u : yabai --message window --stack next
 ctrl + alt - i : yabai --message window --insert stack
 
 # Move in the stack with brackets
-ctrl + alt - 0x21 : yabai --message window --focus stack.prev
-ctrl + alt - 0x1E : yabai --message window --focus stack.next
+ctrl + alt - 0x21 : yabai --message window --focus stack.prev || yabai --message window --focus stack.last
+ctrl + alt - 0x1E : yabai --message window --focus stack.next || yabai --message window --focus stack.first
 
 # Spaces ───────────────────────────────────────────────────────────────────────
 

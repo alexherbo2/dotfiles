@@ -59,6 +59,9 @@ ctrl + alt + shift - l : yabai --message window --resize right:20:0
 
 # Stack ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
+# Stack next window
+ctrl + alt - u : yabai --message window --stack next
+
 # Set insertion point in focused container
 ctrl + alt - i : yabai --message window --insert stack
 

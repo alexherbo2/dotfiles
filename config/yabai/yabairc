@@ -9,6 +9,7 @@ alias set='yabai --message config'
 
 sudo yabai --load-sa
 skhd --reload
+pkill limelight; limelight &
 
 # Color palette ────────────────────────────────────────────────────────────────
 

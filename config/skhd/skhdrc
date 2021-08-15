@@ -6,6 +6,8 @@
 #
 # Keyboard guidelines:
 # https://developer.apple.com/design/human-interface-guidelines/macos/user-interaction/keyboard/
+#
+# Useful command to get key codes: skhd --observe
 
 # Basics ───────────────────────────────────────────────────────────────────────
 
@@ -60,9 +62,9 @@ ctrl + alt + shift - l : yabai --message window --resize right:20:0
 # Set insertion point in focused container
 ctrl + alt - i : yabai --message window --insert stack
 
-# Move in the stack
-ctrl + alt - [ : yabai --message window --focus stack.prev
-ctrl + alt - ] : yabai --message window --focus stack.next
+# Move in the stack with brackets
+ctrl + alt - 0x21 : yabai --message window --focus stack.prev
+ctrl + alt - 0x1E : yabai --message window --focus stack.next
 
 # Spaces ───────────────────────────────────────────────────────────────────────
 

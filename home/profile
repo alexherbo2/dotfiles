@@ -66,3 +66,6 @@ export FZF_DEFAULT_OPTS='--multi --layout=reverse --preview-window=down:60%'
 # https://maxfierke.com/blog/posts/so-you-want-to-compile-crystal-on-arm64-macos
 [ -x /usr/local/bin/brew ] && eval "$(/usr/local/bin/brew shellenv)"
 [ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Sets the path environment variable for macOS
+[ -x /bin/launchctl ] && sudo launchctl config user path "$PATH"

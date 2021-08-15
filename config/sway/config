@@ -166,7 +166,7 @@ bindsym --to-code {
 
   # Layouts ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-  # Layouts
+  # Change layout of container
   Mod4+a layout tabbed
   Mod4+s layout stacking
   Mod4+d layout toggle split

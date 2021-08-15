@@ -17,6 +17,9 @@ ctrl + alt - return : alacritty
 # Reload yabai
 ctrl + alt - r : launchctl kickstart -k gui/${UID}/homebrew.mxcl.yabai
 
+# Open mpv with URLs from clipboard
+cmd - m : pbpaste | mpv -playlist -
+
 # Layouts ──────────────────────────────────────────────────────────────────────
 
 # Change layout of desktop

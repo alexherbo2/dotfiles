@@ -1,0 +1,4 @@
+# GNU Readline
+# https://gnu.org/software/readline/
+
+C-o: edit-and-execute-command

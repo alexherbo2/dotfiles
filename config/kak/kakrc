@@ -19,6 +19,12 @@ try %sh{
 try lsp-enable
 
 source ~/projects/alacritty.kak/rc/alacritty.kak
+source ~/projects/auto-pairs.kak/rc/auto-pairs.kak
+source ~/projects/lib.kak/rc/lib.kak
+source ~/projects/search.kak/rc/search.kak
+source ~/projects/select.kak/rc/select.kak
+source ~/projects/surround.kak/rc/surround.kak
+source ~/projects/text-objects.kak/rc/text-objects.kak
 source ~/projects/tmux.kak/rc/tmux.kak
 
 # Kakoune support

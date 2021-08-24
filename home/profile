@@ -19,6 +19,9 @@ path ~/projects/kakoune.cr/bin
 path ~/projects/kakoune.cr/share/kcr/commands/edit
 path ~/projects/kakoune.cr/share/kcr/commands/fzf
 
+# snippet.cr – https://github.com/alexherbo2/snippet.cr
+path ~/projects/snippet.cr/bin
+
 # Batch – https://github.com/alexherbo2/batch
 path ~/projects/batch/bin
 path ~/projects/batch/share/batch/scripts

@@ -19,7 +19,7 @@ white=0xffeaeaea # macOS
 
 # Global settings ──────────────────────────────────────────────────────────────
 
-set mouse_follows_focus off
+set mouse_follows_focus on
 set focus_follows_mouse autofocus
 set window_topmost on
 

@@ -23,6 +23,7 @@ source ~/projects/auto-pairs.kak/rc/auto-pairs.kak
 source ~/projects/lib.kak/rc/lib.kak
 source ~/projects/search.kak/rc/search.kak
 source ~/projects/select.kak/rc/select.kak
+source ~/projects/snippet.kak/rc/snippet.kak
 source ~/projects/surround.kak/rc/surround.kak
 source ~/projects/text-objects.kak/rc/text-objects.kak
 source ~/projects/tmux.kak/rc/tmux.kak

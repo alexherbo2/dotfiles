@@ -1,5 +1,8 @@
 format = '${custom.tab}$all'
 
+[cmd_duration]
+disabled = true
+
 [custom.tab]
 description = 'The current tab in the tab terminal multiplexer'
 command = 'tab --starship'

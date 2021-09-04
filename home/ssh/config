@@ -21,3 +21,7 @@ Host git.trustpair.fr
   User mablasou
   HostName git.trustpair.fr
   IdentityFile ~/.ssh/id_rsa_trustpair
+
+Host work
+  User mablasou
+  HostName mathieus-mbp

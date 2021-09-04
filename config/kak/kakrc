@@ -91,6 +91,9 @@ set-option global disabled_hooks '(?!auto)(?!detect)\K(.+)-(trim-indent|insert|i
 add-highlighter -override global/number-lines number-lines
 add-highlighter -override global/show-matching show-matching
 
+# LSP
+remove-highlighter global/lsp_error_lines
+
 # Show selections
 show-selected-text
 

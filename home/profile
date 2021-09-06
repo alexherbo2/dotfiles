@@ -50,6 +50,9 @@ path ~/.cargo/bin
 
 # Environment variables ────────────────────────────────────────────────────────
 
+# Locales
+export LANG=en_US.UTF-8
+
 # Desktop environment
 # Get icons.
 export XDG_CURRENT_DESKTOP=kde

@@ -21,6 +21,7 @@ path ~/projects/kakoune.cr/share/kcr/commands/fzf
 
 # snippet.cr – https://github.com/alexherbo2/snippet.cr
 path ~/projects/snippet.cr/bin
+path ~/projects/snippet.kak/bin
 
 # Batch – https://github.com/alexherbo2/batch
 path ~/projects/batch/bin

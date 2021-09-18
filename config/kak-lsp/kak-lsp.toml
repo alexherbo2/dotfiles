@@ -65,9 +65,11 @@ timeout = 1800 # seconds (30 minutes)
 filetypes = ["rust"]
 roots = ["Cargo.toml"]
 command = "rust-analyzer"
+settings_section = "rust-analyzer"
 
 # Options
-[language.rust.initialization_options]
+[language.rust.settings.rust-analyzer]
+hoverActions.enable = false
 diagnostics.disabled = ["unresolved-proc-macro"]
 
 # Scry

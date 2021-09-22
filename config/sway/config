@@ -46,6 +46,7 @@ exec swayidle before-sleep swaylock
 
 exec_always kanshi
 exec mako
+exec sway-fade
 
 # Colors ───────────────────────────────────────────────────────────────────────
 

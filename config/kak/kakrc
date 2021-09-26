@@ -84,6 +84,14 @@ set-indent global 2
 enable-detect-indent
 enable-auto-indent
 
+# Indent guides
+show-indent-guides
+
+# Options
+set-face global IndentGuidesOdd "%opt{background},%opt{background}+f"
+set-face global IndentGuidesEven "%opt{background},%opt{background}+f"
+set-face global IndentGuidesIncomplete "%opt{red},%opt{red}+f"
+
 # Auto-pairing of characters
 enable-auto-pairs
 

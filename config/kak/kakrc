@@ -147,6 +147,7 @@ map -docstring 'search (extend)' global normal F ':search-extend<ret>'
 map -docstring 'search (append)' global normal <a-f> ':search-append<ret>'
 
 # Selection primitives
+map -docstring 'select object' global normal v ':enter-user-mode objects<ret>'
 map -docstring 'enter insert mode with main selection' global normal ^ ':enter-insert-mode-with-main-selection<ret>'
 map -docstring 'select next word' global normal w ':select-next-word<ret>'
 map -docstring 'surround' global normal q ':surround<ret>'
@@ -175,5 +176,4 @@ map -docstring 'deindent' global insert <s-tab> '<a-;><lt>'
 
 # View mode ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-map -docstring 'view mode' global normal v V
 map -docstring 'show palette' global view p '<esc>:show-palette<ret>'

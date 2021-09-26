@@ -68,6 +68,9 @@ set-option global startup_info_version 20211231
 set-option global ui_options terminal_assistant=none
 delete-scratch-message
 
+# Sensible scroll-off: 5 lines and 1 column.
+set-option global scrolloff 5,1
+
 # Color scheme
 # Dracula – https://draculatheme.com/kakoune
 source ~/projects/dracula/kakoune/colors/dracula-transparent.kak

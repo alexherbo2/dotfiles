@@ -34,7 +34,7 @@ try %{
   source-runtime rc/detection/file.kak
   source-runtime rc/filetype/asciidoc.kak
   source-runtime rc/filetype/c-family.kak
-  source ~/projects/fork/kakoune/rc/filetype/crystal.kak
+  source-runtime rc/filetype/crystal.kak
   source-runtime rc/filetype/css.kak
   source-runtime rc/filetype/eruby.kak
   source-runtime rc/filetype/etc.kak

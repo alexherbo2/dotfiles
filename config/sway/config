@@ -316,7 +316,8 @@ bindsym --to-code {
 
 # Rules ────────────────────────────────────────────────────────────────────────
 
-for_window [app_id="popup"] floating enable
+for_window [app_id="popup"] floating enable, border pixel 10
+for_window [app_id="panel"] border pixel 10
 for_window [title="Picture in picture"] floating enable
 for_window [class="Ankama Launcher"] layout tabbed, border none, gaps inner current set 0
 

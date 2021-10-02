@@ -5,6 +5,7 @@ defaults:
 servers:
 - addr: irc.libera.chat
   port: 6697
+  tls: true
 
   nicks: [taupiqueur]
   realname: Mathieu Ablasou

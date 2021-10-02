@@ -355,6 +355,7 @@
 
     # Messaging ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
+    tiny # https://github.com/osa1/tiny
     discord # https://discord.com
     slack # https://slack.com
 

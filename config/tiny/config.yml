@@ -1,0 +1,36 @@
+defaults:
+  port: 6697
+  tls: true
+  nicks: [taupiqueur]
+  realname: Mathieu Ablasou
+
+servers:
+- addr: irc.libera.chat
+  join:
+  - '#alacritty'
+  - '#amber'
+  - '#archlinux'
+  - '#bash'
+  - '#chromium'
+  - '#chromium-extensions'
+  - '#chromium-support'
+  - '#crystal-lang'
+  - '#css'
+  - '#curl'
+  - '#ffmpeg'
+  - '#html'
+  - '#inkscape'
+  - '#javascript'
+  - '#jq'
+  - '#kakoune'
+  - '#kde'
+  - '#lua'
+  - '#mpv'
+  - '#mpv-android'
+  - '#nixos'
+  - '#ruby'
+  - '#rubyonrails'
+  - '#sway'
+  - '#termux'
+  - '#tiny'
+  - '#tmux'

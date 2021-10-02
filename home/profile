@@ -54,7 +54,7 @@ path ~/.cargo/bin
 export LANG=en_US.UTF-8
 
 # OpenSSH – https://openssh.com
-eval "$(ssh-agent)"
+eval "$(ssh-agent)" # then `ssh-add`
 
 # Desktop environment
 # Get icons.

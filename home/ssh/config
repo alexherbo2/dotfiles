@@ -1,10 +1,15 @@
-# Configure ControlMaster for multiplexing
-# https://man.openbsd.org/ssh_config#ControlMaster
-#
-# macOS-only: `UseKeychain` (see ssh_config(5) for details).
+# OpenSSH
+# https://openssh.com
+# https://man.openbsd.org/ssh_config
+
 Host *
-  IgnoreUnknown UseKeychain
+  IgnoreUnknown UseKeychain # macOS-only
+
+  # Authentication
   UseKeychain yes
+  AddKeysToAgent yes
+
+  # SSH multiplexing
   ControlMaster auto
   ControlPath ~/.cache/ssh/sessions/%r@%h:%p
   ControlPersist yes

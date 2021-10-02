@@ -53,6 +53,9 @@ path ~/.cargo/bin
 # Locales
 export LANG=en_US.UTF-8
 
+# OpenSSH – https://openssh.com
+eval "$(ssh-agent)"
+
 # Desktop environment
 # Get icons.
 #

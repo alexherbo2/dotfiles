@@ -105,8 +105,9 @@ add-highlighter -override global/show-matching show-matching
 # LSP
 remove-highlighter global/lsp_error_lines
 
-# Show selections
+# Show selections and marks
 show-selected-text
+show-marks
 
 # Show whitespaces
 add-highlighter -override global/show-whitespaces show-whitespaces

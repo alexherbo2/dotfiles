@@ -160,6 +160,7 @@ map -docstring 'search (extend)' global normal F ':search-extend<ret>'
 map -docstring 'search (append)' global normal <a-f> ':search-append<ret>'
 
 # Marks
+map -docstring 'enter insert mode with main selection' global normal '^' ':mark<ret>i'
 map -docstring 'iterate previous selection' global normal '<left>' ':mark<ret>p'
 map -docstring 'iterate next selection' global normal '<right>' ':mark<ret>n'
 map -docstring 'consume selections' global normal '<s-left>' ':mark<ret>C'

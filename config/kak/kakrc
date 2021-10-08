@@ -24,6 +24,7 @@ source ~/projects/lib.kak/rc/lib.kak
 source ~/projects/mark.kak/rc/mark.kak
 source ~/projects/search.kak/rc/search.kak
 source ~/projects/select.kak/rc/select.kak
+source ~/projects/shortcuts.kak/rc/shortcuts.kak
 # source ~/projects/snippet.kak/rc/snippet.kak
 source ~/projects/surround.kak/rc/surround.kak
 source ~/projects/text-objects.kak/rc/text-objects.kak
@@ -170,12 +171,14 @@ map -docstring 'clear register' global normal D ':mark<ret>d'
 
 # Selection primitives
 map -docstring 'select mode' global normal v ':select-mode<ret>'
-map -docstring 'select next word' global normal w ':select-next-word<ret>'
 map -docstring 'surround' global normal q ':surround<ret>'
 map -docstring 'select objects' global normal S ':select-objects<ret>'
-map -docstring 'select all occurrences of current selection' global normal <a-percent> ':select-highlights<ret>'
+
+# Shortcuts
+map -docstring 'select next word' global normal w ':select-next-word<ret>'
 map -docstring 'move line down' global normal <down> ':move-lines-down<ret>'
 map -docstring 'move line up' global normal <up> ':move-lines-up<ret>'
+map -docstring 'select all occurrences of current selection' global normal <a-percent> ':select-highlights<ret>'
 
 # Tools
 map -docstring 'math' global normal = ':math<ret>'

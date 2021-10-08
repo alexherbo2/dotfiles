@@ -168,7 +168,7 @@ map -docstring 'add selections to register' global normal Y ':mark<ret>a'
 map -docstring 'clear register' global normal D ':mark<ret>d'
 
 # Selection primitives
-map -docstring 'select object' global normal v ':enter-user-mode objects<ret>'
+map -docstring 'select mode' global normal v ':select-mode<ret>'
 map -docstring 'select next word' global normal w ':select-next-word<ret>'
 map -docstring 'surround' global normal q ':surround<ret>'
 map -docstring 'select objects' global normal S ':select-objects<ret>'

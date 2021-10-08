@@ -21,6 +21,7 @@ try lsp-enable
 source ~/projects/alacritty.kak/rc/alacritty.kak
 source ~/projects/auto-pairs.kak/rc/auto-pairs.kak
 source ~/projects/lib.kak/rc/lib.kak
+source ~/projects/mark.kak/rc/mark.kak
 source ~/projects/search.kak/rc/search.kak
 source ~/projects/select.kak/rc/select.kak
 # source ~/projects/snippet.kak/rc/snippet.kak
@@ -158,14 +159,16 @@ map -docstring 'search (replace)' global normal f ':search-replace<ret>'
 map -docstring 'search (extend)' global normal F ':search-extend<ret>'
 map -docstring 'search (append)' global normal <a-f> ':search-append<ret>'
 
+# Marks
+map -docstring 'iterate previous selection' global normal '<left>' ':mark<ret>p'
+map -docstring 'iterate next selection' global normal '<right>' ':mark<ret>n'
+map -docstring 'consume selections' global normal '<s-left>' ':mark<ret>C'
+map -docstring 'consume main selection' global normal '<a-right>' ':mark<ret>c'
+map -docstring 'add selections to register' global normal Y ':mark<ret>a'
+map -docstring 'clear register' global normal D ':mark<ret>d'
+
 # Selection primitives
 map -docstring 'select object' global normal v ':enter-user-mode objects<ret>'
-map -docstring 'enter insert mode with main selection' global normal ^ ':enter-insert-mode-with-main-selection<ret>'
-map -docstring 'iterate previous selection (default: ^)' global normal '<left>' ':iterate-previous-selection %val{register}<ret>'
-map -docstring 'iterate next selection (default: ^)' global normal '<right>' ':iterate-next-selection %val{register}<ret>'
-map -docstring 'consume main selection (default: ^)' global normal '<s-right>' ':consume-main-selection %val{register}<ret>'
-map -docstring 'add selections to register (default: ^)' global normal Y ':add-selections-to-register %val{register}<ret>'
-map -docstring 'clear register (default: ^)' global normal D ':clear-register %val{register}<ret>'
 map -docstring 'select next word' global normal w ':select-next-word<ret>'
 map -docstring 'surround' global normal q ':surround<ret>'
 map -docstring 'select objects' global normal S ':select-objects<ret>'

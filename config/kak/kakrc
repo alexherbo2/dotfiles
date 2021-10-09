@@ -20,6 +20,7 @@ try lsp-enable
 
 source ~/projects/alacritty.kak/rc/alacritty.kak
 source ~/projects/auto-pairs.kak/rc/auto-pairs.kak
+source ~/projects/indent.kak/rc/indent.kak
 source ~/projects/lib.kak/rc/lib.kak
 source ~/projects/mark.kak/rc/mark.kak
 source ~/projects/search.kak/rc/search.kak
@@ -88,9 +89,6 @@ enable-auto-indent
 
 # Auto-pairing of characters
 enable-auto-pairs
-
-# Disable indentation hooks
-set-option global disabled_hooks '(?!auto)(?!detect)\K(.+)-(trim-indent|insert|indent)'
 
 # Highlighters
 add-highlighter -override global/number-lines number-lines
@@ -191,11 +189,6 @@ map -docstring 'buffer picker' global normal <c-b> ':connect popup kcr fzf buffe
 map -docstring 'grep picker' global normal <c-g> ':connect popup kcr fzf grep<ret>'
 map -docstring 'grep picker (buffer)' global normal <c-r> ':connect popup kcr fzf grep %val{buflist}<ret>'
 map -docstring 'git' global normal <c-l> ':connect popup gitui<ret>'
-
-# Insert mode ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-map -docstring 'indent' global insert <tab> '<a-;><a-gt>'
-map -docstring 'deindent' global insert <s-tab> '<a-;><lt>'
 
 # View mode ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 

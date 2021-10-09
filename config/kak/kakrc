@@ -26,6 +26,7 @@ source ~/projects/mark.kak/rc/mark.kak
 source ~/projects/search.kak/rc/search.kak
 source ~/projects/select.kak/rc/select.kak
 source ~/projects/shortcuts.kak/rc/shortcuts.kak
+source ~/projects/show-characters.kak/rc/show-characters.kak
 # source ~/projects/snippet.kak/rc/snippet.kak
 source ~/projects/surround.kak/rc/surround.kak
 source ~/projects/text-objects.kak/rc/text-objects.kak
@@ -94,32 +95,15 @@ enable-auto-pairs
 add-highlighter -override global/number-lines number-lines
 add-highlighter -override global/show-matching show-matching
 
+# Show characters and whitespaces
+show-characters
+
 # LSP
 remove-highlighter global/lsp_error_lines
 
 # Show selections and marks
 show-selected-text
 show-marks
-
-# Show whitespaces
-set-face global Indent 'default,default+g'
-set-face global Tab 'default,green+g'
-set-face global WhitespaceError 'default,red+g'
-
-add-highlighter -override global/show-trailing-whitespaces regex '\h+$' '0:WhitespaceError'
-add-highlighter -override global/show-non-breaking-spaces regex ' +' '0:WhitespaceError'
-add-highlighter -override global/show-multiple-whitespaces regex '\h{2,}' '0:WhitespaceError'
-add-highlighter -override global/show-indent regex '^\h+' '0:Indent'
-add-highlighter -override global/show-tabs regex '\t+' '0:Tab'
-add-highlighter -override global/show-odd-indent regex '^(\h{1}|\h{3}|\h{5}|\h{7}|\h{9})(?=\H)' '0:WhitespaceError'
-add-highlighter -override global/show-deep-indent regex '^\h{9,}' '0:WhitespaceError'
-add-highlighter -override global/show-empty-lines regex '^\h+$' '0:WhitespaceError'
-
-# Show characters
-add-highlighter -override global/show-unicode-2013 regex '–' '0:green+f'
-add-highlighter -override global/show-unicode-2014 regex '—' '0:green+bf'
-add-highlighter -override global/show-math-symbols regex '[−×]' '0:cyan+f'
-add-highlighter -override global/show-limit regex '(?S)^.{79}[=-─┈]\K\n' '0:green+f'
 
 # Save buffer
 make-directory-on-save

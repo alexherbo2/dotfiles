@@ -86,14 +86,6 @@ set-indent global 2
 enable-detect-indent
 enable-auto-indent
 
-# Indent guides
-show-indent-guides
-
-# Options
-set-face global IndentGuidesOdd "%opt{background},%opt{background}+f"
-set-face global IndentGuidesEven "%opt{background},%opt{background}+f"
-set-face global IndentGuidesIncomplete "%opt{red},%opt{red}+f"
-
 # Auto-pairing of characters
 enable-auto-pairs
 
@@ -112,11 +104,18 @@ show-selected-text
 show-marks
 
 # Show whitespaces
-add-highlighter -override global/show-whitespaces show-whitespaces
-add-highlighter -override global/show-trailing-whitespaces regex '\h+$' '0:red+f'
-add-highlighter -override global/show-non-breaking-spaces regex ' +' '0:red+f'
-add-highlighter -override global/show-multiple-whitespaces regex '\h{2,}' '0:red+f'
-add-highlighter -override global/show-indent regex '^\h+' '0:Whitespace'
+set-face global Indent 'default,default+g'
+set-face global Tab 'default,green+g'
+set-face global WhitespaceError 'default,red+g'
+
+add-highlighter -override global/show-trailing-whitespaces regex '\h+$' '0:WhitespaceError'
+add-highlighter -override global/show-non-breaking-spaces regex ' +' '0:WhitespaceError'
+add-highlighter -override global/show-multiple-whitespaces regex '\h{2,}' '0:WhitespaceError'
+add-highlighter -override global/show-indent regex '^\h+' '0:Indent'
+add-highlighter -override global/show-tabs regex '\t+' '0:Tab'
+add-highlighter -override global/show-odd-indent regex '^(\h{1}|\h{3}|\h{5}|\h{7}|\h{9})(?=\H)' '0:WhitespaceError'
+add-highlighter -override global/show-deep-indent regex '^\h{9,}' '0:WhitespaceError'
+add-highlighter -override global/show-empty-lines regex '^\h+$' '0:WhitespaceError'
 
 # Show characters
 add-highlighter -override global/show-unicode-2013 regex '–' '0:green+f'

@@ -175,10 +175,6 @@
   # Backlight
   programs.light.enable = true;
 
-  # Redshift
-  services.redshift.enable = true;
-  services.redshift.package = pkgs.redshift-wlr;
-
   # Virtualisation
   # virtualisation.lxc.enable = true;
   # virtualisation.lxd.enable = true;
@@ -321,7 +317,7 @@
 
     # Backlight
     light # https://haikarainen.github.io/light/
-    redshift-wlr # http://jonls.dk/redshift/ (Wayland patch)
+    wlsunset # https://sr.ht/~kennylevinsen/wlsunset/
 
     # Wayland ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 

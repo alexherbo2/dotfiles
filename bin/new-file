@@ -1,7 +1,0 @@
-#!/bin/sh
-
-name=$(date '+%F_%T')
-prefix=$1
-suffix=$2
-
-printf '%s%s%s\n' "$prefix" "$name" "$suffix"

@@ -311,7 +311,7 @@ bindsym --to-code {
   Mod4+p exec chromium https://passwords.google.com
 
   # Screenshots
-  Print exec sway-grim $(new-file).webp
+  Print exec sway-grim $(date '+%F_%T').webp
 
   # Multimedia-keys ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 

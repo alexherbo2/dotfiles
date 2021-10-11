@@ -413,6 +413,7 @@
 
     # Programming languages
     jq # https://stedolan.github.io/jq/
+    oq # https://github.com/Blacksmoke16/oq
     bc # https://en.wikipedia.org/wiki/Bc_(programming_language)
 
     # Utils ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈

@@ -34,6 +34,9 @@
   w = add
   r = reword
   p = pick
+  u = unstage
+  D = discard
+  rb = rollback
   st = status
   b = branch
   d = diff
@@ -61,8 +64,9 @@
   pick = commit --amend --no-edit
 
   ; Undo
-  undo = reset
-  discard = reset --hard
+  unstage = restore --staged
+  discard = restore --staged --worktree
+  rollback = reset --hard
 
   ; Merge
   ; Explicit is better than implicit.

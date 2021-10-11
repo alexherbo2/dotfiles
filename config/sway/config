@@ -45,9 +45,20 @@ exec swayidle before-sleep swaylock
 
 # Startup commands ─────────────────────────────────────────────────────────────
 
+# Output configuration
+# https://wayland.emersion.fr/kanshi/
 exec_always kanshi
+
+# Notifications
+# https://wayland.emersion.fr/mako/
 exec mako
+
+# Night mode
+# https://sr.ht/~kennylevinsen/wlsunset/
 exec wlsunset
+
+# Sway tools
+# https://github.com/alexherbo2/sway-tools
 exec sway-fade
 
 # Colors ───────────────────────────────────────────────────────────────────────

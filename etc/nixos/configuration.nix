@@ -335,6 +335,9 @@
     swayidle # https://github.com/swaywm/swayidle
     swaylock # https://github.com/swaywm/swaylock
 
+    # Wayfire
+    wayfire # https://wayfire.org
+
     # Services
     kanshi # Output configuration – https://wayland.emersion.fr/kanshi/
     mako # Notifications – https://wayland.emersion.fr/mako/

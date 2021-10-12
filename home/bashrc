@@ -136,7 +136,7 @@ gc() {
 
 gg() {
   git add .
-  git discard
+  git discard .
   git-gc-all-ferocious
   git push
   git pull
@@ -149,7 +149,7 @@ GG() {
     pastel paint green "$repository"
     cd "$repository"
     git add .
-    git discard
+    git discard .
     git-gc-all-ferocious
     git pull
   done

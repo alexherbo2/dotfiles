@@ -126,7 +126,7 @@ tmux-integration-enable
 # Normal mode ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 # Hot reloading
-map -docstring 'reload kakrc' global normal <F5> ':source-kakrc; echo reloaded kakrc<ret>'
+map -docstring 'reload kakrc' global user R ':source-kakrc; echo reloaded kakrc<ret>'
 
 # Enter command mode
 map -docstring 'enter command' global normal <ret> :

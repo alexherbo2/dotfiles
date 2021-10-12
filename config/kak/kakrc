@@ -31,6 +31,7 @@ source ~/projects/show-characters.kak/rc/show-characters.kak
 source ~/projects/surround.kak/rc/surround.kak
 source ~/projects/text-objects.kak/rc/text-objects.kak
 source ~/projects/tmux.kak/rc/tmux.kak
+source ~/projects/window.kak/rc/window.kak
 
 # Kakoune support
 # https://github.com/mawww/kakoune/tree/master/rc

@@ -22,6 +22,7 @@ font:
 
 cursor:
   style:
+    shape: Beam
     blinking: On
 
 # Keyboard ─────────────────────────────────────────────────────────────────────

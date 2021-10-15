@@ -96,17 +96,17 @@ enable-auto-pairs
 add-highlighter -override global/show-matching show-matching
 add-highlighter -override global/show-whitespaces show-whitespaces
 add-highlighter -override global/number-lines number-lines -relative -hlcursor
-add-highlighter -override global/wrap wrap -word -marker '↪'
+# add-highlighter -override global/wrap wrap -word -marker '↪'
 
 # Show characters and whitespaces
-# show-characters
+show-characters
 
 # LSP
 remove-highlighter global/lsp_error_lines
 
 # Show selections and marks
-# show-selected-text
-# show-marks
+show-selected-text
+show-marks
 
 # Save buffer
 make-directory-on-save

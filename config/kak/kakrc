@@ -78,7 +78,7 @@ set-option global scrolloff 5,1
 
 # Color scheme
 # Dracula – https://draculatheme.com/kakoune
-source ~/projects/dracula/kakoune/colors/dracula-transparent.kak
+source ~/projects/dracula/kakoune/colors/dracula.kak
 
 # Status line
 add-cursor-character-unicode-expansion
@@ -99,14 +99,14 @@ add-highlighter -override global/number-lines number-lines -relative -hlcursor
 add-highlighter -override global/wrap wrap -word -marker '↪'
 
 # Show characters and whitespaces
-show-characters
+# show-characters
 
 # LSP
 remove-highlighter global/lsp_error_lines
 
 # Show selections and marks
-show-selected-text
-show-marks
+# show-selected-text
+# show-marks
 
 # Save buffer
 make-directory-on-save

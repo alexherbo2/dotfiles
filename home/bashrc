@@ -15,6 +15,10 @@ eval "$(starship init bash)"
 # https://github.com/cantino/mcfly
 eval "$(mcfly init bash)"
 
+# zoxide
+# https://github.com/ajeetdsouza/zoxide
+eval "$(zoxide init bash)"
+
 # Application launcher
 fork() {
   nohup "$@" < /dev/null > /dev/null 2>&1 &

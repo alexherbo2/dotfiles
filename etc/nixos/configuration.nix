@@ -233,6 +233,9 @@
     # Shell history
     mcfly # https://github.com/cantino/mcfly
 
+    # Shell navigation
+    zoxide # https://github.com/ajeetdsouza/zoxide
+
     # Text editors ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
     kakoune # https://kakoune.org

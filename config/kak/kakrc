@@ -27,7 +27,7 @@ source ~/projects/mark.kak/rc/mark.kak
 source ~/projects/search.kak/rc/search.kak
 source ~/projects/select.kak/rc/select.kak
 source ~/projects/shortcuts.kak/rc/shortcuts.kak
-source ~/projects/show-characters.kak/rc/show-characters.kak
+source ~/projects/show-whitespaces.kak/rc/show-whitespaces.kak
 # source ~/projects/snippet.kak/rc/snippet.kak
 source ~/projects/surround.kak/rc/surround.kak
 source ~/projects/text-objects.kak/rc/text-objects.kak
@@ -80,6 +80,10 @@ set-option global scrolloff 5,1
 # Dracula – https://draculatheme.com/kakoune
 source ~/projects/dracula/kakoune/colors/dracula.kak
 
+# Custom faces
+set-face global SelectedText "default,rgba:%opt{blue}%opt{selection_alpha}" # Blue (alpha-blended)
+set-face global ConsecutiveWhitespaces "rgb:%opt{comment}+f@Whitespace"
+
 # Status line
 add-cursor-character-unicode-expansion
 set-option global modelinefmt '%val{bufname} %val{cursor_line}:%val{cursor_char_column} {{context_info}} {{mode_info}} - U+%opt{cursor_character_unicode} - %val{client}@%val{session}'
@@ -94,15 +98,32 @@ enable-auto-pairs
 
 # Highlighters
 add-highlighter -override global/show-matching show-matching
-add-highlighter -override global/show-whitespaces show-whitespaces
 add-highlighter -override global/number-lines number-lines -relative -hlcursor
 # add-highlighter -override global/wrap wrap -word -marker '↪'
 
-# Show characters and whitespaces
-show-characters
+# Show whitespaces
+show-whitespaces
 
 # LSP
 remove-highlighter global/lsp_error_lines
+
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# Show various characters (Unicode characters, math symbols).
+# https://unicode-table.com
+
+set-face global EmphasisCharacter 'green+if'
+set-face global StrongCharacter 'green+bf'
+set-face global MathSymbol 'cyan+f'
+
+add-highlighter -override shared/characters group
+add-highlighter -override shared/characters/unicode-2013 regex '–+' '0:EmphasisCharacter'
+add-highlighter -override shared/characters/unicode-2014 regex '—+' '0:StrongCharacter'
+add-highlighter -override shared/characters/math-symbols regex '[−×]+' '0:MathSymbol'
+
+add-highlighter -override global/characters ref characters
+
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 # Show selections and marks
 show-selected-text

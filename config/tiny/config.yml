@@ -38,4 +38,6 @@ servers:
   - '#termux'
   - '#tiny'
   - '#tmux'
+  - '#vim'
+  - '#vim-fr'
   - '#wayfire'

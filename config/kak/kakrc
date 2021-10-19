@@ -202,7 +202,7 @@ map -docstring 'file picker' global normal <c-f> ':connect popup kcr fzf files<r
 map -docstring 'buffer picker' global normal <c-b> ':connect popup kcr fzf buffers<ret>'
 map -docstring 'grep picker' global normal <c-g> ':connect popup kcr fzf grep<ret>'
 map -docstring 'grep picker (buffer)' global normal <c-r> ':connect popup kcr fzf grep %val{buflist}<ret>'
-map -docstring 'git' global normal <c-l> ':connect popup gitui<ret>'
+map -docstring 'open Git UI' global normal <c-l> ':git-ui<ret>'
 
 # View mode ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 

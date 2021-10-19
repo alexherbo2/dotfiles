@@ -81,7 +81,7 @@ set-option global scrolloff 5,1
 source ~/projects/dracula/kakoune/colors/dracula.kak
 
 # Custom faces
-set-face global SelectedText "default,rgba:%opt{white}%opt{selection_alpha}" # White (alpha-blended)
+set-face global SelectedText "default,rgba:%opt{blue}%opt{selection_alpha}" # Blue (alpha-blended)
 set-face global Search "default,rgba:%opt{white}%opt{selection_alpha}" # White (alpha-blended)
 set-face global MarkedPrimarySelection "default,rgba:%opt{orange}%opt{selection_alpha}" # Orange (alpha-blended)
 set-face global MarkedSecondarySelection "default,rgba:%opt{green}%opt{selection_alpha}" # Green (alpha-blended)

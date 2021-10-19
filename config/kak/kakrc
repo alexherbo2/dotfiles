@@ -82,6 +82,10 @@ source ~/projects/dracula/kakoune/colors/dracula.kak
 
 # Custom faces
 set-face global SelectedText "default,rgba:%opt{blue}%opt{selection_alpha}" # Blue (alpha-blended)
+set-face global MarkedPrimarySelection "default,rgba:%opt{orange}%opt{selection_alpha}" # Orange (alpha-blended)
+set-face global MarkedSecondarySelection "default,rgba:%opt{green}%opt{selection_alpha}" # Green (alpha-blended)
+set-face global MarkedPrimaryCursor "default,rgba:%opt{orange}%opt{cursor_alpha}" # Orange (alpha-blended)
+set-face global MarkedSecondaryCursor "default,rgba:%opt{green}%opt{cursor_alpha}" # Green (alpha-blended)
 set-face global ConsecutiveWhitespaces "rgb:%opt{comment}+f@Whitespace"
 
 # Status line

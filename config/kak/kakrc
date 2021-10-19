@@ -105,6 +105,9 @@ add-highlighter -override global/show-matching show-matching
 add-highlighter -override global/number-lines number-lines -relative -hlcursor
 # add-highlighter -override global/wrap wrap -word -marker '↪'
 
+# Show search
+show-search
+
 # Show whitespaces
 show-whitespaces
 

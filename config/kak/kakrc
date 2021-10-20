@@ -83,10 +83,6 @@ source ~/projects/dracula/kakoune/colors/dracula.kak
 # Custom faces
 set-face global SelectedText "default,rgba:%opt{blue}%opt{selection_alpha}" # Blue (alpha-blended)
 set-face global Search "default,rgba:%opt{white}%opt{selection_alpha}" # White (alpha-blended)
-set-face global MarkedPrimarySelection "default,rgba:%opt{orange}%opt{selection_alpha}" # Orange (alpha-blended)
-set-face global MarkedSecondarySelection "default,rgba:%opt{green}%opt{selection_alpha}" # Green (alpha-blended)
-set-face global MarkedPrimaryCursor "default,rgba:%opt{orange}%opt{cursor_alpha}" # Orange (alpha-blended)
-set-face global MarkedSecondaryCursor "default,rgba:%opt{green}%opt{cursor_alpha}" # Green (alpha-blended)
 set-face global ConsecutiveWhitespaces "rgb:%opt{comment}+f@Whitespace"
 
 # Status line
@@ -135,7 +131,6 @@ add-highlighter -override global/characters ref characters
 
 # Show selections and marks
 show-selected-text
-show-marks
 
 # Save buffer
 make-directory-on-save
@@ -173,15 +168,6 @@ map -docstring 'search (replace)' global normal f ':search-replace<ret>'
 map -docstring 'search (extend)' global normal F ':search-extend<ret>'
 map -docstring 'search (append)' global normal <a-f> ':search-append<ret>'
 
-# Marks
-map -docstring 'enter insert mode with main selection' global normal '^' ':mark<ret>i'
-map -docstring 'iterate previous selection' global normal '<left>' ':mark<ret>p'
-map -docstring 'iterate next selection' global normal '<right>' ':mark<ret>n'
-map -docstring 'consume selections' global normal '<s-left>' ':mark<ret>C'
-map -docstring 'consume main selection' global normal '<a-right>' ':mark<ret>c'
-map -docstring 'add selections to register' global normal Y ':mark<ret>a'
-map -docstring 'clear register' global normal D ':mark<ret>d'
-
 # Selection primitives
 map -docstring 'select mode' global normal v ':select-mode<ret>'
 map -docstring 'surround' global normal q ':surround<ret>'
@@ -199,8 +185,7 @@ map -docstring 'select all occurrences of current selection' global normal <a-pe
 map -docstring 'math' global normal = ':math<ret>'
 
 # Windowing
-map -docstring 'client' global normal <c-t> ':new<ret>'
-map -docstring 'terminal' global normal <c-n> ':connect-terminal<ret>'
+map -docstring 'terminal' global normal <c-t> ':connect-terminal<ret>'
 map -docstring 'file explorer' global normal <c-e> ':connect panel sidetree --select %val{buffile}<ret>'
 map -docstring 'file picker' global normal <c-f> ':connect popup kcr fzf files<ret>'
 map -docstring 'buffer picker' global normal <c-b> ':connect popup kcr fzf buffers<ret>'

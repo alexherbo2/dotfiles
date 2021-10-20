@@ -173,9 +173,6 @@ map -docstring 'select mode' global normal v ':select-mode<ret>'
 map -docstring 'surround' global normal q ':surround<ret>'
 map -docstring 'select objects' global normal S ':select-objects<ret>'
 
-# Tools
-map -docstring 'math' global normal = ':math<ret>'
-
 # Windowing
 map -docstring 'terminal' global normal <c-t> ':connect-terminal<ret>'
 map -docstring 'file explorer' global normal <c-e> ':connect panel sidetree --select %val{buffile}<ret>'

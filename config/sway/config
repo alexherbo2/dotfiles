@@ -339,4 +339,5 @@ for_window [app_id="Alacritty"] border pixel 10
 
 # Add a bit of transparency to reduce eye strain.
 for_window [app_id="Alacritty"] opacity set 0.99
+for_window [app_id="org.kde.konsole"] opacity set 0.99
 for_window [app_id="org.kde.dolphin"] opacity set 0.99

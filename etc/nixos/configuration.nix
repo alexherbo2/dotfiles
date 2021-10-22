@@ -243,6 +243,7 @@
     helix # https://helix-editor.com
     vscode # https://code.visualstudio.com
     neovim # https://neovim.io
+    neovide # https://github.com/neovide/neovide
     emacs # https://gnu.org/software/emacs/
 
     # File managers ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈

@@ -31,6 +31,7 @@ servers:
   - '#lua'
   - '#mpv'
   - '#mpv-android'
+  - '#neovim'
   - '#nixos'
   - '#ruby'
   - '#rubyonrails'

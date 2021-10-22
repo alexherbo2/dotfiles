@@ -26,7 +26,7 @@ source ~/projects/select.kak/rc/select.kak
 source ~/projects/sensible.kak/rc/sensible.kak
 source ~/projects/shortcuts.kak/rc/shortcuts.kak
 source ~/projects/show-whitespaces.kak/rc/show-whitespaces.kak
-# source ~/projects/snippet.kak/rc/snippet.kak
+nop source ~/projects/snippet.kak/rc/snippet.kak
 source ~/projects/surround.kak/rc/surround.kak
 source ~/projects/text-objects.kak/rc/text-objects.kak
 source ~/projects/tmux.kak/rc/tmux.kak

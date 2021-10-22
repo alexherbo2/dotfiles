@@ -24,8 +24,8 @@ source ~/projects/git.kak/rc/git.kak
 source ~/projects/indent.kak/rc/indent.kak
 source ~/projects/lib.kak/rc/lib.kak
 source ~/projects/mark.kak/rc/mark.kak
-source ~/projects/search.kak/rc/search.kak
 source ~/projects/select.kak/rc/select.kak
+source ~/projects/sensible.kak/rc/sensible.kak
 source ~/projects/shortcuts.kak/rc/shortcuts.kak
 source ~/projects/show-whitespaces.kak/rc/show-whitespaces.kak
 # source ~/projects/snippet.kak/rc/snippet.kak
@@ -63,7 +63,6 @@ try %{
   source-runtime rc/tools/grep.kak
   source-runtime rc/tools/make.kak
   source-runtime rc/tools/man.kak
-  source-runtime rc/windowing/new-client.kak
 }
 
 # Options ──────────────────────────────────────────────────────────────────────
@@ -71,22 +70,13 @@ try %{
 # UI options
 set-option global startup_info_version 20211231
 set-option global ui_options terminal_assistant=none
-delete-scratch-message
-
-# Sensible scroll-off: 5 lines and 1 column.
-set-option global scrolloff 5,1
 
 # Color scheme
 # Dracula – https://draculatheme.com/kakoune
 source ~/projects/dracula/kakoune/colors/dracula.kak
 
-# Custom faces
-set-face global SelectedText "default,rgba:%opt{blue}%opt{selection_alpha}" # Blue (alpha-blended)
-set-face global Search "default,rgba:%opt{white}%opt{selection_alpha}" # White (alpha-blended)
-set-face global ConsecutiveWhitespaces "rgb:%opt{comment}+f@Whitespace"
-
 # Status line
-add-cursor-character-unicode-expansion
+declare-cursor-character-unicode-expansion
 set-option global modelinefmt '%val{bufname} %val{cursor_line}:%val{cursor_char_column} {{context_info}} {{mode_info}} - U+%opt{cursor_character_unicode} - %val{client}@%val{session}'
 
 # Indentation
@@ -97,91 +87,42 @@ enable-auto-indent
 # Auto-pairing of characters
 enable-auto-pairs
 
-# Highlighters
-add-highlighter -override global/show-matching show-matching
-add-highlighter -override global/number-lines number-lines -relative -hlcursor
-# add-highlighter -override global/wrap wrap -word -marker '↪'
-
-# Show search
-show-search
+# Integration
+synchronize-clipboard
+make-directory-on-save
 
 # Show whitespaces
 show-whitespaces
 
-# LSP
-remove-highlighter global/lsp_error_lines
-
-# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-# Show various characters (Unicode characters, math symbols).
+# Show various characters
 # https://unicode-table.com
-
-set-face global EmphasisCharacter 'green+if'
-set-face global StrongCharacter 'green+bf'
-set-face global MathSymbol 'cyan+f'
-
-add-highlighter -override shared/characters group
-add-highlighter -override shared/characters/unicode-2013 regex '–+' '0:EmphasisCharacter'
-add-highlighter -override shared/characters/unicode-2014 regex '—+' '0:StrongCharacter'
-add-highlighter -override shared/characters/math-symbols regex '[−×]+' '0:MathSymbol'
-
-add-highlighter -override global/characters ref characters
-
-# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-# Show selections and marks
-show-selected-text
-
-# Save buffer
-make-directory-on-save
-
-# Clipboard
-synchronize-clipboard
-synchronize-buffer-directory-name-with-register d
-
-# Tools
-set-option global makecmd 'make -j 8'
-set-option global grepcmd 'rg --column'
-
-# Windowing
-alacritty-integration-enable
-tmux-integration-enable
+add-highlighter -override global/U+2013 regex '–' '0:green+f'
+add-highlighter -override global/U+2014 regex '—' '0:green+bf'
+add-highlighter -override global/math-symbols regex '[−×]' '0:cyan+f'
 
 # Mappings ─────────────────────────────────────────────────────────────────────
 
 # Normal mode ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 # Hot reloading
-map -docstring 'reload kakrc' global user R ':source-kakrc; echo reloaded kakrc<ret>'
+map -docstring 'reload kakrc' global user R ': source-kakrc; echo reloaded kakrc<ret>'
 
 # Enter command mode
 map -docstring 'enter command' global normal <ret> :
 
 # Editing
-map -docstring 'save' global normal <c-s> ':write; echo saved<ret>'
-map -docstring 'quit' global normal <c-q> ':quit<ret>'
-map -docstring 'close buffer' global normal <c-w> ':delete-buffer<ret>'
+map -docstring 'save' global normal <c-s> ': write; echo saved<ret>'
+map -docstring 'quit' global normal <c-q> ': quit<ret>'
 map -docstring 'last buffer' global normal <c-a> ga
 
-# Search
-map -docstring 'search (replace)' global normal f ':search-replace<ret>'
-map -docstring 'search (extend)' global normal F ':search-extend<ret>'
-map -docstring 'search (append)' global normal <a-f> ':search-append<ret>'
-
 # Selection primitives
-map -docstring 'select mode' global normal v ':select-mode<ret>'
-map -docstring 'surround' global normal q ':surround<ret>'
-map -docstring 'select objects' global normal S ':select-objects<ret>'
+map -docstring 'surround mode' global normal q ': surround-mode<ret>'
+map -docstring 'select mode' global normal S ': select-mode<ret>'
 
 # Windowing
-map -docstring 'terminal' global normal <c-t> ':connect-terminal<ret>'
-map -docstring 'file explorer' global normal <c-e> ':connect panel sidetree --select %val{buffile}<ret>'
-map -docstring 'file picker' global normal <c-f> ':connect popup kcr fzf files<ret>'
-map -docstring 'buffer picker' global normal <c-b> ':connect popup kcr fzf buffers<ret>'
-map -docstring 'grep picker' global normal <c-g> ':connect popup kcr fzf grep<ret>'
-map -docstring 'grep picker (buffer)' global normal <c-r> ':connect popup kcr fzf grep %val{buflist}<ret>'
-map -docstring 'open Git UI' global normal <c-l> ':git-ui<ret>'
-
-# View mode ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-map -docstring 'show palette' global view p '<esc>:show-palette<ret>'
+map -docstring 'file explorer' global normal <c-e> ': connect terminal-panel sidetree --select %val{buffile}<ret>'
+map -docstring 'file picker' global normal <c-f> ': connect terminal-popup kcr fzf files<ret>'
+map -docstring 'buffer picker' global normal <c-b> ': connect terminal-popup kcr fzf buffers<ret>'
+map -docstring 'grep picker' global normal <c-g> ': connect terminal-popup kcr fzf grep<ret>'
+map -docstring 'grep picker (buffer)' global normal <c-r> ': connect terminal-popup kcr fzf grep %val{buflist}<ret>'
+map -docstring 'git' global normal <c-l> ': connect terminal-popup gitui<ret>'

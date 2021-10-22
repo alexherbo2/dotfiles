@@ -47,6 +47,7 @@ try %{
   source-runtime rc/filetype/javascript.kak
   source-runtime rc/filetype/json.kak
   source-runtime rc/filetype/kakrc.kak
+  source-runtime rc/filetype/lisp.kak
   source-runtime rc/filetype/lua.kak
   source-runtime rc/filetype/makefile.kak
   source-runtime rc/filetype/markdown.kak

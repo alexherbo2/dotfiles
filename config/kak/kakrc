@@ -69,6 +69,7 @@ try %{
 # UI options
 set-option global startup_info_version 20211231
 set-option global ui_options terminal_assistant=none
+remove-scratch-message
 
 # Color scheme
 # Dracula – https://draculatheme.com/kakoune
@@ -80,6 +81,7 @@ set-option global modelinefmt '%val{bufname} %val{cursor_line}:%val{cursor_char_
 
 # LSP
 try lsp-enable
+remove-highlighter global/lsp_error_lines
 
 # Indentation
 set-indent global 2

@@ -92,7 +92,7 @@ enable-auto-indent
 enable-auto-pairs
 
 # Integration
-synchronize-clipboard
+synchronize-terminal-clipboard
 make-directory-on-save
 
 # Show whitespaces

@@ -7,6 +7,7 @@ config/iterm2
 config/mpv/socket
 config/mpv/watch_later
 config/cachix/cachix.dhall
+local/bin/gitui
 local/share/icons/candy-icons
 local/share/konsole
 local/share/applications

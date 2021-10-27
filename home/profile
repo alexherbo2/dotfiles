@@ -9,8 +9,6 @@ path() {
 }
 
 # Home
-path ~/configuration/bin
-path ~/configuration/local/bin
 path ~/.local/bin
 
 # Projects

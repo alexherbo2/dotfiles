@@ -20,7 +20,6 @@ source ~/projects/alacritty.kak/rc/alacritty.kak
 source ~/projects/auto-pairs.kak/rc/auto-pairs.kak
 source ~/projects/git.kak/rc/git.kak
 source ~/projects/indent.kak/rc/indent.kak
-source ~/projects/lib.kak/rc/lib.kak
 source ~/projects/mark.kak/rc/mark.kak
 source ~/projects/select.kak/rc/select.kak
 source ~/projects/sensible.kak/rc/sensible.kak
@@ -29,6 +28,7 @@ source ~/projects/show-whitespaces.kak/rc/show-whitespaces.kak
 nop source ~/projects/snippet.kak/rc/snippet.kak
 source ~/projects/surround.kak/rc/surround.kak
 source ~/projects/text-objects.kak/rc/text-objects.kak
+source ~/projects/tiny.kak/rc/tiny.kak
 source ~/projects/tmux.kak/rc/tmux.kak
 source ~/projects/window.kak/rc/window.kak
 
@@ -76,7 +76,7 @@ remove-scratch-message
 source ~/projects/dracula/kakoune/colors/dracula.kak
 
 # Status line
-declare-cursor-character-unicode-expansion
+declare-cursor-character-unicode
 set-option global modelinefmt '%val{bufname} %val{cursor_line}:%val{cursor_char_column} {{context_info}} {{mode_info}} - U+%opt{cursor_character_unicode} - %val{client}@%val{session}'
 
 # LSP

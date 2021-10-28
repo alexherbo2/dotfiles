@@ -21,6 +21,7 @@ source ~/projects/auto-pairs.kak/rc/auto-pairs.kak
 source ~/projects/git.kak/rc/git.kak
 source ~/projects/indent.kak/rc/indent.kak
 source ~/projects/mark.kak/rc/mark.kak
+source ~/projects/pipe.kak/rc/pipe.kak
 source ~/projects/select.kak/rc/select.kak
 source ~/projects/sensible.kak/rc/sensible.kak
 source ~/projects/shortcuts.kak/rc/shortcuts.kak

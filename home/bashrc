@@ -189,7 +189,7 @@ alias rl='batch --map '"'"'relink "$1" "$2"'"'"''
 alias o=dolphin
 
 # Web browser
-alias b=chromium
+alias b=google-chrome-stable
 
 # mpv
 # https://mpv.io

@@ -308,7 +308,7 @@ bindsym --to-code {
   Mod4+F7 exec find -L documents | dmenu | xargs zathura --
 
   # Password manager
-  Mod4+p exec chromium https://passwords.google.com
+  Mod4+p exec google-chrome-stable https://passwords.google.com
 
   # Screenshots
   Print exec sway-grim $(date '+%F_%T').webp

@@ -65,7 +65,7 @@ spawn do
     when { "file-manager", 1 }
       Process.run("swaymsg", { "exec", "dolphin" })
     when { "web-browser", 1 }
-      Process.run("swaymsg", { "exec", "chromium" })
+      Process.run("swaymsg", { "exec", "google-chrome-stable" })
     when { "volume", 1 }
       Process.run("amixer", { "set", "Master", "toggle" })
     when { "volume", 4 }

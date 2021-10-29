@@ -265,10 +265,10 @@
 
     # Web browsers ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-    chromium # https://chromium.org
+    google-chrome # https://google.com/chrome/
 
     # For testing
-    google-chrome # https://google.com/chrome/
+    chromium # https://chromium.org
     firefox # https://mozilla.org/firefox/
     opera # https://opera.com
     vivaldi # https://vivaldi.com

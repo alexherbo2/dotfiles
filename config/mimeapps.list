@@ -1,9 +1,9 @@
 [Default Applications]
 
-# Chromium
-# https://chromium.org
-x-scheme-handler/http=chromium-browser.desktop
-x-scheme-handler/https=chromium-browser.desktop
+# Google Chrome
+# https://google.com/chrome/
+x-scheme-handler/http=google-chrome.desktop
+x-scheme-handler/https=google-chrome.desktop
 
 # kakoune.cr
 # https://github.com/alexherbo2/kakoune.cr

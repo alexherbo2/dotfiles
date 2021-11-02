@@ -35,6 +35,9 @@ path ~/projects/ffmpeg-tools/bin
 path ~/projects/sway-tools/bin
 path ~/projects/tmux-tools/bin
 
+# Password manager – https://github.com/taupiqueur/pw
+path ~/projects/pw/bin
+
 # Kakoune – https://kakoune.org
 path ~/repositories/github.com/mawww/kakoune/src
 path ~/repositories/github.com/kak-lsp/kak-lsp/target/release

@@ -202,6 +202,7 @@
 
     alacritty # https://github.com/alacritty/alacritty
     konsole # https://konsole.kde.org
+    foot # https://codeberg.org/dnkl/foot
 
     # Terminal multiplexers
     tmux # https://github.com/tmux/tmux

@@ -336,6 +336,9 @@
     swayidle # https://github.com/swaywm/swayidle
     swaylock # https://github.com/swaywm/swaylock
 
+    # river
+    river # https://github.com/riverwm/river
+
     # Wayfire
     wayfire # https://wayfire.org
 

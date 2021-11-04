@@ -75,6 +75,7 @@ alias top=htop
 
 # rsync
 # https://rsync.samba.org
+alias rsync='rsync -azH --info=progress2 --delete'
 alias rsync='rsync --archive --compress --hard-links --info=progress2 --delete'
 
 # bat

@@ -42,6 +42,9 @@ alias md='mkdir -p'
 alias cp='cp -R'
 alias rm='rm -Rf'
 
+# Run `sudo` with aliases
+alias sudo='sudo '
+
 # Navigation
 alias ..='cd ..'
 alias ...='cd ...'

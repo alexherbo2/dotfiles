@@ -1,3 +1,0 @@
-#!/bin/sh
-
-sudo mount /dev/disk/by-label/iPod ~/Disk/iPod

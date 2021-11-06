@@ -412,6 +412,10 @@
 
     # Tools ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
+    # Networking
+    openssh # https://openssh.com
+    openssl # https://openssl.org
+
     # Archivers
     archiver # https://github.com/mholt/archiver
     zip # http://info-zip.org

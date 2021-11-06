@@ -1,6 +1,7 @@
 home/bash_history
 home/mcfly
 local/share/zoxide
+config/env
 home/ssh/id_rsa
 home/ssh/id_rsa_*
 home/ssh/known_hosts

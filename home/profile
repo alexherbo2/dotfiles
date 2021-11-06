@@ -51,6 +51,9 @@ path ~/.cargo/bin
 
 # Environment variables ────────────────────────────────────────────────────────
 
+# Local environment variables
+. ~/.config/env
+
 # Locales
 export LANG=en_US.UTF-8
 

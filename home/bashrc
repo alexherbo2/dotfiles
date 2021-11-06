@@ -57,7 +57,7 @@ alias nix-upgrade='sudo nixos-rebuild switch --upgrade --keep-going --fallback'
 alias nix-gc='sudo nix-collect-garbage --delete-old'
 
 # Compiling
-alias nix-cargo="nix-shell --run 'cargo build --release' --packages pkg-config rustup openssl"
+alias nix-cargo="nix-shell --run 'cargo build --release' --packages pkg-config openssl rustup"
 alias nix-shards="nix-shell --run 'shards build --release --production' --packages pkg-config openssl crystal shards"
 
 # ifconfig.co

@@ -2,8 +2,8 @@ home/bash_history
 home/mcfly
 local/share/zoxide
 config/env
-home/ssh/id_rsa
-home/ssh/id_rsa_*
+home/ssh/id_ed25519
+home/ssh/id_ed25519_*
 home/ssh/known_hosts
 home/icons
 config/gh

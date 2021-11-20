@@ -15,9 +15,9 @@ Host *
   ControlPersist yes
 
 Host mawww
-  User taupiqueur
   HostName tamiok.kakoune.org
+  User taupiqueur
 
 Host paris8
-  User ili900
   HostName bocal.cs.univ-paris8.fr
+  User ili900

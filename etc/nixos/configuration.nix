@@ -466,6 +466,7 @@
     gcc # https://gcc.gnu.org
     clang # https://clang.llvm.org
     llvm # https://llvm.org
+    llvmPackages_rocm.llvm # provides llvm-config
 
     # Build systems
     gnumake # https://gnu.org/software/make/

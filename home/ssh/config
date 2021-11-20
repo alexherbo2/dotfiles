@@ -21,3 +21,8 @@ Host mawww
 Host paris8
   HostName bocal.cs.univ-paris8.fr
   User ili900
+
+Host alexherbo2.github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_alexherbo2

@@ -418,8 +418,7 @@
 
     # Archivers
     archiver # https://github.com/mholt/archiver
-    zip # http://info-zip.org
-    p7zip # http://p7zip.sourceforge.net
+    p7zip # https://7-zip.org
 
     # Programming languages
     jq # https://stedolan.github.io/jq/

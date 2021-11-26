@@ -1,7 +1,0 @@
-#!/bin/sh
-
-# Archive the current directory to your home.
-
-name=$(basename "$PWD")
-cd ..
-zip -r -y "$HOME/$name.zip" "$name"

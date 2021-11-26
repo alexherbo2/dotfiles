@@ -81,6 +81,11 @@ alias top=htop
 alias rsync='rsync -azH --info=progress2 --delete'
 alias rsync='rsync --archive --compress --hard-links --info=progress2 --delete'
 
+# tar.xz
+txz() {
+  tar caf "$1.tar.xz" "$1"
+}
+
 # bat
 # https://github.com/sharkdp/bat
 alias cat=bat

@@ -1,1 +1,0 @@
-/Users/taupiqueur/repositories/github.com/occivink/mpv-gallery-view/scripts/gallery-thumbgen.lua

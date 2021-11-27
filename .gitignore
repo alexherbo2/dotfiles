@@ -12,6 +12,8 @@ config/mpv/socket
 config/mpv/watch_later
 config/cachix/cachix.dhall
 local/bin/gitui
+local/bin/batch
+local/bin/chronic
 local/bin/pw
 local/bin/scr
 local/share/icons/candy-icons

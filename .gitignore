@@ -13,6 +13,7 @@ config/mpv/watch_later
 config/cachix/cachix.dhall
 local/bin/gitui
 local/bin/pw
+local/bin/scr
 local/share/icons/candy-icons
 local/share/konsole
 local/share/applications

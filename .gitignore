@@ -13,6 +13,9 @@ config/mpv/watch_later
 config/cachix/cachix.dhall
 local/bin/gitui
 local/bin/batch
+local/bin/rename
+local/bin/relink
+local/bin/convert
 local/bin/chronic
 local/bin/pw
 local/bin/scr

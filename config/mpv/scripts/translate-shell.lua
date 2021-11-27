@@ -1,1 +1,0 @@
-/Users/taupiqueur/projects/mpv-translate-shell/scripts/translate-shell.lua

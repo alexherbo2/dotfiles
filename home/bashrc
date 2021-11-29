@@ -156,7 +156,7 @@ alias gv='gh repo view --web'
 gc() {
   repository=$1.git
   directory=$1; directory=${directory#https://}; directory=${directory%.git}; directory=~/.local/share/$directory
-  pastel paint green "Cloning '$repository' into '$directory'"
+  pastel paint green --bold "Cloning '$repository' into '$directory'"
   git clone "$repository" "$directory"
 }
 
@@ -172,7 +172,7 @@ GG() {
   set -- ~/repositories/github.com/*/* ~/repositories/gitlab.com/*/*
 
   for repository do
-    pastel paint green "$repository"
+    pastel paint green --bold "$repository"
     cd "$repository"
     git add .
     git discard .

@@ -5,12 +5,12 @@
 
 ;; Evil
 ;; https://github.com/emacs-evil/evil
-(add-to-list 'load-path "~/repositories/github.com/emacs-evil/evil")
-(add-to-list 'load-path "~/repositories/github.com/emacs-evil/goto-chg")
+(add-to-list 'load-path "~/.local/share/github.com/emacs-evil/evil")
+(add-to-list 'load-path "~/.local/share/github.com/emacs-evil/goto-chg")
 (require 'evil)
 (evil-mode 1)
 
 ;; Dracula
 ;; https://draculatheme.com/emacs
-(add-to-list 'custom-theme-load-path "~/repositories/github.com/dracula/emacs")
+(add-to-list 'custom-theme-load-path "~/.local/share/github.com/dracula/emacs")
 (load-theme 'dracula t)

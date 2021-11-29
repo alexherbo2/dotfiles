@@ -154,7 +154,10 @@ alias gist='gh gist create --web'
 alias gv='gh repo view --web'
 
 gc() {
-  gh repo clone "$1" ~/repositories/github.com/"$1"
+  repository=$1.git
+  directory=$1; directory=${directory#https://}; directory=${directory%.git}; directory=~/.local/share/$directory
+  pastel paint green "Cloning '$repository' into '$directory'"
+  git clone "$repository" "$directory"
 }
 
 gg() {

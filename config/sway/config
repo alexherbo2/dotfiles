@@ -26,9 +26,10 @@ smart_gaps on
 
 # Input configuration ──────────────────────────────────────────────────────────
 
-# input type:keyboard {
-#   xkb_file ~/.local/share/github.com/fabi1cazenave/qwerty-lafayette/dist/qwerty-l.xkb
-# }
+input type:keyboard {
+  xkb_layout us,fr
+  xkb_options grp:caps_toggle
+}
 
 # Output configuration ─────────────────────────────────────────────────────────
 

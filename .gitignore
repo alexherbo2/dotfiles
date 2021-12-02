@@ -12,6 +12,8 @@ config/mpv/socket
 config/mpv/watch_later
 config/cachix/cachix.dhall
 local/bin/gitui
+local/bin/kcr
+local/bin/kcr-*
 local/bin/batch
 local/bin/rename
 local/bin/relink

@@ -252,6 +252,7 @@
     # Git ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
     git # https://git-scm.com
+    delta # https://github.com/dandavison/delta
     gitAndTools.gh # https://cli.github.com
     gitAndTools.gitui # https://github.com/extrawurst/gitui
 

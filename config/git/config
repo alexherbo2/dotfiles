@@ -3,6 +3,7 @@
   email = taupiqueur.kanto@gmail.com
 
 [core]
+  pager = delta
   editor = kak
 
 [pull]

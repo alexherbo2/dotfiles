@@ -1,1 +1,1 @@
-/Users/taupiqueur/Code/mpv-clip/scripts/clip.lua
+/Users/taupiqueur/code/mpv-clip/scripts/clip.lua

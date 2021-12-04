@@ -13,7 +13,8 @@ import:
 # Appearance ───────────────────────────────────────────────────────────────────
 
 # Add a bit of transparency to reduce eye strain.
-background_opacity: 0.99
+window:
+  opacity: 0.99
 
 font:
   size: 16.0

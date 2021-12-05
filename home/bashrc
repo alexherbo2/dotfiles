@@ -244,7 +244,12 @@ esac
 # https://maxfierke.com/blog/posts/so-you-want-to-compile-crystal-on-arm64-macos
 alias ibrew='arch -x86_64 /usr/local/bin/brew'
 
-# Erases .DS_Store and .localized files.
+# Erases .DS_Store and .localized files from your home folder.
+# Avoids Applications and Library folders.
 DS_Store() {
-  sudo find ~ '(' -name .DS_Store -or -name .localized ')' -print -exec rm -i -- {} + 2> /dev/null || true
+  find ~ -maxdepth 1 -not -name Applications -and -not -name Library |
+  while read directory
+  do
+    find "$directory" '(' -name .DS_Store -or -name .localized ')' -print -exec rm -i -- {} +
+  done
 }

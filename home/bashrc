@@ -247,7 +247,7 @@ alias ibrew='arch -x86_64 /usr/local/bin/brew'
 # Erases .DS_Store and .localized files from your home folder.
 # Avoids Applications and Library folders.
 DS_Store() {
-  find ~ -maxdepth 1 -not -name Applications -and -not -name Library |
+  find ~ -mindepth 1 -maxdepth 1 -not -name Applications -and -not -name Library |
   while read directory
   do
     find "$directory" '(' -name .DS_Store -or -name .localized ')' -print -exec rm -i -- {} +

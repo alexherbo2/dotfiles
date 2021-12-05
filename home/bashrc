@@ -90,10 +90,6 @@ txz() {
 # https://github.com/sharkdp/bat
 alias cat=bat
 
-# fd
-# https://github.com/sharkdp/fd
-alias find=fd
-
 # ripgrep
 # https://github.com/BurntSushi/ripgrep
 alias grep='rg --smart-case'

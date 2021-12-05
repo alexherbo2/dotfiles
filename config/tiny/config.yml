@@ -24,6 +24,7 @@ servers:
   - '#emacs'
   - '#evil-mode'
   - '#ffmpeg'
+  - '#hammerspoon'
   - '#html'
   - '#inkscape'
   - '#javascript'

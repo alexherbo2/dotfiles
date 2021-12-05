@@ -3,6 +3,11 @@
 --
 -- Keys: https://github.com/Hammerspoon/hammerspoon/blob/master/extensions/keycodes/libkeycodes.m
 
+-- Spoons
+-- https://github.com/dtinth/FocusHighlight.spoon
+hs.loadSpoon("FocusHighlight")
+spoon.FocusHighlight:start()
+
 -- Uses Karabiner-Elements to convert your caps lock to the hyper key: "⌘" + "⌃" + "⌥" + "⇧".
 -- https://karabiner-elements.pqrs.org
 local hyper = { "cmd", "ctrl", "alt", "shift" }

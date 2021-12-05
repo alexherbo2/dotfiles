@@ -38,7 +38,7 @@ end)
 
 -- Move focused window to screen number.
 local function moveFocusedWindowToScreenNumber(number)
-  local function()
+  return function()
     local screens = hs.screen.allScreens()
     local window = hs.window.focusedWindow()
     window:moveToScreen(screens[number])

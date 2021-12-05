@@ -247,3 +247,8 @@ esac
 # Homebrew – https://brew.sh
 # https://maxfierke.com/blog/posts/so-you-want-to-compile-crystal-on-arm64-macos
 alias ibrew='arch -x86_64 /usr/local/bin/brew'
+
+# Erases .DS_Store and .localized files.
+DS_Store() {
+  sudo find ~ '(' -name .DS_Store -or -name .localized ')' -print -exec rm -i -- {} + 2> /dev/null || true
+}

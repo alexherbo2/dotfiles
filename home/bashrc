@@ -202,7 +202,7 @@ alias b=google-chrome-stable
 # mpv
 # https://mpv.io
 alias m=mpv
-alias ms='mpv -shuffle'
+alias ms='mpv --shuffle'
 
 # youtube-dl
 # https://ytdl-org.github.io/youtube-dl/

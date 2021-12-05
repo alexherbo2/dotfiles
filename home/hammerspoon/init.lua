@@ -22,7 +22,7 @@ end)
 
 hs.hotkey.bind(hyper, "y", function()
   log.i("mpv - youtube-dl")
-  hs.execute("pbpaste | mpv -playlist -")
+  hs.execute("pbpaste | mpv --playlist=-")
 end)
 
 hs.hotkey.bind(hyper, "w", function()

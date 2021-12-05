@@ -299,11 +299,11 @@ bindsym --to-code {
   # Desktop ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
   # Open mpv with URLs from clipboard
-  Mod4+m exec wl-paste | mpv -playlist -
+  Mod4+m exec wl-paste | mpv --playlist=-
 
   # mpv
-  Mod4+F6 exec find -L videos torrents | dmenu | mpv -playlist -
-  Mod4+Shift+F6 exec find -L videos | dmenu | mpv -shuffle -playlist -
+  Mod4+F6 exec find -L videos torrents | dmenu | mpv --playlist=-
+  Mod4+Shift+F6 exec find -L videos | dmenu | mpv --shuffle --playlist=-
 
   # zathura
   Mod4+F7 exec find -L documents | dmenu | xargs zathura --

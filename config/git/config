@@ -36,6 +36,7 @@
   ci = commit
   cm = commit --message
   co = checkout
+  cb = checkout -b
   l = log
   L = log --graph
   bd = branch-delete
@@ -72,9 +73,6 @@
   ; no-ff │ ff-only
   update = merge --ff-only
   join = merge --no-ff
-
-  ; Fork
-  fork = checkout -b
 
   ; Stash
   unstash = stash pop

@@ -10,43 +10,6 @@ path() {
 
 # Home
 path ~/.local/bin
-
-# Projects
-# kakoune.cr – https://github.com/alexherbo2/kakoune.cr
-path ~/projects/kakoune.cr/bin
-path ~/projects/kakoune.cr/share/kcr/commands/edit
-path ~/projects/kakoune.cr/share/kcr/commands/fzf
-
-# snippet.cr – https://github.com/alexherbo2/snippet.cr
-path ~/projects/snippet.cr/bin
-path ~/projects/snippet.kak/bin
-
-# Batch – https://github.com/alexherbo2/batch
-path ~/projects/batch/bin
-path ~/projects/batch/share/batch/scripts
-path ~/projects/batch.kak/bin
-
-# Chronic – https://github.com/alexherbo2/chronic
-path ~/projects/chronic/bin
-
-# Tools – https://github.com/alexherbo2/{tool}
-path ~/projects/git-tools/bin
-path ~/projects/ffmpeg-tools/bin
-path ~/projects/sway-tools/bin
-path ~/projects/tmux-tools/bin
-
-# Password manager – https://github.com/taupiqueur/pw
-path ~/projects/pw/bin
-
-# Kakoune – https://kakoune.org
-path ~/.local/share/github.com/mawww/kakoune/src
-path ~/.local/share/github.com/kak-lsp/kak-lsp/target/release
-path ~/.local/share/github.com/topisani/sidetree/target/release
-
-# yabai – https://github.com/koekeishiya/yabai
-path ~/.local/share/github.com/koekeishiya/limelight/bin
-
-# Packages
 path ~/.cargo/bin
 
 # Environment variables ────────────────────────────────────────────────────────

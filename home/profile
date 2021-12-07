@@ -1,27 +1,21 @@
 # Bash
 # https://gnu.org/software/bash/
 
-# Paths ────────────────────────────────────────────────────────────────────────
+# Homebrew
+# https://brew.sh
+eval "$(brew shellenv)"
 
-# Prepend the given directory to paths.
-path() {
-  export PATH=$1:$PATH
-}
-
-# Home
-path ~/.local/bin
-path ~/.cargo/bin
+# OpenSSH
+# https://openssh.com
+eval "$(ssh-agent)" # then `ssh-add`
 
 # Environment variables ────────────────────────────────────────────────────────
 
-# Local environment variables
-. ~/.config/env
+# Paths
+export PATH=~/.local/bin:~/.cargo/bin:$PATH
 
 # Locales
 export LANG=en_US.UTF-8
-
-# OpenSSH – https://openssh.com
-eval "$(ssh-agent)" # then `ssh-add`
 
 # Desktop environment
 # Get icons.
@@ -31,24 +25,11 @@ eval "$(ssh-agent)" # then `ssh-add`
 export QT_QPA_PLATFORMTHEME=kde
 
 # Applications
-export EDITOR='kcr edit'
+export EDITOR=kak
 export KAKOUNE_POSIX_SHELL=/bin/dash
 
 # fzf – https://github.com/junegunn/fzf
 export FZF_DEFAULT_OPTS='--multi --layout=reverse --preview-window=down:60%'
 
-# Linux ────────────────────────────────────────────────────────────────────────
-
-# Same home folder with macOS
-[ -d "/Users/$USER" ] && export HOME=/Users/$USER
-
-# macOS ────────────────────────────────────────────────────────────────────────
-
-# Homebrew – https://brew.sh
-# This is to ensure ARM software from Homebrew runs before Intel software.
-# https://maxfierke.com/blog/posts/so-you-want-to-compile-crystal-on-arm64-macos
-[ -x /usr/local/bin/brew ] && eval "$(/usr/local/bin/brew shellenv)"
-[ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
-
-# Sets the path environment variable for macOS
-# [ -x /bin/launchctl ] && sudo launchctl config user path "$PATH"
+# Local environment variables
+. ~/.config/env

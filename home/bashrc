@@ -1,12 +1,6 @@
 # Bash
 # https://gnu.org/software/bash/
 
-# Hot reloading
-f5() {
-  . ~/.bash_profile
-  printf 'reloaded bashrc'
-}
-
 # Starship
 # https://starship.rs
 eval "$(starship init bash)"
@@ -18,6 +12,12 @@ eval "$(mcfly init bash)"
 # zoxide
 # https://github.com/ajeetdsouza/zoxide
 eval "$(zoxide init bash)"
+
+# Reload the configuration
+R() {
+  . ~/.bash_profile
+  echo 'reloaded bashrc'
+}
 
 # Application launcher
 fork() {
@@ -221,15 +221,15 @@ alias rr='rails routes --grep'
 
 # RVM
 # https://rvm.io
-[ -s ~/.rvm/scripts/rvm ] && . ~/.rvm/scripts/rvm
+. ~/.rvm/scripts/rvm
 
 # OS-specific settings ─────────────────────────────────────────────────────────
 
-os=$(uname -s)
-case "$os" in
+case "$(uname -s)" in
   Darwin)
     alias copy=pbcopy
     alias paste=pbpaste
+    alias set-path='sudo launchctl config user path'
     ;;
   Linux|FreeBSD|OpenBSD)
     alias open=xdg-open
@@ -239,10 +239,6 @@ case "$os" in
 esac
 
 # macOS ────────────────────────────────────────────────────────────────────────
-
-# Homebrew – https://brew.sh
-# https://maxfierke.com/blog/posts/so-you-want-to-compile-crystal-on-arm64-macos
-alias ibrew='arch -x86_64 /usr/local/bin/brew'
 
 # Erases .DS_Store and .localized files from your home folder.
 # Avoids Applications and Library and .Trash folders.

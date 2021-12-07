@@ -141,6 +141,7 @@
 
   # SSH
   services.openssh.enable = true;
+  programs.ssh.startAgent = true;
 
   # Printing
   services.printing.enable = true;

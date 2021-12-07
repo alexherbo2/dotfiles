@@ -221,7 +221,7 @@ alias rr='rails routes --grep'
 
 # RVM
 # https://rvm.io
-. ~/.rvm/scripts/rvm
+# . ~/.rvm/scripts/rvm
 
 # OS-specific settings ─────────────────────────────────────────────────────────
 

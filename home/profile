@@ -5,10 +5,6 @@
 # https://brew.sh
 eval "$(brew shellenv)"
 
-# OpenSSH
-# https://openssh.com
-eval "$(ssh-agent)" # then `ssh-add`
-
 # Environment variables ────────────────────────────────────────────────────────
 
 # Paths

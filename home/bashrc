@@ -229,7 +229,7 @@ case "$(uname -s)" in
   Darwin)
     alias copy=pbcopy
     alias paste=pbpaste
-    alias set-path='sudo launchctl config user path'
+    alias set-path='sudo launchctl config user path "$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/opt/homebrew/sbin:/usr/local/sbin:/usr/sbin:/sbin"'
     ;;
   Linux|FreeBSD|OpenBSD)
     alias open=xdg-open
@@ -241,8 +241,8 @@ esac
 # macOS ────────────────────────────────────────────────────────────────────────
 
 # Erases .DS_Store and .localized files from your home folder.
-# Avoids Applications and Library and .Trash folders.
 DS_Store() {
-  set -- $(find ~ -mindepth 1 -maxdepth 1 -not -name Applications -not -name Library -not -name .Trash)
-  find "$@" '(' -name .DS_Store -or -name .localized ')' -print -exec rm -i -- {} +
+  pastel paint green --bold "Searching .DS_Store and .localized files from your home folder…"
+  echo ~
+  find ~ '(' -name '*.DS_Store' -or -name '*.localized' ')' -print -exec rm -i -- {} +
 }

@@ -223,27 +223,10 @@ alias rr='rails routes --grep'
 # https://rvm.io
 # . ~/.rvm/scripts/rvm
 
-# OS-specific settings ─────────────────────────────────────────────────────────
-
-case "$(uname -s)" in
-  Darwin)
-    alias copy=pbcopy
-    alias paste=pbpaste
-    alias set-path='sudo launchctl config user path "$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/opt/homebrew/sbin:/usr/local/sbin:/usr/sbin:/sbin"'
-    ;;
-  Linux|FreeBSD|OpenBSD)
-    alias open=xdg-open
-    alias copy=wl-copy
-    alias paste=wl-paste
-    ;;
-esac
-
 # macOS ────────────────────────────────────────────────────────────────────────
 
+# Sets the PATH environment variable for all services on macOS.
+alias set-path='sudo launchctl config user path ~/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/opt/homebrew/sbin:/usr/local/sbin:/usr/sbin:/sbin'
+
 # Erases .DS_Store and .localized files from your home folder.
-DS_Store() {
-  exa ~ ~/Desktop ~/Documents ~/Downloads ~/Movies ~/Music ~/Pictures ~/Public
-  pastel paint green --bold "Searching .DS_Store and .localized files from your home folder…"
-  echo ~
-  find ~ '(' -name '*.DS_Store' -or -name '*.localized' ')' -print -exec rm -i -- {} +
-}
+alias DS_Store="find ~ '(' -name '*.DS_Store' -or -name '*.localized' ')' -print -exec rm -i -- {} +"

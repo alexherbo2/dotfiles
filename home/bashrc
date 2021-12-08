@@ -229,4 +229,4 @@ alias rr='rails routes --grep'
 alias set-path='sudo launchctl config user path ~/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/opt/homebrew/sbin:/usr/local/sbin:/usr/sbin:/sbin'
 
 # Erases .DS_Store and .localized files from your home folder.
-alias DS_Store="find ~ '(' -name '*.DS_Store' -or -name '*.localized' ')' -print -exec rm -i -- {} +"
+alias DS_Store="find ~ '(' -name '*.DS_Store' -or -name '*.localized' ')' -print -exec rm -Ri -- {} +"

@@ -247,6 +247,7 @@
     # File managers ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
     dolphin # https://apps.kde.org/en/dolphin
+    broot # https://dystroy.org/broot/
     # sidetree
     # https://github.com/topisani/sidetree
 

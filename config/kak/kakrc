@@ -44,6 +44,7 @@ try %{
   source-runtime rc/filetype/eruby.kak
   source-runtime rc/filetype/etc.kak
   source-runtime rc/filetype/html.kak
+  source-runtime rc/filetype/i3.kak
   source-runtime rc/filetype/ini.kak
   source-runtime rc/filetype/javascript.kak
   source-runtime rc/filetype/json.kak
@@ -52,6 +53,7 @@ try %{
   source-runtime rc/filetype/lua.kak
   source-runtime rc/filetype/makefile.kak
   source-runtime rc/filetype/markdown.kak
+  source-runtime rc/filetype/nix.kak
   source-runtime rc/filetype/ruby.kak
   source-runtime rc/filetype/rust.kak
   source-runtime rc/filetype/scss.kak
@@ -63,6 +65,13 @@ try %{
   source-runtime rc/tools/grep.kak
   source-runtime rc/tools/make.kak
   source-runtime rc/tools/man.kak
+}
+
+# Detection ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+remove-hooks global sh-config
+hook -group sh-config global BufOpenFile '.*/(profile|bashrc|tmux.conf)' %{
+  set-option buffer filetype sh
 }
 
 # Options ──────────────────────────────────────────────────────────────────────

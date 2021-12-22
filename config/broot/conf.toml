@@ -3,8 +3,6 @@
 
 # Options ──────────────────────────────────────────────────────────────────────
 
-modal = true
-
 # Default flags
 # [g] ⇒ --show-git-info
 # [i] ⇒ --show-gitignored
@@ -16,29 +14,25 @@ default_flags = 'gi'
 [[verbs]]
 invocation = 'quit'
 shortcut = 'q'
-key = 'q'
 execution = ':quit'
 
 # Toggle hidden files
 [[verbs]]
 invocation = 'toggle hidden'
 shortcut = '.'
-key = '.'
 execution = ':toggle_hidden'
 
 # Toggle sizes
 [[verbs]]
 invocation = 'toggle sizes'
 shortcut = 'i'
-key = 'i'
 execution = ':toggle_sizes'
 
 # Open a terminal here
 [[verbs]]
 invocation = 'terminal'
-shortcut = '$'
-key = '$'
-execution = 'bash'
+shortcut = 't'
+execution = '$SHELL'
 set_working_dir = true
 leave_broot = false
 
@@ -46,7 +40,6 @@ leave_broot = false
 [[verbs]]
 invocation = 'home'
 shortcut = '~'
-key = '~'
 execution = ':focus ~'
 leave_broot = false
 
@@ -55,7 +48,6 @@ leave_broot = false
 [[verbs]]
 invocation = 'view'
 shortcut = 'v'
-key = 'v'
 execution = 'bat {file}'
 leave_broot = false
 
@@ -64,15 +56,14 @@ leave_broot = false
 [[verbs]]
 invocation = 'edit'
 shortcut = 'e'
-key = 'e'
-execution = 'kak +{line} {file}'
+execution = '$EDITOR +{line} {file}'
 leave_broot = false
 
 # Create new text files.
 [[verbs]]
 invocation = 'create {subpath}'
-shortcut = 'o'
-execution = 'kak {directory}/{subpath}'
+shortcut = 'c'
+execution = '$EDITOR {directory}/{subpath}'
 leave_broot = false
 
 # archiver
@@ -80,7 +71,6 @@ leave_broot = false
 [[verbs]]
 invocation = 'extract'
 shortcut = 'x'
-key = 'x'
 execution = 'arc unarchive {file}'
 set_working_dir = true
 leave_broot = false
@@ -90,6 +80,5 @@ leave_broot = false
 [[verbs]]
 invocation = 'mpv'
 shortcut = 'm'
-key = 'm'
 execution = 'mpv --really-quiet {file}'
 leave_broot = false

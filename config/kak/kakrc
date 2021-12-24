@@ -141,3 +141,11 @@ map -docstring 'file picker' global normal <c-f> ': connect terminal-popup kcr f
 map -docstring 'buffer picker' global normal <c-b> ': connect terminal-popup kcr fzf buffers<ret>'
 map -docstring 'grep picker' global normal <c-g> ': connect terminal-popup kcr fzf grep<ret>'
 map -docstring 'grep picker (buffer)' global normal <c-r> ': connect terminal-popup kcr fzf grep %val{buflist}<ret>'
+
+# Notes ────────────────────────────────────────────────────────────────────────
+
+remove-hooks global notes
+hook -group notes global BufCreate '.*/docs/notes.txt' %{
+  add-highlighter -override buffer/notes regex '(?S)^(\d{4}-\d{2}-\d{2}) (\w{3}) (.+)$' 1:blue 2:magenta 3:default
+  map -docstring 'insert date (2006-01-02 Mon)' buffer insert <c-u> '<a-;>!date ''+%F %a'' | tr -d ''\n''<ret>'
+}

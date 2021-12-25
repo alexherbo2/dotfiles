@@ -2,7 +2,7 @@
 // https://github.com/extrawurst/gitui
 
 (
-  selected_tab: Yellow,
+  selected_tab: Reset,
   command_fg: White,
   selection_bg: Blue,
   cmdbar_extra_lines_bg: Blue,

@@ -144,7 +144,7 @@ map -docstring 'grep picker (buffer)' global normal <c-r> ': connect terminal-po
 
 # Notes ────────────────────────────────────────────────────────────────────────
 
-map -docstring 'open notes' global user w ': edit ~/docs/notes.txt<ret>'
+map -docstring 'open notes' global user w ': edit ~/docs/notes.txt<ret>gjvt'
 
 remove-hooks global notes
 hook -group notes global BufCreate '.*/docs/notes.txt' %{

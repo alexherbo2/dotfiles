@@ -156,6 +156,7 @@ add-highlighter -override shared/notes/tag regex '(\[)([^\]]+)(\])' 1:default+d 
 add-highlighter -override shared/notes/keywords group
 add-highlighter -override shared/notes/keywords/ regex 'Buy' 0:yellow
 add-highlighter -override shared/notes/keywords/ regex 'Go to' 0:cyan
+add-highlighter -override shared/notes/keywords/ regex 'Go on' 0:cyan
 add-highlighter -override shared/notes/keywords/ regex 'Sign up' 0:blue
 add-highlighter -override shared/notes/keywords/ regex 'Update' 0:yellow
 add-highlighter -override shared/notes/keywords/ regex 'Watch' 0:cyan

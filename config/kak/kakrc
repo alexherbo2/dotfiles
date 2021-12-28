@@ -147,6 +147,8 @@ map -docstring 'grep picker (buffer)' global normal <c-r> ': connect terminal-po
 map -docstring 'open notes' global user w ': edit ~/docs/notes.txt<ret>gjvt'
 
 add-highlighter -override shared/notes group
+add-highlighter -override shared/notes/entry-date-year regex '(?S)^(\d{4}) (.+)$' 1:comment 2:comment 3:default
+add-highlighter -override shared/notes/entry-date-year-month regex '(?S)^(\d{4}-\d{2}) (.+)$' 1:comment 2:comment 3:default
 add-highlighter -override shared/notes/entry-date regex '(?S)^(\d{4}-\d{2}-\d{2}) (\w{3}) (.+)$' 1:comment 2:comment 3:default
 add-highlighter -override shared/notes/entry-date-time regex '(?S)^(\d{4}-\d{2}-\d{2}) (\w{3}) (\d{2}:\d{2}) (.+)$' 1:comment 2:comment 3:comment 4:default
 add-highlighter -override shared/notes/info regex '(\()([^)]+)(\))' 1:default+d 2:blue 3:default+d

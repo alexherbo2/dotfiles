@@ -182,6 +182,10 @@
   # Important: Requires nixpkgs.config.allowUnfree
   # virtualisation.virtualbox.host.enableExtensionPack = true;
 
+  # Parallels
+  # https://parallels.com
+  hardware.parallels.enable = true;
+
   # PostgreSQL
   # https://postgresql.org
   # https://nixos.org/manual/nixos/stable#module-postgresql

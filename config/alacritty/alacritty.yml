@@ -31,4 +31,5 @@ cursor:
 # Keys:
 # https://docs.rs/glutin/latest/glutin/event/enum.VirtualKeyCode.html
 key_bindings:
-  - { key: N, mods: Control|Shift, action: SpawnNewInstance }
+  - { key: N, mods: Control|Shift, action: CreateNewWindow }
+  - { key: N, mods: Command, action: CreateNewWindow }

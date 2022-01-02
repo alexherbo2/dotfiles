@@ -19,7 +19,7 @@ window:
 font:
   size: 16.0
   normal:
-    family: PragmataPro
+    family: PragmataPro Mono
 
 cursor:
   style:

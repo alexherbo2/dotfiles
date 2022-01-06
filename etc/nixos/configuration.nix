@@ -416,6 +416,9 @@
 
     # Tools ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
+    # System information
+    neofetch # https://github.com/dylanaraps/neofetch
+
     # Networking
     openssh # https://openssh.com
     openssl # https://openssl.org

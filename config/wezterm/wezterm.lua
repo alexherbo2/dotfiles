@@ -4,6 +4,9 @@
 local wezterm = require 'wezterm'
 
 return {
+  -- Smart tab bar [distraction-free mode]
+  hide_tab_bar_if_only_one_tab = true,
+
   -- Color scheme
   -- https://wezfurlong.org/wezterm/config/appearance.html
   --

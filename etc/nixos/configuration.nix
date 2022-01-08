@@ -455,6 +455,9 @@
     # Static site generators
     hugo # https://gohugo.io
 
+    # Terminals
+    ttyd # https://github.com/tsl0922/ttyd
+
     # Services
     ngrok # https://ngrok.com
     heroku # https://heroku.com

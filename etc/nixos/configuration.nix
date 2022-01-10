@@ -128,6 +128,10 @@
 
   # Services ───────────────────────────────────────────────────────────────────
 
+  # Optimize battery life
+  # https://linrunner.de/tlp/
+  services.tlp.enable = true;
+
   # Login
   services.logind.lidSwitch = "ignore";
   services.logind.extraConfig = ''

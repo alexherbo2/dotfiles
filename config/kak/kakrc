@@ -18,7 +18,7 @@ try %sh{
 
 source ~/projects/alacritty.kak/rc/alacritty.kak
 source ~/projects/auto-pairs.kak/rc/auto-pairs.kak
-source ~/code/crystal.kak/rc/crystal.kak
+source ~/.config/kak/autoload/crystal.kak
 source ~/projects/git.kak/rc/git.kak
 source ~/projects/indent.kak/rc/indent.kak
 source ~/projects/mark.kak/rc/mark.kak

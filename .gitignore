@@ -19,3 +19,5 @@ local/share/fonts
 local/state
 config/karabiner
 local/share/karabiner
+config/kak/autoload
+config/mpv/scripts

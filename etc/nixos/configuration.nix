@@ -186,6 +186,10 @@
   # Important: Requires nixpkgs.config.allowUnfree
   # virtualisation.virtualbox.host.enableExtensionPack = true;
 
+  # QEMU
+  # https://qemu.org
+  services.qemuGuest.enable = true;
+
   # Parallels
   # https://parallels.com
   hardware.parallels.enable = true;

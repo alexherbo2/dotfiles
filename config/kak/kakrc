@@ -124,12 +124,17 @@ map -docstring 'reload kakrc' global user R ': source-kakrc; echo reloaded kakrc
 # Enter command mode
 map -docstring 'enter command' global normal <ret> :
 
+# Re-center view
+map -docstring 'scroll to put the cursor on the top line of the window' global normal <esc> vt
+
 # Editing
 map -docstring 'save' global normal <c-s> ': write; echo saved<ret>'
 map -docstring 'quit' global normal <c-q> ': quit<ret>'
 map -docstring 'last buffer' global normal <c-a> ga
 
-# Movement
+# Navigation
+map -docstring 'scroll one page up' global normal <pageup> <space><pageup>
+map -docstring 'scroll one page down' global normal <pagedown> <space><pagedown>
 map -docstring 'move to previous paragraph' global normal [ <space>gh[pgi
 map -docstring 'move to next paragraph' global normal ] <space>]plgi
 

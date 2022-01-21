@@ -130,6 +130,8 @@ map -docstring 'quit' global normal <c-q> ': quit<ret>'
 map -docstring 'last buffer' global normal <c-a> ga
 
 # Selection primitives
+map -docstring 'select inner object' global normal v <a-i>
+map -docstring 'select whole object' global normal V <a-a>
 map -docstring 'surround mode' global normal q ': surround-mode<ret>'
 map -docstring 'select mode' global normal S ': select-mode<ret>'
 

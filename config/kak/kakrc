@@ -129,6 +129,10 @@ map -docstring 'save' global normal <c-s> ': write; echo saved<ret>'
 map -docstring 'quit' global normal <c-q> ': quit<ret>'
 map -docstring 'last buffer' global normal <c-a> ga
 
+# Movement
+map -docstring 'move to previous paragraph' global normal [ [phhgi
+map -docstring 'move to next paragraph' global normal ] ]plgi
+
 # Selection primitives
 map -docstring 'select inner object' global normal v <a-i>
 map -docstring 'select whole object' global normal V <a-a>

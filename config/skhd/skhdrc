@@ -50,8 +50,8 @@ alt - l : yabai --message query --windows --space | jq 'map(select(."is-visible"
 #
 # Note: Expose mode does not work in an empty space.
 #
-# ctrl - k : yabai --message space --toggle mission-control
-# ctrl - j : yabai --message window --toggle expose
+ctrl - k : yabai --message space --toggle mission-control
+ctrl - j : yabai --message window --toggle expose
 
 # Spaces ───────────────────────────────────────────────────────────────────────
 
@@ -59,8 +59,8 @@ alt - l : yabai --message query --windows --space | jq 'map(select(."is-visible"
 #
 # Note: yabai space commands don’t have animation and cannot be used in Mission Control.
 #
-# ctrl - h : yabai --message space --focus prev
-# ctrl - l : yabai --message space --focus next
+ctrl - h : yabai --message space --focus prev
+ctrl - l : yabai --message space --focus next
 
 # Switch to space
 ctrl - 1 : yabai --message space --focus 1

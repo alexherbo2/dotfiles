@@ -480,6 +480,9 @@
 
     # Programming languages ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
+    # Bash
+    nodePackages.bash-language-server # https://github.com/bash-lsp/bash-language-server
+
     # C
     gcc # https://gcc.gnu.org
     clang # https://clang.llvm.org

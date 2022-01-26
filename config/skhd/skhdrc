@@ -41,6 +41,10 @@ cmd + alt + shift - u : yabai --message window --grid 2:2:0:1:1:1
 cmd + alt + shift - i : yabai --message window --grid 2:2:1:1:1:1
 
 # Focus next and previous windows
+#
+# Note: Use the same—Command—modifier key after moving windows.
+#
+cmd - h : yabai --message query --windows --space | jq 'map(select(."is-visible")) | sort_by(.frame.x, .frame.y, .id) | nth((index(map(select(."has-focus"))) - 1) % length).id' | xargs yabai --message window --focus
 alt - h : yabai --message query --windows --space | jq 'map(select(."is-visible")) | sort_by(.frame.x, .frame.y, .id) | nth((index(map(select(."has-focus"))) - 1) % length).id' | xargs yabai --message window --focus
 alt - l : yabai --message query --windows --space | jq 'map(select(."is-visible")) | sort_by(.frame.x, .frame.y, .id) | nth((index(map(select(."has-focus"))) + 1) % length).id' | xargs yabai --message window --focus
 

@@ -54,8 +54,8 @@ alt - l : yabai --message query --windows --space | jq 'map(select(."is-visible"
 #
 # Note: Expose mode does not work in an empty space.
 #
-ctrl - k : yabai --message space --toggle mission-control
-ctrl - j : yabai --message window --toggle expose
+# ctrl - k : yabai --message space --toggle mission-control
+# ctrl - j : yabai --message window --toggle expose
 
 # Spaces ───────────────────────────────────────────────────────────────────────
 
@@ -63,22 +63,25 @@ ctrl - j : yabai --message window --toggle expose
 #
 # Note: yabai space commands don’t have animation and cannot be used in Mission Control.
 #
-ctrl - h : yabai --message space --focus prev
-ctrl - l : yabai --message space --focus next
+# ctrl - h : yabai --message space --focus prev
+# ctrl - l : yabai --message space --focus next
 
 # Switch to space
-ctrl - 1 : yabai --message space --focus 1
-ctrl - 2 : yabai --message space --focus 2
-ctrl - 3 : yabai --message space --focus 3
-ctrl - 4 : yabai --message space --focus 4
-ctrl - 5 : yabai --message space --focus 5
-ctrl - 6 : yabai --message space --focus 6
-ctrl - 7 : yabai --message space --focus 7
-ctrl - 8 : yabai --message space --focus 8
-ctrl - 9 : yabai --message space --focus 9
-ctrl - 0 : yabai --message space --focus 10
-ctrl - 0x1B : yabai --message space --focus 11
-ctrl - 0x18 : yabai --message space --focus 12
+#
+# Note: yabai space commands don’t have animation.
+#
+# ctrl - 1 : yabai --message space --focus 1
+# ctrl - 2 : yabai --message space --focus 2
+# ctrl - 3 : yabai --message space --focus 3
+# ctrl - 4 : yabai --message space --focus 4
+# ctrl - 5 : yabai --message space --focus 5
+# ctrl - 6 : yabai --message space --focus 6
+# ctrl - 7 : yabai --message space --focus 7
+# ctrl - 8 : yabai --message space --focus 8
+# ctrl - 9 : yabai --message space --focus 9
+# ctrl - 0 : yabai --message space --focus 10
+# ctrl - 0x1B : yabai --message space --focus 11
+# ctrl - 0x18 : yabai --message space --focus 12
 
 # Move focused window to space
 ctrl + shift - 1 : yabai --message window --space 1

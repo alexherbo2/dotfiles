@@ -295,7 +295,7 @@
 
     # Utils
     ffmpeg-full # FFmpeg https://ffmpeg.org
-    youtube-dl # https://yt-dl.org
+    yt-dlp # https://github.com/yt-dlp/yt-dlp
 
     # Music players ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 

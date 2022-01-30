@@ -208,9 +208,9 @@ alias b=google-chrome-stable
 alias m=mpv
 alias ms='mpv --shuffle'
 
-# youtube-dl
-# https://ytdl-org.github.io/youtube-dl/
-alias y=youtube-dl
+# yt-dlp
+# https://github.com/yt-dlp/yt-dlp
+alias y=yt-dlp
 
 # Pandoc
 # https://pandoc.org

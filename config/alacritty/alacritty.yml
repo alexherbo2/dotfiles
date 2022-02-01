@@ -21,6 +21,9 @@ font:
   normal:
     family: PragmataPro Mono
 
+selection:
+  save_to_clipboard: true
+
 cursor:
   style:
     shape: Beam

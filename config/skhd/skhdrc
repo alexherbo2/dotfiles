@@ -22,7 +22,7 @@ cmd - f5 : launchctl kickstart -k gui/${UID}/homebrew.mxcl.yabai && skhd --reloa
 ctrl - y : yabai --message window --toggle native-fullscreen
 
 # Picture-in-picture
-ctrl - x : yabai --message window --toggle pip
+ctrl - x : yabai --message window --toggle sticky && yabai --message window --toggle topmost
 
 # Windows ──────────────────────────────────────────────────────────────────────
 

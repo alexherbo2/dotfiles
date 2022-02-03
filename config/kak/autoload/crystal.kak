@@ -1,0 +1,1 @@
+/Users/taupiqueur/code/kakoune-crystal/rc/crystal.kak

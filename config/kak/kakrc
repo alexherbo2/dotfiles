@@ -125,7 +125,7 @@ map -docstring 'reload kakrc' global user R ': source-kakrc; echo reloaded kakrc
 map -docstring 'enter command' global normal <ret> :
 
 # Re-center view
-map -docstring 'scroll to put the cursor on the top line of the window' global normal <esc> vt
+map -docstring 'scroll to put the cursor on the top line of the window' global normal <esc> vtvm
 
 # Editing
 map -docstring 'save' global normal <c-s> ': write; echo saved<ret>'

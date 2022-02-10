@@ -130,7 +130,6 @@ map -docstring 'scroll to put the cursor on the top line of the window' global n
 # Editing
 map -docstring 'save' global normal <c-s> ': write; echo saved<ret>'
 map -docstring 'quit' global normal <c-q> ': quit<ret>'
-map -docstring 'last buffer' global normal <c-a> ga
 
 # Navigation
 map -docstring 'scroll one page up' global normal <pageup> <space><pageup>

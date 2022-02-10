@@ -128,8 +128,9 @@ map -docstring 'enter command' global normal <ret> :
 map -docstring 'scroll to put the cursor on the top line of the window' global normal <esc> vtvm
 
 # Editing
-map -docstring 'save' global normal <c-s> ': write; echo saved<ret>'
-map -docstring 'quit' global normal <c-q> ': quit<ret>'
+map -docstring 'save file' global normal <c-s> ': write; echo file saved<ret>'
+map -docstring 'close client' global normal <c-q> ': quit<ret>'
+map -docstring 'close buffer' global normal <c-w> ': delete-buffer; echo buffer closed<ret>'
 
 # Navigation
 map -docstring 'scroll one page up' global normal <pageup> <space><pageup>

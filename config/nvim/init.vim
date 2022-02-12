@@ -12,6 +12,7 @@ set runtimepath+=~/.local/share/github.com/tpope/vim-sleuth
 set runtimepath+=~/.local/share/github.com/tpope/vim-surround
 set runtimepath+=~/.local/share/github.com/tpope/vim-unimpaired
 set runtimepath+=~/.local/share/github.com/tpope/vim-vinegar
+set runtimepath+=~/.local/share/github.com/vim-crystal/vim-crystal
 
 colorscheme dracula
 

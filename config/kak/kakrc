@@ -180,3 +180,5 @@ hook -group notes global BufCreate '.*/docs/notes.txt' %{
   map -docstring 'insert date (2006-01-02 Mon 15:04)' buffer insert <c-i> '<a-;>!date ''+%F %a %H:%M'' | tr -d ''\n''<ret>'
   map -docstring 'save and close buffer' buffer normal <c-w> ': write; delete-buffer<ret>'
 }
+
+source ~/t.kak

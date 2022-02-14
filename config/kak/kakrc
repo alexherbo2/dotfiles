@@ -17,13 +17,15 @@ try %sh{
 }
 
 source ~/.config/kak/autoload/clipboard.kak
+source ~/.config/kak/autoload/comment.kak
 source ~/.config/kak/autoload/crystal.kak
+source ~/.config/kak/autoload/indent.kak
 source ~/.config/kak/autoload/language-support.kak
 
 source ~/projects/alacritty.kak/rc/alacritty.kak
 source ~/projects/auto-pairs.kak/rc/auto-pairs.kak
 source ~/projects/git.kak/rc/git.kak
-source ~/projects/indent.kak/rc/indent.kak
+# source ~/projects/indent.kak/rc/indent.kak
 source ~/projects/mark.kak/rc/mark.kak
 source ~/projects/pipe.kak/rc/pipe.kak
 source ~/projects/select.kak/rc/select.kak
@@ -97,9 +99,12 @@ try lsp-enable
 remove-highlighter global/lsp_error_lines
 
 # Indentation
-set-indent global 2
-enable-detect-indent
-enable-auto-indent
+set-option global tabstop 2
+set-option global indentwidth 2
+set-option global disabled_hooks '(?!auto)(?!detect)\K(.+)-(trim-indent|insert|indent)'
+# set-indent global 2
+# enable-detect-indent
+# enable-auto-indent
 
 # Auto-pairing of characters
 enable-auto-pairs

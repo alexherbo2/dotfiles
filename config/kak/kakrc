@@ -113,6 +113,10 @@ enable-auto-pairs
 synchronize-terminal-clipboard
 make-directory-on-save
 
+# Tools
+set-option global makecmd 'make -j 8'
+set-option global grepcmd 'rg --with-filename --line-number --column'
+
 # Show whitespaces
 show-whitespaces
 

@@ -11,6 +11,8 @@
 
 # Preamble ─────────────────────────────────────────────────────────────────────
 
+remove-hooks global config
+
 try %sh{
   kcr init kakoune
   kak-lsp --kakoune --session "$kak_session"
@@ -164,6 +166,12 @@ map -docstring 'file picker' global normal <c-f> ': terminal-popup kcr fzf files
 map -docstring 'buffer picker' global normal <c-b> ': terminal-popup kcr fzf buffers<ret>'
 map -docstring 'grep picker' global normal <c-g> ': terminal-popup kcr fzf grep<ret>'
 map -docstring 'grep picker (buffer)' global normal <c-r> ': terminal-popup kcr fzf grep %val{buflist}<ret>'
+
+# Language support ─────────────────────────────────────────────────────────────
+
+hook -group config global BufSetOption filetype=grep %{
+  map buffer normal <ret> ': grep-jump<ret>'
+}
 
 # Notes ────────────────────────────────────────────────────────────────────────
 

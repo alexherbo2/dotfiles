@@ -174,7 +174,7 @@ gg() {
 }
 
 GG() {
-  set -- ~/.local/share/github.com/*/* ~/.local/share/gitlab.com/*/*
+  set -- ~/.local/share/github.com/*/* ~/.local/share/gitlab.com/*/* ~/.local/share/git.sr.ht/*/*
 
   for repository do
     pastel paint green --bold "$repository"

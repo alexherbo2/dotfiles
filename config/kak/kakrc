@@ -22,7 +22,6 @@ source ~/.config/kak/autoload/clipboard.kak
 source ~/.config/kak/autoload/comment.kak
 source ~/.config/kak/autoload/crystal.kak
 source ~/.config/kak/autoload/indent.kak
-source ~/.config/kak/autoload/language-support.kak
 
 source ~/projects/alacritty.kak/rc/alacritty.kak
 source ~/projects/auto-pairs.kak/rc/auto-pairs.kak

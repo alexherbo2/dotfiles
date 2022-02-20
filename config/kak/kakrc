@@ -102,7 +102,7 @@ remove-highlighter global/lsp_error_lines
 # Indentation
 set-option global tabstop 2
 set-option global indentwidth 2
-set-option global disabled_hooks '(?!auto)(?!detect)\K(.+)-(trim-indent|insert|indent)'
+set-option global disabled_hooks '.+-trim-indent|.+-insert|.+-indent'
 # set-indent global 2
 # enable-detect-indent
 # enable-auto-indent

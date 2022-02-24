@@ -458,6 +458,9 @@
     # Notifications
     libnotify # https://developer.gnome.org/notification-spec/ (provides notify-send)
 
+    # Spell checker
+    aspell # http://aspell.net
+
     # Web ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
     # Static site generators

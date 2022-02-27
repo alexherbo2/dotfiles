@@ -13,6 +13,12 @@ cmd - return : open -a 'Alacritty'
 # Web browser
 cmd + shift - return : open -a 'Google Chrome'
 
+# Open mpv
+ctrl - m : open -a 'mpv'
+
+# Open mpv with URLs from clipboard
+ctrl + shift - m : pbpaste | mpv --playlist=-
+
 # Reload yabai and skhd
 cmd - f5 : launchctl kickstart -k gui/${UID}/homebrew.mxcl.yabai && skhd --reload
 

@@ -1,7 +1,7 @@
 " Neovim
 " https://neovim.io
 
-set runtimepath+=~/projects/kakoune.vim
+set runtimepath+=~/code~/kakoune.vim
 set runtimepath+=~/.local/share/github.com/dracula/vim
 set runtimepath+=~/.local/share/github.com/scrooloose/nerdtree
 set runtimepath+=~/.local/share/github.com/tpope/vim-commentary

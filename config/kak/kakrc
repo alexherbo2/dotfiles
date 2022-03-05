@@ -230,4 +230,4 @@ add-highlighter -override shared/list/url regex 'https?://\S+' 0:cyan
 add-highlighter -override shared/list/date regex '\d{4}-\d{2}-\d{2}' 0:blue
 add-highlighter -override shared/list/date-range regex '(\d{4}-\d{2}-\d{2}) (-) (\d{4}-\d{2}-\d{2})' 1:blue 2:bright-blue 3:blue
 
-source ~/t.kak
+source ~/.kakrc

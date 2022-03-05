@@ -74,13 +74,6 @@ try %{
   source-runtime rc/tools/man.kak
 }
 
-# Detection ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-remove-hooks global config
-hook -group config global BufOpenFile '.*/(profile|bashrc|tmux.conf)' %{
-  set-option buffer filetype sh
-}
-
 # Options ──────────────────────────────────────────────────────────────────────
 
 # UI options
@@ -174,6 +167,16 @@ map -docstring 'format date to 2006-01-02' global user D '| chronic %F<ret>'
 
 hook -group config global BufSetOption filetype=grep %{
   map buffer normal <ret> ': grep-jump<ret>'
+}
+
+# Detection ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+hook -group config global BufCreate '.*/\.kakrc' %{
+  set-option buffer filetype kak
+}
+
+hook -group config global BufCreate '.*/(profile|bashrc|tmux.conf)' %{
+  set-option buffer filetype sh
 }
 
 # Notes ────────────────────────────────────────────────────────────────────────

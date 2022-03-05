@@ -200,4 +200,17 @@ hook -group notes global BufCreate '.*/docs/notes.txt' %{
   map -docstring 'insert date (2006-01-02 Mon 15:04)' buffer insert <c-i> '<a-;>!date ''+%F %a %H:%M'' | tr -d ''\n''<ret>'
 }
 
+# List ─────────────────────────────────────────────────────────────────────────
+
+add-highlighter -override shared/list group
+add-highlighter -override shared/list/number regex '\d+' 0:blue
+add-highlighter -override shared/list/url regex 'https?://\S+' 0:cyan
+add-highlighter -override shared/list/date regex '\d{4}-\d{2}-\d{2}' 0:blue
+add-highlighter -override shared/list/date-range regex '(\d{4}-\d{2}-\d{2}) (-) (\d{4}-\d{2}-\d{2})' 1:blue 2:bright-blue 3:blue
+
+remove-hooks global list
+hook -group list global BufCreate '.*/list.txt' %{
+  add-highlighter -override buffer/list ref list
+}
+
 source ~/t.kak

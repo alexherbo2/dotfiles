@@ -23,22 +23,22 @@ source ~/.config/kak/autoload/comment.kak
 source ~/.config/kak/autoload/crystal.kak
 source ~/.config/kak/autoload/indent.kak
 
-source ~/projects/alacritty.kak/rc/alacritty.kak
-source ~/projects/auto-pairs.kak/rc/auto-pairs.kak
-source ~/projects/git.kak/rc/git.kak
-# source ~/projects/indent.kak/rc/indent.kak
-source ~/projects/mark.kak/rc/mark.kak
-source ~/projects/pipe.kak/rc/pipe.kak
-source ~/projects/select.kak/rc/select.kak
-source ~/projects/sensible.kak/rc/sensible.kak
-source ~/projects/shortcuts.kak/rc/shortcuts.kak
-source ~/projects/show-whitespaces.kak/rc/show-whitespaces.kak
-nop source ~/projects/snippet.kak/rc/snippet.kak
-source ~/projects/surround.kak/rc/surround.kak
-source ~/projects/text-objects.kak/rc/text-objects.kak
-source ~/projects/tiny.kak/rc/tiny.kak
-source ~/projects/tmux.kak/rc/tmux.kak
-source ~/projects/window.kak/rc/window.kak
+source ~/code~/alacritty.kak/rc/alacritty.kak
+source ~/code~/auto-pairs.kak/rc/auto-pairs.kak
+source ~/code~/git.kak/rc/git.kak
+# source ~/code~/indent.kak/rc/indent.kak
+source ~/code~/mark.kak/rc/mark.kak
+source ~/code~/pipe.kak/rc/pipe.kak
+source ~/code~/select.kak/rc/select.kak
+source ~/code~/sensible.kak/rc/sensible.kak
+source ~/code~/shortcuts.kak/rc/shortcuts.kak
+source ~/code~/show-whitespaces.kak/rc/show-whitespaces.kak
+nop source ~/code~/snippet.kak/rc/snippet.kak
+source ~/code~/surround.kak/rc/surround.kak
+source ~/code~/text-objects.kak/rc/text-objects.kak
+source ~/code~/tiny.kak/rc/tiny.kak
+source ~/code~/tmux.kak/rc/tmux.kak
+source ~/code~/window.kak/rc/window.kak
 
 # Kakoune support
 # https://github.com/mawww/kakoune/tree/master/rc
@@ -90,7 +90,7 @@ remove-scratch-message
 
 # Color scheme
 # Dracula – https://draculatheme.com/kakoune
-source ~/projects/dracula/kakoune/colors/dracula.kak
+source ~/code~/dracula/kakoune/colors/dracula.kak
 
 # Status line
 declare-cursor-character-unicode

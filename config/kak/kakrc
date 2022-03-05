@@ -52,6 +52,7 @@ try %{
   source-runtime rc/filetype/html.kak
   source-runtime rc/filetype/i3.kak
   source-runtime rc/filetype/ini.kak
+  source-runtime rc/filetype/java.kak
   source-runtime rc/filetype/javascript.kak
   source-runtime rc/filetype/json.kak
   source-runtime rc/filetype/kakrc.kak

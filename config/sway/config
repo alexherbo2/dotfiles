@@ -60,7 +60,7 @@ exec wlsunset
 
 # Sway tools
 # https://github.com/alexherbo2/sway-tools
-exec sway-fade
+# exec sway-fade
 
 # Colors ───────────────────────────────────────────────────────────────────────
 

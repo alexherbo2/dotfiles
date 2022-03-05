@@ -68,23 +68,9 @@
   # Do not prompt for password
   security.sudo.wheelNeedsPassword = false;
 
-  # Optimization – Speed-up builds
-  # Jobs to run in parallel
-  nix.maxJobs = 1;
-  # Use all available cores when set to 0
-  nix.buildCores = 1;
-
-  # Lower the Nix daemon process priority
-  # nix.daemonNiceLevel = 19;
-  # nix.daemonIONiceLevel = 7;
-
-  # CPU throttling
-  # systemd.enableCgroupAccounting = true;
-  # systemd.services.nix-daemon.serviceConfig.CPUQuota = "10%";
-
   # Automatic Upgrades
   # https://nixos.org/manual/nixos/stable#sec-upgrading-automatic
-  # system.autoUpgrade.enable = true;
+  system.autoUpgrade.enable = true;
 
   # Cleaning the Nix Store
   # https://nixos.org/manual/nixos/stable#sec-nix-gc
@@ -188,11 +174,11 @@
 
   # QEMU
   # https://qemu.org
-  services.qemuGuest.enable = true;
+  # services.qemuGuest.enable = true;
 
   # Parallels
   # https://parallels.com
-  hardware.parallels.enable = true;
+  # hardware.parallels.enable = true;
 
   # PostgreSQL
   # https://postgresql.org

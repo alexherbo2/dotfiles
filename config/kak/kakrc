@@ -68,7 +68,6 @@ try %{
   source-runtime rc/filetype/sh.kak
   source-runtime rc/filetype/toml.kak
   source-runtime rc/filetype/yaml.kak
-  source-runtime rc/tools/comment.kak
   source-runtime rc/tools/doc.kak
   source-runtime rc/tools/grep.kak
   source-runtime rc/tools/make.kak

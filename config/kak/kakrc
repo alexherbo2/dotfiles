@@ -18,6 +18,16 @@ try %sh{
   kak-lsp --kakoune --session "$kak_session"
 }
 
+# Kakoune support
+# https://github.com/mawww/kakoune/tree/master/rc
+try %{
+  source ~/.config/kak/init.kak
+}
+
+evaluate-commands %sh{
+  find -L "$kak_config/autoload" -type f -name '*.kak' -exec printf 'source "%s";' {} +
+}
+
 source ~/.config/kak/autoload/clipboard.kak
 source ~/.config/kak/autoload/comment.kak
 source ~/.config/kak/autoload/crystal.kak
@@ -26,53 +36,17 @@ source ~/.config/kak/autoload/indent.kak
 source ~/code~/alacritty.kak/rc/alacritty.kak
 source ~/code~/auto-pairs.kak/rc/auto-pairs.kak
 source ~/code~/git.kak/rc/git.kak
-# source ~/code~/indent.kak/rc/indent.kak
 source ~/code~/mark.kak/rc/mark.kak
 source ~/code~/pipe.kak/rc/pipe.kak
 source ~/code~/select.kak/rc/select.kak
 source ~/code~/sensible.kak/rc/sensible.kak
 source ~/code~/shortcuts.kak/rc/shortcuts.kak
 source ~/code~/show-whitespaces.kak/rc/show-whitespaces.kak
-nop source ~/code~/snippet.kak/rc/snippet.kak
 source ~/code~/surround.kak/rc/surround.kak
 source ~/code~/text-objects.kak/rc/text-objects.kak
 source ~/code~/tiny.kak/rc/tiny.kak
 source ~/code~/tmux.kak/rc/tmux.kak
 source ~/code~/window.kak/rc/window.kak
-
-# Kakoune support
-# https://github.com/mawww/kakoune/tree/master/rc
-try %{
-  source-runtime rc/detection/file.kak
-  source-runtime rc/filetype/asciidoc.kak
-  source-runtime rc/filetype/c-family.kak
-  source-runtime rc/filetype/css.kak
-  source-runtime rc/filetype/eruby.kak
-  source-runtime rc/filetype/etc.kak
-  source-runtime rc/filetype/html.kak
-  source-runtime rc/filetype/i3.kak
-  source-runtime rc/filetype/ini.kak
-  source-runtime rc/filetype/java.kak
-  source-runtime rc/filetype/javascript.kak
-  source-runtime rc/filetype/json.kak
-  source-runtime rc/filetype/kakrc.kak
-  source-runtime rc/filetype/kotlin.kak
-  source-runtime rc/filetype/lisp.kak
-  source-runtime rc/filetype/lua.kak
-  source-runtime rc/filetype/makefile.kak
-  source-runtime rc/filetype/markdown.kak
-  source-runtime rc/filetype/nix.kak
-  source-runtime rc/filetype/ruby.kak
-  source-runtime rc/filetype/rust.kak
-  source-runtime rc/filetype/scss.kak
-  source-runtime rc/filetype/sh.kak
-  source-runtime rc/filetype/toml.kak
-  source-runtime rc/filetype/yaml.kak
-  source-runtime rc/tools/doc.kak
-  source-runtime rc/tools/grep.kak
-  source-runtime rc/tools/make.kak
-  source-runtime rc/tools/man.kak
-}
 
 # Options ──────────────────────────────────────────────────────────────────────
 
@@ -83,7 +57,7 @@ remove-scratch-message
 
 # Color scheme
 # Dracula – https://draculatheme.com/kakoune
-source ~/code~/dracula/kakoune/colors/dracula.kak
+source ~/.config/kak/colors/dracula.kak
 
 # Status line
 declare-cursor-character-unicode
@@ -232,5 +206,3 @@ add-highlighter -override shared/list/number regex '\d+' 0:blue
 add-highlighter -override shared/list/url regex 'https?://\S+' 0:cyan
 add-highlighter -override shared/list/date regex '\d{4}-\d{2}-\d{2}' 0:blue
 add-highlighter -override shared/list/date-range regex '(\d{4}-\d{2}-\d{2}) (-) (\d{4}-\d{2}-\d{2})' 1:blue 2:bright-blue 3:blue
-
-source ~/.kakrc

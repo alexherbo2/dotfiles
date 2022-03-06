@@ -20,4 +20,6 @@ local/state
 config/karabiner
 local/share/karabiner
 config/kak/autoload
+config/kak/colors
+config/kak/init.kak
 config/mpv/scripts

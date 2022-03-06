@@ -137,6 +137,30 @@ map -docstring 'grep picker (buffer)' global normal <c-r> ': terminal-popup kcr 
 # Formatting and parsing date-time
 map -docstring 'format date to 2006-01-02' global user D '| chronic %F<ret>'
 
+# Quick editing ────────────────────────────────────────────────────────────────
+
+# Modes
+try %[ declare-user-mode open ]
+
+# Commands
+define-command -override enter-open-mode -docstring 'enter open mode' %{
+  enter-user-mode open
+}
+
+# Aliases
+alias global o enter-open-mode
+
+# Mappings
+map -docstring 'open bashrc' global open b ': edit ~/.bashrc<ret>'
+map -docstring 'open kakrc' global open k ': edit ~/.config/kak/kakrc<ret>'
+map -docstring 'open init.kak' global open K ': edit ~/.config/kak/init.kak<ret>'
+map -docstring 'open mpv.conf' global open m ': edit ~/.config/mpv/input.conf; edit ~/.config/mpv/mpv.conf<ret>'
+map -docstring 'open notes' global open n ': edit ~/docs/notes.txt<ret>gjvt'
+map -docstring 'open configuration.nix' global open N ': edit /etc/nixos/configuration.nix<ret>'
+map -docstring 'open tmux.conf' global open t ': edit ~/.config/tmux/tmux.conf<ret>'
+map -docstring 'open sway/config' global open w ': edit ~/.config/sway/config<ret>'
+map -docstring 'open wayfire.ini' global open W ': edit ~/.config/wayfire.ini<ret>'
+
 # Language support ─────────────────────────────────────────────────────────────
 
 hook -group config global BufSetOption filetype=grep %{
@@ -154,8 +178,6 @@ hook -group config global BufCreate '.*/(profile|bashrc|tmux.conf)' %{
 }
 
 # Notes ────────────────────────────────────────────────────────────────────────
-
-map -docstring 'open notes' global user w ': edit ~/docs/notes.txt<ret>gjvt'
 
 hook -group config global BufCreate '.*/docs/notes.txt' %{
   set-option buffer filetype notes

@@ -185,8 +185,8 @@ hook -group config global BufCreate '.*/docs/notes.txt' %{
 
 hook -group config global BufSetOption filetype=notes %{
   add-highlighter -override buffer/notes ref notes
-  map -docstring 'insert date (2006-01-02 Mon)' buffer insert <c-u> '<a-;>!date ''+%F %a'' | tr -d ''\n''<ret>'
-  map -docstring 'insert date (2006-01-02 Mon 15:04)' buffer insert <c-i> '<a-;>!date ''+%F %a %H:%M'' | tr -d ''\n''<ret>'
+  map -docstring 'insert date (2006-01-02 Mon)' buffer insert <c-u> '<a-;>;<a-;>!date ''+%F %a'' | tr -d ''\n''<ret><right>'
+  map -docstring 'insert date (2006-01-02 Mon 15:04)' buffer insert <c-i> '<a-;>;<a-;>!date ''+%F %a %H:%M'' | tr -d ''\n''<ret><right>'
 }
 
 add-highlighter -override shared/notes group

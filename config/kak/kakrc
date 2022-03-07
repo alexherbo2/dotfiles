@@ -187,11 +187,6 @@ hook -group config global BufSetOption filetype=notes %{
   add-highlighter -override buffer/notes ref notes
   map -docstring 'insert date (2006-01-02 Mon)' buffer insert <c-u> '<a-;>!date ''+%F %a'' | tr -d ''\n''<ret>'
   map -docstring 'insert date (2006-01-02 Mon 15:04)' buffer insert <c-i> '<a-;>!date ''+%F %a %H:%M'' | tr -d ''\n''<ret>'
-  hook -always -once buffer BufSetOption 'filetype=.*' %{
-    remove-highlighter buffer/notes
-    unmap buffer insert <c-u>
-    unmap buffer insert <c-i>
-  }
 }
 
 add-highlighter -override shared/notes group
@@ -218,9 +213,6 @@ hook -group config global BufCreate '.*/list.txt' %{
 
 hook -group config global BufSetOption filetype=list %{
   add-highlighter -override buffer/list ref list
-  hook -always -once buffer BufSetOption 'filetype=.*' %{
-    remove-highlighter buffer/list
-  }
 }
 
 add-highlighter -override shared/list group

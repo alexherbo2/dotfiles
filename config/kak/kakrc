@@ -135,7 +135,8 @@ map -docstring 'grep picker' global normal <c-g> ': terminal-popup kcr fzf grep<
 map -docstring 'grep picker (buffer)' global normal <c-r> ': terminal-popup kcr fzf grep %val{buflist}<ret>'
 
 # Formatting and parsing date-time
-map -docstring 'format date to 2006-01-02' global user D '| chronic %F<ret>'
+map -docstring 'format date to 2006-01-02' global user d '| date -d "$kak_selection" ''+%F''<ret>'
+map -docstring 'format date to 2006-01-02 Mon' global user D '| date -d "$kak_selection" ''+%F %a''<ret>'
 
 # Quick editing ────────────────────────────────────────────────────────────────
 

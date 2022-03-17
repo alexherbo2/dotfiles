@@ -51,7 +51,7 @@
   # Rails: 5000
   # GoTTY: 8080
   # The Lounge: 9000
-  networking.firewall.allowedTCPPorts = [ 80 443 1313 3000 5000 8080 9000 ];
+  networking.firewall.allowedTCPPorts = [ 22 80 443 1313 3000 5000 8080 9000 ];
 
   time.timeZone = "Europe/Paris";
 
@@ -91,7 +91,7 @@
 
   # Users ──────────────────────────────────────────────────────────────────────
 
-  users.extraUsers.taupiqueur = {
+  users.users.taupiqueur = {
     uid = 1000;
     # Indicates whether this is an account for a real user.
     # In other words, set a bunch of options for us.
@@ -109,6 +109,7 @@
       "vboxusers"
       "video"
       "wheel"
+      "adbusers"
     ];
   };
 
@@ -144,6 +145,7 @@
   # https://nixos.wiki/wiki/Fonts
   fonts.fonts = with pkgs; [
     # terminus # http://terminus-font.sourceforge.net
+    ubuntu_font_family # https://design.ubuntu.com/font/
     dejavu_fonts # https://dejavu-fonts.github.io
     font-awesome # https://fontawesome.com
   ];
@@ -161,6 +163,9 @@
 
   # Backlight
   programs.light.enable = true;
+
+  # Android
+  programs.adb.enable = true;
 
   # Virtualisation
   # virtualisation.lxc.enable = true;
@@ -242,10 +247,24 @@
     neovide # https://github.com/neovide/neovide
     emacs # https://gnu.org/software/emacs/
 
+    # IDEs ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+    # IntelliJ IDEA
+    # https://jetbrains.com/idea/
+    jetbrains.idea-community
+    jetbrains.jdk
+
+    # Android Studio
+    # https://developer.android.com/studio
+    android-studio
+    android-tools
+
     # File managers ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
     dolphin # https://apps.kde.org/en/dolphin
     broot # https://dystroy.org/broot/
+    ranger # https://ranger.github.io
+    vifm # https://vifm.info
     # sidetree
     # https://github.com/topisani/sidetree
 
@@ -280,7 +299,7 @@
     translate-shell # https://www.soimort.org/translate-shell/
 
     # Utils
-    ffmpeg-full # FFmpeg https://ffmpeg.org
+    ffmpeg_5 # FFmpeg https://ffmpeg.org
     yt-dlp # https://github.com/yt-dlp/yt-dlp
 
     # Music players ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -432,6 +451,7 @@
     socat # http://www.dest-unreach.org/socat/
 
     # Filesystem
+    parted # https://gnu.org/software/parted/
     gparted # https://gparted.org
     gptfdisk # https://rodsbooks.com/gdisk/
 
@@ -556,6 +576,10 @@
     # Scala
     # https://scala-lang.org
     scala
+
+    # Java
+    # https://openjdk.java.net
+    jdk
 
     # Kotlin
     # https://kotlinlang.org

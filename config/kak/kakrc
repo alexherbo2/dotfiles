@@ -190,21 +190,19 @@ hook -group config global BufSetOption filetype=notes %{
   map -docstring 'insert date (2006-01-02 Mon 15:04)' buffer insert <c-i> '<a-;>;<a-;>!date ''+%F %a %H:%M'' | tr -d ''\n''<ret><right>'
 }
 
-add-highlighter -override shared/notes group
-add-highlighter -override shared/notes/entry-date-year regex '(?S)^(\d{4}) (.+)$' 1:comment 2:default
-add-highlighter -override shared/notes/entry-date-year-month regex '(?S)^(\d{4}-\d{2}) (.+)$' 1:comment 2:default
-add-highlighter -override shared/notes/entry-date regex '(?S)^(\d{4}-\d{2}-\d{2}) (\w{3}) (.+)$' 1:comment 2:comment 3:default
-add-highlighter -override shared/notes/entry-date-time regex '(?S)^(\d{4}-\d{2}-\d{2}) (\w{3}) (\d{2}:\d{2}) (.+)$' 1:comment 2:comment 3:comment 4:default
-add-highlighter -override shared/notes/info regex '(\()([^)]+)(\))' 1:default+d 2:blue 3:default+d
-add-highlighter -override shared/notes/tag regex '(\[)([^\]]+)(\])' 1:default+d 2:cyan 3:default+d
-add-highlighter -override shared/notes/keywords group
-add-highlighter -override shared/notes/keywords/ regex 'Buy' 0:yellow
-add-highlighter -override shared/notes/keywords/ regex 'Go on' 0:cyan
-add-highlighter -override shared/notes/keywords/ regex 'Go to' 0:cyan
-add-highlighter -override shared/notes/keywords/ regex 'Read' 0:cyan
-add-highlighter -override shared/notes/keywords/ regex 'Sign up' 0:blue
-add-highlighter -override shared/notes/keywords/ regex 'Update' 0:yellow
-add-highlighter -override shared/notes/keywords/ regex 'Watch' 0:cyan
+add-highlighter -override shared/notes regions
+add-highlighter -override shared/notes/text default-region group
+add-highlighter -override shared/notes/text/entry-date-year regex '^\d{4}' 0:comment
+add-highlighter -override shared/notes/text/entry-date-year-month regex '^\d{4}-\d{2}' 0:comment
+add-highlighter -override shared/notes/text/entry-date regex '^\d{4}-\d{2}-\d{2} \w{3}' 0:comment
+add-highlighter -override shared/notes/text/entry-date-time regex '^\d{4}-\d{2}-\d{2} \w{3} \d{2}:\d{2}' 0:comment
+add-highlighter -override shared/notes/text/keyword regex '\b(Buy|Go on|Go to|Read|Sign up|Update|Watch)\b' 0:keyword
+add-highlighter -override shared/notes/text/url regex 'https?://\S+' 0:link
+add-highlighter -override shared/notes/info region -recurse '\(' '\(' '\)' group
+add-highlighter -override shared/notes/info/content fill string
+add-highlighter -override shared/notes/info/url ref notes/text/url
+add-highlighter -override shared/notes/info/delimiters regex '(?<opening>.).+(?<closing>.)' opening:string closing:string
+add-highlighter -override shared/notes/tag region -recurse '\[' '\[' '\]' fill meta
 
 # List ─────────────────────────────────────────────────────────────────────────
 
@@ -216,8 +214,10 @@ hook -group config global BufSetOption filetype=list %{
   add-highlighter -override buffer/list ref list
 }
 
-add-highlighter -override shared/list group
-add-highlighter -override shared/list/number regex '\d+' 0:blue
-add-highlighter -override shared/list/url regex 'https?://\S+' 0:cyan
-add-highlighter -override shared/list/date regex '\d{4}-\d{2}-\d{2}' 0:blue
-add-highlighter -override shared/list/date-range regex '(\d{4}-\d{2}-\d{2}) (-) (\d{4}-\d{2}-\d{2})' 1:blue 2:bright-blue 3:blue
+add-highlighter -override shared/list regions
+add-highlighter -override shared/list/text default-region group
+add-highlighter -override shared/list/text/number regex '\b\d{2}\b' 0:value
+add-highlighter -override shared/list/text/date regex '\b\d{4}-\d{2}-\d{2}\b' 0:string
+add-highlighter -override shared/list/text/year regex '\b\d{4}\b' 0:string
+add-highlighter -override shared/list/text/keyword regex '\b(Movie|Special)\b' 0:keyword
+add-highlighter -override shared/list/text/url regex 'https?://\S+' 0:link

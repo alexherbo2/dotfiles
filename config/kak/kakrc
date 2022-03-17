@@ -199,6 +199,8 @@ map -docstring 'open wayfire.ini' global open W ': edit ~/.config/wayfire.ini<re
 
 # Language support ─────────────────────────────────────────────────────────────
 
+set-option global line_comment_token '#'
+
 hook -group config global BufSetOption filetype=grep %{
   map buffer normal <ret> ': grep-jump<ret>'
 }

@@ -53,7 +53,7 @@ source ~/code~/window.kak/rc/window.kak
 # UI options
 set-option global startup_info_version 20211231
 set-option global ui_options terminal_assistant=none
-remove-scratch-message
+# remove-scratch-message
 
 # Color scheme
 # Dracula – https://draculatheme.com/kakoune

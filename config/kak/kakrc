@@ -138,6 +138,36 @@ map -docstring 'grep picker (buffer)' global normal <c-r> ': terminal-popup kcr 
 map -docstring 'format date to 2006-01-02' global user d '| date -d "$kak_selection" ''+%F''<ret>'
 map -docstring 'format date to 2006-01-02 Mon' global user D '| date -d "$kak_selection" ''+%F %a''<ret>'
 
+# Goto mode ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+map -docstring 'file' global goto f '<a-;>: open-file-picker<ret>'
+
+define-command -override open-file-picker -docstring 'open file picker' %{
+  prompt file: -shell-script-candidates 'fd --type file' %{
+    edit %val{text}
+  }
+}
+
+map -docstring 'buffer' global goto b '<a-;>: open-buffer-picker<ret>'
+
+define-command -override open-buffer-picker -docstring 'open buffer picker' %{
+  prompt buffer: -buffer-completion %{
+    buffer %val{text}
+  }
+}
+
+map -docstring 'grep' global goto / '<a-;>: open-grep-prompt<ret>'
+
+define-command -override open-grep-prompt -docstring 'open grep prompt' %{
+  # Provides word completion
+  prompt grep: -shell-script-candidates %{
+    echo "write '$kak_response_fifo'" > "$kak_command_fifo"
+    cat "$kak_response_fifo" | kak -f 's[\w-]{4,}<ret>y%<a-R>a<ret>'
+  } %{
+    grep %val{text}
+  }
+}
+
 # Quick editing ────────────────────────────────────────────────────────────────
 
 # Modes

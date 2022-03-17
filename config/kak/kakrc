@@ -34,7 +34,7 @@ source ~/.config/kak/autoload/crystal.kak
 source ~/.config/kak/autoload/indent.kak
 
 source ~/code~/alacritty.kak/rc/alacritty.kak
-source ~/code~/auto-pairs.kak/rc/auto-pairs.kak
+# source ~/code~/auto-pairs.kak/rc/auto-pairs.kak
 source ~/code~/git.kak/rc/git.kak
 source ~/code~/mark.kak/rc/mark.kak
 source ~/code~/pipe.kak/rc/pipe.kak
@@ -76,7 +76,7 @@ set-option global disabled_hooks '.+-trim-indent|.+-insert|.+-indent'
 # enable-auto-indent
 
 # Auto-pairing of characters
-enable-auto-pairs
+# enable-auto-pairs
 
 # Integration
 synchronize-terminal-clipboard

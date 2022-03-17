@@ -59,6 +59,11 @@ remove-scratch-message
 # Dracula – https://draculatheme.com/kakoune
 source ~/.config/kak/colors/dracula.kak
 
+# Color scheme
+# One – https://github.com/raiguard/one.kak
+source ~/.config/kak/colors/one-light.kak
+one-enable-fancy-underlines
+
 # Status line
 declare-cursor-character-unicode
 set-option global modelinefmt '%val{bufname} %val{cursor_line}:%val{cursor_char_column} {{context_info}} {{mode_info}} - U+%opt{cursor_character_unicode} - %val{client}@%val{session}'

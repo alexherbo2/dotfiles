@@ -37,7 +37,7 @@ output * {
   # DuckTales Finale by AKHTS
   # https://akhts.carrd.co
   # https://bloggingboutburgers.tumblr.com/image/645856359657717761
-  bg ~/wallpapers/akhts/ducktales-finale.jpg fill
+  bg ~/wallpapers/ducktales-finale.jpg fill
 }
 
 # Idle configuration ───────────────────────────────────────────────────────────

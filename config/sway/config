@@ -312,7 +312,8 @@ bindsym --to-code {
   Mod4+p exec google-chrome-stable https://passwords.google.com
 
   # Screenshots
-  Print exec sway-grim ~/Desktop/$(date '+%F_%T').webp
+  Print exec grim ~/Desktop/$(date '+%F_%T').webp
+  Shift+Print exec slurp | grim -g - ~/Desktop/$(date '+%F_%T').webp
 
   # Multimedia-keys ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 

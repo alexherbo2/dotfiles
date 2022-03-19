@@ -198,8 +198,8 @@ alias La='exa --tree --all'
 # Batch
 # https://github.com/alexherbo2/batch
 alias rn='batch --map=rename'
-alias cv='batch --map=convert'
 alias rl='batch --map=relink'
+alias cv='batch --map=convert'
 
 # File manager
 alias o=dolphin

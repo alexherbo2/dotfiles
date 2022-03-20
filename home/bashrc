@@ -114,27 +114,25 @@ alias tl='tmux list-sessions'
 
 # Kakoune
 # https://kakoune.org
+alias k=kak
+alias ko=kak_open
 alias kn='kak -n'
-alias kr='sudo kak -n'
+alias kl='kak -l'
+alias ks='kak -s "$(basename "$PWD")"'
+alias kc='kak -c "$(basename "$PWD")"'
 
-# kakoune.cr
-# https://github.com/alexherbo2/kakoune.cr
-alias k='kcr edit'
-alias K='kcr-fzf-shell'
-alias KK='K --working-directory .'
-alias ks='kcr shell --session'
-alias kl='kcr list'
-alias a='kcr attach'
-
-# Open files _from_ and _to_ a session.
-# $ :f src
-# $ f: mawww/kakoune
-alias :f='kcr fzf files'
-alias f:='KK kcr fzf files'
-alias fm:='K sidetree --working-directory'
-
-alias :g='kcr fzf grep'
-alias g:='KK kcr fzf grep'
+# Usage:
+# kak_open [files]
+# Uses `KAKOUNE_SESSION` and `KAKOUNE_CLIENT` environment variables.
+kak_open() {
+  {
+    for filename do
+      echo "edit -- %[$filename]"
+    done
+    echo "evaluate-commands -try-client %[$KAKOUNE_CLIENT] -verbatim -- edit %[$1]"
+  } |
+  kak -p "$KAKOUNE_SESSION"
+}
 
 # sidetree
 # https://github.com/topisani/sidetree

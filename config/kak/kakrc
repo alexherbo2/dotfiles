@@ -40,7 +40,7 @@ source ~/code~/pipe.kak/rc/pipe.kak
 source ~/code~/select.kak/rc/select.kak
 source ~/code~/sensible.kak/rc/sensible.kak
 source ~/code~/shortcuts.kak/rc/shortcuts.kak
-source ~/code~/show-whitespaces.kak/rc/show-whitespaces.kak
+source ~/code~/show-whitespace.kak/rc/show-whitespace.kak
 source ~/code~/surround.kak/rc/surround.kak
 source ~/code~/text-objects.kak/rc/text-objects.kak
 source ~/code~/tiny.kak/rc/tiny.kak
@@ -85,8 +85,8 @@ make-directory-on-save
 set-option global makecmd 'make -j 8'
 set-option global grepcmd 'rg --with-filename --line-number --column'
 
-# Show whitespaces
-show-whitespaces
+# Show whitespace
+add-highlighter -override global/whitespace ref whitespace
 
 # Custom face
 set-face global Whitespace "rgb:%opt{background}+f"

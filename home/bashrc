@@ -115,11 +115,19 @@ alias tl='tmux list-sessions'
 # Kakoune
 # https://kakoune.org
 alias k=kak
+alias ke=kak_set_env
 alias ko=kak_open
 alias kn='kak -n'
 alias kl='kak -l'
 alias ks='kak -s "$(basename "$PWD")"'
 alias kc='kak -c "$(basename "$PWD")"'
+
+# Usage:
+# kak_set_env [session] [client]
+# Sets `KAKOUNE_SESSION` and `KAKOUNE_CLIENT` environment variables.
+kak_set_env() {
+  export KAKOUNE_SESSION=$1 KAKOUNE_CLIENT=$2
+}
 
 # Usage:
 # kak_open [files]

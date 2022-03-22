@@ -223,6 +223,17 @@ alias pandoc='pandoc --pdf-engine tectonic'
 alias r=rails
 alias rr='rails routes --grep'
 
+# IDEs ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# IntelliJ IDEA
+# https://jetbrains.com/idea/
+alias idea-community='swaymsg exec _JAVA_AWT_WM_NONREPARENTING=1 idea-community'
+
+# Android Studio
+# https://developer.android.com/studio
+# https://github.com/swaywm/sway/issues/595
+alias android-studio='swaymsg exec _JAVA_AWT_WM_NONREPARENTING=1 android-studio'
+
 # Functions ────────────────────────────────────────────────────────────────────
 
 # RVM

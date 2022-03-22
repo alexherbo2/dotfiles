@@ -1,21 +1,26 @@
-format = '${custom.tab}$all'
+# Starship
+# https://starship.rs
+
+format = '${custom.tab}${custom.kakoune}$all'
 
 [cmd_duration]
 disabled = true
 
+# tab
+# https://github.com/austinjones/tab-rs
 [custom.tab]
 description = 'The current tab in the tab terminal multiplexer'
 command = 'tab --starship'
 when = 'tab --starship'
 shell = ['sh']
 style = 'bold blue'
-format = '[$output]($style)'
 
+# Kakoune
+# https://kakoune.org
 [custom.kakoune]
 symbol = '🐈'
-command = 'kcr prompt'
-when = 'kcr prompt'
-shell = ['sh']
 description = 'The current Kakoune session and client'
+command = 'echo "$KAKOUNE_CLIENT@$KAKOUNE_SESSION"'
+when = '[ -n "$KAKOUNE_SESSION" ]'
+shell = ['sh']
 style = 'green'
-format = '[$symbol $output]($style)'

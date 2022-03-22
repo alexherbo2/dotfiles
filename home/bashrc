@@ -117,6 +117,7 @@ alias tl='tmux list-sessions'
 alias k=kak
 alias ke=kak_set_env
 alias ko=kak_open
+alias ka='kak -c "$KAKOUNE_SESSION"'
 alias kn='kak -n'
 alias kl='kak -l'
 alias ks='kak -s "$(basename "$PWD")"'

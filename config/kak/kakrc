@@ -48,13 +48,30 @@ source ~/code~/window.kak/rc/window.kak
 # Options ──────────────────────────────────────────────────────────────────────
 
 # UI options
-set-option global startup_info_version 20211231
-set-option global ui_options terminal_assistant=none
-# remove-scratch-message
+set-option global startup_info_version 20221231
+set-option global ui_options terminal_set_title=no terminal_assistant=none
+set-option global scrolloff 5,1
+add-highlighter -override global/show-matching show-matching
+add-highlighter -override global/number-lines number-lines -hlcursor
 
 # Color scheme
 # Dracula – https://draculatheme.com/kakoune
 source ~/.config/kak/colors/dracula.kak
+
+# Custom color palette (Tomorrow Night)
+declare-option str background '1d1f21'
+declare-option str foreground 'c5c8c6'
+
+# Custom faces
+set-face global Default "rgb:%opt{foreground},rgb:%opt{background}"
+set-face global MenuForeground "rgb:%opt{foreground},rgb:%opt{selection}"
+set-face global MenuBackground "rgb:%opt{foreground},rgb:%opt{background}"
+set-face global StatusLine "rgb:%opt{foreground},rgb:%opt{background}"
+set-face global StatusCursor "rgb:%opt{background},rgb:%opt{foreground}"
+set-face global LineNumbers "rgb:%opt{non_text}"
+set-face global LineNumberCursor "rgb:%opt{foreground}"
+set-face global LineNumbersWrapped "rgb:%opt{background}"
+set-face global Whitespace "rgb:%opt{background}+f"
 
 # LSP
 try lsp-enable
@@ -72,9 +89,6 @@ set-option global grepcmd 'rg --with-filename --line-number --column'
 # Show whitespace
 add-highlighter -override global/whitespace ref whitespace
 
-# Custom face
-set-face global Whitespace "rgb:%opt{background}+f"
-
 # Show various characters
 # https://unicode-table.com
 add-highlighter -override global/U+2013 regex '–' '0:green+f'
@@ -86,7 +100,7 @@ add-highlighter -override global/math-symbols regex '[−×]' '0:cyan+f'
 # Normal mode ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 # Hot reloading
-map -docstring 'reload kakrc' global user R ': source-kakrc; echo reloaded kakrc<ret>'
+map -docstring 'reload kakrc' global user R ': source "%val{runtime}/kakrc"; echo reloaded kakrc<ret>'
 
 # Enter command mode
 map -docstring 'enter command' global normal <ret> :
@@ -180,7 +194,8 @@ map -docstring 'open init.kak' global open K ': edit ~/.config/kak/init.kak<ret>
 map -docstring 'open mpv.conf' global open m ': edit ~/.config/mpv/input.conf; edit ~/.config/mpv/mpv.conf<ret>'
 map -docstring 'open notes' global open n ': edit ~/docs/notes.txt<ret>gjvt'
 map -docstring 'open configuration.nix' global open N ': edit /etc/nixos/configuration.nix<ret>'
-map -docstring 'open tmux.conf' global open t ': edit ~/.config/tmux/tmux.conf<ret>'
+map -docstring 'open alacritty.yml' global open t ': edit ~/.config/alacritty/alacritty.yml<ret>'
+map -docstring 'open tmux.conf' global open T ': edit ~/.config/tmux/tmux.conf<ret>'
 map -docstring 'open sway/config' global open w ': edit ~/.config/sway/config<ret>'
 map -docstring 'open wayfire.ini' global open W ': edit ~/.config/wayfire.ini<ret>'
 

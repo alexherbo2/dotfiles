@@ -7,9 +7,6 @@ import:
   # Color scheme – https://draculatheme.com/alacritty
   - ~/code~/dracula/alacritty/dracula.yml
 
-  # CSI u mode – https://github.com/alexherbo2/alacritty-extended-keys
-  # - ~/code~/alacritty-extended-keys/keys.yml
-
 # Appearance ───────────────────────────────────────────────────────────────────
 
 # Add a bit of transparency to reduce eye strain.
@@ -21,6 +18,10 @@ font:
   normal:
     family: PragmataPro Mono
 
+font:
+  normal:
+    family: Ubuntu Mono
+
 selection:
   save_to_clipboard: true
 
@@ -28,6 +29,13 @@ cursor:
   style:
     shape: Beam
     blinking: On
+
+# Custom color palette (Tomorrow Night)
+colors:
+  primary:
+    background: '#1d1f21'
+    foreground: '#c5c8c6'
+    bright_foreground: '#eaeaea'
 
 # Keyboard ─────────────────────────────────────────────────────────────────────
 

@@ -35,6 +35,7 @@
   d = diff
   ci = commit
   cm = commit --message
+  ct = !date '+%F %T' | git commit --file=-
   co = checkout
   cb = checkout -b
   l = log

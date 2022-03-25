@@ -191,6 +191,8 @@ GG() {
     git-gc-all-ferocious
     git pull
   done
+
+  cd
 }
 
 # exa

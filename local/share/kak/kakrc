@@ -1,1 +1,2 @@
 source "%val{config}/kakrc"
+source ~/.kakrc

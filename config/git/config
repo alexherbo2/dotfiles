@@ -20,7 +20,7 @@
   defaultRemote = origin
 
 [log]
-  date = relative
+  date = iso
 
 [alias]
 

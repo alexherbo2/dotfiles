@@ -214,11 +214,8 @@ alias lla='exa --icons --git --long --all'
 alias L='exa --tree'
 alias La='exa --tree --all'
 
-# Batch
-# https://github.com/alexherbo2/batch
-alias rn='batch --map=rename'
-alias rl='batch --map=relink'
-alias cv='batch --map=convert'
+# batch
+alias imv="batch -f 'tr [:upper:] [:lower:]' -f 'tr -s [:blank:] -' -f 'tr -d ?!,' -e kak -p : -m rename -d delete -I ~/.config/batch.sh"
 
 # File manager
 alias o=dolphin

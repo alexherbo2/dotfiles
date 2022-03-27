@@ -180,7 +180,7 @@ gc() {
   git clone "$repository" "$directory"
 }
 
-gci() {
+gc2() {
   gc "$1" ''
 }
 

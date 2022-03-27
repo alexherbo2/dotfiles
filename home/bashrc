@@ -18,7 +18,7 @@ eval "$(zoxide init bash)"
 . ~/.config/broot/launcher/bash/br
 
 # Reload the configuration
-R() {
+f5() {
   . ~/.bash_profile
   echo 'reloaded bashrc'
 }
@@ -51,8 +51,7 @@ alias sudo='sudo '
 
 # Navigation
 alias ..='cd ..'
-alias ...='cd ...'
-alias ....='cd "$(git rev-parse --show-toplevel)"'
+alias ...='cd ../..'
 
 # NixOS
 # https://nixos.org
@@ -149,16 +148,29 @@ alias st=sidetree
 
 # Git
 # https://git-scm.com
-alias g=git
-
-# gitui
-# https://github.com/extrawurst/gitui
-alias G=gitui
-
-# GitHub CLI
 # https://cli.github.com
-alias gist='gh gist create --web'
+# https://github.com/extrawurst/gitui
+alias g=git
+alias G=gitui
+alias gw='git add'
+alias gl='git log'
+# Commit
+alias gci='git commit'
+alias gcm='git commit --message'
+alias greword='git commit --amend'
+alias gpick='git commit --amend --no-edit'
+alias gsnapshot='date "+%F %T" | git commit --file=-'
+# Undo
+alias gu='git restore --staged'
+alias gD='git restore --staged --worktree'
+alias grb='git reset --hard'
+alias ggc=git-gc-all-ferocious
+# Navigation
+alias gco='git checkout -b'
+alias gcd='cd "$(git rev-parse --show-toplevel)"'
+# Web
 alias gv='gh repo view --web'
+alias gist='gh gist create --web'
 
 gc() {
   [ $# -lt 2 ] && suffix=.git
@@ -173,11 +185,9 @@ gci() {
 }
 
 gg() {
-  git add .
-  git discard .
-  git-gc-all-ferocious
-  git push
-  git pull
+  gw .
+  gD .
+  ggc
 }
 
 GG() {
@@ -186,10 +196,10 @@ GG() {
   for repository do
     pastel paint green --bold "$repository"
     cd "$repository"
-    git add .
-    git discard .
-    git-gc-all-ferocious
-    git pull
+    gw .
+    gD .
+    ggc
+    g pull
   done
 
   cd

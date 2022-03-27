@@ -153,7 +153,9 @@ alias st=sidetree
 alias g=git
 alias G=gitui
 alias gw='git add'
+alias gw.='gw .'
 alias gl='git log'
+alias gst='git status'
 # Commit
 alias gci='git commit'
 alias gcm='git commit --message'
@@ -163,6 +165,7 @@ alias gsnapshot='date "+%F %T" | git commit --file=-'
 # Undo
 alias gu='git restore --staged'
 alias gD='git restore --staged --worktree'
+alias gD.='gD .'
 alias grb='git reset --hard'
 alias ggc=git-gc-all-ferocious
 # Navigation
@@ -185,8 +188,8 @@ gc2() {
 }
 
 gg() {
-  gw .
-  gD .
+  gw.
+  gD.
   ggc
 }
 
@@ -196,8 +199,8 @@ GG() {
   for repository do
     pastel paint green --bold "$repository"
     cd "$repository"
-    gw .
-    gD .
+    gw.
+    gD.
     ggc
     g pull
   done

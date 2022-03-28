@@ -218,7 +218,9 @@ alias L='exa --tree'
 alias La='exa --tree --all'
 
 # batch
-alias imv="batch -f 'tr [:upper:] [:lower:]' -f 'tr -s [:blank:] -' -f 'tr -d ?!,' -e kak -p : -m rename -d delete -I ~/.config/batch.sh"
+imv() {
+  batch -e kak -p : -m 'mv -vi --' -d 'rm -vi --' -f 'tr [:upper:] [:lower:]' -f "tr -s \\'[:blank:] -" -f 'tr -d ?!,' "$@"
+}
 
 # File manager
 alias o=dolphin

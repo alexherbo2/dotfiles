@@ -39,12 +39,8 @@ fi
 
 # Aliases ──────────────────────────────────────────────────────────────────────
 
-alias p=echo
 alias q=exit
-alias _='rm -Rf'
-alias md='mkdir -p'
-alias cp='cp -R'
-alias rm='rm -Rf'
+alias _='rm -Rf --'
 
 # Run `sudo` with aliases
 alias sudo='sudo '

@@ -217,7 +217,7 @@ alias La='exa --tree --all'
 
 # batch
 imv() {
-  batch -e kak -p : -m 'mv -vi --' -d 'rm -vi --' -f 'tr [:upper:] [:lower:]' -f "tr -s \\'[:blank:] -" -f 'tr -d ?!,' "$@"
+  batch -e kak -p : -M 'mkdir -vp -- "$(dirname -- "$2")" && mv -vi -- "$1" "$2"' -d 'rm -vi --' -f 'tr [:upper:] [:lower:]' -f "tr -s \\'[:blank:] -" -f 'tr -d ?!,' "$@"
 }
 
 # File manager

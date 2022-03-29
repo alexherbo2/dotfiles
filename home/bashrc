@@ -163,6 +163,7 @@ alias gu='git restore --staged'
 alias gD='git restore --staged --worktree'
 alias gD.='gD .'
 alias grb='git reset --hard'
+alias grb^='git reset --hard HEAD^'
 alias ggc=git-gc-all-ferocious
 # Navigation
 alias gco='git checkout -b'

@@ -581,10 +581,13 @@
     # Java
     # https://openjdk.java.net
     jdk
+    gradle # https://gradle.org
 
     # Kotlin
     # https://kotlinlang.org
     kotlin
+    # kotlin-language-server
+    # https://github.com/fwcd/kotlin-language-server
 
     # Janet
     # https://janet-lang.org

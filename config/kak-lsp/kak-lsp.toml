@@ -23,6 +23,7 @@ timeout = 1800 # seconds (30 minutes)
 bash = { filetypes = ['sh'], roots = ['.git'], command = 'bash-language-server', args = ['start'] }
 crystal = { filetypes = ['crystal'], roots = ['shard.yml'], command = 'scry' }
 javascript = { filetypes = ['javascript'], roots = ['.flowconfig'], command = 'flow', args = ['lsp'] }
+kotlin = { filetypes = ['kotlin'], roots = ['.git'], command = 'kotlin-language-server' }
 ruby = { filetypes = ['ruby'], roots = ['Gemfile'], command = 'solargraph', args = ['stdio'] }
 rust = { filetypes = ['rust'], roots = ['Cargo.toml'], command = 'rust-analyzer' }
 

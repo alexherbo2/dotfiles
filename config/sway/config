@@ -12,17 +12,9 @@ set $launcher [floating app_id="Alacritty"] scratchpad show
 
 # Options ──────────────────────────────────────────────────────────────────────
 
-font pango:DejaVu 11
-gaps inner 10
-workspace_layout default
-default_border pixel
+font pango:Ubuntu Mono 11
 floating_modifier Mod4
 workspace_auto_back_and_forth yes
-
-# Single window mode – Distraction-free
-hide_edge_borders --i3 smart
-smart_borders on
-smart_gaps on
 
 # Input configuration ──────────────────────────────────────────────────────────
 
@@ -318,26 +310,22 @@ bindsym --to-code {
   # Multimedia-keys ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
   # Volume controls
+  # https://alsa-project.org
   XF86AudioMute exec amixer set Master toggle
   XF86AudioRaiseVolume exec amixer set Master 5%+
   XF86AudioLowerVolume exec amixer set Master 5%-
 
-  # mpv controls
-  XF86AudioPlay exec echo cycle pause | socat - ~/.config/mpv/socket
-  XF86AudioPause exec echo cycle pause | socat - ~/.config/mpv/socket
-  XF86AudioNext exec echo playlist-next | socat - ~/.config/mpv/socket
-  XF86AudioPrev exec echo playlist-prev | socat - ~/.config/mpv/socket
+  # Screen brightness
+  # https://haikarainen.github.io/light/
+  XF86MonBrightnessUp exec light -A 5
+  XF86MonBrightnessDown exec light -U 5
 }
 
 # Rules ────────────────────────────────────────────────────────────────────────
 
-for_window [app_id="popup"] floating enable, border pixel 10
-for_window [app_id="panel"] border pixel 10
+for_window [app_id="popup"] floating enable
+for_window [app_id="panel"] move left
 for_window [title="Picture in picture"] floating enable
-for_window [class="Ankama Launcher"] layout tabbed, border none, gaps inner current set 0
-
-# Terminal
-for_window [app_id="Alacritty"] border pixel 10
 
 # Add a bit of transparency to reduce eye strain.
 for_window [app_id="Alacritty"] opacity set 0.99

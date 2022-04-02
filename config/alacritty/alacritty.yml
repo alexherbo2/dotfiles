@@ -30,13 +30,6 @@ cursor:
     shape: Beam
     blinking: On
 
-# Custom color palette (Tomorrow Night)
-colors:
-  primary:
-    background: '#1d1f21'
-    foreground: '#c5c8c6'
-    bright_foreground: '#eaeaea'
-
 # Keyboard ─────────────────────────────────────────────────────────────────────
 
 # Keys:

@@ -58,19 +58,13 @@ add-highlighter -override global/number-lines number-lines -hlcursor
 # Dracula – https://draculatheme.com/kakoune
 source ~/.config/kak/colors/dracula.kak
 
-# Custom color palette (Tomorrow Night)
-declare-option str background '1d1f21'
-declare-option str foreground 'c5c8c6'
-
 # Custom faces
-set-face global Default "rgb:%opt{foreground},rgb:%opt{background}"
-set-face global MenuForeground "rgb:%opt{foreground},rgb:%opt{selection}"
-set-face global MenuBackground "rgb:%opt{foreground},rgb:%opt{background}"
-set-face global StatusLine "rgb:%opt{foreground},rgb:%opt{background}"
-set-face global StatusCursor "rgb:%opt{background},rgb:%opt{foreground}"
-set-face global LineNumbers "rgb:%opt{non_text}"
-set-face global LineNumberCursor "rgb:%opt{foreground}"
-set-face global LineNumbersWrapped "rgb:%opt{background}"
+set-face global PrimarySelection "rgb:%opt{black},rgb:%opt{pink}+fg"
+set-face global SecondarySelection "rgb:%opt{black},rgb:%opt{purple}+fg"
+set-face global PrimaryCursor "rgb:%opt{black},rgb:%opt{cyan}+fg"
+set-face global SecondaryCursor "rgb:%opt{black},rgb:%opt{orange}+fg"
+set-face global PrimaryCursorEol "rgb:%opt{black},rgb:%opt{green}+fg"
+set-face global SecondaryCursorEol "rgb:%opt{black},rgb:%opt{green}+fg"
 set-face global Whitespace "rgb:%opt{background}+f"
 
 # LSP

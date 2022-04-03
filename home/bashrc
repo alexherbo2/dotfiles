@@ -13,31 +13,18 @@ eval "$(mcfly init bash)"
 # https://github.com/ajeetdsouza/zoxide
 eval "$(zoxide init bash)"
 
-# Reload the configuration
-f5() {
-  . ~/.bash_profile
-  echo 'reloaded bashrc'
-}
-
-# Application launcher
-fork() {
-  nohup "$@" < /dev/null > /dev/null 2>&1 &
-}
-
-alias @=fork
-
-# Sway – https://swaywm.org
-#
-# Application launcher: Open the resulting window on the original workspace that the command was run on.
-if [ -S "$SWAYSOCK" ]; then
-  alias @='swaymsg exec --'
-fi
-
 # Aliases ──────────────────────────────────────────────────────────────────────
 
 alias q=exit
 alias md='mkdir -p --'
 alias _='rm -Rf --'
+
+# Spawns a command.
+spawn() {
+  nohup "$@" < /dev/null > /dev/null 2>&1 &
+}
+
+alias @=spawn
 
 # Run `sudo` with aliases
 alias sudo='sudo '
@@ -258,6 +245,11 @@ alias idea-community='swaymsg exec _JAVA_AWT_WM_NONREPARENTING=1 idea-community'
 alias android-studio='swaymsg exec _JAVA_AWT_WM_NONREPARENTING=1 android-studio'
 
 # Functions ────────────────────────────────────────────────────────────────────
+
+# Reloads bashrc.
+reload_bashrc() {
+  . ~/.bash_profile
+}
 
 # RVM
 # https://rvm.io

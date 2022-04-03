@@ -124,7 +124,8 @@ kak_open() {
 
 # sidetree
 # https://github.com/topisani/sidetree
-alias st=sidetree
+alias st='sidetree --select'
+alias st.=sidetree
 
 # Git
 # https://git-scm.com
@@ -219,6 +220,7 @@ alias b=google-chrome-stable
 
 # mpv
 # https://mpv.io
+alias @mpv='@ mpv --no-terminal'
 alias m=mpv
 alias ms='mpv --shuffle'
 

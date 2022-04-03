@@ -202,9 +202,11 @@ alias La='exa --tree --all'
 imap() {
   batch -f 'iconv -f UTF-8 -t ASCII//TRANSLIT//IGNORE' -f 'tr [:upper:] [:lower:]' -f "tr -s \\'[:blank:] -" -f 'tr -d ?!,' "$@"
 }
+
 amap() {
   imap -E "$@"
 }
+
 imv() {
   imap -p : -M 'mkdir -vp -- "$(dirname -- "$2")" && mv -vi -- "$1" "$2"' -d 'rm -vi --' "$@"
 }

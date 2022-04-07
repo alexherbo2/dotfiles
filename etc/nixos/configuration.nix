@@ -252,13 +252,13 @@
 
     # IntelliJ IDEA
     # https://jetbrains.com/idea/
-    jetbrains.idea-community
-    jetbrains.jdk
+    jetbrains.idea-community # https://jetbrains.com/idea/
+    jetbrains.jdk # https://jetbrains.com/idea/
 
     # Android Studio
     # https://developer.android.com/studio
-    android-studio
-    android-tools
+    android-studio # https://developer.android.com/studio
+    android-tools # https://developer.android.com/studio
 
     # File managers ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -507,62 +507,64 @@
 
     # Rust
     # https://rust-lang.org
-    rustc
+    rustc # https://rust-lang.org
     cargo # https://crates.io
     rustup # https://rustup.rs
     rust-analyzer # https://rust-analyzer.github.io
 
     # Crystal
     # https://crystal-lang.org
-    crystal
+    crystal # https://crystal-lang.org
     shards # https://github.com/crystal-lang/shards
     scry # https://github.com/crystal-lang-tools/scry
 
     # Ruby
     # https://ruby-lang.org
-    ruby_3_0
+    ruby_3_0 # https://ruby-lang.org
     solargraph # https://solargraph.org
 
     # Elixir
     # https://elixir-lang.org
-    elixir
+    elixir # https://elixir-lang.org
 
     # JavaScript
     nodejs_latest # https://nodejs.org
+    nodePackages_latest.npm # https://npmjs.com
     yarn # https://yarnpkg.com
     flow # https://flow.org
 
     # OCaml
     # https://ocaml.org
-    ocaml
+    ocaml # https://ocaml.org
     opam # https://opam.ocaml.org
 
     # Lua
     # https://lua.org
-    lua5_4
+    lua5_4 # https://lua.org
     luarocks # https://luarocks.org
 
     # Python
     # https://python.org
-    python39
+    python39 # https://python.org
     python39Packages.pip # https://pip.pypa.io
 
     # Go
     # https://golang.org
-    go
+    go # https://golang.org
 
     # Haskell
     # https://haskell.org
     ghc # https://haskell.org/ghc/
     cabal-install # https://hackage.haskell.org/package/cabal-install
+    haskell-language-server # https://github.com/haskell/haskell-language-server
 
     # Nim
     # https://nim-lang.org
-    nim
+    nim # https://nim-lang.org
 
     # Zig
     # https://ziglang.org
-    zig
+    zig # https://ziglang.org
 
     # Common Lisp
     ccl # https://ccl.clozure.com
@@ -576,22 +578,22 @@
 
     # Scala
     # https://scala-lang.org
-    scala
+    scala # https://scala-lang.org
 
     # Java
     # https://openjdk.java.net
-    jdk
+    jdk # https://openjdk.java.net
     gradle # https://gradle.org
 
     # Kotlin
     # https://kotlinlang.org
-    kotlin
+    kotlin # https://kotlinlang.org
     # kotlin-language-server
     # https://github.com/fwcd/kotlin-language-server
 
     # Janet
     # https://janet-lang.org
-    janet
+    janet # https://janet-lang.org
 
   ];
 }

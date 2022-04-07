@@ -7,6 +7,9 @@ import:
   # Color scheme – https://draculatheme.com/alacritty
   - ~/code~/dracula/alacritty/dracula.yml
 
+  # CSI u mode
+  - ~/code~/alacritty-extended-keys/keys.yml
+
 # Appearance ───────────────────────────────────────────────────────────────────
 
 # Add a bit of transparency to reduce eye strain.

@@ -3,7 +3,7 @@
 
 # Homebrew
 # https://brew.sh
-eval "$(brew shellenv)"
+[ -x /opt/homebrew/bin/brew ] && eval "$(brew shellenv)"
 
 # Environment variables ────────────────────────────────────────────────────────
 

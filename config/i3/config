@@ -19,20 +19,20 @@ workspace_auto_back_and_forth yes
 
 # Input configuration ──────────────────────────────────────────────────────────
 
-exec_always --no-startup-id -- setxkbmap -layout us,fr -option grp:caps_toggle
+exec_always --no-startup-id setxkbmap -layout us,fr -option grp:caps_toggle
 
 # Output configuration ─────────────────────────────────────────────────────────
 
 # Modeline: cvt 2560 1600 75
-exec_always --no-startup-id -- xrandr --newmode 2560x1600_75.00 443.25 2560 2768 3048 3536 1600 1603 1609 1672 -hsync +vsync && xrandr --addmode Virtual-1 2560x1600_75.00 && xrandr --output Virtual-1 --mode 2560x1600_75.00 --pos 0x0 --scale 0.5 --filter nearest
+exec_always --no-startup-id xrandr --newmode 2560x1600_75.00 443.25 2560 2768 3048 3536 1600 1603 1609 1672 -hsync +vsync && xrandr --addmode Virtual-1 2560x1600_75.00 && xrandr --output Virtual-1 --mode 2560x1600_75.00 --pos 0x0 --scale 0.5 --filter nearest
 
 # Modeline: cvt 3840 2160 75
-# exec_always --no-startup-id -- xrandr --newmode 3840x2160_75.00 904.00 3840 4168 4592 5344 2160 2163 2168 2257 -hsync +vsync && xrandr --addmode Virtual-1 3840x2160_75.00 && xrandr --output Virtual-1 --mode 3840x2160_75.00 --pos 0x0 --scale 0.5 --filter nearest
+# exec_always --no-startup-id xrandr --newmode 3840x2160_75.00 904.00 3840 4168 4592 5344 2160 2163 2168 2257 -hsync +vsync && xrandr --addmode Virtual-1 3840x2160_75.00 && xrandr --output Virtual-1 --mode 3840x2160_75.00 --pos 0x0 --scale 0.5 --filter nearest
 
 # DuckTales Finale by AKHTS
 # https://akhts.carrd.co
 # https://bloggingboutburgers.tumblr.com/image/645856359657717761
-exec_always --no-startup-id -- feh --bg-scale ~/wallpapers/ducktales-finale.jpg
+exec_always --no-startup-id feh --bg-scale ~/wallpapers/ducktales-finale.jpg
 
 # Colors ───────────────────────────────────────────────────────────────────────
 

@@ -12,7 +12,7 @@ import:
   - ~/code~/dracula/alacritty/dracula.yml
 
   # CSI u mode
-  - ~/code~/alacritty-extended-keys/keys.yml
+  # - ~/code~/alacritty-extended-keys/keys.yml
 
 # Appearance ───────────────────────────────────────────────────────────────────
 

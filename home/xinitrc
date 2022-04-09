@@ -1,0 +1,4 @@
+# xorg
+# https://xorg.freedesktop.org
+
+exec i3

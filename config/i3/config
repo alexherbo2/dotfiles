@@ -1,6 +1,7 @@
-# Sway
-# https://swaywm.org
-# https://github.com/swaywm/sway/blob/master/config.in
+# i3
+# https://i3wm.org
+# https://i3wm.org/docs/userguide.html
+# https://github.com/i3/i3/blob/next/etc/config
 
 # Variables ────────────────────────────────────────────────────────────────────
 
@@ -8,7 +9,7 @@
 set $terminal alacritty
 
 # Application launcher
-set $launcher [floating app_id="Alacritty"] scratchpad show
+set $launcher [floating class="Alacritty"] scratchpad show
 
 # Options ──────────────────────────────────────────────────────────────────────
 
@@ -18,35 +19,16 @@ workspace_auto_back_and_forth yes
 
 # Input configuration ──────────────────────────────────────────────────────────
 
-input type:keyboard {
-  xkb_layout us,fr
-  xkb_options grp:caps_toggle
-}
+exec_always --no-startup-id -- setxkbmap -layout us,fr -option grp:caps_toggle
 
 # Output configuration ─────────────────────────────────────────────────────────
+
+exec_always --no-startup-id -- xrandr --output Virtual-1 --mode 3840x2160 --pos 0x0 --scale 0.5 --filter nearest
 
 # DuckTales Finale by AKHTS
 # https://akhts.carrd.co
 # https://bloggingboutburgers.tumblr.com/image/645856359657717761
-output * background ~/wallpapers/ducktales-finale.jpg fill
-
-# Idle configuration ───────────────────────────────────────────────────────────
-
-exec swayidle before-sleep swaylock
-
-# Startup commands ─────────────────────────────────────────────────────────────
-
-# Output configuration
-# https://wayland.emersion.fr/kanshi/
-exec kanshi
-
-# Notifications
-# https://wayland.emersion.fr/mako/
-exec mako
-
-# Night mode
-# https://sr.ht/~kennylevinsen/wlsunset/
-exec wlsunset
+exec_always --no-startup-id -- feh --bg-scale ~/wallpapers/ducktales-finale.jpg
 
 # Colors ───────────────────────────────────────────────────────────────────────
 
@@ -60,7 +42,7 @@ set $blue #2e9ef4
 set $white #eaeaea
 
 # client.<class> <border> <background> <text>
-# https://github.com/swaywm/sway/raw/master/sway/sway.5.scd#:~:text=client.
+# https://i3wm.org/docs/userguide.html#_changing_colors
 client.focused $white $white $black
 client.focused_inactive $black $black $white
 client.unfocused $black $black $white
@@ -71,11 +53,9 @@ client.urgent $red $red $white
 bar {
   position top
 
-  # Status line
-  # It was written in Crystal with the goal of using as few syscalls as possible.
-  status_command crystal ~/.config/sway/status.cr
+  status_command i3status
 
-  # https://github.com/swaywm/sway/raw/master/sway/sway-bar.5.scd#:~:text=colors
+  # https://i3wm.org/docs/userguide.html#_colors
   colors {
     background $white
     statusline $black
@@ -104,7 +84,7 @@ bindsym Mod4+Shift+Return $launcher
 bindsym Mod4+F5 reload
 
 # Logout
-bindsym Mod4+BackSpace exec swaylock
+bindsym Mod4+BackSpace exec i3lock
 bindsym Mod4+Shift+BackSpace exec systemctl suspend
 bindsym Control+Mod1+BackSpace exit
 
@@ -164,10 +144,10 @@ bindsym Mod4+Shift+k move up
 bindsym Mod4+Shift+l move right
 
 # Resize focused window
-bindsym Mod4+Control+h resize shrink right 5 ppt
-bindsym Mod4+Control+j resize grow down 5 ppt
-bindsym Mod4+Control+k resize shrink down 5 ppt
-bindsym Mod4+Control+l resize grow right 5 ppt
+bindsym Mod4+Control+h resize shrink right 20 px
+bindsym Mod4+Control+j resize grow down 20 px
+bindsym Mod4+Control+k resize shrink down 20 px
+bindsym Mod4+Control+l resize grow right 20 px
 
 # Change the gaps for the current workspace.
 bindsym Mod4+g gaps inner current minus 10
@@ -182,7 +162,7 @@ bindsym Mod4+v border pixel 10
 bindsym Mod4+Shift+V border pixel 2
 
 # Mark window
-bindsym Mod4+Shift+m exec seq 0 99 | dmenu | xargs swaymsg mark --
+bindsym Mod4+Shift+m exec seq 0 99 | dmenu | xargs i3-msg mark --
 
 # Workspaces ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -225,47 +205,18 @@ bindsym Mod4+Shift+minus move container to workspace number 11
 bindsym Mod4+Shift+equal move container to workspace number 12
 
 # Rename workspace
-bindsym Mod4+r exec seq 0 99 | dmenu | xargs swaymsg rename workspace to --
+bindsym Mod4+r exec seq 0 99 | dmenu | xargs i3-msg rename workspace to --
 
 # Desktop ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 # Open mpv with URLs from clipboard
-bindsym Mod4+m exec wl-paste | mpv --playlist=-
-
-# mpv
-bindsym Mod4+F6 exec find -L videos torrents | dmenu | mpv --playlist=-
-bindsym Mod4+Shift+F6 exec find -L videos | dmenu | mpv --shuffle --playlist=-
-
-# zathura
-bindsym Mod4+F7 exec find -L documents | dmenu | xargs zathura --
+bindsym Mod4+m exec xsel --output --clipboard | mpv --playlist=-
 
 # Password manager
-bindsym Mod4+p exec google-chrome-stable https://passwords.google.com
-
-# Screenshots
-bindsym Print exec grim ~/Desktop/$(date '+%F_%T').webp
-bindsym Shift+Print exec slurp | grim -g - ~/Desktop/$(date '+%F_%T').webp
-
-# Multimedia-keys ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-# Volume controls
-# https://alsa-project.org
-bindsym XF86AudioMute exec amixer set Master toggle
-bindsym XF86AudioRaiseVolume exec amixer set Master 5%+
-bindsym XF86AudioLowerVolume exec amixer set Master 5%-
-
-# Screen brightness
-# https://haikarainen.github.io/light/
-bindsym XF86MonBrightnessUp exec light -A 5
-bindsym XF86MonBrightnessDown exec light -U 5
+bindsym Mod4+p exec chromium https://passwords.google.com
 
 # Rules ────────────────────────────────────────────────────────────────────────
 
-for_window [app_id="popup"] floating enable
-for_window [app_id="panel"] move left
+for_window [class="popup"] floating enable
+for_window [class="panel"] move left
 for_window [title="Picture in picture"] floating enable
-
-# Add a bit of transparency to reduce eye strain.
-for_window [app_id="Alacritty"] opacity set 0.99
-for_window [app_id="org.kde.konsole"] opacity set 0.99
-for_window [app_id="org.kde.dolphin"] opacity set 0.99

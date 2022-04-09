@@ -1,8 +1,6 @@
 # Bash
 # https://gnu.org/software/bash/
 
-# Alacritty
-# https://alacritty.org
 # https://github.com/alacritty/alacritty/issues/3624
 unset LIBGL_ALWAYS_SOFTWARE
 
@@ -263,6 +261,7 @@ alias sway='WLR_NO_HARDWARE_CURSORS=1 sway'
 
 # IntelliJ IDEA
 # https://jetbrains.com/idea/
+# https://github.com/swaywm/sway/issues/595
 alias idea-community='swaymsg exec _JAVA_AWT_WM_NONREPARENTING=1 idea-community'
 
 # Android Studio

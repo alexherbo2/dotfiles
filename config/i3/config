@@ -24,7 +24,7 @@ exec_always --no-startup-id setxkbmap -layout us,fr -option grp:caps_toggle
 # Output configuration ─────────────────────────────────────────────────────────
 
 # Modeline: cvt 2560 1600 75
-exec_always --no-startup-id xrandr --newmode 2560x1600_75.00 443.25 2560 2768 3048 3536 1600 1603 1609 1672 -hsync +vsync && xrandr --addmode Virtual-1 2560x1600_75.00 && xrandr --output Virtual-1 --mode 2560x1600_75.00 --pos 0x0
+# exec_always --no-startup-id xrandr --newmode 2560x1600_75.00 443.25 2560 2768 3048 3536 1600 1603 1609 1672 -hsync +vsync && xrandr --addmode Virtual-1 2560x1600_75.00 && xrandr --output Virtual-1 --mode 2560x1600_75.00 --pos 0x0
 
 # Modeline: cvt 3840 2160 75
 # exec_always --no-startup-id xrandr --newmode 3840x2160_75.00 904.00 3840 4168 4592 5344 2160 2163 2168 2257 -hsync +vsync && xrandr --addmode Virtual-1 3840x2160_75.00 && xrandr --output Virtual-1 --mode 3840x2160_75.00 --pos 0x0 --scale 0.5 --filter nearest
@@ -79,10 +79,9 @@ bar {
 # Basics ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 # Terminal emulator
+# https://github.com/alacritty/alacritty/issues/3500
 bindsym Mod4+Return exec $terminal
-
-# Application launcher
-bindsym Mod4+Shift+Return $launcher
+bindsym Mod4+Shift+Return open, open, exec $terminal
 
 # Reload
 bindsym Mod4+F5 reload

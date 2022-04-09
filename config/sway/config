@@ -5,7 +5,8 @@
 # Variables ────────────────────────────────────────────────────────────────────
 
 # Terminal emulator
-set $terminal alacritty
+# https://github.com/alacritty/alacritty/issues/3624
+set $terminal LIBGL_ALWAYS_SOFTWARE=1 alacritty
 
 # Application launcher
 set $launcher [floating app_id="Alacritty"] scratchpad show
@@ -25,12 +26,10 @@ input type:keyboard {
 
 # Output configuration ─────────────────────────────────────────────────────────
 
-output * {
-  # DuckTales Finale by AKHTS
-  # https://akhts.carrd.co
-  # https://bloggingboutburgers.tumblr.com/image/645856359657717761
-  bg ~/wallpapers/ducktales-finale.jpg fill
-}
+# DuckTales Finale by AKHTS
+# https://akhts.carrd.co
+# https://bloggingboutburgers.tumblr.com/image/645856359657717761
+output * bg ~/wallpapers/ducktales-finale.jpg fill
 
 # Idle configuration ───────────────────────────────────────────────────────────
 
@@ -94,232 +93,187 @@ bar {
     urgent_workspace $red $red $white
     binding_mode $blue $blue $white
   }
-
-  # Mouse bindings
-  bindsym {
-    # Show title bar
-    # Useful with the opposite action on a title bar.
-    button3 border normal
-  }
 }
 
 # Bindings ─────────────────────────────────────────────────────────────────────
 
-mode mouse {
-  bindsym --to-code {
-    1 exec sway-click button1
-    2 exec sway-click button2
-    3 exec sway-click button3
-    4 exec sway-click button4
-    5 exec sway-click button5
+# Basics ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-    Shift+1 exec sway-click button1
-    Shift+2 exec sway-click button2
-    Shift+3 exec sway-click button3
-    Shift+4 exec sway-click button4
-    Shift+5 exec sway-click button5
+# Terminal emulator
+bindsym Mod4+Return exec $terminal
 
-    Control+1 exec sway-click button1
-    Control+2 exec sway-click button2
-    Control+3 exec sway-click button3
-    Control+4 exec sway-click button4
-    Control+5 exec sway-click button5
+# Application launcher
+bindsym Mod4+Shift+Return $launcher
 
-    # Move your focus around
-    Tab focus right
-    Shift+Tab focus left
+# Reload
+bindsym Mod4+F5 reload
 
-    Mod4+Escape mode default
-  }
-}
+# Logout
+bindsym Mod4+BackSpace exec swaylock
+bindsym Mod4+Shift+BackSpace exec systemctl suspend
+bindsym Control+Mod1+BackSpace exit
 
-bindsym --to-code {
+# Mouse bindings ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-  # Basics ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# Close window
+bindsym button2 kill
 
-  # Terminal emulator
-  Mod4+Return exec $terminal
+# Move your focus around
+bindsym --whole-window Mod4+button4 focus left
+bindsym --whole-window Mod4+button5 focus right
 
-  # Application launcher
-  Mod4+Shift+Return $launcher
+# Move the focused window with the same, but add Shift.
+bindsym --whole-window Mod4+Shift+button4 move left
+bindsym --whole-window Mod4+Shift+button5 move right
 
-  # Reload
-  Mod4+F5 reload
+# Layouts ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-  # Logout
-  Mod4+BackSpace exec swaylock
-  Mod4+Shift+BackSpace exec systemctl suspend
-  Control+Mod1+BackSpace exit
+# Change layout of container
+bindsym Mod4+a layout tabbed
+bindsym Mod4+s layout stacking
+bindsym Mod4+d layout toggle split
+bindsym Mod4+f fullscreen toggle
+bindsym Mod4+x sticky toggle
+bindsym Mod4+c exec pkill sway-spiral || sway-spiral
 
-  # Mouse bindings ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# Distraction-free
+bindsym Mod4+Shift+d bar mode dock
+bindsym Mod4+Shift+f bar mode invisible
 
-  # Close window
-  button2 kill
+# Tiling and floating
+bindsym Mod4+Shift+space floating toggle
+bindsym Mod4+space focus mode_toggle
 
-  # Hide title bar
-  # Useful with the opposite action on the status bar.
-  button3 border pixel
+# Containers ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-  # Move your focus around
-  --whole-window Mod4+button4 focus left
-  --whole-window Mod4+button5 focus right
+# Kill focused window
+bindsym Mod4+w kill
 
-  # Move the focused window with the same, but add Shift.
-  --whole-window Mod4+Shift+button4 move left
-  --whole-window Mod4+Shift+button5 move right
+# Horizontal and vertical splits
+bindsym Mod4+o split vertical
+bindsym Mod4+Shift+o split horizontal
 
-  # Enter mouse mode
-  Mod4+Escape mode mouse
+# Focus parent and child containers
+bindsym Mod4+u focus parent
+bindsym Mod4+i focus child
 
-  # Layouts ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# Move your focus around
+bindsym Mod4+h focus left
+bindsym Mod4+j focus down
+bindsym Mod4+k focus up
+bindsym Mod4+l focus right
 
-  # Change layout of container
-  Mod4+a layout tabbed
-  Mod4+s layout stacking
-  Mod4+d layout toggle split
-  Mod4+f fullscreen toggle
-  Mod4+x sticky toggle
-  Mod4+c exec pkill sway-spiral || sway-spiral
+# Move the focused window with the same, but add Shift.
+bindsym Mod4+Shift+h move left
+bindsym Mod4+Shift+j move down
+bindsym Mod4+Shift+k move up
+bindsym Mod4+Shift+l move right
 
-  # Distraction-free
-  Mod4+Shift+d bar mode dock
-  Mod4+Shift+f bar mode invisible
+# Resize in these directions:
+# ╭────╮ →
+# │    │ →
+# │    │ →
+# │    │ →
+# ╰────╯ →
+# ↓ ↓ ↓  ↘
+bindsym Mod4+Control+h resize shrink right 5 ppt
+bindsym Mod4+Control+j resize grow down 5 ppt
+bindsym Mod4+Control+k resize shrink down 5 ppt
+bindsym Mod4+Control+l resize grow right 5 ppt
 
-  # Tiling and floating
-  Mod4+Shift+space floating toggle
-  Mod4+space focus mode_toggle
+# Change the gaps for the current workspace.
+bindsym Mod4+g gaps inner current minus 10
+bindsym Mod4+Shift+g gaps inner current plus 10
 
-  # Containers ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# Change border styles
+bindsym Mod4+b border pixel
+bindsym Mod4+Shift+b border normal
 
-  # Kill focused window
-  Mod4+w kill
+# Change border size
+bindsym Mod4+v border pixel 10
+bindsym Mod4+Shift+V border pixel 2
 
-  # Horizontal and vertical splits
-  Mod4+o split vertical
-  Mod4+Shift+o split horizontal
+# Search window
+bindsym Mod4+slash exec sway-commander
+bindsym Mod4+Shift+slash exec sway-commander move workspace current, focus
 
-  # Focus parent and child containers
-  Mod4+u focus parent
-  Mod4+i focus child
+# Mark window
+bindsym Mod4+Shift+m exec seq 0 99 | dmenu | xargs swaymsg mark --
 
-  # Move your focus around
-  Mod4+h focus left
-  Mod4+j focus down
-  Mod4+k focus up
-  Mod4+l focus right
+# Workspaces ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-  # Move the focused window with the same, but add Shift.
-  Mod4+Shift+h move left
-  Mod4+Shift+j move down
-  Mod4+Shift+k move up
-  Mod4+Shift+l move right
+# Switch to the next or previous workspace
+bindsym Mod4+n workspace next
+bindsym Mod4+Shift+n workspace prev
 
-  # Resize in these directions:
-  # ╭────╮ →
-  # │    │ →
-  # │    │ →
-  # │    │ →
-  # ╰────╯ →
-  # ↓ ↓ ↓  ↘
-  Mod4+Control+h resize shrink right 5 ppt
-  Mod4+Control+j resize grow down 5 ppt
-  Mod4+Control+k resize shrink down 5 ppt
-  Mod4+Control+l resize grow right 5 ppt
+# Switch to the last workspace
+bindsym Mod4+Tab workspace back_and_forth
+bindsym Mod4+Shift+Tab move container to workspace back_and_forth
 
-  # Change the gaps for the current workspace.
-  Mod4+g gaps inner current minus 10
-  Mod4+Shift+g gaps inner current plus 10
+# Switch to workspace
+bindsym Mod4+grave scratchpad show
+bindsym Mod4+1 workspace number 1
+bindsym Mod4+2 workspace number 2
+bindsym Mod4+3 workspace number 3
+bindsym Mod4+4 workspace number 4
+bindsym Mod4+5 workspace number 5
+bindsym Mod4+6 workspace number 6
+bindsym Mod4+7 workspace number 7
+bindsym Mod4+8 workspace number 8
+bindsym Mod4+9 workspace number 9
+bindsym Mod4+0 workspace number 10
+bindsym Mod4+minus workspace number 11
+bindsym Mod4+equal workspace number 12
 
-  # Change border styles
-  Mod4+b border pixel
-  Mod4+Shift+b border normal
+# Move focused container to workspace
+bindsym Mod4+Shift+grave move scratchpad
+bindsym Mod4+Shift+1 move container to workspace number 1
+bindsym Mod4+Shift+2 move container to workspace number 2
+bindsym Mod4+Shift+3 move container to workspace number 3
+bindsym Mod4+Shift+4 move container to workspace number 4
+bindsym Mod4+Shift+5 move container to workspace number 5
+bindsym Mod4+Shift+6 move container to workspace number 6
+bindsym Mod4+Shift+7 move container to workspace number 7
+bindsym Mod4+Shift+8 move container to workspace number 8
+bindsym Mod4+Shift+9 move container to workspace number 9
+bindsym Mod4+Shift+0 move container to workspace number 10
+bindsym Mod4+Shift+minus move container to workspace number 11
+bindsym Mod4+Shift+equal move container to workspace number 12
 
-  # Change border size
-  Mod4+v border pixel 10
-  Mod4+Shift+V border pixel 2
+# Rename workspace
+bindsym Mod4+r exec seq 0 99 | dmenu | xargs swaymsg rename workspace to --
 
-  # Search window
-  Mod4+slash exec sway-commander
-  Mod4+Shift+slash exec sway-commander move workspace current, focus
+# Desktop ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-  # Mark window
-  Mod4+Shift+m exec seq 0 99 | dmenu | xargs swaymsg mark --
+# Open mpv with URLs from clipboard
+bindsym Mod4+m exec wl-paste | mpv --playlist=-
 
-  # Workspaces ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# mpv
+bindsym Mod4+F6 exec find -L videos torrents | dmenu | mpv --playlist=-
+bindsym Mod4+Shift+F6 exec find -L videos | dmenu | mpv --shuffle --playlist=-
 
-  # Switch to the next or previous workspace
-  Mod4+n workspace next
-  Mod4+Shift+n workspace prev
+# zathura
+bindsym Mod4+F7 exec find -L documents | dmenu | xargs zathura --
 
-  # Switch to the last workspace
-  Mod4+Tab workspace back_and_forth
-  Mod4+Shift+Tab move container to workspace back_and_forth
+# Password manager
+bindsym Mod4+p exec google-chrome-stable https://passwords.google.com
 
-  # Switch to workspace
-  Mod4+grave scratchpad show
-  Mod4+1 workspace number 1
-  Mod4+2 workspace number 2
-  Mod4+3 workspace number 3
-  Mod4+4 workspace number 4
-  Mod4+5 workspace number 5
-  Mod4+6 workspace number 6
-  Mod4+7 workspace number 7
-  Mod4+8 workspace number 8
-  Mod4+9 workspace number 9
-  Mod4+0 workspace number 10
-  Mod4+minus workspace number 11
-  Mod4+equal workspace number 12
+# Screenshots
+bindsym Print exec grim ~/Desktop/$(date '+%F_%T').webp
+bindsym Shift+Print exec slurp | grim -g - ~/Desktop/$(date '+%F_%T').webp
 
-  # Move focused container to workspace
-  Mod4+Shift+grave move scratchpad
-  Mod4+Shift+1 move container to workspace number 1
-  Mod4+Shift+2 move container to workspace number 2
-  Mod4+Shift+3 move container to workspace number 3
-  Mod4+Shift+4 move container to workspace number 4
-  Mod4+Shift+5 move container to workspace number 5
-  Mod4+Shift+6 move container to workspace number 6
-  Mod4+Shift+7 move container to workspace number 7
-  Mod4+Shift+8 move container to workspace number 8
-  Mod4+Shift+9 move container to workspace number 9
-  Mod4+Shift+0 move container to workspace number 10
-  Mod4+Shift+minus move container to workspace number 11
-  Mod4+Shift+equal move container to workspace number 12
+# Multimedia-keys ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-  # Rename workspace
-  Mod4+r exec seq 0 99 | dmenu | xargs swaymsg rename workspace to --
+# Volume controls
+# https://alsa-project.org
+bindsym XF86AudioMute exec amixer set Master toggle
+bindsym XF86AudioRaiseVolume exec amixer set Master 5%+
+bindsym XF86AudioLowerVolume exec amixer set Master 5%-
 
-  # Desktop ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-  # Open mpv with URLs from clipboard
-  Mod4+m exec wl-paste | mpv --playlist=-
-
-  # mpv
-  Mod4+F6 exec find -L videos torrents | dmenu | mpv --playlist=-
-  Mod4+Shift+F6 exec find -L videos | dmenu | mpv --shuffle --playlist=-
-
-  # zathura
-  Mod4+F7 exec find -L documents | dmenu | xargs zathura --
-
-  # Password manager
-  Mod4+p exec google-chrome-stable https://passwords.google.com
-
-  # Screenshots
-  Print exec grim ~/Desktop/$(date '+%F_%T').webp
-  Shift+Print exec slurp | grim -g - ~/Desktop/$(date '+%F_%T').webp
-
-  # Multimedia-keys ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-  # Volume controls
-  # https://alsa-project.org
-  XF86AudioMute exec amixer set Master toggle
-  XF86AudioRaiseVolume exec amixer set Master 5%+
-  XF86AudioLowerVolume exec amixer set Master 5%-
-
-  # Screen brightness
-  # https://haikarainen.github.io/light/
-  XF86MonBrightnessUp exec light -A 5
-  XF86MonBrightnessDown exec light -U 5
-}
+# Screen brightness
+# https://haikarainen.github.io/light/
+bindsym XF86MonBrightnessUp exec light -A 5
+bindsym XF86MonBrightnessDown exec light -U 5
 
 # Rules ────────────────────────────────────────────────────────────────────────
 

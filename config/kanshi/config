@@ -4,5 +4,5 @@ profile {
 
 profile {
   output eDP-1 disable
-  output "Dell Inc. DELL S2721QS FNN7M43" mode 3840x2160 position 0,0 scale 2
+  output "Dell Inc. DELL S2721QS FNN7M43" resolution 3840x2160 position 0,0 scale 2
 }

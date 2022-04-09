@@ -249,6 +249,13 @@ alias rr='rails routes --grep'
 
 # IDEs ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
+# Sway
+# https://swaywm.org
+# https://github.com/swaywm/sway/issues/3851
+alias sway='WLR_NO_HARDWARE_CURSORS=1 sway'
+
+# IDEs ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
 # IntelliJ IDEA
 # https://jetbrains.com/idea/
 alias idea-community='swaymsg exec _JAVA_AWT_WM_NONREPARENTING=1 idea-community'

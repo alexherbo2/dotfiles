@@ -1,6 +1,11 @@
 # Bash
 # https://gnu.org/software/bash/
 
+# Alacritty
+# https://alacritty.org
+# https://github.com/alacritty/alacritty/issues/3624
+unset LIBGL_ALWAYS_SOFTWARE
+
 # Starship
 # https://starship.rs
 eval "$(starship init bash)"

@@ -5,6 +5,8 @@
 # Variables ────────────────────────────────────────────────────────────────────
 
 # Terminal emulator
+# Alacritty
+# https://alacritty.org
 # https://github.com/alacritty/alacritty/issues/3624
 set $terminal LIBGL_ALWAYS_SOFTWARE=1 alacritty
 

@@ -3,8 +3,8 @@
 # https://github.com/alacritty/alacritty/blob/master/alacritty.yml
 
 # https://github.com/alacritty/alacritty/issues/3624
-env:
-  LIBGL_ALWAYS_SOFTWARE: '1'
+# env:
+#   LIBGL_ALWAYS_SOFTWARE: '1'
 
 import:
 
@@ -12,7 +12,7 @@ import:
   - ~/code~/dracula/alacritty/dracula.yml
 
   # CSI u mode
-  # - ~/code~/alacritty-extended-keys/keys.yml
+  - ~/code~/alacritty-extended-keys/keys.yml
 
 # Appearance ───────────────────────────────────────────────────────────────────
 

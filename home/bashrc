@@ -2,7 +2,7 @@
 # https://gnu.org/software/bash/
 
 # https://github.com/alacritty/alacritty/issues/3624
-unset LIBGL_ALWAYS_SOFTWARE
+# unset LIBGL_ALWAYS_SOFTWARE
 
 # Starship
 # https://starship.rs
@@ -262,12 +262,12 @@ alias sway='WLR_NO_HARDWARE_CURSORS=1 sway'
 # IntelliJ IDEA
 # https://jetbrains.com/idea/
 # https://github.com/swaywm/sway/issues/595
-alias idea-community='swaymsg exec _JAVA_AWT_WM_NONREPARENTING=1 idea-community'
+alias idea-community='_JAVA_AWT_WM_NONREPARENTING=1 @ idea-community'
 
 # Android Studio
 # https://developer.android.com/studio
 # https://github.com/swaywm/sway/issues/595
-alias android-studio='swaymsg exec _JAVA_AWT_WM_NONREPARENTING=1 android-studio'
+alias android-studio='_JAVA_AWT_WM_NONREPARENTING=1 @ android-studio'
 
 # Functions ────────────────────────────────────────────────────────────────────
 

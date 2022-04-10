@@ -452,6 +452,7 @@
     socat # http://www.dest-unreach.org/socat/
 
     # Filesystem
+    sshfs # https://github.com/libfuse/sshfs
     parted # https://gnu.org/software/parted/
     gparted # https://gparted.org
     gptfdisk # https://rodsbooks.com/gdisk/

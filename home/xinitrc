@@ -1,4 +1,4 @@
 # xorg
 # https://xorg.freedesktop.org
 
-KDEWM=i3 exec startplasma-x11
+exec i3

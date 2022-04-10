@@ -2,25 +2,24 @@
 
 # A drop-in dmenu replacement using fzf with Alacritty.
 
-# – fzf (https://github.com/junegunn/fzf)
-# – Alacritty (https://github.com/alacritty/alacritty)
+# Temporary directory
+tmpdir=$(mktemp -d)
 
-# Create IO files
-state=$(mktemp -d)
-input=$state/input
-output=$state/output
-trap 'rm -Rf "$state"' EXIT
+# Register an `at_exit` handler to clean up temporary files.
+trap at_exit EXIT
+at_exit() {
+  rm -Rf "$tmpdir"
+}
 
-# Get input
-cat > "$input"
+stdin=tmpdir/stdin
+stdout=tmpdir/stdout
 
-# Run fzf with Alacritty
-alacritty --class 'popup' --command sh -c 'fzf < "$1" > "$2"' -- "$input" "$output"
+# Runs fzf with Alacritty as a dmenu interface.
+cat > "$stdin"
+alacritty --class=popup --command sh -c 'fzf < "$1" > "$2"' -- "$stdin" "$stdout"
+cat "$stdout"
 
-# Write output
-cat "$output"
-
-# Exit code
-if test ! -s "$output"; then
+# Returns the exit code.
+if [ ! -s "$stdout" ]; then
   exit 1
 fi

@@ -5,7 +5,8 @@
 # Variables ────────────────────────────────────────────────────────────────────
 
 # Terminal emulator
-set $terminal alacritty
+# https://github.com/alacritty/alacritty/issues/3624
+set $terminal LIBGL_ALWAYS_SOFTWARE=1 alacritty
 
 # Application launcher
 set $launcher [floating app_id="Alacritty"] scratchpad show

@@ -114,7 +114,7 @@ map -docstring 'surround mode' global normal q ': surround-mode<ret>'
 map -docstring 'select mode' global normal S ': select-mode<ret>'
 
 # Windowing
-map -docstring 'terminal' global user t ': terminal bash<ret>'
+map -docstring 'terminal' global user t ': terminal<ret>'
 map -docstring 'client' global user c ': terminal kak -c %val{session}<ret>'
 map -docstring 'file explorer' global user f ': terminal-panel sidetree<ret>'
 map -docstring 'git popup' global user g ': terminal-popup gitui<ret>'

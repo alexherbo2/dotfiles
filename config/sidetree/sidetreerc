@@ -23,7 +23,7 @@ map <c-c> quit
 map H cd ..
 map L cd
 map $ shell 'alacritty msg create-window --class popup --working-directory "$sidetree_dir"'
-map o shell 'echo "evaluate-commands -try-client %[$KAKOUNE_CLIENT] -verbatim -- edit %[$sidetree_entry]" | kak -p "$KAKOUNE_SESSION"'
+map o shell 'echo "evaluate-commands -try-client %($KAKOUNE_CLIENT) -verbatim -- edit %($sidetree_entry)" | kak -p "$KAKOUNE_SESSION"'
 map v shell 'alacritty msg create-window --class popup --command bat --paging=always "$sidetree_entry"'
 map y shell 'wl-copy "$sidetree_entry"'
 map x shell 'arc unarchive "$sidetree_entry"'

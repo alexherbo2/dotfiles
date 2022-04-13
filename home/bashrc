@@ -128,9 +128,9 @@ kak_server() {
 kak_open() {
   {
     for filename do
-      echo "edit -- %[$filename]"
+      echo "edit -- %($filename)"
     done
-    echo "evaluate-commands -try-client %[$KAKOUNE_CLIENT] -verbatim -- edit %[$1]"
+    echo "evaluate-commands -try-client %($KAKOUNE_CLIENT) -verbatim -- edit %($1)"
   } |
   kak -p "$KAKOUNE_SESSION"
 }

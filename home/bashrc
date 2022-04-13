@@ -213,6 +213,7 @@ alias L='exa --tree'
 alias La='exa --tree --all'
 
 # batch
+# https://github.com/taupiqueur/batch
 # interactive map
 imap() {
   batch -f 'iconv -f UTF-8 -t ASCII//TRANSLIT//IGNORE' -f 'tr [:upper:] [:lower:]' -f "tr -s \\'[:blank:] -" -f 'tr -d ?!,' "$@"

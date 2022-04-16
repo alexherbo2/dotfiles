@@ -9,7 +9,6 @@ home/icons
 config/broot/launcher
 config/gh
 config/iterm2
-config/mpv/watch_later
 config/cachix/cachix.dhall
 local/share/icons/candy-icons
 local/share/konsole

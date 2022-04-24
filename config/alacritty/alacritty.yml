@@ -19,7 +19,7 @@ window:
 font:
   size: 16.0
   normal:
-    family: UbuntuMono Nerd Font Mono
+    family: JetBrains Mono
 
 selection:
   save_to_clipboard: true

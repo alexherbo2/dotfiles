@@ -13,7 +13,7 @@ set $launcher [floating app_id="Alacritty"] scratchpad show
 
 # Options ──────────────────────────────────────────────────────────────────────
 
-font pango:Ubuntu Mono 11
+font pango:JetBrains Mono 11
 floating_modifier Mod4
 workspace_auto_back_and_forth yes
 

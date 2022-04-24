@@ -144,10 +144,7 @@
   # Fonts
   # https://nixos.wiki/wiki/Fonts
   fonts.fonts = with pkgs; [
-    # comic-mono-font # https://dtinth.github.io/comic-mono-font/
-    # terminus # http://terminus-font.sourceforge.net
-    ubuntu_font_family # https://design.ubuntu.com/font/
-    dejavu_fonts # https://dejavu-fonts.github.io
+    jetbrains-mono # https://jetbrains.com/lp/mono/
     font-awesome # https://fontawesome.com
     nerdfonts # https://nerdfonts.com
   ];

@@ -19,12 +19,7 @@ window:
 font:
   size: 16.0
   normal:
-    family: PragmataPro Mono
-
-font:
-  size: 16.0
-  normal:
-    family: Ubuntu Mono
+    family: UbuntuMono Nerd Font Mono
 
 selection:
   save_to_clipboard: true

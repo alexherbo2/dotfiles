@@ -18,7 +18,7 @@ return {
 
   -- Font configuration
   -- https://wezfurlong.org/wezterm/config/fonts.html
-  font = wezterm.font('PragmataPro Mono'),
+  font = wezterm.font('JetBrains Mono'),
   font_size = 16.0,
 
   -- Disable ligatures

@@ -148,6 +148,7 @@
     ubuntu_font_family # https://design.ubuntu.com/font/
     dejavu_fonts # https://dejavu-fonts.github.io
     font-awesome # https://fontawesome.com
+    nerdfonts # https://nerdfonts.com
   ];
 
   # Wayland compositors

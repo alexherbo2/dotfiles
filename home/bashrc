@@ -99,6 +99,16 @@ alias tl='tmux list-sessions'
 alias k=kak
 alias ke=kak_set_env
 alias kE='kak_set_env "$(basename "$PWD")"'
+alias k0='export KAKOUNE_CLIENT=client0'
+alias k1='export KAKOUNE_CLIENT=client1'
+alias k2='export KAKOUNE_CLIENT=client2'
+alias k3='export KAKOUNE_CLIENT=client3'
+alias k4='export KAKOUNE_CLIENT=client4'
+alias k5='export KAKOUNE_CLIENT=client5'
+alias k6='export KAKOUNE_CLIENT=client6'
+alias k7='export KAKOUNE_CLIENT=client7'
+alias k8='export KAKOUNE_CLIENT=client8'
+alias k9='export KAKOUNE_CLIENT=client9'
 alias ks=kak_server
 alias kS='kak_server "$(basename "$PWD")"'
 alias ko=kak_open

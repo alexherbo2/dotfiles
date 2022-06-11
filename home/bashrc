@@ -158,8 +158,14 @@ alias g=git
 alias G=gitui
 alias gw='git add'
 alias gw.='gw .'
-alias gl='git log'
 alias gst='git status'
+# Log
+# https://git-scm.com/docs/git-log
+alias gl='git log'
+alias gls='git log -S'
+alias glg='git log -G'
+alias glS='git log -p -S'
+alias glG='git log -p -G'
 # Commit
 alias gci='git commit'
 alias gcm='git commit --message'

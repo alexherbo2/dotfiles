@@ -59,7 +59,7 @@ add-highlighter -override global/number-lines number-lines -hlcursor
 source ~/.config/kak/colors/dracula.kak
 
 # Custom faces
-set-face global Whitespace "rgb:%opt{background}+f"
+set-face global SelectedText "rgb:%opt{green}+f"
 
 # LSP
 try lsp-enable
@@ -75,6 +75,7 @@ set-option global makecmd 'make -j 8'
 set-option global grepcmd 'rg --with-filename --line-number --column'
 
 # Show whitespace
+add-highlighter -override global/show-whitespaces show-whitespaces
 add-highlighter -override global/whitespace ref whitespace
 
 # Show various characters

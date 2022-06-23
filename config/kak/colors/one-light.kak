@@ -1,0 +1,1 @@
+/Users/taupiqueur/.local/share/git.sr.ht/~raiguard/one.kak/colors/one-light.kak

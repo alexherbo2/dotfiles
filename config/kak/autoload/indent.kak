@@ -1,0 +1,1 @@
+/Users/taupiqueur/code/kakoune-language-support/rc/indent.kak

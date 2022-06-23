@@ -1,0 +1,1 @@
+/Users/taupiqueur/code~/alacritty.kak/rc/alacritty.kak

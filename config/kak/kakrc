@@ -17,34 +17,6 @@ try %sh{
   kak-lsp --kakoune --session "$kak_session"
 }
 
-# Kakoune support
-# https://github.com/mawww/kakoune/tree/master/rc
-try %{
-  source ~/.config/kak/init.kak
-}
-
-evaluate-commands %sh{
-  find -L "$kak_config/autoload" -type f -name '*.kak' -exec printf 'source "%s";' {} +
-}
-
-source ~/.config/kak/autoload/clipboard.kak
-source ~/.config/kak/autoload/comment.kak
-source ~/.config/kak/autoload/crystal.kak
-source ~/.config/kak/autoload/indent.kak
-
-source ~/code~/alacritty.kak/rc/alacritty.kak
-source ~/code~/git.kak/rc/git.kak
-source ~/code~/mark.kak/rc/mark.kak
-source ~/code~/pipe.kak/rc/pipe.kak
-source ~/code~/select.kak/rc/select.kak
-source ~/code~/sensible.kak/rc/sensible.kak
-source ~/code~/shortcuts.kak/rc/shortcuts.kak
-source ~/code~/show-whitespace.kak/rc/show-whitespace.kak
-source ~/code~/surround.kak/rc/surround.kak
-source ~/code~/text-objects.kak/rc/text-objects.kak
-source ~/code~/tmux.kak/rc/tmux.kak
-source ~/code~/window.kak/rc/window.kak
-
 # Options ──────────────────────────────────────────────────────────────────────
 
 # UI options
@@ -56,7 +28,7 @@ add-highlighter -override global/number-lines number-lines -hlcursor
 
 # Color scheme
 # Dracula – https://draculatheme.com/kakoune
-source ~/.config/kak/colors/dracula.kak
+colorscheme dracula
 
 # Custom faces
 set-face global SelectedText "rgb:%opt{green}+f"
@@ -179,7 +151,6 @@ alias global o enter-open-mode
 # Mappings
 map -docstring 'open bashrc' global open b ': edit ~/.bashrc<ret>'
 map -docstring 'open kakrc' global open k ': edit ~/.config/kak/kakrc<ret>'
-map -docstring 'open init.kak' global open K ': edit ~/.config/kak/init.kak<ret>'
 map -docstring 'open mpv.conf' global open m ': edit ~/.config/mpv/input.conf; edit ~/.config/mpv/mpv.conf<ret>'
 map -docstring 'open notes' global open n ': edit ~/docs/notes.txt<ret>gjvt'
 map -docstring 'open configuration.nix' global open N ': edit /etc/nixos/configuration.nix<ret>'

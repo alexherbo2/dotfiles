@@ -75,10 +75,10 @@ map -docstring 'close client' global normal <c-q> ': quit<ret>'
 map -docstring 'close buffer' global normal <c-w> ': delete-buffer; echo -markup ''{Information}buffer closed''<ret>'
 
 # Navigation
-map -docstring 'scroll one page up' global normal <pageup> <space><pageup>
-map -docstring 'scroll one page down' global normal <pagedown> <space><pagedown>
-map -docstring 'move to previous paragraph' global normal [ <space>gh[pgi
-map -docstring 'move to next paragraph' global normal ] <space>]plgi
+map -docstring 'scroll one page up' global normal <pageup> ,<pageup>
+map -docstring 'scroll one page down' global normal <pagedown> ,<pagedown>
+map -docstring 'move to previous paragraph' global normal [ ,gh[pgi
+map -docstring 'move to next paragraph' global normal ] ,]plgi
 
 # Selection primitives
 map -docstring 'select inner object' global normal v <a-i>

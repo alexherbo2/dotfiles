@@ -172,7 +172,13 @@ alias gcm='git commit --message'
 alias greword='git commit --amend'
 alias gpick='git commit --amend --no-edit'
 alias gsnapshot='date "+%F %T" | git commit --file=-'
-# Undo
+# Push
+# https://git-scm.com/docs/git-push
+alias gpush='git push'
+# Pull
+# https://git-scm.com/docs/git-pull
+alias gpull='git pull'
+# Undo commit
 alias gu='git restore --staged'
 alias gD='git restore --staged --worktree'
 alias gD.='gD .'

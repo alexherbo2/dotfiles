@@ -10,9 +10,9 @@ return {
   -- Color scheme
   -- https://wezfurlong.org/wezterm/config/appearance.html
   --
-  -- Dracula
-  -- https://draculatheme.com
-  color_scheme = 'Dracula',
+  -- Catppuccin
+  -- https://catppuccin.com
+  color_scheme = 'Catppuccin Frappe',
 
   window_background_opacity = 0.99,
 
@@ -27,8 +27,4 @@ return {
 
   -- Cursor style
   default_cursor_style = 'BlinkingBar',
-
-  -- Enable CSI u mode
-  -- https://wezfurlong.org/wezterm/config/lua/config/enable_csi_u_key_encoding.html
-  enable_csi_u_key_encoding = true
 }

@@ -7,10 +7,7 @@ home/ssh/id_ed25519_*
 home/ssh/known_hosts
 home/icons
 config/gh
-local/share/icons/candy-icons
 local/share/konsole
-local/share/applications
-local/share/icons
 local/share/fonts
 config/kak/autoload
 config/kak/colors

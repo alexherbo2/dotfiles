@@ -3,7 +3,6 @@
 - [alacritty.yml](config/alacritty/alacritty.yml)
 - [bashrc](home/bashrc)
 - [git/config](config/git/config)
-- [gitui/key_config.ron](config/gitui/key_config.ron)
 - [kakrc](config/kak/kakrc)
 - [mpv.conf](config/mpv/mpv.conf)
 - [nginx.conf](etc/nginx/nginx.conf)

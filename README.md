@@ -1,5 +1,14 @@
-# Configuration
+# dotfiles
 
-###### [Kakoune](config/kak/kakrc) | [Git](config/git/config) | [gitui](config/gitui/key_config.ron) | [Sway](config/sway/config) | [Wayfire](config/wayfire.ini) | [Alacritty](config/alacritty/alacritty.yml) | [Bash](home/bashrc) | [tmux](config/tmux/tmux.conf) | [mpv](config/mpv/mpv.conf) | [sidetree](config/sidetree/sidetreerc) | [Starship](config/starship.toml) | [nginx](etc/nginx/nginx.conf)
-
-> Personal configuration files.
+- [alacritty.yml](config/alacritty/alacritty.yml)
+- [bashrc](home/bashrc)
+- [git/config](config/git/config)
+- [gitui/key_config.ron](config/gitui/key_config.ron)
+- [kakrc](config/kak/kakrc)
+- [mpv.conf](config/mpv/mpv.conf)
+- [nginx.conf](etc/nginx/nginx.conf)
+- [sidetreerc](config/sidetree/sidetreerc)
+- [starship.toml](config/starship.toml)
+- [sway/config](config/sway/config)
+- [tmux.conf](config/tmux/tmux.conf)
+- [wayfire.ini](config/wayfire.ini)

@@ -5,24 +5,6 @@
 x-scheme-handler/http=google-chrome.desktop
 x-scheme-handler/https=google-chrome.desktop
 
-# kakoune.cr
-# https://github.com/alexherbo2/kakoune.cr
-application/csv=kcr.desktop
-application/json=kcr.desktop
-application/postscript=kcr.desktop
-text/html=kcr.desktop
-text/plain=kcr.desktop
-text/troff=kcr.desktop
-text/x-c++=kcr.desktop
-text/x-c=kcr.desktop
-text/x-java=kcr.desktop
-text/x-lisp=kcr.desktop
-text/x-makefile=kcr.desktop
-text/xml=kcr.desktop
-text/x-ruby=kcr.desktop
-text/x-script.python=kcr.desktop
-text/x-shellscript=kcr.desktop
-
 # mpv
 # https://mpv.io
 image/gif=mpv.desktop

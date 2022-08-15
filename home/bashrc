@@ -275,11 +275,6 @@ alias rr='rails routes --grep'
 # https://github.com/swaywm/sway/issues/3851
 alias sway='WLR_NO_HARDWARE_CURSORS=1 sway'
 
-# i3
-# https://i3wm.org
-# https://github.com/alacritty/alacritty/issues/3500
-alias i3='startx /usr/bin/i3 -- -maxbigreqsize 127'
-
 # IDEs ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 # IntelliJ IDEA

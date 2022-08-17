@@ -1,0 +1,36 @@
+# Helix
+# https://helix-editor.com
+# https://github.com/helix-editor/helix/blob/master/languages.toml
+
+theme = "catppuccin_frappe"
+
+[[language]]
+name = "crystal"
+scope = "source.crystal"
+injection-regex = "crystal"
+file-types = ["cr"]
+roots = ["shard.yml"]
+comment-token = "#"
+language-server = { command = "crystalline" }
+indent = { tab-width = 2, unit = "  " }
+grammar = "ruby"
+
+[keys.normal]
+"#" = "toggle_comments"
+q = "surround_add"
+Q = "surround_delete"
+v = "select_textobject_around"
+V = "select_textobject_inner"
+m = "match_brackets"
+[keys.normal.space]
+# Formatting and parsing date-time
+# format date to 2006-01-02
+d = ':pipe date -d "$(cat)" "+%F" | tr -d "\\n"'
+# format date to 2006-01-02 Mon
+D = ':pipe date -d "$(cat)" "+%F %a" | tr -d "\\n"'
+[editor]
+rulers = [80]
+[editor.whitespace]
+render = "all"
+[editor.whitespace.characters]
+newline = "¬"

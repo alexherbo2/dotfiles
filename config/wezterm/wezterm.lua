@@ -27,4 +27,24 @@ return {
 
   -- Cursor style
   default_cursor_style = 'BlinkingBar',
+
+  -- Leader key
+  -- https://wezfurlong.org/wezterm/config/keys.html#leader-key
+  leader = { key = '`', timeout_milliseconds = 9000 },
+
+  -- Key bindings
+  -- https://wezfurlong.org/wezterm/config/keys.html
+  keys = {
+    -- Send "`" to the terminal when pressing "`", "`"
+    { key = '`', mods="LEADER", action=wezterm.action{SendString='`'} },
+    { key = 'o', mods="LEADER", action=wezterm.action{SplitVertical={domain="CurrentPaneDomain"}} },
+    { key = 'O', mods="LEADER", action=wezterm.action{SplitHorizontal={domain="CurrentPaneDomain"}} },
+    { key = 'c', mods="LEADER", action=wezterm.action{SpawnTab="CurrentPaneDomain"} },
+    { key = 'h', mods="LEADER", action=wezterm.action{ActivatePaneDirection="Left"} },
+    { key = 'l', mods="LEADER", action=wezterm.action{ActivatePaneDirection="Right"} },
+    { key = 'k', mods="LEADER", action=wezterm.action{ActivatePaneDirection="Up"} },
+    { key = 'j', mods="LEADER", action=wezterm.action{ActivatePaneDirection="Down"} },
+    { key = 'f', mods="LEADER", action="TogglePaneZoomState" },
+    { key = 'v', mods="LEADER", action="ActivateCopyMode" },
+  }
 }

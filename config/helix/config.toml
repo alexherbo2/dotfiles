@@ -1,0 +1,26 @@
+# Helix
+# https://helix-editor.com
+
+theme = "catppuccin_frappe"
+
+[keys.normal]
+"#" = "toggle_comments"
+"A-o" = "add_newline_below"
+"A-O" = "add_newline_above"
+q = "surround_add"
+Q = "surround_delete"
+v = "select_textobject_inner"
+V = "select_textobject_around"
+m = "match_brackets"
+[keys.normal.space]
+# Formatting and parsing date-time
+# format date to 2006-01-02
+d = ':pipe date -d "$(cat)" "+%F" | tr -d "\\n"'
+# format date to 2006-01-02 Mon
+D = ':pipe date -d "$(cat)" "+%F %a" | tr -d "\\n"'
+[editor]
+rulers = [80]
+[editor.whitespace]
+render = "all"
+[editor.whitespace.characters]
+newline = "¬"

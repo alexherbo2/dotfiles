@@ -36,11 +36,6 @@ set-face global SelectedText "rgb:%opt{green}+f"
 # LSP
 try lsp-enable
 
-# Indentation
-set-option global tabstop 4
-set-option global indentwidth 2
-set-option global disabled_hooks '.+-trim-indent|.+-insert|.+-indent'
-
 # Tools
 set-option global makecmd 'make -j 8'
 set-option global grepcmd 'rg --with-filename --line-number --column'
@@ -172,21 +167,42 @@ map -docstring 'open wayfire.ini' global open W ': edit ~/.config/wayfire.ini<re
 
 # Language support ─────────────────────────────────────────────────────────────
 
-set-option global line_comment_token '#'
+# Indentation
+set-option global tabstop 4
+set-option global indentwidth 2
+set-option global disabled_hooks '.+-trim-indent|.+-insert|.+-indent'
+
+# Kakoune
+# https://kakoune.org
+hook -group config global BufSetOption filetype=kak %{
+  set-option buffer indentwidth 2
+  set-option buffer line_comment_token '#'
+}
 
 # Crystal
 # https://crystal-lang.org
 hook -group config global BufSetOption filetype=crystal %{
+  set-option buffer indentwidth 2
   set-option buffer line_comment_token '#'
 }
 
 # JavaScript
 # https://developer.mozilla.org/en-US/docs/Web/JavaScript
 hook -group config global BufSetOption filetype=javascript %{
+  set-option buffer indentwidth 2
   set-option buffer line_comment_token '//'
   set-option buffer block_comment_tokens '/*' '*/'
 }
 
+# Makefile
+# https://en.wikipedia.org/wiki/Make_(software)#Makefile
+hook -group config global BufSetOption filetype=makefile %{
+  set-option buffer indentwidth 0
+  set-option buffer line_comment_token '#'
+}
+
+# grep
+# https://en.wikipedia.org/wiki/Grep
 hook -group config global BufSetOption filetype=grep %{
   map buffer normal <ret> ': grep-jump<ret>'
 }

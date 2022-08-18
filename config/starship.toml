@@ -1,19 +1,10 @@
 # Starship
 # https://starship.rs
 
-format = '${custom.tab}${custom.kakoune}$all'
+format = '${custom.kakoune}$all'
 
 [cmd_duration]
 disabled = true
-
-# tab
-# https://github.com/austinjones/tab-rs
-[custom.tab]
-description = 'The current tab in the tab terminal multiplexer'
-command = 'tab --starship'
-when = 'tab --starship'
-shell = ['sh']
-style = 'bold blue'
 
 # Kakoune
 # https://kakoune.org

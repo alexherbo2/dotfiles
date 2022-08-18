@@ -24,8 +24,5 @@ export QT_QPA_PLATFORMTHEME=kde
 export EDITOR=kak
 export KAKOUNE_POSIX_SHELL=/bin/dash
 
-# fzf – https://github.com/junegunn/fzf
-export FZF_DEFAULT_OPTS='--multi --layout=reverse --preview-window=down:60%'
-
 # Local environment variables
 . ~/.config/env

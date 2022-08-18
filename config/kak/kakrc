@@ -106,7 +106,7 @@ map -docstring 'file' global goto f '<a-;>: open-file-picker<ret>'
 define-command -override open-file-picker -params .. -docstring 'open-file-picker [<paths>]: Opens file picker.' %{
   terminal-popup sh -c %{
     fd --type file . "$@" |
-    fzf --preview 'bat --style=numbers --color=always --line-range :500 {}' --header='Select a file to open' --prompt='(f)>' |
+    fzf --preview 'bat --style=numbers --color=always --line-range :500 {}' --layout=reverse --header='Select a file to open' --prompt='(f)>' |
     # Open selected files
     while read filename; do
       echo "evaluate-commands -client %($KAKOUNE_CLIENT) -verbatim -- edit -- %($filename)" | kak -p "$KAKOUNE_SESSION"
@@ -119,7 +119,7 @@ map -docstring 'buffer' global goto b '<a-;>: open-buffer-picker<ret>'
 define-command -override open-buffer-picker -docstring 'open-buffer-picker: Opens buffer picker.' %{
   terminal-popup sh -c %{
     printf '%s\n' "$@" |
-    fzf --preview 'bat --style=numbers --color=always --line-range :500 -- {}' --header='Select a buffer to open' --prompt='(b)>' |
+    fzf --preview 'bat --style=numbers --color=always --line-range :500 -- {}' --layout=reverse --header='Select a buffer to open' --prompt='(b)>' |
     # Open selected buffers
     while read bufname; do
       echo "evaluate-commands -client %($KAKOUNE_CLIENT) -verbatim -- buffer %($bufname)" | kak -p "$KAKOUNE_SESSION"
@@ -127,10 +127,10 @@ define-command -override open-buffer-picker -docstring 'open-buffer-picker: Open
   } -- %val{buflist}
 }
 
-map -docstring 'grep' global goto / '<a-;>: open-grep-prompt<ret>'
+map -docstring 'global search' global goto / '<a-;>: open-search-picker<ret>'
 
-define-command -override open-grep-prompt -docstring 'open-grep-prompt: Opens grep prompt.' %{
-  terminal-popup fzf --phony --delimiter ':' --ansi --bind 'change:reload(rg --color=always --column --with-filename --fixed-strings -- {q} || true),enter:execute(echo "evaluate-commands -client %($KAKOUNE_CLIENT) -verbatim -- edit -- {1} {2} {3}" | kak -p "$KAKOUNE_SESSION")+abort' --preview 'highlight_line={2} line_range_begin=$((line = highlight_line - (FZF_PREVIEW_LINES / 4) && line < 1 ? 1 : line)) line_range_end=$((line_range_begin + FZF_PREVIEW_LINES)) && bat --style=numbers --color=always --line-range "$line_range_begin:$line_range_end" --highlight-line {2} {1} 2> /dev/null' --header 'Select a file to open' --prompt '(g)>'
+define-command -override open-search-picker -docstring 'open-search-picker: Opens search picker.' %{
+  terminal-popup fzf --phony --delimiter ':' --ansi --bind 'change:reload(rg --color=always --column --with-filename --fixed-strings -- {q} || true),enter:execute(echo "evaluate-commands -client %($KAKOUNE_CLIENT) -verbatim -- edit -- {1} {2} {3}" | kak -p "$KAKOUNE_SESSION")+abort' --preview 'highlight_line={2} line_range_begin=$((line = highlight_line - (FZF_PREVIEW_LINES / 4) && line < 1 ? 1 : line)) line_range_end=$((line_range_begin + FZF_PREVIEW_LINES)) && bat --style=numbers --color=always --line-range "$line_range_begin:$line_range_end" --highlight-line {2} {1} 2> /dev/null' --layout=reverse --header 'Select a file to open' --prompt '(g)>'
 }
 
 # Commands ─────────────────────────────────────────────────────────────────────

@@ -35,10 +35,9 @@ set-face global SelectedText "rgb:%opt{green}+f"
 
 # LSP
 try lsp-enable
-remove-highlighter global/lsp_error_lines
 
 # Indentation
-set-option global tabstop 2
+set-option global tabstop 4
 set-option global indentwidth 2
 set-option global disabled_hooks '.+-trim-indent|.+-insert|.+-indent'
 
@@ -103,15 +102,15 @@ map -docstring 'Unicode' global user u ': echo -markup "{Information}U+%sh{print
 
 map -docstring 'file' global goto f '<a-;>: open-file-picker<ret>'
 
-define-command -override open-file-picker -params .. -docstring 'open-file-picker [<paths>]: Opens file picker.' %{
+define-command -override open-file-picker -docstring 'open-file-picker: Opens file picker.' %{
   terminal-popup sh -c %{
-    fd --type file . "$@" |
+    fd --type file |
     fzf --preview 'bat --style=numbers --color=always --line-range :500 {}' --multi --layout=reverse --header='Select a file to open' --prompt='(f)>' |
     # Open selected files
     while read filename; do
       echo "evaluate-commands -client %($KAKOUNE_CLIENT) -verbatim -- edit -- %($filename)" | kak -p "$KAKOUNE_SESSION"
     done
-  } -- %arg{@}
+  }
 }
 
 map -docstring 'buffer' global goto b '<a-;>: open-buffer-picker<ret>'

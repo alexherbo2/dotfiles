@@ -149,6 +149,7 @@ alias G=gitui
 alias gw='git add'
 alias gw.='gw .'
 alias gst='git status'
+alias gdiff='git diff'
 # Log
 # https://git-scm.com/docs/git-log
 alias gl='git log'

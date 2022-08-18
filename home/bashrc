@@ -40,17 +40,9 @@ alias ...='cd ../..'
 # https://ifconfig.co
 alias ipd='curl ifconfig.co'
 
-# nginx
-# https://nginx.org
-alias nginx='sudo nginx -c /etc/nginx/nginx.conf'
-
 # procs
 # https://github.com/dalance/procs
 alias ps=procs
-
-# htop
-# https://htop.dev
-alias top=htop
 
 # rsync
 # https://rsync.samba.org
@@ -65,10 +57,6 @@ txz() {
 # bat
 # https://github.com/sharkdp/bat
 alias cat=bat
-
-# ripgrep
-# https://github.com/BurntSushi/ripgrep
-alias grep='rg --smart-case'
 
 # curl
 # https://curl.haxx.se
@@ -244,17 +232,9 @@ imv() {
   imap -p : -M 'mkdir -vp -- "$(dirname -- "$2")" && mv -vi -- "$1" "$2"' -d 'rm -vi --' "$@"
 }
 
-# File manager
-alias o=dolphin
-
-# Web browser
-alias b=google-chrome-stable
-
 # mpv
 # https://mpv.io
-alias @mpv='@ mpv --no-terminal'
 alias m=mpv
-alias ms='mpv --shuffle'
 
 # yt-dlp
 # https://github.com/yt-dlp/yt-dlp

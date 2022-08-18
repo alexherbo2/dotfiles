@@ -129,7 +129,16 @@ define-command -override open-buffer-picker -docstring 'open-buffer-picker: Open
 map -docstring 'global search' global goto / '<a-;>: open-search-picker<ret>'
 
 define-command -override open-search-picker -docstring 'open-search-picker: Opens search picker.' %{
-  terminal-popup fzf --phony --delimiter ':' --ansi --bind 'change:reload(rg --color=always --column --with-filename --fixed-strings -- {q} || true),enter:execute(echo "evaluate-commands -client %($KAKOUNE_CLIENT) -verbatim -- edit -- {1} {2} {3}" | kak -p "$KAKOUNE_SESSION")+abort' --preview 'highlight_line={2} line_range_begin=$((line = highlight_line - (FZF_PREVIEW_LINES / 4) && line < 1 ? 1 : line)) line_range_end=$((line_range_begin + FZF_PREVIEW_LINES)) && bat --style=numbers --color=always --line-range "$line_range_begin:$line_range_end" --highlight-line {2} {1} 2> /dev/null' --layout=reverse --header 'Select a file to open' --prompt '(g)>'
+  terminal-popup fzf --phony --delimiter ':' --ansi --bind %(change:reload(
+    rg --color=always --column --with-filename --fixed-strings -- {q} || true
+  ),enter:execute(
+    echo "evaluate-commands -client %($KAKOUNE_CLIENT) -verbatim -- edit -- {1} {2} {3}" | kak -p "$KAKOUNE_SESSION"
+  )+abort) --preview %{
+    highlight_line={2}
+    line_range_begin=$((line = highlight_line - (FZF_PREVIEW_LINES / 4) && line < 1 ? 1 : line))
+    line_range_end=$((line_range_begin + FZF_PREVIEW_LINES))
+    bat --style=numbers --color=always --line-range "$line_range_begin:$line_range_end" --highlight-line {2} {1} 2> /dev/null
+  } --layout=reverse --header 'Select a file to open' --prompt '(g)>'
 }
 
 # Commands ─────────────────────────────────────────────────────────────────────

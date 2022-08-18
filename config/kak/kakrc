@@ -106,7 +106,7 @@ map -docstring 'file' global goto f '<a-;>: open-file-picker<ret>'
 define-command -override open-file-picker -params .. -docstring 'open-file-picker [<paths>]: Opens file picker.' %{
   terminal-popup sh -c %{
     fd --type file . "$@" |
-    fzf --preview 'bat --style=numbers --color=always --line-range :500 {}' --layout=reverse --header='Select a file to open' --prompt='(f)>' |
+    fzf --preview 'bat --style=numbers --color=always --line-range :500 {}' --multi --layout=reverse --header='Select a file to open' --prompt='(f)>' |
     # Open selected files
     while read filename; do
       echo "evaluate-commands -client %($KAKOUNE_CLIENT) -verbatim -- edit -- %($filename)" | kak -p "$KAKOUNE_SESSION"
@@ -119,7 +119,7 @@ map -docstring 'buffer' global goto b '<a-;>: open-buffer-picker<ret>'
 define-command -override open-buffer-picker -docstring 'open-buffer-picker: Opens buffer picker.' %{
   terminal-popup sh -c %{
     printf '%s\n' "$@" |
-    fzf --preview 'bat --style=numbers --color=always --line-range :500 -- {}' --layout=reverse --header='Select a buffer to open' --prompt='(b)>' |
+    fzf --preview 'bat --style=numbers --color=always --line-range :500 -- {}' --multi --layout=reverse --header='Select a buffer to open' --prompt='(b)>' |
     # Open selected buffers
     while read bufname; do
       echo "evaluate-commands -client %($KAKOUNE_CLIENT) -verbatim -- buffer %($bufname)" | kak -p "$KAKOUNE_SESSION"

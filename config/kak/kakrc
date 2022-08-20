@@ -14,6 +14,7 @@
 remove-hooks global config
 
 try %sh{
+  kak-test --print-kakoune-init
   kak-lsp --kakoune --session "$kak_session"
 }
 
@@ -101,10 +102,8 @@ define-command -override open-file-picker -docstring 'open-file-picker: Opens fi
   terminal-popup sh -c %{
     fd --type file |
     fzf --preview 'bat --style=numbers --color=always --line-range :500 {}' --multi --layout=reverse --header='Select a file to open' --prompt='(f)>' |
-    # Open selected files
-    while read filename; do
-      echo "evaluate-commands -client %($KAKOUNE_CLIENT) -verbatim -- edit -- %($filename)" | kak -p "$KAKOUNE_SESSION"
-    done
+    xargs -- printf "evaluate-commands -client '$KAKOUNE_CLIENT' -verbatim -- edit -- %%(%s)\\n" |
+    kak -p "$KAKOUNE_SESSION"
   }
 }
 
@@ -114,10 +113,8 @@ define-command -override open-buffer-picker -docstring 'open-buffer-picker: Open
   terminal-popup sh -c %{
     printf '%s\n' "$@" |
     fzf --preview 'bat --style=numbers --color=always --line-range :500 -- {}' --multi --layout=reverse --header='Select a buffer to open' --prompt='(b)>' |
-    # Open selected buffers
-    while read bufname; do
-      echo "evaluate-commands -client %($KAKOUNE_CLIENT) -verbatim -- buffer %($bufname)" | kak -p "$KAKOUNE_SESSION"
-    done
+    xargs -- printf "evaluate-commands -client '$KAKOUNE_CLIENT' -verbatim -- buffer -- %%(%s)\\n" |
+    kak -p "$KAKOUNE_SESSION"
   } -- %val{buflist}
 }
 
@@ -127,7 +124,7 @@ define-command -override open-search-picker -docstring 'open-search-picker: Open
   terminal-popup fzf --phony --delimiter ':' --ansi --bind %(change:reload(
     rg --color=always --column --with-filename --fixed-strings -- {q} || true
   ),enter:execute(
-    echo "evaluate-commands -client %($KAKOUNE_CLIENT) -verbatim -- edit -- {1} {2} {3}" | kak -p "$KAKOUNE_SESSION"
+    echo "evaluate-commands -client '$KAKOUNE_CLIENT' -verbatim -- edit -- {1} {2} {3}" | kak -p "$KAKOUNE_SESSION"
   )+abort) --preview %{
     highlight_line={2}
     line_range_begin=$((line = highlight_line - (FZF_PREVIEW_LINES / 4) && line < 1 ? 1 : line))
@@ -192,6 +189,14 @@ hook -group config global BufSetOption filetype=javascript %{
   set-option buffer indentwidth 2
   set-option buffer line_comment_token '//'
   set-option buffer block_comment_tokens '/*' '*/'
+}
+
+# Lua
+# https://lua.org
+hook -group config global BufSetOption filetype=lua %{
+  set-option buffer indentwidth 2
+  set-option buffer line_comment_token '--'
+  set-option buffer block_comment_tokens '[[--' '--]]'
 }
 
 # Makefile

@@ -23,7 +23,7 @@ map <c-c> quit
 map H cd ..
 map L cd
 map $ shell 'tmux display-popup -w 90% -h 90% -d "$sidetree_dir" -E'
-map o shell 'echo "evaluate-commands -client %($KAKOUNE_CLIENT) -verbatim -- edit %($sidetree_entry); focus %($KAKOUNE_CLIENT)" | kak -p "$KAKOUNE_SESSION"'
+map o shell 'echo "evaluate-commands -client %($KAKOUNE_CLIENT) -verbatim -- edit -- %($sidetree_entry); focus %($KAKOUNE_CLIENT)" | kak -p "$KAKOUNE_SESSION"'
 map v shell 'tmux display-popup -w 90% -h 90% -E bat --paging=always "$sidetree_entry"'
 map y shell 'tmux set-buffer -w "$sidetree_entry"'
 map x shell 'arc unarchive "$sidetree_entry"'

@@ -101,7 +101,7 @@ map -docstring 'file' global goto f '<a-;>: open-file-picker<ret>'
 define-command -override open-file-picker -docstring 'open-file-picker: Opens file picker.' %{
   terminal-popup sh -c %{
     fd --type file |
-    fzf --preview 'bat --style=numbers --color=always --line-range :500 {}' --multi --layout=reverse --header='Select a file to open' --prompt='(f)>' |
+    fzf --preview 'bat --style=numbers --color=always --line-range :500 -- {}' --multi --layout=reverse --header='Select a file to open' --prompt='(f)>' |
     xargs -- printf "evaluate-commands -client '$KAKOUNE_CLIENT' -verbatim -- edit -- %%(%s)\\n" |
     kak -p "$KAKOUNE_SESSION"
   }

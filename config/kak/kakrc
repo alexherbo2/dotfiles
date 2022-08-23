@@ -53,7 +53,7 @@ add-highlighter -override global/math-symbols regex '[−×]' '0:cyan+f'
 
 # Mappings ---------------------------------------------------------------------
 
-# Normal mode ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# Normal mode ------------------------------------------------------------------
 
 # Hot reloading
 map -docstring 'reload kakrc' global user <F5> ': source "%val{runtime}/kakrc"; echo reloaded kakrc<ret>'
@@ -81,7 +81,7 @@ map -docstring 'select whole object' global normal V <a-a>
 map -docstring 'surround mode' global normal q ': surround-mode<ret>'
 map -docstring 'enter select mode' global normal s ': enter-select-mode<ret>'
 
-# User mode ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# User mode --------------------------------------------------------------------
 
 # LSP
 map -docstring 'lsp' global user l ': enter-user-mode lsp<ret>'
@@ -99,7 +99,7 @@ map -docstring 'format date to 2006-01-02 Mon' global user D '| date -d "$kak_se
 # Show the Unicode value under the cursor.
 map -docstring 'Unicode' global user u ': echo -markup "{Information}U+%sh{printf ''%04x'' ""$kak_cursor_char_value""}"<ret>'
 
-# Goto mode ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# Goto mode --------------------------------------------------------------------
 
 map -docstring 'file' global goto f '<a-;>: open-file-picker<ret>'
 
@@ -217,7 +217,7 @@ hook -group config global BufSetOption filetype=grep %{
   map buffer normal <ret> ': grep-jump<ret>'
 }
 
-# Detection ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# Detection --------------------------------------------------------------------
 
 hook -group config global BufCreate '.*/\.kakrc' %{
   set-option buffer filetype kak

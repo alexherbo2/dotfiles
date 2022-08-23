@@ -249,14 +249,14 @@ alias pandoc='pandoc --pdf-engine tectonic'
 alias r=rails
 alias rr='rails routes --grep'
 
-# Window managers ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# Window managers --------------------------------------------------------------
 
 # Sway
 # https://swaywm.org
 # https://github.com/swaywm/sway/issues/3851
 alias sway='WLR_NO_HARDWARE_CURSORS=1 sway'
 
-# IDEs ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# IDEs -------------------------------------------------------------------------
 
 # IntelliJ IDEA
 # https://jetbrains.com/idea/

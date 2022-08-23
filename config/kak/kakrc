@@ -14,8 +14,8 @@
 remove-hooks global config
 
 try %sh{
-  kak-test --print-kakoune-init
   kak-lsp --kakoune --session "$kak_session"
+  kak-test --print-kakoune-init
 }
 
 # Options ----------------------------------------------------------------------

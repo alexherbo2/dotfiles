@@ -81,6 +81,11 @@ map -docstring 'select whole object' global normal V <a-a>
 map -docstring 'surround mode' global normal q ': surround-mode<ret>'
 map -docstring 'enter select mode' global normal s ': enter-select-mode<ret>'
 
+# User mode ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# LSP
+map -docstring 'lsp' global user l ': enter-user-mode lsp<ret>'
+
 # Windowing
 map -docstring 'terminal' global user t ': terminal<ret>'
 map -docstring 'client' global user c ': terminal kak -c %val{session}<ret>'

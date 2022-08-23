@@ -138,6 +138,8 @@ alias gw='git add'
 alias gw.='gw .'
 alias gst='git status'
 alias gdiff='git diff'
+alias gb='git branch'
+alias gco='git checkout'
 # Log
 # https://git-scm.com/docs/git-log
 alias gl='git log'
@@ -167,7 +169,6 @@ alias grb='git reset --hard'
 alias grb^='git reset --hard HEAD^'
 alias ggc=git-gc-all-ferocious
 # Navigation
-alias gco='git checkout -b'
 alias gcd='cd "$(git rev-parse --show-toplevel)"'
 # Web
 alias gv='gh repo view --web'

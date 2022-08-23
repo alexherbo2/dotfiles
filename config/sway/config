@@ -93,7 +93,7 @@ bar {
 
 # Bindings ---------------------------------------------------------------------
 
-# Basics ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# Basics ---------------------------------------------------------------------
 
 # Terminal emulator
 bindsym Mod4+Return exec $terminal
@@ -109,7 +109,7 @@ bindsym Mod4+BackSpace exec swaylock
 bindsym Mod4+Shift+BackSpace exec systemctl suspend
 bindsym Control+Mod1+BackSpace exit
 
-# Mouse bindings ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# Mouse bindings -------------------------------------------------------------
 
 # Close window
 bindsym button2 kill
@@ -122,7 +122,7 @@ bindsym --whole-window Mod4+button5 focus right
 bindsym --whole-window Mod4+Shift+button4 move left
 bindsym --whole-window Mod4+Shift+button5 move right
 
-# Layouts ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# Layouts --------------------------------------------------------------------
 
 # Change layout of container
 bindsym Mod4+a layout tabbed
@@ -139,7 +139,7 @@ bindsym Mod4+Shift+f bar mode invisible
 bindsym Mod4+Shift+space floating toggle
 bindsym Mod4+space focus mode_toggle
 
-# Containers ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# Containers -----------------------------------------------------------------
 
 # Kill focused window
 bindsym Mod4+w kill
@@ -185,7 +185,7 @@ bindsym Mod4+Shift+V border pixel 2
 # Mark window
 bindsym Mod4+Shift+m exec seq 0 99 | dmenu | xargs swaymsg mark --
 
-# Workspaces ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# Workspaces -----------------------------------------------------------------
 
 # Switch to the next or previous workspace
 bindsym Mod4+n workspace next
@@ -228,7 +228,7 @@ bindsym Mod4+Shift+equal move container to workspace number 12
 # Rename workspace
 bindsym Mod4+r exec seq 0 99 | dmenu | xargs swaymsg rename workspace to --
 
-# Desktop ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# Desktop --------------------------------------------------------------------
 
 # Open mpv with URLs from clipboard
 bindsym Mod4+m exec wl-paste | mpv --playlist=-
@@ -247,7 +247,7 @@ bindsym Mod4+p exec google-chrome-stable https://passwords.google.com
 bindsym Print exec grim ~/Desktop/$(date '+%F_%T').webp
 bindsym Shift+Print exec slurp | grim -g - ~/Desktop/$(date '+%F_%T').webp
 
-# Multimedia-keys ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# Multimedia-keys ------------------------------------------------------------
 
 # Volume controls
 # https://alsa-project.org

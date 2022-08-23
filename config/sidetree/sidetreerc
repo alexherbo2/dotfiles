@@ -2,13 +2,13 @@
 # https://github.com/topisani/sidetree
 # https://github.com/topisani/sidetree/blob/master/sidetreerc
 
-# General ──────────────────────────────────────────────────────────────────────
+# General ----------------------------------------------------------------------
 
 set show_hidden false
 set quit_on_open false
 set open_cmd 'tmux display-popup -w 90% -h 90% -E kak -- "$sidetree_entry"'
 
-# Appearance ───────────────────────────────────────────────────────────────────
+# Appearance -------------------------------------------------------------------
 
 set file_icons true
 set icon_style darkgray
@@ -17,7 +17,7 @@ set file_name_style reset
 set highlight_style +r
 set link_style cyan+b
 
-# Mappings ─────────────────────────────────────────────────────────────────────
+# Mappings ---------------------------------------------------------------------
 
 map <c-c> quit
 map H cd ..

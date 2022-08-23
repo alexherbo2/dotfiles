@@ -2,7 +2,7 @@
 # https://swaywm.org
 # https://github.com/swaywm/sway/blob/master/config.in
 
-# Variables ────────────────────────────────────────────────────────────────────
+# Variables --------------------------------------------------------------------
 
 # Terminal emulator
 # https://github.com/alacritty/alacritty/issues/3624
@@ -11,31 +11,31 @@ set $terminal LIBGL_ALWAYS_SOFTWARE=1 alacritty
 # Application launcher
 set $launcher [floating app_id="Alacritty"] scratchpad show
 
-# Options ──────────────────────────────────────────────────────────────────────
+# Options ----------------------------------------------------------------------
 
 font pango:JetBrains Mono 11
 floating_modifier Mod4
 workspace_auto_back_and_forth yes
 
-# Input configuration ──────────────────────────────────────────────────────────
+# Input configuration ----------------------------------------------------------
 
 input type:keyboard {
   xkb_layout us,fr
   xkb_options grp:caps_toggle
 }
 
-# Output configuration ─────────────────────────────────────────────────────────
+# Output configuration ---------------------------------------------------------
 
 # DuckTales Finale by AKHTS
 # https://akhts.carrd.co
 # https://bloggingboutburgers.tumblr.com/image/645856359657717761
 output * background ~/wallpapers/ducktales-finale.jpg fill
 
-# Idle configuration ───────────────────────────────────────────────────────────
+# Idle configuration -----------------------------------------------------------
 
 exec swayidle before-sleep swaylock
 
-# Startup commands ─────────────────────────────────────────────────────────────
+# Startup commands -------------------------------------------------------------
 
 # Output configuration
 # https://wayland.emersion.fr/kanshi/
@@ -49,7 +49,7 @@ exec mako
 # https://sr.ht/~kennylevinsen/wlsunset/
 exec wlsunset
 
-# Colors ───────────────────────────────────────────────────────────────────────
+# Colors -----------------------------------------------------------------------
 
 # Color palette:
 # – Default (blue)
@@ -67,7 +67,7 @@ client.focused_inactive $black $black $white
 client.unfocused $black $black $white
 client.urgent $red $red $white
 
-# Bar ──────────────────────────────────────────────────────────────────────────
+# Bar --------------------------------------------------------------------------
 
 bar {
   position top
@@ -91,7 +91,7 @@ bar {
   }
 }
 
-# Bindings ─────────────────────────────────────────────────────────────────────
+# Bindings ---------------------------------------------------------------------
 
 # Basics ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -260,7 +260,7 @@ bindsym XF86AudioLowerVolume exec amixer set Master 5%-
 bindsym XF86MonBrightnessUp exec light -A 5
 bindsym XF86MonBrightnessDown exec light -U 5
 
-# Rules ────────────────────────────────────────────────────────────────────────
+# Rules ------------------------------------------------------------------------
 
 for_window [app_id="popup"] floating enable
 for_window [app_id="panel"] move left

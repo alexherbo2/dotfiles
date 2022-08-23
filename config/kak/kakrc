@@ -9,7 +9,7 @@
 # https://github.com/topisani/dotfiles/blob/master/config/kak/kakrc
 # https://gitlab.com/vbauerster/dotfiles/-/blob/master/.config/kak/kakrc
 
-# Preamble ─────────────────────────────────────────────────────────────────────
+# Preamble ---------------------------------------------------------------------
 
 remove-hooks global config
 
@@ -18,7 +18,7 @@ try %sh{
   kak-lsp --kakoune --session "$kak_session"
 }
 
-# Options ──────────────────────────────────────────────────────────────────────
+# Options ----------------------------------------------------------------------
 
 # UI options
 set-option global startup_info_version 20221231
@@ -51,7 +51,7 @@ add-highlighter -override global/U+2013 regex '–' '0:green+f'
 add-highlighter -override global/U+2014 regex '—' '0:green+bf'
 add-highlighter -override global/math-symbols regex '[−×]' '0:cyan+f'
 
-# Mappings ─────────────────────────────────────────────────────────────────────
+# Mappings ---------------------------------------------------------------------
 
 # Normal mode ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -138,13 +138,13 @@ define-command -override open-search-picker -docstring 'open-search-picker: Open
   } --layout=reverse --header 'Select a file to open' --prompt '(g)>'
 }
 
-# Commands ─────────────────────────────────────────────────────────────────────
+# Commands ---------------------------------------------------------------------
 
 define-command -override mkdir -docstring 'make directory for the current buffer' %{
   nop %sh(mkdir -p -- "$(dirname -- "$kak_buffile")")
 }
 
-# Quick editing ────────────────────────────────────────────────────────────────
+# Quick editing ----------------------------------------------------------------
 
 # Modes
 try %[ declare-user-mode open ]
@@ -167,7 +167,7 @@ map -docstring 'open tmux.conf' global open T ': edit ~/.config/tmux/tmux.conf<r
 map -docstring 'open sway/config' global open w ': edit ~/.config/sway/config<ret>'
 map -docstring 'open wayfire.ini' global open W ': edit ~/.config/wayfire.ini<ret>'
 
-# Language support ─────────────────────────────────────────────────────────────
+# Language support -------------------------------------------------------------
 
 # Indentation
 set-option global tabstop 4
@@ -227,7 +227,7 @@ hook -group config global BufCreate '.*/(profile|bashrc|tmux.conf)' %{
   set-option buffer filetype sh
 }
 
-# Notes ────────────────────────────────────────────────────────────────────────
+# Notes ------------------------------------------------------------------------
 
 hook -group config global BufCreate '.*/docs/notes.txt' %{
   set-option buffer filetype notes
@@ -253,7 +253,7 @@ add-highlighter -override shared/notes/info/url ref notes/text/url
 add-highlighter -override shared/notes/info/delimiters regex '(?<opening>.).+(?<closing>.)' opening:string closing:string
 add-highlighter -override shared/notes/tag region -recurse '\[' '\[' '\]' fill meta
 
-# List ─────────────────────────────────────────────────────────────────────────
+# List -------------------------------------------------------------------------
 
 hook -group config global BufCreate '.*/list.txt' %{
   set-option buffer filetype list

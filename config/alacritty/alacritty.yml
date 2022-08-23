@@ -10,7 +10,7 @@ import:
   # CSI u mode
   - ~/code~/alacritty-extended-keys/keys.yml
 
-# Appearance ───────────────────────────────────────────────────────────────────
+# Appearance -------------------------------------------------------------------
 
 # Remove window decorations.
 # Add a bit of transparency to reduce eye strain.
@@ -31,7 +31,7 @@ cursor:
     shape: Beam
     blinking: On
 
-# Keyboard ─────────────────────────────────────────────────────────────────────
+# Keyboard ---------------------------------------------------------------------
 
 # Keys:
 # https://docs.rs/glutin/latest/glutin/event/enum.VirtualKeyCode.html

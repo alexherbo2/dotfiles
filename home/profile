@@ -5,7 +5,7 @@
 # https://brew.sh
 [ -x /opt/homebrew/bin/brew ] && eval "$(brew shellenv)"
 
-# Environment variables ────────────────────────────────────────────────────────
+# Environment variables --------------------------------------------------------
 
 # Paths
 export PATH=~/.local/bin:~/.cargo/bin:$PATH

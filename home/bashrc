@@ -16,7 +16,7 @@ eval "$(mcfly init bash)"
 # https://github.com/ajeetdsouza/zoxide
 eval "$(zoxide init bash)"
 
-# Aliases ──────────────────────────────────────────────────────────────────────
+# Aliases ----------------------------------------------------------------------
 
 alias q=exit
 alias md='mkdir -p --'
@@ -268,7 +268,7 @@ alias idea-community='_JAVA_AWT_WM_NONREPARENTING=1 @ idea-community'
 # https://github.com/swaywm/sway/issues/595
 alias android-studio='_JAVA_AWT_WM_NONREPARENTING=1 @ android-studio'
 
-# Functions ────────────────────────────────────────────────────────────────────
+# Functions --------------------------------------------------------------------
 
 # Reloads bashrc.
 reload_bashrc() {
@@ -279,7 +279,7 @@ reload_bashrc() {
 # https://rvm.io
 # . ~/.rvm/scripts/rvm
 
-# macOS ────────────────────────────────────────────────────────────────────────
+# macOS ------------------------------------------------------------------------
 
 # Keep MacBook awake with lid closed
 # https://caffeinated.app/keep-macbook-awake-with-lid-closed/

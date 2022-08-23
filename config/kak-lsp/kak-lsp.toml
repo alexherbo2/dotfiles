@@ -2,18 +2,18 @@
 # https://github.com/kak-lsp/kak-lsp
 # https://github.com/kak-lsp/kak-lsp/blob/master/kak-lsp.toml
 
-# Global settings ──────────────────────────────────────────────────────────────
+# Global settings --------------------------------------------------------------
 
 snippet_support = false
 verbosity = 2
 
-# Server options ───────────────────────────────────────────────────────────────
+# Server options ---------------------------------------------------------------
 
 [server]
 
 timeout = 1800 # seconds (30 minutes)
 
-# Language servers ─────────────────────────────────────────────────────────────
+# Language servers -------------------------------------------------------------
 
 [language]
 
@@ -27,7 +27,7 @@ kotlin = { filetypes = ['kotlin'], roots = ['.git'], command = 'kotlin-language-
 ruby = { filetypes = ['ruby'], roots = ['Gemfile'], command = 'solargraph', args = ['stdio'] }
 rust = { filetypes = ['rust'], roots = ['Cargo.toml'], command = 'rust-analyzer' }
 
-# Semantic tokens ──────────────────────────────────────────────────────────────
+# Semantic tokens --------------------------------------------------------------
 
 [semantic_tokens]
 

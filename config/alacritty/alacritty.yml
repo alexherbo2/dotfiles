@@ -4,8 +4,11 @@
 
 import:
 
-  # Color scheme – https://draculatheme.com/alacritty
+  # Color scheme: Dracula (https://draculatheme.com/alacritty)
   - ~/code~/dracula/alacritty/dracula.yml
+
+  # Color scheme: Catppuccin Frappe (https://catppuccin.com)
+  - ~/.local/share/github.com/catppuccin/alacritty/catppuccin.yml
 
   # CSI u mode
   - ~/code~/alacritty-extended-keys/keys.yml

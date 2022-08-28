@@ -125,8 +125,7 @@ kak_open() {
 
 # sidetree
 # https://github.com/topisani/sidetree
-alias st='sidetree --select'
-alias st.=sidetree
+alias st=sidetree
 
 # Git
 # https://git-scm.com

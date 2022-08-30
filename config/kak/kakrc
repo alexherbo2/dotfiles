@@ -85,7 +85,7 @@ map -docstring 'enter select mode' global normal s ': enter-select-mode<ret>'
 
 # LSP
 map -docstring 'lsp' global user l ': enter-user-mode lsp<ret>'
-map -docstring 'open document symbol picker' global user s ': enter-user-mode lsp<ret><c-o>'
+map -docstring 'open document symbol picker' global user s ': enter-user-mode lsp<ret>s'
 map -docstring 'open workspace symbol picker' global user S ': enter-user-mode lsp<ret>o'
 
 # Windowing

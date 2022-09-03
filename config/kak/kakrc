@@ -27,12 +27,25 @@ set-option global scrolloff 5,1
 add-highlighter -override global/show-matching show-matching
 add-highlighter -override global/number-lines number-lines -hlcursor
 
-# Color scheme
-# Dracula – https://draculatheme.com/kakoune
+# Color scheme: Dracula (https://draculatheme.com/kakoune)
 colorscheme dracula
 
 # Custom faces
 set-face global SelectedText "rgb:%opt{green}+f"
+
+# Color scheme: One light (https://git.sr.ht/~raiguard/one.kak)
+colorscheme one-light
+
+# Custom faces
+set-face global Whitespace "rgb:%opt{bg}+f"
+set-face global SelectedText "rgb:%opt{blue}+f"
+
+# System clipboard
+set-option global clipboard_copy_command 'pbcopy'
+set-option global clipboard_copy_args
+
+set-option global clipboard_paste_command 'pbpaste'
+set-option global clipboard_paste_args
 
 # LSP
 try lsp-enable
@@ -41,11 +54,10 @@ try lsp-enable
 set-option global makecmd 'make -j 8'
 set-option global grepcmd 'rg --with-filename --line-number --column'
 
-# Show whitespace
-add-highlighter -override global/show-whitespaces show-whitespaces
+# Highlight whitespace
 add-highlighter -override global/whitespace ref whitespace
 
-# Show various characters
+# Highlight various characters
 # https://unicode-table.com
 add-highlighter -override global/U+2013 regex '–' '0:green+f'
 add-highlighter -override global/U+2014 regex '—' '0:green+bf'
@@ -146,6 +158,16 @@ define-command -override mkdir -docstring 'make directory for the current buffer
   nop %sh(mkdir -p -- "$(dirname -- "$kak_buffile")")
 }
 
+define-command -override ro -docstring 'make buffer read-only (on/off)' %{
+  set-option buffer readonly %sh{
+    if [ "$kak_opt_readonly" = false ]; then
+      echo yes
+    else
+      echo no
+    fi
+  }
+}
+
 # Quick editing ----------------------------------------------------------------
 
 # Modes
@@ -230,6 +252,8 @@ hook -group config global BufCreate '.*/(profile|bashrc|tmux.conf)' %{
 }
 
 # Notes ------------------------------------------------------------------------
+
+edit -scratch scratch.txt
 
 hook -group config global BufCreate '.*/docs/notes.txt' %{
   set-option buffer filetype notes

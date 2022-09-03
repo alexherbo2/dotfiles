@@ -30,13 +30,16 @@ return {
 
   -- Leader key
   -- https://wezfurlong.org/wezterm/config/keys.html#leader-key
-  leader = { key = '`', timeout_milliseconds = 9000 },
+  -- leader = { key = '`', timeout_milliseconds = 9000 },
+  leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 9000 },
 
   -- Key bindings
   -- https://wezfurlong.org/wezterm/config/keys.html
   keys = {
-    -- Send "`" to the terminal when pressing "`", "`"
-    { key = '`', mods="LEADER", action=wezterm.action{SendString='`'} },
+    -- Send "`" to the terminal when pressing "`", "`".
+    -- { key = '`', mods="LEADER", action=wezterm.action{SendString='`'} },
+    -- Send "CTRL-A" to the terminal when pressing "CTRL-A", "CTRL-A".
+    { key = 'A', mods="LEADER|CTRL", action=wezterm.action.SendKey{key="a", mods="CTRL"} },
     { key = 'o', mods="LEADER", action=wezterm.action{SplitVertical={domain="CurrentPaneDomain"}} },
     { key = 'O', mods="LEADER", action=wezterm.action{SplitHorizontal={domain="CurrentPaneDomain"}} },
     { key = 'c', mods="LEADER", action=wezterm.action{SpawnTab="CurrentPaneDomain"} },

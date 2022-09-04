@@ -32,6 +32,11 @@ cursor:
     shape: Beam
     blinking: On
 
+bell:
+  command:
+    program: osascript
+    args: ['-e', 'beep']
+
 # Keyboard ---------------------------------------------------------------------
 
 # Keys:

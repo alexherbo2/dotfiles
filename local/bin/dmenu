@@ -1,25 +1,8 @@
 #!/bin/sh
 
-# A drop-in dmenu replacement using fzf with Alacritty.
-
-# Temporary directory
-tmpdir=$(mktemp -d)
-
-# Register an `at_exit` handler to clean up temporary files.
-trap at_exit EXIT
-at_exit() {
-  rm -Rf "$tmpdir"
-}
-
-stdin=tmpdir/stdin
-stdout=tmpdir/stdout
-
-# Runs fzf with Alacritty as a dmenu interface.
-cat > "$stdin"
-alacritty --class=popup --command sh -c 'fzf < "$1" > "$2"' -- "$stdin" "$stdout"
-cat "$stdout"
-
-# Returns the exit code.
-if [ ! -s "$stdout" ]; then
-  exit 1
-fi
+# A drop-in dmenu replacement using fzf/WezTerm.
+> /tmp/stdout
+cat > /tmp/stdin
+wezterm start --class=popup sh -c 'fzf < /tmp/stdin > /tmp/stdout'
+cat /tmp/stdout
+[ ! -s /tmp/stdout ]

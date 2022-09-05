@@ -1,26 +1,36 @@
 # Helix
 # https://helix-editor.com
+# https://docs.helix-editor.com/configuration.html
 
-theme = "catppuccin_frappe"
+# Appearance -------------------------------------------------------------------
+
+theme = 'catppuccin_frappe'
+
+[editor]
+rulers = [81]
+
+[editor.whitespace]
+render = 'all'
+characters = { newline = '¬' }
+
+# [editor.indent-guides]
+# render = true
+
+# Key bindings -----------------------------------------------------------------
 
 [keys.normal]
-"#" = "toggle_comments"
-"A-o" = "add_newline_below"
-"A-O" = "add_newline_above"
-q = "surround_add"
-Q = "surround_delete"
-v = "select_textobject_inner"
-V = "select_textobject_around"
-m = "match_brackets"
+'#' = 'toggle_comments'
+S = 'surround_add'
+V = 'select_textobject_around'
+
 [keys.normal.space]
 # Formatting and parsing date-time
-# format date to 2006-01-02
-d = ':pipe date -d "$(cat)" "+%F" | tr -d "\\n"'
-# format date to 2006-01-02 Mon
+# Format date to 2006-01-02 Mon
 D = ':pipe date -d "$(cat)" "+%F %a" | tr -d "\\n"'
-[editor]
-rulers = [80]
-[editor.whitespace]
-render = "all"
-[editor.whitespace.characters]
-newline = "¬"
+
+[keys.insert]
+'A-o' = 'add_newline_above'
+'A-ret' = 'add_newline_below'
+
+# Insert date (2006-01-02 Mon 15:04)
+'C-d' = ':insert-output date "+%F %a" | tr -d "\\n"'

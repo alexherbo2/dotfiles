@@ -19,6 +19,7 @@ characters = { newline = '¬' }
 # Key bindings -----------------------------------------------------------------
 
 [keys.normal]
+ret = 'command_mode'
 '#' = 'toggle_comments'
 S = 'surround_add'
 V = 'select_textobject_around'

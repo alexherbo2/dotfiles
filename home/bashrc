@@ -76,6 +76,7 @@ alias tl='tmux list-sessions'
 # https://kakoune.org
 alias k=kak
 alias ke=kak_set_env
+alias ke!='unset KAKOUNE_SESSION KAKOUNE_CLIENT'
 alias kE='kak_set_env "$(basename "$PWD")"'
 alias k0='export KAKOUNE_CLIENT=client0'
 alias k1='export KAKOUNE_CLIENT=client1'

@@ -40,6 +40,16 @@ colorscheme one-light
 set-face global Whitespace "rgb:%opt{bg}+f"
 set-face global SelectedText "rgb:%opt{blue}+f"
 
+# Windowing
+alias global terminal wezterm-terminal-horizontal
+alias global terminal-horizontal wezterm-terminal-horizontal
+alias global terminal-vertical wezterm-terminal-vertical
+alias global terminal-tab wezterm-terminal-tab
+alias global terminal-window wezterm-terminal-window
+alias global terminal-popup wezterm-terminal-window
+alias global terminal-panel wezterm-terminal-horizontal
+alias global focus nop
+
 # System clipboard
 set-option global clipboard_copy_command 'pbcopy'
 set-option global clipboard_copy_args

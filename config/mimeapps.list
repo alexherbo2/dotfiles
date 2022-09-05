@@ -15,10 +15,10 @@ video/mp4=mpv.desktop
 video/webm=mpv.desktop
 video/x-matroska=mpv.desktop
 
-# synapse
-# https://synapse-bt.org
-x-scheme-handler/magnet=synapse.desktop
+# Transmission
+# https://transmissionbt.com
+x-scheme-handler/magnet=transmission-qt.desktop
 
-# zathura
-# https://pwmt.org/projects/zathura/
-application/pdf=org.pwmt.zathura.desktop
+# sioyek
+# https://sioyek.info
+application/pdf=sioyek.desktop

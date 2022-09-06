@@ -9,6 +9,8 @@ theme = 'catppuccin_frappe'
 
 [editor]
 rulers = [81]
+line-number = 'relative'
+color-modes = true
 
 [editor.whitespace]
 render = 'all'

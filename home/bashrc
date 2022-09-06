@@ -29,9 +29,6 @@ spawn() {
 
 alias @=spawn
 
-# Run `sudo` with aliases
-alias sudo='sudo '
-
 # Navigation
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -47,7 +44,6 @@ alias ps=procs
 # rsync
 # https://rsync.samba.org
 alias rsync='rsync -azH --info=progress2 --delete'
-alias rsync='rsync --archive --compress --hard-links --info=progress2 --delete'
 
 # tar.xz
 txz() {
@@ -61,16 +57,6 @@ alias cat=bat
 # curl
 # https://curl.haxx.se
 alias curl='curl -sSL'
-
-# archiver
-# https://github.com/mholt/archiver
-alias x='arc unarchive'
-
-# tmux
-# https://github.com/tmux/tmux
-alias t=tmux
-alias ta='tmux attach-session'
-alias tl='tmux list-sessions'
 
 # Kakoune
 # https://kakoune.org
@@ -124,9 +110,9 @@ kak_open() {
   kak -p "$KAKOUNE_SESSION"
 }
 
-# sidetree
-# https://github.com/topisani/sidetree
-alias st=sidetree
+# treeview
+# https://github.com/veeso/tui-realm-treeview
+alias t=treeview
 
 # Git
 # https://git-scm.com

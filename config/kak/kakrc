@@ -128,38 +128,29 @@ map -docstring 'Unicode' global user u ': echo -markup "{Information}U+%sh{print
 map -docstring 'file' global goto f '<a-;>: open-file-picker<ret>'
 
 define-command -override open-file-picker -docstring 'open-file-picker: Opens file picker.' %{
-  terminal-popup sh -c %{
-    fd --type file |
-    fzf --preview 'bat --style=numbers --color=always --line-range :500 -- {}' --multi --layout=reverse --header='Select a file to open' --prompt='(f)>' |
-    xargs -- printf "evaluate-commands -client '$KAKOUNE_CLIENT' -verbatim -- edit -- %%(%s)\\n" |
-    kak -p "$KAKOUNE_SESSION"
+  prompt file: -shell-script-candidates 'fd --type file' %{
+    edit %val{text}
   }
 }
 
 map -docstring 'buffer' global goto b '<a-;>: open-buffer-picker<ret>'
 
 define-command -override open-buffer-picker -docstring 'open-buffer-picker: Opens buffer picker.' %{
-  terminal-popup sh -c %{
-    printf '%s\n' "$@" |
-    fzf --preview 'bat --style=numbers --color=always --line-range :500 -- {}' --multi --layout=reverse --header='Select a buffer to open' --prompt='(b)>' |
-    xargs -- printf "evaluate-commands -client '$KAKOUNE_CLIENT' -verbatim -- buffer -- %%(%s)\\n" |
-    kak -p "$KAKOUNE_SESSION"
-  } -- %val{buflist}
+  prompt buffer: -buffer-completion %{
+    buffer %val{text}
+  }
 }
 
 map -docstring 'global search' global goto / '<a-;>: open-global-search-picker<ret>'
 
 define-command -override open-global-search-picker -docstring 'open-global-search-picker: Opens global search picker.' %{
-  terminal-popup fzf --phony --delimiter ':' --ansi --bind %(change:reload(
-    rg --color=always --column --with-filename --fixed-strings -- {q} || true
-  ),enter:execute(
-    echo "evaluate-commands -client '$KAKOUNE_CLIENT' -verbatim -- edit -- {1} {2} {3}" | kak -p "$KAKOUNE_SESSION"
-  )+abort) --preview %{
-    highlight_line={2}
-    line_range_begin=$((line = highlight_line - (FZF_PREVIEW_LINES / 4) && line < 1 ? 1 : line))
-    line_range_end=$((line_range_begin + FZF_PREVIEW_LINES))
-    bat --style=numbers --color=always --line-range "$line_range_begin:$line_range_end" --highlight-line {2} {1} 2> /dev/null
-  } --layout=reverse --header 'Select a file to open' --prompt '(g)>'
+  # Provides word completion
+  prompt grep: -shell-script-candidates %{
+    echo "write '$kak_response_fifo'" > "$kak_command_fifo"
+    cat "$kak_response_fifo" | kak -f 's[\w-]{4,}<ret>y%<a-R>a<ret>'
+  } %{
+    grep %val{text}
+  }
 }
 
 # Commands ---------------------------------------------------------------------

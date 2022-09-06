@@ -1,6 +1,7 @@
 # Helix
 # https://helix-editor.com
 # https://docs.helix-editor.com/configuration.html
+# https://github.com/helix-editor/helix/blob/master/helix-term/src/keymap/default.rs
 
 # Appearance -------------------------------------------------------------------
 

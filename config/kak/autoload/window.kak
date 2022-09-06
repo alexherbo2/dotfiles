@@ -1,1 +1,0 @@
-/Users/taupiqueur/code~/window.kak/rc/window.kak

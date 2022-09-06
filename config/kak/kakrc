@@ -27,28 +27,12 @@ set-option global scrolloff 5,1
 add-highlighter -override global/show-matching show-matching
 add-highlighter -override global/number-lines number-lines -hlcursor
 
-# Color scheme: Dracula (https://draculatheme.com/kakoune)
-colorscheme dracula
-
-# Custom faces
-set-face global SelectedText "rgb:%opt{green}+f"
-
 # Color scheme: One light (https://git.sr.ht/~raiguard/one.kak)
 colorscheme one-light
 
 # Custom faces
 set-face global Whitespace "rgb:%opt{bg}+f"
 set-face global SelectedText "rgb:%opt{blue}+f"
-
-# Windowing
-alias global terminal wezterm-terminal-horizontal
-alias global terminal-horizontal wezterm-terminal-horizontal
-alias global terminal-vertical wezterm-terminal-vertical
-alias global terminal-tab wezterm-terminal-tab
-alias global terminal-window wezterm-terminal-window
-alias global terminal-popup wezterm-terminal-window
-alias global terminal-panel wezterm-terminal-horizontal
-alias global focus nop
 
 # System clipboard
 set-option global clipboard_copy_command 'pbcopy'
@@ -110,12 +94,6 @@ map -docstring 'lsp' global user l ': enter-user-mode lsp<ret>'
 map -docstring 'open document symbol picker' global user s ': enter-user-mode lsp<ret>s'
 map -docstring 'open workspace symbol picker' global user S ': enter-user-mode lsp<ret>o'
 
-# Windowing
-map -docstring 'terminal' global user t ': terminal<ret>'
-map -docstring 'client' global user c ': terminal kak -c %val{session}<ret>'
-map -docstring 'file explorer' global user f ': terminal-panel sidetree<ret>'
-map -docstring 'git popup' global user g ': terminal-popup gitui<ret>'
-
 # Formatting and parsing date-time
 map -docstring 'format date to 2006-01-02' global user d '| date -d "$kak_selection" ''+%F''<ret>'
 map -docstring 'format date to 2006-01-02 Mon' global user D '| date -d "$kak_selection" ''+%F %a''<ret>'
@@ -168,29 +146,6 @@ define-command -override ro -docstring 'make buffer read-only (on/off)' %{
     fi
   }
 }
-
-# Quick editing ----------------------------------------------------------------
-
-# Modes
-try %[ declare-user-mode open ]
-
-# Commands
-define-command -override enter-open-mode -docstring 'enter open mode' %{
-  enter-user-mode open
-}
-
-# Aliases
-alias global o enter-open-mode
-
-# Mappings
-map -docstring 'open bashrc' global open b ': edit ~/.bashrc<ret>'
-map -docstring 'open kakrc' global open k ': edit ~/.config/kak/kakrc<ret>'
-map -docstring 'open mpv.conf' global open m ': edit ~/.config/mpv/input.conf; edit ~/.config/mpv/mpv.conf<ret>'
-map -docstring 'open notes' global open n ': edit ~/docs/notes.txt<ret>gjvt'
-map -docstring 'open alacritty.yml' global open t ': edit ~/.config/alacritty/alacritty.yml<ret>'
-map -docstring 'open tmux.conf' global open T ': edit ~/.config/tmux/tmux.conf<ret>'
-map -docstring 'open sway/config' global open w ': edit ~/.config/sway/config<ret>'
-map -docstring 'open wayfire.ini' global open W ': edit ~/.config/wayfire.ini<ret>'
 
 # Language support -------------------------------------------------------------
 

@@ -1,8 +1,0 @@
-# Syntax:
-#
-# %<group> <host>=(<user>:<group>) [tags]: <command>
-#
-# Example:
-#
-# sudo -h kanto -u taupiqueur -g pokemon echo taupiqueur at kanto
-%wheel ALL=(ALL:ALL) NOPASSWD: ALL

@@ -45,22 +45,13 @@ D = ':pipe date -d "$(cat)" "+%F %a" | tr -d "\\n"'
 # math-symbols
 n = [
   ':new',
-  ':pipe printf "%s\\\\n" "–" "—" "−" "×"',
+  ':pipe printf "%s\\n" "–" "—" "−" "×"',
   'split_selection_on_newline',
   'trim_selections',
   'search_selection',
   ':buffer-close!'
 ]
-
-# Show the Unicode value under the cursor.
-u = [
-  'yank',
-  ':new',
-  ':pipe printf "%04x" "$(cat)"',
-  'trim_selections',
-  'search_selection',
-  ':buffer-close!'
-]
+# TODO: Show the Unicode value under the cursor.
 
 [keys.insert]
 'A-o' = 'add_newline_above'

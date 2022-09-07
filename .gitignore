@@ -1,9 +1,10 @@
+.DS_Store
+.bash_history
 .config/env
 .config/gh/config.yml
 .config/gh/hosts.yml
-.bash_history
+.local/share/zoxide/db.zo
 .mcfly/history.db
 .ssh/id_ed25519
 .ssh/id_ed25519_*
 .ssh/known_hosts
-.local/share/zoxide/db.zo

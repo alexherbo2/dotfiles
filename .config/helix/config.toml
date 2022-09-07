@@ -24,8 +24,8 @@ characters = { newline = '¬' }
 [editor.file-picker]
 hidden = false
 
-# [editor.indent-guides]
-# render = true
+[editor.indent-guides]
+render = true
 
 # Key bindings -----------------------------------------------------------------
 

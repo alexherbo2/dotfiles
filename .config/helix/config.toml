@@ -16,6 +16,9 @@ color-modes = true
 render = 'all'
 characters = { newline = '¬' }
 
+[editor.file-picker]
+hidden = false
+
 # [editor.indent-guides]
 # render = true
 

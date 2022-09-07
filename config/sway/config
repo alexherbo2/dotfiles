@@ -73,8 +73,7 @@ bar {
   position top
 
   # Status line
-  # It was written in Crystal with the goal of using as few syscalls as possible.
-  status_command crystal ~/.config/sway/status.cr
+  status_command while date '+%A %F %R'; do sleep 10; done
 
   # https://github.com/swaywm/sway/raw/master/sway/sway-bar.5.scd#:~:text=colors
   colors {

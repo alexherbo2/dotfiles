@@ -3,6 +3,7 @@
 .config/env
 .config/gh/config.yml
 .config/gh/hosts.yml
+.config/mpv/watch_later
 .local/share/zoxide/db.zo
 .mcfly/history.db
 .ssh/control_masters

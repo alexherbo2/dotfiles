@@ -73,7 +73,7 @@ bar {
   position top
 
   # Status line
-  status_command while date '+%A %F %R'; do sleep 10; done
+  status_command while date +'%A %F %R'; do sleep 10; done
 
   # https://github.com/swaywm/sway/raw/master/sway/sway-bar.5.scd#:~:text=colors
   colors {

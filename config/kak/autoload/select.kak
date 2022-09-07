@@ -1,1 +1,0 @@
-/Users/taupiqueur/code~/select.kak/rc/select.kak

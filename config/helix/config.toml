@@ -35,6 +35,29 @@ backspace = 'collapse_selection'
 # Format date to 2006-01-02 Mon
 D = ':pipe date -d "$(cat)" "+%F %a" | tr -d "\\n"'
 
+# Highlight various characters
+# https://unicode-table.com
+# U+2013
+# U+2014
+# math-symbols
+n = [
+  ':new',
+  ':insert-output printf "–|—|[−×]|X|X|X|X|X"',
+  ':buffer-close!'
+]
+
+# Language support
+B = ':set-language bash'
+
+# Show the Unicode value under the cursor.
+u = [
+  'yank',
+  ':new',
+  ':pipe printf "%04x" "$(cat)"',
+  'search_selection',
+  ':buffer-close!'
+]
+
 [keys.insert]
 'A-o' = 'add_newline_above'
 'A-ret' = 'add_newline_below'

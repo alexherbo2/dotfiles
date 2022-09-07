@@ -12,6 +12,11 @@ rulers = [81]
 line-number = 'relative'
 color-modes = true
 
+[editor.cursor-shape]
+insert = 'bar'
+normal = 'block'
+select = 'underline'
+
 [editor.whitespace]
 render = 'all'
 characters = { newline = '¬' }

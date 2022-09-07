@@ -19,13 +19,6 @@ alias q=exit
 alias md='mkdir -p --'
 alias _='rm -Rf --'
 
-# Spawns a command.
-spawn() {
-  nohup "$@" < /dev/null > /dev/null 2>&1 &
-}
-
-alias @=spawn
-
 # Navigation
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -59,9 +52,9 @@ alias cat='BAT_THEME=ansi bat'
 # https://curl.haxx.se
 alias curl='curl -sSL'
 
-# treeview
-# https://github.com/veeso/tui-realm-treeview
-alias t=treeview
+# side tree panel
+alias st='open -a Finder'
+alias st.='open -a Finder .'
 
 # Git
 # https://git-scm.com
@@ -190,18 +183,6 @@ alias rr='rails routes --grep'
 # https://swaywm.org
 # https://github.com/swaywm/sway/issues/3851
 alias sway='WLR_NO_HARDWARE_CURSORS=1 sway'
-
-# IDEs -------------------------------------------------------------------------
-
-# IntelliJ IDEA
-# https://jetbrains.com/idea/
-# https://github.com/swaywm/sway/issues/595
-alias idea-community='_JAVA_AWT_WM_NONREPARENTING=1 @ idea-community'
-
-# Android Studio
-# https://developer.android.com/studio
-# https://github.com/swaywm/sway/issues/595
-alias android-studio='_JAVA_AWT_WM_NONREPARENTING=1 @ android-studio'
 
 # Functions --------------------------------------------------------------------
 

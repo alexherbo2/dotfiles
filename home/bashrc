@@ -34,6 +34,10 @@ alias ...='cd ../..'
 # https://ifconfig.co
 alias ipd='curl ifconfig.co'
 
+# nginx
+# https://nginx.org
+alias nginx='sudo nginx -c /etc/nginx/nginx.conf'
+
 # procs
 # https://github.com/dalance/procs
 alias ps=procs

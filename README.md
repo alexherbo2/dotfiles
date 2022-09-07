@@ -3,7 +3,6 @@
 - [bashrc](home/bashrc)
 - [git/config](config/git/config)
 - [helix/config.toml](config/helix/config.toml)
-- [kakrc](config/kak/kakrc)
 - [mpv.conf](config/mpv/mpv.conf)
 - [starship.toml](config/starship.toml)
 - [sway/config](config/sway/config)

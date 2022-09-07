@@ -4,7 +4,7 @@
 
 [core]
   pager = delta
-  editor = kak
+  editor = hx
 
 [pull]
   ff = only

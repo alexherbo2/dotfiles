@@ -61,7 +61,7 @@ spawn do
     # on the original workspace that the command was run on.
     case { click_event["name"], click_event["button"] }
     when { "terminal", 1 }
-      Process.run("swaymsg", { "exec", "alacritty" })
+      Process.run("swaymsg", { "exec", "wezterm" })
     when { "file-manager", 1 }
       Process.run("swaymsg", { "exec", "dolphin" })
     when { "web-browser", 1 }

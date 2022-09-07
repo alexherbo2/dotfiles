@@ -13,13 +13,3 @@
   # ControlMaster auto
   # ControlPath ~/.cache/ssh/sessions/%r@%h:%p
   # ControlPersist yes
-
-Host mawww
-  HostName tamiok.kakoune.org
-  User taupiqueur
-
-Host alexherbo2.github.com
-  HostName github.com
-  User git
-  IdentityFile ~/.ssh/id_ed25519_alexherbo2
-  IdentitiesOnly yes

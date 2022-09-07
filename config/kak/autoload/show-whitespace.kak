@@ -1,1 +1,0 @@
-/Users/taupiqueur/code~/show-whitespace.kak/rc/show-whitespace.kak

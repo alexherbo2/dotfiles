@@ -5,11 +5,11 @@
 # Variables --------------------------------------------------------------------
 
 # Terminal emulator
-# https://github.com/alacritty/alacritty/issues/3624
-set $terminal LIBGL_ALWAYS_SOFTWARE=1 alacritty
+# https://wezfurlong.org/wezterm/
+set $terminal wezterm
 
 # Application launcher
-set $launcher [floating app_id="Alacritty"] scratchpad show
+set $launcher [floating app_id="org.wezfurlong.wezterm"] scratchpad show
 
 # Options ----------------------------------------------------------------------
 
@@ -267,6 +267,6 @@ for_window [app_id="panel"] move left
 for_window [title="Picture in picture"] floating enable
 
 # Add a bit of transparency to reduce eye strain.
-for_window [app_id="Alacritty"] opacity set 0.99
+for_window [app_id="org.wezfurlong.wezterm"] opacity set 0.99
 for_window [app_id="org.kde.konsole"] opacity set 0.99
 for_window [app_id="org.kde.dolphin"] opacity set 0.99

@@ -5,4 +5,4 @@
 cat > /tmp/stdin
 wezterm start --class=popup sh -c 'fzf < /tmp/stdin > /tmp/stdout'
 cat /tmp/stdout
-[ ! -s /tmp/stdout ]
+[ -s /tmp/stdout ]

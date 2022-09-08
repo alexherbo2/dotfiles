@@ -23,6 +23,9 @@ alias _='rm -Rf --'
 alias ..='cd ..'
 alias ...='cd ../..'
 
+# Mount shared directory
+alias mount_shared='sshfs host: shared'
+
 # ifconfig.co
 # https://ifconfig.co
 alias ipd='curl ifconfig.co'
@@ -158,6 +161,11 @@ amap() {
 # interactive mv
 imv() {
   imap -p : -M 'mkdir -vp -- "$(dirname -- "$2")" && mv -vi -- "$1" "$2"' -d 'rm -vi --' "$@"
+}
+
+# selective mv
+xmv() {
+  xplr | imv "$@"
 }
 
 # mpv

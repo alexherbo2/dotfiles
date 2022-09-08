@@ -114,7 +114,7 @@ gx() {
 
 # exa
 # https://the.exa.website
-alias l='exa --icons'
+alias ls='exa --icons'
 alias la='exa --icons --all'
 alias ll='exa --icons --git --long'
 alias lla='exa --icons --git --long --all'

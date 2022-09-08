@@ -104,37 +104,12 @@ alias gcd='cd "$(git rev-parse --show-toplevel)"'
 alias gv='gh repo view --web'
 alias gist='gh gist create --web'
 
-gc() {
-  [ $# -lt 2 ] && suffix=.git
-  repository=${1}${suffix}
+# Clone
+gx() {
+  repository=${1}.git
   directory=$1; directory=${directory#https://}; directory=${directory%.git}; directory=~/.local/share/$directory
-  pastel paint green --bold "Cloning '$repository' into '$directory'"
   git clone "$repository" "$directory"
-}
-
-gc2() {
-  gc "$1" ''
-}
-
-gg() {
-  gw.
-  gD.
-  ggc
-}
-
-GG() {
-  set -- ~/.local/share/github.com/*/* ~/.local/share/gitlab.com/*/* ~/.local/share/git.sr.ht/*/*
-
-  for repository do
-    pastel paint green --bold "$repository"
-    cd "$repository"
-    gw.
-    gD.
-    ggc
-    g pull
-  done
-
-  cd
+  cd "$directory"
 }
 
 # exa

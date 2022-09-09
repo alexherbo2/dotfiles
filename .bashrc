@@ -138,7 +138,7 @@ imv() {
   imap -p : -M 'mkdir -vp -- "$(dirname -- "$2")" && mv -vi -- "$1" "$2"' -d 'rm -vi --' "$@"
 }
 
-# selective mv
+# graphical mv
 xmv() {
   xplr | imv "$@"
 }

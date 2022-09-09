@@ -4,6 +4,10 @@
 local wezterm = require 'wezterm'
 
 return {
+  -- General -------------------------------------------------------------------
+
+  switch_to_last_active_tab_when_closing_tab = true,
+
   -- Appearance ----------------------------------------------------------------
 
   -- Smart tab bar [distraction-free mode]
@@ -43,6 +47,7 @@ return {
 
     -- Create tabs
     { key = 'c', mods = 'LEADER', action = wezterm.action.SpawnTab 'CurrentPaneDomain' },
+    { key = 'C', mods = 'LEADER', action = wezterm.action.SpawnCommandInNewTab { cwd = wezterm.home_dir } },
 
     -- Split panes
     { key = 'o', mods = 'LEADER', action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' } },

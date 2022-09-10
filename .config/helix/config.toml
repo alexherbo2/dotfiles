@@ -30,6 +30,7 @@ render = true
 # Key bindings -----------------------------------------------------------------
 
 [keys.normal]
+D = 'remove_primary_selection'
 '{' = 'goto_prev_paragraph'
 '}' = 'goto_next_paragraph'
 left = 'goto_previous_buffer'

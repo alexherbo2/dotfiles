@@ -232,16 +232,6 @@ bindsym Mod4+r exec seq 0 99 | dmenu | xargs swaymsg rename workspace to --
 # Open mpv with URLs from clipboard
 bindsym Mod4+m exec wl-paste | mpv --playlist=-
 
-# mpv
-bindsym Mod4+F6 exec find -L videos torrents | dmenu | mpv --playlist=-
-bindsym Mod4+Shift+F6 exec find -L videos | dmenu | mpv --shuffle --playlist=-
-
-# zathura
-bindsym Mod4+F7 exec find -L documents | dmenu | xargs zathura --
-
-# Password manager
-bindsym Mod4+p exec google-chrome-stable https://passwords.google.com
-
 # Screenshots
 bindsym Print exec grim ~/Desktop/$(date '+%F_%T').webp
 bindsym Shift+Print exec slurp | grim -g - ~/Desktop/$(date '+%F_%T').webp

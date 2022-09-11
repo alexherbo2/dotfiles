@@ -23,8 +23,8 @@ alias _='rm -Rf --'
 alias ..='cd ..'
 alias ...='cd ../..'
 
-# Mount shared directory
-alias mount_shared='sshfs host: shared'
+# Mount shared directory on guest
+alias mount_shared='ssh guest sshfs host: shared'
 
 # ifconfig.co
 # https://ifconfig.co

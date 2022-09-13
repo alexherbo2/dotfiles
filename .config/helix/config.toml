@@ -72,3 +72,8 @@ n = [
 
 # Insert date (2006-01-02 Mon 15:04)
 'C-d' = ':insert-output date "+%F %a" | tr -d "\\n"'
+
+[keys.insert.C-space]
+space = ['collapse_selection', ':insert-output printf ’']
+'<' = ['collapse_selection', ':insert-output printf “']
+'>' = ['collapse_selection', ':insert-output printf ”']

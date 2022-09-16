@@ -23,9 +23,6 @@ alias _='rm -Rf --'
 alias ..='cd ..'
 alias ...='cd ../..'
 
-# Mount shared directory on guest
-alias mount_shared='ssh guest sshfs host: shared'
-
 # ifconfig.co
 # https://ifconfig.co
 alias ipd='curl ifconfig.co'
@@ -74,6 +71,7 @@ alias gco='git checkout'
 # Log
 # https://git-scm.com/docs/git-log
 alias gl='git log'
+alias gL='git log -p'
 # Grep logs
 alias gF='git log -p -S'
 alias gE='git log -p -G'
@@ -145,7 +143,7 @@ xmv() {
 
 # mpv
 # https://mpv.io
-alias m=mpv
+alias mpv='open -a mpv'
 
 # yt-dlp
 # https://github.com/yt-dlp/yt-dlp

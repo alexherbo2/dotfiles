@@ -1,0 +1,421 @@
+# Fonts
+ttf-jetbrains-mono # https://jetbrains.com/lp/mono/
+ttf-font-awesome # https://fontawesome.com
+nerd-fonts-jetbrains-mono # https://nerdfonts.com
+
+# Terminals ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+alacritty # https://github.com/alacritty/alacritty
+konsole # https://konsole.kde.org
+foot # https://codeberg.org/dnkl/foot
+
+# Terminal multiplexers
+tmux # https://github.com/tmux/tmux
+tab-rs # https://github.com/austinjones/tab-rs
+
+# Fuzzy finders
+fzf # https://github.com/junegunn/fzf
+
+# Terminal tools
+tldr # man – https://tldr.sh
+glow # Markdown – https://github.com/charmbracelet/glow
+
+# Terminal utils
+exa # ls – https://the.exa.website
+fd # find – https://github.com/sharkdp/fd
+bat # cat – https://github.com/sharkdp/bat
+pastel # https://github.com/sharkdp/pastel
+ripgrep # grep – https://github.com/BurntSushi/ripgrep
+procs # ps – https://github.com/dalance/procs
+htop # top – https://htop.dev
+
+# Shells ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+dash # http://gondor.apana.org.au/~herbert/dash/
+bash # https://gnu.org/software/bash/
+bash-completion # https://github.com/scop/bash-completion
+
+# Shell prompts
+starship # https://starship.rs
+
+# Shell history
+mcfly # https://github.com/cantino/mcfly
+
+# Shell navigation
+zoxide # https://github.com/ajeetdsouza/zoxide
+
+# Text editors ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+kakoune # https://kakoune.org
+kak-lsp # https://github.com/kak-lsp/kak-lsp
+helix # https://helix-editor.com
+code # https://code.visualstudio.com
+neovim # https://neovim.io
+neovide # https://github.com/neovide/neovide
+emacs # https://gnu.org/software/emacs/
+
+# IDEs ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# IntelliJ IDEA
+# https://jetbrains.com/idea/
+intellij-idea-community-edition # https://jetbrains.com/idea/
+
+# Android Studio
+# https://developer.android.com/studio
+android-studio # https://developer.android.com/studio
+android-tools # https://developer.android.com/studio
+
+# File managers ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+dolphin # https://apps.kde.org/en/dolphin
+xplr # https://xplr.dev
+broot # https://dystroy.org/broot/
+ranger # https://ranger.github.io
+vifm # https://vifm.info
+# sidetree
+# https://github.com/topisani/sidetree
+
+# Git ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+git # https://git-scm.com
+git-delta # https://github.com/dandavison/delta
+github-cli # https://cli.github.com
+gitui # https://github.com/extrawurst/gitui
+
+# Torrents ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+transmission-cli # https://transmissionbt.com
+transmission-qt # https://transmissionbt.com
+
+# Web browsers ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+google-chrome # https://google.com/chrome/
+
+# For testing
+chromium # https://chromium.org
+firefox # https://mozilla.org/firefox/
+opera # https://opera.com
+vivaldi # https://vivaldi.com
+brave # https://brave.com
+
+# Media players ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+mpv # https://mpv.io
+
+# Dependencies for mpv scripts
+translate-shell # https://www.soimort.org/translate-shell/
+
+# Utils
+ffmpeg # FFmpeg https://ffmpeg.org
+yt-dlp # https://github.com/yt-dlp/yt-dlp
+
+# Music players ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+spotify # https://spotify.com
+
+# Videos editors ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+obs-studio # https://obsproject.com
+olive-editor # https://olivevideoeditor.org
+
+# Image editors ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+inkscape # https://inkscape.org
+gimp # https://gimp.org
+
+# Document viewers ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+sioyek # https://sioyek.info
+zathura # https://pwmt.org/projects/zathura/
+
+# Document converters
+pandoc # https://pandoc.org
+tectonic # https://tectonic-typesetting.github.io
+img2pdf # https://gitlab.mister-muffin.de/josch/img2pdf
+
+# Desktop environments ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+plasma # https://kde.org
+plasma-desktop # https://kde.org
+plasma-wayland-session # https://kde.org
+
+# Display managers
+sddm # https://github.com/sddm/sddm
+
+# Networking
+networkmanager # https://wiki.gnome.org/Projects/NetworkManager
+
+# Audio
+pavucontrol # https://freedesktop.org/software/pulseaudio/pavucontrol/
+
+# Backlight
+light # https://haikarainen.github.io/light/
+wlsunset # https://sr.ht/~kennylevinsen/wlsunset/
+
+# Wayland ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# Wayland
+wayland # https://wayland.freedesktop.org
+xwayland # https://wayland.freedesktop.org/xserver.html
+
+# Sway
+sway # https://swaywm.org
+swaybg # https://github.com/swaywm/swaybg
+swayidle # https://github.com/swaywm/swayidle
+swaylock # https://github.com/swaywm/swaylock
+
+# river
+river # https://github.com/riverwm/river
+
+# Wayfire
+wayfire # https://wayfire.org
+
+# Services
+kanshi # Output configuration – https://wayland.emersion.fr/kanshi/
+mako # Notifications – https://wayland.emersion.fr/mako/
+
+# Clipboard
+wl-clipboard # https://github.com/bugaevc/wl-clipboard
+
+# Screenshots
+grim # https://wayland.emersion.fr/grim/
+slurp # https://wayland.emersion.fr/slurp/
+
+# Screencast
+wf-recorder # https://github.com/ammen99/wf-recorder
+
+# Utils
+wev # https://git.sr.ht/~sircmpwn/wev
+wlr-randr # https://github.com/emersion/wlr-randr
+
+# Messaging ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+tiny # https://github.com/osa1/tiny
+discord # https://discord.com
+slack # https://slack.com
+
+# Games ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+steam # https://store.steampowered.com
+retroarch # https://retroarch.com
+
+# Game emulators
+# https://emulation.gametechwiki.com
+mesen # NES – https://mesen.ca
+nestopia # NES – http://0ldsk00l.ca/nestopia/
+higan # SNES – https://higan.dev (formerly bsnes)
+mupen64plus # Nintendo 64 – https://mupen64plus.org
+m64p # Mupen64Plus GUI – https://github.com/loganmc10/m64p
+sameboy # Game Boy and Game Boy Color – https://sameboy.github.io
+mgba # GBA – https://mgba.io
+mednafen # PlayStation 1 – https://mednafen.github.io
+mednaffe # Mednafen GUI – https://github.com/AmatCoder/mednaffe
+pcsx2 # PlayStation 2 – https://pcsx2.net
+dolphin-emu # GameCube – https://dolphin-emu.org
+melonds # Nintendo DS – http://melonds.kuribo64.net
+
+# Game utils
+xboxdrv # https://xboxdrv.gitlab.io
+ecmtools # https://github.com/alucryd/ecm-tools
+
+# Emulators ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+wine # https://winehq.org
+
+# Virtualization ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+docker # https://docker.com
+
+# Android ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+android-file-transfer # https://whoozle.github.io/android-file-transfer-linux/
+
+# iPod ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+gtkpod # http://gtkpod.org
+
+# Tools ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# System information
+neofetch # https://github.com/dylanaraps/neofetch
+
+# Networking
+openssh # https://openssh.com
+openssl # https://openssl.org
+
+# Archivers
+archiver # https://github.com/mholt/archiver
+p7zip # https://7-zip.org
+
+# Programming languages
+jq # https://stedolan.github.io/jq/
+oq # https://github.com/Blacksmoke16/oq
+bc # https://en.wikipedia.org/wiki/Bc_(programming_language)
+
+# Utils ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+file # https://darwinsys.com/file/
+socat # http://www.dest-unreach.org/socat/
+
+# Filesystem
+parted # https://gnu.org/software/parted/
+gparted # https://gparted.org
+gptfdisk # https://rodsbooks.com/gdisk/
+
+# Watchers
+inotify-tools # https://github.com/inotify-tools/inotify-tools
+
+# XDG
+xdg_utils # https://freedesktop.org/wiki/Software/xdg-utils/ (provides xdg-open)
+
+# Notifications
+libnotify # https://developer.gnome.org/notification-spec/ (provides notify-send)
+
+# Spell checker
+aspell # http://aspell.net
+
+# Web ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# Static site generators
+hugo # https://gohugo.io
+
+# Terminals
+ttyd # https://github.com/tsl0922/ttyd
+
+# Services
+ngrok # https://ngrok.com
+heroku # https://heroku.com
+
+# Servers
+nginx # https://nginx.org
+
+# Database
+sqlite # https://sqlite.org
+sqlitebrowser # https://sqlitebrowser.org
+redis # https://redis.io
+
+# Programming languages ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+vscode-css-languageserver
+vscode-html-languageserver
+vscode-json-languageserver
+typescript-language-server
+python-lsp-server
+
+# Markdown
+marksman-bin # https://github.com/artempyanykh/marksman
+
+# TOML
+taplo-cli # https://taplo.tamasfe.dev
+
+# Bash
+bash-language-server # https://github.com/bash-lsp/bash-language-server
+
+# C
+gcc # https://gcc.gnu.org
+clang # https://clang.llvm.org
+llvm # https://llvm.org
+llvmPackages_rocm.llvm # provides llvm-config
+
+# Build systems
+gnumake # https://gnu.org/software/make/
+pkg-config # https://freedesktop.org/wiki/Software/pkg-config/
+meson # https://mesonbuild.com
+ninja # https://ninja-build.org
+
+# Rust
+# https://rust-lang.org
+rustc # https://rust-lang.org
+cargo # https://crates.io
+rustup # https://rustup.rs
+rust-analyzer # https://rust-analyzer.github.io
+
+# Crystal
+# https://crystal-lang.org
+crystal # https://crystal-lang.org
+shards # https://github.com/crystal-lang/shards
+crystalline
+
+# Ruby
+# https://ruby-lang.org
+ruby # https://ruby-lang.org
+ruby-solargraph # https://solargraph.org
+
+# Elixir
+# https://elixir-lang.org
+elixir # https://elixir-lang.org
+
+# JavaScript
+nodejs # https://nodejs.org
+npm # https://npmjs.com
+yarn # https://yarnpkg.com
+flow # https://flow.org
+
+# OCaml
+# https://ocaml.org
+ocaml # https://ocaml.org
+opam # https://opam.ocaml.org
+
+# Lua
+# https://lua.org
+lua # https://lua.org
+luarocks # https://luarocks.org
+
+# Python
+# https://python.org
+python39 # https://python.org
+python39Packages.pip # https://pip.pypa.io
+python-lsp-server # https://github.com/python-lsp/python-lsp-server
+
+# Go
+# https://golang.org
+go # https://golang.org
+
+# Haskell
+# https://haskell.org
+ghc # https://haskell.org/ghc/
+cabal-install # https://hackage.haskell.org/package/cabal-install
+haskell-language-server # https://github.com/haskell/haskell-language-server
+
+# Nim
+# https://nim-lang.org
+nim # https://nim-lang.org
+
+# Zig
+# https://ziglang.org
+zig # https://ziglang.org
+
+# Common Lisp
+ccl # https://ccl.clozure.com
+sbcl # http://sbcl.org
+quicklisp # https://quicklisp.org
+
+# Clojure
+# https://clojure.org
+clojure # https://clojure.org
+leiningen # https://leiningen.org
+
+# Scala
+# https://scala-lang.org
+scala # https://scala-lang.org
+
+# Java
+# https://openjdk.java.net
+jdk-openjdk # https://openjdk.java.net
+gradle # https://gradle.org
+
+# Kotlin
+# https://kotlinlang.org
+kotlin # https://kotlinlang.org
+kotlin-language-server # https://github.com/fwcd/kotlin-language-server
+
+# Janet
+# https://janet-lang.org
+janet # https://janet-lang.org
+alsa-utils # https://alsa-project.org
+i3 # https://i3wm.org
+xsel # https://vergenet.net/~conrad/software/xsel/
+feh # https://feh.finalrewind.org
+xorg-setxkbmap # https://xorg.freedesktop.org
+xorg-xinit # https://xorg.freedesktop.org
+dmenu # https://tools.suckless.org/dmenu/

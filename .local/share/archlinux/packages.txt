@@ -360,6 +360,7 @@ opam # https://opam.ocaml.org
 # https://lua.org
 lua # https://lua.org
 luarocks # https://luarocks.org
+lua-language-server # https://github.com/sumneko/lua-language-server
 
 # Python
 # https://python.org

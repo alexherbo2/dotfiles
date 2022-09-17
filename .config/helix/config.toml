@@ -67,9 +67,6 @@ n = [
 # TODO: Show the Unicode value under the cursor.
 
 [keys.insert]
-'A-o' = 'add_newline_above'
-'A-ret' = 'add_newline_below'
-
 # Insert date (2006-01-02 Mon 15:04)
 'C-d' = ':insert-output date "+%F %a" | tr -d "\\n"'
 

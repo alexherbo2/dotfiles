@@ -5,10 +5,6 @@
 # https://microsoft.github.io/language-server-protocol/implementors/servers/
 
 [[language]]
-name = 'markdown'
-language-server = { command = 'marksman', args = ['server'] }
-
-[[language]]
 name = 'ruby'
 file-types = ['cr']
 language-server = { command = 'crystalline', args = ['--stdio'] }

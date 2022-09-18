@@ -23,9 +23,6 @@ return {
   font = wezterm.font('JetBrains Mono'),
   font_size = 16.0,
 
-  -- Disable ligatures
-  harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
-
   -- Cursor style
   default_cursor_style = 'BlinkingBar',
 

@@ -6,6 +6,9 @@
   pager = delta
   editor = hx
 
+[delta]
+  light = true
+
 [pull]
   ff = only
 

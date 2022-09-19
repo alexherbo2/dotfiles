@@ -5,6 +5,9 @@
 # https://brew.sh
 [ -x /opt/homebrew/bin/brew ] && eval "$(brew shellenv)"
 
+# opam configuration
+eval "$(opam env)"
+
 # Environment variables --------------------------------------------------------
 
 # Paths

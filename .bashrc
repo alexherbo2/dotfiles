@@ -15,6 +15,9 @@ eval "$(mcfly init bash)"
 # https://github.com/ajeetdsouza/zoxide
 eval "$(zoxide init bash)"
 
+# opam configuration
+eval "$(opam env)"
+
 # RVM
 # https://rvm.io
 . ~/.rvm/scripts/rvm
@@ -22,7 +25,7 @@ eval "$(zoxide init bash)"
 # Environment variables --------------------------------------------------------
 
 # Paths
-export PATH=~/.local/bin:~/.cargo/bin:~/.opam/default/bin:$PATH
+export PATH=~/.local/bin:~/.cargo/bin:$PATH
 
 # Locales
 export LANG=en_US.UTF-8

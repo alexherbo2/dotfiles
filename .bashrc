@@ -15,7 +15,7 @@ eval "$(zoxide init bash)"
 
 # RVM
 # https://rvm.io
-# . ~/.rvm/scripts/rvm
+. ~/.rvm/scripts/rvm
 
 # Aliases ----------------------------------------------------------------------
 

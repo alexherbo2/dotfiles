@@ -13,6 +13,10 @@ eval "$(mcfly init bash)"
 # https://github.com/ajeetdsouza/zoxide
 eval "$(zoxide init bash)"
 
+# RVM
+# https://rvm.io
+# . ~/.rvm/scripts/rvm
+
 # Aliases ----------------------------------------------------------------------
 
 alias q=exit
@@ -164,17 +168,6 @@ alias rr='rails routes --grep'
 # https://swaywm.org
 # https://github.com/swaywm/sway/issues/3851
 alias sway='WLR_NO_HARDWARE_CURSORS=1 sway'
-
-# Functions --------------------------------------------------------------------
-
-# Reloads bashrc.
-reload_bashrc() {
-  . ~/.bash_profile
-}
-
-# RVM
-# https://rvm.io
-# . ~/.rvm/scripts/rvm
 
 # macOS ------------------------------------------------------------------------
 

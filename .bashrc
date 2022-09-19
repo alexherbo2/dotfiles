@@ -194,14 +194,12 @@ alias sway='WLR_NO_HARDWARE_CURSORS=1 sway'
 
 # macOS ------------------------------------------------------------------------
 
-[ -d /opt/homebrew ] || return
-
 # Homebrew
 # https://brew.sh
-eval "$(brew shellenv)"
+[ -x /opt/homebrew/bin/brew ] && eval "$(brew shellenv)"
 
 # Enable Bash completion on macOS.
-. /opt/homebrew/etc/profile.d/bash_completion.sh
+[ -r /opt/homebrew/etc/profile.d/bash_completion.sh ] && . /opt/homebrew/etc/profile.d/bash_completion.sh
 
 # Keep MacBook awake with lid closed
 # https://caffeinated.app/keep-macbook-awake-with-lid-closed/

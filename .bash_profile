@@ -26,3 +26,6 @@ export EDITOR=hx
 
 # Local environment variables
 . ~/.config/env
+
+# Source bashrc.
+. ~/.bashrc

@@ -14,7 +14,7 @@ return {
   hide_tab_bar_if_only_one_tab = true,
 
   -- Color scheme
-  color_scheme = 'Catppuccin Frappe',
+  color_scheme = 'Catppuccin Latte',
 
   -- Add a bit of transparency to reduce eye strain.
   window_background_opacity = 0.99,

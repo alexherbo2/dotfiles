@@ -56,6 +56,9 @@ return {
     { key = 'k', mods = 'LEADER', action = wezterm.action.ActivatePaneDirection 'Up' },
     { key = 'l', mods = 'LEADER', action = wezterm.action.ActivatePaneDirection 'Right' },
 
+    -- Move panes
+    { key = 'F', mods = 'LEADER', action = wezterm.action.PaneSelect { mode = 'SwapWithActive' } },
+
     -- Switch tabs
     { key = 'n', mods = 'LEADER', action = wezterm.action.ActivateTabRelative(1) },
     { key = 'p', mods = 'LEADER', action = wezterm.action.ActivateTabRelative(-1) },

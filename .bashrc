@@ -19,6 +19,27 @@ eval "$(zoxide init bash)"
 # https://rvm.io
 . ~/.rvm/scripts/rvm
 
+# Environment variables --------------------------------------------------------
+
+# Paths
+export PATH=~/.local/bin:~/.cargo/bin:~/.opam/default/bin:$PATH
+
+# Locales
+export LANG=en_US.UTF-8
+
+# Desktop environment
+# Get icons.
+#
+# Configuration of Qt5 apps under environments other than KDE Plasma:
+# https://wiki.archlinux.org/title/Qt#Configuration_of_Qt5_apps_under_environments_other_than_KDE_Plasma
+export QT_QPA_PLATFORMTHEME=kde
+
+# Applications
+export EDITOR=hx
+
+# Local environment variables
+. ~/.config/env
+
 # Aliases ----------------------------------------------------------------------
 
 alias q=exit
@@ -52,7 +73,7 @@ txz() {
 
 # bat
 # https://github.com/sharkdp/bat
-alias cat='BAT_THEME=ansi bat'
+alias cat=bat
 
 # curl
 # https://curl.haxx.se
@@ -172,6 +193,15 @@ alias rr='rails routes --grep'
 alias sway='WLR_NO_HARDWARE_CURSORS=1 sway'
 
 # macOS ------------------------------------------------------------------------
+
+[ -d /opt/homebrew ] || return
+
+# Homebrew
+# https://brew.sh
+eval "$(brew shellenv)"
+
+# Enable Bash completion on macOS.
+. /opt/homebrew/etc/profile.d/bash_completion.sh
 
 # Keep MacBook awake with lid closed
 # https://caffeinated.app/keep-macbook-awake-with-lid-closed/

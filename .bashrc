@@ -7,6 +7,8 @@ eval "$(starship init bash)"
 
 # McFly
 # https://github.com/cantino/mcfly
+export MCFLY_LIGHT=TRUE
+export MCFLY_FUZZY=2
 eval "$(mcfly init bash)"
 
 # zoxide

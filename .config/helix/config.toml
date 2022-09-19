@@ -5,7 +5,7 @@
 
 # Appearance -------------------------------------------------------------------
 
-theme = 'catppuccin_frappe'
+theme = 'onelight'
 
 [editor]
 rulers = [81]

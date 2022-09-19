@@ -355,6 +355,7 @@ flow # https://flow.org
 # https://ocaml.org
 ocaml # https://ocaml.org
 opam # https://opam.ocaml.org
+ocaml-lsp-git # https://github.com/ocaml/ocaml-lsp
 
 # Lua
 # https://lua.org

@@ -9,10 +9,6 @@ wezterm # https://wezfurlong.org/wezterm/
 konsole # https://konsole.kde.org
 foot # https://codeberg.org/dnkl/foot
 
-# Terminal multiplexers
-tmux # https://github.com/tmux/tmux
-tab-rs # https://github.com/austinjones/tab-rs
-
 # Fuzzy finders
 fzf # https://github.com/junegunn/fzf
 
@@ -230,14 +226,7 @@ docker # https://docker.com
 
 android-file-transfer # https://whoozle.github.io/android-file-transfer-linux/
 
-# iPod ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-gtkpod # http://gtkpod.org
-
 # Tools ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-# System information
-neofetch # https://github.com/dylanaraps/neofetch
 
 # Networking
 openssh # https://openssh.com
@@ -267,6 +256,9 @@ inotify-tools # https://github.com/inotify-tools/inotify-tools
 
 # XDG
 xdg_utils # https://freedesktop.org/wiki/Software/xdg-utils/ (provides xdg-open)
+
+# Sound
+alsa-utils # https://alsa-project.org
 
 # Notifications
 libnotify # https://developer.gnome.org/notification-spec/ (provides notify-send)
@@ -414,10 +406,3 @@ kotlin-language-server # https://github.com/fwcd/kotlin-language-server
 # Janet
 # https://janet-lang.org
 janet # https://janet-lang.org
-alsa-utils # https://alsa-project.org
-i3 # https://i3wm.org
-xsel # https://vergenet.net/~conrad/software/xsel/
-feh # https://feh.finalrewind.org
-xorg-setxkbmap # https://xorg.freedesktop.org
-xorg-xinit # https://xorg.freedesktop.org
-dmenu # https://tools.suckless.org/dmenu/

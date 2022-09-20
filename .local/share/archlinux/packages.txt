@@ -5,7 +5,7 @@ nerd-fonts-jetbrains-mono # https://nerdfonts.com
 
 # Terminals ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-alacritty # https://github.com/alacritty/alacritty
+wezterm # https://wezfurlong.org/wezterm/
 konsole # https://konsole.kde.org
 foot # https://codeberg.org/dnkl/foot
 
@@ -190,7 +190,7 @@ wlr-randr # https://github.com/emersion/wlr-randr
 
 # Messaging ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-tiny # https://github.com/osa1/tiny
+kirc # http://kirc.io
 discord # https://discord.com
 slack # https://slack.com
 

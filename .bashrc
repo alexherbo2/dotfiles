@@ -21,6 +21,13 @@ eval "$(opam env)"
 # https://rvm.io
 . ~/.rvm/scripts/rvm
 
+# Homebrew
+# https://brew.sh
+[ -x /opt/homebrew/bin/brew ] && eval "$(brew shellenv)"
+
+# Enable Bash completion on macOS.
+[ -r /opt/homebrew/etc/profile.d/bash_completion.sh ] && . /opt/homebrew/etc/profile.d/bash_completion.sh
+
 # Environment variables --------------------------------------------------------
 
 # Paths
@@ -199,13 +206,6 @@ alias kirc='kirc -s irc.libera.chat -c "#kirc" -p 6697 -n taupiqueur -r "Mathieu
 alias sway='WLR_NO_HARDWARE_CURSORS=1 sway'
 
 # macOS ------------------------------------------------------------------------
-
-# Homebrew
-# https://brew.sh
-[ -x /opt/homebrew/bin/brew ] && eval "$(brew shellenv)"
-
-# Enable Bash completion on macOS.
-[ -r /opt/homebrew/etc/profile.d/bash_completion.sh ] && . /opt/homebrew/etc/profile.d/bash_completion.sh
 
 # Keep MacBook awake with lid closed
 # https://caffeinated.app/keep-macbook-awake-with-lid-closed/

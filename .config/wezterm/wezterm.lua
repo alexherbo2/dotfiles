@@ -10,8 +10,10 @@ return {
 
   -- Appearance ----------------------------------------------------------------
 
-  -- Smart tab bar [distraction-free mode]
+  -- Tab bar appearance and colors
+  use_fancy_tab_bar = false,
   hide_tab_bar_if_only_one_tab = true,
+  tab_bar_at_bottom = true,
 
   -- Color scheme
   color_scheme = 'Catppuccin Latte',

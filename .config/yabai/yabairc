@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# yabai
+# https://github.com/koekeishiya/yabai
+# https://github.com/koekeishiya/yabai/blob/master/doc/yabai.asciidoc
+
+alias set='yabai --message config'
+
+# Startup commands ─────────────────────────────────────────────────────────────
+
+sudo yabai --load-sa
+
+# Global settings ──────────────────────────────────────────────────────────────
+
+set layout float
+set focus_follows_mouse autofocus

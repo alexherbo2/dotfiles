@@ -3,6 +3,9 @@
 
 local wezterm = require 'wezterm'
 
+-- Color scheme preferences
+local color_scheme_preferences = { Light = 'Catppuccin Latte', Dark = 'Catppuccin Frappe' }
+
 return {
   -- General -------------------------------------------------------------------
 
@@ -16,7 +19,7 @@ return {
   tab_bar_at_bottom = true,
 
   -- Color scheme
-  color_scheme = 'Catppuccin Latte',
+  color_scheme = color_scheme_preferences[wezterm.gui.get_appearance()],
 
   -- Add a bit of transparency to reduce eye strain.
   window_background_opacity = 0.99,

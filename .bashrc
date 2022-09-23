@@ -7,7 +7,6 @@ eval "$(starship init bash)"
 
 # McFly
 # https://github.com/cantino/mcfly
-export MCFLY_LIGHT=TRUE
 eval "$(mcfly init bash)"
 
 # zoxide
@@ -206,6 +205,12 @@ alias kirc='kirc -s irc.libera.chat -p 6667 -c "#kirc" -n taupiqueur -r "Mathieu
 alias sway='WLR_NO_HARDWARE_CURSORS=1 sway'
 
 # macOS ------------------------------------------------------------------------
+
+# Appearance preferences
+if ! defaults read -g AppleInterfaceStyle > /dev/null 2>&1; then
+  export MCFLY_LIGHT=TRUE
+  export DELTA_FEATURES=light-mode
+fi
 
 # Keep MacBook awake with lid closed
 # https://caffeinated.app/keep-macbook-awake-with-lid-closed/

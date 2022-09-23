@@ -1,4 +1,4 @@
 # bat
 # https://github.com/sharkdp/bat
 
---theme 'Solarized (light)'
+--theme ansi

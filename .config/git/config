@@ -6,8 +6,11 @@
   pager = delta
   editor = hx
 
-[delta]
+[delta "light-mode"]
   light = true
+
+[delta "dark-mode"]
+  dark = true
 
 [pull]
   ff = only

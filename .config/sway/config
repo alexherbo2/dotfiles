@@ -254,8 +254,3 @@ bindsym XF86MonBrightnessDown exec light -U 5
 for_window [app_id="popup"] floating enable
 for_window [app_id="panel"] move left
 for_window [title="Picture in picture"] floating enable
-
-# Add a bit of transparency to reduce eye strain.
-for_window [app_id="org.wezfurlong.wezterm"] opacity set 0.99
-for_window [app_id="org.kde.konsole"] opacity set 0.99
-for_window [app_id="org.kde.dolphin"] opacity set 0.99

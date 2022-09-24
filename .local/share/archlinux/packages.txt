@@ -188,6 +188,7 @@ wlr-randr # https://github.com/emersion/wlr-randr
 
 kirc # http://kirc.io
 discord # https://discord.com
+element-desktop # https://element.io
 slack # https://slack.com
 
 # Games ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈

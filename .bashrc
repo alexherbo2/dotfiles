@@ -149,7 +149,7 @@ gx() {
 # https://the.exa.website
 alias ls='exa --icons --all'
 alias ll='exa --icons --git --long --all'
-alias La='exa --tree --all --ignore-glob .git'
+alias tree='exa --tree --all --ignore-glob .git'
 
 # batch
 # https://github.com/taupiqueur/batch

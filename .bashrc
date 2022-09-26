@@ -131,7 +131,6 @@ alias gsquash='git reset --soft'
 alias gsquash^='git reset --soft HEAD^'
 alias grb='git reset --hard'
 alias grb^='git reset --hard HEAD^'
-alias ggc=git-gc-all-ferocious
 # Navigation
 alias gcd='cd "$(git rev-parse --show-toplevel)"'
 # Web
@@ -148,12 +147,9 @@ gx() {
 
 # exa
 # https://the.exa.website
-alias ls='exa --icons'
-alias la='exa --icons --all'
-alias ll='exa --icons --git --long'
-alias lla='exa --icons --git --long --all'
-alias L='exa --tree'
-alias La='exa --tree --all'
+alias ls='exa --icons --all'
+alias ll='exa --icons --git --long --all'
+alias La='exa --tree --all --ignore-glob .git'
 
 # batch
 # https://github.com/taupiqueur/batch

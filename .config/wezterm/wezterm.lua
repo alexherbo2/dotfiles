@@ -4,7 +4,7 @@
 local wezterm = require 'wezterm'
 
 -- Tab title format
-wezterm.on('format-tab-title', function(tab) return ' ' .. tab.tab_index .. ' ' end)
+wezterm.on('format-tab-title', function(tab) return ' ' .. tab.tab_index + 1 .. ' ' end)
 
 return {
   -- General -------------------------------------------------------------------

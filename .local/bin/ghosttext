@@ -2,7 +2,5 @@
 
 # A drop-in GhostText replacement using Helix/WezTerm.
 # https://ghosttext.fregante.com
-cat ~/.config/helix/config.toml - <<EOF > /tmp/helix_config.toml
-keys.normal.ret = ['select_all', 'yank_main_selection_to_clipboard', ':quit!']
-EOF
+sed '/^ret/d;$a[keys.normal]\nret = ["select_all", "yank_main_selection_to_clipboard", ":quit!"]' ~/.config/helix/config.toml > /tmp/helix_config.toml
 wezterm start --class=popup hx --config /tmp/helix_config.toml scratch.md

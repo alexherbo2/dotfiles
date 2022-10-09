@@ -43,10 +43,6 @@ S = 'surround_add'
 V = 'select_textobject_around'
 
 [keys.normal.space]
-q = ':buffer-close'
-space = ['keep_primary_selection', 'collapse_selection']
-tab = 'flip_selections'
-backspace = 'collapse_selection'
 # Formatting and parsing date-time
 # Format date to 2006-01-02 Mon
 D = ':pipe date -d "$(cat)" "+%F %a" | tr -d "\\n"'

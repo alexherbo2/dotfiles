@@ -1,0 +1,33 @@
+# Alacritty
+# https://alacritty.org
+# https://github.com/alacritty/alacritty/blob/master/alacritty.yml
+
+# Appearance -------------------------------------------------------------------
+
+# Add a bit of transparency to reduce eye strain.
+window:
+  opacity: 0.90
+
+font:
+  size: 16.0
+  normal:
+    family: JetBrains Mono
+
+selection:
+  save_to_clipboard: true
+
+cursor:
+  style:
+    shape: Beam
+    blinking: On
+
+bell:
+  command:
+    program: osascript
+    args: ['-e', 'beep']
+
+# Key bindings -----------------------------------------------------------------
+
+key_bindings:
+  - { key: N, mods: Control|Shift, action: CreateNewWindow }
+  - { key: N, mods: Command, action: CreateNewWindow }

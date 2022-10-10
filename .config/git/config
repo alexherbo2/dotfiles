@@ -3,7 +3,7 @@
   email = taupiqueur.kanto@gmail.com
 
 [core]
-  pager = delta
+  pager = delta | less --mouse
   editor = hx
 
 [delta]

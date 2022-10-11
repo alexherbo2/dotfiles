@@ -73,6 +73,7 @@ a = ['goto_last_accessed_file', 'exit_select_mode']
 x = ['extend_to_line_bounds', 'trim_selections']
 
 [keys.normal]
+'@' = 'replay_macro'
 X = ['extend_to_line_bounds', 'ensure_selections_forward', 'flip_selections']
 q = 'surround_add'
 Q = ['ensure_selections_forward', 'extend_char_right', 'delete_char_forward', 'flip_selections', 'delete_char_backward']
@@ -111,6 +112,7 @@ v = 'select_textobject_inner'
 V = 'select_textobject_around'
 
 [keys.normal.space]
+'@' = 'record_macro'
 # Formatting and parsing date-time
 # Format date to 2006-01-02 Mon
 D = ':pipe date -d "$(cat)" "+%F %a" | tr -d "\\n"'

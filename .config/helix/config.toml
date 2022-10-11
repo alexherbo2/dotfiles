@@ -49,6 +49,9 @@ O = 'vsplit'
 c = 'wclose'
 C = 'wonly'
 
+[keys.normal.G]
+e = ['select_mode', 'ensure_selections_forward', 'goto_file_end', 'exit_select_mode']
+
 [keys.select.g]
 e = 'goto_file_end'
 a = ['goto_last_accessed_file', 'exit_select_mode']
@@ -67,6 +70,7 @@ a = ['goto_last_accessed_file', 'exit_select_mode']
 x = ['extend_to_line_bounds', 'trim_selections']
 
 [keys.normal]
+X = ['extend_to_line_bounds', 'ensure_selections_forward', 'flip_selections']
 D = 'copy_selection_on_next_line'
 q = 'surround_add'
 Q = ['ensure_selections_forward', 'extend_char_right', 'delete_char_forward', 'flip_selections', 'delete_char_backward']

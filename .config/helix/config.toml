@@ -37,6 +37,9 @@ render = true
 # Kakoune keyboard shortcuts
 
 [keys.normal.g]
+s = 'symbol_picker'
+j = 'jumplist_picker'
+'!' = 'diagnostics_picker'
 f = 'file_picker'
 b = 'buffer_picker'
 '/' = 'global_search'

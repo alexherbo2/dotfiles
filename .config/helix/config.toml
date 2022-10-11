@@ -100,6 +100,8 @@ ret = 'command_mode'
 '#' = 'toggle_comments'
 v = 'select_textobject_inner'
 V = 'select_textobject_around'
+A-up = ['extend_to_line_bounds', 'delete_selection', 'move_line_up', 'add_newline_above', 'move_line_up', 'replace_with_yanked']
+A-down = ['extend_to_line_bounds', 'delete_selection', 'add_newline_below', 'move_line_down', 'replace_with_yanked']
 
 [keys.normal.space]
 '@' = 'record_macro'

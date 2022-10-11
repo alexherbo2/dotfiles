@@ -74,7 +74,6 @@ x = ['extend_to_line_bounds', 'trim_selections']
 
 [keys.normal]
 X = ['extend_to_line_bounds', 'ensure_selections_forward', 'flip_selections']
-D = 'copy_selection_on_next_line'
 q = 'surround_add'
 Q = ['ensure_selections_forward', 'extend_char_right', 'delete_char_forward', 'flip_selections', 'delete_char_backward']
 A-n = 'search_prev'
@@ -94,7 +93,6 @@ A-k = 'keep_selections'
 A-K = 'remove_selections'
 A-j = 'join_selections'
 A-J = 'join_selections_space'
-C = ['ensure_selections_forward', 'extend_to_line_end', 'change_selection']
 W = 'extend_next_word_start'
 A-W = 'extend_next_long_word_start'
 A-B = 'extend_prev_long_word_start'

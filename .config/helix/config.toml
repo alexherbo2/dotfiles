@@ -1,7 +1,12 @@
 # Helix
-# https://helix-editor.com
+# https://docs.helix-editor.com/commands.html
 # https://docs.helix-editor.com/configuration.html
+# https://docs.helix-editor.com/keymap.html
+# https://github.com/helix-editor/helix/blob/master/helix-term/src/commands.rs
+# https://github.com/helix-editor/helix/blob/master/helix-term/src/commands/typed.rs
 # https://github.com/helix-editor/helix/blob/master/helix-term/src/keymap/default.rs
+# https://github.com/helix-editor/helix/blob/master/helix-view/src/editor.rs
+# https://helix-editor.com
 
 # Appearance -------------------------------------------------------------------
 
@@ -29,17 +34,75 @@ render = true
 
 # Key bindings -----------------------------------------------------------------
 
+# Kakoune keyboard shortcuts
+
+[keys.normal.g]
+f = 'file_picker'
+b = 'buffer_picker'
+'/' = 'global_search'
+'?' = 'last_picker'
+I = 'goto_first_nonwhitespace'
+
+[keys.normal.space.w]
+o = 'hsplit'
+O = 'vsplit'
+c = 'wclose'
+C = 'wonly'
+
+[keys.select.g]
+e = 'goto_file_end'
+a = ['goto_last_accessed_file', 'exit_select_mode']
+
+[keys.select]
+R = ['replace_with_yanked', 'exit_select_mode']
+e = 'goto_file_end'
+a = ['goto_last_accessed_file', 'exit_select_mode']
+
+[keys.select.space]
+R = ['replace_selections_with_clipboard', 'exit_select_mode']
+e = 'goto_file_end'
+a = ['goto_last_accessed_file', 'exit_select_mode']
+
+[keys.normal.m]
+x = ['extend_to_line_bounds', 'trim_selections']
+
 [keys.normal]
-D = 'remove_primary_selection'
-'{' = 'goto_prev_paragraph'
-'}' = 'goto_next_paragraph'
+D = 'copy_selection_on_next_line'
+q = 'surround_add'
+Q = ['ensure_selections_forward', 'extend_char_right', 'delete_char_forward', 'flip_selections', 'delete_char_backward']
+A-n = 'search_prev'
+N = 'extend_search_next'
+A-N = 'extend_search_prev'
+A-h = ['ensure_selections_forward', 'extend_to_line_start']
+A-l = ['ensure_selections_forward', 'extend_to_line_end']
+f = ['ensure_selections_forward', 'extend_next_char']
+F = ['ensure_selections_forward', 'flip_selections', 'extend_prev_char']
+t = ['ensure_selections_forward', 'extend_till_char']
+T = ['ensure_selections_forward', 'flip_selections', 'extend_till_prev_char']
+H = 'extend_char_left'
+L = 'extend_char_right'
+J = 'extend_line_down'
+K = 'extend_line_up'
+A-k = 'keep_selections'
+A-K = 'remove_selections'
+A-j = 'join_selections'
+A-J = 'join_selections_space'
+C = ['ensure_selections_forward', 'extend_to_line_end', 'change_selection']
+W = 'extend_next_word_start'
+A-W = 'extend_next_long_word_start'
+A-B = 'extend_prev_long_word_start'
+A-E = 'extend_next_long_word_end'
+E = 'extend_next_word_end'
+B = 'extend_prev_word_start'
+'{' = ['ensure_selections_forward', 'flip_selections', 'select_mode', 'goto_prev_paragraph', 'exit_select_mode']
+'}' = ['ensure_selections_forward', 'select_mode', 'goto_next_paragraph', 'exit_select_mode']
 left = 'goto_previous_buffer'
 right = 'goto_next_buffer'
 up = 'add_newline_above'
 down = 'add_newline_below'
 ret = 'command_mode'
 '#' = 'toggle_comments'
-S = 'surround_add'
+v = 'select_textobject_inner'
 V = 'select_textobject_around'
 
 [keys.normal.space]
@@ -67,6 +130,7 @@ n = [
 'C-d' = ':insert-output date "+%F %a" | tr -d "\\n"'
 
 [keys.insert.C-space]
+'i' = ['collapse_selection', ':insert-output printf 0', 'move_char_left', 'yank_joined_to_clipboard', ':new', 'replace_selections_with_clipboard', ':pipe awk "{ print NR - 1 }"', 'split_selection_on_newline', 'yank', ':buffer-close!', 'replace_with_yanked', 'move_char_right']
 space = ['collapse_selection', ':insert-output printf ’']
 '<' = ['collapse_selection', ':insert-output printf “']
 '>' = ['collapse_selection', ':insert-output printf ”']

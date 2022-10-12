@@ -45,6 +45,7 @@ return {
     { key = 'v', mods = 'LEADER', action = wezterm.action.ActivateCopyMode },
 
     -- Zoom
+    { key = 'F11', action = wezterm.action.TogglePaneZoomState },
     { key = 'Enter', mods = 'LEADER', action = wezterm.action.TogglePaneZoomState },
 
     -- Create tabs

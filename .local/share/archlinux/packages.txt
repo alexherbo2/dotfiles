@@ -5,6 +5,7 @@ nerd-fonts-jetbrains-mono # https://nerdfonts.com
 
 # Terminals ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
+tmux # https://github.com/tmux/tmux
 wezterm # https://wezfurlong.org/wezterm/
 konsole # https://konsole.kde.org
 foot # https://codeberg.org/dnkl/foot

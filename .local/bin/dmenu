@@ -1,8 +1,6 @@
 #!/bin/sh
 
 # A drop-in dmenu replacement using fzf/WezTerm.
-> /tmp/stdout
 cat > /tmp/stdin
 wezterm start --class=popup sh -c 'fzf < /tmp/stdin > /tmp/stdout'
-cat /tmp/stdout
-[ -s /tmp/stdout ]
+[ -s /tmp/stdout ] && cat /tmp/stdout

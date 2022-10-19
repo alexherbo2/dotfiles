@@ -229,6 +229,9 @@ bindsym Mod4+r exec seq 0 99 | dmenu | xargs swaymsg rename workspace to --
 
 # Desktop ----------------------------------------------------------------------
 
+# Open GhostText
+bindsym Mod4+e exec ghosttext
+
 # Open mpv with URLs from clipboard
 bindsym Mod4+m exec wl-paste | mpv --playlist=-
 

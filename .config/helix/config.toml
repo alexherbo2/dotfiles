@@ -34,6 +34,9 @@ hidden = false
 # Kakoune keyboard shortcuts
 # https://kakoune.org
 
+# VS Code keyboard shortcuts
+# https://code.visualstudio.com/docs/getstarted/keybindings#_default-keyboard-shortcuts
+
 # Normal mode ------------------------------------------------------------------
 
 # Reference:

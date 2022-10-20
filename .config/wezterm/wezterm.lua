@@ -30,6 +30,9 @@ return {
 
   -- Key bindings --------------------------------------------------------------
 
+  -- tmux keyboard shortcuts
+  -- https://man.openbsd.org/tmux#DEFAULT_KEY_BINDINGS
+
   -- Leader key
   leader = { key = [[`]], timeout_milliseconds = 9000 },
 

@@ -18,6 +18,7 @@ tldr # man – https://tldr.sh
 glow # Markdown – https://github.com/charmbracelet/glow
 
 # Terminal utils
+rsync
 exa # ls – https://the.exa.website
 fd # find – https://github.com/sharkdp/fd
 bat # cat – https://github.com/sharkdp/bat

@@ -17,10 +17,6 @@ eval "$(zoxide init bash)"
 # opam configuration
 eval "$(opam env)"
 
-# RVM
-# https://rvm.io
-. ~/.rvm/scripts/rvm
-
 # Homebrew
 # https://brew.sh
 [ -x /opt/homebrew/bin/brew ] && eval "$(brew shellenv)"

@@ -79,6 +79,7 @@ alias rsync='rsync -azH --info=progress2 --delete'
 txz() {
   tar caf "$1.tar.xz" "$1"
 }
+alias untar='tar xvf'
 
 # bat
 # https://github.com/sharkdp/bat

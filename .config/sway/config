@@ -16,6 +16,7 @@ set $launcher [floating app_id="org.wezfurlong.wezterm"] scratchpad show
 font pango:JetBrains Mono 11
 floating_modifier Mod4
 workspace_auto_back_and_forth yes
+focus_on_window_activation focus
 
 # Input configuration ----------------------------------------------------------
 

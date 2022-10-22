@@ -112,7 +112,7 @@ tectonic # https://tectonic-typesetting.github.io
 
 # plasma # https://kde.org
 plasma-desktop # https://kde.org
-~plasma-wayland-session # https://kde.org
+plasma-wayland-session # https://kde.org
 
 # Fonts
 ttf-jetbrains-mono # https://jetbrains.com/lp/mono/

@@ -195,8 +195,8 @@ alias kirc='kirc -s irc.libera.chat -p 6667 -c "libera,kirc" -n taupiqueur -r "M
 
 # Sway
 # https://swaywm.org
-# https://github.com/swaywm/sway/issues/3851
-alias sway='WLR_NO_HARDWARE_CURSORS=1 sway'
+# https://gitlab.freedesktop.org/wlroots/wlroots/-/blob/master/docs/env_vars.md
+alias sway='WLR_RENDERER=pixman WLR_NO_HARDWARE_CURSORS=1 sway'
 
 # macOS ------------------------------------------------------------------------
 

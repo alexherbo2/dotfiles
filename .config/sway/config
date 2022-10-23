@@ -32,23 +32,13 @@ input type:keyboard {
 # https://bloggingboutburgers.tumblr.com/image/645856359657717761
 output * background ~/wallpapers/ducktales-finale.jpg fill
 
-# Idle configuration -----------------------------------------------------------
-
-exec swayidle before-sleep swaylock
-
 # Startup commands -------------------------------------------------------------
 
-# Output configuration
-# https://wayland.emersion.fr/kanshi/
-exec kanshi
-
-# Notifications
-# https://wayland.emersion.fr/mako/
-exec mako
-
-# Night mode
-# https://sr.ht/~kennylevinsen/wlsunset/
-exec wlsunset
+exec swayidle # Idle configuration
+exec kanshi # Output configuration
+exec mako # Notifications
+exec wezterm # Terminal emulator
+exec wlsunset # Night shift
 
 # Colors -----------------------------------------------------------------------
 
@@ -101,12 +91,7 @@ bindsym Mod4+Return exec $terminal
 # Application launcher
 bindsym Mod4+Shift+Return $launcher
 
-# Reload
-bindsym Mod4+F5 reload
-
 # Logout
-bindsym Mod4+BackSpace exec swaylock
-bindsym Mod4+Shift+BackSpace exec systemctl suspend
 bindsym Control+Mod1+BackSpace exit
 
 # Mouse bindings ---------------------------------------------------------------

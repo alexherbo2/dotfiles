@@ -86,6 +86,10 @@ alias cat=bat
 # https://curl.haxx.se
 alias curl='curl -sSL'
 
+# Kakoune
+# https://kakoune.org
+alias kak='kak -n'
+
 # side tree panel
 alias st='open -a Finder'
 alias st.='open -a Finder .'

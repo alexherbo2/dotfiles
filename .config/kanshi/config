@@ -1,3 +1,6 @@
+# kanshi
+# https://wayland.emersion.fr/kanshi/
+# https://github.com/swaywm/sway/blob/master/sway/sway-output.5.scd
 profile {
   output eDP-1 enable
 }

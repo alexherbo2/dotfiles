@@ -196,6 +196,10 @@ alias rr='rails routes --grep'
 # http://kirc.io
 alias kirc='kirc -s irc.libera.chat -p 6667 -c "libera,kirc" -n taupiqueur -r "Mathieu Ablasou"'
 
+# Arch Linux -------------------------------------------------------------------
+
+alias yay=paru
+
 # Window managers --------------------------------------------------------------
 
 # Sway

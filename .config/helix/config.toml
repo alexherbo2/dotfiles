@@ -81,6 +81,8 @@ V = 'select_textobject_around'
 A-j = 'join_selections'
 A-k = 'keep_selections'
 
+minus = ['ensure_selections_forward', 'extend_char_right', 'extend_char_left']
+
 '@' = 'record_macro'
 
 X = ['extend_to_line_bounds', 'ensure_selections_forward', 'flip_selections']

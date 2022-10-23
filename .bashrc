@@ -4,6 +4,7 @@
 # Starship
 # https://starship.rs
 eval "$(starship init bash)"
+bind -x '"\C-l":"clear"'
 
 # McFly
 # https://github.com/cantino/mcfly

@@ -1,2 +1,5 @@
+# swayidle
+# https://github.com/swaywm/swayidle
+# https://github.com/swaywm/swayidle/blob/master/swayidle.1.scd
 timeout 600 swaylock
 before-sleep swaylock

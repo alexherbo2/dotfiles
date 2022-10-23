@@ -27,10 +27,8 @@ input type:keyboard {
 
 # Output configuration ---------------------------------------------------------
 
-# DuckTales Finale by AKHTS
-# https://akhts.carrd.co
-# https://bloggingboutburgers.tumblr.com/image/645856359657717761
-output * background ~/wallpapers/ducktales-finale.jpg fill
+# Big Blue by Orioto (2009-03-22): https://deviantart.com/orioto/art/Big-Blue-116686280
+output * background ~/wallpapers/big-blue.jpg fill
 
 # Startup commands -------------------------------------------------------------
 

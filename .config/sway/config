@@ -240,4 +240,4 @@ bindsym XF86MonBrightnessDown exec light -U 5
 
 for_window [app_id="popup"] floating enable
 for_window [app_id="panel"] move left
-for_window [title="Picture in picture"] floating enable
+for_window [title="Picture in picture"] floating enable, sticky enable

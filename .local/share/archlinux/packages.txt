@@ -49,11 +49,6 @@ emacs # https://gnu.org/software/emacs/
 
 dolphin # https://apps.kde.org/dolphin/
 xplr # https://xplr.dev
-# broot # https://dystroy.org/broot/
-# ranger # https://ranger.github.io
-# vifm # https://vifm.info
-# sidetree
-# https://github.com/topisani/sidetree
 
 # Git ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -86,10 +81,6 @@ mpv # https://mpv.io
 ffmpeg # FFmpeg https://ffmpeg.org
 yt-dlp # https://github.com/yt-dlp/yt-dlp
 
-# Music players ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-# spotify # https://spotify.com
-
 # Videos editors ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 obs-studio # https://obsproject.com
@@ -110,15 +101,11 @@ tectonic # https://tectonic-typesetting.github.io
 
 # Desktop environments ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-# plasma # https://kde.org
 plasma-desktop # https://kde.org
 plasma-wayland-session # https://kde.org
 
 # Fonts
 ttf-jetbrains-mono # https://jetbrains.com/lp/mono/
-
-# Display managers
-sddm # https://github.com/sddm/sddm
 
 # Networking
 networkmanager # https://wiki.gnome.org/Projects/NetworkManager
@@ -159,12 +146,6 @@ wf-recorder # https://github.com/ammen99/wf-recorder
 wev # https://git.sr.ht/~sircmpwn/wev
 wlr-randr # https://sr.ht/~emersion/wlr-randr/
 
-# Messaging ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-kirc # http://kirc.io
-discord # https://discord.com
-element-desktop # https://element.io
-
 # Games ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 steam # https://store.steampowered.com
@@ -195,8 +176,6 @@ melonds # Nintendo DS – http://melonds.kuribo64.net
 
 docker # https://docker.com
 
-# Android ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
 # Tools ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 # Networking
@@ -204,7 +183,6 @@ openssh # https://openssh.com
 openssl # https://openssl.org
 
 # Archivers
-# archiver # https://github.com/mholt/archiver
 p7zip # https://7-zip.org
 
 # Programming languages
@@ -270,24 +248,20 @@ llvm # https://llvm.org (provides llvm-config)
 make # https://gnu.org/software/make/
 
 # Rust
-# https://rust-lang.org
 rust # https://rust-lang.org
 rustup # https://rustup.rs
 rust-analyzer # https://rust-analyzer.github.io
 
 # Crystal
-# https://crystal-lang.org
 crystal # https://crystal-lang.org
 shards # https://github.com/crystal-lang/shards
 crystalline # https://github.com/elbywan/crystalline
 
 # Ruby
-# https://ruby-lang.org
 ruby # https://ruby-lang.org
 ruby-solargraph # https://solargraph.org
 
 # Elixir
-# https://elixir-lang.org
 elixir # https://elixir-lang.org
 elixir-ls # https://elixir-lsp.github.io/elixir-ls/
 

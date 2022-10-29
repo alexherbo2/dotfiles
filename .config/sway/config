@@ -6,7 +6,7 @@
 
 # Terminal emulator
 # https://wezfurlong.org/wezterm/
-set $terminal wezterm cli spawn
+set $terminal wezterm cli spawn --new-window
 
 # Application launcher
 set $launcher [floating app_id="org.wezfurlong.wezterm"] scratchpad show

@@ -21,8 +21,14 @@ focus_on_window_activation focus
 # Input configuration ----------------------------------------------------------
 
 input type:keyboard {
-  xkb_layout us,fr
-  xkb_options grp:caps_toggle
+  xkb_layout us
+  xkb_variant altgr-intl
+  xkb_options compose:ralt
+}
+
+input type:touchpad {
+  natural_scroll enabled
+  tap enabled
 }
 
 # Output configuration ---------------------------------------------------------

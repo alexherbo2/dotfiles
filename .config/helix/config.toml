@@ -62,6 +62,10 @@ W = 'extend_next_word_start'
 E = 'extend_next_word_end'
 B = 'extend_prev_word_start'
 
+A-w = 'move_next_long_word_start'
+A-e = 'move_next_long_word_end'
+A-b = 'move_prev_long_word_start'
+
 A-W = 'extend_next_long_word_start'
 A-E = 'extend_next_long_word_end'
 A-B = 'extend_prev_long_word_start'

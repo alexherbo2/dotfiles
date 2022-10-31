@@ -125,7 +125,6 @@ C-d = ':insert-output date "+%F %a" | tr -d "\\n"'
 # See also “Vim digraphs” for defaults.
 # https://vimhelp.org/digraph.txt.html#digraphs-default
 ';' = ['collapse_selection', ':insert-output printf ";"']
-'^' = ['collapse_selection', ':insert-output printf ê']
 w = ['collapse_selection', ':insert-output printf é']
 W = ['collapse_selection', ':insert-output printf É']
 e = ['collapse_selection', ':insert-output printf è']
@@ -139,7 +138,8 @@ o = ['collapse_selection', ':insert-output printf ô']
 a = ['collapse_selection', ':insert-output printf à']
 A = ['collapse_selection', ':insert-output printf À']
 s = ['collapse_selection', ':insert-output printf â']
-':' = ['collapse_selection', ':insert-output printf ë']
+d = ['collapse_selection', ':insert-output printf ê']
+f = ['collapse_selection', ':insert-output printf ë']
 c = ['collapse_selection', ':insert-output printf ç']
 C = ['collapse_selection', ':insert-output printf Ç']
 z = ['collapse_selection', ':insert-output printf æ']

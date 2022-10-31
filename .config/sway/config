@@ -21,9 +21,9 @@ focus_on_window_activation focus
 # Input configuration ----------------------------------------------------------
 
 input type:keyboard {
-  xkb_layout us
-  xkb_variant altgr-intl
-  xkb_options compose:ralt
+  xkb_layout us,fr
+  xkb_variant lafayette
+  xkb_options grp:caps_toggle
 }
 
 input type:touchpad {

@@ -22,7 +22,6 @@ focus_on_window_activation focus
 
 input type:keyboard {
   xkb_layout us,fr
-  xkb_variant ,lafayette
   xkb_options grp:caps_toggle
 }
 

@@ -201,9 +201,6 @@ inotify-tools # https://github.com/inotify-tools/inotify-tools
 # XDG
 xdg-utils # https://freedesktop.org/wiki/Software/xdg-utils/ (provides xdg-open)
 
-# Sound
-alsa-utils # https://alsa-project.org
-
 # Notifications
 libnotify # https://developer.gnome.org/notification-spec/ (provides notify-send)
 

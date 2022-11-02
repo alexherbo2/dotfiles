@@ -20,6 +20,8 @@ default_border pixel 3
 default_floating_border none
 hide_edge_borders smart
 focus_on_window_activation focus
+gaps outer 5
+gaps inner 10
 
 # Input configuration ----------------------------------------------------------
 
@@ -118,8 +120,10 @@ bindsym Mod4+f fullscreen toggle
 bindsym Mod4+Shift+d bar mode dock
 bindsym Mod4+Shift+f bar mode invisible
 
-# Tiling and floating
+# Toggle floating mode.
 bindsym Mod4+Shift+space floating toggle
+
+# Swap focus between tiling and floating windows.
 bindsym Mod4+space focus mode_toggle
 
 # Containers -------------------------------------------------------------------
@@ -157,8 +161,7 @@ bindsym Mod4+Control+l resize grow right 5 ppt or 10 px
 bindsym Mod4+b border toggle
 
 # Change the gaps for the current workspace.
-bindsym Mod4+g gaps inner current minus 10
-bindsym Mod4+Shift+g gaps inner current plus 10
+bindsym Mod4+g gaps outer current toggle, gaps inner current toggle
 
 # Workspaces -------------------------------------------------------------------
 

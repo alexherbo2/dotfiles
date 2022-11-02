@@ -146,35 +146,16 @@ bindsym Mod4+Shift+k move up
 bindsym Mod4+Shift+l move right
 
 # Resize focused window
-bindsym Mod4+Control+h resize shrink right 5 ppt
-bindsym Mod4+Control+j resize grow down 5 ppt
-bindsym Mod4+Control+k resize shrink down 5 ppt
-bindsym Mod4+Control+l resize grow right 5 ppt
+bindsym Mod4+Control+h resize shrink right 5 ppt or 10 px
+bindsym Mod4+Control+j resize grow down 5 ppt or 10 px
+bindsym Mod4+Control+k resize shrink down 5 ppt or 10 px
+bindsym Mod4+Control+l resize grow right 5 ppt or 10 px
 
 # Change the gaps for the current workspace.
 bindsym Mod4+g gaps inner current minus 10
 bindsym Mod4+Shift+g gaps inner current plus 10
 
-# Change border styles
-bindsym Mod4+b border pixel
-bindsym Mod4+Shift+b border normal
-
-# Change border size
-bindsym Mod4+v border pixel 10
-bindsym Mod4+Shift+V border pixel 2
-
-# Mark window
-bindsym Mod4+Shift+m exec seq 0 99 | dmenu | xargs swaymsg mark --
-
 # Workspaces -------------------------------------------------------------------
-
-# Switch to the next or previous workspace
-bindsym Mod4+n workspace next
-bindsym Mod4+Shift+n workspace prev
-
-# Switch to the last workspace
-bindsym Mod4+Tab workspace back_and_forth
-bindsym Mod4+Shift+Tab move container to workspace back_and_forth
 
 # Switch to workspace
 bindsym Mod4+1 workspace number 1
@@ -187,7 +168,6 @@ bindsym Mod4+7 workspace number 7
 bindsym Mod4+8 workspace number 8
 bindsym Mod4+9 workspace number 9
 bindsym Mod4+0 workspace number 10
-bindsym Mod4+slash scratchpad show
 
 # Move focused container to workspace
 bindsym Mod4+Shift+1 move container to workspace number 1
@@ -200,10 +180,10 @@ bindsym Mod4+Shift+7 move container to workspace number 7
 bindsym Mod4+Shift+8 move container to workspace number 8
 bindsym Mod4+Shift+9 move container to workspace number 9
 bindsym Mod4+Shift+0 move container to workspace number 10
-bindsym Mod4+Shift+minus move scratchpad
 
-# Rename workspace
-bindsym Mod4+r exec seq 0 99 | dmenu | xargs swaymsg rename workspace to --
+# Move windows in and out of the scratchpad.
+bindsym Mod4+Shift+minus move scratchpad
+bindsym Mod4+minus scratchpad show
 
 # Desktop ----------------------------------------------------------------------
 
@@ -220,15 +200,13 @@ bindsym Shift+Print exec slurp | grim -g - ~/Desktop/$(date '+%F_%T').webp
 # Multimedia-keys --------------------------------------------------------------
 
 # Volume controls
-# https://alsa-project.org
-bindsym XF86AudioMute exec amixer set Master toggle
-bindsym XF86AudioRaiseVolume exec amixer set Master 5%+
-bindsym XF86AudioLowerVolume exec amixer set Master 5%-
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 
-# Screen brightness
-# https://haikarainen.github.io/light/
-bindsym XF86MonBrightnessUp exec light -A 5
-bindsym XF86MonBrightnessDown exec light -U 5
+# Brightness controls
+bindsym XF86MonBrightnessUp exec light -T 1.3
+bindsym XF86MonBrightnessDown exec light -T 0.72
 
 # Rules ------------------------------------------------------------------------
 

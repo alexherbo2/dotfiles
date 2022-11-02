@@ -16,6 +16,9 @@ set $launcher [floating app_id="org.wezfurlong.wezterm"] scratchpad show
 font pango:JetBrains Mono 11
 floating_modifier Mod4
 workspace_auto_back_and_forth yes
+default_border pixel 3
+default_floating_border none
+hide_edge_borders smart
 focus_on_window_activation focus
 
 # Input configuration ----------------------------------------------------------
@@ -110,7 +113,6 @@ bindsym Mod4+a layout tabbed
 bindsym Mod4+s layout stacking
 bindsym Mod4+d layout toggle split
 bindsym Mod4+f fullscreen toggle
-bindsym Mod4+x sticky toggle
 
 # Distraction-free
 bindsym Mod4+Shift+d bar mode dock
@@ -150,6 +152,9 @@ bindsym Mod4+Control+h resize shrink right 5 ppt or 10 px
 bindsym Mod4+Control+j resize grow down 5 ppt or 10 px
 bindsym Mod4+Control+k resize shrink down 5 ppt or 10 px
 bindsym Mod4+Control+l resize grow right 5 ppt or 10 px
+
+# Cycle through border styles
+bindsym Mod4+b border toggle
 
 # Change the gaps for the current workspace.
 bindsym Mod4+g gaps inner current minus 10
@@ -210,6 +215,7 @@ bindsym XF86MonBrightnessDown exec light -T 0.72
 
 # Rules ------------------------------------------------------------------------
 
+for_window [floating] border csd
+for_window [app_id="mpv"] sticky enable
 for_window [app_id="popup"] floating enable
-for_window [app_id="panel"] move left
 for_window [title="Picture in picture"] floating enable, sticky enable

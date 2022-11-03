@@ -48,6 +48,7 @@ emacs # https://gnu.org/software/emacs/
 # File managers ----------------------------------------------------------------
 
 dolphin # https://apps.kde.org/dolphin/
+broot # https://dystroy.org/broot/
 xplr # https://xplr.dev
 
 # Git --------------------------------------------------------------------------

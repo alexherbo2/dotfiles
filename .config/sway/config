@@ -4,7 +4,6 @@
 
 # Options ----------------------------------------------------------------------
 
-font pango:JetBrains Mono 11
 floating_modifier Mod4
 workspace_auto_back_and_forth yes
 default_border pixel 3
@@ -41,6 +40,11 @@ exec wezterm cli --class=launcher spawn --new-window # Application launcher
 
 # Appearance -------------------------------------------------------------------
 
+# Font configuration
+font pango:JetBrains Mono 11
+
+# Color scheme -----------------------------------------------------------------
+
 # Color palette: Catppuccin Latte
 # https://github.com/catppuccin/catppuccin#-palettes
 set $text #4c4f69
@@ -48,6 +52,7 @@ set $base #eff1f5
 set $mantle #e6e9ef
 set $crust #dce0e8
 
+# Color scheme
 # client.<class> <border> <background> <text> <indicator> <child_border>
 # https://github.com/swaywm/sway/raw/master/sway/sway.5.scd#:~:text=client.
 client.focused $crust $crust $text $mantle $crust

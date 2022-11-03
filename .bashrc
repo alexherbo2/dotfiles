@@ -15,10 +15,6 @@ eval "$(mcfly init bash)"
 # https://github.com/ajeetdsouza/zoxide
 eval "$(zoxide init bash)"
 
-# Broot
-# https://dystroy.org/broot/
-. ~/.config/broot/launcher/bash/br
-
 # opam configuration
 eval "$(opam env)"
 
@@ -57,6 +53,7 @@ alias md='mkdir -p --'
 alias _='rm -Rf --'
 
 # Navigation
+alias .=broot
 alias ..='cd ..'
 alias ...='cd ../..'
 

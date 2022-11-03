@@ -130,7 +130,6 @@ river # https://github.com/riverwm/river
 
 # Services
 kanshi # Output configuration – https://wayland.emersion.fr/kanshi/
-mako # Notifications – https://wayland.emersion.fr/mako/
 
 # Clipboard
 wl-clipboard # https://github.com/bugaevc/wl-clipboard
@@ -197,12 +196,6 @@ parted # https://gnu.org/software/parted/
 
 # Watchers
 inotify-tools # https://github.com/inotify-tools/inotify-tools
-
-# XDG
-xdg-utils # https://freedesktop.org/wiki/Software/xdg-utils/ (provides xdg-open)
-
-# Notifications
-libnotify # https://developer.gnome.org/notification-spec/ (provides notify-send)
 
 # Web ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 

@@ -15,7 +15,7 @@ eval "$(mcfly init bash)"
 # https://github.com/ajeetdsouza/zoxide
 eval "$(zoxide init bash)"
 
-# broot
+# Broot
 # https://dystroy.org/broot/
 . ~/.config/broot/launcher/bash/br
 

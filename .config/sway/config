@@ -2,15 +2,6 @@
 # https://swaywm.org
 # https://github.com/swaywm/sway/blob/master/config.in
 
-# Variables --------------------------------------------------------------------
-
-# Terminal emulator
-# https://wezfurlong.org/wezterm/
-set $terminal wezterm cli spawn --new-window
-
-# Application launcher
-set $launcher [app_id="launcher"] scratchpad show
-
 # Options ----------------------------------------------------------------------
 
 font pango:JetBrains Mono 11
@@ -48,7 +39,7 @@ exec wlsunset # Night shift
 exec wezterm # Terminal emulator
 exec wezterm cli --class=launcher spawn --new-window # Application launcher
 
-# Colors -----------------------------------------------------------------------
+# Appearance -------------------------------------------------------------------
 
 # Color palette: Catppuccin Latte
 # https://github.com/catppuccin/catppuccin#-palettes
@@ -63,7 +54,7 @@ client.focused $crust $crust $text $mantle $crust
 client.focused_inactive $base $base $text $base $base
 client.unfocused $base $base $text $base $base
 
-# Bar --------------------------------------------------------------------------
+# Status bar -------------------------------------------------------------------
 
 bar {
   position top
@@ -86,78 +77,63 @@ bar {
 
 # Basics -----------------------------------------------------------------------
 
-# Terminal emulator
-bindsym Mod4+Return exec $terminal
+# Open a terminal.
+bindsym Mod4+Return exec wezterm cli spawn --new-window
 
-# Application launcher
-bindsym Mod4+Shift+Return $launcher
+# Open a launcher.
+bindsym Mod4+Shift+Return [app_id="launcher"] scratchpad show
 
-# Logout
+# Exit Sway.
 bindsym Control+Mod1+BackSpace exit
-
-# Mouse bindings ---------------------------------------------------------------
-
-# Close window
-bindsym button2 kill
-
-# Move your focus around
-bindsym --whole-window Mod4+button4 focus left
-bindsym --whole-window Mod4+button5 focus right
-
-# Move the focused window with the same, but add Shift.
-bindsym --whole-window Mod4+Shift+button4 move left
-bindsym --whole-window Mod4+Shift+button5 move right
 
 # Layouts ----------------------------------------------------------------------
 
-# Change layout of container
+# Change layout style.
 bindsym Mod4+a layout tabbed
 bindsym Mod4+s layout stacking
 bindsym Mod4+d layout toggle split
-bindsym Mod4+f fullscreen toggle
 
-# Distraction-free
-bindsym Mod4+Shift+d bar mode dock
-bindsym Mod4+Shift+f bar mode invisible
+# Toggle full-screen mode.
+bindsym Mod4+f fullscreen toggle
 
 # Toggle floating mode.
 bindsym Mod4+Shift+space floating toggle
 
-# Swap focus between tiling and floating windows.
+# Swap focus between tiling and floating areas.
 bindsym Mod4+space focus mode_toggle
 
 # Containers -------------------------------------------------------------------
 
-# Kill focused window
+# Close focused window.
 bindsym Mod4+w kill
 
-# Horizontal and vertical splits
+# Switch between horizontal and vertical splits.
 bindsym Mod4+o split vertical
 bindsym Mod4+Shift+o split horizontal
 
-# Focus parent and child containers
+# Focus parent and child containers.
 bindsym Mod4+u focus parent
 bindsym Mod4+i focus child
 
-# Move your focus around
+# Move your focus around.
 bindsym Mod4+h focus left
 bindsym Mod4+j focus down
 bindsym Mod4+k focus up
 bindsym Mod4+l focus right
 
-# Move the focused window with the same, but add Shift.
+# Move focused window.
 bindsym Mod4+Shift+h move left
 bindsym Mod4+Shift+j move down
 bindsym Mod4+Shift+k move up
 bindsym Mod4+Shift+l move right
 
-# Resize focused window
+# Resize focused window.
 bindsym Mod4+Control+h resize shrink right 5 ppt or 10 px
 bindsym Mod4+Control+j resize grow down 5 ppt or 10 px
 bindsym Mod4+Control+k resize shrink down 5 ppt or 10 px
 bindsym Mod4+Control+l resize grow right 5 ppt or 10 px
 
-# Cycle through border styles
+# Cycle through border styles.
 bindsym Mod4+b border toggle
 
 # Change the gaps for the current workspace.
@@ -165,7 +141,7 @@ bindsym Mod4+g gaps outer current toggle, gaps inner current toggle
 
 # Workspaces -------------------------------------------------------------------
 
-# Switch to workspace
+# Switch to workspace.
 bindsym Mod4+1 workspace number 1
 bindsym Mod4+2 workspace number 2
 bindsym Mod4+3 workspace number 3
@@ -177,7 +153,7 @@ bindsym Mod4+8 workspace number 8
 bindsym Mod4+9 workspace number 9
 bindsym Mod4+0 workspace number 10
 
-# Move focused container to workspace
+# Move focused container to workspace.
 bindsym Mod4+Shift+1 move container to workspace number 1
 bindsym Mod4+Shift+2 move container to workspace number 2
 bindsym Mod4+Shift+3 move container to workspace number 3
@@ -195,13 +171,13 @@ bindsym Mod4+minus scratchpad show
 
 # Desktop ----------------------------------------------------------------------
 
-# Open GhostText
+# Open GhostText.
 bindsym Mod4+e exec ghosttext
 
-# Open mpv with URLs from clipboard
+# Open mpv with URLs from clipboard.
 bindsym Mod4+m exec wl-paste | mpv --playlist=-
 
-# Screenshots
+# Take screenshots.
 bindsym Print exec grim ~/Desktop/$(date '+%F_%T').webp
 bindsym Shift+Print exec slurp | grim -g - ~/Desktop/$(date '+%F_%T').webp
 

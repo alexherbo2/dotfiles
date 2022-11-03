@@ -15,6 +15,10 @@ eval "$(mcfly init bash)"
 # https://github.com/ajeetdsouza/zoxide
 eval "$(zoxide init bash)"
 
+# broot
+# https://dystroy.org/broot/
+. ~/.config/broot/launcher/bash/br
+
 # opam configuration
 eval "$(opam env)"
 
@@ -89,10 +93,6 @@ alias curl='curl -sSL'
 # Kakoune
 # https://kakoune.org
 alias kak='kak -n'
-
-# side tree panel
-alias st='open -a Finder'
-alias st.='open -a Finder .'
 
 # Git
 # https://git-scm.com
@@ -174,10 +174,6 @@ imv() {
 xmv() {
   xplr | imv "$@"
 }
-
-# mpv
-# https://mpv.io
-alias mpv='open -a mpv'
 
 # yt-dlp
 # https://github.com/yt-dlp/yt-dlp

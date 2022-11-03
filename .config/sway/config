@@ -9,7 +9,7 @@
 set $terminal wezterm cli spawn --new-window
 
 # Application launcher
-set $launcher [floating app_id="org.wezfurlong.wezterm"] scratchpad show
+set $launcher [app_id="launcher"] scratchpad show
 
 # Options ----------------------------------------------------------------------
 
@@ -44,9 +44,9 @@ output * background ~/wallpapers/big-blue.jpg fill
 
 exec swayidle # Idle configuration
 exec kanshi # Output configuration
-exec mako # Notifications
-exec wezterm # Terminal emulator
 exec wlsunset # Night shift
+exec wezterm # Terminal emulator
+exec wezterm cli --class=launcher spawn --new-window # Application launcher
 
 # Colors -----------------------------------------------------------------------
 

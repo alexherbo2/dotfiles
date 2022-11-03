@@ -5,7 +5,6 @@
 
 set completion-ignore-case on
 set completion-map-case on
-set skip-completed-text on
 set mark-symlinked-directories on
 set colored-completion-prefix on
 set colored-stats on

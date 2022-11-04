@@ -57,6 +57,10 @@ alias .=broot
 alias ..='cd ..'
 alias ...='cd ../..'
 
+# Application launcher
+# Note: Runs command with aliases.
+alias @='swaymsg exec -- '
+
 # ifconfig.co
 # https://ifconfig.co
 alias ipd='curl ifconfig.co'

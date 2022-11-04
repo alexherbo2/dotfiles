@@ -10,6 +10,8 @@ fzf # https://github.com/junegunn/fzf
 
 # Terminal tools
 tldr # man – https://tldr.sh
+dmenu # https://tools.suckless.org/dmenu/
+i3status # https://i3wm.org/docs/i3status.html
 glow # Markdown – https://github.com/charmbracelet/glow
 
 # Terminal utils
@@ -128,9 +130,6 @@ swaylock # https://github.com/swaywm/swaylock
 
 # river
 river # https://github.com/riverwm/river
-
-# Services
-kanshi # Output configuration – https://wayland.emersion.fr/kanshi/
 
 # Clipboard
 wl-clipboard # https://github.com/bugaevc/wl-clipboard

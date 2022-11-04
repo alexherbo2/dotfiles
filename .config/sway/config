@@ -29,14 +29,13 @@ input type:touchpad {
 
 # Big Blue by Orioto (2009-03-22): https://deviantart.com/orioto/art/Big-Blue-116686280
 output * background ~/wallpapers/big-blue.jpg fill
+output "Dell Inc. DELL S2721QS FNN7M43" mode 3840x2160 position 0,0 scale 2
 
 # Startup commands -------------------------------------------------------------
 
 exec swayidle # Idle configuration
-exec kanshi # Output configuration
 exec wlsunset # Night shift
-exec wezterm # Terminal emulator
-exec wezterm cli --class=launcher spawn --new-window # Application launcher
+exec wezterm, move scratchpad # Terminal emulator
 
 # Appearance -------------------------------------------------------------------
 
@@ -65,7 +64,7 @@ bar {
   position top
 
   # Status line
-  status_command while date +'%A %F %R'; do sleep 10; done
+  status_command i3status
 
   # https://github.com/swaywm/sway/raw/master/sway/sway-bar.5.scd#:~:text=colors
   colors {
@@ -86,7 +85,7 @@ bar {
 bindsym Mod4+Return exec wezterm cli spawn --new-window
 
 # Open a launcher.
-bindsym Mod4+Shift+Return [app_id="launcher"] scratchpad show
+bindsym Mod4+Shift+Return exec dmenu_path | dmenu | xargs swaymsg exec
 
 # Exit Sway.
 bindsym Control+Mod1+BackSpace exit
@@ -137,12 +136,6 @@ bindsym Mod4+Control+h resize shrink right 5 ppt or 10 px
 bindsym Mod4+Control+j resize grow down 5 ppt or 10 px
 bindsym Mod4+Control+k resize shrink down 5 ppt or 10 px
 bindsym Mod4+Control+l resize grow right 5 ppt or 10 px
-
-# Cycle through border styles.
-bindsym Mod4+b border toggle
-
-# Change the gaps for the current workspace.
-bindsym Mod4+g gaps outer current toggle, gaps inner current toggle
 
 # Workspaces -------------------------------------------------------------------
 
@@ -202,4 +195,5 @@ bindsym XF86MonBrightnessDown exec light -T 0.72
 for_window [floating] border csd
 for_window [app_id="mpv"] sticky enable
 for_window [app_id="popup"] floating enable
+bindsym Mod4+Shift+minus move scratchpad
 for_window [title="Picture in picture"] floating enable, sticky enable

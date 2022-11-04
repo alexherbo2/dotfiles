@@ -6,7 +6,7 @@ konsole # https://apps.kde.org/konsole/
 foot # https://codeberg.org/dnkl/foot
 
 # Fuzzy finders
-fzf # https://github.com/junegunn/fzf
+fzy # https://github.com/jhawthorn/fzy
 
 # Terminal tools
 tldr # man – https://tldr.sh

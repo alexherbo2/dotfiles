@@ -85,7 +85,7 @@ bar {
 bindsym Mod4+Return exec wezterm cli spawn --new-window
 
 # Open a launcher.
-bindsym Mod4+Shift+Return exec dmenu_path | dmenu | xargs swaymsg exec
+bindsym Mod4+p exec dmenu_path | dmenu | xargs swaymsg exec
 
 # Exit Sway.
 bindsym Control+Mod1+BackSpace exit

@@ -9,4 +9,6 @@ set mark-symlinked-directories on
 set colored-completion-prefix on
 set colored-stats on
 
+C-p: history-substring-search-backward
+C-n: history-substring-search-forward
 C-o: edit-and-execute-command

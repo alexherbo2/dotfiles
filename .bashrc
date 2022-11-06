@@ -1,5 +1,6 @@
 # Bash
 # https://gnu.org/software/bash/
+# https://gnu.org/software/bash/manual/bash.html
 
 # Starship
 # https://starship.rs
@@ -26,6 +27,9 @@ eval "$(opam env)"
 [ -r /opt/homebrew/etc/profile.d/bash_completion.sh ] && . /opt/homebrew/etc/profile.d/bash_completion.sh
 
 # Environment variables --------------------------------------------------------
+
+# Bash history size
+export HISTSIZE=-1
 
 # Paths
 export PATH=~/.local/bin:~/.cargo/bin:$PATH

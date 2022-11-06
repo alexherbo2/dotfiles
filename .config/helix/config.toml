@@ -90,8 +90,8 @@ minus = ['ensure_selections_forward', 'extend_char_right', 'extend_char_left']
 '@' = 'record_macro'
 
 X = ['extend_to_line_bounds', 'ensure_selections_forward', 'flip_selections']
-D = ['ensure_selections_forward', 'extend_to_line_bounds', 'extend_char_right', 'extend_char_left', 'delete_selection', 'add_newline_below', 'move_line_down', 'replace_with_yanked']
-Y = ['ensure_selections_forward', 'extend_to_line_bounds', 'extend_char_right', 'extend_char_left', 'delete_selection', 'move_line_up', 'add_newline_above', 'move_line_up', 'replace_with_yanked']
+D = ['ensure_selections_forward', 'extend_to_line_bounds', 'extend_char_right', 'extend_char_left', 'delete_selection', 'paste_after']
+Y = ['ensure_selections_forward', 'extend_to_line_bounds', 'extend_char_right', 'extend_char_left', 'delete_selection', 'move_line_up', 'paste_before']
 
 '#' = 'toggle_comments'
 

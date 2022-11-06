@@ -54,12 +54,17 @@ export EDITOR=hx
 
 alias q=exit
 alias md='mkdir -p --'
+alias cp='cp -n'
+alias mv='mv -n'
 alias _='rm -Rf --'
 
 # Navigation
 alias .=broot
 alias ..='cd ..'
 alias ...='cd ../..'
+
+# Run `sudo` with aliases.
+alias sudo='sudo '
 
 # Application launcher
 # Note: Runs command with aliases.
@@ -154,8 +159,8 @@ gx() {
 
 # exa
 # https://the.exa.website
-alias ls='exa --icons --all'
-alias ll='exa --icons --git --long --all'
+alias ls='exa --group-directories-first --all'
+alias ll='exa --group-directories-first --all --long --git'
 alias tree='exa --tree --all --ignore-glob .git'
 
 # batch

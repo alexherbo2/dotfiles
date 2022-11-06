@@ -211,6 +211,9 @@ alias sway='WLR_RENDERER=pixman WLR_NO_HARDWARE_CURSORS=1 sway'
 
 # macOS ------------------------------------------------------------------------
 
+# Publish a release for aarch64 macOS users.
+alias publish-macos-release='make release version=nightly target=aarch64-apple-darwin && gh release upload nightly releases/*-nightly-aarch64-apple-darwin.tar.xz'
+
 # Keep MacBook awake with lid closed
 # https://caffeinated.app/keep-macbook-awake-with-lid-closed/
 alias caffeinate-lid='sudo pmset -b sleep 0; sudo pmset -b disablesleep 1'

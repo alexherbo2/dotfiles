@@ -157,6 +157,13 @@ gx() {
   cd "$directory"
 }
 
+# Fork
+gfork() {
+  directory=~/code/forks/$1
+  gh repo fork "$1" "$directory"
+  cd "$directory"
+}
+
 # exa
 # https://the.exa.website
 alias ls='exa --group-directories-first --all'

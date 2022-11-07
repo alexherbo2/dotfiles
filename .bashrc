@@ -62,6 +62,7 @@ alias _='rm -Rf --'
 alias .=broot
 alias ..='cd ..'
 alias ...='cd ../..'
+alias -- -='cd -'
 
 # Run `sudo` with aliases.
 alias sudo='sudo '

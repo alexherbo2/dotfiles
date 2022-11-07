@@ -71,6 +71,13 @@ alias sudo='sudo '
 # Note: Runs command with aliases.
 alias @='swaymsg exec -- '
 
+# Make
+alias m=make
+alias mb='make build'
+alias mt='make test'
+alias mr='make release'
+alias mi='make install'
+
 # ifconfig.co
 # https://ifconfig.co
 alias ipd='curl ifconfig.co'

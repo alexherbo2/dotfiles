@@ -144,26 +144,6 @@ alias gsquash='git reset --soft'
 alias gsquash^='git reset --soft HEAD^'
 alias grb='git reset --hard'
 alias grb^='git reset --hard HEAD^'
-# Navigation
-alias gcd='cd "$(git rev-parse --show-toplevel)"'
-# Web
-alias gv='gh repo view --web'
-alias gist='gh gist create --web'
-
-# Clone
-gx() {
-  repository=${1}.git
-  directory=$1; directory=${directory#https://}; directory=${directory%.git}; directory=~/.local/share/$directory
-  git clone "$repository" "$directory"
-  cd "$directory"
-}
-
-# Fork
-gh_fork() {
-  directory=~/code/forks/$1
-  gh repo fork "$1" "$directory"
-  cd "$directory"
-}
 
 # exa
 # https://the.exa.website

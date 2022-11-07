@@ -210,6 +210,7 @@ alias rr='rails routes --grep'
 
 # macOS
 alias brew-install='brew formulae | fzy | xargs brew install'
+alias brew-install-cask='brew casks | fzy | xargs brew install --cask'
 
 # Arch Linux
 alias yay=paru

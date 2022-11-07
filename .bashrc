@@ -159,7 +159,7 @@ gx() {
 }
 
 # Fork
-gfork() {
+gh_fork() {
   directory=~/code/forks/$1
   gh repo fork "$1" "$directory"
   cd "$directory"
@@ -206,9 +206,14 @@ alias pandoc='pandoc --pdf-engine tectonic'
 alias r=rails
 alias rr='rails routes --grep'
 
-# Arch Linux -------------------------------------------------------------------
+# Package managers -------------------------------------------------------------
 
+# macOS
+alias brew-install='brew formulae | fzy | xargs brew install'
+
+# Arch Linux
 alias yay=paru
+alias yay-install='paru -Sl | fzy | xargs paru -S'
 
 # Window managers --------------------------------------------------------------
 

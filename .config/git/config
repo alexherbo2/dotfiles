@@ -9,18 +9,8 @@
 [delta]
   light = true
 
-[pull]
-  ff = only
-
-[push]
-  default = current
-  followTags = true
-
 [commit]
   verbose = true
-
-[checkout]
-  defaultRemote = origin
 
 [log]
   date = iso

@@ -3,11 +3,8 @@
 # https://gnu.org/software/bash/manual/bash.html#Readline-Init-File
 # https://gnu.org/software/bash/manual/bash.html#Bindable-Readline-Commands
 
-set completion-ignore-case on
-set completion-map-case on
-set mark-symlinked-directories on
-set colored-completion-prefix on
 set colored-stats on
+set colored-completion-prefix on
 
 C-p: history-substring-search-backward
 C-n: history-substring-search-forward

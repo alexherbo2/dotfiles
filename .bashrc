@@ -42,7 +42,6 @@ export EDITOR=hx
 
 # Aliases ----------------------------------------------------------------------
 
-alias q=exit
 alias md='mkdir -p --'
 alias cp='cp -n'
 alias mv='mv -n'

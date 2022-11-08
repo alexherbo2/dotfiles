@@ -2,20 +2,6 @@
 # https://gnu.org/software/bash/
 # https://gnu.org/software/bash/manual/bash.html
 
-# Starship
-# https://starship.rs
-eval "$(starship init bash)"
-bind -x '"\C-l":"clear"'
-
-# McFly
-# https://github.com/cantino/mcfly
-export MCFLY_LIGHT=TRUE
-eval "$(mcfly init bash)"
-
-# zoxide
-# https://github.com/ajeetdsouza/zoxide
-eval "$(zoxide init bash)"
-
 # opam configuration
 eval "$(opam env)"
 
@@ -26,6 +12,7 @@ eval "$(opam env)"
 # Enable Bash completion on macOS.
 [ -r /opt/homebrew/etc/profile.d/bash_completion.sh ] && . /opt/homebrew/etc/profile.d/bash_completion.sh
 
+# Prompt -----------------------------------------------------------------------
 # Environment variables --------------------------------------------------------
 
 # Bash history size
@@ -122,8 +109,7 @@ alias gw='git add'
 alias gw.='gw .'
 alias gst='git status'
 alias gdiff='git diff'
-alias gb='git branch'
-alias gco='git checkout'
+alias gb='git branch | fzy | xargs git switch'
 # Log
 # https://git-scm.com/docs/git-log
 alias gl='git log'
@@ -187,11 +173,6 @@ alias y=yt-dlp
 # Pandoc
 # https://pandoc.org
 alias pandoc='pandoc --pdf-engine tectonic'
-
-# Ruby on Rails
-# https://rubyonrails.org
-alias r=rails
-alias rr='rails routes --grep'
 
 # Package managers -------------------------------------------------------------
 

@@ -1,4 +1,6 @@
 git clone https://github.com/helix-editor/helix.git ~/.local/share/github.com/helix-editor/helix
+mpv https://twitch.tv/joueur_du_grenier
+mpv https://twitch.tv/randomwatchertv
 cd ~/.local/share/github.com/helix-editor/helix
 cargo build --release
 cargo install --path helix-term

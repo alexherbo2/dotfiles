@@ -13,6 +13,9 @@ eval "$(opam env)"
 [ -r /opt/homebrew/etc/profile.d/bash_completion.sh ] && . /opt/homebrew/etc/profile.d/bash_completion.sh
 
 # Prompt -----------------------------------------------------------------------
+
+export PS1='\u@\h:\W\n\$'
+
 # Environment variables --------------------------------------------------------
 
 # Bash history size
@@ -64,6 +67,9 @@ alias mb='make build'
 alias mt='make test'
 alias mr='make release'
 alias mi='make install'
+
+# cargo
+alias cb='cargo build --release'
 
 # ifconfig.co
 # https://ifconfig.co

@@ -70,6 +70,7 @@ alias mi='make install'
 
 # cargo
 alias cb='cargo build --release'
+alias ci='cargo install --path .'
 
 # ifconfig.co
 # https://ifconfig.co

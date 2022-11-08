@@ -43,7 +43,7 @@ export EDITOR=hx
 # Key bindings -----------------------------------------------------------------
 
 # Bash history
-bind -x '"\C-r":"fc -lnr 1 -1 | sed s/^\\t\\s// | fzy"'
+bind -x '"\C-r":"READLINE_LINE=$(fc -lnr 1 -1 | sed s/^\\t\\s// | fzy)"'
 
 # Aliases ----------------------------------------------------------------------
 

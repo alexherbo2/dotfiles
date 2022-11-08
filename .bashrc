@@ -48,6 +48,9 @@ alias cp='cp -n'
 alias mv='mv -n'
 alias _='rm -Rf --'
 
+# Bash history
+alias z='eval "$(fzy < ~/.bash_history)"'
+
 # Navigation
 alias .=broot
 alias ..='cd ..'

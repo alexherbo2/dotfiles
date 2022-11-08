@@ -108,19 +108,29 @@ alias kak='kak -n'
 
 # Git
 # https://git-scm.com
-# https://cli.github.com
+# https://git-scm.com/docs/git-add
+# https://git-scm.com/docs/git-status
+# https://git-scm.com/docs/git-diff
+# https://git-scm.com/docs/git-commit
+# https://git-scm.com/docs/git-log
+# https://git-scm.com/docs/git-push
+# https://git-scm.com/docs/git-pull
+# https://git-scm.com/docs/git-reset
+# https://git-scm.com/docs/git-switch
+# https://git-scm.com/docs/git-branch
+# https://git-scm.com/docs/git-restore
 # https://github.com/extrawurst/gitui
+# https://cli.github.com
 alias g=git
 alias G=gitui
 alias gw='git add'
 alias gw.='gw .'
-alias gst='git status'
-alias gdiff='git diff'
+alias gg='git status && git diff'
 alias gb='git branch | fzy | xargs git switch'
-# Log
-# https://git-scm.com/docs/git-log
 alias gl='git log'
 alias gL='git log -p'
+alias gK='git push'
+alias gj='git pull'
 # Grep logs
 alias gF='git log -p -S'
 alias gE='git log -p -G'
@@ -130,12 +140,6 @@ alias gcm='git commit --message'
 alias greword='git commit --amend'
 alias gpick='git commit --amend --no-edit'
 alias gsnapshot='date "+%F %T" | git commit --file=-'
-# Push
-# https://git-scm.com/docs/git-push
-alias gpush='git push'
-# Pull
-# https://git-scm.com/docs/git-pull
-alias gpull='git pull'
 # Undo commit
 alias gu='git restore --staged'
 alias gD='git restore --staged --worktree'

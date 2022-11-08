@@ -40,15 +40,17 @@ export EDITOR=hx
 # Local environment variables
 . ~/.config/env
 
+# Key bindings -----------------------------------------------------------------
+
+# Bash history
+bind -x '"\C-r":"fc -lnr 1 -1 | fzy"'
+
 # Aliases ----------------------------------------------------------------------
 
 alias md='mkdir -p --'
 alias cp='cp -n'
 alias mv='mv -n'
 alias _='rm -Rf --'
-
-# Bash history
-alias z='eval "$(fzy < ~/.bash_history)"'
 
 # Navigation
 alias .=broot

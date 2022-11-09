@@ -10,4 +10,6 @@ export GIT_SSH_COMMAND='ssh -i ~/.ssh/id_ed25519_alexherbo2'
 export EDITOR='kak -n'
 unset GIT_SSH_COMMAND
 rm .git/COMMIT_EDITMSG
+cp ~/config/.bash_history ~ && history -c && exit
 history -c
+history -l

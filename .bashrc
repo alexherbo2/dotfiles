@@ -14,7 +14,8 @@ eval "$(opam env)"
 
 # Prompt -----------------------------------------------------------------------
 
-export PS1='[$?]\u@\h:\W\n:'
+export PS1='\u@\h:\W\n:'
+export PROMPT_COMMAND='[ $? = 0 ] || echo "ERROR: command exited with $?"'
 
 # Environment variables --------------------------------------------------------
 

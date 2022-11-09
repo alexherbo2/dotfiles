@@ -57,7 +57,7 @@ alias _='rm -Rf --'
 alias z='eval "$(history -w /dev/stdout | tac | fzy)"'
 alias hk='history -a'
 alias hj='history -n'
-alias hD='history -c'
+alias hD='history -cr ~/.bash_history~ && history -w'
 
 # Navigation
 alias .=broot

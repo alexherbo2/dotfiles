@@ -131,13 +131,15 @@ alias kak='kak -n'
 # https://git-scm.com/docs/git-branch
 # https://git-scm.com/docs/git-restore
 # https://github.com/extrawurst/gitui
+# https://git-scm.com/docs/git-for-each-ref
+# https://git-scm.com/docs/git-for-each-ref#_field_names
 # https://cli.github.com
 alias g=git
 alias G=gitui
 alias gw='git add'
 alias gw.='gw .'
 alias gg='git status && git diff'
-alias gb='git branch | fzy | xargs git switch'
+alias gb='git branch --format="%(refname:short)" | fzy | xargs git switch'
 alias gl='git log'
 alias gL='git log -p'
 alias gK='git push'

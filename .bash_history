@@ -6,6 +6,9 @@ pw --length=10 lichess.org taupiqueur
 pw --length=10 paragon-software.com taupiqueur.kanto@gmail.com
 pw --length=10 paypal.com taupiqueur.kanto@gmail.com
 pw --length=10 libera.chat taupiqueur
+hx ~/notes.txt
+broot ~/Downloads
+rm -R .config/mpv/watch_later
 git clone https://github.com/helix-editor/helix.git ~/.local/share/github.com/helix-editor/helix
 mpv https://twitch.tv/joueur_du_grenier
 mpv https://twitch.tv/randomwatchertv

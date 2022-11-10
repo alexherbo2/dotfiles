@@ -41,3 +41,6 @@ export EDITOR='kak -n'
 unset GIT_SSH_COMMAND
 rm .git/COMMIT_EDITMSG
 sudo kak /private/var/db/dhcpd_leases
+ssh guest
+rsync home guest:
+rsync storage/wallpapers guest:storage

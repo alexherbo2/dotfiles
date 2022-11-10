@@ -7,9 +7,9 @@ pw --length=10 paragon-software.com taupiqueur.kanto@gmail.com
 pw --length=10 paypal.com taupiqueur.kanto@gmail.com
 pw --length=10 libera.chat taupiqueur
 hx ~/notes.txt
-broot ~/Downloads
-broot ~/Documents
-broot ~/Desktop
+br ~/Downloads
+br ~/Documents
+br ~/Desktop
 cd ~/config
 cd ~/data
 cd ~/tmp

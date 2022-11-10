@@ -17,6 +17,8 @@ cd ~/code/batch
 cd ~/code/chrome-shortcuts
 cd ~/code/pw
 cd ~/code/mpv-clip
+caffeinate -d
+nginx
 rm -R .config/mpv/watch_later
 git clone https://github.com/helix-editor/helix.git ~/.local/share/github.com/helix-editor/helix
 mpv https://twitch.tv/joueur_du_grenier
@@ -31,4 +33,3 @@ export EDITOR='kak -n'
 unset GIT_SSH_COMMAND
 rm .git/COMMIT_EDITMSG
 sudo kak /private/var/db/dhcpd_leases
-history -cr ~/.bash_history~ && history -w

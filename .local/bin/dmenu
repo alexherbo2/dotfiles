@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# A drop-in dmenu replacement using fzy/WezTerm.
+# A drop-in dmenu replacement using fzy/foot.
 cat > /tmp/stdin
-wezterm start --class=popup sh -c 'fzy < /tmp/stdin > /tmp/stdout'
+foot --app-id=popup sh -c 'fzy < /tmp/stdin > /tmp/stdout'
 [ -s /tmp/stdout ] && cat /tmp/stdout

@@ -35,7 +35,7 @@ output "Dell Inc. DELL S2721QS FNN7M43" mode 3840x2160 position 0,0 scale 2
 
 exec swayidle # Idle configuration
 exec wlsunset # Night shift
-exec wezterm, move scratchpad # Terminal emulator
+exec foot, move scratchpad # Terminal emulator
 
 # Appearance -------------------------------------------------------------------
 
@@ -82,7 +82,7 @@ bar {
 # Basics -----------------------------------------------------------------------
 
 # Open a terminal.
-bindsym Mod4+Return exec wezterm cli spawn --new-window
+bindsym Mod4+Return exec foot
 
 # Open a launcher.
 bindsym Mod4+p exec dmenu_path | dmenu | xargs swaymsg exec

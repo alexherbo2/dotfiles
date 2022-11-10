@@ -21,6 +21,8 @@ caffeinate -d
 nginx
 rm -R .config/mpv/watch_later
 git clone https://github.com/helix-editor/helix.git ~/.local/share/github.com/helix-editor/helix
+git clone https://github.com/mawww/kakoune.git ~/.local/share/github.com/mawww/kakoune
+cd ~/.local/share/github.com/mawww/kakoune
 mpv https://twitch.tv/joueur_du_grenier
 mpv https://twitch.tv/randomwatchertv
 cd ~/.local/share/github.com/helix-editor/helix

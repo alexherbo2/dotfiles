@@ -61,7 +61,6 @@ alias hj='history -n'
 alias hD='history -cr ~/.bash_history~ && history -w'
 
 # Navigation
-alias .=broot
 alias ..='cd ..'
 alias ...='cd ../..'
 alias -- -='cd -'
@@ -168,6 +167,10 @@ alias grb^='git reset --hard HEAD^'
 alias ls='exa --group-directories-first --all'
 alias ll='exa --group-directories-first --all --long --git'
 alias tree='exa --tree --all --ignore-glob .git'
+
+# Broot
+# https://dystroy.org/broot/
+alias br=broot
 
 # batch
 # https://github.com/taupiqueur/batch

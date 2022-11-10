@@ -23,6 +23,11 @@ rm -R .config/mpv/watch_later
 git clone https://github.com/helix-editor/helix.git ~/.local/share/github.com/helix-editor/helix
 git clone https://github.com/mawww/kakoune.git ~/.local/share/github.com/mawww/kakoune
 git clone https://github.com/catppuccin/foot.git ~/.local/share/github.com/catppuccin/foot
+git clone https://github.com/elbywan/crystalline.git ~/.local/share/github.com/elbywan/crystalline
+cd ~/.local/share/github.com/elbywan/crystalline
+mkdir bin
+crystal build src/crystalline.cr -o bin/crystalline --release --no-debug --progress -Dpreview_mt
+install bin/crystalline ~/.local/bin
 cd ~/.local/share/github.com/mawww/kakoune
 mpv https://twitch.tv/joueur_du_grenier
 mpv https://twitch.tv/randomwatchertv

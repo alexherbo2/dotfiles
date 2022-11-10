@@ -1,3 +1,11 @@
+pw --length=10 kanto taupiqueur
+pw --length=10 google.com taupiqueur.kanto
+pw --length=10 github.com taupiqueur
+pw --length=10 apple.com taupiqueur.kanto@gmail.com
+pw --length=10 lichess.org taupiqueur
+pw --length=10 paragon-software.com taupiqueur.kanto@gmail.com
+pw --length=10 paypal.com taupiqueur.kanto@gmail.com
+pw --length=10 libera.chat taupiqueur
 git clone https://github.com/helix-editor/helix.git ~/.local/share/github.com/helix-editor/helix
 mpv https://twitch.tv/joueur_du_grenier
 mpv https://twitch.tv/randomwatchertv

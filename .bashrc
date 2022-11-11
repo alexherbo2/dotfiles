@@ -207,13 +207,14 @@ alias pandoc='pandoc --pdf-engine tectonic'
 
 # macOS
 alias brew-update='brew update && brew upgrade'
-alias brew-install='brew formulae | fzy | xargs brew install'
-alias brew-install-cask='brew casks | fzy | xargs brew install --cask'
+alias brew-install='{ brew formulae; brew casks; } | fzy | xargs brew install'
+alias brew-uninstall='brew list | fzy | xargs brew uninstall'
 
 # Arch Linux
 alias yay=paru
 alias yay-update='paru -Syu'
-alias yay-install='paru -Sl | fzy | xargs paru -S'
+alias yay-install='paru -Slq | fzy | xargs paru -S'
+alias yay-uninstall='paru -Qeq | fzy | xargs paru -Rs'
 
 # Window managers --------------------------------------------------------------
 

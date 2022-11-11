@@ -50,6 +50,7 @@ set $text #4c4f69
 set $base #eff1f5
 set $mantle #e6e9ef
 set $crust #dce0e8
+set $lavender #7287fd
 
 # Color scheme
 # client.<class> <border> <background> <text> <indicator> <child_border>

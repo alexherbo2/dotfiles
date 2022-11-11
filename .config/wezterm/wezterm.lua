@@ -25,9 +25,6 @@ return {
   font = wezterm.font('JetBrains Mono'),
   font_size = 16.0,
 
-  -- Cursor style
-  default_cursor_style = 'BlinkingBar',
-
   -- Key bindings --------------------------------------------------------------
 
   -- tmux keyboard shortcuts

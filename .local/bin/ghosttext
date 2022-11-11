@@ -4,4 +4,4 @@
 # https://ghosttext.fregante.com
 > /tmp/scratch.md
 foot --app-id=popup hx /tmp/scratch.md
-[ -s /tmp/scratch.md ] && pbcopy < /tmp/scratch.md
+[ -s /tmp/scratch.md ] && wl-copy < /tmp/scratch.md

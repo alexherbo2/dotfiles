@@ -140,7 +140,7 @@ alias G=gitui
 alias gw='git add'
 alias gw.='gw .'
 alias gg='git status && git diff'
-alias gb='git branch --format="%(refname:short)" | fzy | xargs git switch'
+alias gb='git branch | fzy | cut -c 3- | xargs git switch'
 alias gl='git log'
 alias gL='git log -p'
 alias gK='git push'

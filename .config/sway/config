@@ -51,13 +51,14 @@ set $base #eff1f5
 set $mantle #e6e9ef
 set $crust #dce0e8
 set $lavender #7287fd
+set $sky #04a5e5
 
 # Color scheme
 # client.<class> <border> <background> <text> <indicator> <child_border>
 # https://github.com/swaywm/sway/raw/master/sway/sway.5.scd#:~:text=client.
-client.focused $crust $crust $text $mantle $crust
-client.focused_inactive $base $base $text $base $base
-client.unfocused $base $base $text $base $base
+client.focused $lavender $lavender $base $sky $lavender
+client.focused_inactive $crust $crust $text $crust $crust
+client.unfocused $crust $crust $text $crust $crust
 
 # Status bar -------------------------------------------------------------------
 

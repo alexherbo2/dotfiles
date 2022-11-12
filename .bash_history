@@ -10,6 +10,8 @@ pw --length=10 libera.chat taupiqueur
 hx ~/notes.txt
 hx
 br
+cd ~/notes
+cd ~/Downloads
 br ~/Downloads
 br ~/Documents
 br ~/Desktop
@@ -49,3 +51,4 @@ ssh guest
 rsync home guest:
 rsync storage/wallpapers guest:storage
 git clone https://git.sr.ht/~raiguard/kak-one ~/.local/share/git.sr.ht/~raiguard/kak-one
+shutdown now

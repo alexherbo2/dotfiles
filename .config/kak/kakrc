@@ -10,6 +10,34 @@
 # https://github.com/topisani/dotfiles/blob/master/config/kak/kakrc
 # https://gitlab.com/vbauerster/dotfiles/-/blob/master/.config/kak/kakrc
 
+# ------------------------------------------------------------------------------
+map global normal <ret> ':'
+map global normal f '<a-:>F'
+map global normal F '<a-:><a-;><a-F>'
+map global normal t '<a-:>t'
+map global normal T '<a-:><a-;><a-T>'
+map global normal / '<a-:>?'
+map global normal ? '<a-:><a-;><a-?>'
+map global normal N '<a-n>'
+map global normal <a-n> '<a-:>?<ret>'
+map global normal <a-N> '<a-:><a-;><a-?><ret>'
+map global normal x ': select-or-extend-lines<ret>'
+map global normal X 'x<a-:><a-;>'
+map global normal v '<a-i>'
+map global normal V '<a-a>'
+map global normal { '<a-:><a-;>{p'
+map global normal } '<a-:>}p'
+define-command select-or-extend-lines %{
+  try %{
+    # At least one selection is not full, so select whole lines.
+    execute-keys -draft '<a-K>\A^.+\n\z<ret>'
+    execute-keys 'x'
+  } catch %{
+    execute-keys 'J'
+  }
+}
+# ------------------------------------------------------------------------------
+
 # Preamble ---------------------------------------------------------------------
 
 remove-hooks global config
@@ -27,30 +55,25 @@ set-option global ui_options terminal_set_title=no terminal_assistant=none
 set-option global scrolloff 5,1
 add-highlighter -override global/show-matching show-matching
 add-highlighter -override global/number-lines number-lines -hlcursor
+add-highlighter -override global/show-whitespaces show-whitespaces
 
-# Color scheme: One light (https://git.sr.ht/~raiguard/one.kak)
-colorscheme one-light
+# Color scheme: One light (https://git.sr.ht/~raiguard/kak-one)
+# colorscheme one-light
+source ~/.local/share/git.sr.ht/~raiguard/kak-one/colors/one-light.kak
 
 # Custom faces
 set-face global Whitespace "rgb:%opt{bg}+f"
 set-face global SelectedText "rgb:%opt{blue}+f"
 
 # System clipboard
-set-option global clipboard_copy_command 'pbcopy'
-set-option global clipboard_copy_args
+# set-option global clipboard_copy_command 'pbcopy'
+# set-option global clipboard_copy_args
 
-set-option global clipboard_paste_command 'pbpaste'
-set-option global clipboard_paste_args
-
-# LSP
-try lsp-enable
-
-# Tools
-set-option global makecmd 'make -j 8'
-set-option global grepcmd 'rg --with-filename --line-number --column'
+# set-option global clipboard_paste_command 'pbpaste'
+# set-option global clipboard_paste_args
 
 # Highlight whitespace
-add-highlighter -override global/whitespace ref whitespace
+# add-highlighter -override global/whitespace ref whitespace
 
 # Highlight various characters
 # https://unicode-table.com
@@ -63,37 +86,37 @@ add-highlighter -override global/math-symbols regex '[−×]' '0:cyan+f'
 # Normal mode ------------------------------------------------------------------
 
 # Hot reloading
-map -docstring 'reload kakrc' global user <F5> ': source "%val{runtime}/kakrc"; echo reloaded kakrc<ret>'
+# map -docstring 'reload kakrc' global user <F5> ': source "%val{runtime}/kakrc"; echo reloaded kakrc<ret>'
 
 # Enter command mode
 map -docstring 'enter command' global normal <ret> :
 
 # Re-center view
-map -docstring 'scroll to put the cursor on the top line of the window' global user , vtvm
+# map -docstring 'scroll to put the cursor on the top line of the window' global user , vtvm
 
 # Editing
-map -docstring 'save file' global normal <c-s> ': write; echo -markup ''{Information}file saved''<ret>'
-map -docstring 'close client' global normal <c-q> ': quit<ret>'
-map -docstring 'close buffer' global normal <c-w> ': delete-buffer; echo -markup ''{Information}buffer closed''<ret>'
+# map -docstring 'save file' global normal <c-s> ': write; echo -markup ''{Information}file saved''<ret>'
+# map -docstring 'close client' global normal <c-q> ': quit<ret>'
+# map -docstring 'close buffer' global normal <c-w> ': delete-buffer; echo -markup ''{Information}buffer closed''<ret>'
 
 # Navigation
-map -docstring 'scroll one page up' global normal <pageup> ,<pageup>
-map -docstring 'scroll one page down' global normal <pagedown> ,<pagedown>
-map -docstring 'move to previous paragraph' global normal [ ,gh[pgi
-map -docstring 'move to next paragraph' global normal ] ,]plgi
+# map -docstring 'scroll one page up' global normal <pageup> ,<pageup>
+# map -docstring 'scroll one page down' global normal <pagedown> ,<pagedown>
+# map -docstring 'move to previous paragraph' global normal [ ,gh[pgi
+# map -docstring 'move to next paragraph' global normal ] ,]plgi
 
 # Selection primitives
 map -docstring 'select inner object' global normal v <a-i>
 map -docstring 'select whole object' global normal V <a-a>
-map -docstring 'enter surround mode' global normal q ': enter-surround-mode<ret>'
-map -docstring 'enter select mode' global normal s ': enter-select-mode<ret>'
+# map -docstring 'enter surround mode' global normal q ': enter-surround-mode<ret>'
+# map -docstring 'enter select mode' global normal s ': enter-select-mode<ret>'
 
 # User mode --------------------------------------------------------------------
 
 # LSP
-map -docstring 'lsp' global user l ': enter-user-mode lsp<ret>'
-map -docstring 'open document symbol picker' global user s ': enter-user-mode lsp<ret>s'
-map -docstring 'open workspace symbol picker' global user S ': enter-user-mode lsp<ret>o'
+# map -docstring 'lsp' global user l ': enter-user-mode lsp<ret>'
+# map -docstring 'open document symbol picker' global user s ': enter-user-mode lsp<ret>s'
+# map -docstring 'open workspace symbol picker' global user S ': enter-user-mode lsp<ret>o'
 
 # Formatting and parsing date-time
 map -docstring 'format date to 2006-01-02' global user d '| date -d "$kak_selection" ''+%F''<ret>'

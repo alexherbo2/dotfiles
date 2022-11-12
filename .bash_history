@@ -48,3 +48,4 @@ ssh host
 ssh guest
 rsync home guest:
 rsync storage/wallpapers guest:storage
+git clone https://git.sr.ht/~raiguard/kak-one ~/.local/share/git.sr.ht/~raiguard/kak-one

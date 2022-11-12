@@ -114,6 +114,12 @@ alias cat=bat
 # https://curl.haxx.se
 alias curl='curl -sSL'
 
+# tmux
+# https://github.com/tmux/tmux
+alias t=tmux
+alias ta='tmux attach-session'
+alias tl='tmux list-sessions'
+
 # Kakoune
 # https://kakoune.org
 alias kak='kak -n'

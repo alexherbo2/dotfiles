@@ -7,7 +7,6 @@ include colors/macos
 # Options ----------------------------------------------------------------------
 
 floating_modifier Mod4
-workspace_auto_back_and_forth yes
 default_border pixel 3
 default_floating_border none
 hide_edge_borders smart
@@ -32,35 +31,25 @@ input type:touchpad {
 # Big Blue by Orioto (2009-03-22): https://deviantart.com/orioto/art/Big-Blue-116686280
 output * background ~/wallpapers/big-blue.jpg fill
 output "Dell Inc. DELL S2721QS FNN7M43" mode 3840x2160 position 0,0 scale 2
+output 'Virtual-1' mode 3840x2160 position 0,0 scale 2
 
 # Startup commands -------------------------------------------------------------
 
 exec swayidle # Idle configuration
 exec wlsunset # Night shift
-exec foot, move scratchpad # Terminal emulator
+exec foot # Terminal emulator
 
 # Appearance -------------------------------------------------------------------
 
 # Font configuration
 font pango:JetBrains Mono 11
 
-# Color scheme -----------------------------------------------------------------
-
-# Color palette: Catppuccin Latte
-# https://github.com/catppuccin/catppuccin#-palettes
-set $text #4c4f69
-set $base #eff1f5
-set $mantle #e6e9ef
-set $crust #dce0e8
-set $lavender #7287fd
-set $sky #04a5e5
-
 # Color scheme
 # client.<class> <border> <background> <text> <indicator> <child_border>
 # https://github.com/swaywm/sway/raw/master/sway/sway.5.scd#:~:text=client.
-client.focused $lavender $lavender $base $sky $lavender
-client.focused_inactive $crust $crust $text $crust $crust
-client.unfocused $crust $crust $text $crust $crust
+client.focused $aqua_gray_6 $aqua_gray_6 $dark_gray_6 $aqua_blue $aqua_gray_6
+client.focused_inactive $aqua_gray_5 $aqua_gray_5 $dark_gray_5 $aqua_gray_5 $aqua_gray_5
+client.unfocused $aqua_gray_5 $aqua_gray_5 $dark_gray_5 $aqua_gray_5 $aqua_gray_5
 
 # Status bar -------------------------------------------------------------------
 
@@ -72,12 +61,12 @@ bar {
 
   # https://github.com/swaywm/sway/raw/master/sway/sway-bar.5.scd#:~:text=colors
   colors {
-    background $base
-    statusline $text
+    background $aqua_gray_6
+    statusline $dark_gray_6
     # <class> <border> <background> <text>
-    focused_workspace $crust $crust $text
-    active_workspace $base $base $text
-    inactive_workspace $base $base $text
+    focused_workspace $aqua_gray_5 $aqua_gray_5 $dark_gray_5
+    active_workspace $aqua_gray_6 $aqua_gray_6 $dark_gray_6
+    inactive_workspace $aqua_gray_6 $aqua_gray_6 $dark_gray_6
   }
 }
 

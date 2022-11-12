@@ -122,7 +122,7 @@ alias tl='tmux list-sessions'
 
 # Kakoune
 # https://kakoune.org
-alias kak='kak -n'
+alias kak='kak -n -e "source ~/.config/kak/kakrc"'
 
 # Git
 # https://git-scm.com

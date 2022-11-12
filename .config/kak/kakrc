@@ -1,3 +1,255 @@
 # Kakoune
 # https://kakoune.org
 # https://github.com/mawww/kakoune
+#
+# Configuration:
+#
+# https://github.com/Delapouite/dot-in-the-sky/blob/master/.config/kak/kakrc
+# https://github.com/mawww/config/blob/master/kakrc
+# https://github.com/occivink/config/blob/master/.config/kak/kakrc
+# https://github.com/topisani/dotfiles/blob/master/config/kak/kakrc
+# https://gitlab.com/vbauerster/dotfiles/-/blob/master/.config/kak/kakrc
+
+# Preamble ---------------------------------------------------------------------
+
+remove-hooks global config
+
+try %sh{
+  kak-lsp --kakoune --session "$kak_session"
+  kak-test --print-kakoune-init
+}
+
+# Options ----------------------------------------------------------------------
+
+# UI options
+set-option global startup_info_version 20221231
+set-option global ui_options terminal_set_title=no terminal_assistant=none
+set-option global scrolloff 5,1
+add-highlighter -override global/show-matching show-matching
+add-highlighter -override global/number-lines number-lines -hlcursor
+
+# Color scheme: One light (https://git.sr.ht/~raiguard/one.kak)
+colorscheme one-light
+
+# Custom faces
+set-face global Whitespace "rgb:%opt{bg}+f"
+set-face global SelectedText "rgb:%opt{blue}+f"
+
+# System clipboard
+set-option global clipboard_copy_command 'pbcopy'
+set-option global clipboard_copy_args
+
+set-option global clipboard_paste_command 'pbpaste'
+set-option global clipboard_paste_args
+
+# LSP
+try lsp-enable
+
+# Tools
+set-option global makecmd 'make -j 8'
+set-option global grepcmd 'rg --with-filename --line-number --column'
+
+# Highlight whitespace
+add-highlighter -override global/whitespace ref whitespace
+
+# Highlight various characters
+# https://unicode-table.com
+add-highlighter -override global/U+2013 regex '–' '0:green+f'
+add-highlighter -override global/U+2014 regex '—' '0:green+bf'
+add-highlighter -override global/math-symbols regex '[−×]' '0:cyan+f'
+
+# Mappings ---------------------------------------------------------------------
+
+# Normal mode ------------------------------------------------------------------
+
+# Hot reloading
+map -docstring 'reload kakrc' global user <F5> ': source "%val{runtime}/kakrc"; echo reloaded kakrc<ret>'
+
+# Enter command mode
+map -docstring 'enter command' global normal <ret> :
+
+# Re-center view
+map -docstring 'scroll to put the cursor on the top line of the window' global user , vtvm
+
+# Editing
+map -docstring 'save file' global normal <c-s> ': write; echo -markup ''{Information}file saved''<ret>'
+map -docstring 'close client' global normal <c-q> ': quit<ret>'
+map -docstring 'close buffer' global normal <c-w> ': delete-buffer; echo -markup ''{Information}buffer closed''<ret>'
+
+# Navigation
+map -docstring 'scroll one page up' global normal <pageup> ,<pageup>
+map -docstring 'scroll one page down' global normal <pagedown> ,<pagedown>
+map -docstring 'move to previous paragraph' global normal [ ,gh[pgi
+map -docstring 'move to next paragraph' global normal ] ,]plgi
+
+# Selection primitives
+map -docstring 'select inner object' global normal v <a-i>
+map -docstring 'select whole object' global normal V <a-a>
+map -docstring 'enter surround mode' global normal q ': enter-surround-mode<ret>'
+map -docstring 'enter select mode' global normal s ': enter-select-mode<ret>'
+
+# User mode --------------------------------------------------------------------
+
+# LSP
+map -docstring 'lsp' global user l ': enter-user-mode lsp<ret>'
+map -docstring 'open document symbol picker' global user s ': enter-user-mode lsp<ret>s'
+map -docstring 'open workspace symbol picker' global user S ': enter-user-mode lsp<ret>o'
+
+# Formatting and parsing date-time
+map -docstring 'format date to 2006-01-02' global user d '| date -d "$kak_selection" ''+%F''<ret>'
+map -docstring 'format date to 2006-01-02 Mon' global user D '| date -d "$kak_selection" ''+%F %a''<ret>'
+
+# Show the Unicode value under the cursor.
+map -docstring 'Unicode' global user u ': echo -markup "{Information}U+%sh{printf ''%04x'' ""$kak_cursor_char_value""}"<ret>'
+
+# Goto mode --------------------------------------------------------------------
+
+map -docstring 'file' global goto f '<a-;>: open-file-picker<ret>'
+
+define-command -override open-file-picker -docstring 'open-file-picker: Opens file picker.' %{
+  prompt file: -shell-script-candidates 'fd --type file' %{
+    edit %val{text}
+  }
+}
+
+map -docstring 'buffer' global goto b '<a-;>: open-buffer-picker<ret>'
+
+define-command -override open-buffer-picker -docstring 'open-buffer-picker: Opens buffer picker.' %{
+  prompt buffer: -buffer-completion %{
+    buffer %val{text}
+  }
+}
+
+map -docstring 'global search' global goto / '<a-;>: open-global-search-picker<ret>'
+
+define-command -override open-global-search-picker -docstring 'open-global-search-picker: Opens global search picker.' %{
+  # Provides word completion
+  prompt grep: -shell-script-candidates %{
+    echo "write '$kak_response_fifo'" > "$kak_command_fifo"
+    cat "$kak_response_fifo" | kak -f 's[\w-]{4,}<ret>y%<a-R>a<ret>'
+  } %{
+    grep %val{text}
+  }
+}
+
+# Commands ---------------------------------------------------------------------
+
+define-command -override mkdir -docstring 'make directory for the current buffer' %{
+  nop %sh(mkdir -p -- "$(dirname -- "$kak_buffile")")
+}
+
+define-command -override ro -docstring 'make buffer read-only (on/off)' %{
+  set-option buffer readonly %sh{
+    if [ "$kak_opt_readonly" = false ]; then
+      echo yes
+    else
+      echo no
+    fi
+  }
+}
+
+# Language support -------------------------------------------------------------
+
+# Indentation
+set-option global tabstop 4
+set-option global indentwidth 2
+set-option global disabled_hooks '.+-trim-indent|.+-insert|.+-indent'
+
+# Kakoune
+# https://kakoune.org
+hook -group config global BufSetOption filetype=kak %{
+  set-option buffer indentwidth 2
+  set-option buffer line_comment_token '#'
+}
+
+# Crystal
+# https://crystal-lang.org
+hook -group config global BufSetOption filetype=crystal %{
+  set-option buffer indentwidth 2
+  set-option buffer line_comment_token '#'
+}
+
+# JavaScript
+# https://developer.mozilla.org/en-US/docs/Web/JavaScript
+hook -group config global BufSetOption filetype=javascript %{
+  set-option buffer indentwidth 2
+  set-option buffer line_comment_token '//'
+  set-option buffer block_comment_tokens '/*' '*/'
+}
+
+# Lua
+# https://lua.org
+hook -group config global BufSetOption filetype=lua %{
+  set-option buffer indentwidth 2
+  set-option buffer line_comment_token '--'
+  set-option buffer block_comment_tokens '[[--' '--]]'
+}
+
+# Makefile
+# https://en.wikipedia.org/wiki/Make_(software)#Makefile
+hook -group config global BufSetOption filetype=makefile %{
+  set-option buffer indentwidth 0
+  set-option buffer line_comment_token '#'
+}
+
+# grep
+# https://en.wikipedia.org/wiki/Grep
+hook -group config global BufSetOption filetype=grep %{
+  map buffer normal <ret> ': grep-jump<ret>'
+}
+
+# Detection --------------------------------------------------------------------
+
+hook -group config global BufCreate '.*/\.kakrc' %{
+  set-option buffer filetype kak
+}
+
+hook -group config global BufCreate '.*/(profile|bashrc|tmux.conf)' %{
+  set-option buffer filetype sh
+}
+
+# Notes ------------------------------------------------------------------------
+
+edit -scratch scratch.txt
+
+hook -group config global BufCreate '.*/docs/notes.txt' %{
+  set-option buffer filetype notes
+}
+
+hook -group config global BufSetOption filetype=notes %{
+  add-highlighter -override buffer/notes ref notes
+  map -docstring 'insert date (2006-01-02 Mon)' buffer insert <c-u> '<a-;>;<a-;>!date ''+%F %a'' | tr -d ''\n''<ret><right>'
+  map -docstring 'insert date (2006-01-02 Mon 15:04)' buffer insert <c-i> '<a-;>;<a-;>!date ''+%F %a %H:%M'' | tr -d ''\n''<ret><right>'
+}
+
+add-highlighter -override shared/notes regions
+add-highlighter -override shared/notes/text default-region group
+add-highlighter -override shared/notes/text/entry-date-year regex '^\d{4}' 0:comment
+add-highlighter -override shared/notes/text/entry-date-year-month regex '^\d{4}-\d{2}' 0:comment
+add-highlighter -override shared/notes/text/entry-date regex '^\d{4}-\d{2}-\d{2} \w{3}' 0:comment
+add-highlighter -override shared/notes/text/entry-date-time regex '^\d{4}-\d{2}-\d{2} \w{3} \d{2}:\d{2}' 0:comment
+add-highlighter -override shared/notes/text/keyword regex '\b(Buy|Go on|Go to|Read|Sign up|Update|Watch)\b' 0:keyword
+add-highlighter -override shared/notes/text/url regex 'https?://\S+' 0:link
+add-highlighter -override shared/notes/info region -recurse '\(' '\(' '\)' group
+add-highlighter -override shared/notes/info/content fill string
+add-highlighter -override shared/notes/info/url ref notes/text/url
+add-highlighter -override shared/notes/info/delimiters regex '(?<opening>.).+(?<closing>.)' opening:string closing:string
+add-highlighter -override shared/notes/tag region -recurse '\[' '\[' '\]' fill meta
+
+# List -------------------------------------------------------------------------
+
+hook -group config global BufCreate '.*/list.txt' %{
+  set-option buffer filetype list
+}
+
+hook -group config global BufSetOption filetype=list %{
+  add-highlighter -override buffer/list ref list
+}
+
+add-highlighter -override shared/list regions
+add-highlighter -override shared/list/text default-region group
+add-highlighter -override shared/list/text/number regex '\b\d{2}\b' 0:value
+add-highlighter -override shared/list/text/date regex '\b\d{4}-\d{2}-\d{2}\b' 0:string
+add-highlighter -override shared/list/text/year regex '\b\d{4}\b' 0:string
+add-highlighter -override shared/list/text/keyword regex '\b(Movie|Special)\b' 0:keyword
+add-highlighter -override shared/list/text/url regex 'https?://\S+' 0:link

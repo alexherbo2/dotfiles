@@ -1,4 +1,6 @@
 kak
+rm ~/docs/bookmarks_*_*_*.html
+mv ~/Documents/bookmarks_*_*_*.html ~/docs
 weechat
 pw --length=10 kanto taupiqueur
 pw --length=10 google.com taupiqueur.kanto

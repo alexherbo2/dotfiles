@@ -37,7 +37,7 @@ output 'Virtual-1' mode 3840x2160 position 0,0 scale 2
 
 exec swayidle # Idle configuration
 exec wlsunset # Night shift
-exec foot # Terminal emulator
+exec foot --server # Terminal emulator
 
 # Appearance -------------------------------------------------------------------
 
@@ -75,7 +75,7 @@ bar {
 # Basics -----------------------------------------------------------------------
 
 # Open a terminal.
-bindsym Mod4+Return exec foot
+bindsym Mod4+Return exec footclient
 
 # Open a launcher.
 bindsym Mod4+p exec dmenu_path | dmenu | xargs swaymsg exec

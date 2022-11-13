@@ -1,4 +1,5 @@
 kak
+weechat
 pw --length=10 kanto taupiqueur
 pw --length=10 google.com taupiqueur.kanto
 pw --length=10 github.com taupiqueur

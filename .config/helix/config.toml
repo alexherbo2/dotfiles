@@ -87,7 +87,7 @@ A-k = 'keep_selections'
 
 minus = ['ensure_selections_forward', 'extend_char_right', 'extend_char_left']
 
-'@' = 'record_macro'
+'@' = 'replay_macro'
 
 X = ['extend_to_line_bounds', 'ensure_selections_forward', 'flip_selections']
 D = ['ensure_selections_forward', 'extend_to_line_bounds', 'extend_char_right', 'extend_char_left', 'delete_selection', 'paste_after']

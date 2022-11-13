@@ -3,5 +3,5 @@
 # A drop-in GhostText replacement using Helix/foot.
 # https://ghosttext.fregante.com
 > /tmp/scratch.md
-foot --app-id=popup hx /tmp/scratch.md
+footclient --app-id=popup hx /tmp/scratch.md
 [ -s /tmp/scratch.md ] && wl-copy < /tmp/scratch.md

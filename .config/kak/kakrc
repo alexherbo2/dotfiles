@@ -10,34 +10,6 @@
 # https://github.com/topisani/dotfiles/blob/master/config/kak/kakrc
 # https://gitlab.com/vbauerster/dotfiles/-/blob/master/.config/kak/kakrc
 
-# ------------------------------------------------------------------------------
-map global normal <ret> ':'
-map global normal f '<a-:>F'
-map global normal F '<a-:><a-;><a-F>'
-map global normal t '<a-:>t'
-map global normal T '<a-:><a-;><a-T>'
-map global normal / '<a-:>?'
-map global normal ? '<a-:><a-;><a-?>'
-map global normal N '<a-n>'
-map global normal <a-n> '<a-:>?<ret>'
-map global normal <a-N> '<a-:><a-;><a-?><ret>'
-map global normal x ': select-or-extend-lines<ret>'
-map global normal X 'x<a-:><a-;>'
-map global normal v '<a-i>'
-map global normal V '<a-a>'
-map global normal { '<a-:><a-;>{p'
-map global normal } '<a-:>}p'
-define-command select-or-extend-lines %{
-  try %{
-    # At least one selection is not full, so select whole lines.
-    execute-keys -draft '<a-K>\A^.+\n\z<ret>'
-    execute-keys 'x'
-  } catch %{
-    execute-keys 'J'
-  }
-}
-# ------------------------------------------------------------------------------
-
 # Preamble ---------------------------------------------------------------------
 
 remove-hooks global config
@@ -82,6 +54,32 @@ add-highlighter -override global/U+2014 regex '—' '0:green+bf'
 add-highlighter -override global/math-symbols regex '[−×]' '0:cyan+f'
 
 # Mappings ---------------------------------------------------------------------
+
+map global normal <ret> ':'
+map global normal f '<a-:>F'
+map global normal F '<a-:><a-;><a-F>'
+map global normal t '<a-:>T'
+map global normal T '<a-:><a-;><a-T>'
+map global normal / '<a-:>?'
+map global normal ? '<a-:><a-;><a-?>'
+map global normal n '<a-:>?<ret>'
+map global normal N '<a-:><a-;><a-?><ret>'
+map global normal x ': select-or-extend-lines<ret>'
+map global normal X 'x<a-:><a-;>'
+map global normal v '<a-i>'
+map global normal V '<a-a>'
+map global normal { '<a-:><a-;>{p'
+map global normal } '<a-:>}p'
+define-command select-or-extend-lines %{
+  execute-keys '<a-:>'
+  try %{
+    # At least one selection is not full, so select whole lines.
+    execute-keys -draft '<a-K>\A^.*\n\z<ret>'
+    execute-keys 'x'
+  } catch %{
+    execute-keys 'Jx'
+  }
+}
 
 # Normal mode ------------------------------------------------------------------
 

@@ -60,10 +60,10 @@ map global normal f '<a-:>F'
 map global normal F '<a-:><a-;><a-F>'
 map global normal t '<a-:>T'
 map global normal T '<a-:><a-;><a-T>'
-map global normal / '<a-:>?'
-map global normal ? '<a-:><a-;><a-?>'
-map global normal n '<a-:>?<ret>'
-map global normal N '<a-:><a-;><a-?><ret>'
+# map global normal / '<a-:>?'
+# map global normal ? '<a-:><a-;><a-?>'
+# map global normal n '<a-:>?<ret>'
+# map global normal N '<a-:><a-;><a-?><ret>'
 map global normal x ': select-or-extend-lines<ret>'
 map global normal X 'x<a-:><a-;>'
 map global normal v '<a-i>'
@@ -231,7 +231,7 @@ hook -group config global BufCreate '.*/(profile|bashrc|tmux.conf)' %{
 
 # Notes ------------------------------------------------------------------------
 
-edit -scratch scratch.txt
+# edit -scratch scratch.txt
 
 hook -group config global BufCreate '.*/docs/notes.txt' %{
   set-option buffer filetype notes

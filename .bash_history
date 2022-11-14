@@ -10,13 +10,13 @@ pw --length=10 lichess.org taupiqueur
 pw --length=10 paragon-software.com taupiqueur.kanto@gmail.com
 pw --length=10 paypal.com taupiqueur.kanto@gmail.com
 pw --length=10 libera.chat taupiqueur
-hx ~/todo.txt
-cat ~/todo.txt
-hx ~/notes.txt
-cat ~/notes.txt
+hx ~/docs/todo.txt
+cat ~/docs/todo.txt
+hx ~/docs/notes.txt
+cat ~/docs/notes.txt
 hx
 br
-cd ~/notes
+cd ~/docs/notes
 cd ~/Downloads
 br ~/Downloads
 br ~/Documents
@@ -32,6 +32,7 @@ caffeinate -d
 nginx
 rm -R .config/mpv/watch_later
 git clone https://github.com/helix-editor/helix.git ~/.local/share/github.com/helix-editor/helix
+sh ~/config/scripts/patch-helix.sh
 git clone https://github.com/mawww/kakoune.git ~/.local/share/github.com/mawww/kakoune
 git clone https://github.com/elbywan/crystalline.git ~/.local/share/github.com/elbywan/crystalline
 cd ~/.local/share/github.com/elbywan/crystalline

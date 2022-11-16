@@ -231,7 +231,7 @@ hook -group config global BufCreate '.*/(profile|bashrc|tmux.conf)' %{
 
 # Notes ------------------------------------------------------------------------
 
-# edit -scratch scratch.txt
+evaluate-commands -draft edit -scratch scratch.txt
 
 hook -group config global BufCreate '.*/docs/notes.txt' %{
   set-option buffer filetype notes

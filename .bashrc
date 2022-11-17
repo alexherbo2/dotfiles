@@ -76,6 +76,7 @@ alias @='swaymsg exec -- '
 alias m=make
 alias mb='make build'
 alias mt='make test'
+alias mc='make clean'
 alias mr='make release'
 alias mi='DESTDIR= PREFIX=~/.local make install'
 alias mu='DESTDIR= PREFIX=~/.local make uninstall'

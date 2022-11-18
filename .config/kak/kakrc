@@ -29,15 +29,6 @@ add-highlighter -override global/show-matching show-matching
 add-highlighter -override global/number-lines number-lines -hlcursor
 add-highlighter -override global/show-whitespaces show-whitespaces
 
-# Color scheme: One light (https://git.sr.ht/~raiguard/kak-one)
-# colorscheme one-light
-source "%val{runtime}/colors/base16.kak"
-# source ~/.local/share/git.sr.ht/~raiguard/kak-one/colors/one-light.kak
-
-# Custom faces
-# set-face global Whitespace "rgb:%opt{bg}+f"
-# set-face global SelectedText "rgb:%opt{blue}+f"
-
 # System clipboard
 # set-option global clipboard_copy_command 'pbcopy'
 # set-option global clipboard_copy_args

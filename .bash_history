@@ -1,4 +1,5 @@
 kak
+eval "$(starship init bash)"
 rm ~/docs/bookmarks_*_*_*.html
 mv ~/Documents/bookmarks_*_*_*.html ~/docs
 weechat

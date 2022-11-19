@@ -27,4 +27,5 @@ bell:
 # Key bindings -----------------------------------------------------------------
 
 key_bindings:
+  - { key: N, mods: Control|Shift, action: CreateNewWindow }
   - { key: N, mods: Command, action: CreateNewWindow }

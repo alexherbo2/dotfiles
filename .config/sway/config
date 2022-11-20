@@ -31,7 +31,7 @@ input type:touchpad {
 # Big Blue by Orioto (2009-03-22): https://deviantart.com/orioto/art/Big-Blue-116686280
 output * background ~/wallpapers/big-blue.jpg fill
 output "Dell Inc. DELL S2721QS FNN7M43" mode 3840x2160 position 0,0 scale 2
-output 'Virtual-1' mode 3840x2160 position 0,0 scale 2
+output Virtual-1 mode 3840x2160 position 0,0 scale 2
 
 # Startup commands -------------------------------------------------------------
 

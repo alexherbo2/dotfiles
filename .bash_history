@@ -1,4 +1,5 @@
 kak
+tldr --update
 export LIBGL_ALWAYS_SOFTWARE=1
 export WLR_RENDERER=pixman
 export WLR_NO_HARDWARE_CURSORS=1

@@ -64,5 +64,7 @@ ssh host
 ssh guest
 rsync home guest:
 rsync storage/wallpapers guest:storage
+chown -R taupiqueur:staff home storage
+chown -R taupiqueur:users home storage
 shutdown now
 gh repo fork

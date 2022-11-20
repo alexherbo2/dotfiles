@@ -223,13 +223,6 @@ alias yay-update='paru -Syu'
 alias yay-install='paru -Slq | fzy | xargs paru -S'
 alias yay-uninstall='paru -Qeq | fzy | xargs paru -Rs'
 
-# Window managers --------------------------------------------------------------
-
-# Sway
-# https://swaywm.org
-# https://gitlab.freedesktop.org/wlroots/wlroots/-/blob/master/docs/env_vars.md
-alias sway='WLR_RENDERER=pixman WLR_NO_HARDWARE_CURSORS=1 sway'
-
 # macOS ------------------------------------------------------------------------
 
 # Publish a release for aarch64 macOS users.

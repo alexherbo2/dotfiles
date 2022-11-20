@@ -1,4 +1,7 @@
 kak
+export LIBGL_ALWAYS_SOFTWARE=1
+export WLR_RENDERER=pixman
+export WLR_NO_HARDWARE_CURSORS=1
 eval "$(starship init bash)"
 rm ~/docs/bookmarks_*_*_*.html
 mv ~/Documents/bookmarks_*_*_*.html ~/docs

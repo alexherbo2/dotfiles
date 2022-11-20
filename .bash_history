@@ -1,4 +1,5 @@
 kak
+pbcopy < /dev/null
 tldr --update
 export LIBGL_ALWAYS_SOFTWARE=1
 export WLR_RENDERER=pixman

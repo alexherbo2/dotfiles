@@ -52,6 +52,7 @@ git clone https://github.com/mawww/kakoune.git ~/.local/share/github.com/mawww/k
 git clone https://github.com/elbywan/crystalline.git ~/.local/share/github.com/elbywan/crystalline
 cd ~/.local/share/github.com/elbywan/crystalline
 brew link llvm@14
+shards install
 mkdir bin
 crystal build src/crystalline.cr -o bin/crystalline --release --no-debug --progress -Dpreview_mt
 install bin/crystalline ~/.local/bin

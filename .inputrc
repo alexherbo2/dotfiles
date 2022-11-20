@@ -5,9 +5,7 @@
 
 set colored-stats on
 set colored-completion-prefix on
-set bind-tty-special-chars off
 
-C-w: backward-kill-word
 C-p: history-substring-search-backward
 C-n: history-substring-search-forward
 C-o: edit-and-execute-command

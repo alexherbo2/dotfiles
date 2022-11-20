@@ -74,7 +74,7 @@ ssh host
 ssh guest
 rsync home guest:
 rsync storage/wallpapers guest:storage
-rsync storage/share guest:storage
+rsync storage/shared guest:storage
 chown -R taupiqueur:staff home storage
 chown -R taupiqueur:users home storage
 shutdown now

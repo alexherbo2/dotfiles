@@ -78,3 +78,4 @@ chown -R taupiqueur:staff home storage
 chown -R taupiqueur:users home storage
 shutdown now
 gh repo fork
+rm -R Movies/TV

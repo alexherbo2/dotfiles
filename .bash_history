@@ -20,6 +20,15 @@ hx ~/docs/todo.txt
 cat ~/docs/todo.txt
 hx ~/docs/notes.txt
 cat ~/docs/notes.txt
+hx ~/anime/list.txt
+hx ~/series/list.txt
+hx ~/movies/list.txt
+hx ~/storage/movies/list.txt
+hx ~/games/info.txt
+hx ~/youtube/music/info.txt
+hx ~/youtube/videos/info.txt
+hx ~/youtube/channels/joueur-du-grenier/list.txt
+hx ~/youtube/channels/bazar-du-grenier/list.txt
 hx
 br
 cd ~/docs/notes
@@ -64,6 +73,7 @@ ssh host
 ssh guest
 rsync home guest:
 rsync storage/wallpapers guest:storage
+rsync storage/share guest:storage
 chown -R taupiqueur:staff home storage
 chown -R taupiqueur:users home storage
 shutdown now

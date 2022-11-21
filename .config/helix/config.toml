@@ -44,6 +44,7 @@ hidden = false
 
 [keys.normal]
 ret = 'command_mode'
+esc = 'select_mode'
 
 H = 'extend_char_left'
 J = 'extend_line_down'
@@ -56,7 +57,7 @@ F = ['ensure_selections_forward', 'flip_selections', 'extend_prev_char']
 T = ['ensure_selections_forward', 'flip_selections', 'extend_till_prev_char']
 
 q = 'surround_add'
-Q = ['ensure_selections_forward', 'extend_char_right', 'delete_char_forward', 'flip_selections', 'delete_char_backward', 'ensure_selections_forward']
+Q = ['ensure_selections_forward', 'delete_char_forward', 'flip_selections', 'delete_char_forward', 'ensure_selections_forward']
 
 W = 'extend_next_word_start'
 E = 'extend_next_word_end'
@@ -96,7 +97,6 @@ Y = ['ensure_selections_forward', 'extend_to_line_bounds', 'extend_char_right', 
 '#' = 'toggle_comments'
 
 [keys.normal.space]
-space = 'select_mode'
 o = 'add_newline_below'
 O = 'add_newline_above'
 '@' = 'record_macro'

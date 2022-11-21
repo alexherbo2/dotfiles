@@ -1,4 +1,5 @@
 kak
+DS_Store
 pbcopy < /dev/null
 tldr --update
 export LIBGL_ALWAYS_SOFTWARE=1

@@ -104,12 +104,6 @@ O = 'add_newline_above'
 # Format date.
 D = ':pipe date -d "$(cat)" "+%F %a" | tr -d "\\n"'
 
-[keys.normal.space.w]
-o = 'hsplit'
-O = 'vsplit'
-c = 'wclose'
-C = 'wonly'
-
 # Insert mode ------------------------------------------------------------------
 
 # Reference:

@@ -1,4 +1,13 @@
 kak
+brew-update
+brew-install
+brew-uninstall
+brew-clean
+yay
+yay-update
+yay-install
+yay-uninstall
+yay-clean
 DS_Store
 pbcopy < /dev/null
 tldr --update

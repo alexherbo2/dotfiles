@@ -46,7 +46,6 @@ cd ~/Downloads
 br ~/Downloads
 br ~/Documents
 br ~/Desktop
-br ~/shared/kanto
 cd ~/config
 cd ~/data
 cd ~/tmp
@@ -84,7 +83,6 @@ sudo kak /private/var/db/dhcpd_leases
 ssh host
 ssh guest
 rsync home guest:
-rsync storage/wallpapers guest:storage
 sshfs host: shared/kanto
 chown -R taupiqueur:users home storage
 chown -R taupiqueur:staff home storage

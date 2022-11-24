@@ -37,6 +37,7 @@ cd ~/Downloads
 br ~/Downloads
 br ~/Documents
 br ~/Desktop
+br ~/shared/kanto
 cd ~/config
 cd ~/data
 cd ~/tmp

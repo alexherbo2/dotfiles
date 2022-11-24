@@ -11,6 +11,7 @@ yay-uninstall
 yay-clean
 DS_Store
 pbcopy < /dev/null
+wl-copy --clear
 tldr --update
 export LIBGL_ALWAYS_SOFTWARE=1
 export WLR_RENDERER=pixman
@@ -42,6 +43,7 @@ hx ~/youtube/channels/joueur-du-grenier/list.txt
 hx ~/youtube/channels/bazar-du-grenier/list.txt
 hx
 br
+cd ~/config
 cd ~/docs/notes
 cd ~/Downloads
 br ~/Downloads

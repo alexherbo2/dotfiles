@@ -75,9 +75,9 @@ ssh host
 ssh guest
 rsync home guest:
 rsync storage/wallpapers guest:storage
-rsync storage/shared guest:storage
-chown -R taupiqueur:staff home storage
+sshfs host: shared/kanto
 chown -R taupiqueur:users home storage
+chown -R taupiqueur:staff home storage
 shutdown now
 gh repo fork
 rm -R Movies/TV

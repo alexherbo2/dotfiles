@@ -1,4 +1,5 @@
 kak
+@ LIBGL_ALWAYS_SOFTWARE=1 chromium
 brew-update
 brew-install
 brew-uninstall

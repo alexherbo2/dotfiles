@@ -88,6 +88,7 @@ ssh guest
 rsync home guest:
 sshfs host: shared/kanto
 chown -R taupiqueur:users home storage
+xattr -rc home storage
 chown -R taupiqueur:staff home storage
 shutdown now
 gh repo fork

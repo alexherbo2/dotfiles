@@ -88,9 +88,9 @@ ssh host
 ssh guest
 rsync home guest:
 sshfs host: shared/kanto
-chown -R taupiqueur:users home storage
-xattr -rc home storage
-chown -R taupiqueur:staff home storage
+chown -R taupiqueur:users home storage shared
+chown -R taupiqueur:staff home storage shared
+xattr -rc home storage shared
 shutdown now
 gh repo fork
 rm -R Movies/TV

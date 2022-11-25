@@ -1,4 +1,5 @@
 .config/env
+.config/chromium
 .config/gh/config.yml
 .config/gh/hosts.yml
 .config/mpv/watch_later

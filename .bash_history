@@ -20,6 +20,7 @@ eval "$(starship init bash)"
 rm ~/docs/bookmarks_*_*_*.html
 mv ~/Documents/bookmarks_*_*_*.html ~/docs
 weechat
+rm -R .config/weechat .local/share/weechat .cache/weechat
 pw --length=10 kanto taupiqueur
 pw --length=10 google.com taupiqueur.kanto
 pw --length=10 github.com taupiqueur

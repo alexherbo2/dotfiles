@@ -1,5 +1,5 @@
 kak
-cp -R Library/Application Support/Chromium .config/chromium
+cp -R 'Library/Application Support/Chromium' .config/chromium
 @ LIBGL_ALWAYS_SOFTWARE=1 chromium
 brew-update
 brew-install

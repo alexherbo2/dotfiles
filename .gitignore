@@ -7,3 +7,4 @@
 .ssh/id_ed25519_*
 .ssh/known_hosts
 .ssh/known_hosts.old
+Library/Application Support/Chromium

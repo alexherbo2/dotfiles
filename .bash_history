@@ -1,4 +1,5 @@
 kak
+alacritty msg create-window
 cp -R 'Library/Application Support/Chromium' .config/chromium
 brew-update
 brew-install

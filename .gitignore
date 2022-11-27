@@ -1,4 +1,5 @@
 .config/env
+.config/chromium
 .config/gh/config.yml
 .config/gh/hosts.yml
 .config/mpv/watch_later
@@ -9,4 +10,3 @@
 .config/weechat
 .local/share/weechat
 .cache/weechat
-Library/Application Support/Google/Chrome

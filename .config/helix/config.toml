@@ -44,7 +44,6 @@ hidden = false
 
 [keys.normal]
 ret = 'command_mode'
-esc = 'select_mode'
 
 H = 'extend_char_left'
 J = 'extend_line_down'
@@ -76,9 +75,6 @@ A-l = ['ensure_selections_forward', 'extend_to_line_end']
 
 G.e = ['select_mode', 'ensure_selections_forward', 'goto_file_end', 'exit_select_mode']
 m.x = ['extend_to_line_bounds', 'trim_selections']
-
-v = 'select_textobject_inner'
-V = 'select_textobject_around'
 
 '{' = ['ensure_selections_forward', 'flip_selections', 'select_mode', 'goto_prev_paragraph', 'exit_select_mode']
 '}' = ['ensure_selections_forward', 'select_mode', 'goto_next_paragraph', 'exit_select_mode']

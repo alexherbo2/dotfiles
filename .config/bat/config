@@ -1,4 +1,5 @@
 # bat
 # https://github.com/sharkdp/bat
 
+--style=plain
 --theme=ansi

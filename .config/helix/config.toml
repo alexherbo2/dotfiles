@@ -55,9 +55,6 @@ t = ['ensure_selections_forward', 'extend_till_char']
 F = ['ensure_selections_forward', 'flip_selections', 'extend_prev_char']
 T = ['ensure_selections_forward', 'flip_selections', 'extend_till_prev_char']
 
-q = 'surround_add'
-Q = ['ensure_selections_forward', 'delete_char_forward', 'flip_selections', 'delete_char_forward', 'ensure_selections_forward']
-
 W = 'extend_next_word_start'
 E = 'extend_next_word_end'
 B = 'extend_prev_word_start'
@@ -84,8 +81,6 @@ A-k = 'keep_selections'
 
 minus = ['ensure_selections_forward', 'extend_char_right', 'extend_char_left']
 
-'@' = 'replay_macro'
-
 X = ['extend_to_line_bounds', 'ensure_selections_forward', 'flip_selections']
 D = ['ensure_selections_forward', 'extend_to_line_bounds', 'extend_char_right', 'extend_char_left', 'delete_selection', 'paste_after']
 Y = ['ensure_selections_forward', 'extend_to_line_bounds', 'extend_char_right', 'extend_char_left', 'delete_selection', 'move_line_up', 'paste_before']
@@ -93,10 +88,6 @@ Y = ['ensure_selections_forward', 'extend_to_line_bounds', 'extend_char_right', 
 '#' = 'toggle_comments'
 
 [keys.normal.space]
-o = 'add_newline_below'
-O = 'add_newline_above'
-'@' = 'record_macro'
-
 # Format date.
 D = ':pipe date -d "$(cat)" "+%F %a" | tr -d "\\n"'
 
@@ -108,8 +99,6 @@ D = ':pipe date -d "$(cat)" "+%F %a" | tr -d "\\n"'
 [keys.insert.C-space]
 # Insert date-time.
 d = ['collapse_selection', ':insert-output date "+%F %a %H:%M" | tr -d "\\n"', 'move_char_right']
-# Insert selection index.
-i = ['collapse_selection', ':insert-output printf 0', 'move_char_left', 'yank_joined_to_clipboard', ':new', 'replace_selections_with_clipboard', ':pipe awk "{ print NR - 1 }"', 'split_selection_on_newline', 'yank', ':buffer-close!', 'replace_with_yanked', 'move_char_right']
 
 [keys.insert.C-k]
 # Insert various characters.

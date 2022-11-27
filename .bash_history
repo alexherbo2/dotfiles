@@ -1,7 +1,5 @@
 kak
 alacritty msg create-window
-cp -R 'Library/Application Support/Chromium' .config/chromium
-rm -R .config/chromium
 brew-update
 brew-install
 brew-uninstall

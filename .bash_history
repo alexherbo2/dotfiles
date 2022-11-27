@@ -1,5 +1,6 @@
 kak
 alacritty msg create-window
+rsync 'host:Library/Application Support/Google/Chrome/.' .config/chromium
 brew-update
 brew-install
 brew-uninstall

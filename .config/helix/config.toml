@@ -81,10 +81,6 @@ m.x = ['extend_to_line_bounds', 'trim_selections']
 A-j = 'join_selections'
 A-k = 'keep_selections'
 
-minus = ['ensure_selections_forward', 'extend_char_right', 'extend_char_left']
-
-'#' = 'toggle_comments'
-
 [keys.normal.space]
 # Format date.
 D = ':pipe date -d "$(cat)" "+%F %a" | tr -d "\\n"'

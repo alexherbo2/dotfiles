@@ -70,6 +70,8 @@ A-B = 'extend_prev_long_word_start'
 A-h = ['ensure_selections_forward', 'flip_selections', 'extend_to_line_start']
 A-l = ['ensure_selections_forward', 'extend_to_line_end']
 
+X = ['extend_to_line_bounds', 'ensure_selections_forward', 'flip_selections']
+
 G.e = ['select_mode', 'ensure_selections_forward', 'goto_file_end', 'exit_select_mode']
 m.x = ['extend_to_line_bounds', 'trim_selections']
 
@@ -80,10 +82,6 @@ A-j = 'join_selections'
 A-k = 'keep_selections'
 
 minus = ['ensure_selections_forward', 'extend_char_right', 'extend_char_left']
-
-X = ['extend_to_line_bounds', 'ensure_selections_forward', 'flip_selections']
-D = ['ensure_selections_forward', 'extend_to_line_bounds', 'extend_char_right', 'extend_char_left', 'delete_selection', 'paste_after']
-Y = ['ensure_selections_forward', 'extend_to_line_bounds', 'extend_char_right', 'extend_char_left', 'delete_selection', 'move_line_up', 'paste_before']
 
 '#' = 'toggle_comments'
 

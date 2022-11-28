@@ -172,10 +172,6 @@ alias ls='exa --group-directories-first --all'
 alias ll='exa --group-directories-first --all --long --git'
 alias tree='exa --tree --all --ignore-glob .git'
 
-# Broot
-# https://dystroy.org/broot/
-alias br=broot
-
 # batch
 # https://github.com/taupiqueur/batch
 # interactive map

@@ -45,13 +45,13 @@ hx ~/youtube/videos/info.txt
 hx ~/youtube/channels/joueur-du-grenier/list.txt
 hx ~/youtube/channels/bazar-du-grenier/list.txt
 hx
-br
+nnn
 cd ~/config
 cd ~/docs/notes
 cd ~/Downloads
-br ~/Downloads
-br ~/Documents
-br ~/Desktop
+nnn ~/Downloads
+nnn ~/Documents
+nnn ~/Desktop
 cd ~/config
 cd ~/data
 cd ~/tmp
@@ -96,3 +96,11 @@ xattr -rc home storage shared
 shutdown now
 gh repo fork
 rm -R Movies/TV
+nnn ~/anime
+nnn ~/series
+nnn ~/movies
+nnn ~/storage/movies
+nnn ~/games
+nnn ~/youtube
+nnn ~/anime/one-piece/06
+nnn ~/series/stargate/stargate-sg-1/french/01

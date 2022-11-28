@@ -75,6 +75,7 @@ X = ['extend_to_line_bounds', 'ensure_selections_forward', 'flip_selections']
 G.e = ['select_mode', 'ensure_selections_forward', 'goto_file_end', 'exit_select_mode']
 m.x = ['extend_to_line_bounds', 'trim_selections']
 
+# Paragraph navigation
 '{' = ['ensure_selections_forward', 'flip_selections', 'select_mode', 'goto_prev_paragraph', 'exit_select_mode']
 '}' = ['ensure_selections_forward', 'select_mode', 'goto_next_paragraph', 'exit_select_mode']
 

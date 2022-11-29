@@ -50,7 +50,9 @@ nnn
 cd ~/config
 cd ~/docs/notes
 cd ~/Downloads
+cd ~/storage/downloads
 nnn ~/Downloads
+nnn ~/storage/downloads
 nnn ~/Documents
 nnn ~/Desktop
 cd ~/config

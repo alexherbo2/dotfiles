@@ -12,6 +12,13 @@ open -a mpv
 open -a Chromium
 open -a 'Google Chrome'
 open -a 'Google Chrome Dev'
+open -a Amethyst
+open -a Rectangle
+open -a Hyperkey
+open -a Shortcuts
+open -a Dolphin
+open -a OpenEmu
+open -a sioyek
 brew-update
 brew-install
 brew-uninstall

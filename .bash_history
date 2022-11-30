@@ -3,6 +3,15 @@ sway
 brew link --force ncurses
 alacritty msg create-window
 rsync 'host:Library/Application Support/Google/Chrome/.' .config/chromium
+open .
+open -a Finder
+open -a UTM
+open -a Terminal
+open -a Alacritty
+open -a mpv
+open -a Chromium
+open -a 'Google Chrome'
+open -a 'Google Chrome Dev'
 brew-update
 brew-install
 brew-uninstall

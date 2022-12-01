@@ -55,6 +55,7 @@ cd ~/storage/downloads
 nnn ~/Downloads
 nnn ~/storage/downloads
 nnn ~/Documents
+nnn ~/docs
 nnn ~/Desktop
 cd ~/config
 cd ~/data

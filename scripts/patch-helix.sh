@@ -5,5 +5,5 @@ crossterm = { git = "https://github.com/yyogo/crossterm.git", branch = "use-sele
 EOF
 
 # https://github.com/helix-editor/helix/pull/3328
-curl https://github.com/helix-editor/helix/commit/caaf9a09874d93a81de45b8e7b59db7e59f446c9.patch |
+curl -L https://github.com/helix-editor/helix/pull/3328.patch |
 git apply -3

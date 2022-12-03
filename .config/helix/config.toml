@@ -84,6 +84,8 @@ A-j = 'join_selections'
 A-k = 'keep_selections'
 
 [keys.normal.space]
+# Yank selected text to clipboard.
+Y = ['yank_joined_to_clipboard', ':new', 'replace_selections_with_clipboard', ':pipe tmux load-buffer -w -', ':buffer-close!']
 # Format date.
 D = ':pipe date -d "$(cat)" "+%F %a" | tr -d "\\n"'
 

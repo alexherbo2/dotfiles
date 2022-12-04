@@ -65,3 +65,37 @@ key_bindings:
   - { key: X, mods: Alt|Shift, chars: "\x1bX" }
   - { key: Y, mods: Alt|Shift, chars: "\x1bY" }
   - { key: Z, mods: Alt|Shift, chars: "\x1bZ" }
+
+  - { key: Grave, mods: Alt, chars: "\x1b`" }
+  - { key: Minus, mods: Alt, chars: "\x1b-" }
+  - { key: Equals, mods: Alt, chars: "\x1b=" }
+  - { key: LBracket, mods: Alt, chars: "\x1b[" }
+  - { key: RBracket, mods: Alt, chars: "\x1b]" }
+  - { key: Backslash, mods: Alt, chars: "\x1b\\" }
+  - { key: Semicolon, mods: Alt, chars: "\x1b;" }
+  - { key: Apostrophe, mods: Alt, chars: "\x1b'" }
+  - { key: Comma, mods: Alt, chars: "\x1b," }
+  - { key: Period, mods: Alt, chars: "\x1b." }
+  - { key: Slash, mods: Alt, chars: "\x1b/" }
+
+  - { key: Grave, mods: Alt|Shift, chars: "\x1b~" }
+  - { key: Key1, mods: Alt|Shift, chars: "\x1b!" }
+  - { key: Key2, mods: Alt|Shift, chars: "\x1b@" }
+  - { key: Key3, mods: Alt|Shift, chars: "\x1b#" }
+  - { key: Key4, mods: Alt|Shift, chars: "\x1b$" }
+  - { key: Key5, mods: Alt|Shift, chars: "\x1b%" }
+  - { key: Key6, mods: Alt|Shift, chars: "\x1b^" }
+  - { key: Key7, mods: Alt|Shift, chars: "\x1b&" }
+  - { key: Key8, mods: Alt|Shift, chars: "\x1b*" }
+  - { key: Key9, mods: Alt|Shift, chars: "\x1b(" }
+  - { key: Key0, mods: Alt|Shift, chars: "\x1b)" }
+  - { key: Minus, mods: Alt|Shift, chars: "\x1b_" }
+  - { key: Equals, mods: Alt|Shift, chars: "\x1b+" }
+  - { key: LBracket, mods: Alt|Shift, chars: "\x1b{" }
+  - { key: RBracket, mods: Alt|Shift, chars: "\x1b}" }
+  - { key: Backslash, mods: Alt|Shift, chars: "\x1b|" }
+  - { key: Semicolon, mods: Alt|Shift, chars: "\x1b:" }
+  - { key: Apostrophe, mods: Alt|Shift, chars: "\x1b\"" }
+  - { key: Comma, mods: Alt|Shift, chars: "\x1b<" }
+  - { key: Period, mods: Alt|Shift, chars: "\x1b>" }
+  - { key: Slash, mods: Alt|Shift, chars: "\x1b?" }

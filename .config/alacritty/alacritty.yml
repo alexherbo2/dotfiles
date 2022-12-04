@@ -1,0 +1,31 @@
+# Alacritty
+# https://alacritty.org
+# https://github.com/alacritty/alacritty
+# https://github.com/alacritty/alacritty/blob/master/alacritty.yml
+
+import: ["~/.config/alacritty/macos/use_option_as_meta_key.yml"]
+
+# Appearance -------------------------------------------------------------------
+
+# Add a bit of transparency to reduce eye strain.
+window:
+  opacity: 0.90
+
+font:
+  size: 16.0
+  normal:
+    family: JetBrains Mono
+
+selection:
+  save_to_clipboard: true
+
+bell:
+  command:
+    program: osascript
+    args: ['-e', 'beep']
+
+# Key bindings -----------------------------------------------------------------
+
+key_bindings:
+  - { key: N, mods: Control|Shift, action: CreateNewWindow }
+  - { key: N, mods: Command, action: CreateNewWindow }

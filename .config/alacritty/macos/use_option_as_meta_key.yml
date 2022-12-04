@@ -66,6 +66,9 @@ key_bindings:
   - { key: Y, mods: Alt|Shift, chars: "\x1bY" }
   - { key: Z, mods: Alt|Shift, chars: "\x1bZ" }
 
+  - { key: Space, mods: Alt, chars: "\x1b " }
+  - { key: Return, mods: Alt, chars: "\x1b\r" }
+
   - { key: Grave, mods: Alt, chars: "\x1b`" }
   - { key: Minus, mods: Alt, chars: "\x1b-" }
   - { key: Equals, mods: Alt, chars: "\x1b=" }

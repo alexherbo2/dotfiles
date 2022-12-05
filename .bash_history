@@ -96,6 +96,8 @@ sshfs host: shared/kanto
 chown -R taupiqueur:users home storage shared
 chown -R taupiqueur:staff home storage shared
 xattr -rc home storage shared
+rsync home storage shared /Volumes/Disk
+rsync home shared /Volumes/USB
 shutdown now
 gh repo fork
 rm -R Movies/TV

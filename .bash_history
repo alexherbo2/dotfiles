@@ -112,3 +112,5 @@ nnn ~/games
 nnn ~/youtube
 nnn ~/anime/one-piece/06
 nnn ~/series/stargate/stargate-sg-1/french/01
+clear
+exit

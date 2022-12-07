@@ -52,7 +52,6 @@ hx ~/youtube/channels/joueur-du-grenier/list.txt
 hx ~/youtube/channels/bazar-du-grenier/list.txt
 hx
 nnn
-cd ~/config
 cd ~/docs/notes
 cd ~/Downloads
 cd ~/storage/downloads

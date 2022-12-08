@@ -16,6 +16,8 @@ theme = 'onelight'
 rulers = [81]
 line-number = 'relative'
 color-modes = true
+auto-format = false
+idle-timeout = 100
 
 [editor.cursor-shape]
 insert = 'bar'
@@ -82,6 +84,10 @@ M = ['select_mode', 'match_brackets', 'exit_select_mode']
 
 A-j = 'join_selections'
 A-k = 'keep_selections'
+
+# Vim-like unimpaired mappings
+'['.w = ':set whitespace.render none'
+']'.w = ':set whitespace.render all'
 
 [keys.normal.space]
 # Yank selected text to clipboard.

@@ -3,6 +3,6 @@
 # https://github.com/emersion/mako/blob/master/mako.5.scd
 background-color=#eaeaea
 text-color=#202020
-border-color=#eaeaea
-progress-color=over #eaeaea
-default-timeout=3000
+border-size=0
+default-timeout=1000
+icons=0

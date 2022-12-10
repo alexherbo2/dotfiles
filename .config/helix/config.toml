@@ -88,6 +88,8 @@ A-k = 'keep_selections'
 # Vim-like unimpaired mappings
 '['.w = ':set whitespace.render none'
 ']'.w = ':set whitespace.render all'
+'['.tab = ':set indent-guides.render false'
+']'.tab = ':set indent-guides.render true'
 
 [keys.normal.space]
 # Yank selected text to clipboard.

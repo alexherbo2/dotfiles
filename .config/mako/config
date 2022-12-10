@@ -1,0 +1,8 @@
+# mako
+# https://wayland.emersion.fr/mako/
+# https://github.com/emersion/mako/blob/master/mako.5.scd
+background-color=#eaeaea
+text-color=#202020
+border-color=#eaeaea
+progress-color=over #eaeaea
+default-timeout=3000

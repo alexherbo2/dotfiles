@@ -213,8 +213,8 @@ alias brew-clean='brew cleanup'
 # Arch Linux
 alias yay=paru
 alias yay-update='paru -Syu'
-alias yay-install='paru -Slq | fzy | xargs paru -S'
-alias yay-uninstall='paru -Qeq | fzy | xargs paru -Rs'
+alias yay-install='paru -Slq | fzy | xargs -o paru -S'
+alias yay-uninstall='paru -Qeq | fzy | xargs -o paru -Rs'
 alias yay-clean='paru -Sc'
 
 # macOS ------------------------------------------------------------------------

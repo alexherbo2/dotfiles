@@ -5,6 +5,11 @@
 
 import: ["~/.config/alacritty/macos/use_option_as_meta_key.yml"]
 
+# Environment variables --------------------------------------------------------
+
+env:
+  TERM: alacritty
+
 # Appearance -------------------------------------------------------------------
 
 # Add a bit of transparency to reduce eye strain.

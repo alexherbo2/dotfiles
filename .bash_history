@@ -97,6 +97,7 @@ ssh host
 ssh guest
 rsync home guest:
 sshfs host: shared/kanto
+swaymsg reload
 chown -R taupiqueur:users home storage shared
 chown -R taupiqueur:staff home storage shared
 xattr -rc home storage shared

@@ -103,6 +103,8 @@ chown -R taupiqueur:staff home storage shared
 xattr -rc home storage shared
 rsync home storage shared /Volumes/Disk
 rsync home shared /Volumes/USB
+rm -R /Volumes/Disk/.fseventsd
+rm -R /Volumes/USB/.fseventsd
 shutdown now
 gh repo fork
 rm -R Movies/TV

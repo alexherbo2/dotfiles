@@ -41,7 +41,7 @@ export EDITOR=hx
 # Key bindings -----------------------------------------------------------------
 
 # Bash history
-bind -x '"\C-r":"READLINE_LINE=$(history -w /dev/stdout | tac | fzy) READLINE_POINT=${#READLINE_LINE}"'
+bind -x '"\C-r":"READLINE_LINE=$(history -w /dev/stdout | tac | awk '!seen[$0]++' | fzy) READLINE_POINT=${#READLINE_LINE}"'
 
 # Aliases ----------------------------------------------------------------------
 
@@ -51,7 +51,7 @@ alias mv='mv -n'
 alias _='rm -Rf --'
 
 # Bash history
-alias z='eval "$(history -w /dev/stdout | tac | fzy)"'
+alias z='eval "$(history -w /dev/stdout | tac | awk '!seen[$0]++' | fzy)"'
 alias hk='history -a'
 alias hj='history -n'
 alias hD='history -cr ~/.bash_history~ && history -w'

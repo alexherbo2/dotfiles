@@ -84,6 +84,7 @@ cd ~/.local/share/github.com/mawww/kakoune
 install ~/.local/bin/kak /opt/homebrew/bin
 mpv https://twitch.tv/joueur_du_grenier
 mpv https://twitch.tv/randomwatchertv
+mpv https://twitch.tv/kayanetv
 cd ~/.local/share/github.com/helix-editor/helix
 cargo build --release
 cargo install --path helix-term

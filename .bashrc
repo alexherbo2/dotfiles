@@ -228,7 +228,8 @@ alias caffeinate-lid='sudo pmset -b sleep 0; sudo pmset -b disablesleep 1'
 alias decaffeinate-lid='sudo pmset -b sleep 5; sudo pmset -b disablesleep 0'
 
 # Sets the PATH environment variable for all services on macOS.
-alias set-macos-path='sudo launchctl config user path ~/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/opt/homebrew/sbin:/usr/local/sbin:/usr/sbin:/sbin'
+# Reference: <https://ss64.com/osx/launchctl.html#:~:text=config system>
+alias set-macos-path='sudo launchctl config user path $HOME/Applications:$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/opt/homebrew/sbin:/usr/local/sbin:/usr/sbin:/sbin'
 alias unset-macos-path='sudo launchctl config user path ""'
 
 # Erases .DS_Store and .localized files from your home folder.

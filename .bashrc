@@ -197,7 +197,7 @@ xmv() {
 # ffmpeg
 # Reference: https://trac.ffmpeg.org/wiki/Encode/H.265
 ffmpeg_x265() {
-  ffmpeg -i "$1" -map 0 -c copy -c:v libx265 -- "$1.mkv"
+  ffmpeg -i "$1" -map 0 -c copy -c:v libx265 -crf 28 -preset veryslow -- "$1.mkv"
 }
 
 # yt-dlp

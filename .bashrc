@@ -56,6 +56,10 @@ alias hk='history -a'
 alias hj='history -n'
 alias hD='history -cr ~/.bash_history~ && history -w'
 
+# Starship
+# https://starship.rs
+alias p='eval "$(starship init bash)"'
+
 # Navigation
 alias ..='cd ..'
 alias ...='cd ../..'

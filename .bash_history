@@ -6,6 +6,7 @@ rsync 'host:Library/Application Support/Google/Chrome/.' .config/chromium
 open .
 brew-update
 brew-install
+brew-install-head
 brew-uninstall
 brew-clean
 yay

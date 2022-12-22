@@ -217,6 +217,7 @@ alias pandoc='pandoc --pdf-engine tectonic'
 # macOS
 alias brew-update='brew update && brew upgrade'
 alias brew-install='{ brew formulae; brew casks; } | fzy | xargs brew install'
+alias brew-install-head='brew-install --HEAD'
 alias brew-uninstall='brew list | fzy | xargs brew uninstall'
 alias brew-clean='brew cleanup'
 

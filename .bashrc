@@ -52,9 +52,9 @@ alias _='rm -Rf --'
 
 # Bash history
 alias z='eval "$(history -w /dev/stdout | tac | awk !seen[\$0]++ | fzy)"'
-alias hpush='history -a'
-alias hpull='history -n'
-alias hclear='history -cr ~/.bash_history~ && history -w'
+alias hk='history -a'
+alias hj='history -n'
+alias hc='history -cr ~/.bash_history~ && history -w'
 
 # Starship
 # https://starship.rs
@@ -150,8 +150,8 @@ alias gg='git status && git diff'
 alias gb='git branch | fzy | cut -c 3- | xargs git switch'
 alias gl='git log'
 alias gL='git log -p'
-alias gpush='git push'
-alias gpull='git pull'
+alias gk='git push'
+alias gj='git pull'
 # Grep logs
 alias gF='git log -p -S'
 alias gE='git log -p -G'

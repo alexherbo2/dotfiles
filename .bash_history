@@ -7,6 +7,7 @@ open .
 brew-update
 brew-install
 brew-install-head
+brew-reinstall
 brew-uninstall
 brew-clean
 yay
@@ -120,5 +121,7 @@ nnn ~/games
 nnn ~/youtube
 nnn ~/anime/one-piece/06
 nnn ~/series/stargate/stargate-sg-1/french/01
+nnn ~/anime/nicky-larson/01
+mpv ~/sounds/waves.opus
 clear
 exit

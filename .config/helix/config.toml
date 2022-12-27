@@ -13,8 +13,6 @@
 theme = 'onelight'
 
 [editor]
-rulers = [81]
-line-number = 'relative'
 color-modes = true
 auto-format = false
 idle-timeout = 100
@@ -90,6 +88,8 @@ A-k = 'keep_selections'
 ']'.w = ':set whitespace.render all'
 '['.tab = ':set indent-guides.render false'
 ']'.tab = ':set indent-guides.render true'
+'['.r = ':set rulers = []'
+']'.r = ':set rulers = [81]'
 
 [keys.normal.space]
 # Yank selected text to clipboard.

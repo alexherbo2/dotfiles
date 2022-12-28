@@ -126,6 +126,8 @@ nnn ~/Downloads
 nnn ~/storage/downloads
 nnn ~/Documents
 nnn ~/docs
+nnn ~/tmp
+nnn ~/data
 nnn ~/Desktop
 nnn ~/.local/share/git.sr.ht
 nnn ~/.local/share/github.com

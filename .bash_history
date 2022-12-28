@@ -127,6 +127,11 @@ nnn ~/storage/downloads
 nnn ~/Documents
 nnn ~/docs
 nnn ~/Desktop
+nnn ~/.local/share/git.sr.ht
+nnn ~/.local/share/github.com
+nnn ~/.local/share/codeberg.org
+nnn ~/.local/share/gitlab.com
+nnn ~/.local/share/hg.stevelosh.com
 cd ~/config
 cd ~/data
 cd ~/tmp

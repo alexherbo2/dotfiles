@@ -81,6 +81,9 @@ bindsym Mod4+Return exec footclient
 # Open a launcher.
 bindsym Mod4+p exec dmenu_path | dmenu | xargs swaymsg exec
 
+# Reload Sway.
+bindsym Mod4+Shift+r reload
+
 # Exit Sway.
 bindsym Control+Mod1+BackSpace exit
 

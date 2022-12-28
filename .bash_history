@@ -12,7 +12,7 @@ git clone https://github.com/ifreund/dotfiles.git ~/.local/share/github.com/ifre
 git clone https://github.com/koekeishiya/dotfiles.git ~/.local/share/github.com/koekeishiya/dotfiles
 git clone https://github.com/lydell/dotfiles.git ~/.local/share/github.com/lydell/dotfiles
 git clone https://github.com/nekonako/dotfiles.git ~/.local/share/github.com/nekonako/dotfiles
-git clone https://hg.stevelosh.com/dotfiles/.git ~/.local/share/hg.stevelosh.com/dotfiles/
+hg clone https://hg.stevelosh.com/dotfiles ~/.local/share/hg.stevelosh.com/dotfiles
 git clone https://github.com/topisani/dotfiles.git ~/.local/share/github.com/topisani/dotfiles
 git clone https://gitlab.com/vbauerster/dotfiles.git ~/.local/share/gitlab.com/vbauerster/dotfiles
 git clone https://github.com/mawww/config.git ~/.local/share/github.com/mawww/config

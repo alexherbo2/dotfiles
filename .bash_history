@@ -142,6 +142,8 @@ cd ~/code/chrome-shortcuts
 cd ~/code/pw
 cd ~/code/mpv-clip
 caffeinate -d
+caffeinate-lid
+decaffeinate-lid
 nginx
 rm -R .config/mpv/watch_later
 git clone https://github.com/helix-editor/helix.git ~/.local/share/github.com/helix-editor/helix

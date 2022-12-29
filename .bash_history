@@ -63,6 +63,10 @@ git clone https://github.com/dmulholl/vimv.git ~/.local/share/github.com/dmulhol
 git clone https://github.com/WayfireWM/wayfire.git ~/.local/share/github.com/WayfireWM/wayfire
 git clone https://github.com/wez/wezterm.git ~/.local/share/github.com/wez/wezterm
 git clone https://github.com/sayanarijit/xplr.git ~/.local/share/github.com/sayanarijit/xplr
+git clone https://github.com/occivink/advent2021.git ~/.local/share/github.com/occivink/advent2021
+git clone https://github.com/HertzDevil/advent-of-code.git ~/.local/share/github.com/HertzDevil/advent-of-code
+git clone https://github.com/asterite/adventofcode2021.git ~/.local/share/github.com/asterite/adventofcode2021
+git clone https://github.com/asterite/adventofcode2022.git ~/.local/share/github.com/asterite/adventofcode2022
 kak
 sway
 brew link --force ncurses

@@ -23,6 +23,7 @@ git clone https://git.sr.ht/~emersion/kanshi ~/.local/share/git.sr.ht/~emersion/
 git clone https://github.com/alacritty/alacritty.git ~/.local/share/github.com/alacritty/alacritty
 git clone https://github.com/ianyh/Amethyst.git ~/.local/share/github.com/ianyh/Amethyst
 git clone https://github.com/taupiqueur/batch.git ~/.local/share/github.com/taupiqueur/batch
+git clone https://github.com/Blacksmoke16/oq.git ~/.local/share/github.com/Blacksmoke16/oq
 git clone https://github.com/Canop/broot.git ~/.local/share/github.com/Canop/broot
 git clone https://github.com/codemirror/dev.git ~/.local/share/github.com/codemirror/dev
 git clone https://github.com/crystal-lang/crystal.git ~/.local/share/github.com/crystal-lang/crystal

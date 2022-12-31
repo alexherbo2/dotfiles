@@ -1,3 +1,5 @@
+git clone https://github.com/GoogleChrome/chrome-extensions-samples.git ~/.local/share/github.com/GoogleChrome/chrome-extensions-samples
+git clone https://github.com/mdn/webextensions-examples.git ~/.local/share/github.com/mdn/webextensions-examples
 git clone https://codeberg.org/dnkl/foot.git ~/.local/share/codeberg.org/dnkl/foot
 git clone https://git.sr.ht/~chambln/dots ~/.local/share/git.sr.ht/~chambln/dots
 git clone https://git.sr.ht/~emersion/dotfiles ~/.local/share/git.sr.ht/~emersion/dotfiles

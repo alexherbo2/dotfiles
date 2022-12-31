@@ -198,9 +198,9 @@ nnn ~/movies
 nnn ~/storage/movies
 nnn ~/games
 nnn ~/youtube
-nnn ~/anime/one-piece/06
-nnn ~/series/stargate/stargate-sg-1/french/01
-nnn ~/anime/nicky-larson/01
+mpv ~/anime/one-piece/06
+mpv ~/series/stargate/stargate-sg-1/french/01
+mpv ~/anime/nicky-larson/01
 mpv ~/sounds/waves.opus
 clear
 exit

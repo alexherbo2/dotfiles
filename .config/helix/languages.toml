@@ -5,6 +5,5 @@
 # https://microsoft.github.io/language-server-protocol/implementors/servers/
 
 [[language]]
-name = 'ruby'
-file-types = ['cr']
+name = 'crystal'
 language-server = { command = 'crystalline', args = ['--stdio'] }

@@ -60,6 +60,8 @@ git clone https://github.com/taupiqueur/chrome-shortcuts.git ~/.local/share/gith
 git clone https://github.com/emersion/slurp.git ~/.local/share/github.com/emersion/slurp
 git clone https://github.com/starship/starship.git ~/.local/share/github.com/starship/starship
 git clone https://github.com/swaywm/sway.git ~/.local/share/github.com/swaywm/sway
+git clone https://github.com/swaywm/sway.wiki.git ~/.local/share/github.com/swaywm/sway.wiki
+git clone https://github.com/helix-editor/helix.wiki.git ~/.local/share/github.com/helix-editor/helix.wiki
 git clone https://github.com/tmux/tmux.git ~/.local/share/github.com/tmux/tmux
 git clone https://github.com/gorhill/uBlock.git ~/.local/share/github.com/gorhill/uBlock
 git clone https://github.com/philc/vimium.git ~/.local/share/github.com/philc/vimium

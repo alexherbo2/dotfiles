@@ -185,6 +185,8 @@ ssh host
 ssh guest
 rsync home guest:
 sshfs host: shared/kanto
+ngrok tcp 22
+ssh taupiqueur@7.tcp.eu.ngrok.io -p 14378
 swaymsg reload
 chown -R taupiqueur:users home storage shared
 chown -R taupiqueur:staff home storage shared

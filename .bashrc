@@ -129,6 +129,9 @@ alias tl='tmux list-sessions'
 # https://kakoune.org
 alias kak='kak -n'
 
+# grep
+alias ws='rg "\\s+$|\\w\\s{2,}\\w"'
+
 # Git
 # https://git-scm.com
 # https://git-scm.com/docs/git-add

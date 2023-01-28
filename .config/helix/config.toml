@@ -42,18 +42,22 @@ hidden = false
 # https://github.com/mawww/kakoune/blob/master/src/normal.cc
 
 [keys.normal]
+# Enter command mode
 ret = 'command_mode'
 
+# Moving around
 H = 'extend_char_left'
 J = 'extend_line_down'
 K = 'extend_line_up'
 L = 'extend_char_right'
 
+# Left-right motions
 f = ['ensure_selections_forward', 'extend_next_char']
 t = ['ensure_selections_forward', 'extend_till_char']
 F = ['ensure_selections_forward', 'flip_selections', 'extend_prev_char']
 T = ['ensure_selections_forward', 'flip_selections', 'extend_till_prev_char']
 
+# Word motions
 W = 'extend_next_word_start'
 E = 'extend_next_word_end'
 B = 'extend_prev_word_start'
@@ -66,19 +70,22 @@ A-W = 'extend_next_long_word_start'
 A-E = 'extend_next_long_word_end'
 A-B = 'extend_prev_long_word_start'
 
+# Line motions
 A-h = ['ensure_selections_forward', 'flip_selections', 'extend_to_line_start']
 A-l = ['ensure_selections_forward', 'extend_to_line_end']
 
 X = ['extend_to_line_bounds', 'ensure_selections_forward', 'flip_selections']
 
+# Paragraph motions
+'{' = ['ensure_selections_forward', 'flip_selections', 'select_mode', 'goto_prev_paragraph', 'exit_select_mode']
+'}' = ['ensure_selections_forward', 'select_mode', 'goto_next_paragraph', 'exit_select_mode']
+
+# Various motions
 G.e = ['select_mode', 'ensure_selections_forward', 'goto_file_end', 'exit_select_mode']
 m.x = ['extend_to_line_bounds', 'trim_selections']
 M = ['select_mode', 'match_brackets', 'exit_select_mode']
 
-# Paragraph navigation
-'{' = ['ensure_selections_forward', 'flip_selections', 'select_mode', 'goto_prev_paragraph', 'exit_select_mode']
-'}' = ['ensure_selections_forward', 'select_mode', 'goto_next_paragraph', 'exit_select_mode']
-
+# Join and keep matching selections
 A-j = 'join_selections'
 A-k = 'keep_selections'
 
@@ -91,9 +98,10 @@ A-k = 'keep_selections'
 ']'.r = ':set rulers [81]'
 
 [keys.normal.space]
-# Yank selected text to clipboard.
+# Yank selected text to local clipboard.
 Y = ':pipe-to tmux load-buffer -w -'
-# Format date.
+
+# Format date as “1991-11-02 Sat”.
 D = ':pipe date -d "$(cat)" "+%F %a" | tr -d "\\n"'
 
 # Insert mode ------------------------------------------------------------------
@@ -102,7 +110,7 @@ D = ':pipe date -d "$(cat)" "+%F %a" | tr -d "\\n"'
 # https://github.com/mawww/kakoune/blob/master/src/input_handler.cc
 
 [keys.insert.C-space]
-# Insert date-time.
+# Insert date-time as “1991-11-02 Sat 10:52”.
 d = ['collapse_selection', ':insert-output date "+%F %a %H:%M" | tr -d "\\n"', 'move_char_right']
 
 [keys.insert.C-k]

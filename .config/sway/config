@@ -192,4 +192,4 @@ bindsym XF86MonBrightnessDown exec light -T 0.72
 for_window [floating] border csd
 for_window [app_id="mpv"] sticky enable
 for_window [app_id="popup"] floating enable
-for_window [title="Picture in picture"] floating enable, sticky enable
+for_window [title="Picture in picture"] floating enable, sticky enable, border none

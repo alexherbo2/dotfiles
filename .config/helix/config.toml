@@ -22,6 +22,9 @@ insert = 'bar'
 normal = 'block'
 select = 'underline'
 
+[editor.soft-wrap]
+enable = true
+
 [editor.whitespace]
 characters = { newline = '¬' }
 

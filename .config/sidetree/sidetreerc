@@ -1,0 +1,28 @@
+# sidetree
+# https://github.com/topisani/sidetree
+# https://github.com/topisani/sidetree/blob/master/sidetreerc
+
+# General ----------------------------------------------------------------------
+
+set show_hidden false
+set quit_on_open false
+set open_cmd open
+
+# Appearance -------------------------------------------------------------------
+
+set file_icons true
+set icon_style darkgray
+set dir_name_style lightblue+b
+set file_name_style reset
+set highlight_style +r
+set link_style cyan+b
+
+# Mappings ---------------------------------------------------------------------
+
+map <c-c> quit
+map H cd ..
+map L cd
+map $ shell 'tmux display-popup -w 90% -h 90% -d "$sidetree_dir" -E'
+map e shell 'tmux display-popup -w 90% -h 90% -E hx "$sidetree_entry"'
+map v shell 'tmux display-popup -w 90% -h 90% -E bat --paging=always "$sidetree_entry"'
+map y shell 'tmux set-buffer -w "$sidetree_entry"'

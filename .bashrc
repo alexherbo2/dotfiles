@@ -64,7 +64,7 @@ alias hc='history -cr ~/.bash_history~ && history -w'
 alias p='eval "$(starship init bash)"'
 
 # Navigation
-alias n='nnn'
+alias st=sidetree
 alias ..='cd ..'
 alias ...='cd ../..'
 alias -- -='cd -'

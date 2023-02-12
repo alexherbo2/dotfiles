@@ -169,9 +169,6 @@ bindsym Mod4+minus scratchpad show
 # Open GhostText.
 bindsym Mod4+e exec ghosttext
 
-# Open mpv with URLs from clipboard.
-bindsym Mod4+m exec wl-paste | mpv --playlist=-
-
 # Take screenshots.
 bindsym Print exec grim ~/Desktop/$(date '+%F_%T').webp
 bindsym Shift+Print exec slurp | grim -g - ~/Desktop/$(date '+%F_%T').webp

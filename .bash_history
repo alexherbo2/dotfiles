@@ -212,5 +212,8 @@ mpv ~/anime/one-piece/06
 mpv ~/series/stargate/stargate-sg-1/french/01
 mpv ~/anime/nicky-larson/01
 mpv ~/sounds/waves.opus
+git init
+git commit --message='Initial commit'
+gh repo create
 clear
 exit

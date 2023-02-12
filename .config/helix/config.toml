@@ -11,25 +11,15 @@
 # Appearance -------------------------------------------------------------------
 
 theme = 'onelight'
-
-[editor]
-color-modes = true
-auto-format = false
-idle-timeout = 100
-
-[editor.cursor-shape]
-insert = 'bar'
-normal = 'block'
-select = 'underline'
-
-[editor.soft-wrap]
-enable = true
-
-[editor.whitespace]
-characters = { newline = '¬' }
-
-[editor.file-picker]
-hidden = false
+editor.color-modes = true
+editor.auto-format = false
+editor.idle-timeout = 100
+editor.cursor-shape.insert = 'bar'
+editor.cursor-shape.normal = 'block'
+editor.cursor-shape.select = 'underline'
+editor.whitespace.characters = { newline = '¬' }
+editor.soft-wrap.enable = true
+editor.file-picker.hidden = false
 
 # Key bindings -----------------------------------------------------------------
 

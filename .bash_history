@@ -27,6 +27,7 @@ git clone https://github.com/phaazon/config.git ~/.local/share/github.com/phaazo
 git clone https://git.sr.ht/~emersion/grim ~/.local/share/git.sr.ht/~emersion/grim
 git clone https://git.sr.ht/~emersion/kanshi ~/.local/share/git.sr.ht/~emersion/kanshi
 git clone https://github.com/alacritty/alacritty.git ~/.local/share/github.com/alacritty/alacritty
+git clone https://github.com/alacritty/alacritty-theme.git ~/.local/share/github.com/alacritty/alacritty-theme
 git clone https://github.com/ianyh/Amethyst.git ~/.local/share/github.com/ianyh/Amethyst
 git clone https://github.com/taupiqueur/batch.git ~/.local/share/github.com/taupiqueur/batch
 git clone https://github.com/Blacksmoke16/oq.git ~/.local/share/github.com/Blacksmoke16/oq

@@ -3,7 +3,7 @@
   email = taupiqueur.kanto@gmail.com
 
 [core]
-  pager = delta | less --mouse
+  pager = delta --light | less --mouse
 
 [commit]
   verbose = true

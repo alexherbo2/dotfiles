@@ -160,7 +160,6 @@ decaffeinate-lid
 nginx
 rm -R .config/mpv/watch_later
 git clone https://github.com/helix-editor/helix.git ~/.local/share/github.com/helix-editor/helix
-sh ~/config/scripts/patch-helix.sh
 git clone https://github.com/mawww/kakoune.git ~/.local/share/github.com/mawww/kakoune
 git clone https://github.com/elbywan/crystalline.git ~/.local/share/github.com/elbywan/crystalline
 cd ~/.local/share/github.com/elbywan/crystalline

@@ -3,7 +3,9 @@
 # https://github.com/alacritty/alacritty
 # https://github.com/alacritty/alacritty/blob/master/alacritty.yml
 
-import: ["~/.config/alacritty/macos/use_option_as_meta_key.yml"]
+import:
+- ~/.config/alacritty/macos/use_option_as_meta_key.yml
+- ~/.local/share/github.com/alacritty/alacritty-theme/themes/atom_one_light.yaml
 
 # Appearance -------------------------------------------------------------------
 

@@ -1,5 +1,6 @@
 git clone https://github.com/watzon/arg_parser.git ~/.local/share/github.com/watzon/arg_parser
 git clone https://github.com/topisani/sidetree.git ~/.local/share/github.com/topisani/sidetree
+cargo install sidetree
 git clone https://github.com/watzon/ngrok.cr.git ~/.local/share/github.com/watzon/ngrok.cr
 git clone https://github.com/crystal-lang/crystal-book.git ~/.local/share/github.com/crystal-lang/crystal-book
 git clone https://github.com/GoogleChrome/chrome-extensions-samples.git ~/.local/share/github.com/GoogleChrome/chrome-extensions-samples

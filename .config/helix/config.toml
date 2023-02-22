@@ -10,7 +10,7 @@
 
 # Appearance -------------------------------------------------------------------
 
-theme = 'onelight'
+theme = 'base16_transparent'
 editor.color-modes = true
 editor.auto-format = false
 editor.idle-timeout = 100

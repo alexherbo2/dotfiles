@@ -177,7 +177,7 @@ mpv https://twitch.tv/randomwatchertv
 mpv https://twitch.tv/kayanetv
 cd ~/.local/share/github.com/helix-editor/helix
 cargo build --release
-cargo install --path helix-term
+cargo install --locked --path helix-term
 install ~/.cargo/bin/hx /opt/homebrew/bin
 export GIT_SSH_COMMAND='ssh -i ~/.ssh/id_ed25519_alexherbo2'
 export EDITOR='kak -n'

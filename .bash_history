@@ -1,4 +1,6 @@
 git clone https://github.com/watzon/arg_parser.git ~/.local/share/github.com/watzon/arg_parser
+git clone https://github.com/doomemacs/doomemacs.git ~/.local/share/github.com/doomemacs/doomemacs
+git clone https://github.com/hlissner/dotfiles.git ~/.local/share/github.com/hlissner/dotfiles
 git clone https://github.com/topisani/sidetree.git ~/.local/share/github.com/topisani/sidetree
 cargo install sidetree
 git clone https://github.com/watzon/ngrok.cr.git ~/.local/share/github.com/watzon/ngrok.cr

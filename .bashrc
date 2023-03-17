@@ -2,6 +2,14 @@
 # https://gnu.org/software/bash/
 # https://gnu.org/software/bash/manual/bash.html
 
+# Starship
+# https://starship.rs
+eval "$(starship init bash)"
+
+# McFly
+# https://github.com/cantino/mcfly
+eval "$(mcfly init bash)"
+
 # opam configuration
 eval "$(opam env)"
 

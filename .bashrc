@@ -22,8 +22,8 @@ eval "$(opam env)"
 
 # Prompt -----------------------------------------------------------------------
 
-export PS1='\[\e[37m\]\u@\h \[\e[36m\]\w\n\[\e[32m\]:\[\e[0m\]'
-export PROMPT_COMMAND='[ $? = 0 ] || echo -e "\\e[31mERROR\\e[0m: command exited with $?"'
+# export PS1='\[\e[37m\]\u@\h \[\e[36m\]\w\n\[\e[32m\]:\[\e[0m\]'
+# export PROMPT_COMMAND='[ $? = 0 ] || echo -e "\\e[31mERROR\\e[0m: command exited with $?"'
 
 # Environment variables --------------------------------------------------------
 
@@ -49,7 +49,7 @@ export EDITOR=hx
 # Key bindings -----------------------------------------------------------------
 
 # Bash history
-bind -x '"\C-r":"READLINE_LINE=$(history -w /dev/stdout | tac | awk !seen[\$0]++ | fzy) READLINE_POINT=${#READLINE_LINE}"'
+# bind -x '"\C-r":"READLINE_LINE=$(history -w /dev/stdout | tac | awk !seen[\$0]++ | fzy) READLINE_POINT=${#READLINE_LINE}"'
 
 # Aliases ----------------------------------------------------------------------
 
@@ -66,10 +66,6 @@ alias z='eval "$(history -w /dev/stdout | tac | awk !seen[\$0]++ | fzy)"'
 alias hk='history -a'
 alias hj='history -n'
 alias hc='history -cr ~/.bash_history~ && history -w'
-
-# Starship
-# https://starship.rs
-alias p='eval "$(starship init bash)"'
 
 # Navigation
 alias st=sidetree

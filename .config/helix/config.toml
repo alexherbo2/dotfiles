@@ -106,6 +106,9 @@ Y = ':pipe-to tmux load-buffer -w -'
 # Format date as “1991-11-02 Sat”.
 D = ':pipe date -d "$(cat)" "+%F %a" | tr -d "\\n"'
 
+# Sanitize text input.
+'@' = ':pipe iconv -f UTF-8 -t ASCII//TRANSLIT//IGNORE'
+
 # Insert mode ------------------------------------------------------------------
 
 # Reference:

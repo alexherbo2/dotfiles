@@ -1,4 +1,6 @@
 git clone https://github.com/watzon/arg_parser.git ~/.local/share/github.com/watzon/arg_parser
+git clone https://github.com/zellij-org/zellij.git ~/.local/share/github.com/zellij-org/zellij
+git clone https://github.com/cantino/mcfly.git ~/.local/share/github.com/cantino/mcfly
 git clone https://github.com/doomemacs/doomemacs.git ~/.local/share/github.com/doomemacs/doomemacs
 git clone https://github.com/hlissner/dotfiles.git ~/.local/share/github.com/hlissner/dotfiles
 git clone https://github.com/topisani/sidetree.git ~/.local/share/github.com/topisani/sidetree
@@ -135,22 +137,22 @@ hx ~/youtube/videos/info.txt
 hx ~/youtube/channels/joueur-du-grenier/list.txt
 hx ~/youtube/channels/bazar-du-grenier/list.txt
 hx
-st
+nnn
 cd ~/docs/notes
 cd ~/Downloads
 cd ~/storage/downloads
-st ~/Downloads
-st ~/storage/downloads
-st ~/Documents
-st ~/docs
-st ~/tmp
-st ~/data
-st ~/Desktop
-st ~/.local/share/git.sr.ht
-st ~/.local/share/github.com
-st ~/.local/share/codeberg.org
-st ~/.local/share/gitlab.com
-st ~/.local/share/hg.stevelosh.com
+nnn ~/Downloads
+nnn ~/storage/downloads
+nnn ~/Documents
+nnn ~/docs
+nnn ~/tmp
+nnn ~/data
+nnn ~/Desktop
+nnn ~/.local/share/git.sr.ht
+nnn ~/.local/share/github.com
+nnn ~/.local/share/codeberg.org
+nnn ~/.local/share/gitlab.com
+nnn ~/.local/share/hg.stevelosh.com
 cd ~/config
 cd ~/data
 cd ~/tmp
@@ -205,12 +207,12 @@ shutdown now
 gh repo view --web
 gh repo fork
 rm -R Movies/TV
-st ~/anime
-st ~/series
-st ~/movies
-st ~/storage/movies
-st ~/games
-st ~/youtube
+nnn ~/anime
+nnn ~/series
+nnn ~/movies
+nnn ~/storage/movies
+nnn ~/games
+nnn ~/youtube
 mpv ~/anime/one-piece/06
 mpv ~/series/stargate/stargate-sg-1/french/01
 mpv ~/anime/nicky-larson/01

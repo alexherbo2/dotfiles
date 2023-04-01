@@ -5,7 +5,7 @@
 
 import:
 - ~/.config/alacritty/macos/use_option_as_meta_key.yml
-- ~/.local/share/github.com/alacritty/alacritty-theme/themes/one_dark.yaml
+- ~/.local/share/github.com/alacritty/alacritty-theme/themes/atom_one_light.yaml
 
 # Appearance -------------------------------------------------------------------
 

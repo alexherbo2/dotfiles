@@ -5,6 +5,9 @@
 [core]
   pager = delta | less --mouse
 
+[delta]
+  light = true
+
 [commit]
   verbose = true
 

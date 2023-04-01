@@ -2,4 +2,4 @@
 # https://github.com/sharkdp/bat
 
 --style=plain
---theme=base16
+--theme=GitHub

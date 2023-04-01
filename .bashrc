@@ -138,6 +138,7 @@ alias ws='rg "\\s+$|\\w\\s{2,}\\w"'
 # https://git-scm.com/docs/git-reset
 # https://git-scm.com/docs/git-switch
 # https://git-scm.com/docs/git-branch
+# https://git-scm.com/docs/git-stash
 # https://git-scm.com/docs/git-restore
 # https://github.com/extrawurst/gitui
 # https://git-scm.com/docs/git-for-each-ref
@@ -149,11 +150,15 @@ alias gw='git add'
 alias gw.='gw .'
 alias gst='git status'
 alias gg='git diff'
+alias ga='git switch -'
 alias gb='git branch | fzy | cut -c 3- | xargs git switch'
 alias gl='git log'
 alias gL='git log -p'
 alias gk='git push'
 alias gj='git pull'
+# Stash
+alias gz='git stash'
+alias gZ='git stash pop'
 # Grep logs
 alias gF='git log -p -S'
 alias gE='git log -p -G'

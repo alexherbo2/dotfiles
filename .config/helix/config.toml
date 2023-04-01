@@ -9,10 +9,7 @@
 # https://github.com/helix-editor/helix/blob/master/helix-view/src/editor.rs
 #
 # Custom patches:
-# https://github.com/helix-editor/helix/pull/2608
 # https://github.com/helix-editor/helix/pull/3328
-# https://github.com/helix-editor/helix/pull/3791
-# https://github.com/helix-editor/helix/pull/5340
 # https://github.com/helix-editor/helix/pull/5468
 # https://github.com/helix-editor/helix/pull/5768
 

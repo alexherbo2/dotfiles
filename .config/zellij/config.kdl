@@ -1,0 +1,7 @@
+// Zellij
+// https://zellij.dev
+
+// Appearance ------------------------------------------------------------------
+
+theme "dracula"
+theme_dir "~/.local/share/github.com/zellij-org/zellij/example/themes"

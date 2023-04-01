@@ -68,7 +68,7 @@ alias hj='history -n'
 alias hc='history -cr ~/.bash_history~ && history -w'
 
 # Navigation
-alias st=sidetree
+alias n=nnn
 alias ..='cd ..'
 alias ...='cd ../..'
 alias -- -='cd -'
@@ -123,11 +123,11 @@ alias cat=bat
 # https://curl.haxx.se
 alias curl='curl -sSL'
 
-# tmux
-# https://github.com/tmux/tmux
-alias t=tmux
-alias ta='tmux attach-session'
-alias tl='tmux list-sessions'
+# Zellij
+# https://zellij.dev
+alias t=zellij
+alias ta='zellij attach --create "${PWD##*/}"'
+alias tl='zellij list-sessions | fzy | xargs -o zellij attach'
 
 # Kakoune
 # https://kakoune.org

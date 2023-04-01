@@ -12,7 +12,7 @@ import:
 font:
   size: 14.0
   normal:
-    family: JetBrains Mono
+    family: JetBrainsMono Nerd Font
 
 selection:
   save_to_clipboard: true

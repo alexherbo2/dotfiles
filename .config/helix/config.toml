@@ -107,10 +107,6 @@ A-k = 'keep_selections'
 ']'.']'.t = ':set-language toml'
 ']'.']'.y = ':set-language yaml'
 
-[keys.normal.space]
-# Yank selected text to local clipboard.
-Y = ':pipe-to tmux load-buffer -w -'
-
 # Format date as “1991-11-02 Sat”.
 D = ':pipe date -d "$(cat)" "+%F %a" | tr -d "\\n"'
 

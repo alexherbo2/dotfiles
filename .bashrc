@@ -11,6 +11,10 @@ eval "$(starship init bash)"
 export MCFLY_LIGHT=TRUE
 eval "$(mcfly init bash)"
 
+# zoxide
+# https://github.com/ajeetdsouza/zoxide
+eval "$(zoxide init bash)"
+
 # opam configuration
 eval "$(opam env)"
 
@@ -28,9 +32,6 @@ eval "$(opam env)"
 
 # Environment variables --------------------------------------------------------
 
-# Bash history size
-export HISTSIZE=-1
-
 # Paths
 export PATH=~/.local/bin:~/.cargo/bin:$PATH
 
@@ -47,11 +48,6 @@ export EDITOR=hx
 # Local environment variables
 . ~/.config/env
 
-# Key bindings -----------------------------------------------------------------
-
-# Bash history
-# bind -x '"\C-r":"READLINE_LINE=$(history -w /dev/stdout | tac | awk !seen[\$0]++ | fzy) READLINE_POINT=${#READLINE_LINE}"'
-
 # Aliases ----------------------------------------------------------------------
 
 # Reload bashrc.
@@ -62,16 +58,9 @@ alias cp='cp -n'
 alias mv='mv -n'
 alias _='rm -Rf --'
 
-# Bash history
-alias z='eval "$(history -w /dev/stdout | tac | awk !seen[\$0]++ | fzy)"'
-alias hk='history -a'
-alias hj='history -n'
-alias hc='history -cr ~/.bash_history~ && history -w'
-
 # Navigation
 alias n=nnn
 alias ..='cd ..'
-alias ...='cd ../..'
 alias -- -='cd -'
 
 # Run `sudo` with aliases.

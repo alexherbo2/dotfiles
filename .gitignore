@@ -10,4 +10,6 @@
 .config/weechat
 .local/share/weechat
 .cache/weechat
+Library/Application Support/McFly
+Library/Application Support/zoxide
 Library/Application Support/Google/Chrome

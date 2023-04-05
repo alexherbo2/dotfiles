@@ -4,3 +4,108 @@
 // Appearance ------------------------------------------------------------------
 
 theme "catppuccin-latte"
+
+// Key bindings ----------------------------------------------------------------
+
+keybinds {
+  normal {
+    // Clear defaults
+    unbind "Ctrl g" "Ctrl p" "Ctrl t" "Ctrl n" "Ctrl h" "Ctrl s" "Ctrl o" "Ctrl q"
+
+    // tmux-like prefix key
+    bind "Ctrl v" { SwitchToMode "Pane"; }
+
+    // Pane
+    bind "Alt Left" { MoveFocusOrTab "Left"; }
+    bind "Alt Right" { MoveFocusOrTab "Right"; }
+    bind "Alt Up" { MoveFocus "Up"; }
+    bind "Alt Down" { MoveFocus "Down"; }
+
+    // Tab
+    bind "Alt 1" { GoToTab 1; }
+    bind "Alt 2" { GoToTab 2; }
+    bind "Alt 3" { GoToTab 3; }
+    bind "Alt 4" { GoToTab 4; }
+    bind "Alt 5" { GoToTab 5; }
+    bind "Alt 6" { GoToTab 6; }
+    bind "Alt 7" { GoToTab 7; }
+    bind "Alt 8" { GoToTab 8; }
+    bind "Alt 9" { GoToTab 9; }
+    bind "Alt 0" { NewTab; }
+  }
+
+  pane {
+    bind "i" { SwitchToMode "Normal"; }
+    bind "q" { Detach; }
+    bind "Ctrl q" { Quit; }
+
+    // Switch panes
+    bind "h" { MoveFocusOrTab "Left"; }
+    bind "l" { MoveFocusOrTab "Right"; }
+    bind "j" { MoveFocus "Down"; }
+    bind "k" { MoveFocus "Up"; }
+
+    // Move panes
+    bind "H" { MovePane "Left"; }
+    bind "L" { MovePane "Right"; }
+    bind "K" { MovePane "Up"; }
+    bind "J" { MovePane "Down"; }
+
+    // Resize panes
+    bind "Ctrl h" "Backspace" { Resize "Decrease Right"; }
+    bind "Ctrl l" { Resize "Increase Right"; }
+    bind "Ctrl k" { Resize "Decrease Down"; }
+    bind "Ctrl j" "Enter" { Resize "Increase Down"; }
+
+    // Create panes
+    bind "o" { NewPane "Down"; SwitchToMode "Normal"; }
+    bind "O" { NewPane "Right"; SwitchToMode "Normal"; }
+
+    // Tab
+    bind "1" { GoToTab 1; }
+    bind "2" { GoToTab 2; }
+    bind "3" { GoToTab 3; }
+    bind "4" { GoToTab 4; }
+    bind "5" { GoToTab 5; }
+    bind "6" { GoToTab 6; }
+    bind "7" { GoToTab 7; }
+    bind "8" { GoToTab 8; }
+    bind "9" { GoToTab 9; }
+    bind "0" { NewTab; }
+
+    // Layout
+    bind "[" { PreviousSwapLayout; }
+    bind "]" { NextSwapLayout; }
+
+    bind "c" { NewTab; SwitchToMode "Normal"; }
+    bind "x" { CloseFocus; }
+    bind "X" { CloseTab; }
+    bind "`" { NewPane; }
+    bind "Tab" { ToggleTab; }
+
+    // Layout
+    bind "f" { ToggleFocusFullscreen; }
+    bind "w" { ToggleFloatingPanes; }
+    bind "W" { TogglePaneEmbedOrFloating; }
+
+    // Search
+    bind "/" "Ctrl f" { SwitchToMode "EnterSearch"; }
+
+    // Scroll
+    bind "e" { EditScrollback; }
+    bind "d" "Down" { ScrollDown; }
+    bind "u" "Up" { ScrollUp; }
+    bind "Ctrl f" "PageDown" { PageScrollDown; }
+    bind "Ctrl b" "PageUp" { PageScrollUp; }
+    bind "Ctrl d" { HalfPageScrollDown; }
+    bind "Ctrl u" { HalfPageScrollUp; }
+    bind "g" "Home" { ScrollToTop; }
+    bind "G" "End" { ScrollToBottom; }
+  }
+
+  entersearch {
+    bind "Enter" "Ctrl n" { Search "down"; }
+    bind "Ctrl p" { Search "up"; }
+    bind "Esc" { SwitchToMode "Pane"; }
+  }
+}

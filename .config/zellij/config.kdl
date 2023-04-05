@@ -92,7 +92,7 @@ keybinds {
     bind "/" "Ctrl f" { SwitchToMode "EnterSearch"; }
 
     // Scroll
-    bind "e" { EditScrollback; }
+    bind "e" { EditScrollback; SwitchToMode "Normal"; }
     bind "d" "Down" { ScrollDown; }
     bind "u" "Up" { ScrollUp; }
     bind "Ctrl f" "PageDown" { PageScrollDown; }

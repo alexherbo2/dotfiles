@@ -32,6 +32,8 @@ keybinds {
     bind "Alt 8" { GoToTab 8; }
     bind "Alt 9" { GoToTab 9; }
     bind "Alt 0" { NewTab; }
+    bind "Alt -" { NewPane; }
+    bind "Alt =" { NextSwapLayout; }
   }
 
   pane {
@@ -73,6 +75,9 @@ keybinds {
     bind "9" { GoToTab 9; }
     bind "0" { NewTab; }
 
+    bind "n" { GoToNextTab; }
+    bind "p" { GoToPreviousTab; }
+
     // Layout
     bind "[" { PreviousSwapLayout; }
     bind "]" { NextSwapLayout; }
@@ -80,7 +85,6 @@ keybinds {
     bind "c" { NewTab; SwitchToMode "Normal"; }
     bind "x" { CloseFocus; }
     bind "X" { CloseTab; }
-    bind "`" { NewPane; }
     bind "Tab" { ToggleTab; }
 
     // Layout
@@ -89,7 +93,7 @@ keybinds {
     bind "W" { TogglePaneEmbedOrFloating; }
 
     // Search
-    bind "/" "Ctrl f" { SwitchToMode "EnterSearch"; }
+    bind "/" { SwitchToMode "EnterSearch"; }
 
     // Scroll
     bind "e" { EditScrollback; SwitchToMode "Normal"; }

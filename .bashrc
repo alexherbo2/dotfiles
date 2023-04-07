@@ -113,12 +113,6 @@ alias cat=bat
 # https://curl.haxx.se
 alias curl='curl -sSL'
 
-# Zellij
-# https://zellij.dev
-alias t=zellij
-alias ta='zellij attach --create "${PWD##*/}"'
-alias tl='zellij list-sessions | fzy | xargs -o zellij attach'
-
 # Kakoune
 # https://kakoune.org
 alias kak='kak -n'

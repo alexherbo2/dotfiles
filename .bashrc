@@ -27,6 +27,9 @@ export PROMPT_COMMAND='[ $? = 0 ] || echo -e "\\e[31mERROR\\e[0m: command exited
 
 # Environment variables --------------------------------------------------------
 
+# Bash history size
+export HISTSIZE=-1
+
 # Paths
 export PATH=~/.local/bin:~/.cargo/bin:$PATH
 

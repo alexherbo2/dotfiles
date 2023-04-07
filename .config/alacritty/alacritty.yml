@@ -16,7 +16,7 @@ window:
 font:
   size: 14.0
   normal:
-    family: JetBrainsMono Nerd Font
+    family: JetBrains Mono
 
 selection:
   save_to_clipboard: true

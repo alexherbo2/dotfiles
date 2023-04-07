@@ -4,11 +4,11 @@
 
 # Starship
 # https://starship.rs
-eval "$(starship init bash)"
+# eval "$(starship init bash)"
 
 # McFly
 # https://github.com/cantino/mcfly
-eval "$(mcfly init bash)"
+# eval "$(mcfly init bash)"
 
 # opam configuration
 eval "$(opam env)"

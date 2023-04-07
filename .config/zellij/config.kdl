@@ -8,20 +8,20 @@ theme "catppuccin-latte"
 // Key bindings ----------------------------------------------------------------
 
 keybinds clear-defaults=true {
-  normal {
-    // tmux-like prefix key
-    bind "Ctrl v" { SwitchToMode "Pane"; }
 
-    // Focus panes
+  // Insert mode ---------------------------------------------------------------
+
+  normal {
+    // Enter normal mode.
+    bind "Ctrl b" { SwitchToMode "Pane"; }
+
+    // Focus panes.
     bind "Alt Left" { MoveFocusOrTab "Left"; }
     bind "Alt Right" { MoveFocusOrTab "Right"; }
     bind "Alt Up" { MoveFocus "Up"; }
     bind "Alt Down" { MoveFocus "Down"; }
 
-    bind "Alt [" { SwitchFocus; }
-    bind "Alt ]" { SwitchFocus; }
-
-    // Switch tabs
+    // Switch tabs.
     bind "Alt 1" { GoToTab 1; }
     bind "Alt 2" { GoToTab 2; }
     bind "Alt 3" { GoToTab 3; }
@@ -34,44 +34,45 @@ keybinds clear-defaults=true {
     bind "Alt 0" { NewTab; }
     bind "Alt -" { NewPane; }
     bind "Alt =" { NextSwapLayout; }
-
+    bind "Alt `" { SwitchFocus; }
   }
 
+  // Normal mode ---------------------------------------------------------------
+
   pane {
-    // Basics
-    // Return to normal mode.
+    // Return to insert mode.
     bind "i" "Esc" "Ctrl c" { ScrollToBottom; SwitchToMode "Normal"; }
 
-    // Exit Zellij
+    // Exit Zellij.
     bind "q" { Detach; }
     bind "Ctrl q" { Quit; }
 
-    // Create windows
+    // Create windows.
     bind "c" { NewTab; SwitchToMode "Normal"; }
 
-    // Split panes
+    // Split panes.
     bind "o" { NewPane "Down"; SwitchToMode "Normal"; }
     bind "O" { NewPane "Right"; SwitchToMode "Normal"; }
 
-    // Focus panes
+    // Focus panes.
     bind "h" { MoveFocusOrTab "Left"; }
     bind "l" { MoveFocusOrTab "Right"; }
-    bind "j" { MoveFocus "Down"; }
     bind "k" { MoveFocus "Up"; }
+    bind "j" { MoveFocus "Down"; }
 
-    // Move panes
+    // Move panes.
     bind "H" { MovePane "Left"; }
     bind "L" { MovePane "Right"; }
     bind "K" { MovePane "Up"; }
     bind "J" { MovePane "Down"; }
 
-    // Resize panes
+    // Resize panes.
     bind "Ctrl h" "Backspace" { Resize "Decrease Right"; }
     bind "Ctrl l" { Resize "Increase Right"; }
     bind "Ctrl k" { Resize "Decrease Down"; }
     bind "Ctrl j" "Enter" { Resize "Increase Down"; }
 
-    // Switch tabs
+    // Switch tabs.
     bind "1" { GoToTab 1; }
     bind "2" { GoToTab 2; }
     bind "3" { GoToTab 3; }
@@ -83,36 +84,23 @@ keybinds clear-defaults=true {
     bind "9" { GoToTab 9; }
     bind "0" { NewTab; }
 
-    // Switch windows
-    bind "p" { GoToPreviousTab; }
+    // Switch tabs.
     bind "n" { GoToNextTab; }
-
-    // Switch windows
     bind "p" { GoToPreviousTab; }
-    bind "n" { GoToNextTab; }
 
-    // Close tabs
+    // Close views.
     bind "x" { CloseFocus; }
     bind "X" { CloseTab; }
 
-    // Layouts
     // Change layout style.
-    bind "[" { PreviousSwapLayout; }
-    bind "]" { NextSwapLayout; }
-
-    // Toggle full-screen mode.
     bind "f" { ToggleFocusFullscreen; }
-
-    // Toggle floating mode.
     bind "e" { TogglePaneEmbedOrFloating; }
-
-    // Swap focus between tiling and floating areas.
     bind "w" { ToggleFloatingPanes; }
 
-    // Search
-    bind "/" "Ctrl f" { SwitchToMode "EnterSearch"; SearchInput 0; }
+    // Enter search mode.
+    bind "/" { SwitchToMode "EnterSearch"; SearchInput 0; }
 
-    // Scroll
+    // Scroll.
     bind "Ctrl e" { EditScrollback; SwitchToMode "Normal"; }
     bind "d" "Down" { ScrollDown; }
     bind "u" "Up" { ScrollUp; }
@@ -124,11 +112,18 @@ keybinds clear-defaults=true {
     bind "G" "End" { ScrollToBottom; }
   }
 
+  // Search mode ---------------------------------------------------------------
+
   entersearch {
+    // Exit search mode.
     bind "Ctrl c" { ScrollToBottom; SwitchToMode "Normal"; }
     bind "Esc" { SwitchToMode "Pane"; }
+
+    // Search next and previous occurrences.
     bind "Enter" "Ctrl n" { Search "down"; }
     bind "Ctrl p" { Search "up"; }
+
+    // Toggle search options.
     bind "Alt c" { SearchToggleOption "CaseSensitivity"; }
     bind "Alt w" { SearchToggleOption "Wrap"; }
     bind "Alt o" { SearchToggleOption "WholeWord"; }

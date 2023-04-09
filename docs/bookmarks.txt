@@ -2,6 +2,8 @@ Taupiqueur’s notes
 https://github.com/taupiqueur/taupiqueur-notes
 Webtoon Factory website
 https://webtoonfactory.com
+Charm website
+https://charm.sh
 Glow repository
 https://github.com/charmbracelet/glow
 Gum repository

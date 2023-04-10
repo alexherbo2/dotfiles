@@ -189,7 +189,7 @@ alias tree='exa --tree --all --ignore-glob .git'
 # https://github.com/taupiqueur/batch
 # interactive map
 imap() {
-  batch -f 'iconv -f UTF-8 -t ASCII//TRANSLIT//IGNORE' -f 'tr [:upper:] [:lower:]' -f "tr -s \\'[:blank:] -" -f 'tr -d ?!,' "$@"
+  batch -e 'kak -n' -f 'iconv -f UTF-8 -t ASCII//TRANSLIT//IGNORE' -f 'tr [:upper:] [:lower:]' -f "tr -s \\'[:blank:] -" -f 'tr -d ?!,' "$@"
 }
 
 # auto map
@@ -204,7 +204,7 @@ imv() {
 
 # graphical mv
 xmv() {
-  xplr | imv "$@"
+  nnn -p - | imv "$@"
 }
 
 # ffmpeg

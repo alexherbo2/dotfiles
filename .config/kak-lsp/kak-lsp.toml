@@ -1,0 +1,49 @@
+# kak-lsp
+# https://github.com/kak-lsp/kak-lsp
+# https://github.com/kak-lsp/kak-lsp/blob/master/kak-lsp.toml
+
+# Global settings --------------------------------------------------------------
+
+snippet_support = false
+verbosity = 2
+
+# Server options ---------------------------------------------------------------
+
+[server]
+
+timeout = 1800 # seconds (30 minutes)
+
+# Language servers -------------------------------------------------------------
+
+[language]
+
+# Reference
+# https://microsoft.github.io/language-server-protocol/implementors/servers/
+
+bash = { filetypes = ['sh'], roots = ['.git'], command = 'bash-language-server', args = ['start'] }
+crystal = { filetypes = ['crystal'], roots = ['shard.yml'], command = 'crystalline' }
+javascript = { filetypes = ['javascript'], roots = ['.git'], command = 'typescript-language-server', args = ['--stdio'] }
+kotlin = { filetypes = ['kotlin'], roots = ['.git'], command = 'kotlin-language-server' }
+ruby = { filetypes = ['ruby'], roots = ['Gemfile'], command = 'solargraph', args = ['stdio'] }
+rust = { filetypes = ['rust'], roots = ['Cargo.toml'], command = 'rust-analyzer' }
+
+# Semantic tokens --------------------------------------------------------------
+
+[semantic_tokens]
+
+# Reference
+# https://microsoft.github.io/language-server-protocol/specification#textDocument_semanticTokens
+
+faces = [
+  { face = 'documentation', token = 'comment', modifiers = ['documentation'] },
+  { face = 'comment', token = 'comment' },
+  { face = 'function', token = 'function' },
+  { face = 'keyword', token = 'keyword' },
+  { face = 'module', token = 'namespace' },
+  { face = 'operator', token = 'operator' },
+  { face = 'string', token = 'string' },
+  { face = 'type', token = 'type' },
+  { face = 'default+d', token = 'variable', modifiers = ['readonly'] },
+  { face = 'default+d', token = 'variable', modifiers = ['constant'] },
+  { face = 'variable', token = 'variable' }
+]

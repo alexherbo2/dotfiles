@@ -37,7 +37,13 @@ set-option global ui_options terminal_set_title=no terminal_assistant=none
 set-option global scrolloff 5,1
 add-highlighter -override global/show-matching show-matching
 add-highlighter -override global/number-lines number-lines -hlcursor
-add-highlighter -override global/show-whitespaces show-whitespaces
+
+# Color scheme: One light (https://git.sr.ht/~raiguard/one.kak)
+# colorscheme one-light
+
+# Custom faces
+# set-face global Whitespace "rgb:%opt{bg}+f"
+# set-face global SelectedText "rgb:%opt{blue}+f"
 
 # System clipboard
 # set-option global clipboard_copy_command 'pbcopy'
@@ -154,6 +160,20 @@ define-command -override open-global-search-picker -docstring 'open-global-searc
     grep %val{text}
   }
 }
+
+# Vim-like unimpaired mappings
+declare-user-mode unimpaired_left
+declare-user-mode unimpaired_right
+# map -docstring 'select regex matches' global select / s
+# map -docstring 'select whole parenthesis blocks' global select <a-b> ': select-whole-parenthesis-blocks<ret>'
+# add-highlighter -override global/show-whitespaces show-whitespaces
+# map -docstring 'enter select mode' global normal s ': enter-select-mode<ret>'
+# map -docstring 'select whole parenthesis blocks' global select <a-b> ': remove-highlighter global/show-whitespaces<ret>''['.w = ':set whitespace.render none'
+# map -docstring 'select whole parenthesis blocks' global select <a-b> ': add-highlighter global/show-whitespaces show-whitespaces<ret>'']'.w = ':set whitespace.render all'
+# map -docstring 'select whole parenthesis blocks' global select <a-b> ': select-whole-parenthesis-blocks<ret>''['.tab = ':set indent-guides.render false'
+# map -docstring 'select whole parenthesis blocks' global select <a-b> ': select-whole-parenthesis-blocks<ret>'']'.tab = ':set indent-guides.render true'
+# map -docstring 'select whole parenthesis blocks' global select <a-b> ': select-whole-parenthesis-blocks<ret>''['.r = ':set rulers []'
+# map -docstring 'select whole parenthesis blocks' global select <a-b> ': select-whole-parenthesis-blocks<ret>'']'.r = ':set rulers [81]'
 
 # Commands ---------------------------------------------------------------------
 

@@ -41,7 +41,8 @@ export LANG=en_US.UTF-8
 export QT_QPA_PLATFORMTHEME=kde
 
 # Applications
-export EDITOR=hx
+export EDITOR=kak
+export KAKOUNE_POSIX_SHELL=/bin/dash
 
 # Local environment variables
 . ~/.config/env

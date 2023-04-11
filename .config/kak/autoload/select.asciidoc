@@ -1,0 +1,63 @@
+= Select
+
+Select objects.
+
+== Usage
+
+Select a region and type `:enter-select-mode` to select objects.
+
+== Configuration
+
+--------------------------------------------------------------------------------
+map -docstring 'enter select mode' global normal s ': enter-select-mode<ret>'
+--------------------------------------------------------------------------------
+
+== Object types
+
+_/_::
+    regex matches
+
+_b_, _(_, _)_::
+    parenthesis blocks
+
+_B_, _{_, _}_::
+    brace blocks
+
+_r_, _[_, _]_::
+    bracket blocks
+
+_a_, _<_, _>_::
+    angle blocks
+
+_Q_, _"_::
+    double quote strings
+
+_q_, _'_::
+    single quote strings
+
+_g_, _`_::
+    grave quote strings
+
+_w_::
+    words
+
+_Alt+w_::
+    big words
+
+_s_::
+    sentences
+
+_p_::
+    paragraphs
+
+_Space_::
+    whitespaces
+
+_i_::
+    indent
+
+_n_::
+    numbers
+
+_u_::
+    arguments

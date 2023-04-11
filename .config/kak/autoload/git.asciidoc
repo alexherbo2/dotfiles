@@ -1,0 +1,38 @@
+= Git
+
+Provides basic Git integration for Kakoune.
+
+== Usage
+
+Write the current buffer with `git-write` and commit changes with `git-commit`.
+
+All commands always uses the current buffer’s repository, so you don’t need to worry about the current working directory.
+
+== Commands
+
+- `git`
+- `git-write`
+- `git-commit`
+
+== Aliases
+
+- `g`
+- `gw`
+- `gc`
+
+== Faces
+
+- `GitInformation`
+- `GitScissors`
+- `GitModifiedFile`
+- `GitNewFile`
+- `GitDeletedFile`
+- `GitRenamedFile`
+
+=== Generics
+
+- `DiffText`
+- `DiffHeader`
+- `DiffInserted`
+- `DiffDeleted`
+- `DiffChanged`

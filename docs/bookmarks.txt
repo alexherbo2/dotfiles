@@ -2,6 +2,8 @@ Taupiqueur’s notes
 https://github.com/taupiqueur/taupiqueur-notes
 Webtoon Factory website
 https://webtoonfactory.com
+kak-lsp repository
+https://github.com/kak-lsp/kak-lsp
 Kakoune, a punk rock text editor
 https://zork.net/~st/jottings/kakoune-a-punk-rock-text-editor.html
 Charm website

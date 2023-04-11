@@ -1,0 +1,31 @@
+# Manual
+
+## Usage
+
+Create a new terminal with the `terminal` command.
+
+## Commands
+
+###### alacritty-terminal-window
+
+```
+alacritty-terminal-window [<program>] [<arguments>]
+```
+
+Creates a new terminal as an Alacritty window.
+
+###### alacritty-terminal-popup
+
+```
+alacritty-terminal-popup [<program>] [<arguments>]
+```
+
+Creates a new terminal as an Alacritty window (class: `popup`).
+
+###### alacritty-terminal-panel
+
+```
+alacritty-terminal-panel [<program>] [<arguments>]
+```
+
+Creates a new terminal as an Alacritty window (class: `panel`).

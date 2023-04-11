@@ -1,0 +1,54 @@
+= Surround
+
+Surround selections.
+
+== Usage
+
+Type `:enter-surround-mode` to surround selections.
+
+== Configuration
+
+--------------------------------------------------------------------------------
+map -docstring 'enter surround mode' global normal q ': enter-surround-mode<ret>'
+--------------------------------------------------------------------------------
+
+== Surrounding pairs
+
+_b_, _(_, _)_::
+    parenthesis block
+
+_B_, _{_, _}_::
+    brace block
+
+_r_, _[_, _]_::
+    bracket block
+
+_a_, _<_, _>_::
+    angle block
+
+_Q_, _"_::
+    double quote string
+
+_q_, _'_::
+    single quote string
+
+_g_, _`_::
+    grave quote string
+
+_Alt+Q_, _“_, _”_::
+    double quotation mark
+
+_Alt+q_, _‘_, _’_::
+    single quotation mark
+
+_Alt+G_, _«_, _»_::
+    double angle quotation mark
+
+_Alt+g_, _‹_, _›_::
+    single angle quotation mark
+
+*_*::
+    emphasis
+
+_*_::
+    strong

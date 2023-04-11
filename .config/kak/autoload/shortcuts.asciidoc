@@ -1,0 +1,35 @@
+= Shortcuts
+
+Shortcuts to common operations.
+
+== Usage
+
+- Erase characters with `Backspace` and `Delete`.
+- Move by word with `w`, `e` and `b` – which are symmetrical.
+- Move lines with `Alt+Down` and `Alt+Up`.
+- Select highlights with `Alt+%`.
+- Increment and decrement selections with `Control+A` and `Control+X`.
+- Complete the buffer directory with `Alt+/`.
+- Evaluate selections with `=`.
+
+== Commands
+
+=== Normal
+
+- `Backspace` ⇒ Erase character before cursor.
+- `Delete` ⇒ Erase character under cursor.
+
+- `w` ⇒ Select next word.
+
+- `Alt+Down` ⇒ Move line down.
+- `Alt+Up` ⇒ Move line up.
+
+- `Alt+%` ⇒ Select all occurrences of current selection.
+
+- `Control+A` ⇒ Increment selection.
+- `Control+X` ⇒ Decrement selection.
+
+=== Prompt
+
+- `=` ⇒ Evaluate selections.
+- `Alt+/` ⇒ Buffer directory.

@@ -1,0 +1,53 @@
+= Refined show whitespace
+
+== Features
+
+* Individual faces for whitespace (tabs, newlines, non-breaking-spaces) and indent.
+* Show whitespace oddities:
+  ** Trailing whitespace (only shown when not in insert mode).
+  ** Odd and mixed indent.
+* Show consecutive whitespace.
+* Show limit of 80 characters (useful for horizontal lines).
+
+== Usage
+
+Show whitespace:
+
+--------------------------------------------------------------------------------
+add-highlighter global/whitespace ref whitespace
+--------------------------------------------------------------------------------
+
+== Highlighters
+
+- `whitespace`
+
+== Faces
+
+Whitespace characters:
+
+- `Tab` ⇒ `WhitespaceError`
+- `Newline` ⇒ `Whitespace`
+- `NonBreakingSpace` ⇒ `WhitespaceError`
+
+//-
+
+Indentation rules:
+
+- `Indent` ⇒ `Whitespace`
+- `MixedIndent` ⇒ `WhitespaceError`
+- `OddIndent` ⇒ `WhitespaceError`
+
+//-
+
+Extra whitespace:
+
+- `TrailingWhitespace` ⇒ `WhitespaceError`
+- `ConsecutiveWhitespace` ⇒ `WhitespaceWarning`
+
+//-
+
+Generic faces:
+
+- `WhitespaceRuler` ⇒ `green+fu`
+- `WhitespaceError` ⇒ `red+fc`
+- `WhitespaceWarning` ⇒ `red+fc`

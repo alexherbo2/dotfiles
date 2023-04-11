@@ -1,5 +1,6 @@
 git clone https://github.com/ajeetdsouza/zoxide.git ~/.local/share/github.com/ajeetdsouza/zoxide
 git clone https://github.com/watzon/arg_parser.git ~/.local/share/github.com/watzon/arg_parser
+git clone https://github.com/kak-lsp/kak-lsp.git ~/.local/share/github.com/kak-lsp/kak-lsp
 git clone https://github.com/zellij-org/zellij.git ~/.local/share/github.com/zellij-org/zellij
 git clone https://github.com/cantino/mcfly.git ~/.local/share/github.com/cantino/mcfly
 git clone https://github.com/doomemacs/doomemacs.git ~/.local/share/github.com/doomemacs/doomemacs

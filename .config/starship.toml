@@ -1,0 +1,17 @@
+# Starship
+# https://starship.rs
+
+format = '${custom.kakoune}$all'
+
+[cmd_duration]
+disabled = true
+
+# Kakoune
+# https://kakoune.org
+[custom.kakoune]
+symbol = '🐈'
+description = 'The current Kakoune session and client'
+command = 'echo "$KAKOUNE_CLIENT@$KAKOUNE_SESSION"'
+when = '[ -n "$KAKOUNE_SESSION" ]'
+shell = ['sh']
+style = 'green'

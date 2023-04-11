@@ -123,7 +123,8 @@ alias curl='curl -sSL'
 
 # Kakoune
 # https://kakoune.org
-alias kak='kak -n'
+# Reference: https://vamolessa.github.io/pepper/pepper/rc/config_recipes#load-config-file-on-startup
+alias kak='kak -n -e "source ~/.config/kak/kakrc"'
 
 # grep
 alias ws='rg "\\s+$|\\w\\s{2,}\\w"'

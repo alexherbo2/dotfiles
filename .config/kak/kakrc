@@ -50,8 +50,8 @@ source "%val{runtime}/colors/default.kak"
 # set-option global clipboard_copy_command 'pbcopy'
 # set-option global clipboard_copy_args
 
-# set-option global clipboard_paste_command 'pbpaste'
-# set-option global clipboard_paste_args
+set-option global clipboard_paste_command 'pbpaste'
+set-option global clipboard_paste_args
 
 # Highlight whitespace
 # add-highlighter -override global/whitespace ref whitespace
@@ -152,44 +152,13 @@ define-command -override open-buffer-picker -docstring 'open-buffer-picker: Open
 
 map -docstring 'global search' global goto / '<a-;>: open-global-search-picker<ret>'
 
-add-highlighter shared/grep regex '^(.+?):(\d+):(\d+):(.+?)$' 1:string 2:value 3:value
-
-hook -group grep-highlight global BufSetOption filetype=grep %{
-  add-highlighter buffer/grep ref grep
-  hook -always -once buffer BufSetOption 'filetype=.*' %{
-    remove-highlighter buffer/grep
-  }
-}
-
-define-command -hidden grep_jump %{
-  evaluate-commands -draft %{
-    execute-keys ',;xs^(.+?):(\d+):(\d+):(.+?)$<ret>'
-    evaluate-commands -client %val{client} -- edit -existing %reg{1} %reg{2} %reg{3}
-  }
-}
-
-declare-option str grep_tmpdir
-declare-option str grep_command rg
-declare-option str-list grep_args -. --column --with-filename
 define-command -override open-global-search-picker -docstring 'open-global-search-picker: Opens global search picker.' %{
   # Provides word completion
   prompt grep: -shell-script-candidates %{
     echo "write '$kak_response_fifo'" > "$kak_command_fifo"
     cat "$kak_response_fifo" | kak -f 's[\w-]{4,}<ret>y%<a-R>a<ret>'
   } %{
-    reg d %sh{mktemp -d}
-    reg f "%reg{d}/fifo"
-    reg b "%val{text}.refs"
-    nop %sh{
-      eval set -- "$kak_quoted_opt_grep_command" "$kak_quoted_opt_grep_args"
-      mkfifo "$kak_reg_f"
-      { "$@" -- "$kak_text" > "$kak_reg_f"; } < /dev/null > /dev/null 2>&1 &
-    }
-    edit! -fifo %reg{f} "%val{text}.references"
-    set-option buffer grep_tmpdir %reg{d}
-    set-option buffer filetype grep
-    map buffer normal <ret> ': grep_jump<ret>'
-    hook -always -once buffer BufCloseFifo '' %{ nop %sh{ rm -Rf "$kak_opt_grep_tmpdir" } }
+    grep rg --hidden --column --with-filename %val{text}
   }
 }
 

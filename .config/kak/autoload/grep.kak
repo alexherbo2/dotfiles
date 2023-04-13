@@ -20,7 +20,7 @@ define-command grep -params .. %{
   reg b "%arg{@}.refs"
   nop %sh{
     mkfifo "$kak_reg_f"
-    { "$@" -- "$kak_text" > "$kak_reg_f"; } < /dev/null > /dev/null 2>&1 &
+    { "$@" > "$kak_reg_f"; } < /dev/null > /dev/null 2>&1 &
   }
   edit! -fifo %reg{f} %reg{b}
   set-option buffer filetype grep

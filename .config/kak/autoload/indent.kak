@@ -77,7 +77,7 @@ define-command -override -hidden enter-new-line-and-keep-indent %{
     # Copy previous line indent
     execute-keys -draft 'H<a-&>'
     # Clean previous line indent
-    try %[ execute-keys -draft 'xs^\h+$<ret>d' ]
+    try %[ execute-keys -draft 'kxs^\h+$<ret>d' ]
   }
 }
 

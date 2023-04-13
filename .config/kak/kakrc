@@ -136,7 +136,7 @@ map -docstring 'Unicode' global user u ': echo -markup "{Information}U+%sh{print
 map -docstring 'file' global goto f '<a-;>: open-file-picker<ret>'
 
 define-command -override open-file-picker -docstring 'open-file-picker: Opens file picker.' %{
-  prompt file: -shell-script-candidates 'fd --type file' %{
+  prompt file: -shell-script-candidates 'fd -H --type file' %{
     edit %val{text}
   }
 }

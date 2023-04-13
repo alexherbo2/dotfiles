@@ -151,13 +151,27 @@ define-command -override open-buffer-picker -docstring 'open-buffer-picker: Open
 
 map -docstring 'global search' global goto / '<a-;>: open-global-search-picker<ret>'
 
+declare-option str grep_tmpdir
+declare-option str grep_command rg
+declare-option str-list grep_args -. --column --with-filename
 define-command -override open-global-search-picker -docstring 'open-global-search-picker: Opens global search picker.' %{
   # Provides word completion
   prompt grep: -shell-script-candidates %{
     echo "write '$kak_response_fifo'" > "$kak_command_fifo"
     cat "$kak_response_fifo" | kak -f 's[\w-]{4,}<ret>y%<a-R>a<ret>'
   } %{
-    grep %val{text}
+    reg d %sh{mktemp -d}
+    reg f "%reg{d}/fifo"
+    reg b "%val{text}.refs"
+    nop %sh{
+      eval set -- "$kak_quoted_opt_grep_command" "$kak_quoted_opt_grep_args"
+      mkfifo "$kak_reg_f"
+      { "$@" -- "$kak_text" > "$kak_reg_f"; } < /dev/null > /dev/null 2>&1 &
+    }
+    edit! -fifo %reg{f} "%val{text}.references"
+    set-option buffer grep_tmpdir %reg{d}
+    map buffer normal <ret> ',;xs^(.+?):(\d+):(\d+):(.+?)$<ret>:edit -existing %reg{1} %reg{2} %reg{3}<ret>'
+    hook -always -once buffer BufCloseFifo '' %{ nop %sh{ rm -Rf "$kak_opt_grep_tmpdir" } }
   }
 }
 
@@ -176,6 +190,22 @@ declare-user-mode unimpaired_right
 # map -docstring 'select whole parenthesis blocks' global select <a-b> ': select-whole-parenthesis-blocks<ret>'']'.r = ':set rulers [81]'
 
 # Commands ---------------------------------------------------------------------
+
+def alacritty-open-new-client -params .. %{
+  nop %sh{
+    alacritty msg create-window -e kak -c "$kak_session" -e "$*"
+  }
+}
+
+complete-command open-new-client command
+
+def foot-open-new-client -params .. %{
+  nop %sh{
+    footclient -e kak -c "$kak_session" -e "$*"
+  }
+}
+
+complete-command open-new-client command
 
 define-command -override mkdir -docstring 'make directory for the current buffer' %{
   nop %sh(mkdir -p -- "$(dirname -- "$kak_buffile")")

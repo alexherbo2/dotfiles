@@ -197,7 +197,7 @@ def alacritty-open-new-client -params .. %{
   }
 }
 
-complete-command open-new-client command
+complete-command alacritty-open-new-client command
 
 def foot-open-new-client -params .. %{
   nop %sh{
@@ -205,7 +205,7 @@ def foot-open-new-client -params .. %{
   }
 }
 
-complete-command open-new-client command
+complete-command foot-open-new-client command
 
 define-command -override mkdir -docstring 'make directory for the current buffer' %{
   nop %sh(mkdir -p -- "$(dirname -- "$kak_buffile")")

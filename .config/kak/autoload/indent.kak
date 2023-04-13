@@ -55,19 +55,31 @@ declare-option -docstring 'Indentation rules to ignore the indentation of the cu
 declare-option -hidden str private_increase_indent_pattern '[({\[]$'
 declare-option -hidden str private_decrease_indent_pattern '^\h*[)}\]]$'
 
-remove-hooks global indent
-hook -group indent global InsertChar '.*' indent-on-inserted-character
+# remove-hooks global indent
+# hook -group indent global InsertChar '.*' indent-on-inserted-character
 
 # Increase and decrease indent with Tab.
 map -docstring 'Increase indent' global insert <tab> '<a-;><a-gt>'
 map -docstring 'Decrease indent' global insert <s-tab> '<a-;><lt>'
 map -docstring 'Decrease indent or erase character before cursor' global insert <backspace> '<a-;>: decrease-indent-or-erase-character-before-cursor<ret>'
+map -docstring 'Decrease indent or erase character before cursor' global insert <ret> '<a-;>: enter-new-line-and-keep-indent<ret>'
 
 # hook on file open and buffer reload.
 # Implementation reference:
 # https://github.com/helix-editor/helix/blob/master/helix-view/src/document.rs#:~:text=detect_indent_and_line_ending
-hook -group indent global BufOpenFile '.*' detect-indent-style
-hook -group indent global BufReload '.*' detect-indent-style
+# hook -group indent global BufOpenFile '.*' detect-indent-style
+# hook -group indent global BufReload '.*' detect-indent-style
+
+# Enter ⇒ Decrease indent or erase character before cursor.
+define-command -override -hidden enter-new-line-and-keep-indent %{
+  evaluate-commands -draft -itersel %{
+    execute-keys ';i<ret>'
+    # Copy previous line indent
+    execute-keys -draft 'H<a-&>'
+    # Clean previous line indent
+    try %[ execute-keys -draft 'xs^\h+$<ret>d' ]
+  }
+}
 
 # Backspace ⇒ Decrease indent or erase character before cursor.
 define-command -override -hidden decrease-indent-or-erase-character-before-cursor %{

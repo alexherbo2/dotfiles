@@ -168,9 +168,9 @@ declare-user-mode unimpaired_right
 map -docstring 'unimpaired_left' global user '[' ': enter-user-mode unimpaired_left<ret>'
 map -docstring 'unimpaired_right' global user ']' ': enter-user-mode unimpaired_right<ret>'
 map -docstring 'whitespace' global unimpaired_left w ': remove-highlighter global/whitespace<ret>'
-map -docstring 'whitespace' global unimpaired_left w ': add-highlighter global/whitespace show-whitespaces<ret>'
+map -docstring 'whitespace' global unimpaired_right w ': add-highlighter global/whitespace show-whitespaces<ret>'
 map -docstring 'rulers' global unimpaired_left r ': remove-highlighter global/rulers<ret>'
-map -docstring 'rulers' global unimpaired_left r ': add-highlighter global/rulers column 81 default,cyan<ret>'
+map -docstring 'rulers' global unimpaired_right r ': add-highlighter global/rulers column 81 default,cyan<ret>'
 
 # Commands ---------------------------------------------------------------------
 

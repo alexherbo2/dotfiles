@@ -55,14 +55,14 @@ declare-option -docstring 'Indentation rules to ignore the indentation of the cu
 declare-option -hidden str private_increase_indent_pattern '[({\[]$'
 declare-option -hidden str private_decrease_indent_pattern '^\h*[)}\]]$'
 
-# remove-hooks global indent
-# hook -group indent global InsertChar '.*' indent-on-inserted-character
+remove-hooks global indent
+hook -group indent global InsertChar '.*' indent-on-inserted-character
 
 # Increase and decrease indent with Tab.
 map -docstring 'Increase indent' global insert <tab> '<a-;><a-gt>'
 map -docstring 'Decrease indent' global insert <s-tab> '<a-;><lt>'
 map -docstring 'Decrease indent or erase character before cursor' global insert <backspace> '<a-;>: decrease-indent-or-erase-character-before-cursor<ret>'
-map -docstring 'Decrease indent or erase character before cursor' global insert <ret> '<a-;>: enter-new-line-and-keep-indent<ret>'
+# map -docstring 'Decrease indent or erase character before cursor' global insert <ret> '<a-;>: enter-new-line-and-keep-indent<ret>'
 
 # hook on file open and buffer reload.
 # Implementation reference:

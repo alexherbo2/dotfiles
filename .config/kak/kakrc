@@ -165,16 +165,12 @@ define-command -override open-global-search-picker -docstring 'open-global-searc
 # Vim-like unimpaired mappings
 declare-user-mode unimpaired_left
 declare-user-mode unimpaired_right
-# map -docstring 'select regex matches' global select / s
-# map -docstring 'select whole parenthesis blocks' global select <a-b> ': select-whole-parenthesis-blocks<ret>'
-# add-highlighter -override global/show-whitespaces show-whitespaces
-# map -docstring 'enter select mode' global normal s ': enter-select-mode<ret>'
-# map -docstring 'select whole parenthesis blocks' global select <a-b> ': remove-highlighter global/show-whitespaces<ret>''['.w = ':set whitespace.render none'
-# map -docstring 'select whole parenthesis blocks' global select <a-b> ': add-highlighter global/show-whitespaces show-whitespaces<ret>'']'.w = ':set whitespace.render all'
-# map -docstring 'select whole parenthesis blocks' global select <a-b> ': select-whole-parenthesis-blocks<ret>''['.tab = ':set indent-guides.render false'
-# map -docstring 'select whole parenthesis blocks' global select <a-b> ': select-whole-parenthesis-blocks<ret>'']'.tab = ':set indent-guides.render true'
-# map -docstring 'select whole parenthesis blocks' global select <a-b> ': select-whole-parenthesis-blocks<ret>''['.r = ':set rulers []'
-# map -docstring 'select whole parenthesis blocks' global select <a-b> ': select-whole-parenthesis-blocks<ret>'']'.r = ':set rulers [81]'
+map -docstring 'unimpaired_left' global user '[' ': enter-user-mode select unimpaired_left<ret>'
+map -docstring 'unimpaired_right' global user ']' ': enter-user-mode select unimpaired_right<ret>'
+map -docstring 'whitespace' global unimpaired_left w ': remove-highlighter global/whitespace<ret>'
+map -docstring 'whitespace' global unimpaired_left w ': add-highlighter global/whitespace show-whitespaces<ret>'
+map -docstring 'rulers' global unimpaired_left r ': remove-highlighter global/rulers<ret>'
+map -docstring 'rulers' global unimpaired_left r ': add-highlighter global/rulers column 81 default,cyan<ret>'
 
 # Commands ---------------------------------------------------------------------
 

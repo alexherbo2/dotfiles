@@ -39,6 +39,7 @@ add-highlighter -override global/show-matching show-matching
 add-highlighter -override global/number-lines number-lines -hlcursor
 
 # Color scheme: One light (https://git.sr.ht/~raiguard/one.kak)
+source "%val{runtime}/colors/default.kak"
 # colorscheme one-light
 
 # Custom faces

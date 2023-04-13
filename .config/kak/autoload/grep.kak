@@ -30,4 +30,4 @@ define-command grep -params .. %{
 
 declare-option str grep_command rg
 declare-option str-list grep_args --hidden --column --with-filename
-complete-command grep shell-command
+complete-command grep shell-completion

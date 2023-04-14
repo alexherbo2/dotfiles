@@ -38,6 +38,9 @@ set-option global scrolloff 5,1
 add-highlighter -override global/show-matching show-matching
 add-highlighter -override global/number-lines number-lines -hlcursor
 
+# Status line
+set-option global modelinefmt '%val{bufname} %val{cursor_line}:%val{cursor_char_column} {{context_info}} {{mode_info}} - %val{client}@%val{session}'
+
 # Color scheme: One light (https://git.sr.ht/~raiguard/one.kak)
 source "%val{runtime}/colors/default.kak"
 # colorscheme one-light
@@ -64,6 +67,7 @@ add-highlighter -override global/math-symbols regex '[−×]' '0:cyan+f'
 
 # Mappings ---------------------------------------------------------------------
 
+map -docstring 'yank joined selections into system clipboard' global user y ': yank_terminal_clipboard<ret>'
 map global normal <ret> ':'
 map global normal f '<a-:>F'
 map global normal F '<a-:><a-;><a-F>'
@@ -167,6 +171,8 @@ declare-user-mode unimpaired_left
 declare-user-mode unimpaired_right
 map -docstring 'unimpaired_left' global user '[' ': enter-user-mode unimpaired_left<ret>'
 map -docstring 'unimpaired_right' global user ']' ': enter-user-mode unimpaired_right<ret>'
+map -docstring 'read-only' global unimpaired_left r ': set-option buffer readonly yes<ret>'
+map -docstring 'read-only' global unimpaired_right r ': set-option buffer readonly no<ret>'
 map -docstring 'whitespace' global unimpaired_left w ': remove-highlighter global/whitespace<ret>'
 map -docstring 'whitespace' global unimpaired_right w ': add-highlighter global/whitespace show-whitespaces<ret>'
 map -docstring 'rulers' global unimpaired_left r ': remove-highlighter global/rulers<ret>'
@@ -174,7 +180,7 @@ map -docstring 'rulers' global unimpaired_right r ': add-highlighter global/rule
 
 # Commands ---------------------------------------------------------------------
 
-def alacritty-open-new-client -params .. %{
+define-command alacritty-open-new-client -params .. %{
   nop %sh{
     alacritty msg create-window -e kak -c "$kak_session" -e "$*"
   }
@@ -182,7 +188,7 @@ def alacritty-open-new-client -params .. %{
 
 complete-command alacritty-open-new-client command
 
-def foot-open-new-client -params .. %{
+define-command foot-open-new-client -params .. %{
   nop %sh{
     footclient -e kak -c "$kak_session" -e "$*"
   }
@@ -194,14 +200,55 @@ define-command -override mkdir -docstring 'make directory for the current buffer
   nop %sh(mkdir -p -- "$(dirname -- "$kak_buffile")")
 }
 
-define-command -override ro -docstring 'make buffer read-only (on/off)' %{
-  set-option buffer readonly %sh{
-    if [ "$kak_opt_readonly" = false ]; then
-      echo yes
-    else
-      echo no
-    fi
+# Terminal integration
+hook -group alacritty-detection global ClientCreate '.*' %{
+  trigger-user-hook "TERM=%val{client_env_TERM}"
+}
+
+# Alacritty terminal detection
+hook -group alacritty-integration global User 'TERM=alacritty' %{
+  alias global open-new-client alacritty-open-new-client
+}
+
+# foot terminal detection
+hook -group alacritty-integration global User 'TERM=foot' %{
+  alias global open-new-client foot-open-new-client
+}
+
+define-command open-kakrc -docstring 'open kakrc' %{
+  edit "%val{config}/kakrc"
+}
+
+define-command open-config -params 1 -docstring 'open from %val{config}' %{
+  edit "%val{config}/%arg{1}"
+}
+
+complete-command -menu open-config shell-script-candidates %{
+  cd "$kak_config" && find -L . -type f | sort -u
+}
+
+define-command -override open-runtime -params 1 -docstring 'open from %val{runtime}' %{
+  edit "%val{runtime}/%arg{1}"
+}
+
+complete-command -menu open-config shell-script-candidates %{
+  cd "$kak_runtime" && find -L . -type f | sort -u
+}
+
+define-command yank_terminal_clipboard %{
+  nop %sh{
+    printf 'echo -to-file %%(%s) -- "%%val{selections}"' "$kak_response_fifo" > "$kak_command_fifo"
+    {
+      printf '\033]52;c;'
+      tr '\0' '\n' < "$kak_response_fifo" | sed 's/\\\\/\\/g' | base64
+      printf '\a'
+    } > /dev/tty
   }
+}
+
+# Show Unicode value in the status line.
+define-command get_character_info %{
+  echo %sh{printf 'U+%04x' "$kak_cursor_char_value"}
 }
 
 # Language support -------------------------------------------------------------

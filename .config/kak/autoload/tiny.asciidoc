@@ -1,0 +1,41 @@
+= Tiny
+
+A set of commands you likely want in your **kakrc**.
+
+== Configuration
+
+--------------------------------------------------------------------------------
+# Kakoune support
+source-runtime rc/filetype/c-family.kak # sourced from the [runtime] directory.
+
+# UI options
+remove-scratch-message # removes the *scratch* message.
+
+# Color scheme
+source-config colors/dracula.kak # sourced from your [config] directory.
+
+# Status line
+declare-cursor-character-unicode # shows Unicode value in the status line.
+set-option global modelinefmt '%val{bufname} %val{cursor_line}:%val{cursor_char_column} {{context_info}} {{mode_info}} - U+%opt{cursor_character_unicode} - %val{client}@%val{session}'
+
+# Integration
+synchronize-terminal-clipboard # synchronizes the terminal clipboard when copying.
+make-directory-on-save # ensures the buffer directory exists when saving.
+--------------------------------------------------------------------------------
+
+== Opening files
+
+:share: https://github.com/mawww/kakoune/tree/master/share/kak
+
+Open {share}[Kakoune files]:
+
+--------------------------------------------------------------------------------
+open-runtime doc/█
+--------------------------------------------------------------------------------
+
+If you don’t use the **autoload**, interactive commands can also be used in your **kakrc**:
+
+--------------------------------------------------------------------------------
+source-runtime rc/filetype/c-family.kak
+source-config colors/dracula.kak
+--------------------------------------------------------------------------------

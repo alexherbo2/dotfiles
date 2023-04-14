@@ -133,6 +133,10 @@ map -docstring 'format date to 2006-01-02 Mon' global user D '| date -d "$kak_se
 # Show the Unicode value under the cursor.
 map -docstring 'Unicode' global user u ': echo -markup "{Information}U+%sh{printf ''%04x'' ""$kak_cursor_char_value""}"<ret>'
 
+# Add search flags
+map global prompt <a-i> '<home>(?i)<end>'
+map global prompt <a-o> '<home>(?S)<end>'
+
 # Goto mode --------------------------------------------------------------------
 
 map -docstring 'file' global goto f '<a-;>: open-file-picker<ret>'

@@ -325,8 +325,8 @@ define-command link-window -params 1 -docstring 'link-window <client>: link wind
 complete-command link-window client
 
 define-command grab_buffer_in_viewport -params 1 -client-completion -docstring 'link-window <client>: link window to client' %{
-  execute-keys '"sZ'
-  execute-keys -client %arg{1} '"sz'
+  execute-keys -client %arg{1} '"tZ'
+  execute-keys '"tz'
 }
 
 define-command move-window -params 1 -client-completion -docstring 'move-window <client>: move window to client' %{
@@ -1408,51 +1408,23 @@ define-command git -params .. -docstring 'git [options] [command] [flags]: run G
 }
 
 # https://git-scm.com/docs/git-add
-define-command git-write -docstring 'git-write: save the current buffer and stage the file' %{
-  write
-  ensure_git_dir
+define-command git-add -docstring 'git-add: stage the current buffer file' %{
   nop %sh{
-    directory=$(dirname "$kak_buffile")
-    cd "$directory"
-    git add --force "$kak_buffile"
+    git add "$kak_buffile"
   }
-  echo -markup '{Information}Added file{Default}'
 }
 
 # https://git-scm.com/docs/git-commit
 define-command git-commit -docstring 'git-commit: commit changes' %{
-  ensure_git_dir
-  edit %sh{
-    directory=$(dirname "$kak_buffile")
-    cd "$directory"
-    git -c core.editor= commit --verbose
-    git rev-parse --path-format=absolute --git-path COMMIT_EDITMSG
+  edit -existing %sh{
+    git commit --no-edit
+    git rev-parse --git-path COMMIT_EDITMSG
   }
-  hook -always -once buffer BufWritePost '(?<git_root>.*)/\.git/COMMIT_EDITMSG' %{
-    try %{
-      git -C %val{hook_param_capture_git_root} commit --file %val{hook_param} --cleanup=strip
-      delete-buffer
-      echo -markup '{Information}Commit succeeded{Default}'
-    } catch %{
-      delete-buffer
-      echo -markup '{Error}Commit failed{Default}'
+  hook buffer BufWritePost '.*' %{
+    nop %sh{
+      git commit --file %val{hook_param} --cleanup=strip
     }
-  }
-}
-
-# https://git-scm.com/docs/git
-# https://git-scm.com/docs/git-rev-parse
-define-command -hidden ensure_git_dir %{
-  evaluate-commands %sh{
-    buf_dir=$(dirname "$kak_buffile")
-    buf_inside_work_tree=$(git -C "$buf_dir" rev-parse --is-inside-work-tree)
-    exit_code=$?
-    if [ "$exit_code" -ne 0 ]; then
-      echo 'fail "git: %val{buffile} not inside a Git repository"'
-    fi
-    if [ "$buf_inside_work_tree" = false ]; then
-      echo 'fail "git: %val{buffile} not inside work tree"'
-    fi
+    delete-buffer
   }
 }
 

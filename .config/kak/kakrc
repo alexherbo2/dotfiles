@@ -1640,10 +1640,6 @@ add-highlighter shared/whitespace/ruler regex '(?S)^.{80}$\K\n' '0:WhitespaceRul
 # Options ──────────────────────────────────────────────────────────────────────
 
 # Sensible scroll-off: 5 lines and 1 column.
-set-option global scrolloff 5,1
-
-add-highlighter global/show-matching show-matching
-add-highlighter global/number-lines number-lines -relative -hlcursor
 # Initialization
 # Highlighters
 

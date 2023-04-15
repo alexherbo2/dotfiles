@@ -6,6 +6,8 @@ kak-lsp repository
 https://github.com/kak-lsp/kak-lsp
 Kakoune, a punk rock text editor
 https://zork.net/~st/jottings/kakoune-a-punk-rock-text-editor.html
+~krobelus/dotfiles
+https://git.sr.ht/~krobelus/dotfiles
 Charm website
 https://charm.sh
 Glow repository

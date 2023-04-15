@@ -11,7 +11,7 @@
 # https://gitlab.com/vbauerster/dotfiles/-/blob/master/.config/kak/kakrc
 
 # Preamble ---------------------------------------------------------------------
-define-command -override colorscheme -params 1 -docstring 'load color scheme' %{
+define-command colorscheme -params 1 -docstring 'load color scheme' %{
   source "%val{config}/colors/%arg{1}.kak"
 }
 evaluate-commands %sh{
@@ -22,11 +22,8 @@ evaluate-commands %sh{
 
 # Preamble ---------------------------------------------------------------------
 
-remove-hooks global config
-
 try %sh{
   kak-lsp --kakoune --session "$kak_session"
-  kak-test --print-kakoune-init
 }
 
 # Options ----------------------------------------------------------------------
@@ -37,8 +34,9 @@ set-option global ui_options terminal_set_title=no terminal_assistant=none
 # Matching pairs
 set-option global matching_pairs ( ) { } [ ] < > “ ” ‘ ’ « » ‹ ›
 set-option global scrolloff 5,1
-add-highlighter -override global/show-matching show-matching
-add-highlighter -override global/number-lines number-lines -hlcursor
+add-highlighter global/show-matching show-matching
+add-highlighter global/number-lines number-lines -hlcursor
+add-highlighter global/wrap wrap -word -indent -marker '↪'
 
 # Status line
 set-option global modelinefmt '%val{bufname} %val{cursor_line}:%val{cursor_char_column} {{context_info}} {{mode_info}} - %val{client}@%val{session}'
@@ -56,13 +54,13 @@ source "%val{runtime}/colors/default.kak"
 # set-option global clipboard_copy_args
 
 # Highlight whitespace
-# add-highlighter -override global/whitespace ref whitespace
+# add-highlighter global/whitespace ref whitespace
 
 # Highlight various characters
 # https://unicode-table.com
-add-highlighter -override global/U+2013 regex '–' '0:green+f'
-add-highlighter -override global/U+2014 regex '—' '0:green+bf'
-add-highlighter -override global/math-symbols regex '[−×]' '0:cyan+f'
+add-highlighter global/U+2013 regex '–' '0:green+f'
+add-highlighter global/U+2014 regex '—' '0:green+bf'
+add-highlighter global/math-symbols regex '[−×]' '0:cyan+f'
 
 # Mappings ---------------------------------------------------------------------
 
@@ -76,6 +74,23 @@ map -docstring 'single angle quotation mark' global object <a-g> 'c‹,›<ret>'
 map -docstring 'tag' global object t 'c<lt>.+?<gt>,<lt>/.+?<gt><ret>'
 # Line
 map -docstring 'line' global object x '<esc>x_'
+
+# Extended next and previous pairs
+map global normal [ ':select_previous_surrounding_object<ret>'
+map global normal ] ':select_next_surrounding_object<ret>'
+
+define-command select_next_surrounding_object %{
+  on-key %{
+    execute-keys "f%val{key}<a-a>%val{key}"
+  }
+}
+
+define-command select_previous_surrounding_object %{
+  on-key %{
+    execute-keys "<a-f>%val{key}h<a-a>%val{key}"
+  }
+}
+
 map -docstring 'yank joined selections into system clipboard' global user y ': yank_terminal_clipboard<ret>'
 map global normal <ret> ':'
 map global normal f '<a-:>F'
@@ -153,7 +168,7 @@ map global prompt <a-o> '<home>(?S)<end>'
 
 map -docstring 'file' global goto f '<a-;>: open-file-picker<ret>'
 
-define-command -override open-file-picker -docstring 'open-file-picker: Opens file picker.' %{
+define-command open-file-picker -docstring 'open-file-picker: Opens file picker.' %{
   prompt -menu file: -shell-script-candidates 'fd -H --type file' %{
     edit %val{text}
   }
@@ -161,7 +176,7 @@ define-command -override open-file-picker -docstring 'open-file-picker: Opens fi
 
 map -docstring 'buffer' global goto b '<a-;>: open-buffer-picker<ret>'
 
-define-command -override open-buffer-picker -docstring 'open-buffer-picker: Opens buffer picker.' %{
+define-command open-buffer-picker -docstring 'open-buffer-picker: Opens buffer picker.' %{
   prompt -menu buffer: -buffer-completion %{
     buffer %val{text}
   }
@@ -187,8 +202,8 @@ define-command -hidden grep_jump %{
 }
 
 define-command fifo -params .. %{
-  reg d %sh{mktemp -d}
-  reg f "%reg{d}/fifo"
+  set-register d %sh{mktemp -d}
+  set-register f "%reg{d}/fifo"
   nop %sh{
     mkfifo "$kak_reg_f"
     { "$@" > "$kak_reg_f"; } < /dev/null > /dev/null 2>&1 &
@@ -202,7 +217,7 @@ complete-command fifo shell
 declare-option str grep_command rg
 declare-option str-list grep_args --hidden --column --with-filename
 
-define-command -override open-global-search-picker -docstring 'open-global-search-picker: Opens global search picker.' %{
+define-command open-global-search-picker -docstring 'open-global-search-picker: Opens global search picker.' %{
   # Provides word completion
   prompt grep: -shell-script-candidates %{
     echo "write '$kak_response_fifo'" > "$kak_command_fifo"
@@ -228,10 +243,6 @@ map -docstring 'rulers' global unimpaired_right r ': add-highlighter global/rule
 
 # Commands ---------------------------------------------------------------------
 
-# Shortcuts
-
-# Mappings ─────────────────────────────────────────────────────────────────────
-
 map -docstring 'erase character before cursor' global normal <backspace> ': erase-character-before-cursor<ret>'
 map -docstring 'erase character under cursor' global normal <del> ': erase-character-under-cursor<ret>'
 
@@ -249,15 +260,15 @@ map -docstring 'buffer directory' global prompt <a-/> '%sh{dirname "$kak_bufname
 
 # Commands ─────────────────────────────────────────────────────────────────────
 
-define-command -override erase-character-before-cursor -docstring 'erase character before cursor' %{
+define-command erase-character-before-cursor -docstring 'erase character before cursor' %{
   execute-keys -draft ';i<backspace>'
 }
 
-define-command -override erase-character-under-cursor -docstring 'erase character under cursor' %{
+define-command erase-character-under-cursor -docstring 'erase character under cursor' %{
   execute-keys -draft ';i<del>'
 }
 
-define-command -override select-next-word -docstring 'select next word' %{
+define-command select-next-word -docstring 'select next word' %{
   evaluate-commands -itersel %{
     hook -group select-next-word -always -once window User "%val{selection_desc}" %{
       search-next-word
@@ -272,32 +283,32 @@ define-command -override select-next-word -docstring 'select next word' %{
   }
 }
 
-define-command -override -hidden search-next-word -docstring 'search next word' %{
+define-command -hidden search-next-word -docstring 'search next word' %{
   execute-keys 'h/\W\w<ret><a-i>w'
 }
 
 # Reference: https://code.visualstudio.com/docs/getstarted/keybindings#_basic-editing
-define-command -override move-lines-down -docstring 'move line down' %{
+define-command move-lines-down -docstring 'move line down' %{
   execute-keys -draft 'x<a-_><a-:>Z;ezjxdzP'
 }
 
-define-command -override move-lines-up -docstring 'move line up' %{
+define-command move-lines-up -docstring 'move line up' %{
   execute-keys -draft 'x<a-_><a-:><a-;>Z;bzkxdzp'
 }
 
-define-command -override select-highlights -docstring 'select all occurrences of current selection' %{
+define-command select-highlights -docstring 'select all occurrences of current selection' %{
   execute-keys '"aZ*%s<ret>"bZ"az"b<a-z>a'
 }
 
-define-command -override increment-selection -params 1 -docstring 'increment-selection <count>: increment selection by count' %{
+define-command increment-selection -params 1 -docstring 'increment-selection <count>: increment selection by count' %{
   execute-keys "a+%sh{expr $1 '|' 1}<esc>|{ cat; echo; } | bc<ret>"
 }
 
-define-command -override decrement-selection -params 1 -docstring 'decrement-selection <count>: decrement selection by count' %{
+define-command decrement-selection -params 1 -docstring 'decrement-selection <count>: decrement selection by count' %{
   execute-keys "a-%sh{expr $1 '|' 1}<esc>|{ cat; echo; } | bc<ret>"
 }
 
-define-command -override evaluate-selections -docstring 'evaluate selections' %{
+define-command evaluate-selections -docstring 'evaluate selections' %{
   evaluate-commands -itersel %{
     evaluate-commands %val{selection}
   }
@@ -317,13 +328,13 @@ define-command grab_buffer_in_viewport -params 1 -client-completion -docstring '
   execute-keys -client %arg{1} '"sz'
 }
 
-define-command -override move-window -params 1 -client-completion -docstring 'move-window <client>: move window to client' %{
+define-command move-window -params 1 -client-completion -docstring 'move-window <client>: move window to client' %{
   execute-keys '"sZ'
   execute-keys -client %arg{1} '"sz'
   buffer-next
 }
 
-define-command -override swap-window -params 1 -client-completion -docstring 'swap-window <client>: swap window with client' %{
+define-command swap-window -params 1 -client-completion -docstring 'swap-window <client>: swap window with client' %{
   execute-keys '"sZ'
   execute-keys -client %arg{1} '"tZ'
   execute-keys '"tz'
@@ -337,7 +348,7 @@ define-command -override swap-window -params 1 -client-completion -docstring 'sw
 
 try %[ declare-user-mode surround ]
 
-define-command -override enter-surround-mode -docstring 'enter surround mode' %{
+define-command enter-surround-mode -docstring 'enter surround mode' %{
   enter-user-mode surround
 }
 
@@ -357,7 +368,7 @@ define-command -override enter-surround-mode -docstring 'enter surround mode' %{
 # emphasis
 # strong
 # map -docstring 'enter surround mode' global normal q ': enter-surround-mode<ret>'
-define-command -override -hidden surround-init %{
+define-command -hidden surround-init %{
   # Enter text
   map -docstring 'enter insert mode' global surround i ': surround-enter-insert-mode<ret>'
   map -docstring 'key' global surround k ': surround-key<ret>'
@@ -390,14 +401,14 @@ define-command -override -hidden surround-init %{
 # Commands ─────────────────────────────────────────────────────────────────────
 
 # Declare surrounding pairs
-define-command -override declare-surrounding-pair -params 4 -docstring 'declare-surrounding-pair <description> [alias] <opening> <closing>: declare surrounding pair' %{
+define-command declare-surrounding-pair -params 4 -docstring 'declare-surrounding-pair <description> [alias] <opening> <closing>: declare surrounding pair' %{
   try %[ map -docstring %arg{1} global surround %arg{2} ": surround-add %%🐈%arg{3}🐈 %%🐈%arg{4}🐈<ret>" ]
   try %[ map -docstring %arg{1} global surround %arg{3} ": surround-add %%🐈%arg{3}🐈 %%🐈%arg{4}🐈<ret>" ]
   try %[ map -docstring %arg{1} global surround %arg{4} ": surround-add %%🐈%arg{3}🐈 %%🐈%arg{4}🐈<ret>" ]
 }
 
 # Enter insert mode
-define-command -override -hidden surround-enter-insert-mode -docstring 'surround: enter insert mode' %{
+define-command -hidden surround-enter-insert-mode -docstring 'surround: enter insert mode' %{
   execute-keys -save-regs '' 'Z'
   hook -always -once window ModeChange 'pop:insert:normal' %{
     hook -always -once window ModeChange 'pop:insert:normal' %{
@@ -411,21 +422,21 @@ define-command -override -hidden surround-enter-insert-mode -docstring 'surround
 }
 
 # Surround key
-define-command -override -hidden surround-key -docstring 'surround key' %{
+define-command -hidden surround-key -docstring 'surround key' %{
   on-key %{
     surround-add %val{key} %val{key}
   }
 }
 
 # Surround tag
-define-command -override -hidden surround-tag -docstring 'surround tag' %{
+define-command -hidden surround-tag -docstring 'surround tag' %{
   prompt surround-tag: %{
     surround-add "<%val{text}>" "</%val{text}>"
   }
 }
 
 # Surround selected text
-define-command -override -hidden surround-add -params 2 %{
+define-command -hidden surround-add -params 2 %{
   evaluate-commands -save-regs '"' %{
     set-register '"' %arg{1}
     execute-keys -draft P
@@ -434,11 +445,11 @@ define-command -override -hidden surround-add -params 2 %{
   }
 }
 
-define-command -override -hidden surround-add-space %{
+define-command -hidden surround-add-space %{
   surround-add ' ' ' '
 }
 
-define-command -override -hidden surround-add-line %{
+define-command -hidden surround-add-line %{
   # Extract selected text on its own line; clean whitespaces around the selection.
   try %[ execute-keys -draft 'i<ret><esc>kgl<a-i><space>d' ]
   try %[ execute-keys -draft 'a<ret><esc>jgl<a-i><space>d' ]
@@ -449,7 +460,7 @@ define-command -override -hidden surround-add-line %{
 }
 
 # Delete surrounding
-define-command -override -hidden surround-delete %{
+define-command -hidden surround-delete %{
   # Tag support
   try %{
     execute-keys 'y<a-a>c<lt>.+?<gt>,<lt>/.+?<gt><ret>R'
@@ -490,7 +501,7 @@ define-command foot-open-new-client -params .. %{
 
 complete-command foot-open-new-client command
 
-define-command -override mkdir -docstring 'make directory for the current buffer' %{
+define-command mkdir -docstring 'make directory for the current buffer' %{
   nop %sh(mkdir -p -- "$(dirname -- "$kak_buffile")")
 }
 
@@ -521,7 +532,7 @@ complete-command -menu open-config shell-script-candidates %{
   cd "$kak_config" && find -L . -type f | sort -u
 }
 
-define-command -override open-runtime -params 1 -docstring 'open from %val{runtime}' %{
+define-command open-runtime -params 1 -docstring 'open from %val{runtime}' %{
   edit "%val{runtime}/%arg{1}"
 }
 
@@ -663,16 +674,16 @@ map -docstring 'iterate previous selection' global normal <c-p> ': iterate-previ
 
 # Commands ─────────────────────────────────────────────────────────────────────
 
-define-command -override restore-register -params 1 -docstring 'restore-register <register>: restore register (default: ^)' %{
+define-command restore-register -params 1 -docstring 'restore-register <register>: restore register (default: ^)' %{
   try %[ execute-keys """%arg{1}z" ]
 }
 
-define-command -override consume-register -params 1 -docstring 'consume-register <register>: consume register (default: ^)' %{
+define-command consume-register -params 1 -docstring 'consume-register <register>: consume register (default: ^)' %{
   restore-register %arg{1}
   clear-register %arg{1}
 }
 
-define-command -override clear-register -params 1 -docstring 'clear-register <register>: clear register (default: ^)' %{
+define-command clear-register -params 1 -docstring 'clear-register <register>: clear register (default: ^)' %{
   # Handle null named register.
   try %{
     set-register %arg{1}
@@ -683,15 +694,15 @@ define-command -override clear-register -params 1 -docstring 'clear-register <re
   }
 }
 
-define-command -override restore-selections -params 1 -docstring 'restore-selections <register>: restore selections (default: ^)' %{
+define-command restore-selections -params 1 -docstring 'restore-selections <register>: restore selections (default: ^)' %{
   try %[ execute-keys """%arg{1}<a-z>a" ]
 }
 
-define-command -override save-selections -params 1 -docstring 'save-selections <register>: save selections (default: ^)' %{
+define-command save-selections -params 1 -docstring 'save-selections <register>: save selections (default: ^)' %{
   execute-keys -save-regs '' """%arg{1}Z"
 }
 
-define-command -override add-selections -params 1 -docstring 'add-selections <register>: add selections (default: ^)' %{
+define-command add-selections -params 1 -docstring 'add-selections <register>: add selections (default: ^)' %{
   evaluate-commands -draft consume-selections %arg{1}
   # Display saved selections:
   # Handle null named register.
@@ -702,19 +713,19 @@ define-command -override add-selections -params 1 -docstring 'add-selections <re
   }
 }
 
-define-command -override consume-selections -params 1 -docstring 'consume-selections <register>: consume selections (default: ^)' %{
+define-command consume-selections -params 1 -docstring 'consume-selections <register>: consume selections (default: ^)' %{
   restore-selections %arg{1}
   save-selections %arg{1}
   execute-keys ','
 }
 
-define-command -override iterate-next-selection -params 1 -docstring 'iterate-next-selection <register>: iterate next selection (default: ^)' %{
+define-command iterate-next-selection -params 1 -docstring 'iterate-next-selection <register>: iterate next selection (default: ^)' %{
   restore-register %arg{1}
   execute-keys ')'
   consume-selections %arg{1}
 }
 
-define-command -override iterate-previous-selection -params 1 -docstring 'iterate-previous-selection <register>: iterate previous selection (default: ^)' %{
+define-command iterate-previous-selection -params 1 -docstring 'iterate-previous-selection <register>: iterate previous selection (default: ^)' %{
   restore-register %arg{1}
   execute-keys '('
   consume-selections %arg{1}
@@ -722,7 +733,7 @@ define-command -override iterate-previous-selection -params 1 -docstring 'iterat
 
 # Highlighters ─────────────────────────────────────────────────────────────────
 
-define-command -override -hidden update-mark-ranges %{
+define-command -hidden update-mark-ranges %{
   # Reset ranges
   evaluate-commands -buffer '*' unset-option buffer mark_ranges
   try %{
@@ -749,14 +760,14 @@ define-command -override -hidden update-mark-ranges %{
   }
 }
 
-define-command -override show-marks -docstring 'show marks' %{
-  add-highlighter -override global/marks ranges mark_ranges
+define-command show-marks -docstring 'show marks' %{
+  add-highlighter global/marks ranges mark_ranges
   remove-hooks global show-marks
   hook -group show-marks -always global RegisterModified '\^' update-mark-ranges
   update-mark-ranges
 }
 
-define-command -override hide-marks -docstring 'hide marks' %{
+define-command hide-marks -docstring 'hide marks' %{
   remove-hooks global show-marks
   remove-highlighter global/marks
   evaluate-commands -buffer '*' unset-option buffer mark_ranges
@@ -819,7 +830,7 @@ show-marks
 
 try %[ declare-user-mode select ]
 
-define-command -override enter-select-mode -docstring 'enter select mode' %{
+define-command enter-select-mode -docstring 'enter select mode' %{
   enter-user-mode select
 }
 
@@ -873,91 +884,91 @@ map -docstring 'select arguments' global select u ': select-arguments<ret>'
 
 # Commands ─────────────────────────────────────────────────────────────────────
 
-define-command -override -hidden select-inner-parenthesis-blocks -docstring 'select inner parenthesis blocks' %{
+define-command -hidden select-inner-parenthesis-blocks -docstring 'select inner parenthesis blocks' %{
   execute-keys 's\(<ret><a-i>b'
 }
 
-define-command -override -hidden select-whole-parenthesis-blocks -docstring 'select whole parenthesis blocks' %{
+define-command -hidden select-whole-parenthesis-blocks -docstring 'select whole parenthesis blocks' %{
   execute-keys 's\(<ret><a-a>b'
 }
 
-define-command -override -hidden select-inner-brace-blocks -docstring 'select inner brace blocks' %{
+define-command -hidden select-inner-brace-blocks -docstring 'select inner brace blocks' %{
   execute-keys 's\{<ret><a-i>B' # }
 }
 
-define-command -override -hidden select-whole-brace-blocks -docstring 'select whole brace blocks' %{
+define-command -hidden select-whole-brace-blocks -docstring 'select whole brace blocks' %{
   execute-keys 's\{<ret><a-a>B' # }
 }
 
-define-command -override -hidden select-inner-bracket-blocks -docstring 'select inner bracket blocks' %{
+define-command -hidden select-inner-bracket-blocks -docstring 'select inner bracket blocks' %{
   execute-keys 's\[<ret><a-i>r'
 }
 
-define-command -override -hidden select-whole-bracket-blocks -docstring 'select whole bracket blocks' %{
+define-command -hidden select-whole-bracket-blocks -docstring 'select whole bracket blocks' %{
   execute-keys 's\[<ret><a-a>r'
 }
 
-define-command -override -hidden select-inner-angle-blocks -docstring 'select inner angle blocks' %{
+define-command -hidden select-inner-angle-blocks -docstring 'select inner angle blocks' %{
   execute-keys 's<lt><ret><a-i>a'
 }
 
-define-command -override -hidden select-whole-angle-blocks -docstring 'select whole angle blocks' %{
+define-command -hidden select-whole-angle-blocks -docstring 'select whole angle blocks' %{
   execute-keys 's<lt><ret><a-a>a'
 }
 
-define-command -override -hidden select-inner-double-quote-strings -docstring 'select inner double quote strings' %{
+define-command -hidden select-inner-double-quote-strings -docstring 'select inner double quote strings' %{
   execute-keys 's"[^"]*"<ret><a-;><a-i>Q'
 }
 
-define-command -override -hidden select-whole-double-quote-strings -docstring 'select whole double quote strings' %{
+define-command -hidden select-whole-double-quote-strings -docstring 'select whole double quote strings' %{
   execute-keys 's"[^"]*"<ret><a-;><a-a>Q'
 }
 
-define-command -override -hidden select-inner-single-quote-strings -docstring 'select inner single quote strings' %{
+define-command -hidden select-inner-single-quote-strings -docstring 'select inner single quote strings' %{
   execute-keys "s'[^']*'<ret><a-;><a-i>q"
 }
 
-define-command -override -hidden select-whole-single-quote-strings -docstring 'select whole single quote strings' %{
+define-command -hidden select-whole-single-quote-strings -docstring 'select whole single quote strings' %{
   execute-keys "s'[^']*'<ret><a-;><a-a>q"
 }
 
-define-command -override -hidden select-inner-grave-quote-strings -docstring 'select inner grave quote strings' %{
+define-command -hidden select-inner-grave-quote-strings -docstring 'select inner grave quote strings' %{
   execute-keys 's`[^`]*`<ret><a-;><a-i>g'
 }
 
-define-command -override -hidden select-whole-grave-quote-strings -docstring 'select whole grave quote strings' %{
+define-command -hidden select-whole-grave-quote-strings -docstring 'select whole grave quote strings' %{
   execute-keys 's`[^`]*`<ret><a-;><a-a>g'
 }
 
-define-command -override -hidden select-words -docstring 'select words' %{
+define-command -hidden select-words -docstring 'select words' %{
   execute-keys 's\w+<ret><a-i>w'
 }
 
-define-command -override -hidden select-big-words -docstring 'select big words' %{
+define-command -hidden select-big-words -docstring 'select big words' %{
   execute-keys 's\w+<ret><a-i><a-w>'
 }
 
-define-command -override -hidden select-sentences -docstring 'select sentences' %{
+define-command -hidden select-sentences -docstring 'select sentences' %{
   execute-keys 's[^\n]+<ret><a-i>s'
 }
 
-define-command -override -hidden select-paragraphs -docstring 'select paragraphs' %{
+define-command -hidden select-paragraphs -docstring 'select paragraphs' %{
   execute-keys 's[^\n]+<ret><a-i>p'
 }
 
-define-command -override -hidden select-whitespaces -docstring 'select whitespaces' %{
+define-command -hidden select-whitespaces -docstring 'select whitespaces' %{
   execute-keys 's\h+<ret><a-i><space>'
 }
 
-define-command -override -hidden select-indent -docstring 'select indent' %{
+define-command -hidden select-indent -docstring 'select indent' %{
   execute-keys 's^\h+<ret><a-i><space>'
 }
 
-define-command -override -hidden select-numbers -docstring 'select numbers' %{
+define-command -hidden select-numbers -docstring 'select numbers' %{
   execute-keys 's\d+<ret><a-i>n'
 }
 
-define-command -override -hidden select-arguments -docstring 'select arguments' %{
+define-command -hidden select-arguments -docstring 'select arguments' %{
   execute-keys 's\(<ret><a-i>bs\w+<ret><a-i>u'
 }
 
@@ -968,24 +979,24 @@ hook -group config global BufCreate '.*/docs/notes.txt' %{
 }
 
 hook -group config global BufSetOption filetype=notes %{
-  add-highlighter -override buffer/notes ref notes
+  add-highlighter buffer/notes ref notes
   map -docstring 'insert date (2006-01-02 Mon)' buffer insert <c-u> '<a-;>;<a-;>!date ''+%F %a'' | tr -d ''\n''<ret><right>'
   map -docstring 'insert date (2006-01-02 Mon 15:04)' buffer insert <c-i> '<a-;>;<a-;>!date ''+%F %a %H:%M'' | tr -d ''\n''<ret><right>'
 }
 
-add-highlighter -override shared/notes regions
-add-highlighter -override shared/notes/text default-region group
-add-highlighter -override shared/notes/text/entry-date-year regex '^\d{4}' 0:comment
-add-highlighter -override shared/notes/text/entry-date-year-month regex '^\d{4}-\d{2}' 0:comment
-add-highlighter -override shared/notes/text/entry-date regex '^\d{4}-\d{2}-\d{2} \w{3}' 0:comment
-add-highlighter -override shared/notes/text/entry-date-time regex '^\d{4}-\d{2}-\d{2} \w{3} \d{2}:\d{2}' 0:comment
-add-highlighter -override shared/notes/text/keyword regex '\b(Buy|Go on|Go to|Read|Sign up|Update|Watch)\b' 0:keyword
-add-highlighter -override shared/notes/text/url regex 'https?://\S+' 0:link
-add-highlighter -override shared/notes/info region -recurse '\(' '\(' '\)' group
-add-highlighter -override shared/notes/info/content fill string
-add-highlighter -override shared/notes/info/url ref notes/text/url
-add-highlighter -override shared/notes/info/delimiters regex '(?<opening>.).+(?<closing>.)' opening:string closing:string
-add-highlighter -override shared/notes/tag region -recurse '\[' '\[' '\]' fill meta
+add-highlighter shared/notes regions
+add-highlighter shared/notes/text default-region group
+add-highlighter shared/notes/text/entry-date-year regex '^\d{4}' 0:comment
+add-highlighter shared/notes/text/entry-date-year-month regex '^\d{4}-\d{2}' 0:comment
+add-highlighter shared/notes/text/entry-date regex '^\d{4}-\d{2}-\d{2} \w{3}' 0:comment
+add-highlighter shared/notes/text/entry-date-time regex '^\d{4}-\d{2}-\d{2} \w{3} \d{2}:\d{2}' 0:comment
+add-highlighter shared/notes/text/keyword regex '\b(Buy|Go on|Go to|Read|Sign up|Update|Watch)\b' 0:keyword
+add-highlighter shared/notes/text/url regex 'https?://\S+' 0:link
+add-highlighter shared/notes/info region -recurse '\(' '\(' '\)' group
+add-highlighter shared/notes/info/content fill string
+add-highlighter shared/notes/info/url ref notes/text/url
+add-highlighter shared/notes/info/delimiters regex '(?<opening>.).+(?<closing>.)' opening:string closing:string
+add-highlighter shared/notes/tag region -recurse '\[' '\[' '\]' fill meta
 
 # List -------------------------------------------------------------------------
 
@@ -994,16 +1005,16 @@ hook -group config global BufCreate '.*/list.txt' %{
 }
 
 hook -group config global BufSetOption filetype=list %{
-  add-highlighter -override buffer/list ref list
+  add-highlighter buffer/list ref list
 }
 
-add-highlighter -override shared/list regions
-add-highlighter -override shared/list/text default-region group
-add-highlighter -override shared/list/text/number regex '\b\d{2}\b' 0:value
-add-highlighter -override shared/list/text/date regex '\b\d{4}-\d{2}-\d{2}\b' 0:string
-add-highlighter -override shared/list/text/year regex '\b\d{4}\b' 0:string
-add-highlighter -override shared/list/text/keyword regex '\b(Movie|Special)\b' 0:keyword
-add-highlighter -override shared/list/text/url regex 'https?://\S+' 0:link
+add-highlighter shared/list regions
+add-highlighter shared/list/text default-region group
+add-highlighter shared/list/text/number regex '\b\d{2}\b' 0:value
+add-highlighter shared/list/text/date regex '\b\d{4}-\d{2}-\d{2}\b' 0:string
+add-highlighter shared/list/text/year regex '\b\d{4}\b' 0:string
+add-highlighter shared/list/text/keyword regex '\b(Movie|Special)\b' 0:keyword
+add-highlighter shared/list/text/url regex 'https?://\S+' 0:link
 
 # Pipe selections as JSON Lines to work with traditional Unix tools.
 #
@@ -1019,13 +1030,13 @@ map -docstring 'pipe (jsonl)' global user | ': pipe-selections-as-jsonl-prompt<r
 
 # Commands ─────────────────────────────────────────────────────────────────────
 
-define-command -override pipe-selections-as-jsonl-prompt -docstring 'pipe selections as JSON Lines' %{
+define-command pipe-selections-as-jsonl-prompt -docstring 'pipe selections as JSON Lines' %{
   prompt 'pipe (jsonl):' -shell-completion %{
     pipe-selections-as-jsonl %val{text}
   }
 }
 
-define-command -override pipe-selections-as-jsonl -params 1.. -docstring 'pipe-selections-as-jsonl <command> [arguments]: pipe selections as JSON Lines' %{
+define-command pipe-selections-as-jsonl -params 1.. -docstring 'pipe-selections-as-jsonl <command> [arguments]: pipe selections as JSON Lines' %{
   evaluate-commands -save-regs '"' %sh{
     # Path to selections as JSON Lines
     selections_path=$(mktemp)
@@ -1134,7 +1145,7 @@ map -docstring 'Decrease indent or erase character before cursor' global insert 
 # hook -group indent global BufReload '.*' detect-indent-style
 
 # Enter ⇒ Decrease indent or erase character before cursor.
-define-command -override -hidden enter-new-line-and-keep-indent %{
+define-command -hidden enter-new-line-and-keep-indent %{
   evaluate-commands -draft -itersel %{
     execute-keys ';i<ret>'
     # Copy previous line indent
@@ -1145,7 +1156,7 @@ define-command -override -hidden enter-new-line-and-keep-indent %{
 }
 
 # Backspace ⇒ Decrease indent or erase character before cursor.
-define-command -override -hidden decrease-indent-or-erase-character-before-cursor %{
+define-command -hidden decrease-indent-or-erase-character-before-cursor %{
   try %{
     execute-keys -draft -itersel '<a-h><a-k>\A\h+.\z<ret>'
     execute-keys -draft '<lt>'
@@ -1154,11 +1165,11 @@ define-command -override -hidden decrease-indent-or-erase-character-before-curso
   }
 }
 
-define-command -override -hidden indent-on-inserted-character %{
+define-command -hidden indent-on-inserted-character %{
   "indent-on-inserted-character-with-auto-indent-%opt{auto_indent}"
 }
 
-define-command -override -hidden indent-handle-inserted-character -params .. %{
+define-command -hidden indent-handle-inserted-character -params .. %{
   evaluate-commands -draft %{
     # Select line begin to the rightmost inserted character.
     execute-keys 'h<a-h><a-:>'
@@ -1166,10 +1177,10 @@ define-command -override -hidden indent-handle-inserted-character -params .. %{
   }
 }
 
-define-command -override -hidden indent-on-inserted-character-with-auto-indent-none %{
+define-command -hidden indent-on-inserted-character-with-auto-indent-none %{
 }
 
-define-command -override -hidden indent-on-inserted-character-with-auto-indent-keep %{
+define-command -hidden indent-on-inserted-character-with-auto-indent-keep %{
   indent-handle-inserted-character %{
     # Indentation rules when inserting a new line
     execute-keys -draft '<a-k>\n<ret>'
@@ -1180,7 +1191,7 @@ define-command -override -hidden indent-on-inserted-character-with-auto-indent-k
   }
 }
 
-define-command -override -hidden indent-on-inserted-character-with-auto-indent-full %{
+define-command -hidden indent-on-inserted-character-with-auto-indent-full %{
   indent-handle-inserted-character %{
     # Indentation rules when inserting a new line
     execute-keys -draft '<a-k>\n<ret>'
@@ -1223,27 +1234,6 @@ define-command -override -hidden indent-on-inserted-character-with-auto-indent-f
   } catch %{}
 }
 
-define-command -override detect-indent-style -docstring 'detect-indent-style' %{
-  try %{
-    evaluate-commands -draft %{
-      # Search the first indent level
-      execute-keys 'gg/^\h+<ret>'
-
-      # Tabs vs. Spaces
-      # https://youtu.be/V7PLxL8jIl8
-      try %{
-        execute-keys '<a-k>\t<ret>'
-        # Global scope
-        unset-option buffer tabstop
-        set-option buffer indentwidth 0
-      } catch %{
-        set-option buffer tabstop %val{selection_length}
-        set-option buffer indentwidth %val{selection_length}
-      }
-    }
-  }
-}
-
 # This script provides the functionality to toggle comments on lines over the selection
 # using the line and block comment tokens defined in `line_comment_token` and `block_comment_tokens` options.
 #
@@ -1269,19 +1259,19 @@ declare-option -docstring 'Block comment tokens' str-list block_comment_tokens '
 map -docstring 'Toggle comments' global normal '#' ': toggle-comments<ret>'
 
 # Commands
-define-command -override toggle-comments -docstring 'Toggle comments' %{
+define-command toggle-comments -docstring 'Toggle comments' %{
   try toggle-line-comments catch toggle-block-comments
 }
 
-define-command -override toggle-line-comments -docstring 'Toggle line comments' %{
+define-command toggle-line-comments -docstring 'Toggle line comments' %{
   toggle-line-comments-with-token %opt{line_comment_token}
 }
 
-define-command -override toggle-block-comments -docstring 'Toggle block comments' %{
+define-command toggle-block-comments -docstring 'Toggle block comments' %{
   toggle-block-comments-with-token %opt{block_comment_tokens}
 }
 
-define-command -override -hidden toggle-line-comments-with-token -params 1 -docstring 'Toggle line comments with the given line comment token' %{
+define-command -hidden toggle-line-comments-with-token -params 1 -docstring 'Toggle line comments with the given line comment token' %{
   evaluate-commands -draft -save-regs 'ab' %{
     # Arguments
     set-register a %arg{1}
@@ -1328,7 +1318,7 @@ define-command -override -hidden toggle-line-comments-with-token -params 1 -docs
   }
 }
 
-define-command -override -hidden toggle-block-comments-with-token -params 2 -docstring 'Toggle block comments with the given block comment tokens' %{
+define-command -hidden toggle-block-comments-with-token -params 2 -docstring 'Toggle block comments with the given block comment tokens' %{
   evaluate-commands -draft -save-regs 'ab' %{
     # Arguments
     set-register a %arg{1}
@@ -1406,7 +1396,7 @@ set-face global DiffChanged 'yellow'
 # - `DiffInserted`
 # - `DiffDeleted`
 # - `DiffChanged`
-define-command -override git -params .. -docstring 'git [options] [command] [flags]: run Git' %{
+define-command git -params .. -docstring 'git [options] [command] [flags]: run Git' %{
   evaluate-commands %sh{
     git "$@" > /dev/null
     exit_code=$?
@@ -1417,7 +1407,7 @@ define-command -override git -params .. -docstring 'git [options] [command] [fla
 }
 
 # https://git-scm.com/docs/git-add
-define-command -override git-write -docstring 'git-write: save the current buffer and stage the file' %{
+define-command git-write -docstring 'git-write: save the current buffer and stage the file' %{
   write
   ensure_git_dir
   nop %sh{
@@ -1429,7 +1419,7 @@ define-command -override git-write -docstring 'git-write: save the current buffe
 }
 
 # https://git-scm.com/docs/git-commit
-define-command -override git-commit -docstring 'git-commit: commit changes' %{
+define-command git-commit -docstring 'git-commit: commit changes' %{
   ensure_git_dir
   edit %sh{
     directory=$(dirname "$kak_buffile")
@@ -1451,7 +1441,7 @@ define-command -override git-commit -docstring 'git-commit: commit changes' %{
 
 # https://git-scm.com/docs/git
 # https://git-scm.com/docs/git-rev-parse
-define-command -override -hidden ensure_git_dir %{
+define-command -hidden ensure_git_dir %{
   evaluate-commands %sh{
     buf_dir=$(dirname "$kak_buffile")
     buf_inside_work_tree=$(git -C "$buf_dir" rev-parse --is-inside-work-tree)
@@ -1473,56 +1463,56 @@ alias global gc git-commit
 
 # Highlighters ─────────────────────────────────────────────────────────────────
 
-add-highlighter -override shared/git group
+add-highlighter shared/git group
 
 # Commit ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 # https://git-scm.com/docs/git-commit
-add-highlighter -override shared/git/commit regions
-add-highlighter -override shared/git/commit/comments region '^#' '$' group
-add-highlighter -override shared/git/commit/comments/region fill comment
+add-highlighter shared/git/commit regions
+add-highlighter shared/git/commit/comments region '^#' '$' group
+add-highlighter shared/git/commit/comments/region fill comment
 
 # Summary
-add-highlighter -override shared/git/commit/comments/branch_name regex 'On branch (.+)' 0:GitInformation 1:keyword
-add-highlighter -override shared/git/commit/comments/staged_changes regex 'Changes to be committed' 0:GitInformation
-add-highlighter -override shared/git/commit/comments/unstaged_changes regex 'Changes not staged for commit' 0:GitInformation
-add-highlighter -override shared/git/commit/comments/untracked_files regex 'Untracked files' 0:GitInformation
+add-highlighter shared/git/commit/comments/branch_name regex 'On branch (.+)' 0:GitInformation 1:keyword
+add-highlighter shared/git/commit/comments/staged_changes regex 'Changes to be committed' 0:GitInformation
+add-highlighter shared/git/commit/comments/unstaged_changes regex 'Changes not staged for commit' 0:GitInformation
+add-highlighter shared/git/commit/comments/untracked_files regex 'Untracked files' 0:GitInformation
 
 # Changed files
-add-highlighter -override shared/git/commit/comments/modified_files regex '(modified):\h+(.+)' 1:attribute 2:GitModifiedFile
-add-highlighter -override shared/git/commit/comments/new_files regex '(new file):\h+(.+)' 1:attribute 2:GitNewFile
-add-highlighter -override shared/git/commit/comments/deleted_files regex '(deleted):\h+(.+)' 1:attribute 2:GitDeletedFile
-add-highlighter -override shared/git/commit/comments/renamed_files regex '(renamed):\h+(.+)' 1:attribute 2:GitRenamedFile
+add-highlighter shared/git/commit/comments/modified_files regex '(modified):\h+(.+)' 1:attribute 2:GitModifiedFile
+add-highlighter shared/git/commit/comments/new_files regex '(new file):\h+(.+)' 1:attribute 2:GitNewFile
+add-highlighter shared/git/commit/comments/deleted_files regex '(deleted):\h+(.+)' 1:attribute 2:GitDeletedFile
+add-highlighter shared/git/commit/comments/renamed_files regex '(renamed):\h+(.+)' 1:attribute 2:GitRenamedFile
 
 # Scissors
 # https://git-scm.com/docs/git-commit#Documentation/git-commit.txt-scissors
-add-highlighter -override shared/git/commit/comments/scissors regex '# ------------------------ >8 ------------------------' 0:GitScissors
+add-highlighter shared/git/commit/comments/scissors regex '# ------------------------ >8 ------------------------' 0:GitScissors
 
 # Diffs
-add-highlighter -override shared/git/commit/diffs region '^diff --git' '^(?=diff --git)' group
-add-highlighter -override shared/git/commit/diffs/information regex '^\w.+$' 0:GitInformation
-add-highlighter -override shared/git/commit/diffs/regions ref git/diff
+add-highlighter shared/git/commit/diffs region '^diff --git' '^(?=diff --git)' group
+add-highlighter shared/git/commit/diffs/information regex '^\w.+$' 0:GitInformation
+add-highlighter shared/git/commit/diffs/regions ref git/diff
 
 # Diff ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 # https://git-scm.com/docs/git-diff
 # https://en.wikipedia.org/wiki/Diff#Unified_format
-add-highlighter -override shared/git/diff regions
-add-highlighter -override shared/git/diff/original_files region '^---' '$' fill DiffHeader
-add-highlighter -override shared/git/diff/new_files region '^\Q+++' '$' fill DiffHeader
-add-highlighter -override shared/git/diff/range_information region '^@@' '$' fill DiffHeader
-add-highlighter -override shared/git/diff/line_additions region '^\+' '$' fill DiffInserted
-add-highlighter -override shared/git/diff/line_deletions region '^-' '$' fill DiffDeleted
-add-highlighter -override shared/git/diff/contextual_lines region '^\h' '$' fill DiffText
+add-highlighter shared/git/diff regions
+add-highlighter shared/git/diff/original_files region '^---' '$' fill DiffHeader
+add-highlighter shared/git/diff/new_files region '^\Q+++' '$' fill DiffHeader
+add-highlighter shared/git/diff/range_information region '^@@' '$' fill DiffHeader
+add-highlighter shared/git/diff/line_additions region '^\+' '$' fill DiffInserted
+add-highlighter shared/git/diff/line_deletions region '^-' '$' fill DiffDeleted
+add-highlighter shared/git/diff/contextual_lines region '^\h' '$' fill DiffText
 
 # Rebase ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 # https://git-scm.com/docs/git-rebase
-add-highlighter -override shared/git/rebase regions
-add-highlighter -override shared/git/rebase/comments region '^#' '$' group
-add-highlighter -override shared/git/rebase/comments/region fill comment
-add-highlighter -override shared/git/rebase/commands region '^\w' '$' group
-add-highlighter -override shared/git/rebase/commands/region regex '^(p|pick|r|reword|e|edit|s|squash|f|fixup|x|exec|b|break|d|drop|l|label|t|reset|m|merge)\h+(\w+)\h+(.+)$' 1:keyword 2:value 3:default
+add-highlighter shared/git/rebase regions
+add-highlighter shared/git/rebase/comments region '^#' '$' group
+add-highlighter shared/git/rebase/comments/region fill comment
+add-highlighter shared/git/rebase/commands region '^\w' '$' group
+add-highlighter shared/git/rebase/commands/region regex '^(p|pick|r|reword|e|edit|s|squash|f|fixup|x|exec|b|break|d|drop|l|label|t|reset|m|merge)\h+(\w+)\h+(.+)$' 1:keyword 2:value 3:default
 
 # Detection ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -1541,7 +1531,7 @@ hook -group git-commit global BufOpenFile '.*/\.git/COMMIT_EDITMSG' %{
 }
 
 hook -group git-commit global WinSetOption filetype=git-commit %{
-  add-highlighter -override window/git-commit ref git/commit
+  add-highlighter window/git-commit ref git/commit
 }
 
 # Files
@@ -1552,7 +1542,7 @@ hook -group git-rebase global BufOpenFile '.*/\.git/rebase-merge/git-rebase-todo
 }
 
 hook -group git-rebase global WinSetOption filetype=git-rebase %{
-  add-highlighter -override window/git-rebase ref git/rebase
+  add-highlighter window/git-rebase ref git/rebase
 }
 # == Faces
 # Whitespace characters:
@@ -1621,26 +1611,26 @@ hook -group whitespace -always global ModeChange 'push:normal:insert' %{
 #
 # “You can think of highlighters as like a list of painting instructions.” — Screwtape
 #
-add-highlighter -override shared/whitespace group
+add-highlighter shared/whitespace group
 
 # Show whitespace (tabs, newlines, non-breaking-spaces).
-add-highlighter -override shared/whitespace/tab regex '\t+' '0:Tab'
-add-highlighter -override shared/whitespace/newline regex '\n+' '0:Newline'
-add-highlighter -override shared/whitespace/non-breaking-space regex ' +' '0:NonBreakingSpace'
+add-highlighter shared/whitespace/tab regex '\t+' '0:Tab'
+add-highlighter shared/whitespace/newline regex '\n+' '0:Newline'
+add-highlighter shared/whitespace/non-breaking-space regex ' +' '0:NonBreakingSpace'
 
 # Show consecutive whitespace, then paint over indent.
-add-highlighter -override shared/whitespace/consecutive-whitespace regex '\h{2,}' '0:ConsecutiveWhitespace'
-add-highlighter -override shared/whitespace/indent regex '^\h+' '0:Indent'
+add-highlighter shared/whitespace/consecutive-whitespace regex '\h{2,}' '0:ConsecutiveWhitespace'
+add-highlighter shared/whitespace/indent regex '^\h+' '0:Indent'
 
 # Show trailing whitespace.
-add-highlighter -override shared/whitespace/trailing-whitespace regex '\h+$' '0:TrailingWhitespace'
+add-highlighter shared/whitespace/trailing-whitespace regex '\h+$' '0:TrailingWhitespace'
 
 # Show odd and mixed indent.
-add-highlighter -override shared/whitespace/odd-indent regex '^( {1}| {3}| {5}| {7}| {9}| {11}| {13}| {15}| {17}| {19})(?=\H)' '0:OddIndent'
-add-highlighter -override shared/whitespace/mixed-indent regex '^(\t+ | +\t)\h*' '0:MixedIndent'
+add-highlighter shared/whitespace/odd-indent regex '^( {1}| {3}| {5}| {7}| {9}| {11}| {13}| {15}| {17}| {19})(?=\H)' '0:OddIndent'
+add-highlighter shared/whitespace/mixed-indent regex '^(\t+ | +\t)\h*' '0:MixedIndent'
 
 # Show limit of 80 characters.
-add-highlighter -override shared/whitespace/ruler regex '(?S)^.{80}$\K\n' '0:WhitespaceRuler'
+add-highlighter shared/whitespace/ruler regex '(?S)^.{80}$\K\n' '0:WhitespaceRuler'
 
 # Sensible
 # Enter `search` and start typing to search.
@@ -1652,8 +1642,8 @@ add-highlighter -override shared/whitespace/ruler regex '(?S)^.{80}$\K\n' '0:Whi
 # Sensible scroll-off: 5 lines and 1 column.
 set-option global scrolloff 5,1
 
-add-highlighter -override global/show-matching show-matching
-add-highlighter -override global/number-lines number-lines -relative -hlcursor
+add-highlighter global/show-matching show-matching
+add-highlighter global/number-lines number-lines -relative -hlcursor
 # Initialization
 # Highlighters
 
@@ -1666,58 +1656,12 @@ add-highlighter -override global/number-lines number-lines -relative -hlcursor
 
 # Commands ─────────────────────────────────────────────────────────────────────
 
-remove-hooks global sensible-mode
-
-hook -group sensible-mode -always global ModeChange 'push:normal:insert' %{
-  add-highlighter -override window/number-lines number-lines -hlcursor
-  set-face window PrimaryCursor 'black,white+uB'
-  set-face window PrimaryCursorEol 'black,white+uB'
-}
-
-hook -group sensible-mode -always global ModeChange 'pop:insert:normal' %{
-  add-highlighter -override window/number-lines number-lines -relative -hlcursor
-  unset-face window PrimaryCursor
-  unset-face window PrimaryCursorEol
-}
-
-# Commands ─────────────────────────────────────────────────────────────────────
-
-remove-hooks global sensible-cursor-line
-
-hook -group sensible-cursor-line -always global NormalIdle '' %{
-  # Restore _t_ (top) and _b_ (bottom) registers.
-  evaluate-commands -draft %{
-    unset-face window LineNumberCursor
-    # Multiple selections:
-    try %{
-      execute-keys -draft '<a-space>'
-      set-face window LineNumberCursor DiagnosticWarning
-    }
-    # Hidden selections above:
-    try %{
-      execute-keys -draft 'Zgt"tZb"tzGe<a-z>a<a-space>'
-      set-face window LineNumberCursor DiagnosticError
-    }
-    # Hidden selections below:
-    try %{
-      execute-keys -draft 'Zgbgll"bZe"bzGg<a-z>a<a-space>'
-      set-face window LineNumberCursor DiagnosticError
-    }
-  }
-}
-
-# Commands ─────────────────────────────────────────────────────────────────────
-
-# Commands ─────────────────────────────────────────────────────────────────────
-
 # Faces
 set-face global Search 'black,yellow'
-
-remove-hooks global show-search
+add-highlighter shared/search dynregex '%reg{/}' 0:Search
 
 hook -group show-search -always global NormalKey '/|<a-/>|\?|<a-\?>' %{
   add-highlighter window/search ref search
-  # add-highlighter -override window/wrap wrap -word -marker '↪'
   hook -always -once window ModeChange 'pop:prompt:normal' %{
     remove-highlighter window/search
     # remove-highlighter window/wrap
@@ -1726,7 +1670,7 @@ hook -group show-search -always global NormalKey '/|<a-/>|\?|<a-\?>' %{
 
 hook -group show-search global RegisterModified '/' %{
   try %{
-    add-highlighter -override shared/search regex "%reg{/}" 0:Search
+    add-highlighter shared/search regex "%reg{/}" 0:Search
   } catch %{
     remove-highlighter shared/search
   }
@@ -1738,7 +1682,7 @@ declare-option -hidden range-specs selected_text_ranges
 set-face global Search black,yellow+fg
 set-face global SelectedText black,blue+fg
 
-define-command -override -hidden update-selected-text-ranges %{
+define-command -hidden update-selected-text-ranges %{
   # Reset ranges
   unset-option window selected_text_ranges
   try %{
@@ -1763,7 +1707,7 @@ define-command -override -hidden update-selected-text-ranges %{
 }
 
 # Initialization
-add-highlighter -override global/selected-text ranges selected_text_ranges
+add-highlighter global/selected-text ranges selected_text_ranges
 remove-hooks global show-selected-text
 hook -group show-selected-text -always global NormalIdle '' update-selected-text-ranges
 hook -group show-selected-text -always global InsertIdle '' update-selected-text-ranges
@@ -1925,7 +1869,7 @@ hook -group crystal-detection global BufCreate '.+\.cr' %{
 # Enables syntax highlighting for Crystal filetype.
 remove-hooks global crystal-highlight
 hook -group crystal-highlight global WinSetOption filetype=crystal %{
-  add-highlighter -override window/crystal ref crystal
+  add-highlighter window/crystal ref crystal
   hook -always -once window WinSetOption 'filetype=.*' %{
     remove-highlighter window/crystal
   }
@@ -1953,8 +1897,8 @@ hook -group crystal-config global WinSetOption filetype=crystal %{
 # Highlighters ─────────────────────────────────────────────────────────────────
 
 # Creates the base regions
-add-highlighter -override shared/crystal regions
-add-highlighter -override shared/crystal/code default-region group
+add-highlighter shared/crystal regions
+add-highlighter shared/crystal/code default-region group
 
 # Syntax and semantics ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -1988,9 +1932,9 @@ add-highlighter -override shared/crystal/code default-region group
 # Reference
 # https://crystal-lang.org/reference/master/syntax_and_semantics/method_arguments.html
 
-add-highlighter -override shared/crystal/code/instance-method-definition regex "\b(def)\h+(%opt{crystal_word_pattern})\b" 1:keyword 2:function
-add-highlighter -override shared/crystal/code/class-method-definition regex "\b(def)\h+(self\.%opt{crystal_word_pattern})\b" 1:keyword 2:function
-add-highlighter -override shared/crystal/code/method-call regex "\b(%opt{crystal_word_pattern})\(" 1:function
+add-highlighter shared/crystal/code/instance-method-definition regex "\b(def)\h+(%opt{crystal_word_pattern})\b" 1:keyword 2:function
+add-highlighter shared/crystal/code/class-method-definition regex "\b(def)\h+(self\.%opt{crystal_word_pattern})\b" 1:keyword 2:function
+add-highlighter shared/crystal/code/method-call regex "\b(%opt{crystal_word_pattern})\(" 1:function
 
 # Instance and class variables ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -1998,40 +1942,40 @@ add-highlighter -override shared/crystal/code/method-call regex "\b(%opt{crystal
 # https://crystal-lang.org/reference/master/syntax_and_semantics/methods_and_instance_variables.html
 # https://crystal-lang.org/reference/master/syntax_and_semantics/class_variables.html
 
-add-highlighter -override shared/crystal/code/instance-and-class-variables regex '@@?\w+\b' 0:variable
+add-highlighter shared/crystal/code/instance-and-class-variables regex '@@?\w+\b' 0:variable
 
 # Keywords ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 # Note:
 # Generated with `crystal-check-news`.
-add-highlighter -override shared/crystal/code/keyword regex '\binstance_sizeof\b|\buninitialized\b|\bresponds_to\?|\bannotation\b|\bprotected\b|\bpointerof\b|\bverbatim\b|\boffsetof\b|\babstract\b|\brequire\b|\bprivate\b|\binclude\b|\bunless\b|\btypeof\b|\bstruct\b|\bsizeof\b|\bselect\b|\breturn\b|\brescue\b|\bmodule\b|\bextend\b|\bensure\b|\byield\b|\bwhile\b|\buntil\b|\bunion\b|\bsuper\b|\bmacro\b|\bis_a\?|\bfalse\b|\belsif\b|\bclass\b|\bbreak\b|\bbegin\b|\balias\b|\bwith\b|\bwhen\b|\btype\b|\btrue\b|\bthen\b|\bself\b|\bnil\?|\bnext\b|\benum\b|\belse\b|\bcase\b|\bout\b|\bnil\b|\blib\b|\bfun\b|\bfor\b|\bend\b|\bdef\b|\basm\b|\bas\?|\bof\b|\bin\b|\bif\b|\bdo\b|\bas\b' 0:keyword
+add-highlighter shared/crystal/code/keyword regex '\binstance_sizeof\b|\buninitialized\b|\bresponds_to\?|\bannotation\b|\bprotected\b|\bpointerof\b|\bverbatim\b|\boffsetof\b|\babstract\b|\brequire\b|\bprivate\b|\binclude\b|\bunless\b|\btypeof\b|\bstruct\b|\bsizeof\b|\bselect\b|\breturn\b|\brescue\b|\bmodule\b|\bextend\b|\bensure\b|\byield\b|\bwhile\b|\buntil\b|\bunion\b|\bsuper\b|\bmacro\b|\bis_a\?|\bfalse\b|\belsif\b|\bclass\b|\bbreak\b|\bbegin\b|\balias\b|\bwith\b|\bwhen\b|\btype\b|\btrue\b|\bthen\b|\bself\b|\bnil\?|\bnext\b|\benum\b|\belse\b|\bcase\b|\bout\b|\bnil\b|\blib\b|\bfun\b|\bfor\b|\bend\b|\bdef\b|\basm\b|\bas\?|\bof\b|\bin\b|\bif\b|\bdo\b|\bas\b' 0:keyword
 
 # Built-in functions ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 # Note:
 # Generated with `crystal-check-news`.
-add-highlighter -override shared/crystal/code/support.function.kernel regex '\braise_without_backtrace\b|\btimeout_select_action\b|\binstance_sizeof\b|\bread_line\b|\bpointerof\b|\boffsetof\b|\bdebugger\b|\bsprintf\b|\bat_exit\b|\btypeof\b|\bsystem\b|\bsizeof\b|\brecord\b|\bprintf\b|\bcaller\b|\bspawn\b|\bsleep\b|\braise\b|\bprint\b|\babort\b|\brand\b|\bputs\b|\bmain\b|\bloop\b|\bgets\b|\bexit\b|\bpp!|\bpp\b|\bp!|\bp\b' 0:builtin
-add-highlighter -override shared/crystal/code/support.function.object regex '\bdef_equals_and_hash\b|\bforward_missing_to\b|\bclass_property\?|\bclass_property!|\bclass_property\b|\bclass_getter\?|\bclass_getter!|\bclass_setter\b|\bclass_getter\b|\bdef_equals\b|\bproperty\?|\bproperty!|\bdef_clone\b|\bproperty\b|\bdelegate\b|\bdef_hash\b|\bgetter\?|\bgetter!|\bsetter\b|\bgetter\b' 0:builtin
+add-highlighter shared/crystal/code/support.function.kernel regex '\braise_without_backtrace\b|\btimeout_select_action\b|\binstance_sizeof\b|\bread_line\b|\bpointerof\b|\boffsetof\b|\bdebugger\b|\bsprintf\b|\bat_exit\b|\btypeof\b|\bsystem\b|\bsizeof\b|\brecord\b|\bprintf\b|\bcaller\b|\bspawn\b|\bsleep\b|\braise\b|\bprint\b|\babort\b|\brand\b|\bputs\b|\bmain\b|\bloop\b|\bgets\b|\bexit\b|\bpp!|\bpp\b|\bp!|\bp\b' 0:builtin
+add-highlighter shared/crystal/code/support.function.object regex '\bdef_equals_and_hash\b|\bforward_missing_to\b|\bclass_property\?|\bclass_property!|\bclass_property\b|\bclass_getter\?|\bclass_getter!|\bclass_setter\b|\bclass_getter\b|\bdef_equals\b|\bproperty\?|\bproperty!|\bdef_clone\b|\bproperty\b|\bdelegate\b|\bdef_hash\b|\bgetter\?|\bgetter!|\bsetter\b|\bgetter\b' 0:builtin
 
 # Punctuation ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 # punctuation.separator
-add-highlighter -override shared/crystal/code/punctuation.separator regex '\.|::' 0:meta
+add-highlighter shared/crystal/code/punctuation.separator regex '\.|::' 0:meta
 
 # Operators ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 # Reference
 # https://crystal-lang.org/reference/master/syntax_and_semantics/operators.html
 
-add-highlighter -override shared/crystal/code/operator regex '[!%&*+/<=>^|~-]' 0:operator
-add-highlighter -override shared/crystal/code/operator.range regex '\.\.\.?' 0:operator
+add-highlighter shared/crystal/code/operator regex '[!%&*+/<=>^|~-]' 0:operator
+add-highlighter shared/crystal/code/operator.range regex '\.\.\.?' 0:operator
 
 # Constants ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 # Reference
 # https://crystal-lang.org/reference/master/syntax_and_semantics/constants.html
 
-add-highlighter -override shared/crystal/code/variable.constant regex '\b[A-Z]\w*\b' 0:value
+add-highlighter shared/crystal/code/variable.constant regex '\b[A-Z]\w*\b' 0:value
 
 # Numbers ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -2044,8 +1988,8 @@ add-highlighter -override shared/crystal/code/variable.constant regex '\b[A-Z]\w
 # decimal number ⇒ 1_000_000
 # float number ⇒ 1_000_000.111_111
 #
-add-highlighter -override shared/crystal/code/constant.numeric.integer.decimal regex '\b\d(_?\d+)*(_[iu](8|16|32|64|128))?\b' 0:value
-add-highlighter -override shared/crystal/code/constant.numeric.float.decimal regex '\b\d(_?\d+)*\.\d(_?\d+)*(_(f32|f64))?\b' 0:value
+add-highlighter shared/crystal/code/constant.numeric.integer.decimal regex '\b\d(_?\d+)*(_[iu](8|16|32|64|128))?\b' 0:value
+add-highlighter shared/crystal/code/constant.numeric.float.decimal regex '\b\d(_?\d+)*\.\d(_?\d+)*(_(f32|f64))?\b' 0:value
 
 # Examples:
 #
@@ -2053,9 +1997,9 @@ add-highlighter -override shared/crystal/code/constant.numeric.float.decimal reg
 # octal number ⇒ 0o123
 # hexadecimal number ⇒ 0xfe012d
 #
-add-highlighter -override shared/crystal/code/constant.numeric.integer.binary regex '\b0b[0-1]+(_[iu](8|16|32|64|128))?\b' 0:value
-add-highlighter -override shared/crystal/code/constant.numeric.integer.octal regex '\b0o[0-7]+(_[iu](8|16|32|64|128))?\b' 0:value
-add-highlighter -override shared/crystal/code/constant.numeric.integer.hexadecimal regex '\b0x[0-9a-fA-F]+(_[iu](8|16|32|64|128))?\b' 0:value
+add-highlighter shared/crystal/code/constant.numeric.integer.binary regex '\b0b[0-1]+(_[iu](8|16|32|64|128))?\b' 0:value
+add-highlighter shared/crystal/code/constant.numeric.integer.octal regex '\b0o[0-7]+(_[iu](8|16|32|64|128))?\b' 0:value
+add-highlighter shared/crystal/code/constant.numeric.integer.hexadecimal regex '\b0x[0-9a-fA-F]+(_[iu](8|16|32|64|128))?\b' 0:value
 
 # Comments ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -2068,8 +2012,8 @@ add-highlighter -override shared/crystal/code/constant.numeric.integer.hexadecim
 #
 # puts "hello #{name}"
 #
-add-highlighter -override shared/crystal/comment region '#(?!\{)' '$' group
-add-highlighter -override shared/crystal/comment/fill fill comment
+add-highlighter shared/crystal/comment region '#(?!\{)' '$' group
+add-highlighter shared/crystal/comment/fill fill comment
 
 # Documenting code ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -2089,11 +2033,11 @@ add-highlighter -override shared/crystal/comment/fill fill comment
 #
 # Check the number of horns with `#horns`.
 #
-add-highlighter -override shared/crystal/comment/reference regex "`[#.]?%opt{crystal_word_pattern}`" 0:mono
-add-highlighter -override shared/crystal/comment/parameter regex '\*\w+\*' 0:mono
-add-highlighter -override shared/crystal/comment/code-block regex '```(\h*\w+)?$' 0:block
-add-highlighter -override shared/crystal/comment/admonition regex '\h+([A-Z]+):\h+' 1:meta
-add-highlighter -override shared/crystal/comment/directive regex ':\w+:' 0:meta
+add-highlighter shared/crystal/comment/reference regex "`[#.]?%opt{crystal_word_pattern}`" 0:mono
+add-highlighter shared/crystal/comment/parameter regex '\*\w+\*' 0:mono
+add-highlighter shared/crystal/comment/code-block regex '```(\h*\w+)?$' 0:block
+add-highlighter shared/crystal/comment/admonition regex '\h+([A-Z]+):\h+' 1:meta
+add-highlighter shared/crystal/comment/directive regex ':\w+:' 0:meta
 
 # Interpolation ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -2114,14 +2058,14 @@ add-highlighter -override shared/crystal/comment/directive regex ':\w+:' 0:meta
 # puts %q(hello world)
 #
 declare-option -hidden str-list crystal_optional_arguments
-define-command -override -hidden define-crystal-string -params 4.. %{
+define-command -hidden define-crystal-string -params 4.. %{
   set-option global crystal_optional_arguments %arg{@}
   set-option -remove global crystal_optional_arguments %arg{1} %arg{2}
-  add-highlighter -override "shared/crystal/%arg{1}" region %opt{crystal_optional_arguments} regions
-  add-highlighter -override "shared/crystal/%arg{1}/content" default-region group
-  add-highlighter -override "shared/crystal/%arg{1}/content/fill" fill %arg{2}
-  add-highlighter -override "shared/crystal/%arg{1}/content/escaped-character" regex '\\.' 0:meta
-  add-highlighter -override "shared/crystal/%arg{1}/content/escape-sequence" regex '\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|u\{[0-9a-fA-F]+\})' 0:meta
+  add-highlighter "shared/crystal/%arg{1}" region %opt{crystal_optional_arguments} regions
+  add-highlighter "shared/crystal/%arg{1}/content" default-region group
+  add-highlighter "shared/crystal/%arg{1}/content/fill" fill %arg{2}
+  add-highlighter "shared/crystal/%arg{1}/content/escaped-character" regex '\\.' 0:meta
+  add-highlighter "shared/crystal/%arg{1}/content/escape-sequence" regex '\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|u\{[0-9a-fA-F]+\})' 0:meta
 }
 
 # Defines Crystal string interpolation.
@@ -2137,11 +2081,11 @@ define-command -override -hidden define-crystal-string -params 4.. %{
 # name = "world"
 # puts %(hello #{name})
 #
-define-command -override -hidden define-crystal-interpolated-string -params 4.. %{
+define-command -hidden define-crystal-interpolated-string -params 4.. %{
   define-crystal-string %arg{@}
-  add-highlighter -override "shared/crystal/%arg{1}/interpolation" region -recurse '\{' '#\{' '\}' group # }
-  add-highlighter -override "shared/crystal/%arg{1}/interpolation/delimiters" regex '(?<opening>..).+(?<closing>.)' opening:meta closing:meta
-  add-highlighter -override "shared/crystal/%arg{1}/interpolation/crystal" ref crystal
+  add-highlighter "shared/crystal/%arg{1}/interpolation" region -recurse '\{' '#\{' '\}' group # }
+  add-highlighter "shared/crystal/%arg{1}/interpolation/delimiters" regex '(?<opening>..).+(?<closing>.)' opening:meta closing:meta
+  add-highlighter "shared/crystal/%arg{1}/interpolation/crystal" ref crystal
 }
 
 # Characters ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -2155,11 +2099,11 @@ define-command -override -hidden define-crystal-interpolated-string -params 4.. 
 # single quote ⇒ '\''
 # backslash ⇒ '\\'
 #
-add-highlighter -override shared/crystal/string region "'" "(?<!\\)(\\\\)*'" regions
-add-highlighter -override shared/crystal/string/content default-region group
-add-highlighter -override shared/crystal/string/content/fill fill value
-add-highlighter -override shared/crystal/string/content/escaped-character regex '\\.' 0:meta
-add-highlighter -override shared/crystal/string/content/escape-sequence regex '\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|u\{[0-9a-fA-F]+\})' 0:meta
+add-highlighter shared/crystal/string region "'" "(?<!\\)(\\\\)*'" regions
+add-highlighter shared/crystal/string/content default-region group
+add-highlighter shared/crystal/string/content/fill fill value
+add-highlighter shared/crystal/string/content/escaped-character regex '\\.' 0:meta
+add-highlighter shared/crystal/string/content/escape-sequence regex '\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|u\{[0-9a-fA-F]+\})' 0:meta
 # define-crystal-string string.character value "'" "(?<!\\)(\\\\)*'"
 
 # Strings ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -2175,14 +2119,14 @@ add-highlighter -override shared/crystal/string/content/escape-sequence regex '\
 # double quote ⇒ "\""
 # backslash ⇒ "\\"
 #
-add-highlighter -override shared/crystal/string.interpolated region '"' '(?<!\\)(\\\\)*"' regions
-add-highlighter -override shared/crystal/string.interpolated/content default-region group
-add-highlighter -override shared/crystal/string.interpolated/content/fill fill string
-add-highlighter -override shared/crystal/string.interpolated/content/escaped-character ref crystal/string/content/escaped-character
-add-highlighter -override shared/crystal/string.interpolated/content/escape-sequence ref crystal/string/content/escape-sequence
-add-highlighter -override shared/crystal/string.interpolated/interpolation region -recurse '\{' '#\{' '\}' group
-add-highlighter -override shared/crystal/string.interpolated/interpolation/delimiters regex '(?<opening>..).+(?<closing>.)' opening:meta closing:meta
-add-highlighter -override shared/crystal/string.interpolated/interpolation/crystal ref crystal
+add-highlighter shared/crystal/string.interpolated region '"' '(?<!\\)(\\\\)*"' regions
+add-highlighter shared/crystal/string.interpolated/content default-region group
+add-highlighter shared/crystal/string.interpolated/content/fill fill string
+add-highlighter shared/crystal/string.interpolated/content/escaped-character ref crystal/string/content/escaped-character
+add-highlighter shared/crystal/string.interpolated/content/escape-sequence ref crystal/string/content/escape-sequence
+add-highlighter shared/crystal/string.interpolated/interpolation region -recurse '\{' '#\{' '\}' group
+add-highlighter shared/crystal/string.interpolated/interpolation/delimiters regex '(?<opening>..).+(?<closing>.)' opening:meta closing:meta
+add-highlighter shared/crystal/string.interpolated/interpolation/crystal ref crystal
 # define-crystal-interpolated-string string.quoted.double string '"' '(?<!\\)(\\\\)*"'
 
 # Percent string literals ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -2195,11 +2139,11 @@ add-highlighter -override shared/crystal/string.interpolated/interpolation/cryst
 # name = "world"
 # puts %Q(hello #{name})
 #
-add-highlighter -override shared/crystal/string.quoted.percent.parenthesis.interpolated region -recurse '\(' '%Q?\(' '\)' ref crystal/string.interpolated
-add-highlighter -override shared/crystal/string.quoted.percent.bracket.interpolated region -recurse '\[' '%Q?\[' '\]' ref crystal/string.interpolated
-add-highlighter -override shared/crystal/string.quoted.percent.brace.interpolated region -recurse '\{' '%Q?\{' '\}' ref crystal/string.interpolated
-add-highlighter -override shared/crystal/string.quoted.percent.angle.interpolated region -recurse '<' '%Q?<' '>' ref crystal/string.interpolated
-add-highlighter -override shared/crystal/string.quoted.percent.pipe.interpolated region '%Q?\|' '\|' ref crystal/string.interpolated
+add-highlighter shared/crystal/string.quoted.percent.parenthesis.interpolated region -recurse '\(' '%Q?\(' '\)' ref crystal/string.interpolated
+add-highlighter shared/crystal/string.quoted.percent.bracket.interpolated region -recurse '\[' '%Q?\[' '\]' ref crystal/string.interpolated
+add-highlighter shared/crystal/string.quoted.percent.brace.interpolated region -recurse '\{' '%Q?\{' '\}' ref crystal/string.interpolated
+add-highlighter shared/crystal/string.quoted.percent.angle.interpolated region -recurse '<' '%Q?<' '>' ref crystal/string.interpolated
+add-highlighter shared/crystal/string.quoted.percent.pipe.interpolated region '%Q?\|' '\|' ref crystal/string.interpolated
 
 # Raw percent string literals ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -2212,11 +2156,11 @@ add-highlighter -override shared/crystal/string.quoted.percent.pipe.interpolated
 #
 # puts %q(hello world)
 #
-add-highlighter -override shared/crystal/string.quoted.percent.parenthesis region -recurse '\(' '%[qwi]\(' '\)' ref crystal/string
-add-highlighter -override shared/crystal/string.quoted.percent.bracket region -recurse '\[' '%[qwi]\[' '\]' ref crystal/string
-add-highlighter -override shared/crystal/string.quoted.percent.brace region -recurse '\{' '%[qwi]\{' '\}' ref crystal/string
-add-highlighter -override shared/crystal/string.quoted.percent.angle region -recurse '<' '%[qwi]<' '>' ref crystal/string
-add-highlighter -override shared/crystal/string.quoted.percent.pipe region '%[qwi]\|' '\|' ref crystal/string
+add-highlighter shared/crystal/string.quoted.percent.parenthesis region -recurse '\(' '%[qwi]\(' '\)' ref crystal/string
+add-highlighter shared/crystal/string.quoted.percent.bracket region -recurse '\[' '%[qwi]\[' '\]' ref crystal/string
+add-highlighter shared/crystal/string.quoted.percent.brace region -recurse '\{' '%[qwi]\{' '\}' ref crystal/string
+add-highlighter shared/crystal/string.quoted.percent.angle region -recurse '<' '%[qwi]<' '>' ref crystal/string
+add-highlighter shared/crystal/string.quoted.percent.pipe region '%[qwi]\|' '\|' ref crystal/string
 
 # Here document ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -2228,8 +2172,8 @@ add-highlighter -override shared/crystal/string.quoted.percent.pipe region '%[qw
 # <<-'EOF'
 # EOF
 #
-add-highlighter -override shared/crystal/string.unquoted.heredoc.interpolated region -match-capture '<<-(\w+)' '^\h*(\w+)$' ref crystal/string.interpolated
-add-highlighter -override shared/crystal/string.unquoted.heredoc.raw region -match-capture "<<-'(\w+)'" '^\h*(\w+)$' ref crystal/string
+add-highlighter shared/crystal/string.unquoted.heredoc.interpolated region -match-capture '<<-(\w+)' '^\h*(\w+)$' ref crystal/string.interpolated
+add-highlighter shared/crystal/string.unquoted.heredoc.raw region -match-capture "<<-'(\w+)'" '^\h*(\w+)$' ref crystal/string
 
 # Symbols ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -2242,8 +2186,8 @@ add-highlighter -override shared/crystal/string.unquoted.heredoc.raw region -mat
 #
 # :"quoted symbol"
 #
-add-highlighter -override shared/crystal/code/constant.symbol regex ":%opt{crystal_word_pattern}" 0:value
-add-highlighter -override shared/crystal/string.symbol region ':"' '(?<!\\)(\\\\)*"' ref crystal/string
+add-highlighter shared/crystal/code/constant.symbol regex ":%opt{crystal_word_pattern}" 0:value
+add-highlighter shared/crystal/string.symbol region ':"' '(?<!\\)(\\\\)*"' ref crystal/string
 
 # Regular expressions ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -2256,14 +2200,14 @@ add-highlighter -override shared/crystal/string.symbol region ':"' '(?<!\\)(\\\\
 #
 # /foo/i.match("FOO")
 #
-add-highlighter -override shared/crystal/string.regexp.interpolated region '/' '(?<!\\)(\\\\)*/[imx]*' regions
-add-highlighter -override shared/crystal/string.regexp.interpolated/content default-region group
-add-highlighter -override shared/crystal/string.regexp.interpolated/content/fill fill meta
-add-highlighter -override shared/crystal/string.regexp.interpolated/content/escaped-character ref crystal/string/content/escaped-character
-add-highlighter -override shared/crystal/string.regexp.interpolated/content/escape-sequence ref crystal/string/content/escape-sequence
-add-highlighter -override shared/crystal/string.regexp.interpolated/interpolation region -recurse '\{' '#\{' '\}' group
-add-highlighter -override shared/crystal/string.regexp.interpolated/interpolation/delimiters ref crystal/string.interpolated/interpolation/delimiters
-add-highlighter -override shared/crystal/string.regexp.interpolated/interpolation/crystal ref crystal
+add-highlighter shared/crystal/string.regexp.interpolated region '/' '(?<!\\)(\\\\)*/[imx]*' regions
+add-highlighter shared/crystal/string.regexp.interpolated/content default-region group
+add-highlighter shared/crystal/string.regexp.interpolated/content/fill fill meta
+add-highlighter shared/crystal/string.regexp.interpolated/content/escaped-character ref crystal/string/content/escaped-character
+add-highlighter shared/crystal/string.regexp.interpolated/content/escape-sequence ref crystal/string/content/escape-sequence
+add-highlighter shared/crystal/string.regexp.interpolated/interpolation region -recurse '\{' '#\{' '\}' group
+add-highlighter shared/crystal/string.regexp.interpolated/interpolation/delimiters ref crystal/string.interpolated/interpolation/delimiters
+add-highlighter shared/crystal/string.regexp.interpolated/interpolation/crystal ref crystal
 
 # Note: Avoid unterminated regular expression and floor division as regex.
 #
@@ -2272,8 +2216,8 @@ add-highlighter -override shared/crystal/string.regexp.interpolated/interpolatio
 # division ⇒ 1 / 2
 # floor division ⇒ 1 // 2
 #
-add-highlighter -override shared/crystal/division-as-region region ' //? ' '.\K' group
-add-highlighter -override shared/crystal/division-as-region/operator regex '//?' 0:operator
+add-highlighter shared/crystal/division-as-region region ' //? ' '.\K' group
+add-highlighter shared/crystal/division-as-region/operator regex '//?' 0:operator
 
 # Percent regex literals ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -2281,11 +2225,11 @@ add-highlighter -override shared/crystal/division-as-region/operator regex '//?'
 #
 # %r(foo|bar)
 #
-add-highlighter -override shared/crystal/string.regexp.percent.parenthesis.interpolated region -recurse '\(' '%r\(' '\)[imx]*' ref crystal/string.regexp.interpolated
-add-highlighter -override shared/crystal/string.regexp.percent.bracket.interpolated region -recurse '\[' '%r\[' '\][imx]*' ref crystal/string.regexp.interpolated
-add-highlighter -override shared/crystal/string.regexp.percent.brace.interpolated region -recurse '\{' '%r\{' '\}[imx]*' ref crystal/string.regexp.interpolated
-add-highlighter -override shared/crystal/string.regexp.percent.angle.interpolated region -recurse '<' '%r<' '>[imx]*' ref crystal/string.regexp.interpolated
-add-highlighter -override shared/crystal/string.regexp.percent.pipe.interpolated region '%r\|' '\|[imx]*' ref crystal/string.regexp.interpolated
+add-highlighter shared/crystal/string.regexp.percent.parenthesis.interpolated region -recurse '\(' '%r\(' '\)[imx]*' ref crystal/string.regexp.interpolated
+add-highlighter shared/crystal/string.regexp.percent.bracket.interpolated region -recurse '\[' '%r\[' '\][imx]*' ref crystal/string.regexp.interpolated
+add-highlighter shared/crystal/string.regexp.percent.brace.interpolated region -recurse '\{' '%r\{' '\}[imx]*' ref crystal/string.regexp.interpolated
+add-highlighter shared/crystal/string.regexp.percent.angle.interpolated region -recurse '<' '%r<' '>[imx]*' ref crystal/string.regexp.interpolated
+add-highlighter shared/crystal/string.regexp.percent.pipe.interpolated region '%r\|' '\|[imx]*' ref crystal/string.regexp.interpolated
 
 # Command literal ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -2296,7 +2240,7 @@ add-highlighter -override shared/crystal/string.regexp.percent.pipe.interpolated
 #
 # `echo foo`
 #
-add-highlighter -override shared/crystal/string.command region '`' '(?<!\\)(\\\\)*`' ref crystal/string.regexp.interpolated
+add-highlighter shared/crystal/string.command region '`' '(?<!\\)(\\\\)*`' ref crystal/string.regexp.interpolated
 
 # Percent command literals ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -2304,11 +2248,11 @@ add-highlighter -override shared/crystal/string.command region '`' '(?<!\\)(\\\\
 #
 # %x(echo foo)
 #
-add-highlighter -override shared/crystal/string.command.percent.parenthesis region -recurse '\(' '%x\(' '\)' ref crystal/string.regexp.interpolated
-add-highlighter -override shared/crystal/string.command.percent.bracket region -recurse '\[' '%x\[' '\]' ref crystal/string.regexp.interpolated
-add-highlighter -override shared/crystal/string.command.percent.brace region -recurse '\{' '%x\{' '\}' ref crystal/string.regexp.interpolated
-add-highlighter -override shared/crystal/string.command.percent.angle region -recurse '<' '%x<' '>' ref crystal/string.regexp.interpolated
-add-highlighter -override shared/crystal/string.command.percent.pipe region '%x\|' '\|' ref crystal/string.regexp.interpolated
+add-highlighter shared/crystal/string.command.percent.parenthesis region -recurse '\(' '%x\(' '\)' ref crystal/string.regexp.interpolated
+add-highlighter shared/crystal/string.command.percent.bracket region -recurse '\[' '%x\[' '\]' ref crystal/string.regexp.interpolated
+add-highlighter shared/crystal/string.command.percent.brace region -recurse '\{' '%x\{' '\}' ref crystal/string.regexp.interpolated
+add-highlighter shared/crystal/string.command.percent.angle region -recurse '<' '%x<' '>' ref crystal/string.regexp.interpolated
+add-highlighter shared/crystal/string.command.percent.pipe region '%x\|' '\|' ref crystal/string.regexp.interpolated
 
 # What’s new ───────────────────────────────────────────────────────────────────
 
@@ -2318,7 +2262,7 @@ add-highlighter -override shared/crystal/string.command.percent.pipe region '%x\
 #
 # Fetch a document, select keywords and call `crystal-build-result keywords`.
 #
-define-command -override -hidden crystal-build-result -params 1 %{
+define-command -hidden crystal-build-result -params 1 %{
   # Initialization
   execute-keys -save-regs '' 'y'
   edit -scratch
@@ -2337,12 +2281,12 @@ define-command -override -hidden crystal-build-result -params 1 %{
   echo 'Open the *debug* buffer to see result.'
 }
 
-define-command -override -hidden crystal-build-result-with-static-words -params 1 %{
+define-command -hidden crystal-build-result-with-static-words -params 1 %{
   crystal-build-result %arg{1}
   set-option -add window static_words %val{selections}
 }
 
-define-command -override -hidden crystal-check-news %{
+define-command -hidden crystal-check-news %{
   # Initialization
   edit -scratch
   set-option window static_words

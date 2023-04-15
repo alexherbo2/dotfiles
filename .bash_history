@@ -16,6 +16,7 @@ git clone https://github.com/mdn/webextensions-examples.git ~/.local/share/githu
 git clone https://codeberg.org/dnkl/foot.git ~/.local/share/codeberg.org/dnkl/foot
 git clone https://git.sr.ht/~chambln/dots ~/.local/share/git.sr.ht/~chambln/dots
 git clone https://git.sr.ht/~emersion/dotfiles ~/.local/share/git.sr.ht/~emersion/dotfiles
+git clone https://git.sr.ht/~krobelus/dotfiles ~/.local/share/git.sr.ht/~krobelus/dotfiles
 git clone https://git.sr.ht/~sircmpwn/dotfiles ~/.local/share/git.sr.ht/~sircmpwn/dotfiles
 git clone https://github.com/71/dotfiles.git ~/.local/share/github.com/71/dotfiles
 git clone https://github.com/archseer/dotfiles.git ~/.local/share/github.com/archseer/dotfiles

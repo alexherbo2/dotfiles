@@ -34,6 +34,8 @@ try %sh{
 # UI options
 set-option global startup_info_version 20221231
 set-option global ui_options terminal_set_title=no terminal_assistant=none
+# Matching pairs
+set-option global matching_pairs ( ) { } [ ] < > “ ” ‘ ’ « » ‹ ›
 set-option global scrolloff 5,1
 add-highlighter -override global/show-matching show-matching
 add-highlighter -override global/number-lines number-lines -hlcursor
@@ -64,6 +66,16 @@ add-highlighter -override global/math-symbols regex '[−×]' '0:cyan+f'
 
 # Mappings ---------------------------------------------------------------------
 
+# Text objects
+# Quotation marks
+map -docstring 'double quotation mark' global object <a-Q> 'c“,”<ret>'
+map -docstring 'single quotation mark' global object <a-q> 'c‘,’<ret>'
+map -docstring 'double angle quotation mark' global object <a-G> 'c«,»<ret>'
+map -docstring 'single angle quotation mark' global object <a-g> 'c‹,›<ret>'
+# Tag
+map -docstring 'tag' global object t 'c<lt>.+?<gt>,<lt>/.+?<gt><ret>'
+# Line
+map -docstring 'line' global object x '<esc>x_'
 map -docstring 'yank joined selections into system clipboard' global user y ': yank_terminal_clipboard<ret>'
 map global normal <ret> ':'
 map global normal f '<a-:>F'
@@ -116,7 +128,7 @@ map -docstring 'enter command' global normal <ret> :
 # Selection primitives
 map -docstring 'select inner object' global normal v <a-i>
 map -docstring 'select whole object' global normal V <a-a>
-# map -docstring 'enter surround mode' global normal q ': enter-surround-mode<ret>'
+map -docstring 'enter surround mode' global normal q ': enter-surround-mode<ret>'
 # map -docstring 'enter select mode' global normal s ': enter-select-mode<ret>'
 
 # User mode --------------------------------------------------------------------
@@ -157,13 +169,48 @@ define-command -override open-buffer-picker -docstring 'open-buffer-picker: Open
 
 map -docstring 'global search' global goto / '<a-;>: open-global-search-picker<ret>'
 
+add-highlighter shared/grep regex '^(.+?):(\d+):(\d+):(.+?)$' 1:string 2:value 3:value
+
+hook -group grep-highlight global BufSetOption filetype=grep %{
+  add-highlighter buffer/grep ref grep
+  map buffer normal <ret> ': grep_jump<ret>'
+  hook -always -once buffer BufSetOption 'filetype=.*' %{
+    remove-highlighter buffer/grep
+  }
+}
+
+define-command -hidden grep_jump %{
+  evaluate-commands -draft %{
+    execute-keys ',;xs^(.+?):(\d+):(\d+):(.+?)$<ret>'
+    evaluate-commands -client %val{client} -- edit -existing %reg{1} %reg{2} %reg{3}
+  }
+}
+
+define-command fifo -params .. %{
+  reg d %sh{mktemp -d}
+  reg f "%reg{d}/fifo"
+  nop %sh{
+    mkfifo "$kak_reg_f"
+    { "$@" > "$kak_reg_f"; } < /dev/null > /dev/null 2>&1 &
+  }
+  edit! -fifo %reg{f} '[fifo]'
+  hook -always -once buffer BufCloseFifo '' "nop %%sh{ echo rm -Rf ""%reg{d}"" >> ~/t.txt }"
+}
+
+complete-command fifo shell
+
+declare-option str grep_command rg
+declare-option str-list grep_args --hidden --column --with-filename
+
 define-command -override open-global-search-picker -docstring 'open-global-search-picker: Opens global search picker.' %{
   # Provides word completion
   prompt grep: -shell-script-candidates %{
     echo "write '$kak_response_fifo'" > "$kak_command_fifo"
     cat "$kak_response_fifo" | kak -f 's[\w-]{4,}<ret>y%<a-R>a<ret>'
   } %{
-    grep rg --hidden --column --with-filename %val{text}
+    fifo rg --hidden --column --with-filename %val{text}
+    rename-buffer "%arg{@}.refs"
+    set-option buffer filetype grep
   }
 }
 
@@ -180,6 +227,252 @@ map -docstring 'rulers' global unimpaired_left r ': remove-highlighter global/ru
 map -docstring 'rulers' global unimpaired_right r ': add-highlighter global/rulers column 81 default,cyan<ret>'
 
 # Commands ---------------------------------------------------------------------
+
+# Shortcuts
+
+# Mappings ─────────────────────────────────────────────────────────────────────
+
+map -docstring 'erase character before cursor' global normal <backspace> ': erase-character-before-cursor<ret>'
+map -docstring 'erase character under cursor' global normal <del> ': erase-character-under-cursor<ret>'
+
+map -docstring 'select next word' global normal w ': select-next-word<ret>'
+
+map -docstring 'move line down' global normal <a-down> ': move-lines-down<ret>'
+map -docstring 'move line up' global normal <a-up> ': move-lines-up<ret>'
+
+map -docstring 'select all occurrences of current selection' global normal <a-percent> ': select-highlights<ret>'
+
+map -docstring 'increment selection' global normal <c-a> ': increment-selection %val{count}<ret>'
+map -docstring 'decrement selection' global normal <c-x> ': decrement-selection %val{count}<ret>'
+
+map -docstring 'buffer directory' global prompt <a-/> '%sh{dirname "$kak_bufname"}<a-!>/'
+
+# Commands ─────────────────────────────────────────────────────────────────────
+
+define-command -override erase-character-before-cursor -docstring 'erase character before cursor' %{
+  execute-keys -draft ';i<backspace>'
+}
+
+define-command -override erase-character-under-cursor -docstring 'erase character under cursor' %{
+  execute-keys -draft ';i<del>'
+}
+
+define-command -override select-next-word -docstring 'select next word' %{
+  evaluate-commands -itersel %{
+    hook -group select-next-word -always -once window User "%val{selection_desc}" %{
+      search-next-word
+    }
+    try %{
+      execute-keys '<a-i>w'
+      trigger-user-hook "%val{selection_desc}"
+    } catch %{
+      search-next-word
+    }
+    remove-hooks window select-next-word
+  }
+}
+
+define-command -override -hidden search-next-word -docstring 'search next word' %{
+  execute-keys 'h/\W\w<ret><a-i>w'
+}
+
+# Reference: https://code.visualstudio.com/docs/getstarted/keybindings#_basic-editing
+define-command -override move-lines-down -docstring 'move line down' %{
+  execute-keys -draft 'x<a-_><a-:>Z;ezjxdzP'
+}
+
+define-command -override move-lines-up -docstring 'move line up' %{
+  execute-keys -draft 'x<a-_><a-:><a-;>Z;bzkxdzp'
+}
+
+define-command -override select-highlights -docstring 'select all occurrences of current selection' %{
+  execute-keys '"aZ*%s<ret>"bZ"az"b<a-z>a'
+}
+
+define-command -override increment-selection -params 1 -docstring 'increment-selection <count>: increment selection by count' %{
+  execute-keys "a+%sh{expr $1 '|' 1}<esc>|{ cat; echo; } | bc<ret>"
+}
+
+define-command -override decrement-selection -params 1 -docstring 'decrement-selection <count>: decrement selection by count' %{
+  execute-keys "a-%sh{expr $1 '|' 1}<esc>|{ cat; echo; } | bc<ret>"
+}
+
+define-command -override evaluate-selections -docstring 'evaluate selections' %{
+  evaluate-commands -itersel %{
+    evaluate-commands %val{selection}
+  }
+}
+
+alias global = evaluate-selections
+
+define-command link-window -params 1 -docstring 'link-window <client>: link window to client' %{
+  execute-keys '"sZ'
+  execute-keys -client %arg{1} '"sz'
+}
+
+complete-command link-window client
+
+define-command grab_buffer_in_viewport -params 1 -client-completion -docstring 'link-window <client>: link window to client' %{
+  execute-keys '"sZ'
+  execute-keys -client %arg{1} '"sz'
+}
+
+define-command -override move-window -params 1 -client-completion -docstring 'move-window <client>: move window to client' %{
+  execute-keys '"sZ'
+  execute-keys -client %arg{1} '"sz'
+  buffer-next
+}
+
+define-command -override swap-window -params 1 -client-completion -docstring 'swap-window <client>: swap window with client' %{
+  execute-keys '"sZ'
+  execute-keys -client %arg{1} '"tZ'
+  execute-keys '"tz'
+  execute-keys -client %arg{1} '"sz'
+}
+
+# Surround selections
+# Reference: https://github.com/mawww/kakoune/blob/master/src/normal.cc#:~:text=select_object
+
+# Modes ────────────────────────────────────────────────────────────────────────
+
+try %[ declare-user-mode surround ]
+
+define-command -override enter-surround-mode -docstring 'enter surround mode' %{
+  enter-user-mode surround
+}
+
+# Mappings ─────────────────────────────────────────────────────────────────────
+
+# parenthesis block
+# brace block
+# bracket block
+# angle block
+# double quote string
+# single quote string
+# grave quote string
+# double quotation mark
+# single quotation mark
+# double angle quotation mark
+# single angle quotation mark
+# emphasis
+# strong
+# map -docstring 'enter surround mode' global normal q ': enter-surround-mode<ret>'
+define-command -override -hidden surround-init %{
+  # Enter text
+  map -docstring 'enter insert mode' global surround i ': surround-enter-insert-mode<ret>'
+  map -docstring 'key' global surround k ': surround-key<ret>'
+  map -docstring 'tag' global surround t ': surround-tag<ret>'
+
+  # Editing
+  map -docstring 'space' global surround <space> ': surround-add-space<ret>'
+  map -docstring 'line' global surround <ret> ': surround-add-line<ret>'
+  map -docstring 'delete' global surround <backspace> ': surround-delete<ret>'
+  map -docstring 'delete' global surround <del> ': surround-delete<ret>'
+
+  # Surrounding pairs
+  declare-surrounding-pair 'parenthesis block' b ( )
+  declare-surrounding-pair 'brace block' B { }
+  declare-surrounding-pair 'bracket block' r [ ]
+  declare-surrounding-pair 'angle block' a <lt> <gt>
+  declare-surrounding-pair 'double quote string' Q '"' '"'
+  declare-surrounding-pair 'single quote string' q "'" "'"
+  declare-surrounding-pair 'grave quote string' g ` `
+  declare-surrounding-pair 'double quotation mark' <a-Q> “ ”
+  declare-surrounding-pair 'single quotation mark' <a-q> ‘ ’
+  declare-surrounding-pair 'double angle quotation mark' <a-G> « »
+  declare-surrounding-pair 'single angle quotation mark' <a-g> ‹ ›
+
+  # Emphasis
+  map -docstring 'emphasis' global surround _ ': surround-add _ _<ret>'
+  map -docstring 'strong' global surround * ': surround-add ** **<ret>'
+}
+
+# Commands ─────────────────────────────────────────────────────────────────────
+
+# Declare surrounding pairs
+define-command -override declare-surrounding-pair -params 4 -docstring 'declare-surrounding-pair <description> [alias] <opening> <closing>: declare surrounding pair' %{
+  try %[ map -docstring %arg{1} global surround %arg{2} ": surround-add %%🐈%arg{3}🐈 %%🐈%arg{4}🐈<ret>" ]
+  try %[ map -docstring %arg{1} global surround %arg{3} ": surround-add %%🐈%arg{3}🐈 %%🐈%arg{4}🐈<ret>" ]
+  try %[ map -docstring %arg{1} global surround %arg{4} ": surround-add %%🐈%arg{3}🐈 %%🐈%arg{4}🐈<ret>" ]
+}
+
+# Enter insert mode
+define-command -override -hidden surround-enter-insert-mode -docstring 'surround: enter insert mode' %{
+  execute-keys -save-regs '' 'Z'
+  hook -always -once window ModeChange 'pop:insert:normal' %{
+    hook -always -once window ModeChange 'pop:insert:normal' %{
+      execute-keys z
+      set-register ^
+      echo
+    }
+    execute-keys -with-hooks a
+  }
+  execute-keys -with-hooks i
+}
+
+# Surround key
+define-command -override -hidden surround-key -docstring 'surround key' %{
+  on-key %{
+    surround-add %val{key} %val{key}
+  }
+}
+
+# Surround tag
+define-command -override -hidden surround-tag -docstring 'surround tag' %{
+  prompt surround-tag: %{
+    surround-add "<%val{text}>" "</%val{text}>"
+  }
+}
+
+# Surround selected text
+define-command -override -hidden surround-add -params 2 %{
+  evaluate-commands -save-regs '"' %{
+    set-register '"' %arg{1}
+    execute-keys -draft P
+    set-register '"' %arg{2}
+    execute-keys -draft p
+  }
+}
+
+define-command -override -hidden surround-add-space %{
+  surround-add ' ' ' '
+}
+
+define-command -override -hidden surround-add-line %{
+  # Extract selected text on its own line; clean whitespaces around the selection.
+  try %[ execute-keys -draft 'i<ret><esc>kgl<a-i><space>d' ]
+  try %[ execute-keys -draft 'a<ret><esc>jgl<a-i><space>d' ]
+
+  # Indent selection
+  execute-keys -draft '<a-:><a-;>K<a-:>J<a-&>'
+  execute-keys -draft '<gt>'
+}
+
+# Delete surrounding
+define-command -override -hidden surround-delete %{
+  # Tag support
+  try %{
+    execute-keys 'y<a-a>c<lt>.+?<gt>,<lt>/.+?<gt><ret>R'
+  } catch %{
+    # Delete left surrounding
+    try %{
+      execute-keys -draft '<a-:><a-;>h<a-a><space>d'
+    } catch %{
+      execute-keys -draft 'i<backspace>'
+    }
+
+    # Delete right surrounding
+    try %{
+      execute-keys -draft '<a-:>l<a-a><space>d'
+    } catch %{
+      execute-keys -draft 'a<del>'
+    }
+  }
+}
+
+# Initialization ───────────────────────────────────────────────────────────────
+
+surround-init
 
 define-command alacritty-open-new-client -params .. %{
   nop %sh{

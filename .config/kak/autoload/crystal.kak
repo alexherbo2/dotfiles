@@ -1,6 +1,18 @@
 # Crystal
 # https://crystal-lang.org
 
+# kakoune-crystal
+
+# This [Kakoune] extension provides support for the [Crystal] programming language.
+
+# [Kakoune]: https://kakoune.org
+# [Crystal]: https://crystal-lang.org
+
+## Features
+
+# - Syntax highlighting
+# - Auto-indentation
+
 # Configuration ────────────────────────────────────────────────────────────────
 
 # Word pattern

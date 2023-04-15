@@ -1060,3 +1060,4204 @@ define-command -override pipe-selections-as-jsonl -params 1.. -docstring 'pipe-s
     echo execute-keys R
   }
 }
+
+# The editor will not insert indentation automatically.
+# The editor will keep the current line's indentation.
+# The editor will keep the current line's indentation and honor language defined brackets.
+# The editor will keep the current line's indentation, honor language defined brackets and invoke special onEnterRules defined by languages.
+# The editor will keep the current line's indentation, honor language defined brackets, invoke special onEnterRules defined by languages, and honor indentationRules defined by languages.
+# Controls whether the editor should automatically adjust the indentation when users type, paste, move or indent lines.
+
+# November 2019 (version 1.41)
+# January 2022 (version 1.64)
+# window_type Compare against the window type (_NET_WM_WINDOW_TYPE). Possible values are normal, dialog, utility, toolbar, splash, menu, dropdown_menu, popup_menu, tooltip and notification.
+# New auto indentation option#
+# The setting editor.autoIndent can now take different values. This setting impacts multiple features, such as pressing Enter, pressing Tab, or when indenting and unindenting lines. You can think of the setting like a "slider" that becomes more and more opinionated:
+# "none": Pressing Enter will insert \n and nothing more.
+# "keep": Pressing Enter will keep the indentation of the current line.
+# "brackets": All of the above and special logic around language-specific brackets.
+# "advanced": All of the above and respecting language-specific rules that are defined via onEnterRules.
+# "full" (default): All of the above and respecting language-specific rules that are defined via indentationRules.
+
+# If true, the default, tab_size and translate_tabs_to_spaces will be calculated automatically when loading a file
+# Indentation Detection
+# When a file is loaded, its contents are examined, and the tab_size and translate_tabs_to_spaces settings are set for that file. The status area will report when this happens. While this generally works well, you may want to disable it. You can do that with the detect_indentation setting.
+# Indentation detection can be run manually via the detect-indentation command.
+
+# https://github.com/helix-editor/helix/blob/master/helix-core/src/indent.rs
+# https://github.com/microsoft/vscode/blob/main/src/vs/editor/contrib/indentation/browser/indentation.ts
+# https://docs.helix-editor.com/lang-support.html
+# https://code.visualstudio.com/docs/languages/overview
+# Other reference:
+# https://github.com/tpope/vim-sleuth
+
+# Indentation rules
+# Sets indentation rules for languages.
+# https://code.visualstudio.com/api/language-extensions/language-configuration-guide#indentation-rules
+# https://code.visualstudio.com/updates/v1_41#_new-auto-indentation-option
+# https://github.com/microsoft/vscode/blob/main/src/vs/editor/common/config/editorOptions.ts#:~:text=EditorAutoIndentStrategy
+# https://github.com/microsoft/vscode/blob/main/src/vs/editor/common/config/editorOptions.ts#:~:text=editor.autoIndent
+
+# Automatic Indentation Settings
+# Auto-detection
+# Kakoune analyzes your open file and determines the indentation used in the document.
+# The auto-detected indentation overrides your default indentation settings.
+# Note: Kakoune auto-detection checks for the first indentation.
+# If your file uses a different number of spaces, the indentation may not be correctly detected.
+# You may want to turn off `detect_indent_style` and explicitly set the indentation style.
+
+# Enum representing auto-indent strategy.
+# none
+# keep
+# full
+declare-option -docstring 'auto_indent' str auto_indent full
+declare-option -docstring 'Indentation rules to increase the indentation of the current line or next line' str increase_indent_pattern '[({\[]$'
+declare-option -docstring 'Indentation rules to decrease the indentation of the current line or next line' str decrease_indent_pattern '^\h*[)}\]]$'
+declare-option -docstring 'Indentation rules to ignore the indentation of the current line or next line' str ignore_indent_pattern '^\h*#'
+
+declare-option -hidden str private_increase_indent_pattern '[({\[]$'
+declare-option -hidden str private_decrease_indent_pattern '^\h*[)}\]]$'
+
+remove-hooks global indent
+hook -group indent global InsertChar '.*' indent-on-inserted-character
+
+# Increase and decrease indent with Tab.
+map -docstring 'Increase indent' global insert <tab> '<a-;><a-gt>'
+map -docstring 'Decrease indent' global insert <s-tab> '<a-;><lt>'
+map -docstring 'Decrease indent or erase character before cursor' global insert <backspace> '<a-;>: decrease-indent-or-erase-character-before-cursor<ret>'
+# map -docstring 'Decrease indent or erase character before cursor' global insert <ret> '<a-;>: enter-new-line-and-keep-indent<ret>'
+
+# hook on file open and buffer reload.
+# Implementation reference:
+# https://github.com/helix-editor/helix/blob/master/helix-view/src/document.rs#:~:text=detect_indent_and_line_ending
+# hook -group indent global BufOpenFile '.*' detect-indent-style
+# hook -group indent global BufReload '.*' detect-indent-style
+
+# Enter ⇒ Decrease indent or erase character before cursor.
+define-command -override -hidden enter-new-line-and-keep-indent %{
+  evaluate-commands -draft -itersel %{
+    execute-keys ';i<ret>'
+    # Copy previous line indent
+    execute-keys -draft 'H<a-&>'
+    # Clean previous line indent
+    try %[ execute-keys -draft 'kxs^\h+$<ret>d' ]
+  }
+}
+
+# Backspace ⇒ Decrease indent or erase character before cursor.
+define-command -override -hidden decrease-indent-or-erase-character-before-cursor %{
+  try %{
+    execute-keys -draft -itersel '<a-h><a-k>\A\h+.\z<ret>'
+    execute-keys -draft '<lt>'
+  } catch %{
+    execute-keys -draft ';i<backspace>'
+  }
+}
+
+define-command -override -hidden indent-on-inserted-character %{
+  "indent-on-inserted-character-with-auto-indent-%opt{auto_indent}"
+}
+
+define-command -override -hidden indent-handle-inserted-character -params .. %{
+  evaluate-commands -draft %{
+    # Select line begin to the rightmost inserted character.
+    execute-keys 'h<a-h><a-:>'
+    evaluate-commands -draft -itersel -verbatim -- try %arg{@}
+  }
+}
+
+define-command -override -hidden indent-on-inserted-character-with-auto-indent-none %{
+}
+
+define-command -override -hidden indent-on-inserted-character-with-auto-indent-keep %{
+  indent-handle-inserted-character %{
+    # Indentation rules when inserting a new line
+    execute-keys -draft '<a-k>\n<ret>'
+    # Copy previous line indent
+    execute-keys -draft 'L<a-&>'
+    # Clean previous line indent
+    try %[ execute-keys -draft 's^\h+$<ret>d' ]
+  }
+}
+
+define-command -override -hidden indent-on-inserted-character-with-auto-indent-full %{
+  indent-handle-inserted-character %{
+    # Indentation rules when inserting a new line
+    execute-keys -draft '<a-k>\n<ret>'
+    # Copy previous line indent
+    execute-keys -draft 'L<a-&>'
+    # Clean previous line indent
+    try %[ execute-keys -draft 's^\h+$<ret>d' ]
+
+    try %{
+      # Ignore indentation rules.
+      execute-keys -draft '<a-K>%opt{ignore_indent_pattern}<a-!><ret>'
+
+      # Increase the indentation of the next line
+      try %{
+        execute-keys -draft '<a-k>%opt{private_increase_indent_pattern}<a-!>|%opt{increase_indent_pattern}<a-!><ret>'
+        execute-keys -draft 'l<a-gt>'
+      }
+
+      # Decrease the indentation of the next line
+      # when inserting a new line in the middle of line
+      try %{
+        execute-keys -draft 'lx<a-k>%opt{private_decrease_indent_pattern}<a-!>|%opt{decrease_indent_pattern}<a-!><ret>'
+        execute-keys -draft 'l<lt>'
+      }
+    }
+  } catch %{
+    try %{
+      # Ignore indentation rules.
+      execute-keys -draft '<a-K>%opt{ignore_indent_pattern}<a-!><ret>'
+
+      # Indentation rules when inserting a character at the end of line
+      execute-keys -draft 'l<a-k>\n<ret>'
+
+      # Decrease the indentation of the current line
+      try %{
+        execute-keys -draft 'L<a-k>%opt{private_decrease_indent_pattern}<a-!>|%opt{decrease_indent_pattern}<a-!><ret>'
+        execute-keys -draft '<lt>'
+      }
+    }
+  } catch %{}
+}
+
+define-command -override detect-indent-style -docstring 'detect-indent-style' %{
+  try %{
+    evaluate-commands -draft %{
+      # Search the first indent level
+      execute-keys 'gg/^\h+<ret>'
+
+      # Tabs vs. Spaces
+      # https://youtu.be/V7PLxL8jIl8
+      try %{
+        execute-keys '<a-k>\t<ret>'
+        # Global scope
+        unset-option buffer tabstop
+        set-option buffer indentwidth 0
+      } catch %{
+        set-option buffer tabstop %val{selection_length}
+        set-option buffer indentwidth %val{selection_length}
+      }
+    }
+  }
+}
+
+# This script provides the functionality to toggle comments on lines over the selection
+# using the line and block comment tokens defined in `line_comment_token` and `block_comment_tokens` options.
+#
+# Implementation reference:
+#
+# Helix:
+#
+# - https://github.com/helix-editor/helix/blob/master/helix-term/src/keymap.rs#:~:text=toggle_comments
+# - https://github.com/helix-editor/helix/blob/master/helix-term/src/commands.rs#:~:text=toggle_comments
+# - https://github.com/helix-editor/helix/blob/master/helix-core/src/comment.rs
+#
+# Visual Studio Code:
+#
+# - https://github.com/microsoft/vscode/blob/main/src/vs/editor/contrib/comment/browser/comment.ts
+# - https://github.com/microsoft/vscode/blob/main/src/vs/editor/contrib/comment/browser/lineCommentCommand.ts
+# - https://github.com/microsoft/vscode/blob/main/src/vs/editor/contrib/comment/browser/blockCommentCommand.ts
+
+# Options
+declare-option -docstring 'Line comment token' str-list line_comment_token '//'
+declare-option -docstring 'Block comment tokens' str-list block_comment_tokens '/*' '*/'
+
+# Mappings
+map -docstring 'Toggle comments' global normal '#' ': toggle-comments<ret>'
+
+# Commands
+define-command -override toggle-comments -docstring 'Toggle comments' %{
+  try toggle-line-comments catch toggle-block-comments
+}
+
+define-command -override toggle-line-comments -docstring 'Toggle line comments' %{
+  toggle-line-comments-with-token %opt{line_comment_token}
+}
+
+define-command -override toggle-block-comments -docstring 'Toggle block comments' %{
+  toggle-block-comments-with-token %opt{block_comment_tokens}
+}
+
+define-command -override -hidden toggle-line-comments-with-token -params 1 -docstring 'Toggle line comments with the given line comment token' %{
+  evaluate-commands -draft -save-regs 'ab' %{
+    # Arguments
+    set-register a %arg{1}
+
+    # Sanitize selections before iterating.
+    execute-keys 'x'
+
+    evaluate-commands -draft -itersel %{
+      try %{
+        # Select each line, excluding indentation.
+        # Blank lines and blank comments are excluded.
+        execute-keys '<a-s><a-K>^\h*$|^\h*\Q<c-r>a\E\h*$<ret>giGl'
+
+        try %{
+          # Determines whether the given lines should be considered commented.
+          # As soon as one of the non-blank lines doesn’t have a comment, the whole block is considered uncommented.
+          execute-keys -draft '<a-K>\A\Q<c-r>a<ret>'
+
+          # Comment lines
+          # At least one line is not commented, so comment everything.
+          #
+          # Align selections to column to place comment tokens.
+          set-register b %sh(echo "$kak_selections_desc" | tr ' ' '\n' | cut -d ',' -f 1 | cut -d '.' -f 2 | sort -n | head -n 1)
+          execute-keys -draft "gh%reg{b}lhi<c-r>a<space>"
+        } catch %{
+          # Uncomment lines
+          # All lines are commented, so uncomment everything.
+          try %{
+            # Determines margin of 0 or 1 for uncommenting.
+            # If any comment token is not followed by a space, a margin of 0 is used for all lines.
+            execute-keys -draft '<a-K>\A\Q<c-r>a<space><ret>'
+
+            # Uncomment lines (keep space)
+            # At least one comment token is not followed by a space, so uncomment and keep space everywhere.
+            execute-keys -draft 's\A\Q<c-r>a<ret>d'
+          } catch %{
+            # Uncomment lines (remove space)
+            # All comment tokens are followed by a space, so uncomment and remove space everywhere.
+            execute-keys -draft 's\A\Q<c-r>a<space><ret>d'
+          }
+        }
+      }
+    }
+  }
+}
+
+define-command -override -hidden toggle-block-comments-with-token -params 2 -docstring 'Toggle block comments with the given block comment tokens' %{
+  evaluate-commands -draft -save-regs 'ab' %{
+    # Arguments
+    set-register a %arg{1}
+    set-register b %arg{2}
+
+    try %{
+      # Sanitize selections before iterating.
+      # Blank lines are excluded.
+      execute-keys 'x_'
+
+      evaluate-commands -draft -itersel %{
+        try %{
+          # Uncomment selection.
+          # Assert that the selection has been commented.
+          execute-keys -draft '<a-k>\A\Q<c-r>a\E.*\Q<c-r>b\E\z<ret>'
+          execute-keys -draft 's\A\Q<c-r>a\E\h*|\h*\Q<c-r>b\E\z<ret>d'
+        } catch %{
+          # Comment selection.
+          execute-keys -draft 'i<c-r>a<space><esc>a<space><c-r>b'
+        }
+      }
+    }
+  }
+}
+
+# [EditorConfig]: https://editorconfig.org
+# [Visual Studio Code — Language Configuration Guide]: https://code.visualstudio.com/api/language-extensions/language-configuration-guide
+# [Visual Studio Code — Basic Editing — Auto-detection]: https://code.visualstudio.com/docs/editor/codebasics#_autodetection
+# [Sublime Text — Indentation Settings]: https://sublimetext.com/docs/indentation.html
+# Here is a language configuration example that configures the editing experience for C files.
+hook -group c-configuration global BufSetOption filetype=c %{
+  set-option buffer line_comment_token '//'
+  set-option buffer block_comment_tokens '/*' '*/'
+  set-option buffer indentation_rules_increase_indent_pattern ''
+  set-option buffer indentation_rules_decrease_indent_pattern ''
+}
+
+# Git
+# https://git-scm.com
+
+# Options ──────────────────────────────────────────────────────────────────────
+
+# Faces
+set-face global GitInformation 'blue'
+set-face global GitScissors 'blue+b'
+set-face global GitModifiedFile 'yellow'
+set-face global GitNewFile 'green'
+set-face global GitDeletedFile 'red'
+set-face global GitRenamedFile 'yellow'
+
+# Generics
+set-face global DiffText 'comment'
+set-face global DiffHeader 'comment'
+set-face global DiffInserted 'green'
+set-face global DiffDeleted 'red'
+set-face global DiffChanged 'yellow'
+
+# Commands ─────────────────────────────────────────────────────────────────────
+
+# Provides basic Git integration for Kakoune.
+# All commands always uses the current buffer’s repository, so you don’t need to worry about the current working directory.
+# == Faces
+
+# - `GitInformation`
+# - `GitScissors`
+# - `GitModifiedFile`
+# - `GitNewFile`
+# - `GitDeletedFile`
+# - `GitRenamedFile`
+
+# === Generics
+
+# - `DiffText`
+# - `DiffHeader`
+# - `DiffInserted`
+# - `DiffDeleted`
+# - `DiffChanged`
+define-command -override git -params .. -docstring 'git [options] [command] [flags]: run Git' %{
+  evaluate-commands %sh{
+    git "$@" > /dev/null
+    exit_code=$?
+    if [ "$exit_code" -ne 0 ]; then
+      printf 'fail "git: `git %%arg{@}` exited with %d"' "$exit_code"
+    fi
+  }
+}
+
+# https://git-scm.com/docs/git-add
+define-command -override git-write -docstring 'git-write: save the current buffer and stage the file' %{
+  write
+  ensure_git_dir
+  nop %sh{
+    directory=$(dirname "$kak_buffile")
+    cd "$directory"
+    git add --force "$kak_buffile"
+  }
+  echo -markup '{Information}Added file{Default}'
+}
+
+# https://git-scm.com/docs/git-commit
+define-command -override git-commit -docstring 'git-commit: commit changes' %{
+  ensure_git_dir
+  edit %sh{
+    directory=$(dirname "$kak_buffile")
+    cd "$directory"
+    git -c core.editor= commit --verbose
+    git rev-parse --path-format=absolute --git-path COMMIT_EDITMSG
+  }
+  hook -always -once buffer BufWritePost '(?<git_root>.*)/\.git/COMMIT_EDITMSG' %{
+    try %{
+      git -C %val{hook_param_capture_git_root} commit --file %val{hook_param} --cleanup=strip
+      delete-buffer
+      echo -markup '{Information}Commit succeeded{Default}'
+    } catch %{
+      delete-buffer
+      echo -markup '{Error}Commit failed{Default}'
+    }
+  }
+}
+
+# https://git-scm.com/docs/git
+# https://git-scm.com/docs/git-rev-parse
+define-command -override -hidden ensure_git_dir %{
+  evaluate-commands %sh{
+    buf_dir=$(dirname "$kak_buffile")
+    buf_inside_work_tree=$(git -C "$buf_dir" rev-parse --is-inside-work-tree)
+    exit_code=$?
+    if [ "$exit_code" -ne 0 ]; then
+      echo 'fail "git: %val{buffile} not inside a Git repository"'
+    fi
+    if [ "$buf_inside_work_tree" = false ]; then
+      echo 'fail "git: %val{buffile} not inside work tree"'
+    fi
+  }
+}
+
+# Aliases ──────────────────────────────────────────────────────────────────────
+
+alias global g git
+alias global gw git-write
+alias global gc git-commit
+
+# Highlighters ─────────────────────────────────────────────────────────────────
+
+add-highlighter -override shared/git group
+
+# Commit ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# https://git-scm.com/docs/git-commit
+add-highlighter -override shared/git/commit regions
+add-highlighter -override shared/git/commit/comments region '^#' '$' group
+add-highlighter -override shared/git/commit/comments/region fill comment
+
+# Summary
+add-highlighter -override shared/git/commit/comments/branch_name regex 'On branch (.+)' 0:GitInformation 1:keyword
+add-highlighter -override shared/git/commit/comments/staged_changes regex 'Changes to be committed' 0:GitInformation
+add-highlighter -override shared/git/commit/comments/unstaged_changes regex 'Changes not staged for commit' 0:GitInformation
+add-highlighter -override shared/git/commit/comments/untracked_files regex 'Untracked files' 0:GitInformation
+
+# Changed files
+add-highlighter -override shared/git/commit/comments/modified_files regex '(modified):\h+(.+)' 1:attribute 2:GitModifiedFile
+add-highlighter -override shared/git/commit/comments/new_files regex '(new file):\h+(.+)' 1:attribute 2:GitNewFile
+add-highlighter -override shared/git/commit/comments/deleted_files regex '(deleted):\h+(.+)' 1:attribute 2:GitDeletedFile
+add-highlighter -override shared/git/commit/comments/renamed_files regex '(renamed):\h+(.+)' 1:attribute 2:GitRenamedFile
+
+# Scissors
+# https://git-scm.com/docs/git-commit#Documentation/git-commit.txt-scissors
+add-highlighter -override shared/git/commit/comments/scissors regex '# ------------------------ >8 ------------------------' 0:GitScissors
+
+# Diffs
+add-highlighter -override shared/git/commit/diffs region '^diff --git' '^(?=diff --git)' group
+add-highlighter -override shared/git/commit/diffs/information regex '^\w.+$' 0:GitInformation
+add-highlighter -override shared/git/commit/diffs/regions ref git/diff
+
+# Diff ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# https://git-scm.com/docs/git-diff
+# https://en.wikipedia.org/wiki/Diff#Unified_format
+add-highlighter -override shared/git/diff regions
+add-highlighter -override shared/git/diff/original_files region '^---' '$' fill DiffHeader
+add-highlighter -override shared/git/diff/new_files region '^\Q+++' '$' fill DiffHeader
+add-highlighter -override shared/git/diff/range_information region '^@@' '$' fill DiffHeader
+add-highlighter -override shared/git/diff/line_additions region '^\+' '$' fill DiffInserted
+add-highlighter -override shared/git/diff/line_deletions region '^-' '$' fill DiffDeleted
+add-highlighter -override shared/git/diff/contextual_lines region '^\h' '$' fill DiffText
+
+# Rebase ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# https://git-scm.com/docs/git-rebase
+add-highlighter -override shared/git/rebase regions
+add-highlighter -override shared/git/rebase/comments region '^#' '$' group
+add-highlighter -override shared/git/rebase/comments/region fill comment
+add-highlighter -override shared/git/rebase/commands region '^\w' '$' group
+add-highlighter -override shared/git/rebase/commands/region regex '^(p|pick|r|reword|e|edit|s|squash|f|fixup|x|exec|b|break|d|drop|l|label|t|reset|m|merge)\h+(\w+)\h+(.+)$' 1:keyword 2:value 3:default
+
+# Detection ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# Files
+# https://git-scm.com/docs/git-config#FILES
+remove-hooks global git-config
+hook -group git-config global BufOpenFile '.*/etc/gitconfig|.*/git/config|.*/\.gitconfig|.*/\.git/config|.*/\.git/config\.worktree' %{
+  set-option buffer filetype ini
+}
+
+# Files
+# https://git-scm.com/docs/git-commit#_files
+remove-hooks global git-commit
+hook -group git-commit global BufOpenFile '.*/\.git/COMMIT_EDITMSG' %{
+  set-option buffer filetype git-commit
+}
+
+hook -group git-commit global WinSetOption filetype=git-commit %{
+  add-highlighter -override window/git-commit ref git/commit
+}
+
+# Files
+# https://git-scm.com/docs/git-rebase
+remove-hooks global git-rebase
+hook -group git-rebase global BufOpenFile '.*/\.git/rebase-merge/git-rebase-todo' %{
+  set-option buffer filetype git-rebase
+}
+
+hook -group git-rebase global WinSetOption filetype=git-rebase %{
+  add-highlighter -override window/git-rebase ref git/rebase
+}
+# == Faces
+# Whitespace characters:
+# - `Tab` ⇒ `WhitespaceError`
+# - `Newline` ⇒ `Whitespace`
+# - `NonBreakingSpace` ⇒ `WhitespaceError`
+# - `Indent` ⇒ `Whitespace`
+# - `MixedIndent` ⇒ `WhitespaceError`
+# - `OddIndent` ⇒ `WhitespaceError`
+# Extra whitespace:
+# - `TrailingWhitespace` ⇒ `WhitespaceError`
+# - `ConsecutiveWhitespace` ⇒ `WhitespaceWarning`
+# Generic faces:
+# - `WhitespaceRuler` ⇒ `green+fu`
+# - `WhitespaceError` ⇒ `red+fc`
+# - `WhitespaceWarning` ⇒ `red+fc`
+add-highlighter global/whitespace ref whitespace
+# * Individual faces for whitespace (tabs, newlines, non-breaking-spaces) and indent.
+# * Show whitespace oddities:
+# ** Trailing whitespace (only shown when not in insert mode).
+# ** Odd and mixed indent.
+# * Show consecutive whitespace.
+# * Show limit of 80 characters (useful for horizontal lines).
+# add-highlighter global/whitespace ref whitespace
+# Refined show whitespace
+
+# Faces ────────────────────────────────────────────────────────────────────────
+
+# Whitespace characters:
+set-face global Tab WhitespaceError
+set-face global Newline Whitespace
+set-face global NonBreakingSpace WhitespaceError
+
+# Indentation rules:
+set-face global Indent Whitespace
+set-face global MixedIndent WhitespaceError
+set-face global OddIndent WhitespaceError
+
+# Extra whitespace:
+set-face global TrailingWhitespace WhitespaceError
+set-face global ConsecutiveWhitespace WhitespaceWarning
+
+# Generic faces:
+set-face global WhitespaceRuler 'green+fu'
+set-face global WhitespaceError 'red+fc'
+set-face global WhitespaceWarning 'red+fc'
+
+# Hooks ────────────────────────────────────────────────────────────────────────
+
+# Only shown when not in insert mode.
+remove-hooks global whitespace
+hook -group whitespace -always global ModeChange 'push:normal:insert' %{
+  set-face window TrailingWhitespace Whitespace
+  set-face window ConsecutiveWhitespace Whitespace
+
+  # Restore
+  hook -always -once window ModeChange 'pop:insert:normal' %{
+    unset-face window TrailingWhitespace
+    unset-face window ConsecutiveWhitespace
+  }
+}
+
+# Highlighters ─────────────────────────────────────────────────────────────────
+
+# Order matters:
+#
+# “You can think of highlighters as like a list of painting instructions.” — Screwtape
+#
+add-highlighter -override shared/whitespace group
+
+# Show whitespace (tabs, newlines, non-breaking-spaces).
+add-highlighter -override shared/whitespace/tab regex '\t+' '0:Tab'
+add-highlighter -override shared/whitespace/newline regex '\n+' '0:Newline'
+add-highlighter -override shared/whitespace/non-breaking-space regex ' +' '0:NonBreakingSpace'
+
+# Show consecutive whitespace, then paint over indent.
+add-highlighter -override shared/whitespace/consecutive-whitespace regex '\h{2,}' '0:ConsecutiveWhitespace'
+add-highlighter -override shared/whitespace/indent regex '^\h+' '0:Indent'
+
+# Show trailing whitespace.
+add-highlighter -override shared/whitespace/trailing-whitespace regex '\h+$' '0:TrailingWhitespace'
+
+# Show odd and mixed indent.
+add-highlighter -override shared/whitespace/odd-indent regex '^( {1}| {3}| {5}| {7}| {9}| {11}| {13}| {15}| {17}| {19})(?=\H)' '0:OddIndent'
+add-highlighter -override shared/whitespace/mixed-indent regex '^(\t+ | +\t)\h*' '0:MixedIndent'
+
+# Show limit of 80 characters.
+add-highlighter -override shared/whitespace/ruler regex '(?S)^.{80}$\K\n' '0:WhitespaceRuler'
+
+# Sensible
+# Enter `search` and start typing to search.
+# Press `Tab` to skim through the occurrences.
+# Show search with `show-search` or enter search mode then `Escape`.
+
+# Options ──────────────────────────────────────────────────────────────────────
+
+# Sensible scroll-off: 5 lines and 1 column.
+set-option global scrolloff 5,1
+
+add-highlighter -override global/show-matching show-matching
+add-highlighter -override global/number-lines number-lines -relative -hlcursor
+# Initialization
+# Highlighters
+
+# set-face global LineNumberSelected red
+# offscreen
+# hidden
+# MultipleSelections
+# set-face global insert green
+# set-face global selection blue
+
+# Commands ─────────────────────────────────────────────────────────────────────
+
+remove-hooks global sensible-mode
+
+hook -group sensible-mode -always global ModeChange 'push:normal:insert' %{
+  add-highlighter -override window/number-lines number-lines -hlcursor
+  set-face window PrimaryCursor 'black,white+uB'
+  set-face window PrimaryCursorEol 'black,white+uB'
+}
+
+hook -group sensible-mode -always global ModeChange 'pop:insert:normal' %{
+  add-highlighter -override window/number-lines number-lines -relative -hlcursor
+  unset-face window PrimaryCursor
+  unset-face window PrimaryCursorEol
+}
+
+# Commands ─────────────────────────────────────────────────────────────────────
+
+remove-hooks global sensible-cursor-line
+
+hook -group sensible-cursor-line -always global NormalIdle '' %{
+  # Restore _t_ (top) and _b_ (bottom) registers.
+  evaluate-commands -draft %{
+    unset-face window LineNumberCursor
+    # Multiple selections:
+    try %{
+      execute-keys -draft '<a-space>'
+      set-face window LineNumberCursor DiagnosticWarning
+    }
+    # Hidden selections above:
+    try %{
+      execute-keys -draft 'Zgt"tZb"tzGe<a-z>a<a-space>'
+      set-face window LineNumberCursor DiagnosticError
+    }
+    # Hidden selections below:
+    try %{
+      execute-keys -draft 'Zgbgll"bZe"bzGg<a-z>a<a-space>'
+      set-face window LineNumberCursor DiagnosticError
+    }
+  }
+}
+
+# Commands ─────────────────────────────────────────────────────────────────────
+
+# Commands ─────────────────────────────────────────────────────────────────────
+
+# Faces
+set-face global Search 'black,yellow'
+
+remove-hooks global show-search
+
+hook -group show-search -always global NormalKey '/|<a-/>|\?|<a-\?>' %{
+  add-highlighter window/search ref search
+  # add-highlighter -override window/wrap wrap -word -marker '↪'
+  hook -always -once window ModeChange 'pop:prompt:normal' %{
+    remove-highlighter window/search
+    # remove-highlighter window/wrap
+  }
+}
+
+hook -group show-search global RegisterModified '/' %{
+  try %{
+    add-highlighter -override shared/search regex "%reg{/}" 0:Search
+  } catch %{
+    remove-highlighter shared/search
+  }
+}
+
+# Internal variables
+declare-option -hidden range-specs selected_text_ranges
+
+set-face global Search black,yellow+fg
+set-face global SelectedText black,blue+fg
+
+define-command -override -hidden update-selected-text-ranges %{
+  # Reset ranges
+  unset-option window selected_text_ranges
+  try %{
+    evaluate-commands -draft -save-regs '^' %{
+      execute-keys '<a-k>..<ret>'
+      execute-keys '<a-K>\A\h+\z<ret>'
+      # Initialize ranges
+      set-option window selected_text_ranges %val{timestamp}
+      # Mark the main selection
+      # Mark other selections
+      evaluate-commands -draft %{
+        execute-keys '*%s<ret>'
+        evaluate-commands -itersel %{
+          set-option -add window selected_text_ranges "%val{selection_desc}|SelectedText"
+        }
+      }
+      evaluate-commands -itersel %{
+        set-option -remove window selected_text_ranges "%val{selection_desc}|SelectedText"
+      }
+    }
+  }
+}
+
+# Initialization
+add-highlighter -override global/selected-text ranges selected_text_ranges
+remove-hooks global show-selected-text
+hook -group show-selected-text -always global NormalIdle '' update-selected-text-ranges
+hook -group show-selected-text -always global InsertIdle '' update-selected-text-ranges
+
+# Initialization
+# Crystal
+# https://crystal-lang.org
+
+# kakoune-crystal
+
+# This [Kakoune] extension provides support for the [Crystal] programming language.
+
+# [Kakoune]: https://kakoune.org
+# [Crystal]: https://crystal-lang.org
+
+## Features
+
+# - Syntax highlighting
+# - Auto-indentation
+
+# Configuration ────────────────────────────────────────────────────────────────
+
+# Word pattern
+# https://code.visualstudio.com/api/language-extensions/language-configuration-guide#word-pattern
+declare-option -docstring 'Crystal word pattern' str crystal_word_pattern '\w+[?!]?'
+
+# Reference
+#
+# https://crystal-lang.org/reference/master/syntax_and_semantics/control_expressions.html
+#
+# https://crystal-lang.org/reference/master/syntax_and_semantics/if.html
+#
+# value = if some_condition
+# elsif some_other_condition
+# else
+# end
+#
+# https://crystal-lang.org/reference/master/syntax_and_semantics/unless.html
+#
+# value = unless some_condition
+# end
+#
+# https://crystal-lang.org/reference/master/syntax_and_semantics/case.html
+#
+# value = case expression
+# when value
+# end
+#
+# value = case expression
+# in value
+# end
+#
+# https://crystal-lang.org/reference/master/syntax_and_semantics/while.html
+#
+# while some_condition
+# end
+#
+# https://crystal-lang.org/reference/master/syntax_and_semantics/until.html
+#
+# until some_condition
+# end
+#
+# https://crystal-lang.org/reference/master/syntax_and_semantics/types_and_methods.html
+# https://crystal-lang.org/reference/master/syntax_and_semantics/visibility.html
+# https://crystal-lang.org/reference/master/syntax_and_semantics/virtual_and_abstract_types.html
+#
+# https://crystal-lang.org/reference/master/syntax_and_semantics/classes_and_methods.html
+#
+# class Person
+# end
+#
+# private class Person
+# end
+#
+# abstract class Person
+# end
+#
+# private abstract class Person
+# end
+#
+# def name
+# end
+#
+# private def name
+# end
+#
+# protected def name
+# end
+#
+# https://crystal-lang.org/reference/master/syntax_and_semantics/modules.html
+#
+# module JSON
+# end
+#
+# private module JSON
+# end
+#
+# https://crystal-lang.org/reference/master/syntax_and_semantics/structs.html
+#
+# struct Point
+# end
+#
+# private struct Point
+# end
+#
+# abstract struct Point
+# end
+#
+# private abstract struct Point
+# end
+#
+# https://crystal-lang.org/reference/master/syntax_and_semantics/enum.html
+#
+# enum Color
+# end
+#
+# private enum Color
+# end
+#
+# https://crystal-lang.org/reference/master/syntax_and_semantics/blocks_and_procs.html
+#
+# loop do
+# end
+#
+# https://crystal-lang.org/reference/master/syntax_and_semantics/exception_handling.html
+#
+# begin
+# rescue exception
+# ensure
+# end
+#
+# https://crystal-lang.org/reference/master/syntax_and_semantics/macros/
+#
+# macro version
+# end
+#
+# https://crystal-lang.org/reference/master/syntax_and_semantics/annotations/
+#
+# annotation Link
+# end
+#
+# https://crystal-lang.org/reference/master/syntax_and_semantics/c_bindings/
+# https://crystal-lang.org/reference/master/syntax_and_semantics/c_bindings/lib.html
+#
+# lib C
+# end
+#
+# private lib C
+# end
+
+# Detection ────────────────────────────────────────────────────────────────────
+
+# Sets Crystal filetype when opening `.cr` files.
+remove-hooks global crystal-detection
+hook -group crystal-detection global BufCreate '.+\.cr' %{
+  set-option buffer filetype crystal
+}
+
+# Enables syntax highlighting for Crystal filetype.
+remove-hooks global crystal-highlight
+hook -group crystal-highlight global WinSetOption filetype=crystal %{
+  add-highlighter -override window/crystal ref crystal
+  hook -always -once window WinSetOption 'filetype=.*' %{
+    remove-highlighter window/crystal
+  }
+}
+
+# Configures word selection and completion for Crystal filetype.
+# `static_words` option is generated with `crystal-check-news`.
+remove-hooks global crystal-config
+hook -group crystal-config global WinSetOption filetype=crystal %{
+  set-option window increase_indent_pattern '^\h*(if|elsif|else|unless|case|when|case|in|while|until|class|private\h+class|abstract\h+class|private\h+abstract\h+class|def|private\h+def|protected\h+def|module|private\h+module|struct|private\h+struct|abstract\h+struct|private\h+abstract\h+struct|enum|private\h+enum|begin|rescue|ensure|macro|annotation|lib|private\h+lib)[^;]*$|\h(do)[^;]*$|\w+\h*=\h*(if|unless|case|begin)[^;]*$'
+  set-option window decrease_indent_pattern '^\h*(elsif|else|end|when|in|rescue|ensure)$'
+  set-option window ignore_indent_pattern '^\h*#'
+  set-option window line_comment_token '#'
+  set-option buffer extra_word_chars '_' '?' '!'
+  set-option window static_words 'abort' 'abstract' 'alias' 'annotation' 'as' 'as?' 'asm' 'at_exit' 'begin' 'break' 'caller' 'case' 'class' 'class_getter' 'class_getter!' 'class_getter?' 'class_property' 'class_property!' 'class_property?' 'class_setter' 'debugger' 'def' 'def_clone' 'def_equals' 'def_equals_and_hash' 'def_hash' 'delegate' 'do' 'else' 'elsif' 'end' 'ensure' 'enum' 'exit' 'extend' 'false' 'for' 'forward_missing_to' 'fun' 'gets' 'getter' 'getter!' 'getter?' 'if' 'in' 'include' 'instance_sizeof' 'is_a?' 'lib' 'loop' 'macro' 'main' 'module' 'next' 'nil' 'nil?' 'of' 'offsetof' 'out' 'p' 'p!' 'pointerof' 'pp' 'pp!' 'print' 'printf' 'private' 'property' 'property!' 'property?' 'protected' 'puts' 'raise' 'raise_without_backtrace' 'rand' 'read_line' 'record' 'require' 'rescue' 'responds_to?' 'return' 'select' 'self' 'setter' 'sizeof' 'sleep' 'spawn' 'sprintf' 'struct' 'super' 'system' 'then' 'timeout_select_action' 'true' 'type' 'typeof' 'uninitialized' 'union' 'unless' 'until' 'verbatim' 'when' 'while' 'with' 'yield'
+  hook -always -once window WinSetOption 'filetype=.*' %{
+    unset-option window line_comment_token
+    unset-option buffer extra_word_chars
+    unset-option window static_words
+  }
+}
+
+# Indentation ──────────────────────────────────────────────────────────────────
+
+# Highlighters ─────────────────────────────────────────────────────────────────
+
+# Creates the base regions
+add-highlighter -override shared/crystal regions
+add-highlighter -override shared/crystal/code default-region group
+
+# Syntax and semantics ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# Classes
+# Comments
+# Constants
+# Entities
+# Functions/Methods
+# Keywords
+# Language Built-ins
+# Punctuation
+# Storage
+# Strings
+# Variables
+
+# Scope Naming
+# Naming conventions
+# Sublime Text
+# TextMate
+# https://docs.helix-editor.com/themes.html#syntax-highlighting
+# https://macromates.com/manual/en/language_grammars
+# https://github.com/crystal-lang-tools/vscode-crystal-lang/blob/master/syntaxes/crystal.json
+# https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide
+# https://sublimetext.com/docs/scope_naming.html
+
+# Reference
+# https://crystal-lang.org/reference/master/syntax_and_semantics/
+
+# Method definition and call ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# Reference
+# https://crystal-lang.org/reference/master/syntax_and_semantics/method_arguments.html
+
+add-highlighter -override shared/crystal/code/instance-method-definition regex "\b(def)\h+(%opt{crystal_word_pattern})\b" 1:keyword 2:function
+add-highlighter -override shared/crystal/code/class-method-definition regex "\b(def)\h+(self\.%opt{crystal_word_pattern})\b" 1:keyword 2:function
+add-highlighter -override shared/crystal/code/method-call regex "\b(%opt{crystal_word_pattern})\(" 1:function
+
+# Instance and class variables ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# Reference
+# https://crystal-lang.org/reference/master/syntax_and_semantics/methods_and_instance_variables.html
+# https://crystal-lang.org/reference/master/syntax_and_semantics/class_variables.html
+
+add-highlighter -override shared/crystal/code/instance-and-class-variables regex '@@?\w+\b' 0:variable
+
+# Keywords ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# Note:
+# Generated with `crystal-check-news`.
+add-highlighter -override shared/crystal/code/keyword regex '\binstance_sizeof\b|\buninitialized\b|\bresponds_to\?|\bannotation\b|\bprotected\b|\bpointerof\b|\bverbatim\b|\boffsetof\b|\babstract\b|\brequire\b|\bprivate\b|\binclude\b|\bunless\b|\btypeof\b|\bstruct\b|\bsizeof\b|\bselect\b|\breturn\b|\brescue\b|\bmodule\b|\bextend\b|\bensure\b|\byield\b|\bwhile\b|\buntil\b|\bunion\b|\bsuper\b|\bmacro\b|\bis_a\?|\bfalse\b|\belsif\b|\bclass\b|\bbreak\b|\bbegin\b|\balias\b|\bwith\b|\bwhen\b|\btype\b|\btrue\b|\bthen\b|\bself\b|\bnil\?|\bnext\b|\benum\b|\belse\b|\bcase\b|\bout\b|\bnil\b|\blib\b|\bfun\b|\bfor\b|\bend\b|\bdef\b|\basm\b|\bas\?|\bof\b|\bin\b|\bif\b|\bdo\b|\bas\b' 0:keyword
+
+# Built-in functions ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# Note:
+# Generated with `crystal-check-news`.
+add-highlighter -override shared/crystal/code/support.function.kernel regex '\braise_without_backtrace\b|\btimeout_select_action\b|\binstance_sizeof\b|\bread_line\b|\bpointerof\b|\boffsetof\b|\bdebugger\b|\bsprintf\b|\bat_exit\b|\btypeof\b|\bsystem\b|\bsizeof\b|\brecord\b|\bprintf\b|\bcaller\b|\bspawn\b|\bsleep\b|\braise\b|\bprint\b|\babort\b|\brand\b|\bputs\b|\bmain\b|\bloop\b|\bgets\b|\bexit\b|\bpp!|\bpp\b|\bp!|\bp\b' 0:builtin
+add-highlighter -override shared/crystal/code/support.function.object regex '\bdef_equals_and_hash\b|\bforward_missing_to\b|\bclass_property\?|\bclass_property!|\bclass_property\b|\bclass_getter\?|\bclass_getter!|\bclass_setter\b|\bclass_getter\b|\bdef_equals\b|\bproperty\?|\bproperty!|\bdef_clone\b|\bproperty\b|\bdelegate\b|\bdef_hash\b|\bgetter\?|\bgetter!|\bsetter\b|\bgetter\b' 0:builtin
+
+# Punctuation ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# punctuation.separator
+add-highlighter -override shared/crystal/code/punctuation.separator regex '\.|::' 0:meta
+
+# Operators ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# Reference
+# https://crystal-lang.org/reference/master/syntax_and_semantics/operators.html
+
+add-highlighter -override shared/crystal/code/operator regex '[!%&*+/<=>^|~-]' 0:operator
+add-highlighter -override shared/crystal/code/operator.range regex '\.\.\.?' 0:operator
+
+# Constants ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# Reference
+# https://crystal-lang.org/reference/master/syntax_and_semantics/constants.html
+
+add-highlighter -override shared/crystal/code/variable.constant regex '\b[A-Z]\w*\b' 0:value
+
+# Numbers ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# Reference
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/integers.html
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/floats.html
+
+# Examples:
+#
+# decimal number ⇒ 1_000_000
+# float number ⇒ 1_000_000.111_111
+#
+add-highlighter -override shared/crystal/code/constant.numeric.integer.decimal regex '\b\d(_?\d+)*(_[iu](8|16|32|64|128))?\b' 0:value
+add-highlighter -override shared/crystal/code/constant.numeric.float.decimal regex '\b\d(_?\d+)*\.\d(_?\d+)*(_(f32|f64))?\b' 0:value
+
+# Examples:
+#
+# binary number ⇒ 0b1101
+# octal number ⇒ 0o123
+# hexadecimal number ⇒ 0xfe012d
+#
+add-highlighter -override shared/crystal/code/constant.numeric.integer.binary regex '\b0b[0-1]+(_[iu](8|16|32|64|128))?\b' 0:value
+add-highlighter -override shared/crystal/code/constant.numeric.integer.octal regex '\b0o[0-7]+(_[iu](8|16|32|64|128))?\b' 0:value
+add-highlighter -override shared/crystal/code/constant.numeric.integer.hexadecimal regex '\b0x[0-9a-fA-F]+(_[iu](8|16|32|64|128))?\b' 0:value
+
+# Comments ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# Reference
+# https://crystal-lang.org/reference/master/syntax_and_semantics/comments.html
+
+# Note: Avoid string literals with interpolation.
+#
+# Example:
+#
+# puts "hello #{name}"
+#
+add-highlighter -override shared/crystal/comment region '#(?!\{)' '$' group
+add-highlighter -override shared/crystal/comment/fill fill comment
+
+# Documenting code ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# Reference
+# https://crystal-lang.org/reference/master/syntax_and_semantics/documenting_code.html
+
+# Example:
+#
+# A unicorn is a **legendary animal**.
+#
+# To create a unicorn:
+#
+# ```
+# unicorn = Unicorn.new
+# unicorn.speak
+# ```
+#
+# Check the number of horns with `#horns`.
+#
+add-highlighter -override shared/crystal/comment/reference regex "`[#.]?%opt{crystal_word_pattern}`" 0:mono
+add-highlighter -override shared/crystal/comment/parameter regex '\*\w+\*' 0:mono
+add-highlighter -override shared/crystal/comment/code-block regex '```(\h*\w+)?$' 0:block
+add-highlighter -override shared/crystal/comment/admonition regex '\h+([A-Z]+):\h+' 1:meta
+add-highlighter -override shared/crystal/comment/directive regex ':\w+:' 0:meta
+
+# Interpolation ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# Reference
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#interpolation
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#escaping
+
+# Defines Crystal raw string.
+#
+# Syntax:
+#
+# define-crystal-string <region-name> <face-name> [<region-switches>] <opening-pattern> <closing-pattern>
+#
+# Example:
+#
+# define-crystal-string raw-parenthesis-string string -recurse '\(' '%q\(' '\)'
+#
+# puts %q(hello world)
+#
+declare-option -hidden str-list crystal_optional_arguments
+define-command -override -hidden define-crystal-string -params 4.. %{
+  set-option global crystal_optional_arguments %arg{@}
+  set-option -remove global crystal_optional_arguments %arg{1} %arg{2}
+  add-highlighter -override "shared/crystal/%arg{1}" region %opt{crystal_optional_arguments} regions
+  add-highlighter -override "shared/crystal/%arg{1}/content" default-region group
+  add-highlighter -override "shared/crystal/%arg{1}/content/fill" fill %arg{2}
+  add-highlighter -override "shared/crystal/%arg{1}/content/escaped-character" regex '\\.' 0:meta
+  add-highlighter -override "shared/crystal/%arg{1}/content/escape-sequence" regex '\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|u\{[0-9a-fA-F]+\})' 0:meta
+}
+
+# Defines Crystal string interpolation.
+#
+# Syntax:
+#
+# define-crystal-interpolated-string <region-name> <face-name> [<region-switches>] <opening-pattern> <closing-pattern>
+#
+# Example:
+#
+# define-crystal-interpolated-string parenthesis-string string -recurse '\(' '%\(' '\)'
+#
+# name = "world"
+# puts %(hello #{name})
+#
+define-command -override -hidden define-crystal-interpolated-string -params 4.. %{
+  define-crystal-string %arg{@}
+  add-highlighter -override "shared/crystal/%arg{1}/interpolation" region -recurse '\{' '#\{' '\}' group # }
+  add-highlighter -override "shared/crystal/%arg{1}/interpolation/delimiters" regex '(?<opening>..).+(?<closing>.)' opening:meta closing:meta
+  add-highlighter -override "shared/crystal/%arg{1}/interpolation/crystal" ref crystal
+}
+
+# Characters ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# Reference
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/char.html
+
+# Examples:
+#
+# simple character ⇒ 'a'
+# single quote ⇒ '\''
+# backslash ⇒ '\\'
+#
+add-highlighter -override shared/crystal/string region "'" "(?<!\\)(\\\\)*'" regions
+add-highlighter -override shared/crystal/string/content default-region group
+add-highlighter -override shared/crystal/string/content/fill fill value
+add-highlighter -override shared/crystal/string/content/escaped-character regex '\\.' 0:meta
+add-highlighter -override shared/crystal/string/content/escape-sequence regex '\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|u\{[0-9a-fA-F]+\})' 0:meta
+# define-crystal-string string.character value "'" "(?<!\\)(\\\\)*'"
+
+# Strings ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# Reference
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html
+
+# String literal ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# Examples:
+#
+# simple string ⇒ "hello world"
+# double quote ⇒ "\""
+# backslash ⇒ "\\"
+#
+add-highlighter -override shared/crystal/string.interpolated region '"' '(?<!\\)(\\\\)*"' regions
+add-highlighter -override shared/crystal/string.interpolated/content default-region group
+add-highlighter -override shared/crystal/string.interpolated/content/fill fill string
+add-highlighter -override shared/crystal/string.interpolated/content/escaped-character ref crystal/string/content/escaped-character
+add-highlighter -override shared/crystal/string.interpolated/content/escape-sequence ref crystal/string/content/escape-sequence
+add-highlighter -override shared/crystal/string.interpolated/interpolation region -recurse '\{' '#\{' '\}' group
+add-highlighter -override shared/crystal/string.interpolated/interpolation/delimiters regex '(?<opening>..).+(?<closing>.)' opening:meta closing:meta
+add-highlighter -override shared/crystal/string.interpolated/interpolation/crystal ref crystal
+# define-crystal-interpolated-string string.quoted.double string '"' '(?<!\\)(\\\\)*"'
+
+# Percent string literals ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# Reference
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#percent-string-literals
+
+# Example:
+#
+# name = "world"
+# puts %Q(hello #{name})
+#
+add-highlighter -override shared/crystal/string.quoted.percent.parenthesis.interpolated region -recurse '\(' '%Q?\(' '\)' ref crystal/string.interpolated
+add-highlighter -override shared/crystal/string.quoted.percent.bracket.interpolated region -recurse '\[' '%Q?\[' '\]' ref crystal/string.interpolated
+add-highlighter -override shared/crystal/string.quoted.percent.brace.interpolated region -recurse '\{' '%Q?\{' '\}' ref crystal/string.interpolated
+add-highlighter -override shared/crystal/string.quoted.percent.angle.interpolated region -recurse '<' '%Q?<' '>' ref crystal/string.interpolated
+add-highlighter -override shared/crystal/string.quoted.percent.pipe.interpolated region '%Q?\|' '\|' ref crystal/string.interpolated
+
+# Raw percent string literals ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# Reference
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#percent-string-literals
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#percent-string-array-literal
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/symbol.html#percent-symbol-array-literal
+
+# Example:
+#
+# puts %q(hello world)
+#
+add-highlighter -override shared/crystal/string.quoted.percent.parenthesis region -recurse '\(' '%[qwi]\(' '\)' ref crystal/string
+add-highlighter -override shared/crystal/string.quoted.percent.bracket region -recurse '\[' '%[qwi]\[' '\]' ref crystal/string
+add-highlighter -override shared/crystal/string.quoted.percent.brace region -recurse '\{' '%[qwi]\{' '\}' ref crystal/string
+add-highlighter -override shared/crystal/string.quoted.percent.angle region -recurse '<' '%[qwi]<' '>' ref crystal/string
+add-highlighter -override shared/crystal/string.quoted.percent.pipe region '%[qwi]\|' '\|' ref crystal/string
+
+# Here document ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# Reference
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#heredoc
+
+# Example:
+#
+# <<-'EOF'
+# EOF
+#
+add-highlighter -override shared/crystal/string.unquoted.heredoc.interpolated region -match-capture '<<-(\w+)' '^\h*(\w+)$' ref crystal/string.interpolated
+add-highlighter -override shared/crystal/string.unquoted.heredoc.raw region -match-capture "<<-'(\w+)'" '^\h*(\w+)$' ref crystal/string
+
+# Symbols ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# Reference
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/symbol.html
+
+# Symbol literal ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# Example:
+#
+# :"quoted symbol"
+#
+add-highlighter -override shared/crystal/code/constant.symbol regex ":%opt{crystal_word_pattern}" 0:value
+add-highlighter -override shared/crystal/string.symbol region ':"' '(?<!\\)(\\\\)*"' ref crystal/string
+
+# Regular expressions ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# Reference
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/regex.html
+
+# Regex literal ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# Example:
+#
+# /foo/i.match("FOO")
+#
+add-highlighter -override shared/crystal/string.regexp.interpolated region '/' '(?<!\\)(\\\\)*/[imx]*' regions
+add-highlighter -override shared/crystal/string.regexp.interpolated/content default-region group
+add-highlighter -override shared/crystal/string.regexp.interpolated/content/fill fill meta
+add-highlighter -override shared/crystal/string.regexp.interpolated/content/escaped-character ref crystal/string/content/escaped-character
+add-highlighter -override shared/crystal/string.regexp.interpolated/content/escape-sequence ref crystal/string/content/escape-sequence
+add-highlighter -override shared/crystal/string.regexp.interpolated/interpolation region -recurse '\{' '#\{' '\}' group
+add-highlighter -override shared/crystal/string.regexp.interpolated/interpolation/delimiters ref crystal/string.interpolated/interpolation/delimiters
+add-highlighter -override shared/crystal/string.regexp.interpolated/interpolation/crystal ref crystal
+
+# Note: Avoid unterminated regular expression and floor division as regex.
+#
+# Examples:
+#
+# division ⇒ 1 / 2
+# floor division ⇒ 1 // 2
+#
+add-highlighter -override shared/crystal/division-as-region region ' //? ' '.\K' group
+add-highlighter -override shared/crystal/division-as-region/operator regex '//?' 0:operator
+
+# Percent regex literals ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# Example:
+#
+# %r(foo|bar)
+#
+add-highlighter -override shared/crystal/string.regexp.percent.parenthesis.interpolated region -recurse '\(' '%r\(' '\)[imx]*' ref crystal/string.regexp.interpolated
+add-highlighter -override shared/crystal/string.regexp.percent.bracket.interpolated region -recurse '\[' '%r\[' '\][imx]*' ref crystal/string.regexp.interpolated
+add-highlighter -override shared/crystal/string.regexp.percent.brace.interpolated region -recurse '\{' '%r\{' '\}[imx]*' ref crystal/string.regexp.interpolated
+add-highlighter -override shared/crystal/string.regexp.percent.angle.interpolated region -recurse '<' '%r<' '>[imx]*' ref crystal/string.regexp.interpolated
+add-highlighter -override shared/crystal/string.regexp.percent.pipe.interpolated region '%r\|' '\|[imx]*' ref crystal/string.regexp.interpolated
+
+# Command literal ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# Reference
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/command.html
+
+# Example:
+#
+# `echo foo`
+#
+add-highlighter -override shared/crystal/string.command region '`' '(?<!\\)(\\\\)*`' ref crystal/string.regexp.interpolated
+
+# Percent command literals ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# Example:
+#
+# %x(echo foo)
+#
+add-highlighter -override shared/crystal/string.command.percent.parenthesis region -recurse '\(' '%x\(' '\)' ref crystal/string.regexp.interpolated
+add-highlighter -override shared/crystal/string.command.percent.bracket region -recurse '\[' '%x\[' '\]' ref crystal/string.regexp.interpolated
+add-highlighter -override shared/crystal/string.command.percent.brace region -recurse '\{' '%x\{' '\}' ref crystal/string.regexp.interpolated
+add-highlighter -override shared/crystal/string.command.percent.angle region -recurse '<' '%x<' '>' ref crystal/string.regexp.interpolated
+add-highlighter -override shared/crystal/string.command.percent.pipe region '%x\|' '\|' ref crystal/string.regexp.interpolated
+
+# What’s new ───────────────────────────────────────────────────────────────────
+
+# Builds a ready for use `str-list` and `regex` with selections.
+#
+# Usage:
+#
+# Fetch a document, select keywords and call `crystal-build-result keywords`.
+#
+define-command -override -hidden crystal-build-result -params 1 %{
+  # Initialization
+  execute-keys -save-regs '' 'y'
+  edit -scratch
+
+  execute-keys '%<a-R>a<ret><esc>y%<a-R>%|sort -u<ret><a-s>_'
+  echo -debug crystal %arg{1} as str-list:
+  echo -debug -quoting kakoune %val{selections}
+
+  execute-keys '%|awk ''{ print length, $0 }'' | sort -n -r | cut -d " " -f 2-<ret><a-s>_'
+  execute-keys -save-regs '' '*'
+  echo -debug crystal %arg{1} as regex:
+  echo -debug -quoting kakoune %val{main_reg_slash}
+
+  # Cleanup
+  delete-buffer
+  echo 'Open the *debug* buffer to see result.'
+}
+
+define-command -override -hidden crystal-build-result-with-static-words -params 1 %{
+  crystal-build-result %arg{1}
+  set-option -add window static_words %val{selections}
+}
+
+define-command -override -hidden crystal-check-news %{
+  # Initialization
+  edit -scratch
+  set-option window static_words
+
+  # Keywords ⇒ https://github.com/crystal-lang/crystal/blob/master/src/compiler/crystal/syntax/lexer.cr
+  execute-keys '%|curl -sSL https://github.com/crystal-lang/crystal/raw/master/src/compiler/crystal/syntax/lexer.cr<ret>'
+  execute-keys '%1<s>check_ident_or_keyword\(:(%opt{crystal_word_pattern}<a-!>),\h+\w+\)<ret>Z%1<s>@token\.value\h+=\h+:(%opt{crystal_word_pattern}<a-!>)<ret><a-z>a'
+  crystal-build-result-with-static-words keywords
+
+  # Top Level Namespace
+  # https://crystal-lang.org/api/master/toplevel.html#method-summary
+  # https://crystal-lang.org/api/master/toplevel.html#macro-summary
+  execute-keys '%|curl -sSL https://crystal-lang.org/api/master/toplevel.html<ret>'
+  execute-keys '%1<s>class="entry-detail"\h+id="(%opt{crystal_word_pattern}<a-!>)[^"]*-(method|macro)"<ret>'
+  crystal-build-result-with-static-words top-level-namespace
+
+  # Object macros ⇒ https://crystal-lang.org/api/master/Object.html#macro-summary
+  execute-keys '%|curl -sSL https://crystal-lang.org/api/master/Object.html<ret>'
+  execute-keys '%1<s>class="entry-detail"\h+id="(%opt{crystal_word_pattern}<a-!>)[^"]*-(macro)"<ret>'
+  crystal-build-result-with-static-words object-macros
+
+  # Static words
+  set-register dquote %opt{static_words}
+  execute-keys '%<a-R>'
+  crystal-build-result static_words
+
+  # Cleanup
+  delete-buffer
+  echo 'Open the *debug* buffer to see result.'
+}
+# =====================================================
+# ~/.config/kak/autoload/mawww/asciidoc.kak
+# =====================================================
+# http://asciidoc.org/
+# ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+# Detection
+# ‾‾‾‾‾‾‾‾‾
+
+hook global BufCreate .+\.(a(scii)?doc|asc) %{
+    set-option buffer filetype asciidoc
+}
+
+# Initialization
+# ‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+hook -group asciidoc-highlight global WinSetOption filetype=asciidoc %{
+    require-module asciidoc
+
+    add-highlighter window/asciidoc ref asciidoc
+    hook -once -always window WinSetOption filetype=.* %{ remove-highlighter window/asciidoc }
+}
+
+provide-module asciidoc %{
+
+# Highlighters
+# ‾‾‾‾‾‾‾‾‾‾‾‾
+
+add-highlighter shared/asciidoc group
+
+# Titles and headers (multi-line style)
+add-highlighter shared/asciidoc/ regex (\A|\n\n)[^\n]+\n={2,}\h*$ 0:title
+add-highlighter shared/asciidoc/ regex (\A|\n\n)[^\n]+\n-{2,}\h*$ 0:header
+add-highlighter shared/asciidoc/ regex (\A|\n\n)[^\n]+\n~{2,}\h*$ 0:header
+add-highlighter shared/asciidoc/ regex (\A|\n\n)[^\n]+\n\^{2,}\h*$ 0:header
+
+# Titles and headerss (one-line style)
+add-highlighter shared/asciidoc/ regex (\A|\n\n)=\h+[^\n]+$ 0:title
+add-highlighter shared/asciidoc/ regex (\A|\n\n)={2,}\h+[^\n]+$ 0:header
+
+# Comments
+add-highlighter shared/asciidoc/ regex ^//(?:[^\n/][^\n]*|)$ 0:comment
+add-highlighter shared/asciidoc/ regex ^(/{4,}).*?\n(/{4,})$ 0:comment
+
+# List titles
+add-highlighter shared/asciidoc/ regex ^\.[^\h\W][^\n]*$ 0:title
+
+# Bulleted lists
+add-highlighter shared/asciidoc/ regex ^\h*(?<bullet>[-\*])\h+[^\n]+$ 0:list bullet:bullet
+add-highlighter shared/asciidoc/ regex ^\h*(?<bullet>[-\*]+)\h+[^\n]+(\n\h+[^-\*\n]*)?$ 0:list bullet:bullet
+
+# Delimited blocks
+# https://docs.asciidoctor.org/asciidoc/latest/blocks/delimited/
+add-highlighter shared/asciidoc/ regex ^(-{4,})\n[^\n\h].*?\n(-{4,})$ 0:block
+add-highlighter shared/asciidoc/ regex ^(={4,})\n[^\n\h].*?\n(={4,})$ 0:block
+add-highlighter shared/asciidoc/ regex ^(~{4,})\n[^\n\h].*?\n(~{4,})$ 0:block
+add-highlighter shared/asciidoc/ regex ^(\*{4,})\n[^\n\h].*?\n(\*{4,})$ 0:block
+
+# Monospaced text
+add-highlighter shared/asciidoc/ regex \B(?:\+[^\n]+?\+|`[^\n]+?`)\B 0:mono
+
+# Bolded text
+add-highlighter shared/asciidoc/ regex \s\*[^\n\*]+\*\B 0:+b
+add-highlighter shared/asciidoc/ regex \h\*[^\n\*]+\*\B 0:+b
+add-highlighter shared/asciidoc/ regex \*{2}(?!\h)[^\n\*]+\*{2} 0:+b
+add-highlighter shared/asciidoc/ regex \h\*{2}[^\n\*]+\*{2} 0:+b
+
+# Italicized text
+# (these are simpler since they aren't able to _also_ be bullet characters.)
+add-highlighter shared/asciidoc/ regex \b_[^\n]+?_\b 0:+i
+add-highlighter shared/asciidoc/ regex __[^\n]+?__ 0:+i
+
+# Attributes
+add-highlighter shared/asciidoc/ regex ^:(?:(?<neg>!?)[-\w]+|[-\w]+(?<neg>!?)): 0:meta neg:operator
+add-highlighter shared/asciidoc/ regex [^\\](\{[-\w]+\})[^\\]? 1:meta
+
+# Options
+add-highlighter shared/asciidoc/ regex ^\[[^\n]+\]$ 0:operator
+
+# Admonition pargraphs
+add-highlighter shared/asciidoc/ regex ^(NOTE|TIP|IMPORTANT|CAUTION|WARNING): 0:block
+add-highlighter shared/asciidoc/ regex ^\[(NOTE|TIP|IMPORTANT|CAUTION|WARNING)\]$ 0:block
+
+# Links, inline macros
+add-highlighter shared/asciidoc/ regex \b((?:https?|ftp|irc://)[^\h\[]+)\[([^\n]*)?\] 1:link 2:+i
+add-highlighter shared/asciidoc/ regex (link|mailto):([^\n]+)(?:\[([^\n]*)\]) 1:keyword 2:link 3:+i
+add-highlighter shared/asciidoc/ regex (xref):([^\n]+)(?:\[([^\n]*)\]) 1:keyword 2:meta 3:+i
+add-highlighter shared/asciidoc/ regex (<<([^\n><]+)>>) 1:link 2:meta
+
+# Commands
+# ‾‾‾‾‾‾‾‾
+
+}
+# http://w3.org/Style/CSS
+# ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+# Detection
+# ‾‾‾‾‾‾‾‾‾
+
+hook global BufCreate .*[.](css) %{
+    set-option buffer filetype css
+}
+
+# Initialization
+# ‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+hook global WinSetOption filetype=css %[
+    require-module css
+
+    hook window ModeChange pop:insert:.* -group css-trim-indent css-trim-indent
+    hook window InsertChar \n -group css-insert css-insert-on-new-line
+    hook window InsertChar \n -group css-indent css-indent-on-new-line
+    hook window InsertChar \} -group css-indent css-indent-on-closing-curly-brace
+    set-option buffer extra_word_chars '_' '-'
+    set-face global cssLogicalOperator +i@keyword
+
+    hook -once -always window WinSetOption filetype=.* %{ remove-hooks window css-.+ }
+]
+
+hook -group css-highlight global WinSetOption filetype=css %{
+    add-highlighter window/css ref css
+    hook -once -always window WinSetOption filetype=.* %{ remove-highlighter window/css }
+}
+
+
+provide-module css %[
+
+# Highlighters
+# ‾‾‾‾‾‾‾‾‾‾‾‾
+add-highlighter shared/css regions
+add-highlighter shared/css/code default-region group
+add-highlighter shared/css/attr_selector region \[ \] regions
+add-highlighter shared/css/double_string region '"'  (?<!\\)(\\\\)*" fill string
+add-highlighter shared/css/single_string region "'"  (?<!\\)(\\\\)*' fill string
+add-highlighter shared/css/comment    region /\* \*/ fill comment
+
+evaluate-commands %sh{
+  # html tags
+  # generated from the URL & <code> below
+  # includes elements that cannot be styled, which is fine.
+  # 
+  # https://developer.mozilla.org/en-US/docs/Web/HTML/Element
+  html_tags='html body address article aside footer header h1 h2 h3 h4 h5 h6 main nav section blockquote dd div dl dt figcaption figure hr li ol p pre ul a abbr b bdi bdo br cite code data dfn em i kbd mark q rp rt ruby s samp small span strong sub sup time u var wbr area audio img map track video embed iframe object param picture portal source canvas noscript script del ins caption col colgroup table tbody td tfoot th thead tr button datalist fieldset form input label legend meter optgroup option output progress select textarea details dialog menu summary slot template acronym applet basefont bgsound big blink center content dir font frame frameset hgroup image keygen marquee menuitem nobr noembed noframes plaintext rb rtc shadow spacer strike tt xmp'
+
+  # Units
+  # ‾‾‾‾‾
+  # generated from the URL & <code> below
+  # includes #rgb, #rrggbb, #rrggbbaa as color values {3,8}
+  # 
+  # https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Values_and_Units
+  units='% cap ch cm deg dpcm dpi dppx em ex grad Hz ic in kHz lh mm ms pc pt px Q rad rem rlh s turn vb vh vi vmax vmin vw x'
+
+  logical_ops='and not only from to'
+  keywords='!important auto inherit initial unset none'
+  media_types='all print screen speech'
+
+  # easing_re='linear|ease(-(in-out|in|out))?|step-(start|end)'
+
+  # combinators='+ > ~ ||'
+  # attribute_op='= ~= |= ^= $= *='
+
+  join() { eval set -- $1; IFS="|"; echo "$*"; }
+
+  # Selectors
+  # ‾‾‾‾‾‾‾‾‾
+  # universal: *, ns|*, *|*, |*
+  # class/id: .class, #id
+  # type: element
+  # attr: [attr=val]
+
+  # order below matters
+  printf %s "
+  add-highlighter shared/css/code/tag_selectors regex \b($(join "${html_tags}"))((:[a-z:])|[\h.#,]) 1:keyword
+
+  add-highlighter shared/css/code/functional_notation regex ([a-zA-Z0-9-_]+[a-zA-Z0-9])\( 1:keyword
+
+  add-highlighter shared/css/code/logical_operators regex (\b($(join "${logical_ops}"))\b|$(join "${keywords}")) 1:cssLogicalOperator
+
+  add-highlighter shared/css/code/media_types regex \b($(join "${media_types}"))\b 1:+i
+
+  # (after functional notation as they may contain paranthesis)
+  add-highlighter shared/css/code/pseudo regex (:{1,2})([a-z-]+) 0:attribute
+
+  add-highlighter shared/css/code/at_rules regex @[a-z-]+ 0:function 
+
+  add-highlighter shared/css/code/css_property regex ([A-Za-z][A-Za-z0-9_-]*)\h*:\h 1:operator 1:+a
+
+  add-highlighter shared/css/code/selectors regex (\*|[*]?[.][A-Za-z][A-Za-z0-9_-]+) 0:type
+  add-highlighter shared/css/code/selectors_id regex (\*|[*]?[#][A-Za-z][A-Za-z0-9_-]+) 0:type 0:+i
+
+  add-highlighter shared/css/code/hex_values regex (#[0-9A-Fa-f]{3,8})\b 0:value 0:+a
+  add-highlighter shared/css/code/units regex \b(\d*\.)?\d+($(join "${units}"))?\b 0:value 0:+a
+  "
+}
+
+# Attribute Selectors
+add-highlighter shared/css/attr_selector/base default-region group
+add-highlighter shared/css/attr_selector/base/ regex ([a-zA-Z0-9-]+) 1:attribute
+add-highlighter shared/css/attr_selector/base/ regex \h(i|s) 1:type
+add-highlighter shared/css/attr_selector/double_string region '"'  (?<!\\)(\\\\)*" fill string
+add-highlighter shared/css/attr_selector/single_string region "'"  (?<!\\)(\\\\)*' fill string
+
+# Commands
+# ‾‾‾‾‾‾‾‾
+
+define-command -hidden css-trim-indent %{
+    # remove trailing white spaces
+    try %{ execute-keys -draft -itersel x s \h+$ <ret> d }
+}
+
+define-command -hidden css-indent-on-new-line %[
+    evaluate-commands -draft -itersel %[
+        execute-keys <semicolon>
+        try %<
+            # if previous line is part of a comment, do nothing
+            execute-keys -draft <a-?>/\*<ret> <a-K>^\h*[^/*\h]<ret>
+        > catch %<
+            # else if previous line closed a paren (possibly followed by words and a comment),
+            # copy indent of the opening paren line
+            execute-keys -draft kx 1s(\))(\h+\w+)*\h*(\;\h*)?(?://[^\n]+)?\n\z<ret> m<a-semicolon>J <a-S> 1<a-&>
+        > catch %<
+            # else indent new lines with the same level as the previous one
+            execute-keys -draft K <a-&>
+        >
+        # filter previous line
+        try %< execute-keys -draft k x <a-k>^\h+$<ret> Hd >
+        # indent after lines ending with with {
+        try %[ execute-keys -draft k x <a-k> \{$ <ret> j <a-gt> ]
+        # deindent closing brace when after cursor
+        try %[ execute-keys -draft x <a-k> ^\h*\} <ret> gh / \} <ret> m <a-S> 1<a-&> ]
+    ]
+]
+
+define-command -hidden css-insert-on-new-line %[
+    evaluate-commands -draft -itersel %<
+    execute-keys <semicolon>
+    try %[
+        # if the previous line isn't within a comment scope, break
+        execute-keys -draft kx <a-k>^(\h*/\*|\h+\*(?!/))<ret>
+
+        # find comment opening, validate it was not closed, and check its using star prefixes
+        execute-keys -draft <a-?>/\*<ret><a-H> <a-K>\*/<ret> <a-k>\A\h*/\*([^\n]*\n\h*\*)*[^\n]*\n\h*.\z<ret>
+
+        try %[
+            # if the previous line is opening the comment, insert star preceeded by space
+            execute-keys -draft kx<a-k>^\h*/\*<ret>
+            execute-keys -draft i*<space><esc>
+        ] catch %[
+           try %[
+                # if the next line is a comment line insert a star
+                execute-keys -draft jx<a-k>^\h+\*<ret>
+                execute-keys -draft i*<space><esc>
+            ] catch %[
+                try %[
+                    # if the previous line is an empty comment line, close the comment scope
+                    execute-keys -draft kx<a-k>^\h+\*\h+$<ret> x1s\*(\h*)<ret>c/<esc>
+                ] catch %[
+                    # if the previous line is a non-empty comment line, add a star
+                    execute-keys -draft i*<space><esc>
+                ]
+            ]
+        ]
+
+        # trim trailing whitespace on the previous line
+        try %[ execute-keys -draft s\h+$<ret> d ]
+        # align the new star with the previous one
+        execute-keys Kx1s^[^*]*(\*)<ret>&
+    ]
+    >
+]
+
+define-command -hidden css-indent-on-closing-curly-brace %[
+    evaluate-commands -draft -itersel %[
+        # align to opening curly brace when alone on a line
+        try %[ execute-keys -draft <a-h> <a-k> ^\h+\}$ <ret> m s \A|.\z <ret> 1<a-&> ]
+    ]
+]
+
+]
+hook global BufCreate .*\.(diff|patch) %{
+    set-option buffer filetype diff
+}
+
+hook global WinSetOption filetype=diff %{
+    require-module diff
+    map buffer normal <ret> :diff-jump<ret>
+}
+
+hook -group diff-highlight global WinSetOption filetype=diff %{
+    add-highlighter window/diff ref diff
+    hook -once -always window WinSetOption filetype=.* %{ remove-highlighter window/diff }
+}
+
+provide-module diff %§
+
+add-highlighter shared/diff group
+add-highlighter shared/diff/ regex "^\+[^\n]*\n" 0:green,default
+add-highlighter shared/diff/ regex "^-[^\n]*\n" 0:red,default
+add-highlighter shared/diff/ regex "^@@[^\n]*@@" 0:cyan,default
+# If any trailing whitespace was introduced in diff, show it with red background
+add-highlighter shared/diff/ regex "^\+[^\n]*?(\h+)\n" 1:default,red
+
+define-command diff-jump -params .. -docstring %{
+        diff-jump [<switches>] [<directory>]: edit the diff's source file at the cursor position.
+        Paths are resolved relative to <directory>, or the current working directory if unspecified.
+
+        Switches:
+            -       jump to the old file instead of the new file
+            -<num> strip <num> leading directory components, like -p<num> in patch(1). Defaults to 1 if there is a 'diff' line (as printed by 'diff -r'), or 0 otherwise.
+    } %{
+    evaluate-commands -draft -save-regs ac| %{
+        # Save the column because we will move the cursor.
+        set-register c %val{cursor_column}
+        # If there is a "diff" line, we don't need to look further back.
+        try %{
+            execute-keys %{<a-l><semicolon><a-?>^(?:> )*diff\b<ret>x}
+        } catch %{
+            # A single file diff won't have a diff line. Start parsing from
+            # the buffer start, so we can tell if +++/--- lines are headers
+            # or content.
+            execute-keys Gk
+        }
+        set-register a %arg{@}
+        set-register | %{
+            [ -n "$kak_reg_a" ] && eval set -- $kak_quoted_reg_a
+            cmd=$(column=$kak_reg_c perl -we '
+                sub quote {
+                    $SQ = "'\''";
+                    $token = shift;
+                    $token =~ s/$SQ/$SQ$SQ/g;
+                    return "$SQ$token$SQ";
+                }
+                sub fail {
+                    $reason = shift;
+                    print "fail " . quote("diff-jump: $reason");
+                    exit;
+                }
+                $version = "+", $other_version = "-";
+                $strip = undef;
+                $directory = $ENV{PWD};
+                $seen_ddash = 0;
+                foreach (@ARGV) {
+                    if ($seen_ddash or !m{^-}) {
+                        $directory = $_;
+                    } elsif ($_ eq "-") {
+                        $version = "-", $other_version = "+";
+                    } elsif (m{^-(\d+)$}) {
+                        $strip = $1;
+                    } elsif ($_ eq "--") {
+                        $seen_ddash = 1;
+                    } else {
+                        fail "unknown option: $_";
+                    }
+                }
+                $have_diff_line = 0;
+                $state = "header";
+                while (<STDIN>) {
+                    s/^(> )*//g;
+                    $last_line = $_;
+                    if (m{^diff\b}) {
+                        $state = "header";
+                        $have_diff_line = 1;
+                        if (m{^diff -\S* (\S+) (\S+)$}) {
+                            $fallback_file = $version eq "+" ? $2 : $1;
+                        }
+                        next;
+                    }
+                    if ($state eq "header") {
+                        if (m{^[$version]{3} ([^\t\n]+)}) {
+                            $file = $1;
+                            next;
+                        }
+                        if (m{^[$other_version]{3} ([^\t\n]+)}) {
+                            $fallback_file = $1;
+                            next;
+                        }
+                    }
+                    if (m{^@@ -(\d+)(?:,\d+)? \+(\d+)(?:,\d+)? @@}) {
+                        $state = "contents";
+                        $line = ($version eq "+" ? $2 : $1) - 1;
+                    } elsif (m{^[ $version]}) {
+                        $line++ if defined $line;
+                    }
+                }
+                if (not defined $file) {
+                    $file = $fallback_file;
+                }
+                if (not defined $file) {
+                    fail "missing diff header";
+                }
+                if (not defined $strip) {
+                    # A "diff -r" or "git diff" adds "diff" lines to
+                    # the output.  If no such line is present, we have
+                    # a plain diff between files (not directories), so
+                    # there should be no need to strip the directory.
+                    $strip = $have_diff_line ? 1 : 0;
+                }
+                if ($file !~ m{^/}) {
+                    $file =~ s,^([^/]+/+){$strip},, or fail "directory prefix underflow";
+                    $file = "$directory/$file";
+                }
+
+                if (defined $line) {
+                    $column = $ENV{column} - 1; # Account for [ +-] diff prefix.
+                    # If the cursor was on a hunk header, go to the section header if possible.
+                    if ($last_line =~ m{^(@@ -\d+(?:,\d+)? \+\d+(?:,\d+) @@ )([^\n]*)}) {
+                        $hunk_header_prefix = $1;
+                        $hunk_header_from_userdiff = $2;
+                        open FILE, "<", $file or fail "failed to open file: $!: $file";
+                        @lines = <FILE>;
+                        for (my $i = $line - 1; $i >= 0 && $i < scalar @lines; $i--) {
+                            if ($lines[$i] !~ m{\Q$hunk_header_from_userdiff}) {
+                                next;
+                            }
+                            $line = $i + 1;
+                            # Re-add 1 because the @@ line does not have a [ +-] diff prefix.
+                            $column = $column + 1 - length $hunk_header_prefix;
+                            last;
+                        }
+                    }
+                }
+
+                printf "edit -existing -- %s $line $column", quote($file);
+            ' -- "$@")
+            echo "set-register c $cmd" >"$kak_command_fifo"
+        }
+        execute-keys <a-|><ret>
+        evaluate-commands -client %val{client} %{
+            evaluate-commands -try-client %opt{jumpclient} %{
+                %reg{c}
+            }
+        }
+    }
+}
+complete-command diff-jump file
+
+§
+
+define-command \
+    -docstring %{diff-select-file: Select surrounding patch file} \
+    -params 0 \
+    diff-select-file %{
+                evaluate-commands -itersel -save-regs 'ose/' %{
+        try %{
+            execute-keys '"oZgl<a-?>^diff <ret>;"sZ' 'Ge"eZ'
+            try %{ execute-keys '"sz?\n(?=diff )<ret>"e<a-Z><lt>' }
+            execute-keys '"ez'
+        } catch %{
+            execute-keys '"oz'
+            fail 'Not in a diff file'
+        }
+    }
+}
+
+define-command \
+    -docstring %{diff-select-hunk: Select surrounding patch hunk} \
+    -params 0 \
+    diff-select-hunk %{
+    evaluate-commands -itersel -save-regs 'ose/' %{
+        try %{
+            execute-keys '"oZgl<a-?>^@@ <ret>;"sZ' 'Ge"eZ'
+            try %{ execute-keys '"sz?\n(?=diff )<ret>"e<a-Z><lt>' }
+            try %{ execute-keys '"sz?\n(?=@@ )<ret>"e<a-Z><lt>' }
+            execute-keys '"ez'
+        } catch %{
+            execute-keys '"oz'
+            fail 'Not in a diff hunk'
+        }
+    }
+}
+declare-option -docstring "name of the client in which documentation is to be displayed" \
+    str docsclient
+
+declare-option -hidden range-specs doc_render_ranges
+declare-option -hidden range-specs doc_links
+declare-option -hidden range-specs doc_anchors
+
+define-command -hidden -params 4 doc-render-regex %{
+    evaluate-commands -draft %{ try %{
+        execute-keys <percent> s %arg{1} <ret>
+        execute-keys -draft s %arg{2} <ret> d
+        execute-keys "%arg{3}"
+        evaluate-commands %sh{
+            face="$4"
+            eval "set -- $kak_quoted_selections_desc"
+            ranges=""
+            for desc in "$@"; do ranges="$ranges '$desc|$face'"; done
+            echo "update-option buffer doc_render_ranges"
+            echo "set-option -add buffer doc_render_ranges $ranges"
+        }
+    } }
+}
+
+define-command -hidden doc-parse-links %{
+    evaluate-commands -draft %{ try %{
+        execute-keys <percent> s <lt><lt>(.*?),.*?<gt><gt> <ret>
+        execute-keys -draft s <lt><lt>.*,|<gt><gt> <ret> d
+        execute-keys H
+        set-option buffer doc_links %val{timestamp}
+        update-option buffer doc_render_ranges
+        evaluate-commands -itersel %{
+            set-option -add buffer doc_links "%val{selection_desc}|%reg{1}"
+            set-option -add buffer doc_render_ranges "%val{selection_desc}|default+u"
+        }
+    } }
+}
+
+define-command -hidden doc-parse-anchors %{
+    evaluate-commands -draft %{ try %{
+        set-option buffer doc_anchors %val{timestamp}
+        # Find sections as add them as imlicit anchors
+        execute-keys <percent> s ^={2,}\h+([^\n]+)$ <ret>
+        evaluate-commands -itersel %{
+            set-option -add buffer doc_anchors "%val{selection_desc}|%sh{printf '%s' ""$kak_main_reg_1"" | tr '[A-Z ]' '[a-z-]'}"
+        }
+
+        # Parse explicit anchors and remove their text
+        execute-keys <percent> s \[\[(.*?)\]\]\s* <ret>
+        evaluate-commands -itersel %{
+            set-option -add buffer doc_anchors "%val{selection_desc}|%reg{1}"
+        }
+        execute-keys d
+        update-option buffer doc_anchors
+    } }
+}
+
+define-command -hidden doc-jump-to-anchor -params 1 %{
+    update-option buffer doc_anchors
+    evaluate-commands %sh{
+        anchor="$1"
+        eval "set -- $kak_quoted_opt_doc_anchors"
+
+        shift
+        for range in "$@"; do
+            if [ "${range#*|}" = "$anchor" ]; then
+                printf '%s\n'  "select '${range%|*}'; execute-keys vv"
+                exit
+            fi
+        done
+        printf "fail No such anchor '%s'\n" "${anchor}"
+    }
+}
+
+define-command -hidden doc-follow-link %{
+    update-option buffer doc_links
+    evaluate-commands %sh{
+        eval "set -- $kak_quoted_opt_doc_links"
+        for link in "$@"; do
+            printf '%s\n' "$link"
+        done | awk -v FS='[.,|#]' '
+            BEGIN {
+                l=ENVIRON["kak_cursor_line"];
+                c=ENVIRON["kak_cursor_column"];
+            }
+            l >= $1 && c >= $2 && l <= $3 && c <= $4 {
+                if (NF == 6) {
+                    print "doc " $5
+                    if ($6 != "") {
+                        print "doc-jump-to-anchor %{" $6 "}"
+                    }
+                } else {
+                    print "doc-jump-to-anchor %{" $5 "}"
+                }
+                exit
+            }
+        '
+    }
+}
+
+define-command -params 1 -hidden doc-render %{
+    edit! -scratch "*doc-%sh{basename $1 .asciidoc}*"
+    execute-keys "!cat %arg{1}<ret>gg"
+
+    doc-parse-anchors
+
+    # Join paragraphs together
+    try %{
+        execute-keys -draft '%S\n{2,}|(?<lt>=\+)\n|^[^\n]+::\n|^\h*[*-]\h+<ret>' \
+            <a-K>^\h*-{2,}(\n|\z)<ret> S\n\z<ret> <a-k>\n<ret> <a-j>
+    }
+
+    # Remove some line end markers
+    try %{ execute-keys -draft <percent> s \h*(\+|:{2,})$ <ret> d }
+
+    # Setup the doc_render_ranges option
+    set-option buffer doc_render_ranges %val{timestamp}
+    doc-render-regex \B(?<!\\)\*(?=\S)[^\n]+?(?<=\S)(?<!\\)\*\B \A|.\z 'H' default+b
+    doc-render-regex \b(?<!\\)_(?=\S)[^\n]+?(?<=\S)(?<!\\)_\b \A|.\z 'H' default+i
+    doc-render-regex \B(?<!\\)`(?=\S)[^\n]+?(?<=\S)`\B \A|.\z 'H' mono
+    doc-render-regex ^=\h+[^\n]+ ^=\h+ '~' title
+    doc-render-regex ^={2,}\h+[^\n]+ ^={2,}\h+ '' header
+    doc-render-regex ^\h*-{2,}\n\h*.*?^\h*-{2,}\n ^\h*-{2,}\n '' block
+
+    doc-parse-links
+
+    # Remove escaping of * and `
+    try %{ execute-keys -draft <percent> s \\((?=\*)|(?=`)) <ret> d }
+    # Go to beginning of file
+    execute-keys 'gg'
+
+    set-option buffer readonly true
+    add-highlighter buffer/ ranges doc_render_ranges
+    add-highlighter buffer/ wrap -word -indent
+    map buffer normal <ret> :doc-follow-link<ret>
+}
+
+define-command doc -params 0..2 -menu -docstring %{
+        doc <topic> [<keyword>]: open a buffer containing documentation about a given topic
+        An optional keyword argument can be passed to the function, which will be automatically selected in the documentation
+
+        See `:doc doc` for details.
+    } %{
+    evaluate-commands %sh{
+        topic="doc"
+        if [ $# -ge 1 ]; then
+            topic="$1"
+        fi
+        page=$(
+            find -L \
+                "${kak_config}/autoload/" \
+                "${kak_runtime}/doc/" \
+                "${kak_runtime}/rc/" \
+                -type f -name "$topic.asciidoc" 2>/dev/null |
+                head -1
+        )
+        if [ -f "${page}" ]; then
+            jump_cmd=""
+            if [ $# -eq 2 ]; then
+                jump_cmd="doc-jump-to-anchor '$2'"
+            fi
+            printf %s\\n "evaluate-commands -try-client %opt{docsclient} %{ doc-render ${page}; ${jump_cmd} }"
+        else
+            printf 'fail No such doc file: %s\n' "$topic.asciidoc"
+        fi
+    }
+}
+
+complete-command doc shell-script-candidates %{
+    case "$kak_token_to_complete" in
+        0)
+            find -L \
+                "${kak_config}/autoload/" \
+                "${kak_runtime}/doc/" \
+                "${kak_runtime}/rc/" \
+                -type f -name "*.asciidoc" 2>/dev/null |
+                sed 's,.*/,,; s/\.[^.]*$//';;
+        1)
+            page=$(
+                find -L \
+                    "${kak_config}/autoload/" \
+                    "${kak_runtime}/doc/" \
+                    "${kak_runtime}/rc/" \
+                    -type f -name "$1.asciidoc" 2>/dev/null |
+                    head -1
+            )
+            if [ -f "${page}" ]; then
+                awk '
+                    /^==+ +/ { sub(/^==+ +/, ""); print }
+                    /^\[\[[^\]]+\]\]/ { sub(/^\[\[/, ""); sub(/\]\].*/, ""); print }
+                ' < $page | tr '[A-Z ]' '[a-z-]'
+            fi;;
+    esac
+}
+
+alias global help doc
+hook global BufCreate .*(COMMIT_EDITMSG|MERGE_MSG) %{
+    set-option buffer filetype git-commit
+}
+
+hook global BufCreate .*/NOTES_EDITMSG %{
+    set-option buffer filetype git-notes
+}
+
+hook global BufCreate .*(\.git(config|modules)|git/config) %{
+    set-option buffer filetype ini
+}
+
+hook global BufCreate .*\.gitignore %{
+    set-option buffer filetype git-ignore
+}
+
+hook global BufCreate .*git-rebase-todo %{
+    set-option buffer filetype git-rebase
+}
+
+hook global WinSetOption filetype=git-(commit|ignore|notes|rebase) %{
+    require-module "git-%val{hook_param_capture_1}"
+}
+
+hook -group git-commit-highlight global WinSetOption filetype=git-commit %{
+    add-highlighter window/git-commit ref git-commit
+    hook -once -always window WinSetOption filetype=.* %{ remove-highlighter window/git-commit }
+}
+
+hook -group git-ignore-highlight global WinSetOption filetype=git-ignore %{
+    add-highlighter window/git-ignore ref git-ignore
+    hook -once -always window WinSetOption filetype=.* %{ remove-highlighter window/git-ignore }
+}
+
+hook -group git-notes-highlight global WinSetOption filetype=git-notes %{
+    add-highlighter window/git-notes ref git-notes
+    hook -once -always window WinSetOption filetype=.* %{ remove-highlighter window/git-notes }
+}
+
+hook -group git-rebase-highlight global WinSetOption filetype=git-rebase %{
+    add-highlighter window/git-rebase ref git-rebase
+    hook -once -always window WinSetOption filetype=.* %{ remove-highlighter window/git-rebase }
+}
+
+provide-module git-commit %{
+require-module diff
+add-highlighter shared/git-commit regions
+add-highlighter shared/git-commit/diff region '^diff --git' '^(?=diff --git)' ref diff # highlight potential diffs from the -v option
+add-highlighter shared/git-commit/comments region ^# $ group
+add-highlighter shared/git-commit/comments/ fill comment
+add-highlighter shared/git-commit/comments/ regex "\b(?:(modified)|(deleted)|(new file)|(renamed|copied)):([^\n]*)$" 1:yellow 2:red 3:green 4:blue 5:magenta
+}
+
+provide-module git-ignore %{
+add-highlighter shared/git-ignore group
+add-highlighter shared/git-ignore/glob regex '(?<!\\)(?:\\\\)*\K(\*\*?|\?|\[.*?(?<!\\)(?:\\\\)*\])' 0:operator
+add-highlighter shared/git-ignore/negate regex '^!' 0:operator
+add-highlighter shared/git-ignore/comments regex '^#.*?$' 0:comment
+}
+
+provide-module git-notes %{
+add-highlighter shared/git-notes regex ^#[^\n]*$ 0:comment
+}
+
+provide-module git-rebase %{
+add-highlighter shared/git-rebase group
+add-highlighter shared/git-rebase/ regex "^\h*#[^\n]*\n" 0:comment
+add-highlighter shared/git-rebase/ regex "^(?:(pick|p)|(edit|reword|squash|fixup|exec|break|drop|label|reset|merge|[ersfxbdltm])) (\w+)" 1:keyword 2:value 3:meta
+}
+# http://w3.org/html
+# ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+# Detection
+# ‾‾‾‾‾‾‾‾‾
+
+hook global BufCreate .*\.html %{
+    set-option buffer filetype html
+}
+
+hook global BufCreate .*\.xml %{
+    set-option buffer filetype xml
+}
+
+# Initialization
+# ‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+hook global WinSetOption filetype=(html|xml) %{
+    require-module html
+
+    hook window ModeChange pop:insert:.* -group "%val{hook_param_capture_1}-trim-indent"  html-trim-indent
+    hook window InsertChar '>' -group "%val{hook_param_capture_1}-indent" html-indent-on-greater-than
+    hook window InsertChar \n -group "%val{hook_param_capture_1}-indent" html-indent-on-new-line
+
+    hook -once -always window WinSetOption "filetype=.*" "
+        remove-hooks window ""%val{hook_param_capture_1}-.+""
+    "
+}
+
+hook -group html-highlight global WinSetOption filetype=(html|xml) %{
+    add-highlighter "window/%val{hook_param_capture_1}" ref html
+    hook -once -always window WinSetOption "filetype=.*" "
+        remove-highlighter ""window/%val{hook_param_capture_1}""
+    "
+}
+
+
+provide-module html %[
+
+try %{
+    require-module css
+    require-module javascript
+}
+
+# Highlighters
+# ‾‾‾‾‾‾‾‾‾‾‾‾
+
+add-highlighter shared/html regions
+add-highlighter shared/html/comment region <!--     -->                  fill comment
+add-highlighter shared/html/tag     region <          >                  regions
+add-highlighter shared/html/style   region <style\b.*?>\K  (?=</style>)  ref css
+add-highlighter shared/html/script  region <script\b.*?>\K (?=</script>) ref javascript
+
+add-highlighter shared/html/tag/base default-region group
+add-highlighter shared/html/tag/ region '"' (?<!\\)(\\\\)*"      fill string
+add-highlighter shared/html/tag/ region "'" "'"                  fill string
+
+add-highlighter shared/html/tag/base/ regex \b([a-zA-Z0-9_-]+)=? 1:attribute
+add-highlighter shared/html/tag/base/ regex </?(\w+) 1:keyword
+add-highlighter shared/html/tag/base/ regex <(!DOCTYPE(\h+\w+)+) 1:meta
+
+# Commands
+# ‾‾‾‾‾‾‾‾
+
+define-command -hidden html-trim-indent %{
+    # remove trailing white spaces
+    try %{ execute-keys -draft -itersel x s \h+$ <ret> d }
+}
+
+define-command -hidden html-indent-on-greater-than %[
+    evaluate-commands -draft -itersel %[
+        # align closing tag to opening when alone on a line
+        try %[ execute-keys -draft , <a-h> s ^\h+<lt>/(\w+)<gt>$ <ret> {c<lt><c-r>1,<lt>/<c-r>1<gt> <ret> s \A|.\z <ret> 1<a-&> ]
+    ]
+]
+
+define-command -hidden html-indent-on-new-line %{
+    evaluate-commands -draft -itersel %{
+        # preserve previous line indent
+        try %{ execute-keys -draft <semicolon> K <a-&> }
+        # filter previous line
+        try %{ execute-keys -draft k : html-trim-indent <ret> }
+        # indent after lines ending with opening tag except when it starts with a closing tag
+        try %{ execute-keys -draft k x <a-k> <lt>(?!area)(?!base)(?!br)(?!col)(?!command)(?!embed)(?!hr)(?!img)(?!input)(?!keygen)(?!link)(?!menuitem)(?!meta)(?!param)(?!source)(?!track)(?!wbr)(?!/)(?!>)[a-zA-Z0-9_-]+[^>]*?>$ <ret>jx<a-K>^\s*<lt>/<ret><a-gt> } }
+}
+
+]
+hook global BufCreate .+\.ini %{
+    set-option buffer filetype ini
+}
+
+hook global WinSetOption filetype=ini %{
+    require-module ini
+}
+
+hook -group ini-highlight global WinSetOption filetype=ini %{
+    add-highlighter window/ini ref ini
+    hook -once -always window WinSetOption filetype=.* %{ remove-highlighter window/ini }
+}
+
+
+provide-module ini %{
+
+add-highlighter shared/ini regions
+add-highlighter shared/ini/code default-region group
+add-highlighter shared/ini/comment region '(^|\h)\K[#;]' $ fill comment
+
+add-highlighter shared/ini/code/ regex "(?S)^\h*(\[.+?\])\h*$" 1:title
+add-highlighter shared/ini/code/ regex "^\h*([^\[][^=\n]*)=([^\n]*)" 1:variable 2:value
+
+}
+# Detection
+# ‾‾‾‾‾‾‾‾‾
+
+hook global BufCreate .*[.][cm]?(js)x? %{
+    set-option buffer filetype javascript
+}
+
+hook global BufCreate .*[.][cm]?(ts)x? %{
+    set-option buffer filetype typescript
+}
+
+# Initialization
+# ‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+hook global WinSetOption filetype=(javascript|typescript) %{
+    require-module javascript
+
+    hook window ModeChange pop:insert:.* -group "%val{hook_param_capture_1}-trim-indent" javascript-trim-indent
+    hook window InsertChar .* -group "%val{hook_param_capture_1}-indent" javascript-indent-on-char
+    hook window InsertChar \n -group "%val{hook_param_capture_1}-insert" javascript-insert-on-new-line
+    hook window InsertChar \n -group "%val{hook_param_capture_1}-indent" javascript-indent-on-new-line
+
+    hook -once -always window WinSetOption filetype=.* "
+        remove-hooks window %val{hook_param_capture_1}-.+
+    "
+}
+
+hook -group javascript-highlight global WinSetOption filetype=javascript %{
+    add-highlighter window/javascript ref javascript
+    hook -once -always window WinSetOption filetype=.* %{ remove-highlighter window/javascript }
+}
+
+hook -group typescript-highlight global WinSetOption filetype=typescript %{
+    add-highlighter window/typescript ref typescript
+    hook -once -always window WinSetOption filetype=.* %{ remove-highlighter window/typescript }
+}
+
+
+provide-module javascript %§
+
+# Commands
+# ‾‾‾‾‾‾‾‾
+
+define-command -hidden javascript-trim-indent %{
+    # remove trailing white spaces
+    try %{ execute-keys -draft x 1s^(\h+)$<ret> d }
+}
+
+define-command -hidden javascript-indent-on-char %<
+    evaluate-commands -draft -itersel %<
+        # align closer token to its opener when alone on a line
+        try %/ execute-keys -draft <a-h> <a-k> ^\h+[\]}]$ <ret> m s \A|.\z <ret> 1<a-&> /
+    >
+>
+
+define-command -hidden javascript-insert-on-new-line %<
+    evaluate-commands -draft -itersel %<
+    execute-keys <semicolon>
+    try %[
+        evaluate-commands -draft -save-regs '/"' %[
+            # copy the commenting prefix
+            execute-keys -save-regs '' k x1s^\h*(//+\h*)<ret> y
+            try %[
+                # if the previous comment isn't empty, create a new one
+                execute-keys x<a-K>^\h*//+\h*$<ret> jxs^\h*<ret>P
+            ] catch %[
+                # if there is no text in the previous comment, remove it completely
+                execute-keys d
+            ]
+        ]
+    ]
+    try %[
+        # if the previous line isn't within a comment scope, break
+        execute-keys -draft kx <a-k>^(\h*/\*|\h+\*(?!/))<ret>
+
+        # find comment opening, validate it was not closed, and check its using star prefixes
+        execute-keys -draft <a-?>/\*<ret><a-H> <a-K>\*/<ret> <a-k>\A\h*/\*([^\n]*\n\h*\*)*[^\n]*\n\h*.\z<ret>
+
+        try %[
+            # if the previous line is opening the comment, insert star preceeded by space
+            execute-keys -draft kx<a-k>^\h*/\*<ret>
+            execute-keys -draft i*<space><esc>
+        ] catch %[
+           try %[
+                # if the next line is a comment line insert a star
+                execute-keys -draft jx<a-k>^\h+\*<ret>
+                execute-keys -draft i*<space><esc>
+            ] catch %[
+                try %[
+                    # if the previous line is an empty comment line, close the comment scope
+                    execute-keys -draft kx<a-k>^\h+\*\h+$<ret> x1s\*(\h*)<ret>c/<esc>
+                ] catch %[
+                    # if the previous line is a non-empty comment line, add a star
+                    execute-keys -draft i*<space><esc>
+                ]
+            ]
+        ]
+
+        # trim trailing whitespace on the previous line
+        try %[ execute-keys -draft s\h+$<ret> d ]
+        # align the new star with the previous one
+        execute-keys Kx1s^[^*]*(\*)<ret><a-(><a-&>
+    ]
+    >
+>
+
+define-command -hidden javascript-indent-on-new-line %<
+    evaluate-commands -draft -itersel %<
+    execute-keys <semicolon>
+    try %<
+        # if previous line is part of a comment, do nothing
+        execute-keys -draft <a-?>/\*<ret> <a-K>^\h*[^/*\h]<ret>
+    > catch %<
+        # else if previous line closed a paren (possibly followed by words and a comment),
+        # copy indent of the opening paren line
+        execute-keys -draft kx 1s(\))(\h+\w+)*\h*(\;\h*)?(?://[^\n]+)?\n\z<ret> m<a-semicolon>J <a-S> 1<a-&>
+    > catch %<
+        # else indent new lines with the same level as the previous one
+        execute-keys -draft K <a-&>
+    >
+    # remove previous empty lines resulting from the automatic indent
+    try %< execute-keys -draft k x <a-k>^\h+$<ret> Hd >
+    # indent after an opening brace or parenthesis at end of line
+    try %< execute-keys -draft k x <a-k>[{(]\h*$<ret> j <a-gt> >
+    # indent after a label (works for case statements)
+    try %< execute-keys -draft k x s[a-zA-Z0-9_-]+:\h*$<ret> j <a-gt> >
+    # indent after a statement not followed by an opening brace
+    try %< execute-keys -draft k x s\)\h*(?://[^\n]+)?\n\z<ret> \
+                               <a-semicolon>mB <a-k>\A\b(if|for|while)\b<ret> <a-semicolon>j <a-gt> >
+    try %< execute-keys -draft k x s \belse\b\h*(?://[^\n]+)?\n\z<ret> \
+                               j <a-gt> >
+    # deindent after a single line statement end
+    try %< execute-keys -draft K x <a-k>\;\h*(//[^\n]+)?$<ret> \
+                               K x s\)(\h+\w+)*\h*(//[^\n]+)?\n([^\n]*\n){2}\z<ret> \
+                               MB <a-k>\A\b(if|for|while)\b<ret> <a-S>1<a-&> >
+    try %< execute-keys -draft K x <a-k>\;\h*(//[^\n]+)?$<ret> \
+                               K x s \belse\b\h*(?://[^\n]+)?\n([^\n]*\n){2}\z<ret> \
+                               <a-S>1<a-&> >
+    # deindent closing brace(s) when after cursor
+    try %< execute-keys -draft x <a-k> ^\h*[})] <ret> gh / [})] <esc> m <a-S> 1<a-&> >
+    # align to the opening parenthesis or opening brace (whichever is first)
+    # on a previous line if its followed by text on the same line
+    try %< evaluate-commands -draft %<
+        # Go to opening parenthesis and opening brace, then select the most nested one
+        try %< execute-keys [c [({],[)}] <ret> >
+        # Validate selection and get first and last char
+        execute-keys <a-k>\A[{(](\h*\S+)+\n<ret> <a-K>"(([^"]*"){2})*<ret> <a-K>'(([^']*'){2})*<ret> <a-:><a-semicolon>L <a-S>
+        # Remove possibly incorrect indent from new line which was copied from previous line
+        try %< execute-keys -draft , <a-h> s\h+<ret> d >
+        # Now indent and align that new line with the opening parenthesis/brace
+        execute-keys 1<a-&> &
+     > >
+    >
+>
+
+# Highlighting and hooks bulder for JavaScript and TypeScript
+# ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+define-command -hidden init-javascript-filetype -params 1 %~
+    # Highlighters
+    # ‾‾‾‾‾‾‾‾‾‾‾‾
+
+    add-highlighter "shared/%arg{1}" regions
+    add-highlighter "shared/%arg{1}/code" default-region group
+    add-highlighter "shared/%arg{1}/double_string" region '"'  (?<!\\)(\\\\)*"         fill string
+    add-highlighter "shared/%arg{1}/single_string" region "'"  (?<!\\)(\\\\)*'         fill string
+    add-highlighter "shared/%arg{1}/literal"       region "`"  (?<!\\)(\\\\)*`         group
+    add-highlighter "shared/%arg{1}/comment_line"  region //   '$'                     fill comment
+    add-highlighter "shared/%arg{1}/comment"       region /\*  \*/                     fill comment
+    add-highlighter "shared/%arg{1}/shebang"       region ^#!  $                       fill meta
+    add-highlighter "shared/%arg{1}/division" region '[\w\)\]]\K(/|(\h+/\s+))' '(?=\w)' group # Help Kakoune to better detect /…/ literals
+    add-highlighter "shared/%arg{1}/regex"         region /    (?<!\\)(\\\\)*/[gimuy]* fill meta
+    add-highlighter "shared/%arg{1}/jsx"           region -recurse (?<![\w<])<[a-zA-Z>][\w:.-]* (?<![\w<])<[a-zA-Z>][\w:.-]*(?!\hextends)(?=[\s/>])(?!>\()) (</.*?>|/>) regions
+
+    # Regular expression flags are: g → global match, i → ignore case, m → multi-lines, u → unicode, y → sticky
+    # https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
+
+    add-highlighter "shared/%arg{1}/literal/"       fill string
+    add-highlighter "shared/%arg{1}/literal/"       regex \$\{.*?\} 0:value
+
+    add-highlighter "shared/%arg{1}/code/" regex (?:^|[^$_])\b(document|false|null|parent|self|this|true|undefined|window)\b 1:value
+    add-highlighter "shared/%arg{1}/code/" regex "-?\b[0-9]*\.?[0-9]+" 0:value
+    add-highlighter "shared/%arg{1}/code/" regex \b(Array|Boolean|Date|Function|Number|Object|RegExp|String|Symbol)\b 0:type
+
+    # jsx: In well-formed xml the number of opening and closing tags match up regardless of tag name.
+    #
+    # We inline a small XML highlighter here since it anyway need to recurse back up to the starting highlighter.
+    # To make things simple we assume that jsx is always enabled.
+
+    add-highlighter "shared/%arg{1}/jsx/tag"  region -recurse <  <(?=[/a-zA-Z>]) (?<!=)> regions
+    add-highlighter "shared/%arg{1}/jsx/expr" region -recurse \{ \{             \}      ref %arg{1}
+
+    add-highlighter "shared/%arg{1}/jsx/tag/base" default-region group
+    add-highlighter "shared/%arg{1}/jsx/tag/double_string" region =\K" (?<!\\)(\\\\)*" fill string
+    add-highlighter "shared/%arg{1}/jsx/tag/single_string" region =\K' (?<!\\)(\\\\)*' fill string
+    add-highlighter "shared/%arg{1}/jsx/tag/expr" region -recurse \{ \{   \}           group
+
+    add-highlighter "shared/%arg{1}/jsx/tag/base/" regex (\w+) 1:attribute
+    add-highlighter "shared/%arg{1}/jsx/tag/base/" regex </?([\w-$]+) 1:keyword
+    add-highlighter "shared/%arg{1}/jsx/tag/base/" regex (</?|/?>) 0:meta
+
+    add-highlighter "shared/%arg{1}/jsx/tag/expr/"   ref %arg{1}
+
+    # Keywords are collected at
+    # https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords
+    # https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get
+    # https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set
+    add-highlighter "shared/%arg{1}/code/" regex \b(async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|export|extends|finally|for|function|get|if|import|in|instanceof|let|new|of|return|set|static|super|switch|throw|try|typeof|var|void|while|with|yield)\b 0:keyword
+~
+
+init-javascript-filetype javascript
+init-javascript-filetype typescript
+
+# Highlighting specific to TypeScript
+# ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+add-highlighter shared/typescript/code/ regex \b(array|boolean|date|number|object|regexp|string|symbol)\b 0:type
+
+# Keywords grabbed from https://github.com/Microsoft/TypeScript/issues/2536
+add-highlighter shared/typescript/code/ regex \b(as|constructor|declare|enum|from|implements|interface|module|namespace|package|private|protected|public|readonly|static|type)\b 0:keyword
+
+§
+
+# Aliases
+# ‾‾‾‾‾‾‾
+provide-module typescript %{ require-module javascript }
+# http://json.org
+# ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+# Detection
+# ‾‾‾‾‾‾‾‾‾
+
+hook global BufCreate .*[.](json) %{
+    set-option buffer filetype json
+}
+
+# Initialization
+# ‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+hook global WinSetOption filetype=json %{
+    require-module json
+
+    hook window ModeChange pop:insert:.* -group json-trim-indent json-trim-indent
+    hook window InsertChar .* -group json-indent json-indent-on-char
+    hook window InsertChar \n -group json-indent json-indent-on-new-line
+
+    hook -once -always window WinSetOption filetype=.* %{ remove-hooks window json-.+ }
+}
+
+hook -group json-highlight global WinSetOption filetype=json %{
+    add-highlighter window/json ref json
+    hook -once -always window WinSetOption filetype=.* %{ remove-highlighter window/json }
+}
+
+
+provide-module json %(
+
+# Highlighters
+# ‾‾‾‾‾‾‾‾‾‾‾‾
+
+add-highlighter shared/json regions
+add-highlighter shared/json/code default-region group
+add-highlighter shared/json/string region '"' (?<!\\)(\\\\)*" fill string
+
+add-highlighter shared/json/code/ regex \b(true|false|null|\d+(?:\.\d+)?(?:[eE][+-]?\d*)?)\b 0:value
+
+# Commands
+# ‾‾‾‾‾‾‾‾
+
+define-command -hidden json-trim-indent %{
+    # remove trailing white spaces
+    try %{ execute-keys -draft -itersel x s \h+$ <ret> d }
+}
+
+define-command -hidden json-indent-on-char %<
+    evaluate-commands -draft -itersel %<
+        # align closer token to its opener when alone on a line
+        try %< execute-keys -draft <a-h> <a-k> ^\h+[\]}]$ <ret> m <a-S> 1<a-&> >
+    >
+>
+
+define-command -hidden json-indent-on-new-line %<
+    evaluate-commands -draft -itersel %<
+        # preserve previous line indent
+        try %{ execute-keys -draft <semicolon> K <a-&> }
+        # filter previous line
+        try %{ execute-keys -draft k : json-trim-indent <ret> }
+        # indent after lines ending with opener token
+        try %< execute-keys -draft k x <a-k> [[{]\h*$ <ret> j <a-gt> >
+        # deindent closer token(s) when after cursor
+        try %< execute-keys -draft x <a-k> ^\h*[}\]] <ret> gh / [}\]] <ret> m <a-S> 1<a-&> >
+    >
+>
+
+)
+# http://kakoune.org
+# ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+# Detection
+# ‾‾‾‾‾‾‾‾‾
+
+hook global BufCreate (.*/)?(kakrc|.*\.kak) %{
+    set-option buffer filetype kak
+}
+
+# Initialization
+# ‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+hook global WinSetOption filetype=kak %~
+    require-module kak
+
+    set-option window static_words %opt{kak_static_words}
+
+    hook window InsertChar \n -group kak-insert kak-insert-on-new-line
+    hook window InsertChar \n -group kak-indent kak-indent-on-new-line
+    hook window InsertChar [>)}\]] -group kak-indent kak-indent-on-closing-matching
+    hook window InsertChar (?![[{(<>)}\]])[^\s\w] -group kak-indent kak-indent-on-closing-char
+    # cleanup trailing whitespaces on current line insert end
+    hook window ModeChange pop:insert:.* -group kak-trim-indent %{ try %{ execute-keys -draft <semicolon> x s ^\h+$ <ret> d } }
+    set-option buffer extra_word_chars '_' '-'
+
+    hook -once -always window WinSetOption filetype=.* %{ remove-hooks window kak-.+ }
+~
+
+hook -group kak-highlight global WinSetOption filetype=kak %{
+    add-highlighter window/kakrc ref kakrc
+    hook -once -always window WinSetOption filetype=.* %{ remove-highlighter window/kakrc }
+}
+
+provide-module kak %§
+
+require-module sh
+
+# Highlighters & Completion
+# ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+add-highlighter shared/kakrc regions
+add-highlighter shared/kakrc/code default-region group
+add-highlighter shared/kakrc/comment region (^|\h)\K# $ fill comment
+add-highlighter shared/kakrc/double_string region -recurse %{(?<!")("")+(?!")} %{(^|\h)\K"} %{"(?!")} group
+add-highlighter shared/kakrc/single_string region -recurse %{(?<!')('')+(?!')} %{(^|\h)\K'} %{'(?!')} group
+add-highlighter shared/kakrc/shell1 region -recurse '\{' '(^|\h)\K%?%sh\{' '\}' ref sh
+add-highlighter shared/kakrc/shell2 region -recurse '\(' '(^|\h)\K%?%sh\(' '\)' ref sh
+add-highlighter shared/kakrc/shell3 region -recurse '\[' '(^|\h)\K%?%sh\[' '\]' ref sh
+add-highlighter shared/kakrc/shell4 region -recurse '<'  '(^|\h)\K%?%sh<'  '>'  ref sh
+add-highlighter shared/kakrc/shell5 region -recurse '\{' '(^|\h)\K-?shell-script-(completion|candidates)\h+%\{' '\}' ref sh
+add-highlighter shared/kakrc/shell6 region -recurse '\(' '(^|\h)\K-?shell-script-(completion|candidates)\h+%\(' '\)' ref sh
+add-highlighter shared/kakrc/shell7 region -recurse '\[' '(^|\h)\K-?shell-script-(completion|candidates)\h+%\[' '\]' ref sh
+add-highlighter shared/kakrc/shell8 region -recurse '<'  '(^|\h)\K-?shell-script-(completion|candidates)\h+%<'  '>'  ref sh
+
+evaluate-commands %sh{
+    # Grammar
+    keywords="add-highlighter alias arrange-buffers buffer buffer-next buffer-previous catch
+              change-directory colorscheme debug declare-option declare-user-mode define-command complete-command
+              delete-buffer delete-buffer! echo edit edit! enter-user-mode evaluate-commands execute-keys
+              fail hook info kill kill! map menu nop on-key prompt provide-module quit quit!
+              remove-highlighter remove-hooks rename-buffer rename-client rename-session require-module
+              select set-face set-option set-register source trigger-user-hook try
+              unalias unmap unset-face unset-option update-option
+              write write! write-all write-all-quit write-quit write-quit!"
+    attributes="global buffer window current
+                normal insert menu prompt goto view user object
+                number-lines show-matching show-whitespaces fill regex dynregex group flag-lines
+                ranges line column wrap ref regions region default-region replace-ranges"
+    types="int bool str regex int-list str-list completions line-specs range-specs str-to-str-map"
+    values="default black red green yellow blue magenta cyan white yes no false true"
+
+    join() { sep=$2; eval set -- $1; IFS="$sep"; echo "$*"; }
+
+    # Add the language's grammar to the static completion list
+    printf %s\\n "declare-option str-list kak_static_words $(join "${keywords} ${attributes} ${types} ${values}" ' ')'"
+
+    # Highlight keywords (which are always surrounded by whitespace)
+    printf '%s\n' "add-highlighter shared/kakrc/code/keywords regex (?:\s|\A)\K($(join "${keywords}" '|'))(?:(?=\s)|\z) 0:keyword
+                   add-highlighter shared/kakrc/code/attributes regex (?:\s|\A)\K($(join "${attributes}" '|'))(?:(?=\s)|\z) 0:attribute
+                   add-highlighter shared/kakrc/code/types regex (?:\s|\A)\K($(join "${types}" '|'))(?:(?=\s)|\z) 0:type
+                   add-highlighter shared/kakrc/code/values regex (?:\s|\A)\K($(join "${values}" '|'))(?:(?=\s)|\z) 0:value"
+}
+
+add-highlighter shared/kakrc/code/colors regex \b(rgb:[0-9a-fA-F]{6}|rgba:[0-9a-fA-F]{8})\b 0:value
+add-highlighter shared/kakrc/code/numbers regex \b\d+\b 0:value
+
+add-highlighter shared/kakrc/double_string/fill fill string
+add-highlighter shared/kakrc/double_string/escape regex '""' 0:default+b
+add-highlighter shared/kakrc/single_string/fill fill string
+add-highlighter shared/kakrc/single_string/escape regex "''" 0:default+b
+
+add-highlighter shared/kak ref kakrc
+
+# Commands
+# ‾‾‾‾‾‾‾‾
+
+define-command -hidden kak-insert-on-new-line %~
+    evaluate-commands -draft -itersel %=
+        # copy '#' comment prefix and following white spaces
+        try %{ execute-keys -draft k x s ^\h*#\h* <ret> y jgh P }
+    =
+~
+
+define-command -hidden kak-indent-on-new-line %~
+    evaluate-commands -draft -itersel %=
+        # preserve previous line indent
+        try %{ execute-keys -draft <semicolon> K <a-&> }
+        # cleanup trailing whitespaces from previous line
+        try %{ execute-keys -draft k x s \h+$ <ret> d }
+        # indent after line ending with %\w*[^\s\w]
+        try %{ execute-keys -draft k x <a-k> \%\w*[^\s\w]$ <ret> j <a-gt> }
+        # deindent closing brace when after cursor
+        try %_ execute-keys -draft -itersel x <a-k> ^\h*([>)}\]]) <ret> gh / <c-r>1 <ret> m <a-S> 1<a-&> _
+        # deindent closing char(s) 
+        try %{ execute-keys -draft -itersel x <a-k> ^\h*([^\s\w]) <ret> gh / <c-r>1 <ret> <a-?> <c-r>1 <ret> <a-T>% <a-k> \w*<c-r>1$ <ret> <a-S> 1<a-&> }
+    =
+~
+
+define-command -hidden kak-indent-on-closing-matching %~
+    # align to opening matching brace when alone on a line
+    try %= execute-keys -draft -itersel <a-h><a-k>^\h*\Q %val{hook_param} \E$<ret> mGi s \A|.\z<ret> 1<a-&> =
+~
+
+define-command -hidden kak-indent-on-closing-char %{
+    # align to opening matching character when alone on a line
+    try %{ execute-keys -draft -itersel <a-h><a-k>^\h*\Q %val{hook_param} \E$<ret>gi<a-f> %val{hook_param} <a-T>%<a-k>\w*\Q %val{hook_param} \E$<ret> s \A|.\z<ret> gi 1<a-&> }
+}
+
+§
+# http://lua.org
+# ‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+# Detection
+# ‾‾‾‾‾‾‾‾‾
+
+hook global BufCreate .*[.](lua|rockspec) %{
+    set-option buffer filetype lua
+}
+
+# Initialization
+# ‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+hook global WinSetOption filetype=lua %{
+    require-module lua
+
+    hook window ModeChange pop:insert:.* -group lua-trim-indent lua-trim-indent
+    hook window InsertChar .* -group lua-indent lua-indent-on-char
+    hook window InsertChar \n -group lua-indent lua-indent-on-new-line
+    hook window InsertChar \n -group lua-insert lua-insert-on-new-line
+
+    alias window alt lua-alternative-file
+
+    hook -once -always window WinSetOption filetype=.* %{
+        remove-hooks window lua-.+
+        unalias window alt lua-alternative-file
+    }
+}
+
+hook -group lua-highlight global WinSetOption filetype=lua %{
+    add-highlighter window/lua ref lua
+    hook -once -always window WinSetOption filetype=.* %{ remove-highlighter window/lua }
+}
+
+
+provide-module lua %§
+
+# Highlighters
+# ‾‾‾‾‾‾‾‾‾‾‾‾
+
+add-highlighter shared/lua regions
+add-highlighter shared/lua/code default-region group
+add-highlighter shared/lua/raw_string  region -match-capture   '\[(=*)\[' '\](=*)\]' fill string
+add-highlighter shared/lua/raw_comment region -match-capture '--\[(=*)\[' '\](=*)\]' fill comment
+add-highlighter shared/lua/double_string region '"'   (?<!\\)(?:\\\\)*" fill string
+add-highlighter shared/lua/single_string region "'"   (?<!\\)(?:\\\\)*' fill string
+add-highlighter shared/lua/comment       region '--'  $                 fill comment
+
+add-highlighter shared/lua/code/function_declaration regex \b(?:function\h+)(?:\w+\h*\.\h*)*([a-zA-Z_]\w*)\( 1:function
+add-highlighter shared/lua/code/function_call regex \b([a-zA-Z_]\w*)\h*(?=[\(\{]) 1:function
+add-highlighter shared/lua/code/keyword regex \b(break|do|else|elseif|end|for|function|goto|if|in|local|repeat|return|then|until|while)\b 0:keyword
+add-highlighter shared/lua/code/value regex \b(false|nil|true|[0-9]+(:?\.[0-9])?(:?[eE]-?[0-9]+)?|0x[0-9a-fA-F])\b 0:value
+add-highlighter shared/lua/code/symbolic_operator regex (\+|-|\*|/|%|\^|==?|~=|<=?|>=?|\.\.|\.\.\.|#) 0:operator
+add-highlighter shared/lua/code/keyword_operator regex \b(and|or|not)\b 0:operator
+add-highlighter shared/lua/code/module regex \b(_G|_ENV)\b 0:module
+add-highlighter shared/lua/code/attribute regex \B(<[a-zA-Z_]\w*>)\B 0:attribute
+
+# Commands
+# ‾‾‾‾‾‾‾‾
+
+define-command lua-alternative-file -docstring 'Jump to the alternate file (implementation ↔ test)' %{ evaluate-commands %sh{
+    case $kak_buffile in
+        *spec/*_spec.lua)
+            altfile=$(eval printf %s\\n $(printf %s\\n $kak_buffile | sed s+spec/+'*'/+';'s/_spec//))
+            [ ! -f $altfile ] && echo "fail 'implementation file not found'" && exit
+        ;;
+        *.lua)
+            altfile=""
+            altdir=""
+            path=$kak_buffile
+            dirs=$(while [ $path ]; do printf %s\\n $path; path=${path%/*}; done | tail -n +2)
+            for dir in $dirs; do
+                altdir=$dir/spec
+                if [ -d $altdir ]; then
+                    altfile=$altdir/$(realpath $kak_buffile --relative-to $dir | sed s+[^/]'*'/++';'s/.lua$/_spec.lua/)
+                    break
+                fi
+            done
+            [ ! -d "$altdir" ] && echo "fail 'spec/ not found'" && exit
+        ;;
+        *)
+            echo "fail 'alternative file not found'" && exit
+        ;;
+    esac
+    printf %s\\n "edit $altfile"
+}}
+
+define-command -hidden lua-trim-indent %[
+    # remove trailing whitespaces
+    try %[ execute-keys -draft -itersel x s \h+$ <ret> d ]
+]
+
+define-command -hidden lua-indent-on-char %[
+    evaluate-commands -no-hooks -draft -itersel %[
+        # unindent middle and end structures
+        try %[ execute-keys -draft \
+            <a-h><a-k>^\h*(\b(end|else|elseif|until)\b|[)}])$<ret> \
+            :lua-indent-on-new-line<ret> \
+            <a-lt>
+        ]
+    ]
+]
+
+define-command -hidden lua-indent-on-new-line %[
+    evaluate-commands -no-hooks -draft -itersel %[
+        # remove trailing white spaces from previous line
+        try %[ execute-keys -draft k : lua-trim-indent <ret> ]
+        # preserve previous non-empty line indent
+        try %[ execute-keys -draft ,gh<a-?>^[^\n]+$<ret>s\A|.\z<ret>)<a-&> ]
+        # add one indentation level if the previous line is not a comment and:
+        #     - starts with a block keyword that is not closed on the same line,
+        #     - or contains an unclosed function expression,
+        #     - or ends with an enclosed '(' or '{'
+        try %[ execute-keys -draft \
+            , Kx \
+            <a-K>\A\h*--<ret> \
+            <a-K>\A[^\n]*\b(end|until)\b<ret> \
+            <a-k>\A(\h*\b(do|else|elseif|for|function|if|repeat|while)\b|[^\n]*[({]$|[^\n]*\bfunction\b\h*[(])<ret> \
+            <a-:><semicolon><a-gt>
+        ]
+    ]
+]
+
+define-command -hidden lua-insert-on-new-line %[
+    evaluate-commands -no-hooks -draft -itersel %[
+        # copy -- comment prefix and following white spaces
+        try %[ execute-keys -draft kxs^\h*\K--\h*<ret> y gh j x<semicolon> P ]
+        # wisely add end structure
+        evaluate-commands -save-regs x %[
+            # save previous line indent in register x
+            try %[ execute-keys -draft kxs^\h+<ret>"xy ] catch %[ reg x '' ]
+            try %[
+                # check that starts with a block keyword that is not closed on the same line
+                execute-keys -draft \
+                    kx \
+                    <a-k>^\h*\b(else|elseif|do|for|function|if|while)\b|[^\n]\bfunction\b\h*[(]<ret> \
+                    <a-K>\bend\b<ret>
+                # check that the block is empty and is not closed on a different line
+                execute-keys -draft <a-a>i <a-K>^[^\n]+\n[^\n]+\n<ret> jx <a-K>^<c-r>x\b(else|elseif|end)\b<ret>
+                # auto insert end
+                execute-keys -draft o<c-r>xend<esc>
+                # auto insert ) for anonymous function
+                execute-keys -draft kx<a-k>\([^)\n]*function\b<ret>jjA)<esc>
+            ]
+        ]
+    ]
+]
+
+§
+declare-option -docstring "shell command run to build the project" \
+    str makecmd make
+declare-option -docstring "pattern that describes lines containing information about errors in the output of the `makecmd` command" \
+    str make_error_pattern " (?:fatal )?error:"
+
+declare-option -docstring "name of the client in which utilities display information" \
+    str toolsclient
+declare-option -hidden int make_current_error_line
+
+define-command -params .. \
+    -docstring %{
+        make [<arguments>]: make utility wrapper
+        All the optional arguments are forwarded to the make utility
+     } make %{ evaluate-commands %sh{
+     output=$(mktemp -d "${TMPDIR:-/tmp}"/kak-make.XXXXXXXX)/fifo
+     mkfifo ${output}
+     ( eval "${kak_opt_makecmd}" "$@" > ${output} 2>&1 & ) > /dev/null 2>&1 < /dev/null
+
+     printf %s\\n "evaluate-commands -try-client '$kak_opt_toolsclient' %{
+               edit! -fifo ${output} -scroll *make*
+               set-option buffer filetype make
+               set-option buffer make_current_error_line 0
+               hook -always -once buffer BufCloseFifo .* %{ nop %sh{ rm -r $(dirname ${output}) } }
+           }"
+}}
+
+add-highlighter shared/make group
+add-highlighter shared/make/ regex "^((?:\w:)?[^:\n]+):(\d+):(?:(\d+):)?\h+(?:((?:fatal )?error)|(warning)|(note)|(required from(?: here)?))?.*?$" 1:cyan 2:green 3:green 4:red 5:yellow 6:blue 7:yellow
+add-highlighter shared/make/ regex "^\h*(~*(?:(\^)~*)?)$" 1:green 2:cyan+b
+add-highlighter shared/make/ line '%opt{make_current_error_line}' default+b
+
+hook -group make-highlight global WinSetOption filetype=make %{
+    add-highlighter window/make ref make
+    hook -once -always window WinSetOption filetype=.* %{ remove-highlighter window/make }
+}
+
+hook global WinSetOption filetype=make %{
+    hook buffer -group make-hooks NormalKey <ret> make-jump
+    hook -once -always window WinSetOption filetype=.* %{ remove-hooks buffer make-hooks }
+}
+
+declare-option -docstring "name of the client in which all source code jumps will be executed" \
+    str jumpclient
+
+define-command -hidden make-open-error -params 4 %{
+    evaluate-commands -try-client %opt{jumpclient} %{
+        edit -existing "%arg{1}" %arg{2} %arg{3}
+        echo -markup "{Information}{\}%arg{4}"
+        try %{ focus }
+    }
+}
+
+define-command -hidden make-jump %{
+    evaluate-commands %{
+        try %{
+            execute-keys gl<a-?> "Entering directory" <ret><a-:>
+            # Try to parse the error into capture groups, failing on absolute paths
+            execute-keys s "Entering directory [`']([^']+)'.*\n([^:/][^:]*):(\d+):(?:(\d+):)?([^\n]+)\z" <ret>l
+            set-option buffer make_current_error_line %val{cursor_line}
+            make-open-error "%reg{1}/%reg{2}" "%reg{3}" "%reg{4}" "%reg{5}"
+        } catch %{
+            execute-keys <a-h><a-l> s "((?:\w:)?[^:]+):(\d+):(?:(\d+):)?([^\n]+)\z" <ret>l
+            set-option buffer make_current_error_line %val{cursor_line}
+            make-open-error "%reg{1}" "%reg{2}" "%reg{3}" "%reg{4}"
+        }
+    }
+}
+
+define-command make-next-error -docstring 'Jump to the next make error' %{
+    evaluate-commands -try-client %opt{jumpclient} %{
+        buffer '*make*'
+        execute-keys "%opt{make_current_error_line}ggl" "/^(?:\w:)?[^:\n]+:\d+:(?:\d+:)?%opt{make_error_pattern}<ret>"
+        make-jump
+    }
+    try %{
+        evaluate-commands -client %opt{toolsclient} %{
+            buffer '*make*'
+            execute-keys %opt{make_current_error_line}g
+        }
+    }
+}
+
+define-command make-previous-error -docstring 'Jump to the previous make error' %{
+    evaluate-commands -try-client %opt{jumpclient} %{
+        buffer '*make*'
+        execute-keys "%opt{make_current_error_line}g" "<a-/>^(?:\w:)?[^:\n]+:\d+:(?:\d+:)?%opt{make_error_pattern}<ret>"
+        make-jump
+    }
+    try %{
+        evaluate-commands -client %opt{toolsclient} %{
+            buffer '*make*'
+            execute-keys %opt{make_current_error_line}g
+        }
+    }
+}
+# Detection
+# ‾‾‾‾‾‾‾‾‾
+
+hook global BufCreate .*(/?[mM]akefile|\.mk|\.make) %{
+    set-option buffer filetype makefile
+}
+
+# Initialization
+# ‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+hook global WinSetOption filetype=makefile %{
+    require-module makefile
+
+    set-option window static_words %opt{makefile_static_words}
+
+    hook window ModeChange pop:insert:.* -group makefile-trim-indent makefile-trim-indent
+    hook window InsertChar \n -group makefile-indent makefile-indent-on-new-line
+    hook -once -always window WinSetOption filetype=.* %{ remove-hooks window makefile-.+ }
+}
+
+hook -group makefile-highlight global WinSetOption filetype=makefile %{
+    add-highlighter window/makefile ref makefile
+    hook -once -always window WinSetOption filetype=.* %{ remove-highlighter window/makefile }
+}
+
+provide-module makefile %{
+
+# Highlighters
+# ‾‾‾‾‾‾‾‾‾‾‾‾
+
+add-highlighter shared/makefile regions
+
+add-highlighter shared/makefile/content default-region group
+add-highlighter shared/makefile/comment region (?<!\\)(?:\\\\)*(?:^|\h)\K# '$' fill comment
+add-highlighter shared/makefile/evaluate-commands region -recurse \( (?<!\$)(?:\$\$)*\K\$\( \) fill value
+
+add-highlighter shared/makefile/content/ regex ^\S.*?(::|:|!)\s 0:variable
+add-highlighter shared/makefile/content/ regex [+?:]= 0:operator
+
+evaluate-commands %sh{
+    # Grammar
+    keywords="ifeq|ifneq|ifdef|ifndef|else|endif|define|endef"
+
+    # Add the language's grammar to the static completion list
+    printf %s\\n "declare-option str-list makefile_static_words ${keywords}" | tr '|' ' '
+
+    # Highlight keywords
+    printf %s "add-highlighter shared/makefile/content/ regex \b(${keywords})\b 0:keyword"
+}
+
+# Commands
+# ‾‾‾‾‾‾‾‾
+
+define-command -hidden makefile-trim-indent %{
+    evaluate-commands -no-hooks -draft -itersel %{
+        execute-keys x
+        # remove trailing white spaces
+        try %{ execute-keys -draft s \h + $ <ret> d }
+    }
+}
+
+define-command -hidden makefile-indent-on-new-line %{
+    evaluate-commands -draft -itersel %{
+        # preserve previous line indent
+        try %{ execute-keys -draft <semicolon>K<a-&> }
+        ## If the line above is a target indent with a tab
+        try %{ execute-keys -draft Z kx <a-k>^\S.*?(::|:|!)\s<ret> z i<tab> }
+        # cleanup trailing white space son previous line
+        try %{ execute-keys -draft kx s \h+$ <ret>d }
+        # indent after some keywords
+        try %{ execute-keys -draft Z kx <a-k> ^\h*(ifeq|ifneq|ifdef|ifndef|else|define)\b<ret> z <a-gt> }
+    }
+}
+
+}
+declare-option -docstring "name of the client in which documentation is to be displayed" \
+    str docsclient
+
+declare-option -hidden str-list manpage
+
+hook -group man-highlight global WinSetOption filetype=man %{
+    add-highlighter window/man-highlight group
+    # Sections
+    add-highlighter window/man-highlight/ regex ^\S.*?$ 0:title
+    # Subsections
+    add-highlighter window/man-highlight/ regex '^ {3}\S.*?$' 0:default+b
+    # Command line options
+    add-highlighter window/man-highlight/ regex '^ {7}-[^\s,]+(,\s+-[^\s,]+)*' 0:list
+    # References to other manpages
+    add-highlighter window/man-highlight/ regex [-a-zA-Z0-9_.]+\([a-z0-9]+\) 0:header
+
+    map window normal <ret> :man-jump<ret>
+
+    hook -once -always window WinSetOption filetype=.* %{
+      remove-highlighter window/man-highlight
+      unmap window normal <ret>
+    }
+}
+
+hook global WinSetOption filetype=man %{
+    hook -group man-hooks window WinResize .* %{ man-impl %opt{manpage} }
+    hook -once -always window WinSetOption filetype=.* %{ remove-hooks window man-hooks }
+}
+
+define-command -hidden -params ..3 man-impl %{ evaluate-commands %sh{
+    buffer_name="$1"
+    if [ -z "${buffer_name}" ]; then
+        exit
+    fi
+    shift
+    manout=$(mktemp "${TMPDIR:-/tmp}"/kak-man.XXXXXX)
+    manerr=$(mktemp "${TMPDIR:-/tmp}"/kak-man.XXXXXX)
+    colout=$(mktemp "${TMPDIR:-/tmp}"/kak-man.XXXXXX)
+    env MANWIDTH=${kak_window_range##* } man "$@" > "$manout" 2> "$manerr"
+    retval=$?
+    if command -v col >/dev/null; then
+        col -b -x > ${colout} < ${manout}
+    else
+        sed 's/.//g' > ${colout} < ${manout}
+    fi
+    rm ${manout}
+
+    if [ "${retval}" -eq 0 ]; then
+        printf %s\\n "
+                edit -scratch %{*$buffer_name ${*}*}
+                execute-keys '%|cat<space>${colout}<ret>gk'
+                nop %sh{ rm ${colout}; rm ${manerr} }
+                set-option buffer filetype man
+                set-option window manpage $buffer_name $*
+        "
+    else
+        printf '
+            fail %%{%s}
+            nop %%sh{ rm "%s"; rm "%s" }
+        ' "$(cat "$manerr")" "${colout}" "${manerr}"
+    fi
+} }
+
+define-command -params ..1 \
+    -shell-script-candidates %{
+        find /usr/share/man/ $(printf %s "${MANPATH}" | sed 's/:/ /') -name '*.[1-8]*' | sed 's,^.*/\(.*\)\.\([1-8][a-zA-Z]*\).*$,\1(\2),'
+    } \
+    -docstring %{
+        man [<page>]: manpage viewer wrapper
+        If no argument is passed to the command, the selection will be used as page
+        The page can be a word, or a word directly followed by a section number between parenthesis, e.g. kak(1)
+    } man %{ evaluate-commands %sh{
+    subject=${1-$kak_selection}
+
+    ## The completion suggestions display the page number, strip them if present
+    case "${subject}" in
+        *\([1-8]*\))
+            pagenum="${subject##*\(}"
+            pagenum="${pagenum%\)}"
+            subject="${subject%%\(*}"
+            ;;
+        *)
+            pagenum=""
+            ;;
+    esac
+
+    printf %s\\n "evaluate-commands -try-client %opt{docsclient} man-impl man $pagenum $subject"
+} }
+
+
+
+# The following section of code enables a user
+# to go to next or previous man page links and to follow man page links,
+# for example, apropos(1), that would normally appear in SEE ALSO sections.
+# The user would position the cursor on any character of the link
+# and then press <ret> to change to a buffer showing the man page.
+
+# Regex pattern defining a man page link.
+# Used for determining if a selection, which may just be a link, is a link.
+declare-option -hidden regex man_link1 \
+  [\w_.:-]+\(\d[a-z]*\)
+
+# Same as above but with lookbehind and lookahead patterns.
+# Used for searching for a man page link.
+declare-option -hidden regex man_link2 \
+  "(?:^|(?<=\W))%opt{man_link1}(?=\W)"
+
+# Define a useful command sequence for searching a given regex
+# and a given sequence of search keys.
+define-command -hidden man-search -params 2 %{
+    set-register / %arg[1]
+    try %{
+        execute-keys %arg[2]
+    } catch %{
+        fail "Could not find man page link"
+    }
+}
+
+define-command -docstring 'Go to next man page link' \
+man-link-next %{ man-search %opt[man_link2] n }
+
+define-command -docstring 'Go to previous man page link' \
+man-link-prev %{ man-search %opt[man_link2] <a-n> }
+
+define-command -docstring 'Try to jump to a man page' \
+man-jump %{
+  try %{ execute-keys <a-a><a-w> s %opt[man_link1] <ret> } catch %{ fail 'Not a valid man page link' }
+  try %{ man } catch %{ fail 'No man page link to follow' }
+}
+
+# Suggested keymaps for a user mode
+declare-user-mode man
+
+map global man 'g' -docstring 'Jump to a man page using selected man page link' :man-jump<ret>
+map global man 'j' -docstring 'Go to next man page link'                        :man-link-next<ret>
+map global man 'k' -docstring 'Go to previous man page link'                    :man-link-prev<ret>
+map global man 'm' -docstring 'Look up a man page'                              :man<space>
+# http://daringfireball.net/projects/markdown
+# ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+# Detection
+# ‾‾‾‾‾‾‾‾‾
+
+hook global BufCreate .*[.](markdown|md|mkd) %{
+    set-option buffer filetype markdown
+}
+
+# Initialization
+# ‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+hook global WinSetOption filetype=markdown %{
+    require-module markdown
+
+    hook window ModeChange pop:insert:.* -group markdown-trim-indent markdown-trim-indent
+    hook window InsertChar \n -group markdown-insert markdown-insert-on-new-line
+    hook window InsertChar \n -group markdown-indent markdown-indent-on-new-line
+    hook -once -always window WinSetOption filetype=.* %{ remove-hooks window markdown-.+ }
+}
+
+hook -group markdown-load-languages global WinSetOption filetype=markdown %{
+    markdown-load-languages '%'
+}
+
+hook -group markdown-load-languages global WinSetOption filetype=markdown %{
+    hook -group markdown-load-languages window NormalIdle .* %{markdown-load-languages gtGbGl}
+    hook -group markdown-load-languages window InsertIdle .* %{markdown-load-languages gtGbGl}
+}
+
+
+hook -group markdown-highlight global WinSetOption filetype=markdown %{
+    add-highlighter window/markdown ref markdown
+    hook -once -always window WinSetOption filetype=.* %{ remove-highlighter window/markdown }
+}
+
+
+provide-module markdown %{
+
+# Highlighters
+# ‾‾‾‾‾‾‾‾‾‾‾‾
+
+add-highlighter shared/markdown regions
+add-highlighter shared/markdown/inline default-region regions
+add-highlighter shared/markdown/inline/text default-region group
+
+add-highlighter shared/markdown/listblock region ^\h*[-*]\s ^(?=\S) regions
+add-highlighter shared/markdown/listblock/g default-region group
+add-highlighter shared/markdown/listblock/g/ ref markdown/inline
+add-highlighter shared/markdown/listblock/g/marker regex ^\h*([-*])\s 1:bullet
+
+add-highlighter shared/markdown/codeblock region -match-capture \
+    ^(\h*)```\h* \
+    ^(\h*)```\h*$ \
+    regions
+add-highlighter shared/markdown/codeblock/ default-region fill meta
+add-highlighter shared/markdown/listblock/codeblock region -match-capture \
+    ^(\h*)```\h* \
+    ^(\h*)```\h*$ \
+    regions
+add-highlighter shared/markdown/listblock/codeblock/ default-region fill meta
+add-highlighter shared/markdown/codeline region "^( {4}|\t)" "$" fill meta
+
+# https://spec.commonmark.org/0.29/#link-destination
+add-highlighter shared/markdown/angle_bracket_url region (?<=<)([a-z]+://|(mailto|magnet|xmpp):) (?!\\).(?=>)|\n fill link
+add-highlighter shared/markdown/inline/url region -recurse \( (\b[a-z]+://|(mailto|magnet|xmpp):) (?!\\).(?=\))|\s fill link
+add-highlighter shared/markdown/listblock/angle_bracket_url region (?<=<)(\b[a-z]+://|(mailto|magnet|xmpp):) (?!\\).(?=>)|\n fill link
+
+try %{
+    require-module html
+    add-highlighter shared/markdown/inline/tag region (?i)</?[a-z][a-z0-9-]*\s*([a-z_:]|(?=>)) > ref html/tag
+}
+
+add-highlighter shared/markdown/inline/code region -match-capture (`+) (`+) fill mono
+
+# Setext-style header
+add-highlighter shared/markdown/inline/text/ regex (\A|^\n)[^\n]+\n={2,}\h*\n\h*$ 0:title
+add-highlighter shared/markdown/inline/text/ regex (\A|^\n)[^\n]+\n-{2,}\h*\n\h*$ 0:header
+
+# Atx-style header
+add-highlighter shared/markdown/inline/text/ regex ^#[^\n]* 0:header
+
+add-highlighter shared/markdown/inline/text/ regex (?<!\*)(\*([^\s*]|([^\s*](\n?[^\n*])*[^\s*]))\*)(?!\*) 1:+i
+add-highlighter shared/markdown/inline/text/ regex (?<!_)(_([^\s_]|([^\s_](\n?[^\n_])*[^\s_]))_)(?!_) 1:+i
+add-highlighter shared/markdown/inline/text/ regex (?<!\*)(\*\*([^\s*]|([^\s*](\n?[^\n*])*[^\s*]))\*\*)(?!\*) 1:+b
+add-highlighter shared/markdown/inline/text/ regex (?<!_)(__([^\s_]|([^\s_](\n?[^\n_])*[^\s_]))__)(?!_) 1:+b
+add-highlighter shared/markdown/inline/text/ regex ^\h*(>\h*)+ 0:comment
+add-highlighter shared/markdown/inline/text/ regex "\H( {2,})$" 1:+r@meta
+
+# Commands
+# ‾‾‾‾‾‾‾‾
+
+define-command markdown-load-languages -params 1 %{
+    evaluate-commands -draft %{ try %{
+        execute-keys "%arg{1}s```\h*\{?[.=]?\K\w+<ret>" # }
+        evaluate-commands -itersel %{ try %{
+            require-module %val{selection}
+            add-highlighter "shared/markdown/codeblock/%val{selection}" region -match-capture "^(\h*)```\h*(%val{selection}\b|\{[.=]?%val{selection}\})" ^(\h*)``` regions
+            add-highlighter "shared/markdown/codeblock/%val{selection}/" default-region fill meta
+            add-highlighter "shared/markdown/codeblock/%val{selection}/inner" region \A\h*```[^\n]*\K (?=```) ref %val{selection}
+            add-highlighter "shared/markdown/listblock/codeblock/%val{selection}" region -match-capture "^(\h*)```\h*(%val{selection}\b|\{[.=]?%val{selection}\})" ^(\h*)``` regions
+            add-highlighter "shared/markdown/listblock/codeblock/%val{selection}/" default-region fill meta
+            add-highlighter "shared/markdown/listblock/codeblock/%val{selection}/inner" region \A\h*```[^\n]*\K (?=```) ref %val{selection}
+        }}
+    }}
+}
+
+define-command -hidden markdown-trim-indent %{
+    evaluate-commands -no-hooks -draft -itersel %{
+        execute-keys x
+        # remove trailing white spaces
+        try %{ execute-keys -draft s \h + $ <ret> d }
+    }
+}
+
+define-command -hidden markdown-insert-on-new-line %{
+    try %{ execute-keys -draft -itersel k x s ^\h*\K((>\h*)+([*+-]\h)?|(>\h*)*[*+-]\h)\h* <ret> y gh j P }
+}
+
+define-command -hidden markdown-indent-on-new-line %{
+    evaluate-commands -draft -itersel %{
+        # preserve previous line indent
+        try %{ execute-keys -draft <semicolon> K <a-&> }
+        # remove trailing white spaces
+        try %{ execute-keys -draft k x s \h+$ <ret> d }
+    }
+}
+
+}
+# http://ruby-lang.org
+# ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+# Detection
+# ‾‾‾‾‾‾‾‾‾
+
+hook global BufCreate .*(([.](rb))|(irbrc)|(pryrc)|(Brewfile)|(Capfile|[.]cap)|(Gemfile|[.]gemspec)|(Guardfile)|(Rakefile|[.]rake)|(Thorfile|[.]thor)|(Vagrantfile)) %{
+    set-option buffer filetype ruby
+}
+
+# Initialization
+# ‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+hook global WinSetOption filetype=ruby %{
+    require-module ruby
+
+    set-option window static_words %opt{ruby_static_words}
+
+    hook window ModeChange pop:insert:.* -group ruby-trim-indent ruby-trim-indent
+    hook window InsertChar .* -group ruby-indent ruby-indent-on-char
+    hook window InsertChar \n -group ruby-indent ruby-indent-on-new-line
+    hook window InsertChar \n -group ruby-insert ruby-insert-on-new-line
+
+    alias window alt ruby-alternative-file
+
+    hook -once -always window WinSetOption filetype=.* %{
+        remove-hooks window ruby-.+
+        unalias window alt ruby-alternative-file
+    }
+}
+
+hook -group ruby-highlight global WinSetOption filetype=ruby %{
+    add-highlighter window/ruby ref ruby
+    hook -once -always window WinSetOption filetype=.* %{ remove-highlighter window/ruby }
+}
+
+provide-module ruby %§
+
+# Highlighters
+# ‾‾‾‾‾‾‾‾‾‾‾‾
+
+add-highlighter shared/ruby regions
+add-highlighter shared/ruby/code default-region group
+add-highlighter shared/ruby/double_symbol region ':"' (?<!\\)(\\\\)*"                regions
+add-highlighter shared/ruby/single_symbol region ":'" (?<!\\)(\\\\)*'                fill variable
+add-highlighter shared/ruby/double_string region '"' (?<!\\)(\\\\)*"                 regions
+add-highlighter shared/ruby/single_string region "'" (?<!\\)(\\\\)*'                 fill string
+add-highlighter shared/ruby/backtick      region '(?<![$:])`' (?<!\\)(\\\\)*`        regions
+add-highlighter shared/ruby/regex         region '(?<![$:])/' (?<!\\)(\\\\)*/[imox]* regions
+add-highlighter shared/ruby/              region '#' '$'                             fill comment
+add-highlighter shared/ruby/              region ^=begin ^=end                       fill comment
+add-highlighter shared/ruby/              region -recurse \( '%[qwQW]?\(' \)         fill string
+add-highlighter shared/ruby/              region -recurse \{ '%[qwQW]?\{' \}         fill string
+add-highlighter shared/ruby/              region -recurse \[ '%[qwQW]?\[' \]         fill string
+add-highlighter shared/ruby/              region -recurse  < '%[qwQW]?<'   >         fill string
+add-highlighter shared/ruby/              region -recurse \( '%[isIS]\('  \)         fill variable
+add-highlighter shared/ruby/              region -recurse \{ '%[isIS]\{'  \}         fill variable
+add-highlighter shared/ruby/              region -recurse \[ '%[isIS]\['  \]         fill variable
+add-highlighter shared/ruby/              region -recurse  < '%[isIS]<'    >         fill variable
+add-highlighter shared/ruby/              region -recurse \( '%[rxRX]\('  \)         fill meta
+add-highlighter shared/ruby/              region -recurse \{ '%[rxRX]\{'  \}         fill meta
+add-highlighter shared/ruby/              region -recurse \[ '%[rxRX]\['  \]         fill meta
+add-highlighter shared/ruby/              region -recurse  < '%[rxRX]<'    >         fill meta
+add-highlighter shared/ruby/              region -match-capture '%[qwQW]?([^\s0-9A-Za-z\(\{\[<>\]\}\)])' ([^\s0-9A-Za-z\(\{\[<>\]\}\)]) fill string
+add-highlighter shared/ruby/              region -match-capture '%[isIS]([^\s0-9A-Za-z\(\{\[<>\]\}\)])' ([^\s0-9A-Za-z\(\{\[<>\]\}\)]) fill variable
+add-highlighter shared/ruby/              region -match-capture '%[rxRX]([^\s0-9A-Za-z\(\{\[<>\]\}\)])' ([^\s0-9A-Za-z\(\{\[<>\]\}\)]) fill meta
+add-highlighter shared/ruby/heredoc region -match-capture '<<[-~]?(?!self)(\w+)'      '^\h*(\w+)$' fill string
+add-highlighter shared/ruby/division region '[\w\)\]]\K(/|(\h+/\h+))' '\w' group # Help Kakoune to better detect /…/ literals
+
+# Regular expression flags are: i → ignore case, m → multi-lines, o → only interpolate #{} blocks once, x → extended mode (ignore white spaces)
+# Literals are: i → array of symbols, q → string, r → regular expression, s → symbol, w → array of words, x → capture shell result
+
+add-highlighter shared/ruby/double_string/ default-region fill string
+add-highlighter shared/ruby/double_string/interpolation region -recurse \{ \Q#{ \} fill meta
+
+add-highlighter shared/ruby/double_symbol/ default-region fill variable
+add-highlighter shared/ruby/double_symbol/interpolation region -recurse \{ \Q#{ \} fill meta
+
+add-highlighter shared/ruby/backtick/ default-region fill meta
+add-highlighter shared/ruby/backtick/interpolation region -recurse \{ \Q#{ \} fill meta
+
+add-highlighter shared/ruby/regex/ default-region fill meta
+add-highlighter shared/ruby/regex/interpolation region -recurse \{ \Q#{ \} fill meta
+
+evaluate-commands %sh{
+    # Grammar
+    # Keywords are collected searching for keywords at
+    # https://github.com/ruby/ruby/blob/trunk/parse.y
+    keywords="alias|and|begin|break|case|class|def|defined|do|else|elsif|end"
+    keywords="${keywords}|ensure|false|for|if|in|module|next|nil|not|or|private|protected|public|redo"
+    keywords="${keywords}|rescue|retry|return|self|super|then|true|undef|unless|until|when|while|yield"
+    attributes="attr_reader|attr_writer|attr_accessor"
+    values="false|true|nil"
+    meta="require|require_relative|include|extend"
+
+    # Add the language's grammar to the static completion list
+    printf %s\\n "declare-option str-list ruby_static_words ${keywords} ${attributes} ${values} ${meta}" | tr '|' ' '
+
+    # Highlight keywords
+    printf %s "
+        add-highlighter shared/ruby/code/ regex \b(${keywords})[^0-9A-Za-z_!?] 1:keyword
+        add-highlighter shared/ruby/code/ regex \b(${attributes})\b 0:attribute
+        add-highlighter shared/ruby/code/ regex \b(${values})\b 0:value
+        add-highlighter shared/ruby/code/ regex \b(${meta})\b 0:meta
+    "
+}
+
+add-highlighter shared/ruby/code/ regex \b(\w+:(?!:))|(:?(\$(-[0FIKWadilpvw]|["'`/~&+=!$*,:.\;<>?@\\])|(\$|@@?)\w+))|((?<!:):(![~=]|=~|>[=>]?|<((=>?)|<)?|[+\-]@?|\*\*?|===?|[/`%&!^|~]|(\w+[=?!]?)|(\[\]=?)))|([A-Z]\w*|^|\h)\K::(?=[A-Z]) 0:variable
+
+# Commands
+# ‾‾‾‾‾‾‾‾
+
+define-command ruby-alternative-file -docstring 'Jump to the alternate file (implementation ↔ test)' %{ evaluate-commands %sh{
+    case $kak_buffile in
+        *spec/*_spec.rb)
+            altfile=$(eval echo $(echo $kak_buffile | sed s+spec/+'*'/+';'s/_spec//))
+            [ ! -f $altfile ] && echo "fail 'implementation file not found'" && exit
+        ;;
+        *test/*_test.rb)
+            altfile=$(eval echo $(echo $kak_buffile | sed s+test/+'*'/+';'s/_test//))
+            [ ! -f $altfile ] && echo "fail 'implementation file not found'" && exit
+        ;;
+        *.rb)
+            altfile=""
+            altdir=""
+            path=$kak_buffile
+            dirs=$(while [ $path ]; do echo $path; path=${path%/*}; done | tail -n +2)
+            for dir in $dirs; do
+                altdir=$dir/spec && suffix=spec
+                [ ! -d $altdir ] && altdir=$dir/test && suffix=test
+                if [ -d $altdir ]; then
+                    altfile=$altdir/$(realpath $kak_buffile --relative-to $dir | sed s+[^/]'*'/++';'s/.rb$/_${suffix}.rb/)
+                    break
+                fi
+            done
+            [ ! -d "$altdir" ] && echo "fail 'spec/ and test/ not found'" && exit
+        ;;
+        *)
+            echo "fail 'alternative file not found'" && exit
+        ;;
+    esac
+    echo "edit $altfile"
+}}
+
+define-command -hidden ruby-trim-indent %{
+    evaluate-commands -no-hooks -draft -itersel %{
+        execute-keys x
+        # remove trailing white spaces
+        try %{ execute-keys -draft s \h + $ <ret> d }
+    }
+}
+
+define-command -hidden ruby-indent-on-char %{
+    evaluate-commands -no-hooks -draft -itersel %{
+        # align middle and end structures to start
+        try %{ execute-keys -draft x <a-k> ^ \h * (else)   $ <ret> <a-a> i <a-semicolon> <a-?> ^ \h * (if|case)                                               <ret> <a-S> 1<a-&> }
+        try %{ execute-keys -draft x <a-k> ^ \h * (elsif)  $ <ret> <a-a> i <a-semicolon> <a-?> ^ \h * (if)                                                    <ret> <a-S> 1<a-&> }
+        try %{ execute-keys -draft x <a-k> ^ \h * (when)   $ <ret> <a-a> i <a-semicolon> <a-?> ^ \h * (case)                                                  <ret> <a-S> 1<a-&> }
+        try %{ execute-keys -draft x <a-k> ^ \h * (rescue) $ <ret> <a-a> i <a-semicolon> <a-?> ^ \h * (begin|def)                                             <ret> <a-S> 1<a-&> }
+    }
+}
+
+define-command -hidden ruby-indent-on-new-line %{
+    evaluate-commands -no-hooks -draft -itersel %{
+        # preserve previous line indent
+        try %{ execute-keys -draft K <a-&> }
+        # filter previous line
+        try %{ execute-keys -draft k : ruby-trim-indent <ret> }
+        # indent after start structure
+        try %{ execute-keys -draft k x <a-k> ^ \h * (begin|case|class|def|else|elsif|ensure|for|if|module|rescue|unless|until|when|while|.+\bdo$|.+\bdo\h\|.+(?=\|)) [^0-9A-Za-z_!?] <ret> j <a-gt> }
+    }
+}
+
+define-command -hidden ruby-insert-on-new-line %[
+    evaluate-commands -no-hooks -draft -itersel %[
+        # copy _#_ comment prefix and following white spaces
+        try %{ execute-keys -draft k x s ^\h*\K#\h* <ret> y jgi P }
+        # wisely add end structure
+        evaluate-commands -save-regs x %[
+            try %{ execute-keys -draft k x s ^ \h + <ret> \" x y } catch %{ reg x '' }
+            try %[
+                evaluate-commands -draft %[
+                    # Check if previous line opens a block
+                    execute-keys -draft kx <a-k>^<c-r>x(begin|case|class|def|for|if|module|unless|until|while|.+\bdo$|.+\bdo\h\|.+(?=\|))[^0-9A-Za-z_!?]<ret>
+                    # Check that we do not already have an end for this indent level which is first set via `ruby-indent-on-new-line` hook
+                    execute-keys -draft }i J x <a-K> ^<c-r>x(end|else|elsif|rescue|when)[^0-9A-Za-z_!?]<ret>
+                ]
+                execute-keys -draft o<c-r>xend<esc> # insert a new line with containing end
+            ]
+        ]
+    ]
+]
+
+§
+hook global BufCreate .*\.((z|ba|c|k|mk)?sh(rc|_profile)?|profile) %{
+    set-option buffer filetype sh
+}
+
+hook global WinSetOption filetype=sh %{
+    require-module sh
+    set-option window static_words %opt{sh_static_words}
+
+    hook window ModeChange pop:insert:.* -group sh-trim-indent sh-trim-indent
+    hook window InsertChar \n -group sh-insert sh-insert-on-new-line
+    hook window InsertChar \n -group sh-indent sh-indent-on-new-line
+    hook -once -always window WinSetOption filetype=.* %{ remove-hooks window sh-.+ }
+}
+
+hook -group sh-highlight global WinSetOption filetype=sh %{
+    add-highlighter window/sh ref sh
+    hook -once -always window WinSetOption filetype=.* %{ remove-highlighter window/sh }
+}
+
+# using non-ascii characters here so that we can use the '[' command
+provide-module sh %§
+
+add-highlighter shared/sh regions
+add-highlighter shared/sh/code default-region group
+add-highlighter shared/sh/arithmetic region -recurse \(.*?\( (\$|(?<=for)\h*)\(\( \)\) group
+add-highlighter shared/sh/double_string region  %{(?<!\\)(?:\\\\)*\K"} %{(?<!\\)(?:\\\\)*"} group
+add-highlighter shared/sh/single_string region %{(?<!\\)(?:\\\\)*\K'} %{'} fill string
+add-highlighter shared/sh/expansion region -recurse (?<!\\)(?:\\\\)*\K\$\{ (?<!\\)(?:\\\\)*\K\$\{ \}|\n fill value
+add-highlighter shared/sh/comment region (?<!\\)(?:\\\\)*(?:^|\h)\K# '$' fill comment
+add-highlighter shared/sh/heredoc region -match-capture '<<-?\h*''?(\w+)''?' '^\t*(\w+)$' fill string
+
+add-highlighter shared/sh/arithmetic/expansion ref sh/double_string/expansion
+add-highlighter shared/sh/double_string/fill fill string
+
+evaluate-commands %sh{
+    # Grammar
+    # Generated with `compgen -k` in bash
+    keywords="if then else elif fi case esac for select while until do done in
+             function time coproc"
+
+    # Generated with `compgen -b` in bash
+    builtins="alias bg bind break builtin caller cd command compgen complete
+             compopt continue declare dirs disown echo enable eval exec
+             exit export false fc fg getopts hash help history jobs kill
+             let local logout mapfile popd printf pushd pwd read readarray
+             readonly return set shift shopt source suspend test times trap
+             true type typeset ulimit umask unalias unset wait"
+
+    join() { sep=$2; eval set -- $1; IFS="$sep"; echo "$*"; }
+
+    # Add the language's grammar to the static completion list
+    printf %s\\n "declare-option str-list sh_static_words $(join "${keywords}" ' ') $(join "${builtins}" ' ')"
+
+    # Highlight keywords
+    printf %s\\n "add-highlighter shared/sh/code/ regex (?<!-)\b($(join "${keywords}" '|'))\b(?!-) 0:keyword"
+
+    # Highlight builtins
+    printf %s "add-highlighter shared/sh/code/builtin regex (?<!-)\b($(join "${builtins}" '|'))\b(?!-) 0:builtin"
+}
+
+add-highlighter shared/sh/code/operators regex [\[\]\(\)&|]{1,2} 0:operator
+add-highlighter shared/sh/code/variable regex ((?<![-:])\b\w+)= 1:variable
+add-highlighter shared/sh/code/alias regex \balias(\h+[-+]\w)*\h+([\w-.]+)= 2:variable
+add-highlighter shared/sh/code/function regex ^\h*(\S+(?<!=))\h*\(\) 1:function
+
+add-highlighter shared/sh/code/unscoped_expansion regex (?<!\\)(?:\\\\)*\K\$(\w+|#|@|\?|\$|!|-|\*) 0:value
+add-highlighter shared/sh/double_string/expansion regex (?<!\\)(?:\\\\)*\K\$(\w+|#|@|\?|\$|!|-|\*|\{.+?\}) 0:value
+
+# Commands
+# ‾‾‾‾‾‾‾‾
+
+define-command -hidden sh-trim-indent %{
+    # remove trailing white spaces
+    try %{ execute-keys -draft -itersel x s \h+$ <ret> d }
+}
+
+# This is at best an approximation, since shell syntax is very complex.
+# Also note that this targets plain sh syntax, not bash - bash adds a whole
+# other level of complexity. If your bash code is fairly portable this will
+# probably work.
+#
+# Of necessity, this is also fairly opinionated about indentation styles.
+# Doing it "properly" would require far more context awareness than we can
+# bring to this kind of thing.
+define-command -hidden sh-insert-on-new-line %[
+    evaluate-commands -draft -itersel %[
+        # copy '#' comment prefix and following white spaces
+        try %{ execute-keys -draft k x s ^\h*\K#\h* <ret> y gh j P }
+    ]
+]
+
+# Use custom object matching to copy indentation for the various logical
+# blocks.
+#
+# Note that we're using a weird non-ascii character instead of [ or { here
+# because the '[' and '{' characters need to be available for the commands.
+define-command -hidden sh-indent-on-new-line %¶
+    evaluate-commands -draft -itersel %@
+        # preserve previous line indent
+        try %{ execute-keys -draft <semicolon> K <a-&> }
+        # filter previous line
+        try %{ execute-keys -draft k : sh-trim-indent <ret> }
+
+        # Indent loop syntax, e.g.:
+        # for foo in bar; do
+        #       things
+        # done
+        #
+        # or:
+        #
+        # while foo; do
+        #       things
+        # done
+        #
+        # or equivalently:
+        #
+        # while foo
+        # do
+        #       things
+        # done
+        #
+        # indent after do
+        try %{ execute-keys -draft , k x <a-k> \bdo$ <ret> j <a-gt> }
+        # copy the indentation of the matching for/when - matching on the do
+        # statement, so we don't need to duplicate this for the two loop
+        # structures.
+        try %{ execute-keys -draft , k x <a-k> \bdone$ <ret> gh [c\bdo\b,\bdone\b <ret> x <a-S> 1<a-&> , j K <a-&> }
+
+        # Indent if/then/else syntax, e.g.:
+        # if [ $foo = $bar ]; then
+        #       things
+        # else
+        #       other_things
+        # fi
+        #
+        # or equivalently:
+        # if [ $foo = $bar ]
+        # then
+        #       things
+        # else
+        #       other_things
+        # fi
+        #
+        # indent after then
+        try %{ execute-keys -draft , k x <a-k> \bthen$ <ret> j <a-gt> }
+        # copy the indentation of the matching if
+        try %{ execute-keys -draft , k x <a-k> \bfi$ <ret> gh [c\bif\b,\bfi\b <ret> x <a-S> 1<a-&> , j K <a-&> }
+        # copy the indentation of the matching if, and then re-indent afterwards
+        try %{ execute-keys -draft , k x <a-k> \belse$ <ret> gh [c\bif\b,\bfi\b <ret> x <a-S> 1<a-&> , j K <a-&> j <a-gt> }
+
+        # Indent case syntax, e.g.:
+        # case "$foo" in
+        #       bar) thing1;;
+        #       baz)
+        #               things
+        #               ;;
+        #       *)
+        #               default_things
+        #               ;;
+        # esac
+        #
+        # or equivalently:
+        # case "$foo"
+        # in
+        #       bar) thing1;;
+        # esac
+        #
+        # indent after in
+        try %{ execute-keys -draft , k x <a-k> \bin$ <ret> j <a-gt> }
+        # copy the indentation of the matching case
+        try %{ execute-keys -draft , k x <a-k> \besac$ <ret> gh [c\bcase\b,\besac\b <ret> x <a-S> 1<a-&> , j K <a-&> }
+        # indent after )
+        try %{ execute-keys -draft , k x <a-k> ^\s*\(?[^(]+[^)]\)$ <ret> j <a-gt> }
+        # deindent after ;;
+        try %{ execute-keys -draft , k x <a-k> ^\s*\;\;$ <ret> j <a-lt> }
+
+        # Indent compound commands as logical blocks, e.g.:
+        # {
+        #       thing1
+        #       thing2
+        # }
+        #
+        # or in a function definition:
+        # foo () {
+        #       thing1
+        #       thing2
+        # }
+        #
+        # We don't handle () delimited compond commands - these are technically very
+        # similar, but the use cases are quite different and much less common.
+        #
+        # Note that in this context the '{' and '}' characters are reserved
+        # words, and hence must be surrounded by a token separator - typically
+        # white space (including a newline), though technically it can also be
+        # ';'. Only vertical white space makes sense in this context, though,
+        # since the syntax denotes a logical block, not a simple compound command.
+        try %= execute-keys -draft , k x <a-k> (\s|^)\{$ <ret> j <a-gt> =
+        # deindent closing }
+        try %= execute-keys -draft , k x <a-k> ^\s*\}$ <ret> <a-lt> j K <a-&> =
+        # deindent closing } when after cursor
+        try %= execute-keys -draft x <a-k> ^\h*\} <ret> gh / \} <ret> m <a-S> 1<a-&> =
+
+    @
+¶
+
+§
+declare-option -hidden range-specs spell_regions
+declare-option -hidden str spell_last_lang
+
+declare-option -docstring "default language to use when none is passed to the spell-check command" str spell_lang
+
+define-command -params ..1 -docstring %{
+    spell [<language>]: spell check the current buffer
+
+    The first optional argument is the language against which the check will be performed (overrides `spell_lang`)
+    Formats of language supported:
+      - ISO language code, e.g. 'en'
+      - language code above followed by a dash or underscore with an ISO country code, e.g. 'en-US'
+    } spell %{
+    try %{ add-highlighter window/ ranges 'spell_regions' }
+    evaluate-commands %sh{
+        use_lang() {
+            if ! printf %s "$1" | grep -qE '^[a-z]{2,3}([_-][A-Z]{2})?$'; then
+                echo "fail 'Invalid language code (examples of expected format: en, en_US, en-US)'"
+                exit 1
+            else
+                options="-l '$1'"
+                printf 'set-option buffer spell_last_lang %s\n' "$1"
+            fi
+        }
+
+        if [ $# -ge 1 ]; then
+            use_lang "$1"
+        elif [ -n "${kak_opt_spell_lang}" ]; then
+            use_lang "${kak_opt_spell_lang}"
+        fi
+
+        printf 'eval -no-hooks write %s\n' "${kak_response_fifo}" > $kak_command_fifo
+
+        {
+            sed 's/^/^/' | eval "aspell --byte-offsets -a $options" 2>&1 | awk '
+                BEGIN {
+                    line_num = 1
+                    regions = ENVIRON["kak_timestamp"]
+                    server_command = sprintf("kak -p \"%s\"", ENVIRON["kak_session"])
+                }
+
+                {
+                    if (/^@\(#\)/) {
+                        # drop the identification message
+                    }
+
+                    else if (/^\*/) {
+                        # nothing
+                    }
+
+                    else if (/^[+-]/) {
+                        # required to ignore undocumented aspell functionality
+                    }
+
+                    else if (/^$/) {
+                        line_num++
+                    }
+
+                    else if (/^[#&]/) {
+                        word_len = length($2)
+                        word_pos = substr($0, 1, 1) == "&" ? substr($4, 1, length($4) - 1) : $3;
+                        regions = regions " " line_num "." word_pos "+" word_len "|DiagnosticError"
+                    }
+
+                    else {
+                        line = $0
+                        gsub(/"/, "&&", line)
+                        command = "fail \"" line "\""
+                        exit
+                    }
+                }
+
+                END {
+                    if (!length(command))
+                        command = "set-option \"buffer=" ENVIRON["kak_bufname"] "\" spell_regions " regions
+
+                    print command | server_command
+                    close(server_command)
+                }
+            '
+        } <$kak_response_fifo >/dev/null 2>&1 &
+    }
+}
+
+define-command spell-clear %{
+    unset-option buffer spell_regions
+}
+
+define-command spell-next %{ evaluate-commands %sh{
+    anchor_line="${kak_selection_desc%%.*}"
+    anchor_col="${kak_selection_desc%%,*}"
+    anchor_col="${anchor_col##*.}"
+
+    start_first="${kak_opt_spell_regions%%|*}"
+    start_first="${start_first#* }"
+
+    # Make sure properly formatted selection descriptions are in `%opt{spell_regions}`
+    if ! printf %s "${start_first}" | grep -qE '^[0-9]+\.[0-9]+,[0-9]+\.[0-9]+$'; then
+        exit
+    fi
+
+    printf %s "${kak_opt_spell_regions#* }" | awk -v start_first="${start_first}" \
+                                                  -v anchor_line="${anchor_line}" \
+                                                  -v anchor_col="${anchor_col}" '
+        BEGIN {
+            anchor_line = int(anchor_line)
+            anchor_col = int(anchor_col)
+        }
+
+        {
+            for (i = 1; i <= NF; i++) {
+                sel = $i
+                sub(/\|.+$/, "", sel)
+
+                start_line = sel
+                sub(/\..+$/, "", start_line)
+                start_line = int(start_line)
+
+                start_col = sel
+                sub(/,.+$/, "", start_col)
+                sub(/^.+\./, "", start_col)
+                start_col = int(start_col)
+
+                if (start_line < anchor_line \
+                    || (start_line == anchor_line && start_col <= anchor_col))
+                    continue
+
+                target_sel = sel
+                break
+            }
+        }
+
+        END {
+            if (!target_sel)
+                target_sel = start_first
+
+            printf "select %s\n", target_sel
+        }'
+} }
+
+define-command \
+    -docstring "Suggest replacement words for the current selection, against the last language used by the spell-check command" \
+    spell-replace %{
+    prompt \
+        -shell-script-candidates %{
+            options=""
+            if [ -n "$kak_opt_spell_last_lang" ]; then
+                options="-l '$kak_opt_spell_last_lang'"
+            fi
+            printf %s "$kak_selection" |
+                eval "aspell -a $options" |
+                sed -n -e '/^&/ { s/^[^:]*: //; s/, /\n/g; p }'
+        } \
+        "Replace with: " \
+        %{
+            evaluate-commands -save-regs a %{
+                set-register a %val{text}
+                execute-keys c <c-r>a <esc>
+            }
+        }
+}
+
+
+define-command -params 0.. \
+    -docstring "Add the current selection to the dictionary" \
+    spell-add %{ evaluate-commands %sh{
+    options=""
+    if [ -n "$kak_opt_spell_last_lang" ]; then
+        options="-l '$kak_opt_spell_last_lang'"
+    fi
+    if [ $# -eq 0 ]; then
+        # use selections
+        eval set -- "$kak_quoted_selections"
+    fi
+    while [ $# -gt 0 ]; do
+        word="$1"
+        if ! printf '*%s\n#\n' "${word}" | eval "aspell -a $options" >/dev/null; then
+           printf 'fail "Unable to add word: %s"' "$(printf %s "${word}" | sed 's/"/&&/g')"
+           exit 1
+        fi
+        shift
+    done
+}}
+# https://www.w3schools.com/sql/default.asp
+# ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+# Detection
+# ‾‾‾‾‾‾‾‾‾
+
+hook global BufCreate .*/?(?i)sql %{
+    set-option buffer filetype sql
+}
+
+# Initialization
+# ‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+hook global WinSetOption filetype=sql %{
+    require-module sql
+    set-option window static_words %opt{sql_static_words}
+}
+
+hook -group sql-highlight global WinSetOption filetype=sql %{
+    add-highlighter window/sql ref sql
+    hook -once -always window WinSetOption filetype=.* %{ remove-highlighter window/sql }
+}
+
+
+provide-module sql %{
+
+# Highlighters
+# ‾‾‾‾‾‾‾‾‾‾‾‾
+
+add-highlighter shared/sql regions
+add-highlighter shared/sql/code default-region group
+add-highlighter shared/sql/double_string region '"' (?<!\\)(\\\\)*" fill string
+add-highlighter shared/sql/single_string region "'" (?<!\\)(\\\\)*' fill string
+add-highlighter shared/sql/comment1 region '--' '$' fill comment
+add-highlighter shared/sql/comment2 region '#' '$' fill comment
+add-highlighter shared/sql/comment3 region '/\*' '\*/' fill comment
+
+evaluate-commands %sh{
+    # Keywords
+    keywords="ALTER|AS|ASC|AUTO_INCREMENT|CHECK|CONSTRAINT|CREATE|DATABASE|DEFAULT|DELETE|DESC|DISTINCT|DROP"
+    keywords="${keywords}|EXISTS|FOREIGN KEY|FROM|FULL JOIN|FULL OUTER JOIN|GROUP BY|HAVING|INDEX|INNER JOIN"
+    keywords="${keywords}|INSERT INTO|INTO|JOIN|LEFT JOIN|LEFT OUTER JOIN|LIMIT|MODIFY|NOT NULL|ON|ORDER BY|PRIMARY KEY"
+    keywords="${keywords}|REFERENCES|RIGHT JOIN|RIGHT OUTER JOIN|SELECT|SELECT TOP|SET|TABLE|TRUNCATE|UNION|UNIQUE"
+    keywords="${keywords}|UPDATE|VALUES|VIEW|WHERE"
+
+    # Operators
+    operators="ALL|AND|ANY|BETWEEN|EXISTS|IN|IS|LIKE|NOT|OR|SOME"
+
+    # MySQL functions
+    functions="ABS|ACOS|ADDDATE|ADDTIME|ASCII|ASIN|ATAN|AVG|BIN|BINARY|CASE|CAST|CEIL|CEILING"
+    functions="${functions}|CHARACTER_LENGTH|CHAR_LENGTH|COALESCE|CONCAT|CONCAT_WS|CONNECTION_ID|CONV|CONVERT"
+    functions="${functions}|COS|COT|COUNT|CURDATE|CURRENT_DATE|CURRENT_TIME|CURRENT_TIMESTAMP|CURRENT_USER"
+    functions="${functions}|CURTIME|DATABASE|DATE|DATE_ADD|DATEDIFF|DATE_FORMAT|DATE_SUB|DAY|DAYNAME"
+    functions="${functions}|DAYOFMONTH|DAYOFWEEK|DAYOFYEAR|DEGREES|DIV|EXP|EXTRACT|FIELD|FIND_IN_SET|FLOOR"
+    functions="${functions}|FORMAT|FROM_DAYS|GREATEST|HOUR|IF|IFNULL|INSERT|INSTR|ISNULL|LAST_DAY"
+    functions="${functions}|LAST_INSERT_ID|LCASE|LEAST|LEFT|LENGTH|LN|LOCALTIME|LOCALTIMESTAMP|LOCATE|LOG"
+    functions="${functions}|LOWER|LPAD|LTRIM|MAKEDATE|MAKETIME|MAX|MICROSECOND|MID|MIN|MINUTE|MOD|MONTH"
+    functions="${functions}|MONTHNAME|NOW|NULLIF|PERIOD_ADD|PERIOD_DIFF|PI|POSITION|POW|POWER|QUARTER|RADIANS"
+    functions="${functions}|RAND|REPEAT|REPLACE|REVERSE|RIGHT|ROUND|RPAD|RTRIM|SECOND|SEC_TO_TIME|SESSION_USER"
+    functions="${functions}|SIGN|SIN|SPACE|SQRT|STRCMP|STR_TO_DATE|SUBDATE|SUBSTR|SUBSTRING|SUBSTRING_INDEX"
+    functions="${functions}|SUBTIME|SUM|SYSDATE|SYSTEM_USER|TAN|TIME|TIMEDIFF|TIME_FORMAT|TIMESTAMP"
+    functions="${functions}|TIME_TO_SEC|TO_DAYS|TRIM|TRUNCATE|UCASE|UPPER|USER|VERSION|WEEK|WEEKDAY|WEEKOFYEAR"
+    functions="${functions}|YEAR|YEARWEEK"
+
+    # SQL Server functions
+    functions="${functions}|CHAR|CHARINDEX|DATALENGTH|DATEADD|DATENAME|DATEPART|GETDATE|GETUTCDATE|ISDATE"
+    functions="${functions}|ISNUMERIC|LEN|NCHAR|PATINDEX|SESSIONPROPERTY|STR|STUFF|USER_NAME"
+
+    # MS Access functions
+    functions="${functions}|Abs|Asc|Atn|Avg|Chr|Cos|Count|CurDir|CurrentUser|Date|DateAdd|DateDiff|DatePart"
+    functions="${functions}|DateSerial|DateValue|Day|Environ|Exp|Fix|Format|Hour|InStr|InstrRev|Int|IsDate"
+    functions="${functions}|IsNull|IsNumeric|LCase|Left|Len|LTrim|Max|Mid|Min|Minute|Month|MonthName|Now"
+    functions="${functions}|Randomize|Replace|Right|Rnd|Round|RTrim|Second|Sgn|Space|Split|Sqr|Str|StrComp"
+    functions="${functions}|StrConv|StrReverse|Sum|Time|TimeSerial|TimeValue|Trim|UCase|Val|Weekday"
+    functions="${functions}|WeekdayName|Year"
+
+    # Oracle functions
+    functions="${functions}|ADD_MONTHS|ASCIISTR|BITAND|CHR|COMPOSE|COSH|DBTIMEZONE|DECOMPOSE|DUMP|INITCAP|INSTRB"
+    functions="${functions}|INSTRC|LENGTHB|LENGTHC|MEDIAN|MONTHS_BETWEEN|NCHR|NEW_TIME|NEXT_DAY|REGEXP_COUNT"
+    functions="${functions}|REGEXP_INSTR|REGEXP_REPLACE|REGEXP_SUBSTR|REMAINDER|ROWNUM|SESSIONTIMEZONE|SOUNDEX"
+    functions="${functions}|SYSTIMESTAMP|TANH|TRANSLATE|TRUNC|TZ_OFFSET|VSIZE"
+
+    # MySQL data types
+    data_types="LONGBLOB|LONGTEXT|MEDIUMBLOB|MEDIUMTEXT|SET|TEXT|TINYTEXT"
+    data_types_fn="BIGINT|BLOB|CHAR|DATE|DATETIME|DECIMAL|DOUBLE|ENUM|FLOAT|INT"
+    data_types_fn="${data_types_fn}|MEDIUMINT|SMALLINT|TIME|TIMESTAMP|TINYINT|VARCHAR|YEAR"
+
+    # SQL Server data types
+    data_types="${data_types}|bigint|bit|cursor|date|datetime|datetime2|datetimeoffset|image|int|money|nchar|ntext"
+    data_types="${data_types}|nvarchar|real|smalldatetime|smallint|smallmoney|sql_variant|table|text|time"
+    data_types="${data_types}|timestamp|tinyint|uniqueidentifier|varbinary|xml"
+    data_types_fn="${data_types_fn}|binary|char|decimal|float|numeric|nvarchar|varbinary|varchar|varchar"
+
+    # MS Access data types
+    data_types="${data_types}|Text|Memo|Byte|Integer|Long|Single|Double|Currency|AutoNumber|Date"
+    data_types="${data_types}|Time|Ole Object|Hyperlink|Lookup Wizard"
+
+    # Add the language's grammar to the static completion list
+    printf %s\\n "declare-option str-list sql_static_words ${keywords} ${operators} ${functions} ${data_types} ${data_types_fn} NULL" | tr '|' ' '
+
+    # Highlight keywords
+    printf %s "
+        add-highlighter shared/sql/code/ regex '(?i)\b(${functions})\(.*?\)' 0:function
+        add-highlighter shared/sql/code/ regex '(?i)\b(${data_types_fn})\(.*?\)' 0:type
+        add-highlighter shared/sql/code/ regex '(?i)\b(${keywords})\b' 0:keyword
+        add-highlighter shared/sql/code/ regex '(?i)\b(${operators})\b' 0:operator
+        add-highlighter shared/sql/code/ regex '(?i)\b(${data_types})\b' 0:type
+    "
+}
+
+add-highlighter shared/sql/code/ regex '\+|-|\*|/|%|&|\||^|=|>|<|>=|<=|<>|\+=|-=|\*=|/=|%=|&=|^-=|\|\*=' 0:operator
+add-highlighter shared/sql/code/ regex \bNULL\b 0:value
+add-highlighter shared/sql/code/ regex \b\d+(?:\.\d+)?\b 0:value
+
+}
+# http://yaml.org
+# ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+# Detection
+# ‾‾‾‾‾‾‾‾‾
+
+hook global BufCreate .*[.](ya?ml) %{
+    set-option buffer filetype yaml
+}
+
+# Initialization
+# ‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+hook global WinSetOption filetype=yaml %{
+    require-module yaml
+
+    hook window ModeChange pop:insert:.* -group yaml-trim-indent yaml-trim-indent
+    hook window InsertChar \n -group yaml-insert yaml-insert-on-new-line
+    hook window InsertChar \n -group yaml-indent yaml-indent-on-new-line
+    hook -once -always window WinSetOption filetype=.* %{ remove-hooks window yaml-.+ }
+}
+
+hook -group yaml-highlight global WinSetOption filetype=yaml %{
+    add-highlighter window/yaml ref yaml
+    hook -once -always window WinSetOption filetype=.* %{ remove-highlighter window/yaml }
+}
+
+
+provide-module yaml %{
+
+# Highlighters
+# ‾‾‾‾‾‾‾‾‾‾‾‾
+
+add-highlighter shared/yaml regions
+add-highlighter shared/yaml/code      default-region group
+add-highlighter shared/yaml/double_string region '"' (?<!\\)(\\\\)*"       fill string
+add-highlighter shared/yaml/single_string region "'" "'"                   fill string
+add-highlighter shared/yaml/comment       region '(?:^| )#' $              fill comment
+
+add-highlighter shared/yaml/code/ regex ^(---|\.\.\.)$ 0:meta
+add-highlighter shared/yaml/code/ regex ^(\h*:\w*) 0:keyword
+add-highlighter shared/yaml/code/ regex \b(true|false|null)\b 0:value
+add-highlighter shared/yaml/code/ regex ^\h*-?\h*(\S+): 1:attribute
+
+# Commands
+# ‾‾‾‾‾‾‾‾
+
+define-command -hidden yaml-trim-indent %{
+    # remove trailing white spaces
+    try %{ execute-keys -draft -itersel x s \h+$ <ret> d }
+}
+
+define-command -hidden yaml-insert-on-new-line %{
+    evaluate-commands -draft -itersel %{
+        # copy '#' comment prefix and following white spaces
+        try %{ execute-keys -draft k x s ^\h*\K#\h* <ret> y gh j P }
+    }
+}
+
+define-command -hidden yaml-indent-on-new-line %{
+    evaluate-commands -draft -itersel %{
+        # preserve previous line indent
+        try %{ execute-keys -draft <semicolon> K <a-&> }
+        # filter previous line
+        try %{ execute-keys -draft k : yaml-trim-indent <ret> }
+        # indent after :
+        try %{ execute-keys -draft , k x <a-k> :$ <ret> j <a-gt> }
+        # indent after -
+        try %{ execute-keys -draft , k x <a-k> ^\h*- <ret> j <a-gt> }
+    }
+}
+
+}
+# ~/.config/kak/colors/dracula.kak
+# Dracula theme for Kakoune
+# https://draculatheme.com/kakoune
+#
+# Color palette
+# https://spec.draculatheme.com
+#
+# Template
+# https://github.com/mawww/kakoune/blob/master/colors/default.kak
+#
+# Faces
+# https://github.com/mawww/kakoune/blob/master/doc/pages/faces.asciidoc
+#
+# A fully spec‐compliant theme implementation:
+# https://draculatheme.com/visual-studio-code
+# https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml
+#
+# A list of files to open in Kakoune and VS Code:
+# C++ ⇒ https://github.com/mawww/kakoune/tree/master/src
+# AsciiDoc ⇒ https://github.com/mawww/kakoune/tree/master/doc
+
+# Color palette ────────────────────────────────────────────────────────────────
+
+# Standard
+declare-option str background '282a36'
+declare-option str foreground 'f8f8f2'
+declare-option str selection '44475a'
+declare-option str comment '6272a4'
+declare-option str red 'ff5555'
+declare-option str orange 'ffb86c'
+declare-option str yellow 'f1fa8c'
+declare-option str green '50fa7b'
+declare-option str purple 'bd93f9'
+declare-option str cyan '8be9fd'
+declare-option str pink 'ff79c6'
+
+# ANSI
+declare-option str black '21222c'
+declare-option str red 'ff5555'
+declare-option str green '50fa7b'
+declare-option str yellow 'f1fa8c'
+declare-option str blue 'bd93f9'
+declare-option str magenta 'ff79c6'
+declare-option str cyan '8be9fd'
+declare-option str white 'f8f8f2'
+declare-option str bright_black '6272a4'
+declare-option str bright_red 'ff6e6e'
+declare-option str bright_green '69ff94'
+declare-option str bright_yellow 'ffffa5'
+declare-option str bright_blue 'd6acff'
+declare-option str bright_magenta 'ff92df'
+declare-option str bright_cyan 'a4ffff'
+declare-option str bright_white 'ffffff'
+
+# Alpha blending
+declare-option str cursor_alpha '99'
+declare-option str selection_alpha '80'
+
+# UI variants
+# <https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=UI Variants>
+declare-option str background_lighter '424450'
+declare-option str background_light '343746'
+declare-option str background_dark '21222c'
+declare-option str background_darker '191a21'
+
+# Other
+# https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=other
+declare-option str non_text "%opt{background_light}"
+
+# Template ─────────────────────────────────────────────────────────────────────
+
+# For code
+set-face global value "rgb:%opt{purple}" # C++ ⇒ int number = [42];
+set-face global type "rgb:%opt{pink}" # C++ ⇒ [int] main() { ... }
+set-face global variable "rgb:%opt{cyan}" # Makefile ⇒ [install]:
+set-face global module "rgb:%opt{yellow}" # C++ ⇒ #include [<stdio.h>]
+set-face global function "rgb:%opt{green}" # https://spec.draculatheme.com#FunctionNames
+set-face global string "rgb:%opt{yellow}" # https://spec.draculatheme.com#String
+set-face global keyword "rgb:%opt{pink}" # https://spec.draculatheme.com#Keyword
+set-face global operator "rgb:%opt{pink}" # Shell ⇒ true [&&] false
+set-face global attribute "rgb:%opt{pink}" # C++ ⇒ [enum] Color { ... };
+set-face global comment "rgb:%opt{comment}" # https://spec.draculatheme.com#Comment
+set-face global documentation comment # Rust ⇒ /// Returns `true`.
+set-face global meta "rgb:%opt{pink}" # C++ ⇒ [#include] <stdio.h>
+set-face global builtin "rgb:%opt{cyan}+i" # https://spec.draculatheme.com#Support
+
+# Diffs
+# https://spec.draculatheme.com#sec-Diffs
+set-face global DiffText "rgb:%opt{comment}"
+set-face global DiffHeader "rgb:%opt{comment}"
+set-face global DiffInserted "rgb:%opt{green},rgba:%opt{green}20" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=diffEditor.insertedTextBackground
+set-face global DiffDeleted "rgb:%opt{red},rgba:%opt{red}50" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=diffEditor.removedTextBackground
+set-face global DiffChanged "rgb:%opt{orange}"
+
+# For markup
+set-face global title "rgb:%opt{purple}+b" # AsciiDoc ⇒ = Document title — https://spec.draculatheme.com#MarkupHeading
+set-face global header "rgb:%opt{purple}+b" # AsciiDoc ⇒ == Section title — https://spec.draculatheme.com#MarkupHeading
+set-face global mono "rgb:%opt{green}" # AsciiDoc ⇒ `code` — https://spec.draculatheme.com#MarkupInlineCode
+set-face global block "rgb:%opt{orange}" # AsciiDoc ⇒ [----][code][----] — https://spec.draculatheme.com#MarkupCodeBlockWithoutSyntax
+set-face global link "rgb:%opt{cyan}" # Markdown ⇒ <https://draculatheme.com> — https://spec.draculatheme.com#MarkupLinkUrl
+set-face global bullet "rgb:%opt{cyan}" # https://spec.draculatheme.com#MarkupListBulletOrNumber
+set-face global list "rgb:%opt{foreground}" # AsciiDoc ⇒ - [item]
+
+# Builtin faces
+set-face global Default "rgb:%opt{foreground},rgb:%opt{background}" # Editor background
+set-face global PrimarySelection "default,rgba:%opt{pink}%opt{selection_alpha}" # Pink (alpha-blended)
+set-face global SecondarySelection "default,rgba:%opt{purple}%opt{selection_alpha}" # Purple (alpha-blended)
+set-face global PrimaryCursor "default,rgba:%opt{pink}%opt{cursor_alpha}" # Pink (alpha-blended)
+set-face global SecondaryCursor "default,rgba:%opt{purple}%opt{cursor_alpha}" # Purple (alpha-blended)
+set-face global PrimaryCursorEol "rgb:%opt{background},rgb:%opt{foreground}+fg" # White (full block)
+set-face global SecondaryCursorEol "rgb:%opt{background},rgb:%opt{foreground}+fg" # White (full block)
+set-face global MenuForeground "rgb:%opt{foreground},rgb:%opt{selection}" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorSuggestWidget.selectedBackground
+set-face global MenuBackground "rgb:%opt{foreground},rgb:%opt{background_dark}" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorSuggestWidget.background
+set-face global MenuInfo "rgb:%opt{comment}" # IntelliSense suggestions
+set-face global Information Default # Contextual help blends with the editor background.
+set-face global Error "rgb:%opt{foreground},rgb:%opt{red}" # https://spec.draculatheme.com#Invalid
+set-face global DiagnosticError "rgb:%opt{red}" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorError.foreground
+set-face global DiagnosticWarning "rgb:%opt{cyan}" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorWarning.foreground
+set-face global StatusLine "rgb:%opt{foreground},rgb:%opt{background_dark}" # Prefer background dark here — https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=statusBar.background
+set-face global StatusLineMode "rgb:%opt{green}" # [insert]
+set-face global StatusLineInfo "rgb:%opt{purple}" # 1 sel
+set-face global StatusLineValue "rgb:%opt{green}" # 1 sel param=[42] reg=[y]
+set-face global StatusCursor "rgb:%opt{background},rgb:%opt{foreground}" # Cursor in command mode
+set-face global Prompt StatusLine # Same as the status line, since they live at the same place.
+set-face global BufferPadding "rgb:%opt{non_text}" # Kakoune ⇒ set-option global ui_options terminal_padding_fill=yes
+
+# Builtin highlighter faces
+set-face global LineNumbers "rgb:%opt{non_text}" # Kakoune ⇒ add-highlighter -override global/number-lines number-lines — Prefer non-text here — https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorLineNumber
+set-face global LineNumberCursor "rgb:%opt{foreground}" # Kakoune ⇒ add-highlighter -override global/number-lines number-lines -hlcursor
+set-face global LineNumbersWrapped "rgb:%opt{background}" # Kakoune ⇒ add-highlighter -override global/number-lines number-lines; add-highlighter -override global/wrap wrap
+set-face global MatchingChar "rgb:%opt{green}+uf" # Kakoune ⇒ add-highlighter -override global/show-matching show-matching — https://github.com/dracula/vim/blob/master/colors/dracula.vim#:~:text=MatchParen
+set-face global Whitespace "rgb:%opt{non_text}+f" # Kakoune ⇒ add-highlighter -override global/show-whitespaces show-whitespaces
+set-face global WrapMarker "rgb:%opt{non_text}" # Kakoune ⇒ add-highlighter -override global/wrap wrap -marker '↪'
+# ~/.config/kak/colors/dracula.kak
+##
+## base16.kak by lenormf
+##
+
+evaluate-commands %sh{
+    black_lighterer='rgb:383838'
+    black_lighter='rgb:2D2D2D'
+    black_light='rgb:1C1C1C'
+    cyan_light='rgb:7CB0FF'
+    green_dark='rgb:A1B56C'
+    grey_dark='rgb:585858'
+    grey_light='rgb:D8D8D8'
+    magenta_dark='rgb:AB4642'
+    magenta_light='rgb:AB4434'
+    orange_dark='rgb:DC9656'
+    orange_light='rgb:F7CA88'
+    purple_dark='rgb:BA8BAF'
+
+    ## code
+    echo "
+        face global value ${orange_dark}+b
+        face global type ${orange_light}
+        face global variable ${magenta_dark}
+        face global module ${green_dark}
+        face global function ${cyan_light}
+        face global string ${green_dark}
+        face global keyword ${purple_dark}+b
+        face global operator ${cyan_light}
+        face global attribute ${orange_dark}
+        face global comment ${grey_dark}
+        face global documentation comment
+        face global meta ${orange_light}
+        face global builtin default+b
+    "
+
+    ## markup
+    echo "
+        face global title blue
+        face global header ${cyan_light}
+        face global mono ${green_dark}
+        face global block ${orange_dark}
+        face global link blue
+        face global bullet ${magenta_light}
+        face global list ${magenta_dark}
+    "
+
+    ## builtin
+    echo "
+        face global Default ${grey_light},${black_lighter}
+        face global PrimarySelection white,blue+fg
+        face global SecondarySelection black,blue+fg
+        face global PrimaryCursor black,white+fg
+        face global SecondaryCursor black,white+fg
+        face global PrimaryCursorEol black,${cyan_light}+fg
+        face global SecondaryCursorEol black,${cyan_light}+fg
+        face global LineNumbers ${grey_light},${black_lighter}
+        face global LineNumberCursor ${grey_light},rgb:282828+b
+        face global MenuForeground ${grey_light},blue
+        face global MenuBackground blue,${grey_light}
+        face global MenuInfo ${cyan_light}
+        face global Information ${black_light},${cyan_light}
+        face global Error ${grey_light},${magenta_light}
+        face global DiagnosticError ${magenta_light}
+        face global DiagnosticWarning ${cyan_light}
+        face global StatusLine ${grey_light},${black_lighterer}
+        face global StatusLineMode ${orange_dark}
+        face global StatusLineInfo ${cyan_light}
+        face global StatusLineValue ${green_dark}
+        face global StatusCursor ${black_lighterer},${cyan_light}
+        face global Prompt ${black_light},${cyan_light}
+        face global MatchingChar ${cyan_light},${black_light}+b
+        face global BufferPadding ${cyan_light},${black_lighter}
+        face global Whitespace ${grey_dark}+f
+    "
+}
+# Kakoune default color scheme
+
+# For Code
+face global value red
+face global type yellow
+face global variable green
+face global module green
+face global function cyan
+face global string magenta
+face global keyword blue
+face global operator yellow
+face global attribute green
+face global comment cyan
+face global documentation comment
+face global meta magenta
+face global builtin default+b
+
+# For markup
+face global title blue
+face global header cyan
+face global mono green
+face global block magenta
+face global link cyan
+face global bullet cyan
+face global list yellow
+
+# builtin faces
+face global Default default,default
+face global PrimarySelection white,blue+fg
+face global SecondarySelection black,blue+fg
+face global PrimaryCursor black,white+fg
+face global SecondaryCursor black,white+fg
+face global PrimaryCursorEol black,cyan+fg
+face global SecondaryCursorEol black,cyan+fg
+face global LineNumbers default,default
+face global LineNumberCursor default,default+r
+face global MenuForeground white,blue
+face global MenuBackground blue,white
+face global MenuInfo cyan
+face global Information black,yellow
+face global Error black,red
+face global DiagnosticError red
+face global DiagnosticWarning yellow
+face global StatusLine cyan,default
+face global StatusLineMode yellow,default
+face global StatusLineInfo blue,default
+face global StatusLineValue green,default
+face global StatusCursor black,cyan
+face global Prompt yellow,default
+face global MatchingChar default,default+b
+face global Whitespace default,default+fd
+face global BufferPadding blue,default
+# ~/.config/kak/colors/dracula.kak
+source "%val{runtime}/colors/default.kak"

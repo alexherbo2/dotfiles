@@ -8,6 +8,10 @@ Kakoune, a punk rock text editor
 https://zork.net/~st/jottings/kakoune-a-punk-rock-text-editor.html
 ~krobelus/dotfiles
 https://git.sr.ht/~krobelus/dotfiles
+Dracula theme website
+https://draculatheme.com
+Dracula theme repository
+https://github.com/dracula/dracula-theme
 Charm website
 https://charm.sh
 Glow repository

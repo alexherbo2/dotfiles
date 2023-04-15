@@ -1408,7 +1408,8 @@ define-command git -params .. -docstring 'git [options] [command] [flags]: run G
 }
 
 # https://git-scm.com/docs/git-add
-define-command git-add -docstring 'git-add: stage the current buffer file' %{
+define-command git-write -docstring 'git-write: save the current buffer and stage the file' %{
+  write
   nop %sh{
     git add "$kak_buffile"
   }
@@ -1430,7 +1431,6 @@ define-command git-commit -docstring 'git-commit: commit changes' %{
 
 # Aliases ──────────────────────────────────────────────────────────────────────
 
-alias global g git
 alias global gw git-write
 alias global gc git-commit
 

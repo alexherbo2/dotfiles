@@ -88,8 +88,6 @@ map global normal T '<a-:><a-;><a-T>'
 # map global normal N '<a-:><a-;><a-?><ret>'
 map global normal x ': select-or-extend-lines<ret>'
 map global normal X 'x<a-:><a-;>'
-map global normal v '<a-i>'
-map global normal V '<a-a>'
 map global normal { '<a-:><a-;>{p'
 map global normal } '<a-:>}p'
 define-command select-or-extend-lines %{
@@ -1421,7 +1419,7 @@ define-command git-write -docstring 'git-write: save the current buffer and stag
 # https://git-scm.com/docs/git-commit
 define-command git-commit -docstring 'git-commit: commit changes' %{
   edit -existing %sh{
-    git commit --verbose --no-edit
+    git -c core.editor= commit
     git rev-parse --git-path COMMIT_EDITMSG
   }
   hook buffer BufWritePost '.*' %{

@@ -167,25 +167,50 @@ map global prompt <a-o> '<home>(?S)<end>'
 
 # Goto mode --------------------------------------------------------------------
 
-map -docstring 'file' global goto f '<a-;>: open-file-picker<ret>'
-
-define-command open-file-picker -docstring 'open-file-picker: Opens file picker.' %{
-  prompt -menu file: -shell-script-candidates 'fd -H --type file' %{
-    edit %val{text}
+define-command -hidden open_file_picker %{
+  prompt open: -menu -shell-script-candidates 'fd --hidden --type=file' %{
+    edit -existing %val{text}
   }
 }
 
-map -docstring 'buffer' global goto b '<a-;>: open-buffer-picker<ret>'
-
-define-command open-buffer-picker -docstring 'open-buffer-picker: Opens buffer picker.' %{
-  prompt -menu buffer: -buffer-completion %{
+define-command -hidden open_buffer_picker %{
+  prompt open: -menu -buffer-completion %{
     buffer %val{text}
   }
 }
 
-map -docstring 'global search' global goto / '<a-;>: open-global-search-picker<ret>'
+define-command -hidden open_global_search_prompt %{
+  prompt global_search: -shell-script-candidates %{
+    echo "write $kak_quoted_response_fifo" > "$kak_command_fifo"
+    tr -sc '[:alnum:]' '\n' < "$kak_response_fifo"
+  } %{
+    open_buffer_with_output "%val{text}.refs" rg --hidden --column -- %val{text}
+  }
+}
+
+define-command -hidden open_viewport_picker %{
+  prompt -menu viewport_picker: -client-completion %{
+    swap_buffer_in_viewport %val{text}
+  }
+}
+
+define-command -hidden swap_buffer_in_viewport -params 1 %{
+  execute-keys '"sZ'
+  execute-keys -client %arg{1} '"tZ'
+  execute-keys '"tz<esc>'
+  execute-keys -client %arg{1} '"sz<esc>'
+}
+
+map -docstring 'open file picker' global user f ':open_file_picker<ret>'
+map -docstring 'open buffer picker' global user b ':open_buffer_picker<ret>'
+map -docstring 'open global search prompt' global user / ':open_global_search_prompt<ret>'
+map -docstring 'open viewport picker' global user v ':open_viewport_picker<ret>'
 
 add-highlighter shared/grep regex '^(.+?):(\d+):(\d+):(.+?)$' 1:string 2:value 3:value
+
+hook global BufOpenFifo '.+\.refs' %{
+  set-option buffer filetype references
+}
 
 hook -group grep-highlight global BufSetOption filetype=grep %{
   add-highlighter buffer/grep ref grep
@@ -202,33 +227,17 @@ define-command -hidden grep_jump %{
   }
 }
 
-define-command fifo -params .. %{
-  set-register d %sh{mktemp -d}
-  set-register f "%reg{d}/fifo"
+define-command -hidden open_buffer_with_output -params 2.. %{
+  set-register f %sh{mktemp -u}
   nop %sh{
-    mkfifo "$kak_reg_f"
-    { "$@" > "$kak_reg_f"; } < /dev/null > /dev/null 2>&1 &
+    shift && mkfifo "$kak_reg_f" && "$@" > "$kak_reg_f" 2>&1 &
   }
-  edit! -fifo %reg{f} '[fifo]'
-  hook -always -once buffer BufCloseFifo '' "nop %%sh{ echo rm -Rf ""%reg{d}"" >> ~/t.txt }"
+  edit! -scroll -fifo %reg{f} %arg{1}
+  hook -always -once buffer BufCloseFifo '' "nop %%sh{ unlink ""%reg{d}"" >> ~/t.txt }"
 }
-
-complete-command fifo shell
 
 declare-option str grep_command rg
 declare-option str-list grep_args --hidden --column --with-filename
-
-define-command open-global-search-picker -docstring 'open-global-search-picker: Opens global search picker.' %{
-  # Provides word completion
-  prompt grep: -shell-script-candidates %{
-    echo "write '$kak_response_fifo'" > "$kak_command_fifo"
-    cat "$kak_response_fifo" | kak -f 's[\w-]{4,}<ret>y%<a-R>a<ret>'
-  } %{
-    fifo rg --hidden --column --with-filename %val{text}
-    rename-buffer "%arg{@}.refs"
-    set-option buffer filetype grep
-  }
-}
 
 # Vim-like unimpaired mappings
 declare-user-mode unimpaired_left
@@ -316,31 +325,6 @@ define-command evaluate-selections -docstring 'evaluate selections' %{
 }
 
 alias global = evaluate-selections
-
-define-command link-window -params 1 -docstring 'link-window <client>: link window to client' %{
-  execute-keys '"sZ'
-  execute-keys -client %arg{1} '"sz'
-}
-
-complete-command link-window client
-
-define-command grab_buffer_in_viewport -params 1 -client-completion -docstring 'link-window <client>: link window to client' %{
-  execute-keys -client %arg{1} '"tZ'
-  execute-keys '"tz'
-}
-
-define-command move-window -params 1 -client-completion -docstring 'move-window <client>: move window to client' %{
-  execute-keys '"sZ'
-  execute-keys -client %arg{1} '"sz'
-  buffer-next
-}
-
-define-command swap-window -params 1 -client-completion -docstring 'swap-window <client>: swap window with client' %{
-  execute-keys '"sZ'
-  execute-keys -client %arg{1} '"tZ'
-  execute-keys '"tz'
-  execute-keys -client %arg{1} '"sz'
-}
 
 # Surround selections
 # Reference: https://github.com/mawww/kakoune/blob/master/src/normal.cc#:~:text=select_object
@@ -1532,7 +1516,7 @@ hook -group git-rebase global WinSetOption filetype=git-rebase %{
 # - `WhitespaceRuler` ⇒ `green+fu`
 # - `WhitespaceError` ⇒ `red+fc`
 # - `WhitespaceWarning` ⇒ `red+fc`
-add-highlighter global/whitespace ref whitespace
+# add-highlighter global/whitespace ref whitespace
 # * Individual faces for whitespace (tabs, newlines, non-breaking-spaces) and indent.
 # * Show whitespace oddities:
 # ** Trailing whitespace (only shown when not in insert mode).

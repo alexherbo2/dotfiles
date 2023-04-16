@@ -5861,7 +5861,7 @@ jobs:
         run: bin/kak-test
 }
 ################
-source test/test_helper.kak
+#source test/test_helper.kak
 
 test test_select_words %{
 

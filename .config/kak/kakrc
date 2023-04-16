@@ -152,6 +152,27 @@ map global prompt <a-o> '<home>(?S)<end>'
 
 # Goto mode --------------------------------------------------------------------
 
+# ------------------------------------------------------------------------------
+
+# Commands ---------------------------------------------------------------------
+
+define-command -hidden swap_buffer_in_viewport -params 1 %{
+  execute-keys '"sZ'
+  execute-keys -client %arg{1} '"tZ'
+  execute-keys '"tz<esc>'
+  execute-keys -client %arg{1} '"sz<esc>'
+}
+
+define-command -hidden select_next_surrounding_object -params 1 %{
+  execute-keys "f%arg{1}<a-a>%arg{1}"
+}
+
+define-command -hidden select_previous_surrounding_object -params 1 %{
+  execute-keys "<a-f>%arg{1}h<a-a>%arg{1}"
+}
+
+# Prompt commands --------------------------------------------------------------
+
 define-command -hidden open_file_picker %{
   prompt open: -menu -shell-script-candidates 'fd --hidden --type=file' %{
     edit -existing %val{text}
@@ -179,21 +200,6 @@ define-command -hidden open_viewport_picker %{
   }
 }
 
-define-command -hidden swap_buffer_in_viewport -params 1 %{
-  execute-keys '"sZ'
-  execute-keys -client %arg{1} '"tZ'
-  execute-keys '"tz<esc>'
-  execute-keys -client %arg{1} '"sz<esc>'
-}
-
-define-command -hidden select_next_surrounding_object -params 1 %{
-  execute-keys "f%arg{1}<a-a>%arg{1}"
-}
-
-define-command -hidden select_previous_surrounding_object -params 1 %{
-  execute-keys "<a-f>%arg{1}h<a-a>%arg{1}"
-}
-
 define-command -hidden select_next_surrounding_object_prompt %{
   on-key %{
     select_next_surrounding_object %val{key}
@@ -205,6 +211,8 @@ define-command -hidden select_previous_surrounding_object_prompt %{
     select_previous_surrounding_object %val{key}
   }
 }
+
+# ------------------------------------------------------------------------------
 
 map global normal [ ':select_previous_surrounding_object_prompt<ret>'
 map global normal ] ':select_next_surrounding_object_prompt<ret>'

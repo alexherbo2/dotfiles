@@ -236,31 +236,27 @@ map -docstring 'open buffer picker' global user b ':open_buffer_picker<ret>'
 map -docstring 'open global search prompt' global user / ':open_global_search_prompt<ret>'
 map -docstring 'open viewport picker' global user v ':open_viewport_picker<ret>'
 
-# ------------------------------------------------------------------------------
+# Language support -------------------------------------------------------------
 
-add-highlighter shared/grep regex '^(.+?):(\d+):(\d+):(.+?)$' 1:string 2:value 3:value
+add-highlighter shared/references regex '^(.+?):(\d+):(\d+):(.+?)$' 1:string 2:value 3:value
 
 hook global BufOpenFifo '.+\.refs' %{
   set-option buffer filetype references
 }
 
-hook -group grep-highlight global BufSetOption filetype=grep %{
-  add-highlighter buffer/grep ref grep
-  map buffer normal <ret> ': grep_jump<ret>'
-  hook -always -once buffer BufSetOption 'filetype=.*' %{
-    remove-highlighter buffer/grep
-  }
+hook -group grep-highlight global BufSetOption filetype=references %{
+  add-highlighter buffer/references ref references
+  map buffer normal <ret> ':jump_to_references<ret>'
 }
 
-define-command -hidden grep_jump %{
+define-command -hidden jump_to_references %{
   evaluate-commands -draft %{
     execute-keys ',;xs^(.+?):(\d+):(\d+):(.+?)$<ret>'
     evaluate-commands -client %val{client} -- edit -existing %reg{1} %reg{2} %reg{3}
   }
 }
 
-declare-option str grep_command rg
-declare-option str-list grep_args --hidden --column --with-filename
+# ------------------------------------------------------------------------------
 
 # Vim-like unimpaired mappings
 declare-user-mode unimpaired_left

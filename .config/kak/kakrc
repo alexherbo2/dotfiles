@@ -5836,6 +5836,30 @@ test test_toggle_block_comments %{
   assert_buffer_eq '*input*' '*output*'
 }
 ################
+reg c %{
+name: Test CI
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Kakoune
+        run: sudo snap install kakoune --classic
+
+      - name: Install kakoune-test
+        run: |
+          curl -sSL -O https://github.com/alexherbo2/kakoune-test/releases/download/nightly/kak-test-nightly-x86_64-unknown-linux-musl.tar.xz
+          tar xvf kak-test-nightly-x86_64-unknown-linux-musl.tar.xz
+
+      - name: Run tests
+        run: bin/kak-test
+}
 ################
 ################
 ################

@@ -5720,8 +5720,8 @@ end
 paint :red
 }
 ################
-source test/test_helper.kak
-source rc/comment.kak
+#source test/test_helper.kak
+#source rc/comment.kak
 
 test test_toggle_line_comments %{
 

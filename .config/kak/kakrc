@@ -76,21 +76,6 @@ map -docstring 'tag' global object t 'c<lt>.+?<gt>,<lt>/.+?<gt><ret>'
 map -docstring 'line' global object x '<esc>x_'
 
 # Extended next and previous pairs
-map global normal [ ':select_previous_surrounding_object<ret>'
-map global normal ] ':select_next_surrounding_object<ret>'
-
-define-command select_next_surrounding_object %{
-  on-key %{
-    execute-keys "f%val{key}<a-a>%val{key}"
-  }
-}
-
-define-command select_previous_surrounding_object %{
-  on-key %{
-    execute-keys "<a-f>%val{key}h<a-a>%val{key}"
-  }
-}
-
 map -docstring 'yank joined selections into system clipboard' global user y ': yank_terminal_clipboard<ret>'
 map global normal <ret> ':'
 map global normal f '<a-:>F'
@@ -201,6 +186,28 @@ define-command -hidden swap_buffer_in_viewport -params 1 %{
   execute-keys -client %arg{1} '"sz<esc>'
 }
 
+define-command -hidden select_next_surrounding_object -params 1 %{
+  execute-keys "f%arg{1}<a-a>%arg{1}"
+}
+
+define-command -hidden select_previous_surrounding_object -params 1 %{
+  execute-keys "<a-f>%arg{1}h<a-a>%arg{1}"
+}
+
+define-command -hidden select_next_surrounding_object_prompt %{
+  on-key %{
+    select_next_surrounding_object %val{key}
+  }
+}
+
+define-command -hidden select_previous_surrounding_object_prompt %{
+  on-key %{
+    select_previous_surrounding_object %val{key}
+  }
+}
+
+map global normal [ ':select_previous_surrounding_object_prompt<ret>'
+map global normal ] ':select_next_surrounding_object_prompt<ret>'
 map -docstring 'open file picker' global user f ':open_file_picker<ret>'
 map -docstring 'open buffer picker' global user b ':open_buffer_picker<ret>'
 map -docstring 'open global search prompt' global user / ':open_global_search_prompt<ret>'

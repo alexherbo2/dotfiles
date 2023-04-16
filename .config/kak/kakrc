@@ -156,11 +156,17 @@ map global prompt <a-o> '<home>(?S)<end>'
 
 # Commands ---------------------------------------------------------------------
 
-define-command -hidden swap_buffer_in_viewport -params 1 %{
-  execute-keys '"sZ'
-  execute-keys -client %arg{1} '"tZ'
-  execute-keys '"tz<esc>'
-  execute-keys -client %arg{1} '"sz<esc>'
+define-command -hidden open_buffer_with_output -params 2.. %{
+  set-register f %sh{mktemp -u}
+  nop %sh{
+    shift && mkfifo "$kak_reg_f" && "$@" > "$kak_reg_f" 2>&1 &
+  }
+  edit! -scroll -fifo %reg{f} %arg{1}
+  hook -always -once buffer BufCloseFifo '' "
+    nop %%sh{
+      unlink ""%reg{d}""
+    }
+  "
 }
 
 define-command -hidden select_next_surrounding_object -params 1 %{
@@ -171,17 +177,24 @@ define-command -hidden select_previous_surrounding_object -params 1 %{
   execute-keys "<a-f>%arg{1}h<a-a>%arg{1}"
 }
 
-# Prompt commands --------------------------------------------------------------
-
-define-command -hidden open_file_picker %{
-  prompt open: -menu -shell-script-candidates 'fd --hidden --type=file' %{
-    edit -existing %val{text}
-  }
+define-command -hidden swap_buffer_in_viewport -params 1 %{
+  execute-keys '"sZ'
+  execute-keys -client %arg{1} '"tZ'
+  execute-keys '"tz<esc>'
+  execute-keys -client %arg{1} '"sz<esc>'
 }
+
+# Prompt commands --------------------------------------------------------------
 
 define-command -hidden open_buffer_picker %{
   prompt open: -menu -buffer-completion %{
     buffer %val{text}
+  }
+}
+
+define-command -hidden open_file_picker %{
+  prompt open: -menu -shell-script-candidates 'fd --hidden --type=file' %{
+    edit -existing %val{text}
   }
 }
 
@@ -200,26 +213,28 @@ define-command -hidden open_viewport_picker %{
   }
 }
 
-define-command -hidden select_next_surrounding_object_prompt %{
+define-command -hidden prompt_select_next_surrounding_object %{
   on-key %{
     select_next_surrounding_object %val{key}
   }
 }
 
-define-command -hidden select_previous_surrounding_object_prompt %{
+define-command -hidden prompt_select_previous_surrounding_object %{
   on-key %{
     select_previous_surrounding_object %val{key}
   }
 }
 
-# ------------------------------------------------------------------------------
+# Mappings ---------------------------------------------------------------------
 
-map global normal [ ':select_previous_surrounding_object_prompt<ret>'
-map global normal ] ':select_next_surrounding_object_prompt<ret>'
+map -docstring 'select previous surrounding object' global normal [ ':prompt_select_previous_surrounding_object<ret>'
+map -docstring 'select next surrounding object' global normal ] ':prompt_select_next_surrounding_object<ret>'
 map -docstring 'open file picker' global user f ':open_file_picker<ret>'
 map -docstring 'open buffer picker' global user b ':open_buffer_picker<ret>'
 map -docstring 'open global search prompt' global user / ':open_global_search_prompt<ret>'
 map -docstring 'open viewport picker' global user v ':open_viewport_picker<ret>'
+
+# ------------------------------------------------------------------------------
 
 add-highlighter shared/grep regex '^(.+?):(\d+):(\d+):(.+?)$' 1:string 2:value 3:value
 
@@ -240,15 +255,6 @@ define-command -hidden grep_jump %{
     execute-keys ',;xs^(.+?):(\d+):(\d+):(.+?)$<ret>'
     evaluate-commands -client %val{client} -- edit -existing %reg{1} %reg{2} %reg{3}
   }
-}
-
-define-command -hidden open_buffer_with_output -params 2.. %{
-  set-register f %sh{mktemp -u}
-  nop %sh{
-    shift && mkfifo "$kak_reg_f" && "$@" > "$kak_reg_f" 2>&1 &
-  }
-  edit! -scroll -fifo %reg{f} %arg{1}
-  hook -always -once buffer BufCloseFifo '' "nop %%sh{ unlink ""%reg{d}"" >> ~/t.txt }"
 }
 
 declare-option str grep_command rg

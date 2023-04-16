@@ -1421,12 +1421,12 @@ define-command git-write -docstring 'git-write: save the current buffer and stag
 # https://git-scm.com/docs/git-commit
 define-command git-commit -docstring 'git-commit: commit changes' %{
   edit -existing %sh{
-    git commit --no-edit
+    git commit --verbose --no-edit
     git rev-parse --git-path COMMIT_EDITMSG
   }
   hook buffer BufWritePost '.*' %{
     nop %sh{
-      git commit --file %val{hook_param} --cleanup=strip
+      git commit --file "$kak_hook_param" --cleanup=strip
     }
     delete-buffer
   }

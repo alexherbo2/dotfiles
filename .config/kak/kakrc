@@ -124,8 +124,6 @@ map -docstring 'enter command' global normal <ret> :
 # map -docstring 'move to next paragraph' global normal ] ,]plgi
 
 # Selection primitives
-map -docstring 'select inner object' global normal v <a-i>
-map -docstring 'select whole object' global normal V <a-a>
 map -docstring 'enter surround mode' global normal q ': enter-surround-mode<ret>'
 map -docstring 'enter select mode' global normal s ': enter-select-mode<ret>'
 

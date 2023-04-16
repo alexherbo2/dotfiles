@@ -225,6 +225,28 @@ define-command -hidden prompt_select_previous_surrounding_object %{
   }
 }
 
+# Porcelain commands -----------------------------------------------------------
+
+define-command git-write -docstring 'git-write: save the current buffer and stage the file' %{
+  write
+  nop %sh{
+    git add "$kak_buffile"
+  }
+}
+
+define-command git-commit -docstring 'git-commit: commit changes' %{
+  edit -existing %sh{
+    git -c core.editor= commit
+    git rev-parse --git-path COMMIT_EDITMSG
+  }
+  hook buffer BufWritePost '.*' %{
+    nop %sh{
+      git commit --file "$kak_hook_param" --cleanup=strip
+    }
+    delete-buffer
+  }
+}
+
 # Mappings ---------------------------------------------------------------------
 
 map -docstring 'select previous surrounding object' global normal [ ':prompt_select_previous_surrounding_object<ret>'
@@ -1398,38 +1420,6 @@ set-face global DiffChanged 'yellow'
 # - `DiffInserted`
 # - `DiffDeleted`
 # - `DiffChanged`
-define-command git -params .. -docstring 'git [options] [command] [flags]: run Git' %{
-  evaluate-commands %sh{
-    git "$@" > /dev/null
-    exit_code=$?
-    if [ "$exit_code" -ne 0 ]; then
-      printf 'fail "git: `git %%arg{@}` exited with %d"' "$exit_code"
-    fi
-  }
-}
-
-# https://git-scm.com/docs/git-add
-define-command git-write -docstring 'git-write: save the current buffer and stage the file' %{
-  write
-  nop %sh{
-    git add "$kak_buffile"
-  }
-}
-
-# https://git-scm.com/docs/git-commit
-define-command git-commit -docstring 'git-commit: commit changes' %{
-  edit -existing %sh{
-    git -c core.editor= commit
-    git rev-parse --git-path COMMIT_EDITMSG
-  }
-  hook buffer BufWritePost '.*' %{
-    nop %sh{
-      git commit --file "$kak_hook_param" --cleanup=strip
-    }
-    delete-buffer
-  }
-}
-
 # Aliases ──────────────────────────────────────────────────────────────────────
 
 alias global gw git-write

@@ -22,9 +22,10 @@ evaluate-commands %sh{
 
 # Preamble ---------------------------------------------------------------------
 
-try %sh{
+evaluate-commands %sh{
   kak-lsp --kakoune --session "$kak_session"
 }
+lsp-enable
 
 # Options ----------------------------------------------------------------------
 

@@ -41,7 +41,7 @@ export LANG=en_US.UTF-8
 export QT_QPA_PLATFORMTHEME=kde
 
 # Applications
-export EDITOR=kak
+export EDITOR='kak -n -e "source ~/.config/kak/kakrc"'
 export KAKOUNE_POSIX_SHELL=/bin/dash
 
 # Local environment variables

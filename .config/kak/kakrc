@@ -129,11 +129,6 @@ map -docstring 'enter select mode' global normal s ': enter-select-mode<ret>'
 
 # User mode --------------------------------------------------------------------
 
-# LSP
-# map -docstring 'lsp' global user l ': enter-user-mode lsp<ret>'
-# map -docstring 'open document symbol picker' global user s ': enter-user-mode lsp<ret>s'
-# map -docstring 'open workspace symbol picker' global user S ': enter-user-mode lsp<ret>o'
-
 # Formatting and parsing date-time
 map -docstring 'format date to 2006-01-02' global user d '| date -d "$kak_selection" ''+%F''<ret>'
 map -docstring 'format date to 2006-01-02 Mon' global user D '| date -d "$kak_selection" ''+%F %a''<ret>'
@@ -184,10 +179,18 @@ define-command -hidden swap_buffer_in_viewport -params 1 %{
 
 # Prompt commands --------------------------------------------------------------
 
+define-command -hidden show_definition_preview_hover %{
+  lsp-hover
+}
+
 define-command -hidden open_buffer_picker %{
   prompt open: -menu -buffer-completion %{
     buffer %val{text}
   }
+}
+
+define-command -hidden open_document_symbol_picker %{
+  lsp-goto-document-symbol
 }
 
 define-command -hidden open_file_picker %{
@@ -209,6 +212,10 @@ define-command -hidden open_viewport_picker %{
   prompt -menu viewport_picker: -client-completion %{
     swap_buffer_in_viewport %val{text}
   }
+}
+
+define-command -hidden open_workspace_symbol_picker %{
+  lsp-workspace-symbol-incr
 }
 
 define-command -hidden prompt_select_next_surrounding_object %{
@@ -253,6 +260,10 @@ map -docstring 'open file picker' global user f ':open_file_picker<ret>'
 map -docstring 'open buffer picker' global user b ':open_buffer_picker<ret>'
 map -docstring 'open global search prompt' global user / ':open_global_search_prompt<ret>'
 map -docstring 'open viewport picker' global user v ':open_viewport_picker<ret>'
+map -docstring 'open document symbol picker' global user s ':open_document_symbol_picker<ret>'
+map -docstring 'open workspace symbol picker' global user S ':open_workspace_symbol_picker<ret>'
+map -docstring 'show definition preview hover' global user k ':show_definition_preview_hover<ret>'
+map -docstring 'enter lsp mode' global user l ':enter-user-mode lsp<ret>'
 
 # Language support -------------------------------------------------------------
 
@@ -6055,4 +6066,14 @@ hook -group tmux-integration global User 'TMUX=(.+?),(.+?),(.+?)' %{
     tmux_impl set-buffer -w %val{main_reg_dquote}
   }
 }
-################
+#######################
+define-command send-selections-to -params 1 %{
+    try %{
+        eval %sh{ printf '' | kak -p "$1" || printf 'fail' }
+        echo -quoting kakoune -to-shell-script "kak -p '%arg{1}'" 'set-register' 'dquote' %val{selections}
+        echo -markup "{Information}Sent %val{selection_count} selection(s) to session '%arg{1}'"
+    } catch %{
+        echo -markup "{Error}Session '%arg{1}' does not seem to exist"
+    }
+}
+complete-command -menu send-selections-to shell-script-candidates %{ kak -l | grep -E -v "(^$kak_session|\(dead\))$" }

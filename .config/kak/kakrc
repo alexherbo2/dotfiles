@@ -125,8 +125,8 @@ map -docstring 'enter command' global normal <ret> :
 # map -docstring 'move to next paragraph' global normal ] ,]plgi
 
 # Selection primitives
-map -docstring 'enter surround mode' global normal q ': enter-surround-mode<ret>'
-map -docstring 'enter select mode' global normal s ': enter-select-mode<ret>'
+# map -docstring 'enter surround mode' global normal q ': enter-surround-mode<ret>'
+# map -docstring 'enter select mode' global normal s ': enter-select-mode<ret>'
 
 # User mode --------------------------------------------------------------------
 
@@ -147,6 +147,10 @@ map global prompt <a-o> '<home>(?S)<end>'
 # ------------------------------------------------------------------------------
 
 # Commands ---------------------------------------------------------------------
+
+define-command -hidden enter_lsp_mode %{
+  enter-user-mode lsp
+}
 
 define-command -hidden open_buffer_with_output -params 2.. %{
   set-register f %sh{mktemp -u}
@@ -255,6 +259,7 @@ define-command git-commit -docstring 'git-commit: commit changes' %{
 
 # Mappings ---------------------------------------------------------------------
 
+map -docstring 'enter surround mode' global normal q ':enter_surround_mode<ret>'
 map -docstring 'select previous surrounding object' global normal [ ':prompt_select_previous_surrounding_object<ret>'
 map -docstring 'select next surrounding object' global normal ] ':prompt_select_next_surrounding_object<ret>'
 map -docstring 'open file picker' global user f ':open_file_picker<ret>'
@@ -264,7 +269,8 @@ map -docstring 'open viewport picker' global user v ':open_viewport_picker<ret>'
 map -docstring 'open document symbol picker' global user s ':open_document_symbol_picker<ret>'
 map -docstring 'open workspace symbol picker' global user S ':open_workspace_symbol_picker<ret>'
 map -docstring 'show definition preview hover' global user k ':show_definition_preview_hover<ret>'
-map -docstring 'enter lsp mode' global user l ':enter-user-mode lsp<ret>'
+map -docstring 'enter lsp mode' global user l ':enter_lsp_mode<ret>'
+map -docstring 'find friendly session name' global user R ':find_friendly_session_name<ret>'
 
 # Language support -------------------------------------------------------------
 
@@ -378,15 +384,17 @@ alias global = evaluate-selections
 # Surround selections
 # Reference: https://github.com/mawww/kakoune/blob/master/src/normal.cc#:~:text=select_object
 
-# Modes ────────────────────────────────────────────────────────────────────────
+declare-user-mode surround
 
-try %[ declare-user-mode surround ]
-
-define-command enter-surround-mode -docstring 'enter surround mode' %{
+define-command -hidden enter_surround_mode %{
   enter-user-mode surround
 }
 
-# Mappings ─────────────────────────────────────────────────────────────────────
+define-command -hidden declare_surrounding_pair -params 4 %{
+  map -docstring %arg{1} global surround %arg{2} ":add_surrounding_pair %%_%arg{3}_ %%_%arg{4}_<ret>"
+  map -docstring %arg{1} global surround %arg{3} ":add_surrounding_pair %%_%arg{3}_ %%_%arg{4}_<ret>"
+  map -docstring %arg{1} global surround %arg{4} ":add_surrounding_pair %%_%arg{3}_ %%_%arg{4}_<ret>"
+}
 
 # parenthesis block
 # brace block
@@ -401,45 +409,33 @@ define-command enter-surround-mode -docstring 'enter surround mode' %{
 # single angle quotation mark
 # emphasis
 # strong
-# map -docstring 'enter surround mode' global normal q ': enter-surround-mode<ret>'
-define-command -hidden surround-init %{
-  # Enter text
-  map -docstring 'enter insert mode' global surround i ': surround-enter-insert-mode<ret>'
-  map -docstring 'key' global surround k ': surround-key<ret>'
-  map -docstring 'tag' global surround t ': surround-tag<ret>'
+# Enter text
+map -docstring 'enter insert mode' global surround i ': surround-enter-insert-mode<ret>'
+map -docstring 'key' global surround k ': surround-key<ret>'
+map -docstring 'tag' global surround t ': surround-tag<ret>'
 
-  # Editing
-  map -docstring 'space' global surround <space> ': surround-add-space<ret>'
-  map -docstring 'line' global surround <ret> ': surround-add-line<ret>'
-  map -docstring 'delete' global surround <backspace> ': surround-delete<ret>'
-  map -docstring 'delete' global surround <del> ': surround-delete<ret>'
+# Editing
+map -docstring 'space' global surround <space> ': surround-add-space<ret>'
+map -docstring 'line' global surround <ret> ': surround-add-line<ret>'
+map -docstring 'delete' global surround <backspace> ': surround-delete<ret>'
+map -docstring 'delete' global surround <del> ': surround-delete<ret>'
 
-  # Surrounding pairs
-  declare-surrounding-pair 'parenthesis block' b ( )
-  declare-surrounding-pair 'brace block' B { }
-  declare-surrounding-pair 'bracket block' r [ ]
-  declare-surrounding-pair 'angle block' a <lt> <gt>
-  declare-surrounding-pair 'double quote string' Q '"' '"'
-  declare-surrounding-pair 'single quote string' q "'" "'"
-  declare-surrounding-pair 'grave quote string' g ` `
-  declare-surrounding-pair 'double quotation mark' <a-Q> “ ”
-  declare-surrounding-pair 'single quotation mark' <a-q> ‘ ’
-  declare-surrounding-pair 'double angle quotation mark' <a-G> « »
-  declare-surrounding-pair 'single angle quotation mark' <a-g> ‹ ›
+# Surrounding pairs
+declare_surrounding_pair 'parenthesis block' b ( )
+declare_surrounding_pair 'brace block' B { }
+declare_surrounding_pair 'bracket block' r [ ]
+declare_surrounding_pair 'angle block' a <lt> <gt>
+declare_surrounding_pair 'double quote string' Q '"' '"'
+declare_surrounding_pair 'single quote string' q "'" "'"
+declare_surrounding_pair 'grave quote string' g ` `
+declare_surrounding_pair 'double quotation mark' <a-Q> “ ”
+declare_surrounding_pair 'single quotation mark' <a-q> ‘ ’
+declare_surrounding_pair 'double angle quotation mark' <a-G> « »
+declare_surrounding_pair 'single angle quotation mark' <a-g> ‹ ›
 
-  # Emphasis
-  map -docstring 'emphasis' global surround _ ': surround-add _ _<ret>'
-  map -docstring 'strong' global surround * ': surround-add ** **<ret>'
-}
-
-# Commands ─────────────────────────────────────────────────────────────────────
-
-# Declare surrounding pairs
-define-command declare-surrounding-pair -params 4 -docstring 'declare-surrounding-pair <description> [alias] <opening> <closing>: declare surrounding pair' %{
-  try %[ map -docstring %arg{1} global surround %arg{2} ": surround-add %%🐈%arg{3}🐈 %%🐈%arg{4}🐈<ret>" ]
-  try %[ map -docstring %arg{1} global surround %arg{3} ": surround-add %%🐈%arg{3}🐈 %%🐈%arg{4}🐈<ret>" ]
-  try %[ map -docstring %arg{1} global surround %arg{4} ": surround-add %%🐈%arg{3}🐈 %%🐈%arg{4}🐈<ret>" ]
-}
+# Emphasis
+map -docstring 'emphasis' global surround _ ': add_surrounding_pair _ _<ret>'
+map -docstring 'strong' global surround * ': add_surrounding_pair ** **<ret>'
 
 # Enter insert mode
 define-command -hidden surround-enter-insert-mode -docstring 'surround: enter insert mode' %{
@@ -458,19 +454,19 @@ define-command -hidden surround-enter-insert-mode -docstring 'surround: enter in
 # Surround key
 define-command -hidden surround-key -docstring 'surround key' %{
   on-key %{
-    surround-add %val{key} %val{key}
+    add_surrounding_pair %val{key} %val{key}
   }
 }
 
 # Surround tag
 define-command -hidden surround-tag -docstring 'surround tag' %{
   prompt surround-tag: %{
-    surround-add "<%val{text}>" "</%val{text}>"
+    add_surrounding_pair "<%val{text}>" "</%val{text}>"
   }
 }
 
 # Surround selected text
-define-command -hidden surround-add -params 2 %{
+define-command -hidden add_surrounding_pair -params 2 %{
   evaluate-commands -save-regs '"' %{
     set-register '"' %arg{1}
     execute-keys -draft P
@@ -480,7 +476,7 @@ define-command -hidden surround-add -params 2 %{
 }
 
 define-command -hidden surround-add-space %{
-  surround-add ' ' ' '
+  add_surrounding_pair ' ' ' '
 }
 
 define-command -hidden surround-add-line %{
@@ -515,9 +511,13 @@ define-command -hidden surround-delete %{
   }
 }
 
-# Initialization ───────────────────────────────────────────────────────────────
-
-surround-init
+define-command -hidden find_friendly_session_name %{
+  rename-session %sh{
+    curl 'https://myanimelist.net/character.php?limit=[0-1000:50]' |
+    kak -f '1shttps://myanimelist.net/character/\d+/(\w+)<ret>y%<a-R>a<ret>' |
+    shuf -n 1
+  }
+}
 
 define-command alacritty-open-new-client -params .. %{
   nop %sh{

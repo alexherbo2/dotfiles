@@ -77,7 +77,6 @@ map -docstring 'tag' global object t 'c<lt>.+?<gt>,<lt>/.+?<gt><ret>'
 map -docstring 'line' global object x '<esc>x_'
 
 # Extended next and previous pairs
-map -docstring 'yank joined selections into system clipboard' global user y ': yank_terminal_clipboard<ret>'
 map global normal <ret> ':'
 map global normal f '<a-:>F'
 map global normal F '<a-:><a-;><a-F>'
@@ -235,6 +234,17 @@ define-command -hidden prompt_select_previous_surrounding_object %{
   }
 }
 
+define-command -hidden yank_selected_text_to_terminal_clipboard %{
+  nop %sh{
+    printf 'echo -to-file %%(%s) -- "%%val{selections}"' "$kak_response_fifo" > "$kak_command_fifo"
+    {
+      printf '\033]52;c;'
+      tr '\0' '\n' < "$kak_response_fifo" | sed 's/\\\\/\\/g' | base64
+      printf '\a'
+    } > /dev/tty
+  }
+}
+
 # Porcelain commands -----------------------------------------------------------
 
 define-command git-write -docstring 'git-write: save the current buffer and stage the file' %{
@@ -270,6 +280,7 @@ map -docstring 'open document symbol picker' global user s ':open_document_symbo
 map -docstring 'open workspace symbol picker' global user S ':open_workspace_symbol_picker<ret>'
 map -docstring 'show definition preview hover' global user k ':show_definition_preview_hover<ret>'
 map -docstring 'enter lsp mode' global user l ':enter_lsp_mode<ret>'
+map -docstring 'yank selected text to the terminal clipboard' global user y ':yank_selected_text_to_terminal_clipboard<ret>'
 map -docstring 'find friendly session name' global user R ':find_friendly_session_name<ret>'
 
 # Language support -------------------------------------------------------------
@@ -572,17 +583,6 @@ define-command open-runtime -params 1 -docstring 'open from %val{runtime}' %{
 
 complete-command -menu open-config shell-script-candidates %{
   cd "$kak_runtime" && find -L . -type f | sort -u
-}
-
-define-command yank_terminal_clipboard %{
-  nop %sh{
-    printf 'echo -to-file %%(%s) -- "%%val{selections}"' "$kak_response_fifo" > "$kak_command_fifo"
-    {
-      printf '\033]52;c;'
-      tr '\0' '\n' < "$kak_response_fifo" | sed 's/\\\\/\\/g' | base64
-      printf '\a'
-    } > /dev/tty
-  }
 }
 
 # Show Unicode value in the status line.

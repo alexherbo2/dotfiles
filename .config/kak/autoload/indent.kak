@@ -75,8 +75,27 @@ define-command -hidden decrease_indent %{
   execute-keys '<lt>'
 }
 
-# Enter ⇒ Decrease indent or erase character before cursor.
 define-command -hidden enter-new-line-and-keep-indent %{
+  evaluate-commands -draft -itersel %{
+    execute-keys ';i<ret>'
+    # Copy previous line indent
+    execute-keys -draft 'H<a-&>'
+    # Clean previous line indent
+    try %[ execute-keys -draft 'kxs^\h+$<ret>d' ]
+  }
+}
+
+define-command -hidden open-new-line-below-and-keep-indent %{
+  evaluate-commands -draft -itersel %{
+    execute-keys ';i<ret>'
+    # Copy previous line indent
+    execute-keys -draft 'H<a-&>'
+    # Clean previous line indent
+    try %[ execute-keys -draft 'kxs^\h+$<ret>d' ]
+  }
+}
+
+define-command -hidden open-new-line-above-and-keep-indent %{
   evaluate-commands -draft -itersel %{
     execute-keys ';i<ret>'
     # Copy previous line indent

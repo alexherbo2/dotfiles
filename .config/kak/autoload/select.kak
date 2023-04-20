@@ -1,195 +1,143 @@
-# Select objects
-# Reference: https://github.com/mawww/kakoune/blob/master/src/normal.cc#:~:text=select_object
+declare-user-mode select
 
-# _/_::
-# regex matches
-
-# _b_, _(_, _)_::
-# parenthesis blocks
-
-# _B_, _{_, _}_::
-# brace blocks
-
-# _r_, _[_, _]_::
-# bracket blocks
-
-# _a_, _<_, _>_::
-# angle blocks
-
-# _Q_, _"_::
-# double quote strings
-
-# _q_, _'_::
-# single quote strings
-
-# _g_, _`_::
-# grave quote strings
-
-# _w_::
-# words
-
-# _Alt+w_::
-# big words
-
-# _s_::
-# sentences
-
-# _p_::
-# paragraphs
-
-# _Space_::
-# whitespaces
-
-# _i_::
-# indent
-
-# _n_::
-# numbers
-
-# _u_::
-# arguments
-# Modes ────────────────────────────────────────────────────────────────────────
-
-try %[ declare-user-mode select ]
-
-define-command enter-select-mode -docstring 'enter select mode' %{
+define-command -hidden enter_select_mode %{
   enter-user-mode select
 }
 
-# Mappings ─────────────────────────────────────────────────────────────────────
+define-command -hidden select_regex_matches %{
+  execute-keys '/'
+}
 
-map -docstring 'select regex matches' global select / s
-
-map -docstring 'select inner parenthesis blocks' global select b ': select-inner-parenthesis-blocks<ret>'
-map -docstring 'select whole parenthesis blocks' global select <a-b> ': select-whole-parenthesis-blocks<ret>'
-map -docstring 'select inner parenthesis blocks' global select ( ': select-inner-parenthesis-blocks<ret>'
-map -docstring 'select whole parenthesis blocks' global select ) ': select-whole-parenthesis-blocks<ret>'
-
-map -docstring 'select inner brace blocks' global select B ': select-inner-brace-blocks<ret>'
-map -docstring 'select whole brace blocks' global select <a-B> ': select-whole-brace-blocks<ret>'
-map -docstring 'select inner brace blocks' global select { ': select-inner-brace-blocks<ret>'
-map -docstring 'select whole brace blocks' global select } ': select-whole-brace-blocks<ret>'
-
-map -docstring 'select inner bracket blocks' global select r ': select-inner-bracket-blocks<ret>'
-map -docstring 'select whole bracket blocks' global select <a-r> ': select-whole-bracket-blocks<ret>'
-map -docstring 'select inner bracket blocks' global select [ ': select-inner-bracket-blocks<ret>'
-map -docstring 'select whole bracket blocks' global select ] ': select-whole-bracket-blocks<ret>'
-
-map -docstring 'select inner angle blocks' global select a ': select-inner-angle-blocks<ret>'
-map -docstring 'select whole angle blocks' global select <a-a> ': select-whole-angle-blocks<ret>'
-map -docstring 'select inner angle blocks' global select <lt> ': select-inner-angle-blocks<ret>'
-map -docstring 'select whole angle blocks' global select <gt> ': select-whole-angle-blocks<ret>'
-
-map -docstring 'select inner double quote strings' global select Q ': select-inner-double-quote-strings<ret>'
-map -docstring 'select whole double quote strings' global select <a-Q> ': select-whole-double-quote-strings<ret>'
-map -docstring 'select inner double quote strings' global select '"' ': select-inner-double-quote-strings<ret>'
-map -docstring 'select whole double quote strings' global select '<a-">' ': select-whole-double-quote-strings<ret>'
-
-map -docstring 'select inner single quote strings' global select q ': select-inner-single-quote-strings<ret>'
-map -docstring 'select whole single quote strings' global select <a-q> ': select-whole-single-quote-strings<ret>'
-map -docstring 'select inner single quote strings' global select "'" ': select-inner-single-quote-strings<ret>'
-map -docstring 'select whole single quote strings' global select "<a-'>" ': select-whole-single-quote-strings<ret>'
-
-map -docstring 'select inner grave quote strings' global select g ': select-inner-grave-quote-strings<ret>'
-map -docstring 'select whole grave quote strings' global select <a-g> ': select-whole-grave-quote-strings<ret>'
-map -docstring 'select inner grave quote strings' global select ` ': select-inner-grave-quote-strings<ret>'
-map -docstring 'select whole grave quote strings' global select <a-`> ': select-whole-grave-quote-strings<ret>'
-
-map -docstring 'select words' global select w ': select-words<ret>'
-map -docstring 'select big words' global select <a-w> ': select-big-words<ret>'
-map -docstring 'select sentences' global select s ': select-sentences<ret>'
-map -docstring 'select paragraphs' global select p ': select-paragraphs<ret>'
-map -docstring 'select whitespaces' global select <space> ': select-whitespaces<ret>'
-map -docstring 'select indent' global select i ': select-indent<ret>'
-map -docstring 'select numbers' global select n ': select-numbers<ret>'
-map -docstring 'select arguments' global select u ': select-arguments<ret>'
-
-# Commands ─────────────────────────────────────────────────────────────────────
-
-define-command -hidden select-inner-parenthesis-blocks -docstring 'select inner parenthesis blocks' %{
+define-command -hidden select_inner_parenthesis_blocks %{
   execute-keys 's\(<ret><a-i>b'
 }
 
-define-command -hidden select-whole-parenthesis-blocks -docstring 'select whole parenthesis blocks' %{
+define-command -hidden select_whole_parenthesis_blocks %{
   execute-keys 's\(<ret><a-a>b'
 }
 
-define-command -hidden select-inner-brace-blocks -docstring 'select inner brace blocks' %{
+define-command -hidden select_inner_brace_blocks %{
   execute-keys 's\{<ret><a-i>B' # }
 }
 
-define-command -hidden select-whole-brace-blocks -docstring 'select whole brace blocks' %{
+define-command -hidden select_whole_brace_blocks %{
   execute-keys 's\{<ret><a-a>B' # }
 }
 
-define-command -hidden select-inner-bracket-blocks -docstring 'select inner bracket blocks' %{
+define-command -hidden select_inner_bracket_blocks %{
   execute-keys 's\[<ret><a-i>r'
 }
 
-define-command -hidden select-whole-bracket-blocks -docstring 'select whole bracket blocks' %{
+define-command -hidden select_whole_bracket_blocks %{
   execute-keys 's\[<ret><a-a>r'
 }
 
-define-command -hidden select-inner-angle-blocks -docstring 'select inner angle blocks' %{
+define-command -hidden select_inner_angle_blocks %{
   execute-keys 's<lt><ret><a-i>a'
 }
 
-define-command -hidden select-whole-angle-blocks -docstring 'select whole angle blocks' %{
+define-command -hidden select_whole_angle_blocks %{
   execute-keys 's<lt><ret><a-a>a'
 }
 
-define-command -hidden select-inner-double-quote-strings -docstring 'select inner double quote strings' %{
+define-command -hidden select_inner_double_quote_strings %{
   execute-keys 's"[^"]*"<ret><a-;><a-i>Q'
 }
 
-define-command -hidden select-whole-double-quote-strings -docstring 'select whole double quote strings' %{
+define-command -hidden select_whole_double_quote_strings %{
   execute-keys 's"[^"]*"<ret><a-;><a-a>Q'
 }
 
-define-command -hidden select-inner-single-quote-strings -docstring 'select inner single quote strings' %{
+define-command -hidden select_inner_single_quote_strings %{
   execute-keys "s'[^']*'<ret><a-;><a-i>q"
 }
 
-define-command -hidden select-whole-single-quote-strings -docstring 'select whole single quote strings' %{
+define-command -hidden select_whole_single_quote_strings %{
   execute-keys "s'[^']*'<ret><a-;><a-a>q"
 }
 
-define-command -hidden select-inner-grave-quote-strings -docstring 'select inner grave quote strings' %{
+define-command -hidden select_inner_grave_quote_strings %{
   execute-keys 's`[^`]*`<ret><a-;><a-i>g'
 }
 
-define-command -hidden select-whole-grave-quote-strings -docstring 'select whole grave quote strings' %{
+define-command -hidden select_whole_grave_quote_strings %{
   execute-keys 's`[^`]*`<ret><a-;><a-a>g'
 }
 
-define-command -hidden select-words -docstring 'select words' %{
+define-command -hidden select_words %{
   execute-keys 's\w+<ret><a-i>w'
 }
 
-define-command -hidden select-big-words -docstring 'select big words' %{
+define-command -hidden select_big_words %{
   execute-keys 's\w+<ret><a-i><a-w>'
 }
 
-define-command -hidden select-sentences -docstring 'select sentences' %{
+define-command -hidden select_sentences %{
   execute-keys 's[^\n]+<ret><a-i>s'
 }
 
-define-command -hidden select-paragraphs -docstring 'select paragraphs' %{
+define-command -hidden select_paragraphs %{
   execute-keys 's[^\n]+<ret><a-i>p'
 }
 
-define-command -hidden select-whitespaces -docstring 'select whitespaces' %{
+define-command -hidden select_whitespaces %{
   execute-keys 's\h+<ret><a-i><space>'
 }
 
-define-command -hidden select-indent -docstring 'select indent' %{
+define-command -hidden select_indent %{
   execute-keys 's^\h+<ret><a-i><space>'
 }
 
-define-command -hidden select-numbers -docstring 'select numbers' %{
+define-command -hidden select_numbers %{
   execute-keys 's\d+<ret><a-i>n'
 }
 
-define-command -hidden select-arguments -docstring 'select arguments' %{
+define-command -hidden select_arguments %{
   execute-keys 's\(<ret><a-i>bs\w+<ret><a-i>u'
 }
+
+map -docstring 'regex matches' global select / ':select_regex_matches<ret>'
+
+map -docstring 'inner parenthesis blocks' global select b ':select_inner_parenthesis_blocks<ret>'
+map -docstring 'whole parenthesis blocks' global select <a-b> ':select_whole_parenthesis_blocks<ret>'
+map -docstring 'inner parenthesis blocks' global select ( ':select_inner_parenthesis_blocks<ret>'
+map -docstring 'whole parenthesis blocks' global select ) ':select_whole_parenthesis_blocks<ret>'
+
+map -docstring 'inner brace blocks' global select B ':select_inner_brace_blocks<ret>'
+map -docstring 'whole brace blocks' global select <a-B> ':select_whole_brace_blocks<ret>'
+map -docstring 'inner brace blocks' global select { ':select_inner_brace_blocks<ret>'
+map -docstring 'whole brace blocks' global select } ':select_whole_brace_blocks<ret>'
+
+map -docstring 'inner bracket blocks' global select r ':select_inner_bracket_blocks<ret>'
+map -docstring 'whole bracket blocks' global select <a-r> ':select_whole_bracket_blocks<ret>'
+map -docstring 'inner bracket blocks' global select [ ':select_inner_bracket_blocks<ret>'
+map -docstring 'whole bracket blocks' global select ] ':select_whole_bracket_blocks<ret>'
+
+map -docstring 'inner angle blocks' global select a ':select_inner_angle_blocks<ret>'
+map -docstring 'whole angle blocks' global select <a-a> ':select_whole_angle_blocks<ret>'
+map -docstring 'inner angle blocks' global select <lt> ':select_inner_angle_blocks<ret>'
+map -docstring 'whole angle blocks' global select <gt> ':select_whole_angle_blocks<ret>'
+
+map -docstring 'inner double quote strings' global select Q ':select_inner_double_quote_strings<ret>'
+map -docstring 'whole double quote strings' global select <a-Q> ':select_whole_double_quote_strings<ret>'
+map -docstring 'inner double quote strings' global select '"' ':select_inner_double_quote_strings<ret>'
+map -docstring 'whole double quote strings' global select '<a-">' ':select_whole_double_quote_strings<ret>'
+
+map -docstring 'inner single quote strings' global select q ':select_inner_single_quote_strings<ret>'
+map -docstring 'whole single quote strings' global select <a-q> ':select_whole_single_quote_strings<ret>'
+map -docstring 'inner single quote strings' global select "'" ':select_inner_single_quote_strings<ret>'
+map -docstring 'whole single quote strings' global select "<a-'>" ':select_whole_single_quote_strings<ret>'
+
+map -docstring 'inner grave quote strings' global select g ':select_inner_grave_quote_strings<ret>'
+map -docstring 'whole grave quote strings' global select <a-g> ':select_whole_grave_quote_strings<ret>'
+map -docstring 'inner grave quote strings' global select ` ':select_inner_grave_quote_strings<ret>'
+map -docstring 'whole grave quote strings' global select <a-`> ':select_whole_grave_quote_strings<ret>'
+
+map -docstring 'words' global select w ':select_words<ret>'
+map -docstring 'big words' global select <a-w> ':select_big_words<ret>'
+map -docstring 'sentences' global select s ':select_sentences<ret>'
+map -docstring 'paragraphs' global select p ':select_paragraphs<ret>'
+map -docstring 'whitespaces' global select <space> ':select_whitespaces<ret>'
+map -docstring 'indent' global select i ':select_indent<ret>'
+map -docstring 'numbers' global select n ':select_numbers<ret>'
+map -docstring 'arguments' global select u ':select_arguments<ret>'

@@ -65,6 +65,8 @@ add-highlighter global/math-symbols regex '[−×]' '0:cyan+f'
 
 # Mappings ---------------------------------------------------------------------
 
+map -docstring 'erase characters before cursor to line begin' global insert <c-u> '<a-;>: erase_characters_before_cursor_to_line_begin<ret>'
+map -docstring 'paste' global insert <c-y> '<c-r>"'
 map -docstring 'Increase indent' global insert <tab> '<a-;><a-gt>'
 map -docstring 'Decrease indent' global insert <s-tab> '<a-;><lt>'
 map -docstring 'Decrease indent or erase character before cursor' global insert <backspace> '<a-;>: decrease-indent-or-erase-character-before-cursor<ret>'

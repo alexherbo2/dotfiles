@@ -75,7 +75,7 @@ define-command -hidden decrease_indent %{
   execute-keys '<lt>'
 }
 
-define-command -hidden enter-new-line-and-keep-indent %{
+define-command -hidden enter_new_line_and_keep_indent %{
   evaluate-commands -draft -itersel %{
     execute-keys ';i<ret>'
     # Copy previous line indent
@@ -85,7 +85,7 @@ define-command -hidden enter-new-line-and-keep-indent %{
   }
 }
 
-define-command -hidden open-new-line-below-and-keep-indent %{
+define-command -hidden open_new_line_below_and_keep_indent %{
   evaluate-commands -draft -itersel %{
     execute-keys ';i<ret>'
     # Copy previous line indent
@@ -95,7 +95,7 @@ define-command -hidden open-new-line-below-and-keep-indent %{
   }
 }
 
-define-command -hidden open-new-line-above-and-keep-indent %{
+define-command -hidden open_new_line_above_and_keep_indent %{
   evaluate-commands -draft -itersel %{
     execute-keys ';i<ret>'
     # Copy previous line indent
@@ -113,6 +113,12 @@ define-command -hidden decrease-indent-or-erase-character-before-cursor %{
   } catch %{
     execute-keys -draft ';i<backspace>'
   }
+}
+
+# Backspace ⇒ Decrease indent or erase character before cursor.
+define-command -hidden erase_characters_before_cursor_to_line_begin %{
+  execute-keys -draft '<a-h><a-K>^.\z<ret><a-:>Hd'
+  execute-keys '<a-;><a-:><a-;><a-;>'
 }
 
 define-command -hidden indent-on-inserted-character %{

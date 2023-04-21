@@ -71,6 +71,49 @@ map -docstring 'Increase indent' global insert <tab> '<a-;><a-gt>'
 map -docstring 'Decrease indent' global insert <s-tab> '<a-;><lt>'
 map -docstring 'Decrease indent or erase character before cursor' global insert <backspace> '<a-;>: decrease-indent-or-erase-character-before-cursor<ret>'
 
+# Insert various characters.
+# Heavily based on qwerty-lafayette.
+# https://qwerty-lafayette.org
+# See also “Vim digraphs” for defaults.
+# https://vimhelp.org/digraph.txt.html#digraphs-default
+declare-user-mode digraphs
+define-command -hidden insert_text -params 1 %{
+  evaluate-commands -save-regs '"' %{
+    set-register '"' %arg{1}
+    execute-keys -draft ';P'
+  }
+}
+map -docstring 'erase characters before cursor to line begin' global insert <c-u> ''
+map -docstring 'enter digraphs mode' global insert <c-k> '<a-;>:enter-user-mode digraphs<ret>'
+map -docstring 'â' global digraphs 'q' ':insert_text â<ret>'
+map -docstring 'é' global digraphs 'w' ':insert_text é<ret>'
+map -docstring 'É' global digraphs 'W' ':insert_text É<ret>'
+map -docstring 'è' global digraphs 'e' ':insert_text è<ret>'
+map -docstring 'ë' global digraphs 'E' ':insert_text ë<ret>'
+map -docstring 'ê' global digraphs 'r' ':insert_text ê<ret>'
+map -docstring 'ù' global digraphs 'u' ':insert_text ù<ret>'
+map -docstring 'û' global digraphs 'U' ':insert_text û<ret>'
+map -docstring 'î' global digraphs 'i' ':insert_text î<ret>'
+map -docstring 'ï' global digraphs 'I' ':insert_text ï<ret>'
+map -docstring 'ô' global digraphs 'o' ':insert_text ô<ret>'
+map -docstring 'ê' global digraphs '[' ':insert_text ê<ret>'
+map -docstring 'ë' global digraphs ']' ':insert_text ë<ret>'
+map -docstring '«' global digraphs '{' ':insert_text «<ret>'
+map -docstring '»' global digraphs '}' ':insert_text »<ret>'
+map -docstring 'à' global digraphs 'a' ':insert_text à<ret>'
+map -docstring 'À' global digraphs 'A' ':insert_text À<ret>'
+map -docstring 'â' global digraphs 's' ':insert_text â<ret>'
+map -docstring 'ç' global digraphs 'c' ':insert_text ç<ret>'
+map -docstring 'Ç' global digraphs 'C' ':insert_text Ç<ret>'
+map -docstring 'æ' global digraphs 'z' ':insert_text æ<ret>'
+map -docstring 'œ' global digraphs 'x' ':insert_text œ<ret>'
+map -docstring '…' global digraphs '.' ':insert_text …<ret>'
+map -docstring '’' global digraphs '<space>' ':insert_text ’<ret>'
+map -docstring '“' global digraphs '<lt>' ':insert_text “<ret>'
+map -docstring '”' global digraphs '<gt>' ':insert_text ”<ret>'
+map -docstring '—' global digraphs '<minus>' ':insert_text —<ret>'
+map -docstring '–' global digraphs '_' ':insert_text –<ret>'
+
 # Text objects
 # Quotation marks
 map -docstring 'double quotation mark' global object <a-Q> 'c“,”<ret>'
@@ -113,7 +156,7 @@ define-command select-or-extend-lines %{
 # map -docstring 'reload kakrc' global user <F5> ': source "%val{runtime}/kakrc"; echo reloaded kakrc<ret>'
 
 # Enter command mode
-map -docstring 'enter command' global normal <ret> :
+map -docstring 'enter command mode' global normal <ret> :
 
 # Re-center view
 # map -docstring 'scroll to put the cursor on the top line of the window' global user , vtvm
@@ -135,6 +178,7 @@ map -docstring 'enter command' global normal <ret> :
 # User mode --------------------------------------------------------------------
 
 # Formatting and parsing date-time
+# Format date as “1991-11-02 Sat”.
 map -docstring 'format date to 2006-01-02' global user d '| date -d "$kak_selection" ''+%F''<ret>'
 map -docstring 'format date to 2006-01-02 Mon' global user D '| date -d "$kak_selection" ''+%F %a''<ret>'
 map -docstring 'sanitize text input' global user @ '| iconv -f UTF-8 -t ASCII//TRANSLIT//IGNORE<ret>'
@@ -696,6 +740,7 @@ hook -group config global BufCreate '.*/docs/notes.txt' %{
 
 hook -group config global BufSetOption filetype=notes %{
   add-highlighter buffer/notes ref notes
+  # Insert date-time as “1991-11-02 Sat 10:52”.
   map -docstring 'insert date (2006-01-02 Mon)' buffer insert <c-u> '<a-;>;<a-;>!date ''+%F %a'' | tr -d ''\n''<ret><right>'
   map -docstring 'insert date (2006-01-02 Mon 15:04)' buffer insert <c-i> '<a-;>;<a-;>!date ''+%F %a %H:%M'' | tr -d ''\n''<ret><right>'
 }

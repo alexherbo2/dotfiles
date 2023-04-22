@@ -1,3 +1,12 @@
+# # https://docs.ruby-lang.org/en/2.2.0/keywords_rdoc.html
+# syntax "**/*.rb"
+# syntax keywords __ENCODING__|__LINE__|__FILE__|BEGIN|END|alias|and|begin|break|case|class|def|defined?|do|else|elsif|end|ensure|for|if|in|module|next|not|or|redo|rescue|retry|return|super|then|undef|unless|until|when|while|yield
+# syntax types "%u{%w_}"
+# syntax symbols "%(|%)|%[|%]|%{|%}|%.|::|:|;|,|=|<|>|+|-|/|*|%%|%.|%!|?|&|%||@"
+# syntax literals "nil|false|true|self|:%w{%w_}|%d{%d_}%.%w{%w_}|%d{%w_}"
+# syntax strings {'{(\\)(\')!'.}|"{(\\)(\")!".}|/{(\\)(\/)!/.}}
+# syntax comments "#{.}"
+
 # Ruby
 # https://ruby-lang.org
 

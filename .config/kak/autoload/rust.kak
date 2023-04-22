@@ -1,3 +1,12 @@
+# # https://doc.rust-lang.org/reference/keywords.html
+# syntax "**/*.rs"
+# syntax keywords as|break|const|continue|crate|else|enum|extern|fn|for|if|impl|in|let|loop|match|mod|move|mut|pub|ref|return|static|struct|super|trait|type|unsafe|use|where|while|async|await|dyn|abstract|become|box|do|final|macro|override|priv|typeof|unsized|virtual|yield|try|union
+# syntax types "bool|u8|u16|u32|u64|usize|i8|i16|i32|i64|isize|f32|f64|str|char|%u{%w_}"
+# syntax symbols "%(|%)|%[|%]|%{|%}|%.|:|;|,|=|<|>|+|-|/|*|%%|%!|?|&|%||@"
+# syntax literals "true|false|self|'\\''|'\\{!'.}|'.'|b'{(\\')(\\\\)!'.}|%d{%d_}%.%w{%w_}|%d{%w_}|'%a{%w_}"
+# syntax strings '"{(\\\\)(\\")!".}|b"{(\\\\)(\\")!".}'
+# syntax comments "//{.}|/*{!(*/).$}"
+
 # http://rust-lang.org
 # ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 

@@ -630,16 +630,16 @@ map -docstring 'iterate previous selection' global normal <c-p> ': iterate-previ
 
 # Commands ─────────────────────────────────────────────────────────────────────
 
-define-command restore-register -params 1 -docstring 'restore-register <register>: restore register (default: ^)' %{
+define-command restore_register -params 1 -docstring 'restore-register <register>: restore register (default: ^)' %{
   try %[ execute-keys """%arg{1}z" ]
 }
 
-define-command consume-register -params 1 -docstring 'consume-register <register>: consume register (default: ^)' %{
-  restore-register %arg{1}
-  clear-register %arg{1}
+define-command consume_register -params 1 -docstring 'consume-register <register>: consume register (default: ^)' %{
+  restore_register %arg{1}
+  clear_register %arg{1}
 }
 
-define-command clear-register -params 1 -docstring 'clear-register <register>: clear register (default: ^)' %{
+define-command clear_register -params 1 -docstring 'clear-register <register>: clear register (default: ^)' %{
   # Handle null named register.
   try %{
     set-register %arg{1}
@@ -650,15 +650,15 @@ define-command clear-register -params 1 -docstring 'clear-register <register>: c
   }
 }
 
-define-command restore-selections -params 1 -docstring 'restore-selections <register>: restore selections (default: ^)' %{
+define-command restore_selections -params 1 -docstring 'restore-selections <register>: restore selections (default: ^)' %{
   try %[ execute-keys """%arg{1}<a-z>a" ]
 }
 
-define-command save-selections -params 1 -docstring 'save-selections <register>: save selections (default: ^)' %{
+define-command save_selections -params 1 -docstring 'save-selections <register>: save selections (default: ^)' %{
   execute-keys -save-regs '' """%arg{1}Z"
 }
 
-define-command add-selections -params 1 -docstring 'add-selections <register>: add selections (default: ^)' %{
+define-command add_selections -params 1 -docstring 'add-selections <register>: add selections (default: ^)' %{
   evaluate-commands -draft consume-selections %arg{1}
   # Display saved selections:
   # Handle null named register.
@@ -669,27 +669,27 @@ define-command add-selections -params 1 -docstring 'add-selections <register>: a
   }
 }
 
-define-command consume-selections -params 1 -docstring 'consume-selections <register>: consume selections (default: ^)' %{
-  restore-selections %arg{1}
-  save-selections %arg{1}
+define-command consume_selections -params 1 -docstring 'consume-selections <register>: consume selections (default: ^)' %{
+  restore_selections %arg{1}
+  save_selections %arg{1}
   execute-keys ','
 }
 
-define-command iterate-next-selection -params 1 -docstring 'iterate-next-selection <register>: iterate next selection (default: ^)' %{
-  restore-register %arg{1}
+define-command iterate_next_selection -params 1 -docstring 'iterate-next-selection <register>: iterate next selection (default: ^)' %{
+  restore_register %arg{1}
   execute-keys ')'
-  consume-selections %arg{1}
+  consume_selections %arg{1}
 }
 
-define-command iterate-previous-selection -params 1 -docstring 'iterate-previous-selection <register>: iterate previous selection (default: ^)' %{
-  restore-register %arg{1}
+define-command iterate_previous_selection -params 1 -docstring 'iterate-previous-selection <register>: iterate previous selection (default: ^)' %{
+  restore_register %arg{1}
   execute-keys '('
-  consume-selections %arg{1}
+  consume_selections %arg{1}
 }
 
 # Highlighters ─────────────────────────────────────────────────────────────────
 
-define-command -hidden update-mark-ranges %{
+define-command -hidden update_mark_ranges %{
   # Reset ranges
   evaluate-commands -buffer '*' unset-option buffer mark_ranges
   try %{
@@ -716,21 +716,9 @@ define-command -hidden update-mark-ranges %{
   }
 }
 
-define-command show-marks -docstring 'show marks' %{
-  add-highlighter global/marks ranges mark_ranges
-  remove-hooks global show-marks
-  hook -group show-marks -always global RegisterModified '\^' update-mark-ranges
-  update-mark-ranges
-}
-
-define-command hide-marks -docstring 'hide marks' %{
-  remove-hooks global show-marks
-  remove-highlighter global/marks
-  evaluate-commands -buffer '*' unset-option buffer mark_ranges
-}
-
-# Initialization
-show-marks
+add-highlighter global/marks ranges mark_ranges
+hook -group show-marks -always global RegisterModified '\^' update_mark_ranges
+update_mark_ranges
 
 # Notes ------------------------------------------------------------------------
 

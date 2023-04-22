@@ -10,6 +10,23 @@
 # https://github.com/topisani/dotfiles/blob/master/config/kak/kakrc
 # https://gitlab.com/vbauerster/dotfiles/-/blob/master/.config/kak/kakrc
 
+# theme = 'base16_transparent'
+# Kakoune keyboard shortcuts
+# https://kakoune.org
+
+# VS Code keyboard shortcuts
+# https://code.visualstudio.com/docs/getstarted/keybindings#_default-keyboard-shortcuts
+
+# Helix
+# https://helix-editor.com
+# https://docs.helix-editor.com/keymap.html
+# https://docs.helix-editor.com/commands.html
+# https://docs.helix-editor.com/configuration.html
+# https://github.com/helix-editor/helix/blob/master/helix-term/src/keymap/default.rs
+# https://github.com/helix-editor/helix/blob/master/helix-term/src/commands.rs
+# https://github.com/helix-editor/helix/blob/master/helix-term/src/commands/typed.rs
+# https://github.com/helix-editor/helix/blob/master/helix-view/src/editor.rs
+
 # Preamble ---------------------------------------------------------------------
 define-command colorscheme -params 1 -docstring 'load color scheme' %{
   source "%val{config}/colors/%arg{1}.kak"
@@ -37,7 +54,7 @@ set-option global matching_pairs ( ) { } [ ] < > “ ” ‘ ’ « » ‹ ›
 set-option global scrolloff 5,1
 add-highlighter global/show-matching show-matching
 add-highlighter global/number-lines number-lines -hlcursor
-add-highlighter global/wrap wrap -word -indent -marker '↪'
+add-highlighter global/soft_wrap wrap -word -indent -marker '↪'
 
 # Status line
 set-option global modelinefmt '%val{bufname} %val{cursor_line}:%val{cursor_char_column} {{context_info}} {{mode_info}} - %val{client}@%val{session}'
@@ -361,8 +378,8 @@ map -docstring 'unimpaired_left' global user '[' ': enter-user-mode unimpaired_l
 map -docstring 'unimpaired_right' global user ']' ': enter-user-mode unimpaired_right<ret>'
 map -docstring 'read-only' global unimpaired_left r ': set-option buffer readonly yes<ret>'
 map -docstring 'read-only' global unimpaired_right r ': set-option buffer readonly no<ret>'
-map -docstring 'whitespace' global unimpaired_left w ': remove-highlighter global/whitespace<ret>'
-map -docstring 'whitespace' global unimpaired_right w ': add-highlighter global/whitespace show-whitespaces<ret>'
+map -docstring 'render whitespace' global unimpaired_left w ': remove-highlighter global/whitespace<ret>'
+map -docstring 'render whitespace' global unimpaired_right w ': add-highlighter global/whitespace show-whitespaces<ret>'
 map -docstring 'rulers' global unimpaired_left r ': remove-highlighter global/rulers<ret>'
 map -docstring 'rulers' global unimpaired_right r ': add-highlighter global/rulers column 81 default,cyan<ret>'
 

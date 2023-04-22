@@ -18,3 +18,5 @@ Glow repository
 https://github.com/charmbracelet/glow
 Gum repository
 https://github.com/charmbracelet/gum
+Why Kakoune
+https://kakoune.org/why-kakoune/why-kakoune.html

@@ -1,3 +1,12 @@
+# syntax "**/*.sh"
+# syntax keywords "done|do|echo|elif|else|exit|export|for|fi|function|if|in|return|then|while"
+# syntax types "%$%w{%w_}|%$%{{!%}.}"
+# syntax symbols "%(|%)|%[|%]|%{|%}|<|>|=|~|*|&|%!|%||@|;|%$"
+# syntax literals "-%w{%w_-}|%d{%w}"
+# syntax strings {'{(\\)(\')!'.}|"{(\\)(\")!".}}
+# syntax comments "#{.}"
+# syntax texts "{%w_-%.}"
+
 #===============
 hook global BufCreate .*\.((z|ba|c|k|mk)?sh(rc|_profile)?|profile) %{
     set-option buffer filetype sh

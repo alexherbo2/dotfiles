@@ -1,3 +1,12 @@
+# syntax "**/*.css"
+# syntax keywords ""
+# syntax types "@{%w_-}"
+# syntax symbols "%(|%)|%{|%}|%[|%]|<|>|*|:|;|,"
+# syntax literals "%d{%d_}%.%w{%w%%_}|%d{%w%%_}"
+# syntax strings {"{(\\)(\")!".}}
+# syntax comments "/*{!(*/).$}"
+# syntax texts "{%w_-}"
+
 # http://w3.org/Style/CSS
 # ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 

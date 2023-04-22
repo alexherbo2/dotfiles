@@ -20,3 +20,5 @@ Gum repository
 https://github.com/charmbracelet/gum
 Why Kakoune
 https://kakoune.org/why-kakoune/why-kakoune.html
+Taplo website
+https://taplo.tamasfe.dev

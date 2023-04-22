@@ -31,6 +31,13 @@ javascript = { filetypes = ['javascript'], roots = ['.git'], command = 'typescri
 kotlin = { filetypes = ['kotlin'], roots = ['.git'], command = 'kotlin-language-server' }
 ruby = { filetypes = ['ruby'], roots = ['Gemfile'], command = 'solargraph', args = ['stdio'] }
 rust = { filetypes = ['rust'], roots = ['Cargo.toml'], command = 'rust-analyzer' }
+toml = { filetypes = ['toml'], roots = ['.git'], command = 'taplo', args = ['lsp', 'stdio'] }
+yaml = { filetypes = ['yaml'], roots = ['.git'], command = 'yaml-language-server', args = ['--stdio'] }
+json = { filetypes = ['json'], roots = ['.git'], command = 'vscode-json-languageserver' }
+html = { filetypes = ['html'], roots = ['.git'], command = 'vscode-html-languageserver' }
+css = { filetypes = ['css'], roots = ['.git'], command = 'vscode-css-languageserver' }
+lua = { filetypes = ['lua'], roots = ['.git'], command = 'lua-language-server' }
+markdown = { filetypes = ['markdown'], roots = ['.git'], command = 'marksman', args = ['server'] }
 
 # Semantic tokens --------------------------------------------------------------
 

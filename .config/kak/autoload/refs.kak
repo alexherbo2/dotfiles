@@ -3,14 +3,14 @@
 # syntax symbols ":|,|-|%(|%)"
 # syntax literals "%d{%d}"
 
-add-highlighter shared/references regex '^(.+?):(\d+):(\d+):(.+?)$' 1:string 2:value 3:value
+add-highlighter shared/refs regex '^(.+?):(\d+):(\d+):(.+?)$' 1:string 2:value 3:value
 
 hook global BufOpenFifo '.+\.refs' %{
-  set-option buffer filetype references
+  set-option buffer filetype refs
 }
 
-hook -group grep-highlight global BufSetOption filetype=references %{
-  add-highlighter buffer/references ref references
+hook -group grep-highlight global BufSetOption filetype=refs %{
+  add-highlighter buffer/refs ref refs
   map buffer normal <ret> ':jump_to_references<ret>'
 }
 

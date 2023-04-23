@@ -414,7 +414,7 @@ define-command -hidden find_friendly_session_name %{
   }
 }
 
-define-command open_visual_studio_code %{
+define-command open_current_buffer_with_visual_studio_code %{
   nop %sh{
     code --goto "$kak_buffile:$kak_line:$kak_column"
   }
@@ -530,21 +530,7 @@ hook -group config global BufSetOption filetype=makefile %{
   set-option buffer line_comment_token '#'
 }
 
-# grep
-# https://en.wikipedia.org/wiki/Grep
-hook -group config global BufSetOption filetype=grep %{
-  map buffer normal <ret> ': grep-jump<ret>'
-}
-
 # Detection --------------------------------------------------------------------
-
-hook -group config global BufCreate '.*/\.kakrc' %{
-  set-option buffer filetype kak
-}
-
-hook -group config global BufCreate '.*/(profile|bashrc|tmux.conf)' %{
-  set-option buffer filetype sh
-}
 
 # Mark
 
@@ -970,7 +956,7 @@ hook -group show-selected-text -always global NormalIdle '' update-selected-text
 hook -group show-selected-text -always global InsertIdle '' update-selected-text-ranges
 
 # Detection
-# ‾‾‾‾‾‾‾‾‾
+# ‾‾‾‾‾‾‾‾
 
 hook global BufCreate .*/?(?i)sql %{
     set-option buffer filetype sql

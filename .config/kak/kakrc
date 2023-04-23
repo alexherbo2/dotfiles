@@ -429,9 +429,9 @@ define-command -hidden find_friendly_session_name %{
   }
 }
 
-define-command alacritty_open_helix %{
+define-command open_visual_studio_code %{
   nop %sh{
-    alacritty msg create-window -e hx "$kak_buffile:$kak_line:$kak_column"
+    code --goto "$kak_buffile:$kak_line:$kak_column"
   }
 }
 

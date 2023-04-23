@@ -34,9 +34,7 @@ define-command colorscheme -params 1 -docstring 'load color scheme' %{
 evaluate-commands %sh{
   find -L "$kak_config/autoload" -type f -name '*.kak' -exec printf 'source "%s";' {} +
 }
-# source "%val{config}/kakrc"
 colorscheme colibri
-# source ~/.kakrc
 
 # Preamble ---------------------------------------------------------------------
 
@@ -50,7 +48,6 @@ lsp-enable
 # UI options
 set-option global startup_info_version 20221231
 set-option global ui_options terminal_set_title=no terminal_assistant=none
-# Matching pairs
 set-option global matching_pairs ( ) { } [ ] < > “ ” ‘ ’ « » ‹ ›
 set-option global scrolloff 5,1
 add-highlighter global/show-matching show-matching
@@ -80,9 +77,241 @@ add-highlighter global/U+2013 regex '–' '0:green+f'
 add-highlighter global/U+2014 regex '—' '0:green+bf'
 add-highlighter global/math-symbols regex '[−×]' '0:cyan+f'
 
+# Command completion
+alias global = evaluate_selected_text
+complete-command alacritty_open_new_client command
+complete-command foot_open_new_client command
+
+# Commands ---------------------------------------------------------------------
+
+define-command -hidden enter_lsp_mode %{
+  enter-user-mode lsp
+}
+
+define-command select_or_extend_lines %{
+  execute-keys '<a-:>'
+  try %{
+    # At least one selection is not full, so select whole lines.
+    execute-keys -draft '<a-K>\A^.*\n\z<ret>'
+    execute-keys 'x'
+  } catch %{
+    execute-keys 'Jx'
+  }
+}
+
+define-command -hidden select_next_surrounding_object -params 1 %{
+  execute-keys "f%arg{1}<a-a>%arg{1}"
+}
+
+define-command -hidden select_previous_surrounding_object -params 1 %{
+  execute-keys "<a-f>%arg{1}h<a-a>%arg{1}"
+}
+
+define-command -hidden swap_buffer_in_viewport -params 1 %{
+  execute-keys '"sZ'
+  execute-keys -client %arg{1} '"tZ'
+  execute-keys '"tz<esc>'
+  execute-keys -client %arg{1} '"sz<esc>'
+}
+
+define-command sort_selections %{
+  evaluate-commands -save-regs '"' %sh{
+    printf 'echo -to-file %s -- "%%val{selections}"' "$kak_quoted_response_fifo" > "$kak_command_fifo"
+    jq -s -R -r 'split("\u0000") | sort | ["set-register", "dquote"] + map("\u0027" + gsub("\u0027"; "\u0027" + "\u0027") + "\u0027") | join(" ")' "$kak_response_fifo"
+    echo execute-keys R
+  }
+}
+
+# Reference: https://code.visualstudio.com/docs/getstarted/keybindings#_basic-editing
+define-command move_lines_down -docstring 'move line down' %{
+  execute-keys -draft 'x<a-_><a-:>Z;ezjxdzP'
+}
+
+define-command move_lines_up -docstring 'move line up' %{
+  execute-keys -draft 'x<a-_><a-:><a-;>Z;bzkxdzp'
+}
+
+define-command select_highlights -docstring 'select all occurrences of current selection' %{
+  execute-keys '"aZ*%s<ret>"bZ"az"b<a-z>a'
+}
+
+define-command increment_selection -params 1 -docstring 'increment-selection <count>: increment selection by count' %{
+  execute-keys "a+%sh{expr $1 '|' 1}<esc>|{ cat; echo; } | bc<ret>"
+}
+
+define-command decrement_selection -params 1 -docstring 'decrement-selection <count>: decrement selection by count' %{
+  execute-keys "a-%sh{expr $1 '|' 1}<esc>|{ cat; echo; } | bc<ret>"
+}
+
+define-command -hidden evaluate_selected_text %{
+  evaluate-commands -itersel %{
+    evaluate-commands %val{selection}
+  }
+}
+
+define-command open_current_buffer_with_visual_studio_code %{
+  nop %sh{
+    code --goto "$kak_buffile:$kak_line:$kak_column"
+  }
+}
+
+define-command alacritty_open_new_client -params .. %{
+  nop %sh{
+    alacritty msg create-window -e kak -c "$kak_session" -e "$*"
+  }
+}
+
+define-command foot_open_new_client -params .. %{
+  nop %sh{
+    footclient -e kak -c "$kak_session" -e "$*"
+  }
+}
+
+define-command mkdir %{
+  nop %sh(mkdir -p -- "$(dirname -- "$kak_buffile")")
+}
+
+define-command open_config %{
+  edit "%val{config}/kakrc"
+}
+
+define-command get_character_info %{
+  echo %sh{printf 'U+%04x' "$kak_cursor_char_value"}
+}
+
+# Prompt commands --------------------------------------------------------------
+
+define-command -hidden show_definition_preview_hover %{
+  lsp-hover
+}
+
+define-command -hidden open_buffer_picker %{
+  prompt open: -menu -buffer-completion %{
+    buffer %val{text}
+  }
+}
+
+define-command -hidden open_document_symbol_picker %{
+  lsp-goto-document-symbol
+}
+
+define-command -hidden open_file_picker %{
+  prompt open: -menu -shell-script-candidates 'fd --hidden --type=file' %{
+    edit -existing %val{text}
+  }
+}
+
+define-command -hidden open_global_search_prompt %{
+  prompt global_search: -shell-script-candidates %{
+    echo "write $kak_quoted_response_fifo" > "$kak_command_fifo"
+    tr -sc '[:alnum:]' '\n' < "$kak_response_fifo"
+  } %{
+    open_buffer_with_output "%val{text}.refs" rg --hidden --column -- %val{text}
+  }
+}
+
+define-command -hidden open_viewport_picker %{
+  prompt -menu viewport_picker: -client-completion %{
+    swap_buffer_in_viewport %val{text}
+  }
+}
+
+define-command -hidden open_workspace_symbol_picker %{
+  lsp-workspace-symbol-incr
+}
+
+define-command -hidden prompt_select_next_surrounding_object %{
+  on-key %{
+    select_next_surrounding_object %val{key}
+  }
+}
+
+define-command -hidden prompt_select_previous_surrounding_object %{
+  on-key %{
+    select_previous_surrounding_object %val{key}
+  }
+}
+
 # Mappings ---------------------------------------------------------------------
 
-map -docstring 'Toggle comments' global normal '#' ': toggle-comments<ret>'
+# Normal mode ------------------------------------------------------------------
+
+# Enter command mode
+map -docstring 'enter command mode' global normal <ret> :
+
+# Re-center view
+# map -docstring 'scroll to put the cursor on the top line of the window' global user , vtvm
+
+# Editing
+# map -docstring 'save file' global normal <c-s> ': write; echo -markup ''{Information}file saved''<ret>'
+# map -docstring 'close client' global normal <c-q> ': quit<ret>'
+# map -docstring 'close buffer' global normal <c-w> ': delete-buffer; echo -markup ''{Information}buffer closed''<ret>'
+
+# Navigation
+# map -docstring 'scroll one page up' global normal <pageup> ,<pageup>
+# map -docstring 'scroll one page down' global normal <pagedown> ,<pagedown>
+# map -docstring 'move to previous paragraph' global normal [ ,gh[pgi
+# map -docstring 'move to next paragraph' global normal ] ,]plgi
+
+# Selection primitives
+
+# User mode --------------------------------------------------------------------
+
+# Formatting and parsing date-time
+# Format date as “1991-11-02 Sat”.
+map -docstring 'format date to 2006-01-02' global user d '| date -d "$kak_selection" ''+%F''<ret>'
+map -docstring 'format date to 2006-01-02 Mon' global user D '| date -d "$kak_selection" ''+%F %a''<ret>'
+map -docstring 'sanitize text input' global user @ '| iconv -f UTF-8 -t ASCII//TRANSLIT//IGNORE<ret>'
+
+# Show the Unicode value under the cursor.
+map -docstring 'Unicode' global user u ': echo -markup "{Information}U+%sh{printf ''%04x'' ""$kak_cursor_char_value""}"<ret>'
+
+# Add search flags
+map global prompt <a-i> '<home>(?i)<end>'
+map global prompt <a-o> '<home>(?S)<end>'
+
+map -docstring 'enter select mode' global normal S ':enter_select_mode<ret>'
+map -docstring 'enter surround mode' global normal q ':enter_surround_mode<ret>'
+map -docstring 'select previous surrounding object' global normal [ ':prompt_select_previous_surrounding_object<ret>'
+map -docstring 'select next surrounding object' global normal ] ':prompt_select_next_surrounding_object<ret>'
+map -docstring 'open file picker' global user f ':open_file_picker<ret>'
+map -docstring 'open buffer picker' global user b ':open_buffer_picker<ret>'
+map -docstring 'open global search prompt' global user / ':open_global_search_prompt<ret>'
+map -docstring 'open viewport picker' global user v ':open_viewport_picker<ret>'
+map -docstring 'open document symbol picker' global user s ':open_document_symbol_picker<ret>'
+map -docstring 'open workspace symbol picker' global user S ':open_workspace_symbol_picker<ret>'
+map -docstring 'show definition preview hover' global user k ':show_definition_preview_hover<ret>'
+map -docstring 'enter lsp mode' global user l ':enter_lsp_mode<ret>'
+map -docstring 'yank selected text to the terminal clipboard' global user y ':yank_selected_text_to_terminal_clipboard<ret>'
+
+# remappings
+map global normal <a-q> q
+map global normal <a-Q> Q
+
+# Vim-like unimpaired mappings
+declare-user-mode unimpaired_left
+declare-user-mode unimpaired_right
+map -docstring 'unimpaired_left' global user '[' ': enter-user-mode unimpaired_left<ret>'
+map -docstring 'unimpaired_right' global user ']' ': enter-user-mode unimpaired_right<ret>'
+map -docstring 'read-only' global unimpaired_left r ': set-option buffer readonly yes<ret>'
+map -docstring 'read-only' global unimpaired_right r ': set-option buffer readonly no<ret>'
+map -docstring 'render whitespace' global unimpaired_left w ': remove-highlighter global/whitespace<ret>'
+map -docstring 'render whitespace' global unimpaired_right w ': add-highlighter global/whitespace show-whitespaces<ret>'
+map -docstring 'rulers' global unimpaired_left r ': remove-highlighter global/rulers<ret>'
+map -docstring 'rulers' global unimpaired_right r ': add-highlighter global/rulers column 81 default,cyan<ret>'
+
+map -docstring 'move line down' global normal <c-j> ':move_lines_down<ret>'
+map -docstring 'move line up' global normal <c-k> ':move_lines_up<ret>'
+map -docstring 'select all occurrences of current selection' global normal <a-percent> ':select_highlights<ret>'
+map -docstring 'increment selection' global normal <c-a> ':increment_selection %val{count}<ret>'
+map -docstring 'decrement selection' global normal <c-x> ':decrement_selection %val{count}<ret>'
+map -docstring 'buffer directory' global prompt <a-/> '%sh{dirname "$kak_bufname"}<a-!>/'
+
+map -docstring 'clear register' global normal D ':clear_register %val{register}<ret>'
+map -docstring 'add selections' global normal Y ':add_selections %val{register}<ret>'
+map -docstring 'iterate next selection' global normal <c-n> ':iterate_next_selection %val{register}<ret>'
+map -docstring 'iterate previous selection' global normal <c-p> ':iterate_previous_selection %val{register}<ret>'
+map -docstring 'toggle comments' global normal '#' ':toggle_comments<ret>'
 map -docstring 'erase characters before cursor to line begin' global insert <c-u> '<a-;>: erase_characters_before_cursor_to_line_begin<ret>'
 map -docstring 'paste' global insert <c-y> '<c-r>"'
 map -docstring 'Increase indent' global insert <tab> '<a-;><a-gt>'
@@ -153,329 +382,24 @@ map global normal T '<a-:><a-;><a-T>'
 # map global normal ? '<a-:><a-;><a-?>'
 # map global normal n '<a-:>?<ret>'
 # map global normal N '<a-:><a-;><a-?><ret>'
-map global normal x ': select-or-extend-lines<ret>'
+map global normal x ':select_or_extend_lines<ret>'
 map global normal X 'x<a-:><a-;>'
 map global normal { '<a-:><a-;>{p'
 map global normal } '<a-:>}p'
-define-command select-or-extend-lines %{
-  execute-keys '<a-:>'
-  try %{
-    # At least one selection is not full, so select whole lines.
-    execute-keys -draft '<a-K>\A^.*\n\z<ret>'
-    execute-keys 'x'
-  } catch %{
-    execute-keys 'Jx'
-  }
-}
 
-# Normal mode ------------------------------------------------------------------
+# Windowing --------------------------------------------------------------------
 
-# Hot reloading
-# map -docstring 'reload kakrc' global user <F5> ': source "%val{runtime}/kakrc"; echo reloaded kakrc<ret>'
-
-# Enter command mode
-map -docstring 'enter command mode' global normal <ret> :
-
-# Re-center view
-# map -docstring 'scroll to put the cursor on the top line of the window' global user , vtvm
-
-# Editing
-# map -docstring 'save file' global normal <c-s> ': write; echo -markup ''{Information}file saved''<ret>'
-# map -docstring 'close client' global normal <c-q> ': quit<ret>'
-# map -docstring 'close buffer' global normal <c-w> ': delete-buffer; echo -markup ''{Information}buffer closed''<ret>'
-
-# Navigation
-# map -docstring 'scroll one page up' global normal <pageup> ,<pageup>
-# map -docstring 'scroll one page down' global normal <pagedown> ,<pagedown>
-# map -docstring 'move to previous paragraph' global normal [ ,gh[pgi
-# map -docstring 'move to next paragraph' global normal ] ,]plgi
-
-# Selection primitives
-# map -docstring 'enter select mode' global normal s ': enter-select-mode<ret>'
-
-# User mode --------------------------------------------------------------------
-
-# Formatting and parsing date-time
-# Format date as “1991-11-02 Sat”.
-map -docstring 'format date to 2006-01-02' global user d '| date -d "$kak_selection" ''+%F''<ret>'
-map -docstring 'format date to 2006-01-02 Mon' global user D '| date -d "$kak_selection" ''+%F %a''<ret>'
-map -docstring 'sanitize text input' global user @ '| iconv -f UTF-8 -t ASCII//TRANSLIT//IGNORE<ret>'
-
-# Show the Unicode value under the cursor.
-map -docstring 'Unicode' global user u ': echo -markup "{Information}U+%sh{printf ''%04x'' ""$kak_cursor_char_value""}"<ret>'
-
-# Add search flags
-map global prompt <a-i> '<home>(?i)<end>'
-map global prompt <a-o> '<home>(?S)<end>'
-
-# Goto mode --------------------------------------------------------------------
-
-# ------------------------------------------------------------------------------
-
-# Commands ---------------------------------------------------------------------
-
-define-command -hidden enter_lsp_mode %{
-  enter-user-mode lsp
-}
-
-define-command -hidden select_next_surrounding_object -params 1 %{
-  execute-keys "f%arg{1}<a-a>%arg{1}"
-}
-
-define-command -hidden select_previous_surrounding_object -params 1 %{
-  execute-keys "<a-f>%arg{1}h<a-a>%arg{1}"
-}
-
-define-command -hidden swap_buffer_in_viewport -params 1 %{
-  execute-keys '"sZ'
-  execute-keys -client %arg{1} '"tZ'
-  execute-keys '"tz<esc>'
-  execute-keys -client %arg{1} '"sz<esc>'
-}
-
-define-command sort_selections %{
-  evaluate-commands -save-regs '"' %sh{
-    printf 'echo -to-file %s -- "%%val{selections}"' "$kak_quoted_response_fifo" > "$kak_command_fifo"
-    jq -s -R -r 'split("\u0000") | sort | ["set-register", "dquote"] + map("\u0027" + gsub("\u0027"; "\u0027" + "\u0027") + "\u0027") | join(" ")' "$kak_response_fifo"
-    echo execute-keys R
-  }
-}
-
-# Prompt commands --------------------------------------------------------------
-
-define-command -hidden show_definition_preview_hover %{
-  lsp-hover
-}
-
-define-command -hidden open_buffer_picker %{
-  prompt open: -menu -buffer-completion %{
-    buffer %val{text}
-  }
-}
-
-define-command -hidden open_document_symbol_picker %{
-  lsp-goto-document-symbol
-}
-
-define-command -hidden open_file_picker %{
-  prompt open: -menu -shell-script-candidates 'fd --hidden --type=file' %{
-    edit -existing %val{text}
-  }
-}
-
-define-command -hidden open_global_search_prompt %{
-  prompt global_search: -shell-script-candidates %{
-    echo "write $kak_quoted_response_fifo" > "$kak_command_fifo"
-    tr -sc '[:alnum:]' '\n' < "$kak_response_fifo"
-  } %{
-    open_buffer_with_output "%val{text}.refs" rg --hidden --column -- %val{text}
-  }
-}
-
-define-command -hidden open_viewport_picker %{
-  prompt -menu viewport_picker: -client-completion %{
-    swap_buffer_in_viewport %val{text}
-  }
-}
-
-define-command -hidden open_workspace_symbol_picker %{
-  lsp-workspace-symbol-incr
-}
-
-define-command -hidden prompt_select_next_surrounding_object %{
-  on-key %{
-    select_next_surrounding_object %val{key}
-  }
-}
-
-define-command -hidden prompt_select_previous_surrounding_object %{
-  on-key %{
-    select_previous_surrounding_object %val{key}
-  }
-}
-
-# Mappings ---------------------------------------------------------------------
-
-map -docstring 'enter surround mode' global normal q ':enter_surround_mode<ret>'
-map -docstring 'select previous surrounding object' global normal [ ':prompt_select_previous_surrounding_object<ret>'
-map -docstring 'select next surrounding object' global normal ] ':prompt_select_next_surrounding_object<ret>'
-map -docstring 'open file picker' global user f ':open_file_picker<ret>'
-map -docstring 'open buffer picker' global user b ':open_buffer_picker<ret>'
-map -docstring 'open global search prompt' global user / ':open_global_search_prompt<ret>'
-map -docstring 'open viewport picker' global user v ':open_viewport_picker<ret>'
-map -docstring 'open document symbol picker' global user s ':open_document_symbol_picker<ret>'
-map -docstring 'open workspace symbol picker' global user S ':open_workspace_symbol_picker<ret>'
-map -docstring 'show definition preview hover' global user k ':show_definition_preview_hover<ret>'
-map -docstring 'enter lsp mode' global user l ':enter_lsp_mode<ret>'
-map -docstring 'yank selected text to the terminal clipboard' global user y ':yank_selected_text_to_terminal_clipboard<ret>'
-map -docstring 'find friendly session name' global user R ':find_friendly_session_name<ret>'
-
-# Language support -------------------------------------------------------------
-
-# ------------------------------------------------------------------------------
-
-# Vim-like unimpaired mappings
-declare-user-mode unimpaired_left
-declare-user-mode unimpaired_right
-map -docstring 'unimpaired_left' global user '[' ': enter-user-mode unimpaired_left<ret>'
-map -docstring 'unimpaired_right' global user ']' ': enter-user-mode unimpaired_right<ret>'
-map -docstring 'read-only' global unimpaired_left r ': set-option buffer readonly yes<ret>'
-map -docstring 'read-only' global unimpaired_right r ': set-option buffer readonly no<ret>'
-map -docstring 'render whitespace' global unimpaired_left w ': remove-highlighter global/whitespace<ret>'
-map -docstring 'render whitespace' global unimpaired_right w ': add-highlighter global/whitespace show-whitespaces<ret>'
-map -docstring 'rulers' global unimpaired_left r ': remove-highlighter global/rulers<ret>'
-map -docstring 'rulers' global unimpaired_right r ': add-highlighter global/rulers column 81 default,cyan<ret>'
-
-# Commands ---------------------------------------------------------------------
-
-map -docstring 'erase character before cursor' global normal <backspace> ': erase-character-before-cursor<ret>'
-map -docstring 'erase character under cursor' global normal <del> ': erase-character-under-cursor<ret>'
-
-map -docstring 'select next word' global normal w ': select-next-word<ret>'
-
-map -docstring 'move line down' global normal <a-down> ': move-lines-down<ret>'
-map -docstring 'move line up' global normal <a-up> ': move-lines-up<ret>'
-
-map -docstring 'select all occurrences of current selection' global normal <a-percent> ': select-highlights<ret>'
-
-map -docstring 'increment selection' global normal <c-a> ': increment-selection %val{count}<ret>'
-map -docstring 'decrement selection' global normal <c-x> ': decrement-selection %val{count}<ret>'
-
-map -docstring 'buffer directory' global prompt <a-/> '%sh{dirname "$kak_bufname"}<a-!>/'
-
-# Commands ─────────────────────────────────────────────────────────────────────
-
-define-command erase-character-before-cursor -docstring 'erase character before cursor' %{
-  execute-keys -draft ';i<backspace>'
-}
-
-define-command erase-character-under-cursor -docstring 'erase character under cursor' %{
-  execute-keys -draft ';i<del>'
-}
-
-define-command select-next-word -docstring 'select next word' %{
-  evaluate-commands -itersel %{
-    hook -group select-next-word -always -once window User "%val{selection_desc}" %{
-      search-next-word
-    }
-    try %{
-      execute-keys '<a-i>w'
-      trigger-user-hook "%val{selection_desc}"
-    } catch %{
-      search-next-word
-    }
-    remove-hooks window select-next-word
-  }
-}
-
-define-command -hidden search-next-word -docstring 'search next word' %{
-  execute-keys 'h/\W\w<ret><a-i>w'
-}
-
-# Reference: https://code.visualstudio.com/docs/getstarted/keybindings#_basic-editing
-define-command move-lines-down -docstring 'move line down' %{
-  execute-keys -draft 'x<a-_><a-:>Z;ezjxdzP'
-}
-
-define-command move-lines-up -docstring 'move line up' %{
-  execute-keys -draft 'x<a-_><a-:><a-;>Z;bzkxdzp'
-}
-
-define-command select-highlights -docstring 'select all occurrences of current selection' %{
-  execute-keys '"aZ*%s<ret>"bZ"az"b<a-z>a'
-}
-
-define-command increment-selection -params 1 -docstring 'increment-selection <count>: increment selection by count' %{
-  execute-keys "a+%sh{expr $1 '|' 1}<esc>|{ cat; echo; } | bc<ret>"
-}
-
-define-command decrement-selection -params 1 -docstring 'decrement-selection <count>: decrement selection by count' %{
-  execute-keys "a-%sh{expr $1 '|' 1}<esc>|{ cat; echo; } | bc<ret>"
-}
-
-define-command -hidden evaluate_selected_text %{
-  evaluate-commands -itersel %{
-    evaluate-commands %val{selection}
-  }
-}
-
-alias global = evaluate_selected_text
-
-# Surround selections
-# Reference: https://github.com/mawww/kakoune/blob/master/src/normal.cc#:~:text=select_object
-
-define-command -hidden find_friendly_session_name %{
-  rename-session %sh{
-    curl 'https://myanimelist.net/character.php?limit=[0-1000:50]' |
-    kak -f '1shttps://myanimelist.net/character/\d+/(\w+)<ret>y%<a-R>a<ret>' |
-    shuf -n 1
-  }
-}
-
-define-command open_current_buffer_with_visual_studio_code %{
-  nop %sh{
-    code --goto "$kak_buffile:$kak_line:$kak_column"
-  }
-}
-
-define-command alacritty-open-new-client -params .. %{
-  nop %sh{
-    alacritty msg create-window -e kak -c "$kak_session" -e "$*"
-  }
-}
-
-complete-command alacritty-open-new-client command
-
-define-command foot-open-new-client -params .. %{
-  nop %sh{
-    footclient -e kak -c "$kak_session" -e "$*"
-  }
-}
-
-complete-command foot-open-new-client command
-
-define-command mkdir -docstring 'make directory for the current buffer' %{
-  nop %sh(mkdir -p -- "$(dirname -- "$kak_buffile")")
-}
-
-# Terminal integration
-hook -group alacritty-detection global ClientCreate '.*' %{
+# Terminal detection
+hook -group terminal-detection global ClientCreate '.*' %{
   trigger-user-hook "TERM=%val{client_env_TERM}"
 }
 
-# Alacritty terminal detection
-hook -group alacritty-integration global User 'TERM=alacritty' %{
-  alias global open-new-client alacritty-open-new-client
+hook global User 'TERM=alacritty' %{
+  alias global open_new_client alacritty_open_new_client
 }
 
-# foot terminal detection
-hook -group alacritty-integration global User 'TERM=foot' %{
-  alias global open-new-client foot-open-new-client
-}
-
-define-command open-kakrc -docstring 'open kakrc' %{
-  edit "%val{config}/kakrc"
-}
-
-define-command open-config -params 1 -docstring 'open from %val{config}' %{
-  edit "%val{config}/%arg{1}"
-}
-
-complete-command -menu open-config shell-script-candidates %{
-  cd "$kak_config" && find -L . -type f | sort -u
-}
-
-define-command open-runtime -params 1 -docstring 'open from %val{runtime}' %{
-  edit "%val{runtime}/%arg{1}"
-}
-
-complete-command -menu open-config shell-script-candidates %{
-  cd "$kak_runtime" && find -L . -type f | sort -u
-}
-
-# Show Unicode value in the status line.
-define-command get_character_info %{
-  echo %sh{printf 'U+%04x' "$kak_cursor_char_value"}
+hook global User 'TERM=foot' %{
+  alias global open_new_client foot_open_new_client
 }
 
 # Language support -------------------------------------------------------------
@@ -520,121 +444,4 @@ hook -group config global BufSetOption filetype=lua %{
 hook -group config global BufSetOption filetype=makefile %{
   set-option buffer indentwidth 0
   set-option buffer line_comment_token '#'
-}
-
-# Detection --------------------------------------------------------------------
-
-# Mark
-
-# Iterate selections one by one with `Control+N` and `Control+P`.
-
-# Save selections with `Y` or its strong version `Alt+Y` (same as `Y Space`).
-
-# Clear registers with `D`.  You can specify the register to use.  For example, `"/D` to clear the search register.
-
-# Restore registers as selections with `z` or its strong version `Z` (same as `zD`).
-
-# You can specify the register to use for all commands.
-
-# == Commands
-
-# - `z` ⇒ Restore register.
-# - `Z` ⇒ Consume register.
-
-# - `D` ⇒ Clear register.
-
-# - `Y` ⇒ Add selections.
-# - `Alt+Y` ⇒ Consume selections.
-
-# - `Control+N` ⇒ Iterate next selection.
-# - `Control+P` ⇒ Iterate previous selection.
-
-# == Faces
-
-# - `MarkedPrimaryCursor`
-# - `MarkedPrimarySelection`
-
-# - `MarkedSecondaryCursor`
-# - `MarkedSecondarySelection`
-# Options ──────────────────────────────────────────────────────────────────────
-
-# Internal variables
-declare-option -hidden range-specs mark_ranges
-
-# Faces
-set-face global MarkedPrimaryCursor '+ub'
-set-face global MarkedPrimarySelection '+ub'
-set-face global MarkedSecondaryCursor '+u'
-set-face global MarkedSecondarySelection '+u'
-
-# Mappings ─────────────────────────────────────────────────────────────────────
-
-map -docstring 'restore register' global normal z ': restore-register %val{register}<ret>'
-map -docstring 'consume register' global normal Z ': consume-register %val{register}<ret>'
-
-map -docstring 'clear register' global normal D ': clear-register %val{register}<ret>'
-
-map -docstring 'add selections' global normal Y ': add-selections %val{register}<ret>'
-map -docstring 'consume selections' global normal <a-Y> ': consume-selections %val{register}<ret>'
-
-map -docstring 'iterate next selection' global normal <c-n> ': iterate-next-selection %val{register}<ret>'
-map -docstring 'iterate previous selection' global normal <c-p> ': iterate-previous-selection %val{register}<ret>'
-
-# Commands ─────────────────────────────────────────────────────────────────────
-
-define-command restore_register -params 1 -docstring 'restore-register <register>: restore register (default: ^)' %{
-  try %[ execute-keys """%arg{1}z" ]
-}
-
-define-command consume_register -params 1 -docstring 'consume-register <register>: consume register (default: ^)' %{
-  restore_register %arg{1}
-  clear_register %arg{1}
-}
-
-define-command clear_register -params 1 -docstring 'clear-register <register>: clear register (default: ^)' %{
-  # Handle null named register.
-  try %{
-    set-register %arg{1}
-    echo -markup "{Information}cleared register '%arg{1}'{Default}"
-  } catch %{
-    set-register '^'
-    echo -markup "{Information}cleared register '^'{Default}"
-  }
-}
-
-define-command restore_selections -params 1 -docstring 'restore-selections <register>: restore selections (default: ^)' %{
-  try %[ execute-keys """%arg{1}<a-z>a" ]
-}
-
-define-command save_selections -params 1 -docstring 'save-selections <register>: save selections (default: ^)' %{
-  execute-keys -save-regs '' """%arg{1}Z"
-}
-
-define-command add_selections -params 1 -docstring 'add-selections <register>: add selections (default: ^)' %{
-  evaluate-commands -draft consume-selections %arg{1}
-  # Display saved selections:
-  # Handle null named register.
-  try %{
-    execute-keys -save-regs %arg{1} """%arg{1}Z"
-  } catch %{
-    execute-keys Z
-  }
-}
-
-define-command consume_selections -params 1 -docstring 'consume-selections <register>: consume selections (default: ^)' %{
-  restore_selections %arg{1}
-  save_selections %arg{1}
-  execute-keys ','
-}
-
-define-command iterate_next_selection -params 1 -docstring 'iterate-next-selection <register>: iterate next selection (default: ^)' %{
-  restore_register %arg{1}
-  execute-keys ')'
-  consume_selections %arg{1}
-}
-
-define-command iterate_previous_selection -params 1 -docstring 'iterate-previous-selection <register>: iterate previous selection (default: ^)' %{
-  restore_register %arg{1}
-  execute-keys '('
-  consume_selections %arg{1}
 }

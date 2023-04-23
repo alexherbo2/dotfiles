@@ -77,11 +77,6 @@ add-highlighter global/U+2013 regex '–' '0:green+f'
 add-highlighter global/U+2014 regex '—' '0:green+bf'
 add-highlighter global/math-symbols regex '[−×]' '0:cyan+f'
 
-# Command completion
-alias global = evaluate_selected_text
-complete-command alacritty_open_new_client command
-complete-command foot_open_new_client command
-
 # Commands ---------------------------------------------------------------------
 
 define-command -hidden enter_lsp_mode %{
@@ -231,6 +226,13 @@ define-command -hidden prompt_select_previous_surrounding_object %{
     select_previous_surrounding_object %val{key}
   }
 }
+
+# Aliases
+alias global = evaluate_selected_text
+
+# Command completion
+complete-command alacritty_open_new_client command
+complete-command foot_open_new_client command
 
 # Mappings ---------------------------------------------------------------------
 

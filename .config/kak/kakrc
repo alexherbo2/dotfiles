@@ -1550,14 +1550,3 @@ hook -group tmux-integration global User 'TMUX=(.+?),(.+?),(.+?)' %{
     tmux_impl set-buffer -w %val{main_reg_dquote}
   }
 }
-#######################
-######
-
-# syntax "**/*.{bat,cmd}"
-# syntax keywords "call|defined|do|echo%.|echo|else|exit|for|goto|if|not|setlocal|set"
-# syntax types "%%%u{!%%%u%d_}|%%%u{!:%u%d_}{!%%.}"
-# syntax symbols "%(|%)|<|>|=|~|*|&|%%|%!|%||@"
-# syntax literals "-%w{%w_-}|/%w{%w_-}|%d{%w}"
-# syntax strings {'{(\\)(\')!'.}|"{(\\)(\")!".}}
-# syntax comments "rem{.}"
-# syntax texts "{%w_-%.}"

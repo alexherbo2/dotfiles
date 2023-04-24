@@ -4,16 +4,6 @@ hook global BufCreate '.*/notes.txt' %{
 
 hook global BufSetOption filetype=notes %{
   add-highlighter buffer/notes ref notes
-  map buffer insert <c-u> '<a-;>:insert_date<ret>'
-  map buffer insert <c-i> '<a-;>:insert_date_and_time<ret>'
-}
-
-define-command -hidden insert_date %{
-  execute-keys -draft ';!date ''+%F %a'' | tr -d ''\n''<ret>'
-}
-
-define-command -hidden insert_date_and_time %{
-  execute-keys -draft ';!date ''+%F %a %H:%M'' | tr -d ''\n''<ret>'
 }
 
 add-highlighter shared/notes regions

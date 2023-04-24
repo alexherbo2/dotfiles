@@ -43,20 +43,6 @@ add-highlighter global/soft_wrap wrap -word -indent -marker '↪'
 # Status line
 set-option global modelinefmt '%val{bufname} %val{cursor_line}:%val{cursor_char_column} {{context_info}} {{mode_info}} - %val{client}@%val{session}'
 
-# Color scheme: One light (https://git.sr.ht/~raiguard/one.kak)
-# colorscheme one-light
-
-# Custom faces
-# set-face global Whitespace "rgb:%opt{bg}+f"
-# set-face global SelectedText "rgb:%opt{blue}+f"
-
-# System clipboard
-# set-option global clipboard_copy_command 'pbcopy'
-# set-option global clipboard_copy_args
-
-# Highlight whitespace
-# add-highlighter global/whitespace ref whitespace
-
 # Highlight various characters
 # https://unicode-table.com
 add-highlighter global/U+2013 regex '–' '0:green+f'
@@ -69,7 +55,7 @@ define-command -hidden convert_selected_text_to_ascii %{
   execute-keys '|iconv -f UTF-8 -t ASCII//TRANSLIT//IGNORE<ret>'
 }
 
-define-command -hidden convert_selected_date_to_iso_8601 %{
+define-command -hidden convert_selected_dates_to_iso_8601 %{
   execute-keys '|date -I -d "$kak_selection"<ret>'
 }
 
@@ -124,11 +110,11 @@ define-command select_highlights -docstring 'select all occurrences of current s
   execute-keys '"aZ*%s<ret>"bZ"az"b<a-z>a'
 }
 
-define-command increment_selection -params 1 -docstring 'increment-selection <count>: increment selection by count' %{
+define-command increment_selected_numbers -params 0..1 %{
   execute-keys "a+%sh{expr $1 '|' 1}<esc>|{ cat; echo; } | bc<ret>"
 }
 
-define-command decrement_selection -params 1 -docstring 'decrement-selection <count>: decrement selection by count' %{
+define-command decrement_selected_numbers -params 0..1 %{
   execute-keys "a-%sh{expr $1 '|' 1}<esc>|{ cat; echo; } | bc<ret>"
 }
 
@@ -253,7 +239,7 @@ map -docstring 'enter command mode' global normal <ret> :
 
 # User mode --------------------------------------------------------------------
 
-map -docstring 'convert selected date to ISO 8601' global user d ':convert_selected_date_to_iso_8601<ret>'
+map -docstring 'convert selected dates to ISO 8601' global user d ':convert_selected_dates_to_iso_8601<ret>'
 map -docstring 'convert selected text to ASCII' global user @ ':convert_selected_text_to_ascii<ret>'
 
 # Show the Unicode value under the cursor.
@@ -296,8 +282,8 @@ map -docstring 'rulers' global unimpaired_right r ': add-highlighter global/rule
 map -docstring 'move line down' global normal <c-j> ':move_lines_down<ret>'
 map -docstring 'move line up' global normal <c-k> ':move_lines_up<ret>'
 map -docstring 'select all occurrences of current selection' global normal <a-percent> ':select_highlights<ret>'
-map -docstring 'increment selection' global normal <c-a> ':increment_selection %val{count}<ret>'
-map -docstring 'decrement selection' global normal <c-x> ':decrement_selection %val{count}<ret>'
+map -docstring 'increment selected numbers' global normal <c-a> ':increment_selected_numbers %val{count}<ret>'
+map -docstring 'decrement selected numbers' global normal <c-x> ':decrement_selected_numbers %val{count}<ret>'
 map -docstring 'buffer directory' global prompt <a-/> '%sh{dirname "$kak_bufname"}<a-!>/'
 
 map -docstring 'clear register' global normal D ':clear_register %val{register}<ret>'

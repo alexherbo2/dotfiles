@@ -34,7 +34,7 @@ define-command colorscheme -params 1 -docstring 'load color scheme' %{
 evaluate-commands %sh{
   find -L "$kak_config/autoload" -type f -name '*.kak' -exec printf 'source "%s";' {} +
 }
-colorscheme colibri
+colorscheme macos
 
 # Preamble ---------------------------------------------------------------------
 

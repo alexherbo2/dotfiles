@@ -10,22 +10,8 @@
 # https://github.com/topisani/dotfiles/blob/master/config/kak/kakrc
 # https://gitlab.com/vbauerster/dotfiles/-/blob/master/.config/kak/kakrc
 
-# theme = 'base16_transparent'
-# Kakoune keyboard shortcuts
-# https://kakoune.org
-
 # VS Code keyboard shortcuts
 # https://code.visualstudio.com/docs/getstarted/keybindings#_default-keyboard-shortcuts
-
-# Helix
-# https://helix-editor.com
-# https://docs.helix-editor.com/keymap.html
-# https://docs.helix-editor.com/commands.html
-# https://docs.helix-editor.com/configuration.html
-# https://github.com/helix-editor/helix/blob/master/helix-term/src/keymap/default.rs
-# https://github.com/helix-editor/helix/blob/master/helix-term/src/commands.rs
-# https://github.com/helix-editor/helix/blob/master/helix-term/src/commands/typed.rs
-# https://github.com/helix-editor/helix/blob/master/helix-view/src/editor.rs
 
 # Preamble ---------------------------------------------------------------------
 define-command colorscheme -params 1 -docstring 'load color scheme' %{

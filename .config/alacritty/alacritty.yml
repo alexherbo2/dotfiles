@@ -5,7 +5,7 @@
 
 import:
 - ~/.config/alacritty/macos/use_option_as_meta_key.yml
-- ~/.config/alacritty/colors/macos.yml
+- ~/.config/alacritty/colors/macos_light.yml
 
 # Appearance -------------------------------------------------------------------
 

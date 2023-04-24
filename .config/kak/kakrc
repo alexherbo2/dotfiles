@@ -418,21 +418,21 @@ set-option global disabled_hooks '.+-trim-indent|.+-insert|.+-indent'
 
 # Kakoune
 # https://kakoune.org
-hook -group config global BufSetOption filetype=kak %{
+hook global BufSetOption filetype=kak %{
   set-option buffer indentwidth 2
   set-option buffer line_comment_token '#'
 }
 
 # Crystal
 # https://crystal-lang.org
-hook -group config global BufSetOption filetype=crystal %{
+hook global BufSetOption filetype=crystal %{
   set-option buffer indentwidth 2
   set-option buffer line_comment_token '#'
 }
 
 # JavaScript
 # https://developer.mozilla.org/en-US/docs/Web/JavaScript
-hook -group config global BufSetOption filetype=javascript %{
+hook global BufSetOption filetype=javascript %{
   set-option buffer indentwidth 2
   set-option buffer line_comment_token '//'
   set-option buffer block_comment_tokens '/*' '*/'
@@ -440,7 +440,7 @@ hook -group config global BufSetOption filetype=javascript %{
 
 # Lua
 # https://lua.org
-hook -group config global BufSetOption filetype=lua %{
+hook global BufSetOption filetype=lua %{
   set-option buffer indentwidth 2
   set-option buffer line_comment_token '--'
   set-option buffer block_comment_tokens '[[--' '--]]'
@@ -448,7 +448,7 @@ hook -group config global BufSetOption filetype=lua %{
 
 # Makefile
 # https://en.wikipedia.org/wiki/Make_(software)#Makefile
-hook -group config global BufSetOption filetype=makefile %{
+hook global BufSetOption filetype=makefile %{
   set-option buffer indentwidth 0
   set-option buffer line_comment_token '#'
 }

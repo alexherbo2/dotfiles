@@ -151,7 +151,11 @@ define-command open_config %{
 }
 
 define-command get_character_info %{
-  echo %sh{printf 'U+%04x' "$kak_cursor_char_value"}
+  echo -markup %sh{printf '{Information}U+%04x' "$kak_cursor_char_value"}
+}
+
+define-command pwd %{
+  echo -markup "{Information}%sh{pwd}"
 }
 
 # Prompt commands --------------------------------------------------------------
@@ -221,29 +225,11 @@ complete-command foot_open_new_client command
 # Enter command mode
 map -docstring 'enter command mode' global normal <ret> :
 
-# Re-center view
-# map -docstring 'scroll to put the cursor on the top line of the window' global user , vtvm
-
-# Editing
-# map -docstring 'save file' global normal <c-s> ': write; echo -markup ''{Information}file saved''<ret>'
-# map -docstring 'close client' global normal <c-q> ': quit<ret>'
-# map -docstring 'close buffer' global normal <c-w> ': delete-buffer; echo -markup ''{Information}buffer closed''<ret>'
-
-# Navigation
-# map -docstring 'scroll one page up' global normal <pageup> ,<pageup>
-# map -docstring 'scroll one page down' global normal <pagedown> ,<pagedown>
-# map -docstring 'move to previous paragraph' global normal [ ,gh[pgi
-# map -docstring 'move to next paragraph' global normal ] ,]plgi
-
-# Selection primitives
-
 # User mode --------------------------------------------------------------------
 
 map -docstring 'convert selected dates to ISO 8601' global user d ':convert_selected_dates_to_iso_8601<ret>'
 map -docstring 'convert selected text to ASCII' global user @ ':convert_selected_text_to_ascii<ret>'
-
-# Show the Unicode value under the cursor.
-map -docstring 'Unicode' global user u ': echo -markup "{Information}U+%sh{printf ''%04x'' ""$kak_cursor_char_value""}"<ret>'
+map -docstring 'get character info' global user u ':get_character_info<ret>'
 
 # Add search flags
 map global prompt <a-i> '<home>(?i)<end>'

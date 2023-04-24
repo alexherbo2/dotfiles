@@ -126,8 +126,7 @@ alias curl='curl -sSL'
 # Kakoune
 # https://kakoune.org
 # Reference: https://vamolessa.github.io/pepper/pepper/rc/config_recipes#load-config-file-on-startup
-alias kak='kak -n -e "source ~/.config/kak/kakrc"'
-alias k=kak
+alias k='kak -n -e "source ~/.config/kak/kakrc"'
 alias ke=kak_set_env
 alias ke!='unset KAKOUNE_SESSION KAKOUNE_CLIENT'
 alias kE='kak_set_env "$(basename "$PWD")"'

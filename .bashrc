@@ -8,6 +8,7 @@
 
 # McFly
 # https://github.com/cantino/mcfly
+# export MCFLY_LIGHT=TRUE
 # eval "$(mcfly init bash)"
 
 # opam configuration

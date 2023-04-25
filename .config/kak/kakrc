@@ -365,7 +365,6 @@ hook global User 'TERM=foot' %{
 # Indentation
 set-option global tabstop 4
 set-option global indentwidth 2
-set-option global disabled_hooks '.+-trim-indent|.+-insert|.+-indent'
 
 # Kakoune
 # https://kakoune.org

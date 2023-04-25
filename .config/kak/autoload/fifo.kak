@@ -1,4 +1,4 @@
-define-command -hidden open_named_buffer_with_output -params 2.. %{
+define-command -hidden create_buffer_from_command_output -params 2.. %{
   set-register f %sh{mktemp -u}
   nop %sh{
     shift
@@ -13,10 +13,12 @@ define-command -hidden open_named_buffer_with_output -params 2.. %{
   "
 }
 
-define-command -hidden open_buffer_with_output -params 1.. %{
-  open_named_buffer_with_output "%arg{@}.output" %arg{@}
+define-command -hidden create_auto_named_buffer_from_command_output -params 1.. %{
+  create_buffer_from_command_output "%arg{@}.output" %arg{@}
 }
 
-complete-command open_buffer_with_output shell
+complete-command create_buffer_from_command_output shell
+complete-command create_auto_named_buffer_from_command_output shell
 
-alias global ! open_buffer_with_output
+alias global !! create_buffer_from_command_output
+alias global ! create_auto_named_buffer_from_command_output

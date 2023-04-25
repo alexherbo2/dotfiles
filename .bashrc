@@ -42,7 +42,7 @@ export LANG=en_US.UTF-8
 export QT_QPA_PLATFORMTHEME=kde
 
 # Applications
-export EDITOR='kak -n -e "source ~/.config/kak/kakrc"'
+export EDITOR=kak
 export KAKOUNE_POSIX_SHELL=/bin/dash
 
 # Local environment variables
@@ -126,7 +126,7 @@ alias curl='curl -sSL'
 # Kakoune
 # https://kakoune.org
 # Reference: https://vamolessa.github.io/pepper/pepper/rc/config_recipes#load-config-file-on-startup
-alias k='kak -n -e "source ~/.config/kak/kakrc"'
+alias k=kak
 alias ke=kak_set_env
 alias ke!='unset KAKOUNE_SESSION KAKOUNE_CLIENT'
 alias kE='kak_set_env "$(basename "$PWD")"'
@@ -240,7 +240,7 @@ alias tree='exa --tree --all --ignore-glob .git'
 # https://github.com/taupiqueur/batch
 # interactive map
 imap() {
-  batch -e 'kak -n' -f 'iconv -f UTF-8 -t ASCII//TRANSLIT//IGNORE' -f 'tr [:upper:] [:lower:]' -f "tr -s \\'[:blank:] -" -f 'tr -d ?!,' "$@"
+  batch -e kak -f 'iconv -f UTF-8 -t ASCII//TRANSLIT//IGNORE' -f 'tr [:upper:] [:lower:]' -f "tr -s \\'[:blank:] -" -f 'tr -d ?!,' "$@"
 }
 
 # auto map

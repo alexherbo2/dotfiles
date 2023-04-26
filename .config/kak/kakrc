@@ -210,6 +210,7 @@ alias global = evaluate_selected_text
 # Command completion
 complete-command alacritty_open_new_client command
 complete-command foot_open_new_client command
+
 complete-command rename-session shell-script-candidates %{
   cat "$kak_config/friendly_session_names.txt"
 }
@@ -218,16 +219,6 @@ define-command find_friendly_session_name %{
   rename-session %sh{
     shuf -n 1 "$kak_config/friendly_session_names.txt"
   }
-}
-
-define-command open_current_buffer_with_visual_studio_code %{
-  nop %sh{
-    code --goto "$kak_buffile:$kak_line:$kak_column"
-  }
-}
-iii
-complete-command rename-session shell-script-candidates %{
-  cat "$kak_config/friendly_session_names.txt"
 }
 
 # Mappings ---------------------------------------------------------------------

@@ -1,5 +1,5 @@
 # Dockerfile
-# https://dockerfile.org
+# https://docker.com
 
 # kakoune-dockerfile
 # This Kakoune extension allows you to define a language configuration that controls the following declarative language features.

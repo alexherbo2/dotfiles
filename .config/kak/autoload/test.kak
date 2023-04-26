@@ -4,21 +4,6 @@
 # Internal variables
 declare-option str-list tests
 
-declare-option int success_count 0
-declare-option int failure_count 0
-declare-option int error_count 0
-
-declare-option str final_status_message
-declare-option int exit_code 0
-
-# Temporary files
-declare-option str tmp %sh(mktemp -d)
-hook -always global KakEnd '' %{
-  nop %sh(rm -Rf "$kak_opt_tmp")
-}
-
-# Commands ─────────────────────────────────────────────────────────────────────
-
 # Syntax:
 #
 # test <name> <commands>

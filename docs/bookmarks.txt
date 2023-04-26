@@ -22,3 +22,7 @@ Why Kakoune
 https://kakoune.org/why-kakoune/why-kakoune.html
 Taplo website
 https://taplo.tamasfe.dev
+Docker website
+https://docker.com
+Docker documentation
+https://docs.docker.com

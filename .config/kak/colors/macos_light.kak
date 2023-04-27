@@ -54,6 +54,7 @@ declare-option str bright_white 'e5e5e5'
 # Alpha blending
 declare-option str cursor_alpha '99'
 declare-option str selection_alpha '80'
+declare-option str selection_highlight_alpha '20'
 
 # UI variants
 # <https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=UI Variants>
@@ -135,3 +136,7 @@ set-face global LineNumbersWrapped "rgb:%opt{background}" # Kakoune ⇒ add-high
 set-face global MatchingChar "rgb:%opt{green}+uf" # Kakoune ⇒ add-highlighter -override global/show-matching show-matching — https://github.com/dracula/vim/blob/master/colors/dracula.vim#:~:text=MatchParen
 set-face global Whitespace "rgb:%opt{non_text}+f" # Kakoune ⇒ add-highlighter -override global/show-whitespaces show-whitespaces
 set-face global WrapMarker "rgb:%opt{non_text}" # Kakoune ⇒ add-highlighter -override global/wrap wrap -marker '↪'
+
+# Custom faces
+set-face global Whitespace "rgb:%opt{non_text}"
+set-face global SelectedText "default,rgba:%opt{selection}%opt{selection_highlight_alpha}"

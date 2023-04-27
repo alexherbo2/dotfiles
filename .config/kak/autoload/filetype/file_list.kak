@@ -15,9 +15,5 @@ hook -group grep-highlight global BufSetOption filetype=file_list %{
 }
 
 define-command -hidden jump_to_files %{
-  evaluate-commands -draft %{
-    execute-keys 'x<a-s>_'
-    execute-keys -draft -itersel 'gf'
-    evaluate-commands -client %val{client} -- edit -existing %reg{selection}
-  }
+  execute-keys 'x<a-s>_gf'
 }

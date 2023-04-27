@@ -211,6 +211,19 @@ hook -group kakrc-config global WinSetOption filetype=kakrc %{
 add-highlighter shared/kakrc regions
 add-highlighter shared/kakrc/code default-region group
 
+# TODO
+add-highlighter shared/kakrc/double_string region -recurse %{(?<!")("")+(?!")} %{(^|\h)\K"} %{"(?!")} group
+add-highlighter shared/kakrc/single_string region -recurse %{(?<!')('')+(?!')} %{(^|\h)\K'} %{'(?!')} group
+add-highlighter shared/kakrc/shell1 region -recurse '\{' '(^|\h)\K%?%sh\{' '\}' ref sh
+add-highlighter shared/kakrc/shell2 region -recurse '\(' '(^|\h)\K%?%sh\(' '\)' ref sh
+add-highlighter shared/kakrc/shell3 region -recurse '\[' '(^|\h)\K%?%sh\[' '\]' ref sh
+add-highlighter shared/kakrc/shell4 region -recurse '<'  '(^|\h)\K%?%sh<'  '>'  ref sh
+add-highlighter shared/kakrc/shell5 region -recurse '\{' '(^|\h)\K-?shell-script-(completion|candidates)\h+%\{' '\}' ref sh
+add-highlighter shared/kakrc/shell6 region -recurse '\(' '(^|\h)\K-?shell-script-(completion|candidates)\h+%\(' '\)' ref sh
+add-highlighter shared/kakrc/shell7 region -recurse '\[' '(^|\h)\K-?shell-script-(completion|candidates)\h+%\[' '\]' ref sh
+add-highlighter shared/kakrc/shell8 region -recurse '<'  '(^|\h)\K-?shell-script-(completion|candidates)\h+%<'  '>'  ref sh
+#
+
 # Syntax and semantics ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 # Classes
@@ -454,11 +467,11 @@ add-highlighter shared/kakrc/string.interpolated/interpolation/kakrc ref kakrc
 # name = "world"
 # puts %Q(hello #{name})
 #
-add-highlighter shared/kakrc/string.quoted.percent.parenthesis.interpolated region -recurse '\(' '%Q?\(' '\)' ref kakrc/string.interpolated
-add-highlighter shared/kakrc/string.quoted.percent.bracket.interpolated region -recurse '\[' '%Q?\[' '\]' ref kakrc/string.interpolated
-add-highlighter shared/kakrc/string.quoted.percent.brace.interpolated region -recurse '\{' '%Q?\{' '\}' ref kakrc/string.interpolated
-add-highlighter shared/kakrc/string.quoted.percent.angle.interpolated region -recurse '<' '%Q?<' '>' ref kakrc/string.interpolated
-add-highlighter shared/kakrc/string.quoted.percent.pipe.interpolated region '%Q?\|' '\|' ref kakrc/string.interpolated
+# add-highlighter shared/kakrc/string.quoted.percent.parenthesis.interpolated region -recurse '\(' '%Q?\(' '\)' ref kakrc/string.interpolated
+# add-highlighter shared/kakrc/string.quoted.percent.bracket.interpolated region -recurse '\[' '%Q?\[' '\]' ref kakrc/string.interpolated
+# add-highlighter shared/kakrc/string.quoted.percent.brace.interpolated region -recurse '\{' '%Q?\{' '\}' ref kakrc/string.interpolated
+# add-highlighter shared/kakrc/string.quoted.percent.angle.interpolated region -recurse '<' '%Q?<' '>' ref kakrc/string.interpolated
+# add-highlighter shared/kakrc/string.quoted.percent.pipe.interpolated region '%Q?\|' '\|' ref kakrc/string.interpolated
 
 # Raw percent string literals ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -515,14 +528,14 @@ add-highlighter shared/kakrc/string.symbol region ':"' '(?<!\\)(\\\\)*"' ref kak
 #
 # /foo/i.match("FOO")
 #
-add-highlighter shared/kakrc/string.regexp.interpolated region '/' '(?<!\\)(\\\\)*/[imx]*' regions
-add-highlighter shared/kakrc/string.regexp.interpolated/content default-region group
-add-highlighter shared/kakrc/string.regexp.interpolated/content/fill fill meta
-add-highlighter shared/kakrc/string.regexp.interpolated/content/escaped-character ref kakrc/string/content/escaped-character
-add-highlighter shared/kakrc/string.regexp.interpolated/content/escape-sequence ref kakrc/string/content/escape-sequence
-add-highlighter shared/kakrc/string.regexp.interpolated/interpolation region -recurse '\{' '#\{' '\}' group
-add-highlighter shared/kakrc/string.regexp.interpolated/interpolation/delimiters ref kakrc/string.interpolated/interpolation/delimiters
-add-highlighter shared/kakrc/string.regexp.interpolated/interpolation/kakrc ref kakrc
+# add-highlighter shared/kakrc/string.regexp.interpolated region '/' '(?<!\\)(\\\\)*/[imx]*' regions
+# add-highlighter shared/kakrc/string.regexp.interpolated/content default-region group
+# add-highlighter shared/kakrc/string.regexp.interpolated/content/fill fill meta
+# add-highlighter shared/kakrc/string.regexp.interpolated/content/escaped-character ref kakrc/string/content/escaped-character
+# add-highlighter shared/kakrc/string.regexp.interpolated/content/escape-sequence ref kakrc/string/content/escape-sequence
+# add-highlighter shared/kakrc/string.regexp.interpolated/interpolation region -recurse '\{' '#\{' '\}' group
+# add-highlighter shared/kakrc/string.regexp.interpolated/interpolation/delimiters ref kakrc/string.interpolated/interpolation/delimiters
+# add-highlighter shared/kakrc/string.regexp.interpolated/interpolation/kakrc ref kakrc
 
 # Note: Avoid unterminated regular expression and floor division as regex.
 #

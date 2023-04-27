@@ -39,9 +39,6 @@ set-face global DiffChanged 'yellow'
 # - `DiffChanged`
 # Aliases ──────────────────────────────────────────────────────────────────────
 
-alias global gw git-write
-alias global gc git-commit
-
 # Highlighters ─────────────────────────────────────────────────────────────────
 
 add-highlighter shared/git group

@@ -31,24 +31,23 @@ set-option global matching_pairs ( ) { } [ ] < > “ ” ‘ ’ « » ‹ ›
 set-option global scrolloff 5,1
 add-highlighter global/show-matching show-matching
 add-highlighter global/number-lines number-lines -hlcursor
-add-highlighter global/soft_wrap wrap -word -indent -marker '↪'
+add-highlighter global/soft_wrap wrap -indent -marker '↪'
 
 # Status line
 set-option global modelinefmt '%val{bufname} %val{cursor_line}:%val{cursor_char_column} {{context_info}} {{mode_info}} - %val{client}@%val{session}'
 
 # Highlight various characters
-# https://unicode-table.com
 add-highlighter global/U+2013 regex '–' '0:green+f'
 add-highlighter global/U+2014 regex '—' '0:green+bf'
 add-highlighter global/math-symbols regex '[−×]' '0:cyan+f'
 
 # Commands ---------------------------------------------------------------------
 
-define-command -hidden convert_selected_text_to_ascii %{
+define-command convert_selected_text_to_ascii %{
   execute-keys '|iconv -f UTF-8 -t ASCII//TRANSLIT//IGNORE<ret>'
 }
 
-define-command -hidden convert_selected_dates_to_iso_8601 %{
+define-command convert_selected_dates_to_iso_8601 %{
   execute-keys '|date -I -d "$kak_selection"<ret>'
 }
 
@@ -71,7 +70,7 @@ define-command create_buffer_from_template_string -params 2 %{
 
 alias global buffer_str! create_buffer_from_template_string
 
-define-command -hidden enter_lsp_mode %{
+define-command enter_lsp_mode %{
   enter-user-mode lsp
 }
 
@@ -102,7 +101,7 @@ define-command assert_buffer_eq -params 2 %{
   }
 }
 
-define-command -hidden create_buffer_from_command_output -params 2.. %{
+define-command create_buffer_from_command_output -params 2.. %{
   set-register f %sh{mktemp -u}
   nop %sh{
     shift
@@ -117,7 +116,7 @@ define-command -hidden create_buffer_from_command_output -params 2.. %{
   "
 }
 
-define-command -hidden create_auto_named_buffer_from_command_output -params 1.. %{
+define-command create_auto_named_buffer_from_command_output -params 1.. %{
   create_buffer_from_command_output "%arg{@}.output" %arg{@}
 }
 
@@ -138,15 +137,15 @@ define-command select_or_extend_lines %{
   }
 }
 
-define-command -hidden select_next_surrounding_object -params 1 %{
+define-command select_next_surrounding_object -params 1 %{
   execute-keys "f%arg{1}<a-a>%arg{1}"
 }
 
-define-command -hidden select_previous_surrounding_object -params 1 %{
+define-command select_previous_surrounding_object -params 1 %{
   execute-keys "<a-f>%arg{1}h<a-a>%arg{1}"
 }
 
-define-command -hidden swap_buffer_in_viewport -params 1 %{
+define-command swap_buffer_in_viewport -params 1 %{
   execute-keys '"sZ'
   execute-keys -client %arg{1} '"tZ'
   execute-keys '"tz<esc>'
@@ -162,15 +161,15 @@ define-command sort_selections %{
 }
 
 # Reference: https://code.visualstudio.com/docs/getstarted/keybindings#_basic-editing
-define-command move_lines_down -docstring 'move line down' %{
+define-command move_selected_lines_down %{
   execute-keys -draft 'x<a-_><a-:>Z;ezjxdzP'
 }
 
-define-command move_lines_up -docstring 'move line up' %{
+define-command move_selected_lines_up %{
   execute-keys -draft 'x<a-_><a-:><a-;>Z;bzkxdzp'
 }
 
-define-command select_highlights -docstring 'select all occurrences of current selection' %{
+define-command select_highlights %{
   execute-keys '"aZ*%s<ret>"bZ"az"b<a-z>a'
 }
 
@@ -182,7 +181,7 @@ define-command decrement_selected_numbers -params 0..1 %{
   execute-keys "a-%sh{expr $1 '|' 1}<esc>|{ cat; echo; } | bc<ret>"
 }
 
-define-command -hidden evaluate_selected_text %{
+define-command evaluate_selected_text %{
   evaluate-commands -itersel %{
     evaluate-commands %val{selection}
   }
@@ -224,27 +223,27 @@ define-command pwd %{
 
 # Prompt commands --------------------------------------------------------------
 
-define-command -hidden show_definition_preview_hover %{
+define-command show_definition_preview_hover %{
   lsp-hover
 }
 
-define-command -hidden open_buffer_picker %{
+define-command open_buffer_picker %{
   prompt open: -menu -buffer-completion %{
     buffer %val{text}
   }
 }
 
-define-command -hidden open_document_symbol_picker %{
+define-command open_document_symbol_picker %{
   lsp-goto-document-symbol
 }
 
-define-command -hidden open_file_picker %{
+define-command open_file_picker %{
   prompt open: -menu -shell-script-candidates 'fd --hidden --type=file' %{
     edit -existing %val{text}
   }
 }
 
-define-command -hidden open_global_search_prompt %{
+define-command open_global_search_prompt %{
   prompt global_search: -shell-script-candidates %{
     echo "write $kak_quoted_response_fifo" > "$kak_command_fifo"
     tr -sc '[:alnum:]' '\n' < "$kak_response_fifo"
@@ -253,23 +252,23 @@ define-command -hidden open_global_search_prompt %{
   }
 }
 
-define-command -hidden open_viewport_picker %{
+define-command open_viewport_picker %{
   prompt -menu viewport_picker: -client-completion %{
     swap_buffer_in_viewport %val{text}
   }
 }
 
-define-command -hidden open_workspace_symbol_picker %{
+define-command open_workspace_symbol_picker %{
   lsp-workspace-symbol-incr
 }
 
-define-command -hidden prompt_select_next_surrounding_object %{
+define-command prompt_select_next_surrounding_object %{
   on-key %{
     select_next_surrounding_object %val{key}
   }
 }
 
-define-command -hidden prompt_select_previous_surrounding_object %{
+define-command prompt_select_previous_surrounding_object %{
   on-key %{
     select_previous_surrounding_object %val{key}
   }
@@ -297,16 +296,19 @@ define-command git-commit -docstring 'git-commit: commit changes' %{
   }
 }
 
-define-command -hidden restore_register -params 1 %{
+alias global gw git-write
+alias global gc git-commit
+
+define-command restore_register -params 1 %{
   try %[ execute-keys """%arg{1}z" ]
 }
 
-define-command -hidden consume_register -params 1 %{
+define-command consume_register -params 1 %{
   restore_register %arg{1}
   clear_register %arg{1}
 }
 
-define-command -hidden clear_register -params 1 %{
+define-command clear_register -params 1 %{
   try %{
     set-register %arg{1}
     echo -markup "{Information}cleared register '%arg{1}'{Default}"
@@ -316,15 +318,15 @@ define-command -hidden clear_register -params 1 %{
   }
 }
 
-define-command -hidden restore_selections -params 1 %{
+define-command restore_selections -params 1 %{
   try %[ execute-keys """%arg{1}<a-z>a" ]
 }
 
-define-command -hidden save_selections -params 1 %{
+define-command save_selections -params 1 %{
   execute-keys -save-regs '' """%arg{1}Z"
 }
 
-define-command -hidden add_selections -params 1 %{
+define-command add_selections -params 1 %{
   evaluate-commands -draft consume_selections %arg{1}
   try %{
     execute-keys -save-regs %arg{1} """%arg{1}Z"
@@ -333,33 +335,33 @@ define-command -hidden add_selections -params 1 %{
   }
 }
 
-define-command -hidden consume_selections -params 1 %{
+define-command consume_selections -params 1 %{
   restore_selections %arg{1}
   save_selections %arg{1}
   execute-keys ','
 }
 
-define-command -hidden iterate_next_selection -params 1 %{
+define-command iterate_next_selection -params 1 %{
   restore_register %arg{1}
   execute-keys ')'
   consume_selections %arg{1}
 }
 
-define-command -hidden iterate_previous_selection -params 1 %{
+define-command iterate_previous_selection -params 1 %{
   restore_register %arg{1}
   execute-keys '('
   consume_selections %arg{1}
 }
 
-define-command -hidden send_selected_text_to_session -params 1 %{
+define-command send_selected_text_to_session -params 1 %{
   echo -quoting kakoune -to-shell-script "kak -p %arg{1}" set-register '"' %val{selections}
 }
 
-define-command -hidden send_current_buffer_to_session -params 1 %{
+define-command send_current_buffer_to_session -params 1 %{
   echo -quoting kakoune -to-shell-script "kak -p %arg{1}" edit -existing -- %val{buffile}
 }
 
-define-command -hidden send_buffer_list_to_session -params 1 %{
+define-command send_buffer_list_to_session -params 1 %{
   evaluate-commands -buffer '*' %{
     send_current_buffer_to_session %arg{1}
   }
@@ -377,7 +379,7 @@ complete-command send_buffer_list_to_session shell-script-candidates %{
   kak -l
 }
 
-define-command -hidden yank_selected_text_to_terminal_clipboard %{
+define-command yank_selected_text_to_terminal_clipboard %{
   nop %sh{
     printf 'echo -to-file %s -- "%%val{selections}"' "$kak_quoted_response_fifo" > "$kak_command_fifo"
     {
@@ -452,8 +454,8 @@ map -docstring 'render whitespace' global unimpaired_right w ': add-highlighter 
 map -docstring 'rulers' global unimpaired_left r ': remove-highlighter global/rulers<ret>'
 map -docstring 'rulers' global unimpaired_right r ': add-highlighter global/rulers column 81 default,cyan<ret>'
 
-map -docstring 'move line down' global normal <c-j> ':move_lines_down<ret>'
-map -docstring 'move line up' global normal <c-k> ':move_lines_up<ret>'
+map -docstring 'move line down' global normal <c-j> ':move_selected_lines_down<ret>'
+map -docstring 'move line up' global normal <c-k> ':move_selected_lines_up<ret>'
 map -docstring 'select all occurrences of current selection' global normal <a-percent> ':select_highlights<ret>'
 map -docstring 'increment selected numbers' global normal <c-a> ':increment_selected_numbers %val{count}<ret>'
 map -docstring 'decrement selected numbers' global normal <c-x> ':decrement_selected_numbers %val{count}<ret>'
@@ -476,7 +478,7 @@ map -docstring 'Decrease indent or erase character before cursor' global insert 
 # See also “Vim digraphs” for defaults.
 # https://vimhelp.org/digraph.txt.html#digraphs-default
 declare-user-mode digraphs
-define-command -hidden insert_text -params 1 %{
+define-command insert_text -params 1 %{
   evaluate-commands -save-regs '"' %{
     set-register '"' %arg{1}
     execute-keys -draft ';P'
@@ -554,6 +556,36 @@ hook global User 'TERM=foot' %{
   alias global open_new_client foot_open_new_client
 }
 
+set-face global SelectedText black,blue+fg
+
+define-command update_selected_text_ranges %{
+  # Reset ranges
+  unset-option window selected_text_ranges
+  try %{
+    evaluate-commands -draft -save-regs '^' %{
+      execute-keys '<a-k>..<ret>'
+      execute-keys '<a-K>\A\h+\z<ret>'
+      # Initialize ranges
+      set-option window selected_text_ranges %val{timestamp}
+      # Mark the main selection
+      # Mark other selections
+      evaluate-commands -draft %{
+        execute-keys '*%s<ret>'
+        evaluate-commands -itersel %{
+          set-option -add window selected_text_ranges "%val{selection_desc}|SelectedText"
+        }
+      }
+      evaluate-commands -itersel %{
+        set-option -remove window selected_text_ranges "%val{selection_desc}|SelectedText"
+      }
+    }
+  }
+}
+
+add-highlighter global/selected-text ranges selected_text_ranges
+hook -always global NormalIdle '' update_selected_text_ranges
+hook -always global InsertIdle '' update_selected_text_ranges
+
 # Language support -------------------------------------------------------------
 
 # Indentation
@@ -595,4 +627,180 @@ hook global BufSetOption filetype=lua %{
 hook global BufSetOption filetype=makefile %{
   set-option buffer indentwidth 0
   set-option buffer line_comment_token '#'
+}
+
+define-command test_select_words %{
+
+  buffer_str! '*input*' %[
+    [enum Color
+      Red
+      Green
+      Blue
+
+      def red?
+        self == Color::Red
+      end
+    end]
+  ]
+
+  buffer_str! '*output*' %[
+    [enum] [Color]
+      [Red]
+      [Green]
+      [Blue]
+
+      [def] [red]?
+        [self] == [Color]::[Red]
+      [end]
+    [end]
+  ]
+
+  buffer '*input*'
+  execute-keys 's\w+<ret><a-i>w'
+  assert_buffer_eq '*input*' '*output*'
+}
+
+define-command test_select_big_words %{
+
+  buffer_str! '*input*' %[
+    [enum Color
+      Red
+      Green
+      Blue
+
+      def red?
+        self == Color::Red
+      end
+    end]
+  ]
+
+  buffer_str! '*output*' %[
+    [enum] [Color]
+      [Red]
+      [Green]
+      [Blue]
+
+      [def] [red?]
+        [self] == [Color::Red]
+      [end]
+    [end]
+  ]
+
+  buffer '*input*'
+  execute-keys 's\w+<ret><a-i><a-w>'
+  assert_buffer_eq '*input*' '*output*'
+}
+
+# https://crystal-lang.org/reference/master/syntax_and_semantics/enum.html
+define-command test_toggle_line_comments %{
+
+  buffer_str! '*input*' %[
+    enum Color
+      [Red]
+      [Green]
+      [Blue]
+
+      #[def red?
+      #  self == Color::Red
+      #end]
+    end
+
+    [def paint(color : Color)
+      case color
+      when .red?
+        # ...
+      else
+        # Unusual, but still can happen.
+        raise "Unknown color: #{color}"
+      end
+    end
+
+    paint :red]
+  ]
+
+  buffer_str! '*output*' %[
+    enum Color
+      # [Red]
+      # [Green]
+      # [Blue]
+
+      [def red?
+        self == Color::Red
+      end]
+    end
+
+    # [def paint(color : Color)
+    #   case color
+    #   when .red?
+    #     # ...
+    #   else
+    #     # Unusual, but still can happen.
+    #     raise "Unknown color: #{color}"
+    #   end
+    # end
+
+    # paint :red]
+  ]
+
+  buffer '*input*'
+  set-option buffer line_comment_token '#'
+  toggle-comments
+  assert_buffer_eq '*input*' '*output*'
+}
+
+define-command test_toggle_block_comments %{
+
+  buffer_str! '*input*' %[
+    enum Color
+      /* [Red] */
+      /* [Green] */
+      /* [Blue] */
+
+      [def red?
+        self == Color::Red
+      end]
+    end
+
+    /* [def paint(color : Color)
+      case color
+      when .red?
+        # ...
+      else
+        # Unusual, but still can happen.
+        raise "Unknown color: #{color}"
+      end
+    end
+
+    paint :red] */
+  ]
+
+  buffer_str! '*output*' %[
+    enum Color
+      [Red]
+      [Green]
+      [Blue]
+
+      /* [def red?
+        self == Color::Red
+      end] */
+    end
+
+    [def paint(color : Color)
+      case color
+      when .red?
+        # ...
+      else
+        # Unusual, but still can happen.
+        raise "Unknown color: #{color}"
+      end
+    end
+
+    paint :red]
+  ]
+
+  buffer '*input*'
+  set-option buffer line_comment_token
+  set-option buffer block_comment_tokens '/*' '*/'
+  toggle-comments
+  assert_buffer_eq '*input*' '*output*'
 }

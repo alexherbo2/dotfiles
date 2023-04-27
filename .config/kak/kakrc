@@ -52,9 +52,80 @@ define-command -hidden convert_selected_dates_to_iso_8601 %{
   execute-keys '|date -I -d "$kak_selection"<ret>'
 }
 
+# Creates a buffer from the given string.
+# https://github.com/mawww/kakoune/blob/master/src/buffer_utils.cc#:~:text=create_buffer_from_string
+define-command create_buffer_from_string -params 2 %{
+  edit -scratch %arg{1}
+  set-register dquote %arg{2}
+  execute-keys '%R'
+}
+
+alias global buffer_str create_buffer_from_string
+
+# Leading whitespace is removed from the string contents according to the number of whitespace in the last line before the string delimiter.
+# Text enclosed in square brackets denotes selected text.
+define-command create_buffer_from_template_string -params 2 %{
+  create_buffer_from_string %arg{1} %arg{2}
+  execute-keys '%s\A\n|\n\z<ret>d%1s(\h+)\n\z<ret>y%s^\Q<c-r>"<ret>dged%s\[<ret><a-i>ri<backspace><esc>a<del><esc>'
+}
+
+alias global buffer_str! create_buffer_from_template_string
+
 define-command -hidden enter_lsp_mode %{
   enter-user-mode lsp
 }
+
+# https://doc.rust-lang.org/std/macro.assert_eq.html
+define-command assert_eq -params 2 %{
+  evaluate-commands %sh{
+    if [ "$1" != "$2" ]; then
+      echo fail
+    fi
+  }
+}
+
+# Asserts that two buffers are equal to each other.
+# Buffer contents and selected text should be equal.
+define-command assert_buffer_eq -params 2 %{
+  buffer %arg{1}
+  execute-keys -draft '%"ay'
+  set-register c %val{selections_desc}
+
+  buffer %arg{2}
+  execute-keys -draft '%"by'
+  set-register d %val{selections_desc}
+
+  evaluate-commands %sh{
+    if [ "$kak_reg_a" != "$kak_reg_b" ] || [ "$kak_reg_c" != "$kak_reg_d" ]; then
+      echo fail
+    fi
+  }
+}
+
+define-command -hidden create_buffer_from_command_output -params 2.. %{
+  set-register f %sh{mktemp -u}
+  nop %sh{
+    shift
+    mkfifo "$kak_reg_f"
+    { "$@" > "$kak_reg_f" 2>&1; } < /dev/null > /dev/null 2>&1 &
+  }
+  edit! -scroll -fifo %reg{f} %arg{1}
+  hook -always -once buffer BufCloseFifo '' "
+    nop %%sh{
+      unlink ""%reg{f}""
+    }
+  "
+}
+
+define-command -hidden create_auto_named_buffer_from_command_output -params 1.. %{
+  create_buffer_from_command_output "%arg{@}.output" %arg{@}
+}
+
+complete-command create_buffer_from_command_output shell
+complete-command create_auto_named_buffer_from_command_output shell
+
+alias global !! create_buffer_from_command_output
+alias global ! create_auto_named_buffer_from_command_output
 
 define-command select_or_extend_lines %{
   execute-keys '<a-:>'
@@ -201,6 +272,119 @@ define-command -hidden prompt_select_next_surrounding_object %{
 define-command -hidden prompt_select_previous_surrounding_object %{
   on-key %{
     select_previous_surrounding_object %val{key}
+  }
+}
+
+# Porcelain commands -----------------------------------------------------------
+
+define-command git-write -docstring 'git-write: save the current buffer and stage the file' %{
+  write
+  nop %sh{
+    git add "$kak_buffile"
+  }
+}
+
+define-command git-commit -docstring 'git-commit: commit changes' %{
+  edit -existing %sh{
+    git -c core.editor= commit
+    git rev-parse --git-path COMMIT_EDITMSG
+  }
+  hook buffer BufWritePost '.*' %{
+    nop %sh{
+      git commit --file "$kak_hook_param" --cleanup=strip
+    }
+    delete-buffer
+  }
+}
+
+define-command -hidden restore_register -params 1 %{
+  try %[ execute-keys """%arg{1}z" ]
+}
+
+define-command -hidden consume_register -params 1 %{
+  restore_register %arg{1}
+  clear_register %arg{1}
+}
+
+define-command -hidden clear_register -params 1 %{
+  try %{
+    set-register %arg{1}
+    echo -markup "{Information}cleared register '%arg{1}'{Default}"
+  } catch %{
+    set-register '^'
+    echo -markup "{Information}cleared register '^'{Default}"
+  }
+}
+
+define-command -hidden restore_selections -params 1 %{
+  try %[ execute-keys """%arg{1}<a-z>a" ]
+}
+
+define-command -hidden save_selections -params 1 %{
+  execute-keys -save-regs '' """%arg{1}Z"
+}
+
+define-command -hidden add_selections -params 1 %{
+  evaluate-commands -draft consume_selections %arg{1}
+  try %{
+    execute-keys -save-regs %arg{1} """%arg{1}Z"
+  } catch %{
+    execute-keys Z
+  }
+}
+
+define-command -hidden consume_selections -params 1 %{
+  restore_selections %arg{1}
+  save_selections %arg{1}
+  execute-keys ','
+}
+
+define-command -hidden iterate_next_selection -params 1 %{
+  restore_register %arg{1}
+  execute-keys ')'
+  consume_selections %arg{1}
+}
+
+define-command -hidden iterate_previous_selection -params 1 %{
+  restore_register %arg{1}
+  execute-keys '('
+  consume_selections %arg{1}
+}
+
+define-command -hidden send_selected_text_to_session -params 1 %{
+  echo -quoting kakoune -to-shell-script "kak -p %arg{1}" set-register '"' %val{selections}
+}
+
+define-command -hidden send_current_buffer_to_session -params 1 %{
+  echo -quoting kakoune -to-shell-script "kak -p %arg{1}" edit -existing -- %val{buffile}
+}
+
+define-command -hidden send_buffer_list_to_session -params 1 %{
+  evaluate-commands -buffer '*' %{
+    send_current_buffer_to_session %arg{1}
+  }
+}
+
+complete-command send_selected_text_to_session shell-script-candidates %{
+  kak -l
+}
+
+complete-command send_current_buffer_to_session shell-script-candidates %{
+  kak -l
+}
+
+complete-command send_buffer_list_to_session shell-script-candidates %{
+  kak -l
+}
+
+define-command -hidden yank_selected_text_to_terminal_clipboard %{
+  nop %sh{
+    printf 'echo -to-file %s -- "%%val{selections}"' "$kak_quoted_response_fifo" > "$kak_command_fifo"
+    {
+      printf '\033]52;c;'
+      tr '\0' '\n' < "$kak_response_fifo" | sed 's/\\\\/\\/g' | base64
+      printf '\a'
+    } > /dev/tty
   }
 }
 

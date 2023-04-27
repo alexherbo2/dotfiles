@@ -556,7 +556,8 @@ hook global User 'TERM=foot' %{
   alias global open_new_client foot_open_new_client
 }
 
-set-face global SelectedText black,blue+fg
+declare-option -hidden range-specs selected_text_ranges
+# set-face global SelectedText black,blue+fg
 
 define-command update_selected_text_ranges %{
   # Reset ranges

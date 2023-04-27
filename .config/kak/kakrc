@@ -252,6 +252,15 @@ define-command open_global_search_prompt %{
   }
 }
 
+define-command open_file_finder %{
+  prompt find: -shell-script-candidates %{
+    echo "write $kak_quoted_response_fifo" > "$kak_command_fifo"
+    tr -sc '[:alnum:]' '\n' < "$kak_response_fifo"
+  } %{
+    create_buffer_from_command_output "%val{text}.file_list" fd --hidden --type=file -- %val{text}
+  }
+}
+
 define-command open_viewport_picker %{
   prompt -menu viewport_picker: -client-completion %{
     swap_buffer_in_viewport %val{text}
@@ -431,6 +440,7 @@ map -docstring 'select next surrounding object' global normal ] ':prompt_select_
 map -docstring 'open file picker' global user f ':open_file_picker<ret>'
 map -docstring 'open buffer picker' global user b ':open_buffer_picker<ret>'
 map -docstring 'open global search prompt' global user / ':open_global_search_prompt<ret>'
+map -docstring 'open file finder' global user ? ':open_file_finder<ret>'
 map -docstring 'open viewport picker' global user v ':open_viewport_picker<ret>'
 map -docstring 'open document symbol picker' global user s ':open_document_symbol_picker<ret>'
 map -docstring 'open workspace symbol picker' global user S ':open_workspace_symbol_picker<ret>'

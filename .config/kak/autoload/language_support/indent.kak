@@ -47,16 +47,12 @@
 # none
 # keep
 # full
-declare-option -docstring 'auto_indent' str auto_indent full
+# declare-option -docstring 'auto_indent' str auto_indent full
 declare-option -docstring 'Indentation rules to increase the indentation of the current line or next line' str increase_indent_pattern '[({\[]$'
 declare-option -docstring 'Indentation rules to decrease the indentation of the current line or next line' str decrease_indent_pattern '^\h*[)}\]]$'
 declare-option -docstring 'Indentation rules to ignore the indentation of the current line or next line' str ignore_indent_pattern '^\h*#'
 
-declare-option -hidden str private_increase_indent_pattern '[({\[]$'
-declare-option -hidden str private_decrease_indent_pattern '^\h*[)}\]]$'
-
-remove-hooks global indent
-hook -group indent global InsertChar '.*' indent-on-inserted-character
+hook -group indent global InsertChar '.*' indent_on_inserted_character
 
 # Increase and decrease indent with Tab.
 # map -docstring 'Decrease indent or erase character before cursor' global insert <ret> '<a-;>: enter-new-line-and-keep-indent<ret>'
@@ -67,46 +63,16 @@ hook -group indent global InsertChar '.*' indent-on-inserted-character
 # hook -group indent global BufOpenFile '.*' detect-indent-style
 # hook -group indent global BufReload '.*' detect-indent-style
 
-define-command -hidden increase_indent %{
-  execute-keys '<a-gt>'
+define-command increase_indent %{
+  execute-keys -draft '<a-gt>'
 }
 
-define-command -hidden decrease_indent %{
-  execute-keys '<lt>'
-}
-
-define-command -hidden enter_new_line_and_keep_indent %{
-  evaluate-commands -draft -itersel %{
-    execute-keys ';i<ret>'
-    # Copy previous line indent
-    execute-keys -draft 'H<a-&>'
-    # Clean previous line indent
-    try %[ execute-keys -draft 'kxs^\h+$<ret>d' ]
-  }
-}
-
-define-command -hidden open_new_line_below_and_keep_indent %{
-  evaluate-commands -draft -itersel %{
-    execute-keys ';i<ret>'
-    # Copy previous line indent
-    execute-keys -draft 'H<a-&>'
-    # Clean previous line indent
-    try %[ execute-keys -draft 'kxs^\h+$<ret>d' ]
-  }
-}
-
-define-command -hidden open_new_line_above_and_keep_indent %{
-  evaluate-commands -draft -itersel %{
-    execute-keys ';i<ret>'
-    # Copy previous line indent
-    execute-keys -draft 'H<a-&>'
-    # Clean previous line indent
-    try %[ execute-keys -draft 'kxs^\h+$<ret>d' ]
-  }
+define-command decrease_indent %{
+  execute-keys -draft '<lt>'
 }
 
 # Backspace ⇒ Decrease indent or erase character before cursor.
-define-command -hidden decrease-indent-or-erase-character-before-cursor %{
+define-command decrease_indent_or_erase_character_before_cursor %{
   try %{
     execute-keys -draft -itersel '<a-h><a-k>\A\h+.\z<ret>'
     execute-keys -draft '<lt>'
@@ -116,78 +82,56 @@ define-command -hidden decrease-indent-or-erase-character-before-cursor %{
 }
 
 # Backspace ⇒ Decrease indent or erase character before cursor.
-define-command -hidden erase_characters_before_cursor_to_line_begin %{
+define-command erase_characters_before_cursor_to_line_begin %{
   execute-keys -draft '<a-h><a-K>^.\z<ret><a-:>Hd'
   execute-keys '<a-;><a-:><a-;><a-;>'
 }
 
-define-command -hidden indent-on-inserted-character %{
-  "indent-on-inserted-character-with-auto-indent-%opt{auto_indent}"
-}
-
-define-command -hidden indent-handle-inserted-character -params .. %{
+define-command indent_on_inserted_character %{
   evaluate-commands -draft %{
     # Select line begin to the rightmost inserted character.
     execute-keys 'h<a-h><a-:>'
-    evaluate-commands -draft -itersel -verbatim -- try %arg{@}
+    evaluate-commands -draft -itersel -verbatim -- try %{
+      # Indentation rules when inserting a new line
+      execute-keys -draft '<a-k>\n<ret>'
+      # Copy previous line indent
+      execute-keys -draft 'L<a-&>'
+      # Clean previous line indent
+      try %[ execute-keys -draft 's^\h+$<ret>d' ]
+
+      try %{
+        # Ignore indentation rules.
+        execute-keys -draft '<a-K>%opt{ignore_indent_pattern}<a-!><ret>'
+
+        # Increase the indentation of the next line
+        try %{
+          execute-keys -draft '<a-k>%opt{increase_indent_pattern}<a-!><ret>'
+          execute-keys -draft 'l<a-gt>'
+        }
+
+        # Decrease the indentation of the next line
+        # when inserting a new line in the middle of line
+        try %{
+          execute-keys -draft 'lx<a-k>%opt{decrease_indent_pattern}<a-!><ret>'
+          execute-keys -draft 'l<lt>'
+        }
+      }
+    } catch %{
+      try %{
+        # Ignore indentation rules.
+        execute-keys -draft '<a-K>%opt{ignore_indent_pattern}<a-!><ret>'
+
+        # Indentation rules when inserting a character at the end of line
+        execute-keys -draft 'l<a-k>\n<ret>'
+
+        # Decrease the indentation of the current line
+        try %{
+          execute-keys -draft 'L<a-k>%opt{decrease_indent_pattern}<a-!><ret>'
+          execute-keys -draft '<lt>'
+        }
+      }
+    } catch %{}
   }
-}
-
-define-command -hidden indent-on-inserted-character-with-auto-indent-none %{
-}
-
-define-command -hidden indent-on-inserted-character-with-auto-indent-keep %{
-  indent-handle-inserted-character %{
-    # Indentation rules when inserting a new line
-    execute-keys -draft '<a-k>\n<ret>'
-    # Copy previous line indent
-    execute-keys -draft 'L<a-&>'
-    # Clean previous line indent
-    try %[ execute-keys -draft 's^\h+$<ret>d' ]
-  }
-}
-
-define-command -hidden indent-on-inserted-character-with-auto-indent-full %{
-  indent-handle-inserted-character %{
-    # Indentation rules when inserting a new line
-    execute-keys -draft '<a-k>\n<ret>'
-    # Copy previous line indent
-    execute-keys -draft 'L<a-&>'
-    # Clean previous line indent
-    try %[ execute-keys -draft 's^\h+$<ret>d' ]
-
-    try %{
-      # Ignore indentation rules.
-      execute-keys -draft '<a-K>%opt{ignore_indent_pattern}<a-!><ret>'
-
-      # Increase the indentation of the next line
-      try %{
-        execute-keys -draft '<a-k>%opt{private_increase_indent_pattern}<a-!>|%opt{increase_indent_pattern}<a-!><ret>'
-        execute-keys -draft 'l<a-gt>'
-      }
-
-      # Decrease the indentation of the next line
-      # when inserting a new line in the middle of line
-      try %{
-        execute-keys -draft 'lx<a-k>%opt{private_decrease_indent_pattern}<a-!>|%opt{decrease_indent_pattern}<a-!><ret>'
-        execute-keys -draft 'l<lt>'
-      }
-    }
-  } catch %{
-    try %{
-      # Ignore indentation rules.
-      execute-keys -draft '<a-K>%opt{ignore_indent_pattern}<a-!><ret>'
-
-      # Indentation rules when inserting a character at the end of line
-      execute-keys -draft 'l<a-k>\n<ret>'
-
-      # Decrease the indentation of the current line
-      try %{
-        execute-keys -draft 'L<a-k>%opt{private_decrease_indent_pattern}<a-!>|%opt{decrease_indent_pattern}<a-!><ret>'
-        execute-keys -draft '<lt>'
-      }
-    }
-  } catch %{}
 }
 
 # [EditorConfig]: https://editorconfig.org

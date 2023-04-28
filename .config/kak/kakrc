@@ -41,6 +41,13 @@ add-highlighter global/characters regex '[–—−×]' '0:cyan+f'
 
 # Commands ---------------------------------------------------------------------
 
+define-command insert_text -params 1 %{
+  evaluate-commands -save-regs '"' %{
+    set-register '"' %arg{1}
+    execute-keys -draft ';P'
+  }
+}
+
 define-command convert_selected_text_to_ascii %{
   execute-keys '|iconv -f UTF-8 -t ASCII//TRANSLIT//IGNORE<ret>'
 }
@@ -295,14 +302,14 @@ define-command prompt_select_previous_surrounding_object %{
 
 # Porcelain commands -----------------------------------------------------------
 
-define-command git-write -docstring 'git-write: save the current buffer and stage the file' %{
+define-command git_write %{
   write
   nop %sh{
     git add "$kak_buffile"
   }
 }
 
-define-command git-commit -docstring 'git-commit: commit changes' %{
+define-command git_commit %{
   edit -existing %sh{
     git -c core.editor= commit
     git rev-parse --git-path COMMIT_EDITMSG
@@ -315,8 +322,8 @@ define-command git-commit -docstring 'git-commit: commit changes' %{
   }
 }
 
-alias global gw git-write
-alias global gc git-commit
+alias global gw git_write
+alias global gc git_commit
 
 define-command restore_register -params 1 %{
   try %[ execute-keys """%arg{1}z" ]
@@ -475,8 +482,8 @@ map -docstring 'render whitespace' global unimpaired_right w ': add-highlighter 
 map -docstring 'rulers' global unimpaired_left r ': remove-highlighter global/rulers<ret>'
 map -docstring 'rulers' global unimpaired_right r ': add-highlighter global/rulers column 81 default,cyan<ret>'
 
-map -docstring 'move line down' global normal <c-j> ':move_selected_lines_down<ret>'
-map -docstring 'move line up' global normal <c-k> ':move_selected_lines_up<ret>'
+map -docstring 'move selected lines down' global normal <c-j> ':move_selected_lines_down<ret>'
+map -docstring 'move selected lines up' global normal <c-k> ':move_selected_lines_up<ret>'
 map -docstring 'select all occurrences of current selection' global normal <a-percent> ':select_highlights<ret>'
 map -docstring 'increment selected numbers' global normal <c-a> ':increment_selected_numbers %val{count}<ret>'
 map -docstring 'decrement selected numbers' global normal <c-x> ':decrement_selected_numbers %val{count}<ret>'
@@ -487,11 +494,11 @@ map -docstring 'add selections' global normal Y ':add_selections %val{register}<
 map -docstring 'iterate next selection' global normal <c-n> ':iterate_next_selection %val{register}<ret>'
 map -docstring 'iterate previous selection' global normal <c-p> ':iterate_previous_selection %val{register}<ret>'
 map -docstring 'toggle comments' global normal '#' ':toggle_comments<ret>'
-map -docstring 'erase characters before cursor to line begin' global insert <c-u> '<a-;>: erase_characters_before_cursor_to_line_begin<ret>'
+map -docstring 'erase characters before cursor to line begin' global insert <c-u> '<a-;>:erase_characters_before_cursor_to_line_begin<ret>'
 map -docstring 'paste' global insert <c-y> '<c-r>"'
-map -docstring 'Increase indent' global insert <tab> '<a-;><a-gt>'
-map -docstring 'Decrease indent' global insert <s-tab> '<a-;><lt>'
-map -docstring 'Decrease indent or erase character before cursor' global insert <backspace> '<a-;>: decrease-indent-or-erase-character-before-cursor<ret>'
+map -docstring 'Increase indent' global insert <tab> '<a-;>:increase_indent<ret>'
+map -docstring 'Decrease indent' global insert <s-tab> '<a-;>:decrease_indent<ret>'
+map -docstring 'Decrease indent or erase character before cursor' global insert <backspace> '<a-;>:decrease_indent_or_erase_character_before_cursor<ret>'
 
 # Insert various characters.
 # Heavily based on qwerty-lafayette.
@@ -499,12 +506,6 @@ map -docstring 'Decrease indent or erase character before cursor' global insert 
 # See also “Vim digraphs” for defaults.
 # https://vimhelp.org/digraph.txt.html#digraphs-default
 declare-user-mode digraphs
-define-command insert_text -params 1 %{
-  evaluate-commands -save-regs '"' %{
-    set-register '"' %arg{1}
-    execute-keys -draft ';P'
-  }
-}
 map -docstring 'erase characters before cursor to line begin' global insert <c-u> ''
 map -docstring 'enter digraphs mode' global insert <c-k> '<a-;>:enter-user-mode digraphs<ret>'
 map -docstring 'â' global digraphs 'q' ':insert_text â<ret>'

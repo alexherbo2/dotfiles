@@ -1,22 +1,22 @@
 # This script provides the functionality to toggle comments on lines over the selection
 # using the line and block comment tokens defined in `line_comment_token` and `block_comment_tokens` options.
 
-declare-option -hidden str-list line_comment_token
-declare-option -hidden str-list block_comment_tokens
+declare-option str-list line_comment_token
+declare-option str-list block_comment_tokens
 
-define-command -hidden toggle_comments %{
+define-command toggle_comments %{
   try toggle_line_comments catch toggle_block_comments
 }
 
-define-command -hidden toggle_line_comments %{
+define-command toggle_line_comments %{
   toggle_line_comments_with_token %opt{line_comment_token}
 }
 
-define-command -hidden toggle_block_comments %{
+define-command toggle_block_comments %{
   toggle_block_comments_with_tokens %opt{block_comment_tokens}
 }
 
-define-command -hidden toggle_line_comments_with_token -params 1 %{
+define-command toggle_line_comments_with_token -params 1 %{
   evaluate-commands -draft -save-regs 'ab' %{
     # Arguments
     set-register a %arg{1}
@@ -63,7 +63,7 @@ define-command -hidden toggle_line_comments_with_token -params 1 %{
   }
 }
 
-define-command -hidden toggle_block_comments_with_tokens -params 2 %{
+define-command toggle_block_comments_with_tokens -params 2 %{
   evaluate-commands -draft -save-regs 'ab' %{
     # Arguments
     set-register a %arg{1}

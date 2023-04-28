@@ -76,10 +76,9 @@ define-command enter_lsp_mode %{
 
 # https://doc.rust-lang.org/std/macro.assert_eq.html
 define-command assert_eq -params 2 %{
-  evaluate-commands %sh{
-    if [ "$1" != "$2" ]; then
-      echo fail
-    fi
+  try %sh[[ "$1" != "$2" ] && echo fail] catch %{
+    echo -debug -quoting kakoune %arg{1} %arg{2}
+    fail assert_eq %arg{1} %arg{2}
   }
 }
 
@@ -94,10 +93,9 @@ define-command assert_buffer_eq -params 2 %{
   execute-keys -draft '%"by'
   set-register d %val{selections_desc}
 
-  evaluate-commands %sh{
-    if [ "$kak_reg_a" != "$kak_reg_b" ] || [ "$kak_reg_c" != "$kak_reg_d" ]; then
-      echo fail
-    fi
+  try %sh[[ "$kak_reg_a" != "$kak_reg_b" ] || [ "$kak_reg_c" != "$kak_reg_d" ] && echo fail] catch %{
+    echo -debug -quoting kakoune %reg{a} %reg{b} %reg{c} %reg{d}
+    fail assert_buffer_eq %arg{1} %arg{2}
   }
 }
 

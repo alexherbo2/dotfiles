@@ -37,9 +37,7 @@ add-highlighter global/soft_wrap wrap -indent -marker '↪'
 set-option global modelinefmt '%val{bufname} %val{cursor_line}:%val{cursor_char_column} {{context_info}} {{mode_info}} - %val{client}@%val{session}'
 
 # Highlight various characters
-add-highlighter global/U+2013 regex '–' '0:green+f'
-add-highlighter global/U+2014 regex '—' '0:green+bf'
-add-highlighter global/math-symbols regex '[−×]' '0:cyan+f'
+add-highlighter global/characters regex '[–—−×]' '0:cyan+f'
 
 # Commands ---------------------------------------------------------------------
 

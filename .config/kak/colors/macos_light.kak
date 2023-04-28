@@ -58,17 +58,14 @@ declare-option str selection_highlight_alpha '20'
 
 # UI variants
 # <https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=UI Variants>
-declare-option str background_lighter '424450'
-declare-option str background_light '343746'
-declare-option str background_dark '21222c'
-declare-option str background_darker '191a21'
-
-# TODO: bright_white
-declare-option str background_dark 'e5e5e5'
+declare-option str foreground_lighter '333333'
+declare-option str foreground_light '1a1a1a'
+declare-option str background_dark 'e6e6e6'
+declare-option str background_darker 'cccccc'
 
 # Other
 # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=other
-declare-option str non_text "%opt{background_light}"
+declare-option str non_text "%opt{background_darker}"
 
 # Template ─────────────────────────────────────────────────────────────────────
 
@@ -138,5 +135,4 @@ set-face global Whitespace "rgb:%opt{non_text}+f" # Kakoune ⇒ add-highlighter 
 set-face global WrapMarker "rgb:%opt{non_text}" # Kakoune ⇒ add-highlighter -override global/wrap wrap -marker '↪'
 
 # Custom faces
-set-face global Whitespace "rgb:%opt{non_text}"
 set-face global SelectedText "default,rgba:%opt{selection}%opt{selection_highlight_alpha}"

@@ -1,26 +1,4 @@
-# colibri
-# ~/.config/kak/colors/dracula.kak
-# Dracula theme for Kakoune
-# https://draculatheme.com/kakoune
-#
 # Color palette
-# https://spec.draculatheme.com
-#
-# Template
-# https://github.com/mawww/kakoune/blob/master/colors/default.kak
-#
-# Faces
-# https://github.com/mawww/kakoune/blob/master/doc/pages/faces.asciidoc
-#
-# A fully spec‐compliant theme implementation:
-# https://draculatheme.com/visual-studio-code
-# https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml
-#
-# A list of files to open in Kakoune and VS Code:
-# C++ ⇒ https://github.com/mawww/kakoune/tree/master/src
-# AsciiDoc ⇒ https://github.com/mawww/kakoune/tree/master/doc
-
-# Color palette ────────────────────────────────────────────────────────────────
 
 # Standard
 declare-option str background 'ffffff'
@@ -57,17 +35,16 @@ declare-option str selection_alpha '80'
 declare-option str selection_highlight_alpha '20'
 
 # UI variants
-# <https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=UI Variants>
 declare-option str foreground_lighter '333333'
 declare-option str foreground_light '1a1a1a'
 declare-option str background_dark 'e6e6e6'
 declare-option str background_darker 'cccccc'
 
 # Other
-# https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=other
 declare-option str non_text "%opt{background_darker}"
 
-# Template ─────────────────────────────────────────────────────────────────────
+# Template
+# https://github.com/mawww/kakoune/blob/master/colors/default.kak
 
 # For code
 set-face global value "rgb:%opt{red}" # C++ ⇒ int number = [42];

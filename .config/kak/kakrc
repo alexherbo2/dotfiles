@@ -99,6 +99,8 @@ define-command assert_buffer_eq -params 2 %{
   }
 }
 
+complete-command assert_buffer_eq buffer
+
 define-command create_buffer_from_command_output -params 2.. %{
   set-register f %sh{mktemp -u}
   nop %sh{

@@ -88,7 +88,16 @@ define-command erase_characters_before_cursor_to_line_begin %{
 }
 
 define-command indent_on_inserted_character %{
-  evaluate-commands -draft %{
+  indent_on_inserted_character_with_indentation_rules %opt{increase_indent_pattern} %opt{decrease_indent_pattern} %opt{ignore_indent_pattern}
+}
+
+define-command indent_on_inserted_character_with_indentation_rules -params 3 %{
+  evaluate-commands -draft -save-regs 'abc' %{
+    # Arguments
+    set-register a %arg{1}
+    set-register b %arg{2}
+    set-register c %arg{3}
+
     # Select line begin to the rightmost inserted character.
     execute-keys 'h<a-h><a-:>'
     evaluate-commands -draft -itersel -verbatim -- try %{
@@ -101,32 +110,32 @@ define-command indent_on_inserted_character %{
 
       try %{
         # Ignore indentation rules.
-        execute-keys -draft '<a-K>%opt{ignore_indent_pattern}<a-!><ret>'
+        execute-keys -draft '<a-K><c-r>c<ret>'
 
         # Increase the indentation of the next line
         try %{
-          execute-keys -draft '<a-k>%opt{increase_indent_pattern}<a-!><ret>'
+          execute-keys -draft '<a-k><c-r>a<ret>'
           execute-keys -draft 'l<a-gt>'
         }
 
         # Decrease the indentation of the next line
         # when inserting a new line in the middle of line
         try %{
-          execute-keys -draft 'lx<a-k>%opt{decrease_indent_pattern}<a-!><ret>'
+          execute-keys -draft 'lx<a-k><c-r>b<ret>'
           execute-keys -draft 'l<lt>'
         }
       }
     } catch %{
       try %{
         # Ignore indentation rules.
-        execute-keys -draft '<a-K>%opt{ignore_indent_pattern}<a-!><ret>'
+        execute-keys -draft '<a-K><c-r>c<ret>'
 
         # Indentation rules when inserting a character at the end of line
         execute-keys -draft 'l<a-k>\n<ret>'
 
         # Decrease the indentation of the current line
         try %{
-          execute-keys -draft 'L<a-k>%opt{decrease_indent_pattern}<a-!><ret>'
+          execute-keys -draft 'L<a-k><c-r>b<ret>'
           execute-keys -draft '<lt>'
         }
       }

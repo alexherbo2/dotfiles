@@ -343,22 +343,13 @@ define-command consume_selections_in_register -params 1 %{
 }
 
 define-command clear_register -params 1 %{
-  try %{
-    set-register %arg{1}
-    echo -markup "{Information}cleared register '%arg{1}'"
-  } catch %{
-    set-register '^'
-    echo -markup "{Information}cleared register '^'"
-  }
+  try %[ set-register %arg{1} ] catch %[ set-register '^' ]
+  echo -markup "{Information}cleared register '%arg{1}'"
 }
 
 define-command add_selections_to_register -params 1 %{
   evaluate-commands -draft consume_selections_to_register %arg{1}
-  try %{
-    execute-keys -save-regs %arg{1} """%arg{1}Z"
-  } catch %{
-    execute-keys Z
-  }
+  echo -markup "{Information}added %val{selection_count} selections to register '%arg{1}'"
 }
 
 define-command consume_selections_to_register -params 1 %{

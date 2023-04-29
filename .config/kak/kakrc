@@ -584,23 +584,19 @@ declare-option -hidden range-specs selected_text_ranges
 define-command update_selected_text_ranges %{
   # Reset ranges
   unset-option window selected_text_ranges
-  try %{
-    evaluate-commands -draft -save-regs '^' %{
-      execute-keys '<a-k>..<ret>'
-      execute-keys '<a-K>\A\h+\z<ret>'
-      # Initialize ranges
-      set-option window selected_text_ranges %val{timestamp}
-      # Mark the main selection
-      # Mark other selections
-      evaluate-commands -draft %{
-        execute-keys '*gt<c-u>gtZ<c-d>gb<c-d><a-z>us<ret>'
-        evaluate-commands -itersel %{
-          set-option -add window selected_text_ranges "%val{selection_desc}|SelectedText"
-        }
-      }
+  evaluate-commands -draft -save-regs '^' -verbatim -- try %{
+    execute-keys '<a-k>..<ret>'
+    execute-keys '<a-K>\A\h+\z<ret>'
+    # Initialize ranges
+    set-option window selected_text_ranges %val{timestamp}
+    evaluate-commands -draft %{
+      execute-keys '*<pageup>Z<pagedown><pagedown><a-z>us<ret>'
       evaluate-commands -itersel %{
-        set-option -remove window selected_text_ranges "%val{selection_desc}|SelectedText"
+        set-option -add window selected_text_ranges "%val{selection_desc}|SelectedText"
       }
+    }
+    evaluate-commands -itersel %{
+      set-option -remove window selected_text_ranges "%val{selection_desc}|SelectedText"
     }
   }
 }

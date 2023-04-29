@@ -1,7 +1,7 @@
 # https://code.visualstudio.com/api/language-extensions/language-configuration-guide#indentation-rules
 declare-option str increase_indent_pattern '[({\[]$'
 declare-option str decrease_indent_pattern '^\h*[)}\]]$'
-declare-option str ignore_indent_pattern '^\h*#'
+declare-option str ignore_indent_pattern '^\h*//'
 
 define-command occi_indent_config %{
   hook global InsertChar '[\n(){}[\]]' indent_on_inserted_character_with_indentation_rules

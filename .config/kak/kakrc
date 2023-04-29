@@ -629,45 +629,8 @@ define-command detect_indent_style %{
 }
 
 # hook on file open and buffer reload.
-hook global BufOpenFile '.*' detect_indent_style
-hook global BufReload '.*' detect_indent_style
-
-# Kakoune
-# https://kakoune.org
-hook global BufSetOption filetype=kak %{
-  set-option buffer indentwidth 2
-  set-option buffer line_comment_token '#'
-}
-
-# Crystal
-# https://crystal-lang.org
-hook global BufSetOption filetype=crystal %{
-  set-option buffer indentwidth 2
-  set-option buffer line_comment_token '#'
-}
-
-# JavaScript
-# https://developer.mozilla.org/en-US/docs/Web/JavaScript
-hook global BufSetOption filetype=javascript %{
-  set-option buffer indentwidth 2
-  set-option buffer line_comment_token '//'
-  set-option buffer block_comment_tokens '/*' '*/'
-}
-
-# Lua
-# https://lua.org
-hook global BufSetOption filetype=lua %{
-  set-option buffer indentwidth 2
-  set-option buffer line_comment_token '--'
-  set-option buffer block_comment_tokens '[[--' '--]]'
-}
-
-# Makefile
-# https://en.wikipedia.org/wiki/Make_(software)#Makefile
-hook global BufSetOption filetype=makefile %{
-  set-option buffer indentwidth 0
-  set-option buffer line_comment_token '#'
-}
+# hook global BufOpenFile '.*' detect_indent_style
+# hook global BufReload '.*' detect_indent_style
 
 define-command test_select_words %{
 

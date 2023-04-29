@@ -593,7 +593,7 @@ define-command update_selected_text_ranges %{
       # Mark the main selection
       # Mark other selections
       evaluate-commands -draft %{
-        execute-keys '*%s<ret>'
+        execute-keys '*gt<c-u>gtZ<c-d>gb<c-d><a-z>us<ret>'
         evaluate-commands -itersel %{
           set-option -add window selected_text_ranges "%val{selection_desc}|SelectedText"
         }
@@ -789,7 +789,7 @@ define-command test_toggle_line_comments %{
 
   buffer '*input*'
   set-option buffer line_comment_token '#'
-  toggle-comments
+  toggle_comments_with_config
   assert_buffer_eq '*input*' '*output*'
 }
 
@@ -846,6 +846,6 @@ define-command test_toggle_block_comments %{
   buffer '*input*'
   set-option buffer line_comment_token
   set-option buffer block_comment_tokens '/*' '*/'
-  toggle-comments
+  toggle_comments_with_config
   assert_buffer_eq '*input*' '*output*'
 }

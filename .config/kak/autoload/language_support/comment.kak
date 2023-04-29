@@ -1,18 +1,27 @@
 # This script provides the functionality to toggle comments on lines over the selection
 # using the line and block comment tokens defined in `line_comment_token` and `block_comment_tokens` options.
 
-declare-option str-list line_comment_token
-declare-option str-list block_comment_tokens
+declare-option str-list line_comment_token '//'
+declare-option str-list block_comment_tokens '/*' '*/'
 
-define-command toggle_comments %{
-  try toggle_line_comments catch toggle_block_comments
+define-command occi_comment_config %{
+  map global normal '#' ':toggle_comments_with_config<ret>'
+
+  hook global BufSetOption filetype=cpp %{
+    set-option buffer line_comment_token '//'
+    set-option buffer block_comment_tokens '/*' '*/'
+  }
 }
 
-define-command toggle_line_comments %{
+define-command toggle_comments_with_config %{
+  try toggle_line_comments_with_config catch toggle_block_comments_with_config
+}
+
+define-command toggle_line_comments_with_config %{
   toggle_line_comments_with_token %opt{line_comment_token}
 }
 
-define-command toggle_block_comments %{
+define-command toggle_block_comments_with_config %{
   toggle_block_comments_with_tokens %opt{block_comment_tokens}
 }
 

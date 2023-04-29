@@ -493,7 +493,7 @@ map -docstring 'clear register' global normal D ':clear_register %val{register}<
 map -docstring 'add selections' global normal Y ':add_selections %val{register}<ret>'
 map -docstring 'iterate next selection' global normal <c-n> ':iterate_next_selection %val{register}<ret>'
 map -docstring 'iterate previous selection' global normal <c-p> ':iterate_previous_selection %val{register}<ret>'
-map -docstring 'toggle comments' global normal '#' ':toggle_comments<ret>'
+map -docstring 'toggle comments' global normal '#' ':toggle_comments_with_config<ret>'
 map -docstring 'erase characters before cursor to line begin' global insert <c-u> '<a-;>:erase_characters_before_cursor_to_line_begin<ret>'
 map -docstring 'paste' global insert <c-y> '<c-r>"'
 map -docstring 'Increase indent' global insert <tab> '<a-;>:increase_indent<ret>'
@@ -612,9 +612,30 @@ hook -always global PromptIdle '' update_selected_text_ranges
 
 # Language support -------------------------------------------------------------
 
+hook global InsertChar '.*' indent_on_inserted_character_with_indentation_rules
+
 # Indentation
 set-option global tabstop 4
 set-option global indentwidth 2
+
+# Implementation reference:
+# https://github.com/helix-editor/helix/blob/master/helix-view/src/document.rs#:~:text=detect_indent_and_line_ending
+define-command detect_indent_style %{
+  evaluate-commands -draft -verbatim -- try %{
+    # Search the first indent level
+    execute-keys 'gg/^\h+<ret>'
+    try %{
+      execute-keys '<a-k>\t<ret>'
+      set-option buffer indentwidth 0
+    } catch %{
+      set-option buffer indentwidth %val{selection_length}
+    }
+  }
+}
+
+# hook on file open and buffer reload.
+hook global BufOpenFile '.*' detect_indent_style
+hook global BufReload '.*' detect_indent_style
 
 # Kakoune
 # https://kakoune.org

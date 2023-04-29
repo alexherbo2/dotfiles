@@ -106,6 +106,14 @@ define-command assert_buffer_eq -params 2 %{
 
 complete-command assert_buffer_eq buffer
 
+define-command assert_buffer_eq_and_clean_them -params 2 %{
+  assert_buffer_eq %arg{1} %arg{1}
+  evaluate-commands -buffer "%arg{1},%arg{2}" delete-buffer
+}
+
+alias global assert_buffer_eq! assert_buffer_eq_and_clean_them
+complete-command assert_buffer_eq_and_clean_them buffer
+
 define-command create_buffer_from_command_output -params 2.. %{
   set-register f %sh{mktemp -u}
   nop %sh{
@@ -689,7 +697,7 @@ define-command test_select_words %{
 
   buffer '*input*'
   execute-keys 's\w+<ret><a-i>w'
-  assert_buffer_eq '*input*' '*output*'
+  assert_buffer_eq! '*input*' '*output*'
 }
 
 define-command test_select_big_words %{
@@ -720,7 +728,7 @@ define-command test_select_big_words %{
 
   buffer '*input*'
   execute-keys 's\w+<ret><a-i><a-w>'
-  assert_buffer_eq '*input*' '*output*'
+  assert_buffer_eq! '*input*' '*output*'
 }
 
 # https://crystal-lang.org/reference/master/syntax_and_semantics/enum.html
@@ -777,7 +785,7 @@ define-command test_toggle_line_comments %{
   buffer '*input*'
   set-option buffer line_comment_token '#'
   toggle_comments_with_config
-  assert_buffer_eq '*input*' '*output*'
+  assert_buffer_eq! '*input*' '*output*'
 }
 
 define-command test_toggle_block_comments %{
@@ -834,5 +842,5 @@ define-command test_toggle_block_comments %{
   set-option buffer line_comment_token
   set-option buffer block_comment_tokens '/*' '*/'
   toggle_comments_with_config
-  assert_buffer_eq '*input*' '*output*'
+  assert_buffer_eq! '*input*' '*output*'
 }

@@ -212,14 +212,6 @@ add-highlighter shared/kakrc regions
 add-highlighter shared/kakrc/code default-region group
 
 # TODO
-add-highlighter shared/kakrc/shell1 region -recurse '\{' '(^|\h)\K%?%sh\{' '\}' ref sh
-add-highlighter shared/kakrc/shell2 region -recurse '\(' '(^|\h)\K%?%sh\(' '\)' ref sh
-add-highlighter shared/kakrc/shell3 region -recurse '\[' '(^|\h)\K%?%sh\[' '\]' ref sh
-add-highlighter shared/kakrc/shell4 region -recurse '<'  '(^|\h)\K%?%sh<'  '>'  ref sh
-add-highlighter shared/kakrc/shell5 region -recurse '\{' '(^|\h)\K-?shell-script-(completion|candidates)\h+%\{' '\}' ref sh
-add-highlighter shared/kakrc/shell6 region -recurse '\(' '(^|\h)\K-?shell-script-(completion|candidates)\h+%\(' '\)' ref sh
-add-highlighter shared/kakrc/shell7 region -recurse '\[' '(^|\h)\K-?shell-script-(completion|candidates)\h+%\[' '\]' ref sh
-add-highlighter shared/kakrc/shell8 region -recurse '<'  '(^|\h)\K-?shell-script-(completion|candidates)\h+%<'  '>'  ref sh
 #
 
 # Syntax and semantics ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -482,11 +474,15 @@ add-highlighter shared/kakrc/string.interpolated/interpolation/kakrc ref kakrc
 #
 # puts %q(hello world)
 #
-add-highlighter shared/kakrc/string.quoted.percent.parenthesis region -recurse '\(' '%[qwi]\(' '\)' ref kakrc/string
-add-highlighter shared/kakrc/string.quoted.percent.bracket region -recurse '\[' '%[qwi]\[' '\]' ref kakrc/string
-add-highlighter shared/kakrc/string.quoted.percent.brace region -recurse '\{' '%[qwi]\{' '\}' ref kakrc/string
-add-highlighter shared/kakrc/string.quoted.percent.angle region -recurse '<' '%[qwi]<' '>' ref kakrc/string
-add-highlighter shared/kakrc/string.quoted.percent.pipe region '%[qwi]\|' '\|' ref kakrc/string
+add-highlighter shared/kakrc/string.quoted.percent.parenthesis region -recurse '\(' '(^|\h)\K%?%sh\(' '\)' ref sh
+add-highlighter shared/kakrc/string.quoted.percent.bracket region -recurse '\[' '(^|\h)\K%?%sh\[' '\]' ref sh
+add-highlighter shared/kakrc/string.quoted.percent.brace region -recurse '\{' '(^|\h)\K%?%sh\{' '\}' ref sh
+add-highlighter shared/kakrc/string.quoted.percent.angle region -recurse '<' '(^|\h)\K%?%sh<' '>' ref sh
+
+add-highlighter shared/kakrc/string.quoted.percent.parenthesis.with_option region -recurse '\(' '(^|\h)\K(-shell-script-candidates|-shell-script-completion|shell-script-candidates|shell-script-completion)\h+%\(' '\)' ref sh
+add-highlighter shared/kakrc/string.quoted.percent.bracket.with_option region -recurse '\[' '(^|\h)\K(-shell-script-candidates|-shell-script-completion|shell-script-candidates|shell-script-completion)\h+%\[' '\]' ref sh
+add-highlighter shared/kakrc/string.quoted.percent.brace.with_option region -recurse '\{' '(^|\h)\K(-shell-script-candidates|-shell-script-completion|shell-script-candidates|shell-script-completion)\h+%\{' '\}' ref sh
+add-highlighter shared/kakrc/string.quoted.percent.angle.with_option region -recurse '<' '(^|\h)\K(-shell-script-candidates|-shell-script-completion|shell-script-candidates|shell-script-completion)\h+%<' '>' ref sh
 
 # Here document ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 

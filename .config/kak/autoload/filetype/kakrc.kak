@@ -15,13 +15,6 @@ hook global BufCreate '.+/kakrc|.+\.kak' %{
 }
 
 # Enables syntax highlighting for Kakoune filetype.
-hook global BufSetOption filetype=kakrc %{
-  add-highlighter buffer/kakrc ref kakrc
-  hook -always -once buffer BufSetOption 'filetype=.*' %{
-    remove-highlighter buffer/kakrc
-  }
-}
-
 # Configures word selection and completion for Kakoune filetype.
 hook global BufSetOption filetype=kakrc %{
   set-option buffer increase_indent_pattern '^\h*(if|elsif|else|unless|case|when|case|in|while|until|class|private\h+class|abstract\h+class|private\h+abstract\h+class|def|private\h+def|protected\h+def|module|private\h+module|struct|private\h+struct|abstract\h+struct|private\h+abstract\h+struct|enum|private\h+enum|begin|rescue|ensure|macro|annotation|lib|private\h+lib)[^;]*$|\h(do)[^;]*$|\w+\h*=\h*(if|unless|case|begin)[^;]*$'
@@ -30,10 +23,12 @@ hook global BufSetOption filetype=kakrc %{
   set-option buffer line_comment_token '#'
   set-option buffer extra_word_chars '-' '_' '?' '!'
   set-option buffer static_words 'add-highlighter' 'addhl' 'alias' 'arrange-buffer' 'buffer' 'b' 'buffer-next' 'bn' 'buffer-previous' 'bp' 'catch' 'change-directory' 'cd' 'colorscheme' 'debug' 'declare-option' 'decl' 'declare-user-mode' 'define-command' 'def' 'complete-command' 'compl' 'delete-buffer' 'db' 'db!' 'delete-buffer!' 'echo' 'edit' 'e' 'e!' 'edit!' 'enter-user-mode' 'evaluate-commands' 'eval' 'execute-keys' 'exec' 'fail' 'hook' 'info' 'kill' 'kill!' 'map' 'menu' 'nop' 'on-key' 'prompt' 'provide-module' 'quit' 'quit!' 'remove-highlighter' 'rmhl' 'remove-hooks' 'rmhooks' 'rename-buffer' 'rename-client' 'rename-session' 'require-module' 'select' 'face' 'set-face' 'set' 'set-option' 'set-register' 'source' 'trigger-user-hook' 'try' 'unalias' 'unmap' 'unset-face' 'set-option' 'update-option' 'write' 'w' 'w!' 'wq' 'wq!' 'write!' 'write-all' 'wa' 'waq' 'write-all-quit' 'write-quit' 'write-quit!' 'global' 'buffer' 'window' 'shared' 'current' 'normal' 'insert' 'menu' 'prompt' 'goto' 'view' 'user' 'object' 'number-lines' 'show-matching' 'show-whitespaces' 'fill' 'regex' 'dynregex' 'group' 'flag-lines' 'ranges' 'line' 'column' 'wrap' 'ref' 'regions' 'region' 'default-region' 'replace-ranges' 'int' 'bool' 'int-list' 'str-list' 'completions' 'line-specs' 'ranges-specs' 'str-to-str-map' '-hidden' '-docstring' '-buffer-completion' '-client-completion' '-shell-completion' '-file-completion' '-command-completion' '-menu' '-params' '-shell-script-candidates' '-shell-script-completion' '-draft' '-itersel' '-quoting' '-to-file' '-to-shell-script' '-markup' '-debug' '-existing' '-fifo' '-readonly' '-verbatim' '-scroll' '-override' '-save-regs' '-always' '-once' '-group' '-end-of-line' '%arg' '%file' '%opt' '%val' '%sh' 'rgb' 'rgba' 'shell' 'raw' 'kakrc' 'default' 'black' 'red' 'green' 'yellow' 'blue' 'magenta' 'cyan' 'white' 'bright-black' 'bright-red' 'bright-green' 'bright-yellow' 'bright-blue' 'bright-magenta' 'bright-cyan' 'bright-white' 'yes' 'no' 'false' 'true' '<semicolon>' '<ret>' '<esc>' '<down>' '<up>' '<left>' '<right>' '<pageup>' '<pagedown>' '<gt>' '<lt>' '<tab>' '<backspace>' '<space>' '<home>' '<end>' '<ins>' '<del>' '<plus>' '<minus>' '<percent>' '<focus_in>' '<focus_out>'
+  add-highlighter buffer/kakrc ref kakrc
   hook -always -once buffer WinSetOption 'filetype=.*' %{
     unset-option buffer line_comment_token
     unset-option buffer extra_word_chars
     unset-option buffer static_words
+    remove-highlighter buffer/kakrc
   }
 }
 

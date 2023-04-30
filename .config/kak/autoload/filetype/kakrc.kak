@@ -1,24 +1,3 @@
-#===============
-# add-highlighter shared/kakrc regions
-# add-highlighter shared/kakrc/code default-region group
-# add-highlighter shared/kakrc/comment region (^|\h)\K# $ fill comment
-# add-highlighter shared/kakrc/double_string region -recurse %{(?<!")("")+(?!")} %{(^|\h)\K"} %{"(?!")} group
-# add-highlighter shared/kakrc/single_string region -recurse %{(?<!')('')+(?!')} %{(^|\h)\K'} %{'(?!')} group
-# add-highlighter shared/kakrc/shell1 region -recurse '\{' '(^|\h)\K%?%sh\{' '\}' ref sh
-# add-highlighter shared/kakrc/shell2 region -recurse '\(' '(^|\h)\K%?%sh\(' '\)' ref sh
-# add-highlighter shared/kakrc/shell3 region -recurse '\[' '(^|\h)\K%?%sh\[' '\]' ref sh
-# add-highlighter shared/kakrc/shell4 region -recurse '<'  '(^|\h)\K%?%sh<'  '>'  ref sh
-# add-highlighter shared/kakrc/shell5 region -recurse '\{' '(^|\h)\K-?shell-script-(completion|candidates)\h+%\{' '\}' ref sh
-# add-highlighter shared/kakrc/shell6 region -recurse '\(' '(^|\h)\K-?shell-script-(completion|candidates)\h+%\(' '\)' ref sh
-# add-highlighter shared/kakrc/shell7 region -recurse '\[' '(^|\h)\K-?shell-script-(completion|candidates)\h+%\[' '\]' ref sh
-# add-highlighter shared/kakrc/shell8 region -recurse '<'  '(^|\h)\K-?shell-script-(completion|candidates)\h+%<'  '>'  ref sh
-# add-highlighter shared/kakrc/code/colors regex \b(rgb:[0-9a-fA-F]{6}|rgba:[0-9a-fA-F]{8})\b 0:value
-# add-highlighter shared/kakrc/code/numbers regex \b\d+\b 0:value
-# add-highlighter shared/kakrc/double_string/fill fill string
-# add-highlighter shared/kakrc/double_string/escape regex '""' 0:default+b
-# add-highlighter shared/kakrc/single_string/fill fill string
-# add-highlighter shared/kakrc/single_string/escape regex "''" 0:default+b
-#===============
 # Kakoune
 # https://kakoune.org
 
@@ -316,6 +295,10 @@ add-highlighter shared/kakrc/code/constant.numeric.integer.binary regex '\b0b[0-
 add-highlighter shared/kakrc/code/constant.numeric.integer.octal regex '\b0o[0-7]+(_[iu](8|16|32|64|128))?\b' 0:value
 add-highlighter shared/kakrc/code/constant.numeric.integer.hexadecimal regex '\b0x[0-9a-fA-F]+(_[iu](8|16|32|64|128))?\b' 0:value
 
+# Colors
+add-highlighter shared/kakrc/code/constant.color.rgb regex '\b(rgb:[0-9a-fA-F]{6})\b' 0:value
+add-highlighter shared/kakrc/code/constant.color.rgba regex '\b(rgba:[0-9a-fA-F]{8})\b' 0:value
+
 # Comments ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 # Reference
@@ -327,7 +310,7 @@ add-highlighter shared/kakrc/code/constant.numeric.integer.hexadecimal regex '\b
 #
 # puts "hello #{name}"
 #
-add-highlighter shared/kakrc/comment region '#(?!\{)' '$' group
+add-highlighter shared/kakrc/comment region '(^|\h)\K#' '$' group
 add-highlighter shared/kakrc/comment/fill fill comment
 
 # Documenting code ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -417,7 +400,7 @@ define-command -hidden define-kakrc-interpolated-string -params 4.. %{
 add-highlighter shared/kakrc/string region -recurse "(?<!')('')+(?!')" "(^|\h)\K'" "'(?!')" regions
 add-highlighter shared/kakrc/string/content default-region group
 add-highlighter shared/kakrc/string/content/fill fill value
-add-highlighter shared/kakrc/string/content/escaped-character regex '\\.' 0:meta
+add-highlighter shared/kakrc/string/content/escaped-character regex "''" 0:meta
 add-highlighter shared/kakrc/string/content/escape-sequence regex '\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|u\{[0-9a-fA-F]+\})' 0:meta
 # define-kakrc-string string.character value "'" "(?<!\\)(\\\\)*'"
 
@@ -437,7 +420,7 @@ add-highlighter shared/kakrc/string/content/escape-sequence regex '\\(x[0-9a-fA-
 add-highlighter shared/kakrc/string.interpolated region -recurse '(?<!")("")+(?!")' '(^|\h)\K"' '"(?!")' regions
 add-highlighter shared/kakrc/string.interpolated/content default-region group
 add-highlighter shared/kakrc/string.interpolated/content/fill fill string
-add-highlighter shared/kakrc/string.interpolated/content/escaped-character ref kakrc/string/content/escaped-character
+add-highlighter shared/kakrc/string.interpolated/content/escaped-character regex '""' 0:meta
 add-highlighter shared/kakrc/string.interpolated/content/escape-sequence ref kakrc/string/content/escape-sequence
 add-highlighter shared/kakrc/string.interpolated/interpolation region -recurse '\{' '#\{' '\}' group
 add-highlighter shared/kakrc/string.interpolated/interpolation/delimiters regex '(?<opening>..).+(?<closing>.)' opening:meta closing:meta
@@ -480,6 +463,9 @@ add-highlighter shared/kakrc/string.quoted.percent.parenthesis.with_option regio
 add-highlighter shared/kakrc/string.quoted.percent.bracket.with_option region -recurse '\[' '(^|\h)\K(-shell-script-candidates|-shell-script-completion|shell-script-candidates|shell-script-completion)\h+%\[' '\]' ref sh
 add-highlighter shared/kakrc/string.quoted.percent.brace.with_option region -recurse '\{' '(^|\h)\K(-shell-script-candidates|-shell-script-completion|shell-script-candidates|shell-script-completion)\h+%\{' '\}' ref sh
 add-highlighter shared/kakrc/string.quoted.percent.angle.with_option region -recurse '<' '(^|\h)\K(-shell-script-candidates|-shell-script-completion|shell-script-candidates|shell-script-completion)\h+%<' '>' ref sh
+
+add-highlighter shared/kakrc/string.quoted.single.with_option region -recurse "(?<!')('')+(?!')" "(^|\h)\K(-shell-script-candidates|-shell-script-completion|shell-script-candidates|shell-script-completion)\h+'" "'(?!')" ref sh
+add-highlighter shared/kakrc/string.quoted.double.with_option region -recurse '(?<!")("")+(?!")' '(^|\h)\K(-shell-script-candidates|-shell-script-completion|shell-script-candidates|shell-script-completion)\h+"' '"(?!")' ref sh
 
 # Here document ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 

@@ -211,9 +211,6 @@ hook -group kakrc-config global WinSetOption filetype=kakrc %{
 add-highlighter shared/kakrc regions
 add-highlighter shared/kakrc/code default-region group
 
-# TODO
-#
-
 # Syntax and semantics ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 # Classes

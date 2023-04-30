@@ -51,15 +51,14 @@ add-highlighter shared/sh/code default-region group
 # syntax texts "{%w_-%.}"
 # Generated with `compgen -k` in bash keywords
 # Generated with `compgen -b` in bash builtins
-add-highlighter shared/sh/arithmetic region -recurse \(.*?\( (\$|(?<=for)\h*)\(\( \)\) group
-add-highlighter shared/sh/expansion region -recurse (?<!\\)(?:\\\\)*\K\$\{ (?<!\\)(?:\\\\)*\K\$\{ \}|\n fill value
-add-highlighter shared/sh/heredoc region -match-capture '<<-?\h*''?(\w+)''?' '^\t*(\w+)$' fill string
-add-highlighter shared/sh/arithmetic/expansion ref sh/double_string/expansion
-add-highlighter shared/sh/double_string/fill fill string
-add-highlighter shared/sh/code/operators regex [\[\]\(\)&|]{1,2} 0:operator
-add-highlighter shared/sh/code/variable regex ((?<![-:])\b\w+)= 1:variable
-add-highlighter shared/sh/code/alias regex \balias(\h+[-+]\w)*\h+([\w-.]+)= 2:variable
-add-highlighter shared/sh/code/function regex ^\h*(\S+(?<!=))\h*\(\) 1:function
+# add-highlighter shared/sh/arithmetic region -recurse \(.*?\( (\$|(?<=for)\h*)\(\( \)\) group
+# add-highlighter shared/sh/expansion region -recurse (?<!\\)(?:\\\\)*\K\$\{ (?<!\\)(?:\\\\)*\K\$\{ \}|\n fill value
+# add-highlighter shared/sh/heredoc region -match-capture '<<-?\h*''?(\w+)''?' '^\t*(\w+)$' fill string
+# add-highlighter shared/sh/arithmetic/expansion ref sh/double_string/expansion
+# add-highlighter shared/sh/code/operators regex [\[\]\(\)&|]{1,2} 0:operator
+# add-highlighter shared/sh/code/variable regex ((?<![-:])\b\w+)= 1:variable
+# add-highlighter shared/sh/code/alias regex \balias(\h+[-+]\w)*\h+([\w-.]+)= 2:variable
+# add-highlighter shared/sh/code/function regex ^\h*(\S+(?<!=))\h*\(\) 1:function
 #
 
 # Syntax and semantics ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -67,6 +66,8 @@ add-highlighter shared/sh/code/function regex ^\h*(\S+(?<!=))\h*\(\) 1:function
 add-highlighter shared/sh/code/instance-method-definition regex "\b(def)\h+(%opt{sh_word_pattern})\b" 1:keyword 2:function
 add-highlighter shared/sh/code/class-method-definition regex "\b(def)\h+(self\.%opt{sh_word_pattern})\b" 1:keyword 2:function
 add-highlighter shared/sh/code/method-call regex "\b(%opt{sh_word_pattern})\(" 1:function
+
+add-highlighter shared/sh/code/expansion regex '(?<!\\)(\\\\)*\K\$(\w+|[#@?$!*-]|\{.+?\})' 0:value
 
 # Instance and class variables ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -229,7 +230,7 @@ add-highlighter shared/sh/string.quoted.single/content default-region group
 add-highlighter shared/sh/string.quoted.single/content/fill fill value
 add-highlighter shared/sh/string.quoted.single/content/escaped-character regex '\\.' 0:meta
 add-highlighter shared/sh/string.quoted.single/content/escape-sequence regex '\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|u\{[0-9a-fA-F]+\})' 0:meta
-add-highlighter shared/sh/string.quoted.single/content/expansion regex '(?<!\\)(\\\\)*\K\$(\w+|[#@?$!*-]|\{.+?\})' 0:value
+add-highlighter shared/sh/string.quoted.single/content/expansion ref sh/code/expansion
 
 # Strings ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -249,7 +250,7 @@ add-highlighter shared/sh/string.quoted.double/content default-region group
 add-highlighter shared/sh/string.quoted.double/content/fill fill string
 add-highlighter shared/sh/string.quoted.double/content/escaped-character ref sh/string/content/escaped-character
 add-highlighter shared/sh/string.quoted.double/content/escape-sequence ref sh/string/content/escape-sequence
-add-highlighter shared/sh/string.quoted.double/content/expansion ref sh/string/content/expansion
+add-highlighter shared/sh/string.quoted.double/content/expansion ref sh/code/expansion
 
 # Percent string literals ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 

@@ -232,7 +232,7 @@ add-highlighter shared/sh/string.quoted.single/content/expansion ref sh/code/exp
 # backslash ⇒ "\\"
 #
 add-highlighter shared/sh/string.quoted.double region '(?<!\\)(\\\\)*\K"' '(?<!\\)(\\\\)*"' group
-add-highlighter shared/sh/string.quoted.double/escaped-character regex '\\"' 0:meta
+add-highlighter shared/sh/string.quoted.double/escaped-character regex '\\"' 0:value
 add-highlighter shared/sh/string.quoted.double/interpolated ref sh.string.interpolated
 
 # Percent string literals ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈

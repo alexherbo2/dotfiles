@@ -212,8 +212,6 @@ add-highlighter shared/kakrc regions
 add-highlighter shared/kakrc/code default-region group
 
 # TODO
-add-highlighter shared/kakrc/double_string region -recurse %{(?<!")("")+(?!")} %{(^|\h)\K"} %{"(?!")} group
-add-highlighter shared/kakrc/single_string region -recurse %{(?<!')('')+(?!')} %{(^|\h)\K'} %{'(?!')} group
 add-highlighter shared/kakrc/shell1 region -recurse '\{' '(^|\h)\K%?%sh\{' '\}' ref sh
 add-highlighter shared/kakrc/shell2 region -recurse '\(' '(^|\h)\K%?%sh\(' '\)' ref sh
 add-highlighter shared/kakrc/shell3 region -recurse '\[' '(^|\h)\K%?%sh\[' '\]' ref sh
@@ -427,7 +425,7 @@ define-command -hidden define-kakrc-interpolated-string -params 4.. %{
 # single quote ⇒ '\''
 # backslash ⇒ '\\'
 #
-add-highlighter shared/kakrc/string region "'" "(?<!\\)(\\\\)*'" regions
+add-highlighter shared/kakrc/string region -recurse "(?<!')('')+(?!')" "(^|\h)\K'" "'(?!')" regions
 add-highlighter shared/kakrc/string/content default-region group
 add-highlighter shared/kakrc/string/content/fill fill value
 add-highlighter shared/kakrc/string/content/escaped-character regex '\\.' 0:meta
@@ -447,7 +445,7 @@ add-highlighter shared/kakrc/string/content/escape-sequence regex '\\(x[0-9a-fA-
 # double quote ⇒ "\""
 # backslash ⇒ "\\"
 #
-add-highlighter shared/kakrc/string.interpolated region '"' '(?<!\\)(\\\\)*"' regions
+add-highlighter shared/kakrc/string.interpolated region -recurse '(?<!")("")+(?!")' '(^|\h)\K"' '"(?!")' regions
 add-highlighter shared/kakrc/string.interpolated/content default-region group
 add-highlighter shared/kakrc/string.interpolated/content/fill fill string
 add-highlighter shared/kakrc/string.interpolated/content/escaped-character ref kakrc/string/content/escaped-character

@@ -3,10 +3,6 @@
 
 # Configuration ────────────────────────────────────────────────────────────────
 
-# Word pattern
-# https://code.visualstudio.com/api/language-extensions/language-configuration-guide#word-pattern
-declare-option -docstring 'sh word pattern' str sh_word_pattern '\w+[?!]?'
-
 # Detection ────────────────────────────────────────────────────────────────────
 
 # Sets sh filetype when opening `.sh` files.
@@ -32,8 +28,6 @@ hook global BufSetOption filetype=sh %{
   }
 }
 
-# Indentation ──────────────────────────────────────────────────────────────────
-
 # Highlighters ─────────────────────────────────────────────────────────────────
 
 # Creates the base regions
@@ -41,19 +35,8 @@ add-highlighter shared/sh regions
 add-highlighter shared/sh/code default-region group
 
 # TODO
-# syntax "**/*.sh"
-# syntax keywords "done|do|echo|elif|else|exit|export|for|fi|function|if|in|return|then|while"
-# syntax types "%$%w{%w_}|%$%{{!%}.}"
-# syntax symbols "%(|%)|%[|%]|%{|%}|<|>|=|~|*|&|%!|%||@|;|%$"
-# syntax literals "-%w{%w_-}|%d{%w}"
-# syntax strings {'{(\\)(\')!'.}|"{(\\)(\")!".}}
-# syntax comments "#{.}"
-# syntax texts "{%w_-%.}"
-# Generated with `compgen -k` in bash keywords
-# Generated with `compgen -b` in bash builtins
 # add-highlighter shared/sh/arithmetic region -recurse \(.*?\( (\$|(?<=for)\h*)\(\( \)\) group
 # add-highlighter shared/sh/expansion region -recurse (?<!\\)(?:\\\\)*\K\$\{ (?<!\\)(?:\\\\)*\K\$\{ \}|\n fill value
-# add-highlighter shared/sh/heredoc region -match-capture '<<-?\h*''?(\w+)''?' '^\t*(\w+)$' fill string
 # add-highlighter shared/sh/arithmetic/expansion ref sh/double_string/expansion
 # add-highlighter shared/sh/code/operators regex [\[\]\(\)&|]{1,2} 0:operator
 # add-highlighter shared/sh/code/variable regex ((?<![-:])\b\w+)= 1:variable
@@ -162,7 +145,7 @@ add-highlighter shared/sh/comment/fill fill comment
 #
 # Check the number of horns with `#horns`.
 #
-add-highlighter shared/sh/comment/reference regex "`[#.]?%opt{sh_word_pattern}`" 0:mono
+# add-highlighter shared/sh/comment/reference regex "`[#.]?%opt{sh_word_pattern}`" 0:mono
 add-highlighter shared/sh/comment/parameter regex '\*\w+\*' 0:mono
 add-highlighter shared/sh/comment/code-block regex '```(\h*\w+)?$' 0:block
 add-highlighter shared/sh/comment/admonition regex '\h+([A-Z]+):\h+' 1:meta
@@ -248,13 +231,9 @@ add-highlighter shared/sh/string.quoted.single/content/expansion ref sh/code/exp
 # double quote ⇒ "\""
 # backslash ⇒ "\\"
 #
-add-highlighter shared/sh/string.quoted.double region '(?<!\\)(\\\\)*\K"' '(?<!\\)(\\\\)*"' regions
-add-highlighter shared/sh/string.quoted.double/content default-region group
-add-highlighter shared/sh/string.quoted.double/content/fill fill string
-add-highlighter shared/sh/string.quoted.double/content/escaped-character ref sh/string/content/escaped-character
-add-highlighter shared/sh/string.quoted.double/content/escape-sequence ref sh/string/content/escape-sequence
-add-highlighter shared/sh/string.quoted.double/content/expansion ref sh/code/expansion
-add-highlighter shared/sh/string.quoted.double/string.interpolated.parenthesis region -recurse '\(' '\$\(\K' '(?=\))' ref sh
+add-highlighter shared/sh/string.quoted.double region '(?<!\\)(\\\\)*\K"' '(?<!\\)(\\\\)*"' group
+add-highlighter shared/sh/string.quoted.double/escaped-character regex '\\"' 0:meta+b
+add-highlighter shared/sh/string.quoted.double/interpolated ref sh.string.interpolated
 
 # Percent string literals ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -299,5 +278,20 @@ add-highlighter shared/sh/string.quoted.percent.pipe region '%[qwi]\|' '\|' ref 
 # <<-'EOF'
 # EOF
 #
-add-highlighter shared/sh/string.unquoted.heredoc.interpolated region -match-capture '<<-(\w+)' '^\h*(\w+)$' ref sh/string.interpolated
-add-highlighter shared/sh/string.unquoted.heredoc.raw region -match-capture "<<-'(\w+)'" '^\h*(\w+)$' ref sh/string
+add-highlighter shared/sh.string regions
+add-highlighter shared/sh.string/content default-region group
+add-highlighter shared/sh.string/content/fill fill value
+#
+add-highlighter shared/sh.string.interpolated regions
+add-highlighter shared/sh.string.interpolated/content default-region group
+add-highlighter shared/sh.string.interpolated/content/fill fill string
+add-highlighter shared/sh.string.interpolated/content/expansion ref sh/code/expansion
+add-highlighter shared/sh.string.interpolated/string.interpolated.parenthesis region -recurse '\(' '\$\(\K' '(?=\))' ref sh
+#
+#
+add-highlighter shared/sh/string.unquoted.heredoc.with_indent.interpolated region -match-capture '<<-(\w+)' '^\t*(\w+)$' ref sh.string.interpolated
+add-highlighter shared/sh/string.quoted.single.heredoc.with_indent.raw region -match-capture "<<-'(\w+)'" '^\t*(\w+)$' ref sh.string
+add-highlighter shared/sh/string.quoted.double.heredoc.with_indent.raw region -match-capture '<<-"(\w+)"' '^\t*(\w+)$' ref sh.string
+add-highlighter shared/sh/string.unquoted.heredoc.interpolated region -match-capture '<<-(\w+)' '^(\w+)$' ref sh.string.interpolated
+add-highlighter shared/sh/string.quoted.single.heredoc.raw region -match-capture "<<-'(\w+)'" '^(\w+)$' ref sh.string
+add-highlighter shared/sh/string.quoted.double.heredoc.raw region -match-capture '<<-"(\w+)"' '^(\w+)$' ref sh.string

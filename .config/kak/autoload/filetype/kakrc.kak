@@ -18,8 +18,8 @@ hook global BufCreate '.+/kakrc|.+\.kak' %{
 # Configures word selection and completion for Kakoune filetype.
 hook global BufSetOption filetype=kakrc %{
   add-highlighter buffer/kakrc ref kakrc
-  set-option buffer increase_indent_pattern '^\h*(if|elsif|else|unless|case|when|case|in|while|until|class|private\h+class|abstract\h+class|private\h+abstract\h+class|def|private\h+def|protected\h+def|module|private\h+module|struct|private\h+struct|abstract\h+struct|private\h+abstract\h+struct|enum|private\h+enum|begin|rescue|ensure|macro|annotation|lib|private\h+lib)[^;]*$|\h(do)[^;]*$|\w+\h*=\h*(if|unless|case|begin)[^;]*$'
-  set-option buffer decrease_indent_pattern '^\h*(elsif|else|end|when|in|rescue|ensure)$'
+  set-option buffer increase_indent_pattern '[({\[]$'
+  set-option buffer decrease_indent_pattern '^\h*[)}\]]$'
   set-option buffer ignore_indent_pattern '^\h*#'
   set-option buffer line_comment_token '#'
   set-option buffer extra_word_chars '-' '_' '?' '!'

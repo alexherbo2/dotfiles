@@ -63,11 +63,14 @@ add-highlighter shared/sh/code default-region group
 
 # Syntax and semantics ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-add-highlighter shared/sh/code/instance-method-definition regex "\b(def)\h+(%opt{sh_word_pattern})\b" 1:keyword 2:function
-add-highlighter shared/sh/code/class-method-definition regex "\b(def)\h+(self\.%opt{sh_word_pattern})\b" 1:keyword 2:function
-add-highlighter shared/sh/code/method-call regex "\b(%opt{sh_word_pattern})\(" 1:function
+add-highlighter shared/sh/code/function_name_declaration regex '^\h*\K\w+(?=\(\))' 0:function
+add-highlighter shared/sh/code/variable_name_declaration regex '\b\w+(?==)' 0:variable
+add-highlighter shared/sh/code/alias_name_declaration regex '^\h*alias\h*\K[\w.-]+(?==)' 0:variable
 
 add-highlighter shared/sh/code/expansion regex '(?<!\\)(\\\\)*\K\$(\w+|[#@?$!*-]|\{.+?\})' 0:value
+
+# command_substitution
+# add-highlighter shared/sh/string.interpolated.parenthesis region -recurse '\(' '\$\(\K' '(?=\))' ref sh
 
 # Instance and class variables ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -75,12 +78,12 @@ add-highlighter shared/sh/code/instance-and-class-variables regex '@@?\w+\b' 0:v
 
 # Keywords ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-# comgen -k
+# compgen -k
 add-highlighter shared/sh/code/keyword regex '\bif\b|\bthen\b|\belse\b|\belif\b|\bfi\b|\bcase\b|\besac\b|\bfor\b|\bselect\b|\bwhile\b|\buntil\b|\bdo\b|\bdone\b|\bin\b|\bfunction\b|\btime\b|\{|\}|!|\[\[|\]\]|\bcoproc\b' 0:keyword
 
 # Built-in functions ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-# comgen -b
+# compgen -b
 add-highlighter shared/sh/code/support.builtin regex '\.|:|\[|\balias\b|\bbg\b|\bbind\b|\bbreak\b|\bbuiltin\b|\bcaller\b|\bcd\b|\bcommand\b|\bcompgen\b|\bcomplete\b|\bcompopt\b|\bcontinue\b|\bdeclare\b|\bdirs\b|\bdisown\b|\becho\b|\benable\b|\beval\b|\bexec\b|\bexit\b|\bexport\b|\bfalse\b|\bfc\b|\bfg\b|\bgetopts\b|\bhash\b|\bhelp\b|\bhistory\b|\bjobs\b|\bkill\b|\blet\b|\blocal\b|\blogout\b|\bmapfile\b|\bpopd\b|\bprintf\b|\bpushd\b|\bpwd\b|\bread\b|\breadarray\b|\breadonly\b|\breturn\b|\bset\b|\bshift\b|\bshopt\b|\bsource\b|\bsuspend\b|\btest\b|\btimes\b|\btrap\b|\btrue\b|\btype\b|\btypeset\b|\bulimit\b|\bumask\b|\bunalias\b|\bunset\b|\bwait\b' 0:builtin
 
 # Punctuation ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -251,6 +254,7 @@ add-highlighter shared/sh/string.quoted.double/content/fill fill string
 add-highlighter shared/sh/string.quoted.double/content/escaped-character ref sh/string/content/escaped-character
 add-highlighter shared/sh/string.quoted.double/content/escape-sequence ref sh/string/content/escape-sequence
 add-highlighter shared/sh/string.quoted.double/content/expansion ref sh/code/expansion
+add-highlighter shared/sh/string.quoted.double/string.interpolated.parenthesis region -recurse '\(' '\$\(\K' '(?=\))' ref sh
 
 # Percent string literals ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 

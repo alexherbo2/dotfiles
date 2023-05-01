@@ -89,8 +89,8 @@ set-face global SecondaryCursorEol "rgb:%opt{background},rgb:%opt{foreground}+fg
 set-face global MenuForeground "rgb:%opt{foreground},rgb:%opt{selection}" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorSuggestWidget.selectedBackground
 set-face global MenuBackground "rgb:%opt{foreground},rgb:%opt{background_dark}" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorSuggestWidget.background
 set-face global MenuInfo "rgb:%opt{comment}" # IntelliSense suggestions
-set-face global Information Default # Contextual help blends with the editor background.
-set-face global Error "rgb:%opt{foreground},rgb:%opt{red}" # https://spec.draculatheme.com#Invalid
+set-face global Information "rgb:%opt{foreground},rgb:%opt{background_dark}" # Contextual help blends with the editor background.
+set-face global Error "rgb:%opt{red},rgb:%opt{background_dark}" # https://spec.draculatheme.com#Invalid
 set-face global DiagnosticError "rgb:%opt{red}" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorError.foreground
 set-face global DiagnosticWarning "rgb:%opt{yellow}" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorWarning.foreground
 set-face global StatusLine "rgb:%opt{foreground},rgb:%opt{background_dark}" # Prefer background dark here — https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=statusBar.background
@@ -105,7 +105,7 @@ set-face global BufferPadding "rgb:%opt{non_text}" # Kakoune ⇒ set-option glob
 set-face global LineNumbers "rgb:%opt{non_text}" # Kakoune ⇒ add-highlighter -override global/number-lines number-lines — Prefer non-text here — https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorLineNumber
 set-face global LineNumberCursor "rgb:%opt{foreground}" # Kakoune ⇒ add-highlighter -override global/number-lines number-lines -hlcursor
 set-face global LineNumbersWrapped "rgb:%opt{background}" # Kakoune ⇒ add-highlighter -override global/number-lines number-lines; add-highlighter -override global/wrap wrap
-set-face global MatchingChar "rgb:%opt{green}+uf" # Kakoune ⇒ add-highlighter -override global/show-matching show-matching — https://github.com/dracula/vim/blob/master/colors/dracula.vim#:~:text=MatchParen
+set-face global MatchingChar "default,rgba:%opt{selection}%opt{selection_alpha}+u" # Kakoune ⇒ add-highlighter -override global/show-matching show-matching — https://github.com/dracula/vim/blob/master/colors/dracula.vim#:~:text=MatchParen
 set-face global Whitespace "rgb:%opt{non_text}+f" # Kakoune ⇒ add-highlighter -override global/show-whitespaces show-whitespaces
 set-face global WrapMarker "rgb:%opt{non_text}" # Kakoune ⇒ add-highlighter -override global/wrap wrap -marker '↪'
 

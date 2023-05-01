@@ -1,5 +1,5 @@
 # sh
-# https://sh.org
+# https://gnu.org/software/bash/manual/bash.html
 
 # Configuration ────────────────────────────────────────────────────────────────
 
@@ -39,13 +39,10 @@ add-highlighter shared/sh/code default-region group
 add-highlighter shared/sh/code/function_name_declaration regex '^\h*\K\w+(?=\(\))' 0:function
 add-highlighter shared/sh/code/variable_name_declaration regex '\b\w+(?==)' 0:variable
 add-highlighter shared/sh/code/alias_name_declaration regex '^\h*alias\h*\K[\w.-]+(?==)' 0:variable
-
-add-highlighter shared/sh/code/expansion regex '(?<!\\)(\\\\)*\K\$(\w+|[#@?$!*-]|\{.+?\})' 0:value
+add-highlighter shared/sh/code/variable ref sh.variable
 
 # command_substitution
 # add-highlighter shared/sh/string.interpolated.parenthesis region -recurse '\(' '\$\(\K' '(?=\))' ref sh
-
-add-highlighter shared/sh/code/instance-and-class-variables regex '@@?\w+\b' 0:variable
 
 # Keywords ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -76,7 +73,6 @@ add-highlighter shared/sh/string.quoted.single/content default-region group
 add-highlighter shared/sh/string.quoted.single/content/fill fill value
 add-highlighter shared/sh/string.quoted.single/content/escaped-character regex '\\.' 0:meta
 add-highlighter shared/sh/string.quoted.single/content/escape-sequence regex '\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|u\{[0-9a-fA-F]+\})' 0:meta
-add-highlighter shared/sh/string.quoted.single/content/expansion ref sh/code/expansion
 
 add-highlighter shared/sh/string.quoted.double region '(?<!\\)(\\\\)*\K"' '(?<!\\)(\\\\)*"' group
 add-highlighter shared/sh/string.quoted.double/escaped-character regex '\\"' 0:value
@@ -89,9 +85,15 @@ add-highlighter shared/sh.string/content/fill fill value
 add-highlighter shared/sh.string.interpolated regions
 add-highlighter shared/sh.string.interpolated/content default-region group
 add-highlighter shared/sh.string.interpolated/content/fill fill string
-add-highlighter shared/sh.string.interpolated/content/expansion ref sh/code/expansion
+add-highlighter shared/sh.string.interpolated/content/expansion ref sh.variable
 add-highlighter shared/sh.string.interpolated/string.interpolated.parenthesis region -recurse '\(' '\$\(\K' '(?=\))' ref sh
 #
+add-highlighter shared/sh.variable regions
+add-highlighter shared/sh.variable/content default-region group
+add-highlighter shared/sh.variable/content/named_variable regex '(?<!\\)(\\\\)*\$\K(\w+|[#@?$!*-])' 0:variable
+add-highlighter shared/sh.variable/content/positional_variable regex '(?<!\\)(\\\\)*\$\K(\w+|[#@?$!*-])' 0:variable
+add-highlighter shared/sh.variable/content/special_variable regex '(?<!\\)(\\\\)*\$\K(\w+|[#@?$!*-])' 0:variable
+add-highlighter shared/sh.variable/brace_variable region -recurse '\{' '\$\{\K' '(?=\})' fill variable
 #
 add-highlighter shared/sh/string.unquoted.heredoc.with_indent.interpolated region -match-capture '<<-(\w+)' '^\t*(\w+)$' ref sh.string.interpolated
 add-highlighter shared/sh/string.quoted.single.heredoc.with_indent.raw region -match-capture "<<-'(\w+)'" '^\t*(\w+)$' ref sh.string

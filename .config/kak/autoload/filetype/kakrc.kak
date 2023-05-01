@@ -40,6 +40,8 @@ add-highlighter shared/kakrc.string.interpolated/string/ ref kakrc.expansion
 
 # Expansions
 add-highlighter shared/kakrc.expansion regions
+add-highlighter shared/kakrc.expansion/expansion default-region group
+add-highlighter shared/kakrc.expansion/expansion/ regex '%arg|%file|%opt|%val|%sh' 0:meta
 add-highlighter shared/kakrc.expansion/ region -recurse '\(' '[^%]%sh\(\K' '(?=\))' ref sh
 add-highlighter shared/kakrc.expansion/ region -recurse '\[' '[^%]%sh\[\K' '(?=\])' ref sh
 add-highlighter shared/kakrc.expansion/ region -recurse '\{' '[^%]%sh\{\K' '(?=\})' ref sh
@@ -54,7 +56,6 @@ add-highlighter shared/kakrc/code/keyword regex '\badd-highlighter\b|\baddhl\b|\
 add-highlighter shared/kakrc/code/attribute regex '\bglobal\b|\bbuffer\b|\bwindow\b|\bshared\b|\bcurrent\b|\bnormal\b|\binsert\b|\bmenu\b|\bprompt\b|\bgoto\b|\bview\b|\buser\b|\bobject\b|\bnumber-lines\b|\bshow-matching\b|\bshow-whitespaces\b|\bfill\b|\bregex\b|\bdynregex\b|\bgroup\b|\bflag-lines\b|\branges\b|\bline\b|\bcolumn\b|\bwrap\b|\bref\b|\bregions\b|\bregion\b|\bdefault-region\b|\breplace-ranges\b|\b-hidden\b|\b-docstring\b|\b-buffer-completion\b|\b-client-completion\b|\b-shell-completion\b|\b-file-completion\b|\b-command-completion\b|\b-menu\b|\b-params\b|\b-shell-script-candidates\b|\b-shell-script-completion\b|\b-draft\b|\b-itersel\b|\b-quoting\b|\b-to-file\b|\b-to-shell-script\b|\b-markup\b|\b-debug\b|\b-existing\b|\b-fifo\b|\b-readonly\b|\b-verbatim\b|\b-scroll\b|\b-override\b|\b-save-regs\b|\b-always\b|\b-once\b|\b-group\b|\b-end-of-line\b' 0:attribute
 add-highlighter shared/kakrc/code/type regex '\bint\b|\bbool\b|\bint-list\b|\bstr-list\b|\bcompletions\b|\bline-specs\b|\branges-specs\b|\bstr-to-str-map\b' 0:type
 add-highlighter shared/kakrc/code/value regex '\brgb\b|\brgba\b|\bshell\b|\braw\b|\bkakoune\b|\bdefault\b|\bblack\b|\bred\b|\bgreen\b|\byellow\b|\bblue\b|\bmagenta\b|\bcyan\b|\bwhite\b|\bbright-black\b|\bbright-red\b|\bbright-green\b|\bbright-yellow\b|\bbright-blue\b|\bbright-magenta\b|\bbright-cyan\b|\bbright-white\b|\byes\b|\bno\b|\bfalse\b|\btrue\b|\b<semicolon>\b|\b<ret>\b|\b<esc>\b|\b<down>\b|\b<up>\b|\b<left>\b|\b<right>\b|\b<pageup>\b|\b<pagedown>\b|\b<gt>\b|\b<lt>\b|\b<tab>\b|\b<backspace>\b|\b<space>\b|\b<home>\b|\b<end>\b|\b<ins>\b|\b<del>\b|\b<plus>\b|\b<minus>\b|\b<percent>\b|\b<focus_in>\b|\b<focus_out>\b' 0:value
-add-highlighter shared/kakrc/code/meta regex '%arg|%file|%opt|%val|%sh' 0:meta
 
 # Comments
 add-highlighter shared/kakrc/comment region '(^|\h)\K#' '$' ref kakrc.comment

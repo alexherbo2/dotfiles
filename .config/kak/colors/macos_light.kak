@@ -7,9 +7,7 @@ declare-option str selection 'a5cdff'
 
 declare-option str cursor '7f7f7f'
 
-declare-option str comment '6272a4'
-# TODO: cyan
-declare-option str comment '00a6b2'
+declare-option str comment 'bfbfbf'
 
 # ANSI
 declare-option str black '000000'

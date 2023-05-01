@@ -47,17 +47,17 @@ declare-option str non_text "%opt{background_darker}"
 # For code
 set-face global value "rgb:%opt{red}" # C++ ⇒ int number = [42];
 set-face global type "rgb:%opt{yellow}" # C++ ⇒ [int] main() { ... }
-set-face global variable "rgb:%opt{green}" # Makefile ⇒ [install]:
+set-face global variable "rgb:%opt{cyan}" # Makefile ⇒ [install]:
 set-face global module "rgb:%opt{green}" # C++ ⇒ #include [<stdio.h>]
-set-face global function "rgb:%opt{cyan}" # https://spec.draculatheme.com#FunctionNames
-set-face global string "rgb:%opt{magenta}" # https://spec.draculatheme.com#String
+set-face global function "rgb:%opt{magenta}" # https://spec.draculatheme.com#FunctionNames
+set-face global string "rgb:%opt{green}" # https://spec.draculatheme.com#String
 set-face global keyword "rgb:%opt{blue}" # https://spec.draculatheme.com#Keyword
 set-face global operator "rgb:%opt{yellow}" # Shell ⇒ true [&&] false
 set-face global attribute "rgb:%opt{green}" # C++ ⇒ [enum] Color { ... };
 set-face global comment "rgb:%opt{comment}" # https://spec.draculatheme.com#Comment
 set-face global documentation comment # Rust ⇒ /// Returns `true`.
 set-face global meta "rgb:%opt{magenta}" # C++ ⇒ [#include] <stdio.h>
-set-face global builtin "default+b" # https://spec.draculatheme.com#Support
+set-face global builtin "rgb:%opt{magenta}" # https://spec.draculatheme.com#Support
 # set-face global builtin "rgb:%opt{cyan}+i" # https://spec.draculatheme.com#Support
 
 # Diffs

@@ -52,7 +52,7 @@ set-face global module "rgb:%opt{green}" # C++ ⇒ #include [<stdio.h>]
 set-face global function "rgb:%opt{magenta}" # https://spec.draculatheme.com#FunctionNames
 set-face global string "rgb:%opt{green}" # https://spec.draculatheme.com#String
 set-face global keyword "rgb:%opt{blue}" # https://spec.draculatheme.com#Keyword
-set-face global operator "rgb:%opt{yellow}" # Shell ⇒ true [&&] false
+set-face global operator default # Shell ⇒ true [&&] false
 set-face global attribute "rgb:%opt{green}" # C++ ⇒ [enum] Color { ... };
 set-face global comment "rgb:%opt{comment}" # https://spec.draculatheme.com#Comment
 set-face global documentation comment # Rust ⇒ /// Returns `true`.
@@ -76,7 +76,7 @@ set-face global block "rgb:%opt{magenta}" # AsciiDoc ⇒ [----][code][----] — 
 set-face global link "rgb:%opt{cyan}" # Markdown ⇒ <https://draculatheme.com> — https://spec.draculatheme.com#MarkupLinkUrl
 set-face global bullet "rgb:%opt{cyan}" # https://spec.draculatheme.com#MarkupListBulletOrNumber
 # yellow
-set-face global list "rgb:%opt{foreground}" # AsciiDoc ⇒ - [item]
+set-face global list default # AsciiDoc ⇒ - [item]
 
 # Builtin faces
 set-face global Default "rgb:%opt{foreground},rgb:%opt{background}" # Editor background

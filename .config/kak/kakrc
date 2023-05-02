@@ -219,18 +219,6 @@ define-command open_current_buffer_with_helix %{
   open_terminal_app hx "%val{buffile}:%val{cursor_line}:%val{cursor_column}"
 }
 
-define-command alacritty_open_new_client -params .. %{
-  nop %sh{
-    alacritty msg create-window -e kak -c "$kak_session" -e "$*"
-  }
-}
-
-define-command foot_open_new_client -params .. %{
-  nop %sh{
-    footclient -e kak -c "$kak_session" -e "$*"
-  }
-}
-
 define-command mkdir %{
   nop %sh(mkdir -p -- "$(dirname -- "$kak_buffile")")
 }
@@ -323,29 +311,6 @@ define-command prompt_select_previous_surrounding_object %{
 
 # Porcelain commands -----------------------------------------------------------
 
-define-command git_write %{
-  write
-  nop %sh{
-    git add "$kak_buffile"
-  }
-}
-
-define-command git_commit %{
-  edit -existing %sh{
-    git -c core.editor= commit
-    git rev-parse --git-path COMMIT_EDITMSG
-  }
-  hook buffer BufWritePost '.*' %{
-    nop %sh{
-      git commit --file "$kak_hook_param" --cleanup=strip
-    }
-    delete-buffer
-  }
-}
-
-alias global gw git_write
-alias global gc git_commit
-
 define-command restore_selections_from_register -params 1 %{
   try %[ execute-keys """%arg{1}z" ]
 }
@@ -432,9 +397,6 @@ define-command yank_selected_text_to_terminal_clipboard %{
 alias global = evaluate_selected_text
 
 # Command completion
-complete-command alacritty_open_new_client command
-complete-command foot_open_new_client command
-
 complete-command rename-session shell-script-candidates %{
   cat "$kak_config/friendly_session_names.txt"
 }
@@ -576,23 +538,6 @@ map global normal { '<a-:><a-;>{p'
 map global normal } '<a-:>}p'
 
 # Windowing --------------------------------------------------------------------
-
-# Terminal detection
-hook -group terminal-detection global ClientCreate '.*' %{
-  trigger-user-hook "TERM=%val{client_env_TERM}"
-}
-
-hook global User 'TERM=alacritty' %{
-  alias global open_new_client alacritty_open_new_client
-  set-option global terminal_command alacritty
-  set-option global terminal_args msg create-window -e
-}
-
-hook global User 'TERM=foot' %{
-  alias global open_new_client foot_open_new_client
-  set-option global terminal_command footclient
-  set-option global terminal_args -e
-}
 
 declare-option -hidden range-specs selected_text_ranges
 # set-face global SelectedText black,blue+fg

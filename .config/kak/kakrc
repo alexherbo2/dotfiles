@@ -216,7 +216,7 @@ define-command open_current_buffer_with_visual_studio_code %{
 }
 
 define-command open_current_buffer_with_helix %{
-  open_terminal_app hx "$kak_buffile:$kak_line:$kak_column"
+  open_terminal_app hx "%val{buffile}:%val{line}:%val{column}"
 }
 
 define-command alacritty_open_new_client -params .. %{

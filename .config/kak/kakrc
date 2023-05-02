@@ -40,7 +40,7 @@ define-command open_terminal_app -params .. %{
     $kak_opt_terminal_command $kak_opt_terminal_args "$@"
   }
 }
-complete-command open_terminal shell
+complete-command open_terminal_app shell
 
 # Status line
 set-option global modelinefmt '%val{bufname} %val{cursor_line}:%val{cursor_char_column} {{context_info}} {{mode_info}} - %val{client}@%val{session}'

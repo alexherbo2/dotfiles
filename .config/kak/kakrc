@@ -33,6 +33,15 @@ add-highlighter global/show-matching show-matching
 add-highlighter global/number-lines number-lines -hlcursor
 add-highlighter global/soft_wrap wrap -indent -marker '↪'
 
+declare-option str terminal_command
+declare-option str-list terminal_args
+define-command open_terminal_app -params .. %{
+  nop %sh{
+    $kak_opt_terminal_command $kak_opt_terminal_args "$@"
+  }
+}
+complete-command open_terminal shell
+
 # Status line
 set-option global modelinefmt '%val{bufname} %val{cursor_line}:%val{cursor_char_column} {{context_info}} {{mode_info}} - %val{client}@%val{session}'
 
@@ -203,6 +212,12 @@ define-command evaluate_selected_text %{
 define-command open_current_buffer_with_visual_studio_code %{
   nop %sh{
     code --goto "$kak_buffile:$kak_line:$kak_column"
+  }
+}
+
+define-command open_current_buffer_with_helix %{
+  nop %sh{
+    open_terminal_app hx "$kak_buffile:$kak_line:$kak_column"
   }
 }
 
@@ -571,10 +586,14 @@ hook -group terminal-detection global ClientCreate '.*' %{
 
 hook global User 'TERM=alacritty' %{
   alias global open_new_client alacritty_open_new_client
+  set-option global terminal_command alacritty
+  set-option global terminal_args msg create-window -e
 }
 
 hook global User 'TERM=foot' %{
   alias global open_new_client foot_open_new_client
+  set-option global terminal_command footclient
+  set-option global terminal_args -e
 }
 
 declare-option -hidden range-specs selected_text_ranges

@@ -2,7 +2,7 @@ declare-option str terminal_command
 declare-option str-list terminal_args
 
 define-command open_new_terminal_client -params .. %{
-  open_terminal_app_with_config kak -c %val{session} -e "%arg{@}"
+  open_terminal_app kak -c %val{session} -e "%arg{@}"
 }
 
 define-command open_terminal_app -params 1.. %{

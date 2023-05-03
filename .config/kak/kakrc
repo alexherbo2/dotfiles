@@ -34,15 +34,6 @@ add-highlighter global/show-matching show-matching
 add-highlighter global/number-lines number-lines -hlcursor
 add-highlighter global/soft_wrap wrap -indent -marker '↪'
 
-declare-option str terminal_command
-declare-option str-list terminal_args
-define-command open_terminal_app -params .. %{
-  nop %sh{
-    $kak_opt_terminal_command $kak_opt_terminal_args "$@"
-  }
-}
-complete-command open_terminal_app shell
-
 # Status line
 set-option global modelinefmt '%val{bufname} %val{cursor_line}:%val{cursor_char_column} {{context_info}} {{mode_info}} - %val{client}@%val{session}'
 
@@ -425,6 +416,7 @@ map -docstring 'get character info' global user u ':get_character_info<ret>'
 map global prompt <a-i> '<home>(?i)<end>'
 map global prompt <a-o> '<home>(?S)<end>'
 
+map -docstring 'open new terminal client' global normal <c-w> ':open_new_terminal_client<ret>'
 map -docstring 'enter extend mode' global normal v ':enter_extend_mode<ret>'
 map -docstring 'enter match mode' global normal m ':enter_match_mode<ret>'
 map -docstring 'enter select mode' global normal S ':enter_select_mode<ret>'

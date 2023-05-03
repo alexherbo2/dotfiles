@@ -280,7 +280,9 @@ define-command open_file_finder %{
 }
 
 define-command open_viewport_picker %{
-  prompt -menu viewport_picker: -client-completion %{
+  prompt -menu viewport_picker: -shell-script-candidates %{
+    printf '%s\n' $kak_client_list | grep -Fxv "$kak_client"
+  } %{
     swap_buffer_in_viewport %val{text}
   }
 }

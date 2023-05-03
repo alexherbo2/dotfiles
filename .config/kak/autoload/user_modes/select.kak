@@ -68,7 +68,7 @@ define-command -hidden select_words %{
   execute-keys 's\w+<ret><a-i>w'
 }
 
-define-command -hidden select_big_words %{
+define-command -hidden select_long_words %{
   execute-keys 's\w+<ret><a-i><a-w>'
 }
 
@@ -134,7 +134,7 @@ map -docstring 'inner grave quote strings' global select ` ':select_inner_grave_
 map -docstring 'whole grave quote strings' global select <a-`> ':select_whole_grave_quote_strings<ret>'
 
 map -docstring 'words' global select w ':select_words<ret>'
-map -docstring 'big words' global select <a-w> ':select_big_words<ret>'
+map -docstring 'long words' global select <a-w> ':select_long_words<ret>'
 map -docstring 'sentences' global select s ':select_sentences<ret>'
 map -docstring 'paragraphs' global select p ':select_paragraphs<ret>'
 map -docstring 'whitespaces' global select <space> ':select_whitespaces<ret>'

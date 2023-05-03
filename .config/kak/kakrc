@@ -424,6 +424,8 @@ map -docstring 'get character info' global user u ':get_character_info<ret>'
 map global prompt <a-i> '<home>(?i)<end>'
 map global prompt <a-o> '<home>(?S)<end>'
 
+map -docstring 'enter extend mode' global normal v ':enter_extend_mode<ret>'
+map -docstring 'enter match mode' global normal m ':enter_match_mode<ret>'
 map -docstring 'enter select mode' global normal S ':enter_select_mode<ret>'
 map -docstring 'enter surround mode' global normal q ':enter_surround_mode<ret>'
 map -docstring 'select previous surrounding object' global normal [ ':prompt_select_previous_surrounding_object<ret>'
@@ -440,7 +442,7 @@ map -docstring 'show definition preview hover' global user k ':show_definition_p
 map -docstring 'enter lsp mode' global user l ':enter_lsp_mode<ret>'
 map -docstring 'yank selected text to the terminal clipboard' global user y ':yank_selected_text_to_terminal_clipboard<ret>'
 
-# remappings
+# Key remapping
 map global normal <a-q> q
 map global normal <a-Q> Q
 

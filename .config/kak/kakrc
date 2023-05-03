@@ -29,6 +29,7 @@ set-option global startup_info_version 20221231
 set-option global ui_options terminal_set_title=no terminal_assistant=none
 set-option global matching_pairs ( ) { } [ ] < > “ ” ‘ ’ « » ‹ ›
 set-option global scrolloff 5,1
+set-option global autoinfo ''
 add-highlighter global/show-matching show-matching
 add-highlighter global/number-lines number-lines -hlcursor
 add-highlighter global/soft_wrap wrap -indent -marker '↪'

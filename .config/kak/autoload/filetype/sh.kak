@@ -58,6 +58,11 @@ add-highlighter shared/sh/code/keyword regex '\bif\b|\bthen\b|\belse\b|\belif\b|
 # compgen -b
 add-highlighter shared/sh/code/builtin regex '\.|:|\[|\balias\b|\bbg\b|\bbind\b|\bbreak\b|\bbuiltin\b|\bcaller\b|\bcd\b|\bcommand\b|\bcompgen\b|\bcomplete\b|\bcompopt\b|\bcontinue\b|\bdeclare\b|\bdirs\b|\bdisown\b|\becho\b|\benable\b|\beval\b|\bexec\b|\bexit\b|\bexport\b|\bfalse\b|\bfc\b|\bfg\b|\bgetopts\b|\bhash\b|\bhelp\b|\bhistory\b|\bjobs\b|\bkill\b|\blet\b|\blocal\b|\blogout\b|\bmapfile\b|\bpopd\b|\bprintf\b|\bpushd\b|\bpwd\b|\bread\b|\breadarray\b|\breadonly\b|\breturn\b|\bset\b|\bshift\b|\bshopt\b|\bsource\b|\bsuspend\b|\btest\b|\btimes\b|\btrap\b|\btrue\b|\btype\b|\btypeset\b|\bulimit\b|\bumask\b|\bunalias\b|\bunset\b|\bwait\b' 0:builtin
 
+# Operators
+add-highlighter shared/sh/code/operator regex '[()[\]{}<>=~*&!|@;$]' 0:operator
+# Literals
+add-highlighter shared/sh/code/literal regex '-\w[\w-]*|\d\w*' 0:value
+
 # Comments
 add-highlighter shared/sh/comment region '(?<!\\)(\\\\)*(^|\h)\K#' '$' ref sh.comment
 

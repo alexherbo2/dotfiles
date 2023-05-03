@@ -366,15 +366,15 @@ define-command send_buffer_list_to_session -params 1 %{
 }
 
 complete-command send_selected_text_to_session shell-script-candidates %{
-  kak -l
+  kak -l | grep -Fxv "$kak_session"
 }
 
 complete-command send_current_buffer_to_session shell-script-candidates %{
-  kak -l
+  kak -l | grep -Fxv "$kak_session"
 }
 
 complete-command send_buffer_list_to_session shell-script-candidates %{
-  kak -l
+  kak -l | grep -Fxv "$kak_session"
 }
 
 define-command yank_selected_text_to_terminal_clipboard %{

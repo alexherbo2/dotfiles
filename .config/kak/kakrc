@@ -281,7 +281,8 @@ define-command open_file_finder %{
 
 define-command open_viewport_picker %{
   prompt -menu viewport_picker: -shell-script-candidates %{
-    printf '%s\n' $kak_client_list | grep -Fxv "$kak_client"
+    printf 'echo -to-file %s -- "%%val{client_list}"' "$kak_quoted_response_fifo" > "$kak_command_fifo"
+    tr '\0' '\n' < "$kak_response_fifo" | grep -Fxv "$kak_client"
   } %{
     swap_buffer_in_viewport %val{text}
   }

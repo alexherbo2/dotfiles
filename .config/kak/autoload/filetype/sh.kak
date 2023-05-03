@@ -72,6 +72,7 @@ add-highlighter shared/sh/string.quoted.single region "(?<!\\)(\\\\)*\K'" "'" re
 # Double quoted strings
 add-highlighter shared/sh/string.quoted.double region '(?<!\\)(\\\\)*\K"' '(?<!\\)(\\\\)*"' group
 add-highlighter shared/sh/string.quoted.double/escaped regex '\\"' 0:value
+add-highlighter shared/sh/code/operator regex '\$' 0:operator
 add-highlighter shared/sh/string.quoted.double/interpolated ref sh.string.interpolated
 
 # Here document

@@ -24,7 +24,7 @@ define-command open_buffer_search_prompt %{
 
 complete-command grep file
 
-add-highlighter shared/grep regex '^(.+?)(:)(\d+)(:)(\d+)(:)(.+?)$' 1:string 2:operator 3:value 4:operator 4:value 5:operator
+add-highlighter shared/grep regex '^(.+?)(:)(\d+)(:)(\d+)(:)(.+?)$' 1:string 2:operator 3:value 4:operator 5:value 6:operator
 
 hook global BufOpenFifo '.+\.refs' %{
   set-option buffer filetype grep

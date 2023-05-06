@@ -19,14 +19,14 @@ define-command open_buffer_finder %{
 
 complete-command find file
 
-add-highlighter shared/file_list regex '^(.+?)$' 0:value
+add-highlighter shared/find regex '^(.+?)$' 0:value
 
 hook global BufOpenFifo '.+\.flist' %{
-  set-option buffer filetype file_list
+  set-option buffer filetype find
 }
 
-hook -group grep-highlight global BufSetOption filetype=file_list %{
-  add-highlighter buffer/file_list ref file_list
+hook -group grep-highlight global BufSetOption filetype=find %{
+  add-highlighter buffer/find ref find
   map buffer normal <ret> ':jump_to_files<ret>'
 }
 

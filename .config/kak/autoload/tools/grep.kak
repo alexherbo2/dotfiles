@@ -24,14 +24,14 @@ define-command open_buffer_search_prompt %{
 
 complete-command grep file
 
-add-highlighter shared/refs regex '^(.+?)(:)(\d+)(:)(\d+)(:)(.+?)$' 1:string 2:operator 3:value 4:operator 5:value
+add-highlighter shared/grep regex '^(.+?)(:)(\d+)(:)(\d+)(:)(.+?)$' 1:string 2:operator 3:value 4:operator 4:value 5:operator
 
 hook global BufOpenFifo '.+\.refs' %{
-  set-option buffer filetype refs
+  set-option buffer filetype grep
 }
 
-hook global BufSetOption filetype=refs %{
-  add-highlighter buffer/refs ref refs
+hook global BufSetOption filetype=grep %{
+  add-highlighter buffer/grep ref grep
   map buffer normal <ret> ':jump_to_references<ret>'
 }
 

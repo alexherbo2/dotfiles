@@ -378,14 +378,7 @@ complete-command send_buffer_list_to_session shell-script-candidates %{
 }
 
 define-command yank_selected_text_to_terminal_clipboard %{
-  nop %sh{
-    printf 'echo -to-file %s -- "%%val{selections}"' "$kak_quoted_response_fifo" > "$kak_command_fifo"
-    {
-      printf '\033]52;c;'
-      tr '\0' '\n' < "$kak_response_fifo" | sed 's/\\\\/\\/g' | base64
-      printf '\a'
-    } > /dev/tty
-  }
+  execute-keys "y:edit -scratch<ret><a-R>a<ret><esc><a-_><a-|>{ printf '\033]52;c;'; base64; printf '\a'; } <gt> /dev/tty<ret>:delete-buffer<ret>"
 }
 
 # Aliases

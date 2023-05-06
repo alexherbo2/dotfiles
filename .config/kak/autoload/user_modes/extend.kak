@@ -14,3 +14,4 @@ map -docstring 'previous word start' global extend b B
 map -docstring 'next long word start' global extend W <a-W>
 map -docstring 'next long word end' global extend E <a-E>
 map -docstring 'previous long word start' global extend B <a-B>
+map -docstring 'flip selections' global extend ';' '<a-;>'

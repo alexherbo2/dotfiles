@@ -35,8 +35,7 @@ add-highlighter shared/lua.string fill string
 add-highlighter shared/lua.string.escaping regions
 add-highlighter shared/lua.string.escaping/string default-region group
 add-highlighter shared/lua.string.escaping/string/ fill string
-add-highlighter shared/lua.string.escaping/string/ regex '\\.' 0:meta
-add-highlighter shared/lua.string.escaping/string/ regex '\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|u\{[0-9a-fA-F]+\})' 0:meta
+add-highlighter shared/lua.string.escaping/string/ regex '\\[abefnrtv]|\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|u\{[0-9a-fA-F]+\})' 0:meta
 
 # Syntax and semantics
 add-highlighter shared/lua/code/function_name_declaration regex '\bfunction\h+\K(?:\w+\.)*(?:\w+:)?\w+(?=\()' 0:function
@@ -59,13 +58,13 @@ add-highlighter shared/lua/comment region '--' '$' ref lua.comment
 
 # Single quoted strings
 add-highlighter shared/lua/string.quoted.single region "'" "(?<!\\)(?:\\\\)*'" group
-add-highlighter shared/lua/string.quoted.single/escaped regex "\\'" 0:value
 add-highlighter shared/lua/string.quoted.single/escaping ref lua.string.escaping
+add-highlighter shared/lua/string.quoted.single/escaped regex "\\'" 0:meta
 
 # Double quoted strings
 add-highlighter shared/lua/string.quoted.double region '"' '(?<!\\)(?:\\\\)*"' group
-add-highlighter shared/lua/string.quoted.double/escaped regex '\\"' 0:value
 add-highlighter shared/lua/string.quoted.double/escaping ref lua.string.escaping
+add-highlighter shared/lua/string.quoted.double/escaped regex '\\"' 0:meta
 
 add-highlighter shared/lua/string.quoted.bracket region '\[\[\K' '(?=\]\])' ref lua.string
 add-highlighter shared/lua/comment.quoted.bracket region '--\[\[\K' '(?=\]\])' ref lua.comment

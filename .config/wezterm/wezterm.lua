@@ -21,6 +21,9 @@ return {
   -- Color scheme
   color_scheme = 'Catppuccin Latte',
 
+  -- Add a bit of transparency to reduce eye strain.
+  window_background_opacity = 0.99,
+
   -- Font configuration
   font = wezterm.font('JetBrains Mono'),
   font_size = 16.0,

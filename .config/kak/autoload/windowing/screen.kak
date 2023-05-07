@@ -6,5 +6,5 @@ hook global ClientCreate '.*' %{
 
 hook global User 'STY=.+' %{
   set-option global terminal_command sh
-  set-option global terminal_args -c 'screen -X split -v && screen -X focus right && screen "$@"' --
+  set-option global terminal_args -c 'screen "$@" && screen -X eval "split -v" "focus right" "next"' --
 }

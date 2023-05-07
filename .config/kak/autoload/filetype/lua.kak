@@ -39,7 +39,7 @@ add-highlighter shared/lua.string.escaping/string/ regex '\\[abefnrtv]|\\(x[0-9a
 
 # Syntax and semantics
 add-highlighter shared/lua/code/function_name_declaration regex '\bfunction\h+\K(?:\w+\.)*(?:\w+:)?\w+(?=\()' 0:function
-add-highlighter shared/lua/code/function_name_call regex '\b(?:\w+\.)*(?:\w+:)?\w+(?=[\(\{])' 0:function
+add-highlighter shared/lua/code/function_name_call regex '\b(?:\w+\.)*(?:\w+:)?\w+(?=[\(\{\[])' 0:function
 
 # Keywords
 add-highlighter shared/lua/code/keyword regex '\bfunction\b|\breturn\b|\brepeat\b|\belseif\b|\bwhile\b|\buntil\b|\blocal\b|\bfalse\b|\bbreak\b|\btrue\b|\bthen\b|\bgoto\b|\belse\b|\bnot\b|\bnil\b|\bfor\b|\bend\b|\band\b|\bor\b|\bin\b|\bif\b|\bdo\b' 0:keyword

@@ -48,10 +48,7 @@ add-highlighter shared/lua/code/keyword regex '\bfunction\b|\breturn\b|\brepeat\
 add-highlighter shared/lua/code/operator regex '[-+*/%^#&~|<>=:(){}[\];:,.]' 0:operator
 
 # Literals
-add-highlighter shared/lua/code/literal regex '\bfalse\b|\btrue\b|\bnil\b|\b_G\b|\b_ENV\b|\d[\d_]*\.\w[\w]*|\d[\w]*' 0:value
-
-# Types
-add-highlighter shared/lua/code/type regex '\b[A-Z]\w*\b' 0:type
+add-highlighter shared/lua/code/literal regex '\bfalse\b|\btrue\b|\bnil\b|\b_G\b|\b_ENV\b|\d[\d_]*\.\w[\w]*|\d[\w]*|\b[A-Z]\w*\b' 0:value
 
 # Comments
 add-highlighter shared/lua/comment region '--' '$' ref lua.comment

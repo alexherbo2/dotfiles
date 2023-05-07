@@ -25,7 +25,7 @@ hook global BufOpenFifo '.+\.flist' %{
   set-option buffer filetype find
 }
 
-hook -group grep-highlight global BufSetOption filetype=find %{
+hook global BufSetOption filetype=find %{
   add-highlighter buffer/find ref find
   map buffer normal <ret> ':jump_to_files<ret>'
 }

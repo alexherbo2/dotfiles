@@ -63,5 +63,5 @@ add-highlighter shared/lua/string.quoted.double region '"' '(?<!\\)(?:\\\\)*"' g
 add-highlighter shared/lua/string.quoted.double/escaping ref lua.string.escaping
 add-highlighter shared/lua/string.quoted.double/escaped regex '\\"' 0:meta
 
-add-highlighter shared/lua/string.quoted.bracket region '\[\[\K' '(?=\]\])' ref lua.string
-add-highlighter shared/lua/comment.quoted.bracket region '--\[\[\K' '(?=\]\])' ref lua.comment
+add-highlighter shared/lua/string.quoted.bracket region -match-capture '\[(=*)\[' '\](=*)\]' ref lua.string
+add-highlighter shared/lua/comment.quoted.bracket region -match-capture '--\[(=*)\[' '\](=*)\]' ref lua.comment

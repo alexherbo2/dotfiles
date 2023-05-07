@@ -8,7 +8,7 @@ hook global BufCreate '.+\.lua' %{
 hook global BufSetOption filetype=lua %{
   add-highlighter buffer/lua ref lua
   set-option buffer increase_indent_pattern '[({\[]$|\b(do|else|then)$|\bfunction\h*\([^)]*?\)$|\bfunction\h+(?:\w+\.)*(?:\w+:)?\w+\([^)]*?\)$'
-  set-option buffer decrease_indent_pattern '^\h*[)}\]]$|^\h*(elseif|else|end|until)$'
+  set-option buffer decrease_indent_pattern '^\h*[)}\]]$|^\h*(else|end|until)$'
   set-option buffer ignore_indent_pattern '^\h*--'
   set-option buffer line_comment_token '--'
   set-option buffer block_comment_tokens '[[--' '--]]'

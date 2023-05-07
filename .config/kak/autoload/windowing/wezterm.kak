@@ -5,5 +5,5 @@ hook global ClientCreate '.*' %{
 
 hook global User 'TERM_PROGRAM=WezTerm' %{
   set-option global terminal_command wezterm
-  set-option global terminal_args cli split-pane --horizontal
+  set-option global terminal_args cli split-pane --right
 }

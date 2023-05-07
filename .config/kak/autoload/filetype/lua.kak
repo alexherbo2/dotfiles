@@ -96,9 +96,9 @@ add-highlighter shared/lua/code/attribute regex \B(<[a-zA-Z_]\w*>)\B 0:attribute
 # Reference
 # https://lua-lang.org/reference/master/syntax_and_semantics/method_arguments.html
 
-add-highlighter shared/lua/code/instance-method-definition regex "\b(def)\h+(%opt{lua_word_pattern})\b" 1:keyword 2:function
-add-highlighter shared/lua/code/class-method-definition regex "\b(def)\h+(self\.%opt{lua_word_pattern})\b" 1:keyword 2:function
-add-highlighter shared/lua/code/method-call regex "\b(%opt{lua_word_pattern})\(" 1:function
+add-highlighter shared/lua/code/instance-method-definition regex "\b(def)\h+(opt{lua_word_pattern})\b" 1:keyword 2:function
+add-highlighter shared/lua/code/class-method-definition regex "\b(def)\h+(self\.opt{lua_word_pattern})\b" 1:keyword 2:function
+add-highlighter shared/lua/code/method-call regex "\b(opt{lua_word_pattern})\(" 1:function
 
 # Instance and class variables ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -197,7 +197,7 @@ add-highlighter shared/lua/comment/fill fill comment
 #
 # Check the number of horns with `#horns`.
 #
-add-highlighter shared/lua/comment/reference regex "`[#.]?%opt{lua_word_pattern}`" 0:mono
+add-highlighter shared/lua/comment/reference regex "`[#.]?opt{lua_word_pattern}`" 0:mono
 add-highlighter shared/lua/comment/parameter regex '\*\w+\*' 0:mono
 add-highlighter shared/lua/comment/code-block regex '```(\h*\w+)?$' 0:block
 add-highlighter shared/lua/comment/admonition regex '\h+([A-Z]+):\h+' 1:meta
@@ -350,7 +350,7 @@ add-highlighter shared/lua/string.unquoted.heredoc.raw region -match-capture "<<
 #
 # :"quoted symbol"
 #
-add-highlighter shared/lua/code/constant.symbol regex ":%opt{lua_word_pattern}" 0:value
+add-highlighter shared/lua/code/constant.symbol regex ":opt{lua_word_pattern}" 0:value
 add-highlighter shared/lua/string.symbol region ':"' '(?<!\\)(\\\\)*"' ref lua/string
 
 # Regular expressions ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -457,19 +457,19 @@ define-command -hidden lua-check-news %{
 
   # Keywords ⇒ https://github.com/lua-lang/lua/blob/master/src/compiler/lua/syntax/lexer.cr
   execute-keys '%|curl -sSL https://github.com/lua-lang/lua/raw/master/src/compiler/lua/syntax/lexer.cr<ret>'
-  execute-keys '%1<s>check_ident_or_keyword\(:(%opt{lua_word_pattern}<a-!>),\h+\w+\)<ret>Z%1<s>@token\.value\h+=\h+:(%opt{lua_word_pattern}<a-!>)<ret><a-z>a'
+  execute-keys '%1<s>check_ident_or_keyword\(:(opt{lua_word_pattern}<a-!>),\h+\w+\)<ret>Z%1<s>@token\.value\h+=\h+:(opt{lua_word_pattern}<a-!>)<ret><a-z>a'
   lua-build-result-with-static-words keywords
 
   # Top Level Namespace
   # https://lua-lang.org/api/master/toplevel.html#method-summary
   # https://lua-lang.org/api/master/toplevel.html#macro-summary
   execute-keys '%|curl -sSL https://lua-lang.org/api/master/toplevel.html<ret>'
-  execute-keys '%1<s>class="entry-detail"\h+id="(%opt{lua_word_pattern}<a-!>)[^"]*-(method|macro)"<ret>'
+  execute-keys '%1<s>class="entry-detail"\h+id="(opt{lua_word_pattern}<a-!>)[^"]*-(method|macro)"<ret>'
   lua-build-result-with-static-words top-level-namespace
 
   # Object macros ⇒ https://lua-lang.org/api/master/Object.html#macro-summary
   execute-keys '%|curl -sSL https://lua-lang.org/api/master/Object.html<ret>'
-  execute-keys '%1<s>class="entry-detail"\h+id="(%opt{lua_word_pattern}<a-!>)[^"]*-(macro)"<ret>'
+  execute-keys '%1<s>class="entry-detail"\h+id="(opt{lua_word_pattern}<a-!>)[^"]*-(macro)"<ret>'
   lua-build-result-with-static-words object-macros
 
   # Static words

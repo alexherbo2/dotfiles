@@ -5,5 +5,5 @@ hook global ClientCreate '.*' %{
 
 hook global User 'TERM_PROGRAM=tmux' %{
   set-option global terminal_command tmux
-  set-option global terminal_args cli split-window -h
+  set-option global terminal_args split-window -h
 }

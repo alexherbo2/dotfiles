@@ -226,4 +226,5 @@ git init
 git commit --message='Initial commit'
 gh repo create
 clear
+kitty -o allow_remote_control=yes
 exit

@@ -128,20 +128,20 @@ pw --length=10 lichess.org taupiqueur
 pw --length=10 paragon-software.com taupiqueur.kanto@gmail.com
 pw --length=10 paypal.com taupiqueur.kanto@gmail.com
 pw --length=10 libera.chat taupiqueur
-hx ~/docs/todo.txt
+kak ~/docs/todo.txt
 cat ~/docs/todo.txt
-hx ~/docs/notes.txt
+kak ~/docs/notes.txt
 cat ~/docs/notes.txt
-hx ~/anime/list.txt
-hx ~/series/list.txt
-hx ~/movies/list.txt
-hx ~/storage/movies/list.txt
-hx ~/games/info.txt
-hx ~/youtube/music/info.txt
-hx ~/youtube/videos/info.txt
-hx ~/youtube/channels/joueur-du-grenier/list.txt
-hx ~/youtube/channels/bazar-du-grenier/list.txt
-hx
+kak ~/anime/list.txt
+kak ~/series/list.txt
+kak ~/movies/list.txt
+kak ~/storage/movies/list.txt
+kak ~/games/info.txt
+kak ~/youtube/music/info.txt
+kak ~/youtube/videos/info.txt
+kak ~/youtube/channels/joueur-du-grenier/list.txt
+kak ~/youtube/channels/bazar-du-grenier/list.txt
+kak
 nnn
 cd ~/docs/notes
 cd ~/Downloads

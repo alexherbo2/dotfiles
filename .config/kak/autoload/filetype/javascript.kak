@@ -7,8 +7,8 @@ hook global BufCreate '.+\.js' %{
 
 hook global BufSetOption filetype=javascript %{
   add-highlighter buffer/javascript ref javascript
-  set-option buffer increase_indent_pattern '[({\[]$|\b(do|else|repeat|then)$|\bfunction\h*\(.*?\)$|\bfunction\h+(?:\w+\.)*(?:\w+:)?\w+\(.*?\)$'
-  set-option buffer decrease_indent_pattern '^\h*[)}\]]$|^\h*(else|end|until)$'
+  set-option buffer increase_indent_pattern '[({\[]$'
+  set-option buffer decrease_indent_pattern '^\h*[)}\]]$'
   set-option buffer ignore_indent_pattern '^\h*//'
   set-option buffer line_comment_token '//'
   set-option buffer block_comment_tokens '/*' '*/'

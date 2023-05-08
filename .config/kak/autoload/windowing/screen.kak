@@ -1,7 +1,7 @@
 # https://gnu.org/software/screen/
 # https://gnu.org/software/screen/manual/screen.html
 hook global ClientCreate '.*' %{
-  trigger-user-hook "STY=%val{client_env_TERM}"
+  trigger-user-hook "STY=%val{client_env_STY}"
 }
 
 hook global User 'STY=.+' %{

@@ -1,4 +1,6 @@
 git clone https://github.com/ajeetdsouza/zoxide.git ~/.local/share/github.com/ajeetdsouza/zoxide
+kak -s megumin -e 'rename-client chomusuke'
+kak -c megumin
 git clone https://github.com/watzon/arg_parser.git ~/.local/share/github.com/watzon/arg_parser
 git clone https://github.com/kak-lsp/kak-lsp.git ~/.local/share/github.com/kak-lsp/kak-lsp
 git clone https://github.com/zellij-org/zellij.git ~/.local/share/github.com/zellij-org/zellij

@@ -191,8 +191,8 @@ define-command copy_selected_lines_up %{
   execute-keys -draft 'xyp'
 }
 
-map global normal <c-d> ':copy_selected_lines_down<ret>'
-map global normal <c-u> ':copy_selected_lines_up<ret>'
+# map global normal <c-d> ':copy_selected_lines_down<ret>'
+# map global normal <c-u> ':copy_selected_lines_up<ret>'
 
 define-command move_selected_lines_down %{
   execute-keys -draft 'x<a-_><a-:>Z;ezjxdzP'

@@ -183,6 +183,17 @@ define-command sort_selections %{
 }
 
 # Reference: https://code.visualstudio.com/docs/getstarted/keybindings#_basic-editing
+define-command copy_selected_lines_down %{
+  execute-keys -draft 'xyP'
+}
+
+define-command copy_selected_lines_up %{
+  execute-keys -draft 'xyp'
+}
+
+map global normal <c-d> ':copy_selected_lines_down<ret>'
+map global normal <c-u> ':copy_selected_lines_up<ret>'
+
 define-command move_selected_lines_down %{
   execute-keys -draft 'x<a-_><a-:>Z;ezjxdzP'
 }

@@ -1,4 +1,7 @@
 git clone https://github.com/ajeetdsouza/zoxide.git ~/.local/share/github.com/ajeetdsouza/zoxide
+foot --config=/dev/null -o colors.alpha=0.9
+alacritty --config-file=/dev/null -o window.opacity=0.9
+alacritty msg config window.opacity=0.9
 kak -s megumin -e 'rename-client chomusuke'
 kak -c megumin
 git clone https://github.com/watzon/arg_parser.git ~/.local/share/github.com/watzon/arg_parser

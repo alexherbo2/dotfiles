@@ -3,8 +3,7 @@
 declare-user-mode tmux
 
 declare-option str client_completion %{
-  printf 'echo -to-file %s -- "%%val{client_list}"' "$kak_quoted_response_fifo" > "$kak_command_fifo"
-  tr '\0' '\n' < "$kak_response_fifo" | grep -Fxv "$kak_client"
+  echo "$kak_client_list" | tr ' ' '\n' | grep -Fxv "$kak_client"
 }
 
 define-command enter_tmux_mode %{
@@ -18,29 +17,24 @@ hook global ClientCreate .* %{
 
 define-command tmux -params 1.. %{
   nop %sh{
-    TMUX=$kak_client_env_TMUX \
-    TMUX_PANE=$kak_client_env_TMUX_PANE \
-    tmux \
-    set-environment kak_session "$kak_session" \;\
-    set-environment kak_client "$kak_client" \;\
-    "$@"
+    TMUX=$kak_client_env_TMUX TMUX_PANE=$kak_client_env_TMUX_PANE tmux set-environment kak_session "$kak_session" ';' set-environment kak_client "$kak_client" ';' "$@"
   }
-}
-
-define-command split_view_right_with_tmux %{
-  tmux split-window -h kak -c %val{session}
-}
-
-define-command split_view_left_with_tmux %{
-  tmux split-window -h -b kak -c %val{session}
 }
 
 define-command split_view_down_with_tmux %{
   tmux split-window -v kak -c %val{session}
 }
 
+define-command split_view_right_with_tmux %{
+  tmux split-window -h kak -c %val{session}
+}
+
 define-command split_view_up_with_tmux %{
   tmux split-window -v -b kak -c %val{session}
+}
+
+define-command split_view_left_with_tmux %{
+  tmux split-window -h -b kak -c %val{session}
 }
 
 define-command open_new_tab_with_tmux %{
@@ -51,13 +45,17 @@ define-command open_new_tab_right_with_tmux %{
   tmux new-window -a %arg{@}
 }
 
+define-command open_new_tab_left_with_tmux %{
+  tmux new-window -b %arg{@}
+}
+
 define-command focus_client_with_tmux -params 1 %{
   evaluate-commands -client %arg{1} %{
     tmux switch-client -t %val{client_env_TMUX_PANE}
   }
 }
 
-define-command open_client_picker_with_tmux %{
+define-command open_prompt_focus_client_with_tmux %{
   prompt -menu client_picker: -shell-script-candidates %opt{client_completion} %{
     focus_client_with_tmux %val{text}
   }
@@ -75,5 +73,7 @@ map -docstring 'split view down' global tmux s ':split_view_down_with_tmux<ret>'
 map -docstring 'split view right' global tmux v ':split_view_right_with_tmux<ret>'
 map -docstring 'split view up' global tmux S ':split_view_up_with_tmux<ret>'
 map -docstring 'split view left' global tmux V ':split_view_left_with_tmux<ret>'
-map -docstring 'focus client' global tmux f ':open_client_picker_with_tmux<ret>'
+map -docstring 'open new tab right' global tmux w ':open_new_tab_right_with_tmux<ret>'
+map -docstring 'open new tab left' global tmux W ':open_new_tab_left_with_tmux<ret>'
+map -docstring 'focus client' global tmux f ':open_prompt_focus_client_with_tmux<ret>'
 map -docstring 'yank selected text' global tmux y ':yank_selected_text_to_terminal_clipboard_with_tmux<ret>'

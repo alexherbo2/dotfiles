@@ -10,7 +10,10 @@ define-command enter_window_mode %{
 
 define-command quit_other_clients %{
   evaluate-commands %sh{
-    printf 'evaluate-commands -client %s quit\n' $kak_client_list | grep -Fxv "$kak_client"
+    echo "$kak_client_list" | tr ' ' '\n' | grep -Fxv "$kak_client" |
+    while read kak_client
+    do echo "evaluate-commands -client '$kak_client' quit"
+    done
   }
 }
 

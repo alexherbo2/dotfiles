@@ -63,8 +63,12 @@ define-command open_client_picker_with_tmux %{
   }
 }
 
+define-command yank_text_to_terminal_clipboard_with_tmux -params 1 %{
+  tmux set-buffer -w %arg{1}
+}
+
 define-command yank_selected_text_to_terminal_clipboard_with_tmux %{
-  tmux set-buffer -w %val{main_reg_dquote}
+  yank_text_to_terminal_clipboard_with_tmux %val{selection}
 }
 
 map -docstring 'split view down' global tmux s ':split_view_down_with_tmux<ret>'

@@ -29,7 +29,7 @@ set-option global startup_info_version 20221231
 set-option global ui_options terminal_set_title=no terminal_assistant=none
 set-option global matching_pairs ( ) { } [ ] < > “ ” ‘ ’ « » ‹ ›
 set-option global scrolloff 5,1
-set-option global autoinfo ''
+#set-option global autoinfo ''
 add-highlighter global/show-matching show-matching
 add-highlighter global/number-lines number-lines -hlcursor
 add-highlighter global/soft_wrap wrap -indent -marker '↪'
@@ -388,6 +388,7 @@ map global prompt <a-o> '<home>(?S)<end>'
 map -docstring 'open new terminal client' global normal <c-w> ':open_new_terminal_client<ret>'
 map -docstring 'enter_window_mode' global user w ':enter_window_mode<ret>'
 map -docstring 'enter tmux mode' global window w ':enter_tmux_mode<ret>'
+map -docstring 'REPL' global tmux '<c-v>' ':enter_tmux_repl_mode<ret>'
 map -docstring 'enter extend mode' global normal v ':enter_extend_mode<ret>'
 map -docstring 'enter match mode' global normal m ':enter_match_mode<ret>'
 map -docstring 'enter select mode' global normal S ':enter_select_mode<ret>'

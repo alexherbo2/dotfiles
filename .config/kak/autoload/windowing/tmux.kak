@@ -69,6 +69,28 @@ define-command yank_selected_text_to_terminal_clipboard_with_tmux %{
   yank_text_to_terminal_clipboard_with_tmux %val{selection}
 }
 
+define-command send_text_to_tmux_pane -params 2 %{
+  tmux set-buffer %arg{1} ';' paste-buffer -p -t %arg{2}
+}
+
+define-command send_selected_text_to_tmux_pane -params 1 %{
+  send_text_to_tmux_pane %val{selection} %arg{1}
+}
+
+define-command send_selected_lines_to_tmux_pane -params 1 %{
+  evaluate-commands -draft %{
+    execute-keys 'x'
+    send_selected_text_to_tmux_pane %arg{1}
+  }
+}
+
+define-command send_current_buffer_to_tmux_pane -params 1 %{
+  evaluate-commands -draft %{
+    execute-keys '%'
+    send_selected_text_to_tmux_pane %arg{1}
+  }
+}
+
 map -docstring 'split view down' global tmux s ':split_view_down_with_tmux<ret>'
 map -docstring 'split view right' global tmux v ':split_view_right_with_tmux<ret>'
 map -docstring 'split view up' global tmux S ':split_view_up_with_tmux<ret>'

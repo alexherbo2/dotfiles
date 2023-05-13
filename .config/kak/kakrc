@@ -167,13 +167,6 @@ define-command select_previous_surrounding_object -params 1 %{
   execute-keys "<a-f>%arg{1}h<a-a>%arg{1}"
 }
 
-define-command swap_buffer_in_viewport -params 1 %{
-  execute-keys '"sZ'
-  execute-keys -client %arg{1} '"tZ'
-  execute-keys '"tz<esc>'
-  execute-keys -client %arg{1} '"sz<esc>'
-}
-
 define-command sort_selections %{
   evaluate-commands -save-regs '"' %sh{
     printf 'echo -to-file %s -- "%%val{selections}"' "$kak_quoted_response_fifo" > "$kak_command_fifo"
@@ -265,15 +258,6 @@ define-command open_document_symbol_picker %{
 define-command open_file_picker %{
   prompt open: -menu -shell-script-candidates 'fd --type=file --hidden' %{
     edit -existing %val{text}
-  }
-}
-
-define-command open_viewport_picker %{
-  prompt -menu viewport_picker: -shell-script-candidates %{
-    printf 'echo -to-file %s -- "%%val{client_list}"' "$kak_quoted_response_fifo" > "$kak_command_fifo"
-    tr '\0' '\n' < "$kak_response_fifo" | grep -Fxv "$kak_client"
-  } %{
-    swap_buffer_in_viewport %val{text}
   }
 }
 
@@ -402,6 +386,8 @@ map global prompt <a-i> '<home>(?i)<end>'
 map global prompt <a-o> '<home>(?S)<end>'
 
 map -docstring 'open new terminal client' global normal <c-w> ':open_new_terminal_client<ret>'
+map -docstring 'enter_window_mode' global user w ':enter_window_mode<ret>'
+map -docstring 'enter tmux mode' global window w ':enter_tmux_mode<ret>'
 map -docstring 'enter extend mode' global normal v ':enter_extend_mode<ret>'
 map -docstring 'enter match mode' global normal m ':enter_match_mode<ret>'
 map -docstring 'enter select mode' global normal S ':enter_select_mode<ret>'
@@ -414,7 +400,6 @@ map -docstring 'open global search prompt' global user / ':open_global_search_pr
 map -docstring 'open buffer search prompt' global user ? ':open_buffer_search_prompt<ret>'
 map -docstring 'open file finder' global user . ':open_file_finder<ret>'
 map -docstring 'open buffer finder' global user , ':open_buffer_finder<ret>'
-map -docstring 'open viewport picker' global user v ':open_viewport_picker<ret>'
 map -docstring 'open document symbol picker' global user s ':open_document_symbol_picker<ret>'
 map -docstring 'open workspace symbol picker' global user S ':open_workspace_symbol_picker<ret>'
 map -docstring 'show definition preview hover' global user k ':show_definition_preview_hover<ret>'

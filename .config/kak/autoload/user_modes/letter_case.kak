@@ -52,7 +52,7 @@ define-command convert_selected_text_from_kebab_case_style_to_snake_case_style %
 }
 
 define-command convert_selected_text_to_title_case %{
-  execute-keys -draft 's\w+<ret><a-:><a-;>;~'
+  execute-keys -draft 's\w+<ret>`<a-:><a-;>;~'
 }
 
 map -docstring 'uppercase' global letter_case 'u' ':convert_selected_text_to_uppercase<ret>'
@@ -62,7 +62,7 @@ map -docstring 'kebab_case_style_mode' global letter_case 'k' ':enter_kebab_case
 map -docstring 'snake_case_style_mode' global letter_case 's' ':enter_snake_case_style_mode<ret>'
 map -docstring 'title_case' global letter_case 't' ':convert_selected_text_to_title_case<ret>'
 
-map -docstring 'snake_case_style' global camel_case_style 'c' ':convert_selected_text_from_snake_case_style_to_camel_case_style<ret>'
+map -docstring 'snake_case_style' global camel_case_style 's' ':convert_selected_text_from_snake_case_style_to_camel_case_style<ret>'
 map -docstring 'kebab_case_style' global camel_case_style 'k' ':convert_selected_text_from_kebab_case_style_to_camel_case_style<ret>'
 
 map -docstring 'camel_case_style' global snake_case_style 'c' ':convert_selected_text_from_camel_case_style_to_snake_case_style<ret>'

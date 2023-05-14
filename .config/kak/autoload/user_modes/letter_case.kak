@@ -36,11 +36,11 @@ define-command convert_selected_text_from_snake_case_style_to_kebab_case_style %
 }
 
 define-command convert_selected_text_from_camel_case_style_to_snake_case_style %{
-  execute-keys -draft 's[A-Z]+<ret>`1<a-,>i_<esc>'
+  execute-keys -draft 's[A-Z]+<ret>`i_<esc>'
 }
 
 define-command convert_selected_text_from_camel_case_style_to_kebab_case_style %{
-  execute-keys -draft 's[A-Z]<ret>`i-<esc>'
+  execute-keys -draft 's[A-Z]+<ret>`i-<esc>'
 }
 
 define-command convert_selected_text_from_kebab_case_style_to_camel_case_style %{

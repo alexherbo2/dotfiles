@@ -385,6 +385,7 @@ map -docstring 'get character info' global user u ':get_character_info<ret>'
 map global prompt <a-i> '<home>(?i)<end>'
 map global prompt <a-o> '<home>(?S)<end>'
 
+map -docstring 'enter_letter_case_mode' global normal '`' ':enter_letter_case_mode<ret>'
 map -docstring 'open new terminal client' global normal <c-w> ':open_new_terminal_client<ret>'
 map -docstring 'enter_window_mode' global user w ':enter_window_mode<ret>'
 map -docstring 'enter tmux mode' global window w ':enter_tmux_mode<ret>'

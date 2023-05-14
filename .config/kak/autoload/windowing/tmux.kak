@@ -21,32 +21,32 @@ define-command tmux -params 1.. %{
   }
 }
 
-define-command split_view_down_with_tmux %{
-  tmux split-window -v kak -c %val{session}
+define-command split_view_down_with_tmux -params .. %{
+  tmux split-window -v kak -c %val{session} -e "%arg{@}"
 }
 
-define-command split_view_right_with_tmux %{
-  tmux split-window -h kak -c %val{session}
+define-command split_view_right_with_tmux -params .. %{
+  tmux split-window -h kak -c %val{session} -e "%arg{@}"
 }
 
-define-command split_view_up_with_tmux %{
-  tmux split-window -v -b kak -c %val{session}
+define-command split_view_up_with_tmux -params .. %{
+  tmux split-window -v -b kak -c %val{session} -e "%arg{@}"
 }
 
-define-command split_view_left_with_tmux %{
-  tmux split-window -h -b kak -c %val{session}
+define-command split_view_left_with_tmux -params .. %{
+  tmux split-window -h -b kak -c %val{session} -e "%arg{@}"
 }
 
-define-command open_new_tab_with_tmux %{
-  tmux new-window %arg{@}
+define-command open_new_tab_with_tmux -params .. %{
+  tmux new-window kak -c %val{session} -e "%arg{@}"
 }
 
-define-command open_new_tab_right_with_tmux %{
-  tmux new-window -a %arg{@}
+define-command open_new_tab_right_with_tmux -params .. %{
+  tmux new-window -a kak -c %val{session} -e "%arg{@}"
 }
 
-define-command open_new_tab_left_with_tmux %{
-  tmux new-window -b %arg{@}
+define-command open_new_tab_left_with_tmux -params .. %{
+  tmux new-window -b kak -c %val{session} -e "%arg{@}"
 }
 
 define-command focus_client_with_tmux -params 1 %{
@@ -90,6 +90,14 @@ define-command send_current_buffer_to_tmux_pane -params 1 %{
     send_selected_text_to_tmux_pane %arg{1}
   }
 }
+
+complete-command split_view_down_with_tmux command
+complete-command split_view_right_with_tmux command
+complete-command split_view_up_with_tmux command
+complete-command split_view_left_with_tmux command
+complete-command open_new_tab_with_tmux command
+complete-command open_new_tab_right_with_tmux command
+complete-command open_new_tab_left_with_tmux command
 
 map -docstring 'split view down' global tmux s ':split_view_down_with_tmux<ret>'
 map -docstring 'split view right' global tmux v ':split_view_right_with_tmux<ret>'

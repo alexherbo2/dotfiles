@@ -1,8 +1,12 @@
-hook global ClientCreate '.*' %{
-  trigger-user-hook "TERM=%val{client_env_TERM}"
+# https://codeberg.org/dnkl/foot
+define-command foot -params 1.. %{
+  nop %sh{
+    footclient "$@"
+  }
 }
 
-hook global User 'TERM=foot' %{
-  set-option global terminal_command footclient
-  set-option global terminal_args -e
+define-command open_new_window_with_foot -params .. %{
+  footclient -e kak -c %val{session} -e "%arg{@}"
 }
+
+complete-command open_new_window_with_foot command

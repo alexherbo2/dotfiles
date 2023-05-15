@@ -12,10 +12,7 @@ define-command convert_selected_text_to_lowercase %{
   execute-keys '`'
 }
 
-define-command convert_selected_text_to_ %{
-}
-
-define-command convert_selected_words_to_title_case %{
+define-command convert_selected_text_to_title_case %{
   execute-keys -draft 's\w+<ret>`<a-:><a-;>;~'
 }
 

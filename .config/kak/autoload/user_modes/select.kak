@@ -5,7 +5,7 @@ define-command -hidden enter_select_mode %{
 }
 
 define-command -hidden select_regex_matches %{
-  execute-keys '/'
+  execute-keys 's'
 }
 
 define-command -hidden select_inner_parenthesis_blocks %{

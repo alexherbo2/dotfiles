@@ -21,32 +21,60 @@ define-command tmux -params 1.. %{
   }
 }
 
+define-command split_view_down_with_tmux_terminal -params .. %{
+  tmux split-window -v -- %arg{@}
+}
+
+define-command split_view_right_with_tmux_terminal -params .. %{
+  tmux split-window -h -- %arg{@}
+}
+
+define-command split_view_up_with_tmux_terminal -params .. %{
+  tmux split-window -v -b -- %arg{@}
+}
+
+define-command split_view_left_with_tmux_terminal -params .. %{
+  tmux split-window -h -b -- %arg{@}
+}
+
+define-command open_new_tab_with_tmux_terminal -params .. %{
+  tmux new-window -- %arg{@}
+}
+
+define-command open_new_tab_right_with_tmux_terminal -params .. %{
+  tmux new-window -a -- %arg{@}
+}
+
+define-command open_new_tab_left_with_tmux_terminal -params .. %{
+  tmux new-window -b -- %arg{@}
+}
+
 define-command split_view_down_with_tmux -params .. %{
-  tmux split-window -v kak -c %val{session} -e "%arg{@}"
+  split_view_down_with_tmux_terminal kak -c %val{session} -e "%arg{@}"
 }
 
 define-command split_view_right_with_tmux -params .. %{
-  tmux split-window -h kak -c %val{session} -e "%arg{@}"
+  split_view_right_with_tmux_terminal kak -c %val{session} -e "%arg{@}"
 }
 
 define-command split_view_up_with_tmux -params .. %{
-  tmux split-window -v -b kak -c %val{session} -e "%arg{@}"
+  split_view_up_with_tmux_terminal kak -c %val{session} -e "%arg{@}"
 }
 
 define-command split_view_left_with_tmux -params .. %{
-  tmux split-window -h -b kak -c %val{session} -e "%arg{@}"
+  split_view_left_with_tmux_terminal kak -c %val{session} -e "%arg{@}"
 }
 
 define-command open_new_tab_with_tmux -params .. %{
-  tmux new-window kak -c %val{session} -e "%arg{@}"
+  open_new_tab_with_tmux_terminal kak -c %val{session} -e "%arg{@}"
 }
 
 define-command open_new_tab_right_with_tmux -params .. %{
-  tmux new-window -a kak -c %val{session} -e "%arg{@}"
+  open_new_tab_right_with_tmux_terminal kak -c %val{session} -e "%arg{@}"
 }
 
 define-command open_new_tab_left_with_tmux -params .. %{
-  tmux new-window -b kak -c %val{session} -e "%arg{@}"
+  open_new_tab_left_with_tmux_terminal kak -c %val{session} -e "%arg{@}"
 }
 
 define-command focus_client_with_tmux -params 1 %{

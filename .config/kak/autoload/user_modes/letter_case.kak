@@ -70,6 +70,7 @@ define-command convert_selected_words_to_snake_case_style %{
       }
     }
   }
+  execute-keys '`'
 }
 
 map -docstring 'uppercase' global letter_case 'u' ':convert_selected_text_to_uppercase<ret>'

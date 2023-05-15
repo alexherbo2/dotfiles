@@ -31,7 +31,7 @@ define-command convert_selected_words_to_camel_case_style %{
 define-command convert_selected_words_to_kebab_case_style %{
   evaluate-commands -draft -verbatim try %{
     # Select long words before iterating.
-    execute-keys 's[\w-]+<ret>'
+    execute-keys 's\w[\w-]*<ret>'
 
     evaluate-commands -itersel -verbatim try %{
       # Convert selected text from snake case style to kebab case style.
@@ -39,11 +39,17 @@ define-command convert_selected_words_to_kebab_case_style %{
         execute-keys -draft 's_<ret>r-'
       }
       # Convert selected text from camel case to kebab case style.
-      try %{
-        execute-keys -draft 's[A-Z]+<ret>`i-<esc>'
+      evaluate-commands -draft -verbatim try %{
+        execute-keys 'S\A[A-Z]*<ret>'
+        execute-keys 's-?[A-Z]+<ret>`<a-:><a-;>;'
+        try %{
+          execute-keys -draft '<a-k>-<ret>d'
+        }
+        execute-keys 'i-<esc>'
       }
     }
   }
+  execute-keys '`'
 }
 
 define-command convert_selected_words_to_snake_case_style %{

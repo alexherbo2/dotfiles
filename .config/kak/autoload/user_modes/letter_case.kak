@@ -52,7 +52,7 @@ define-command convert_selected_words_to_kebab_case_style %{
 define-command convert_selected_words_to_snake_case_style %{
   evaluate-commands -draft -verbatim try %{
     # Select long words before iterating.
-    execute-keys 's[\w-]+<ret>'
+    execute-keys 's\w[\w-]*<ret>'
 
     evaluate-commands -itersel -verbatim try %{
       # Convert selected text from kebab case style to snake case style.
@@ -60,8 +60,13 @@ define-command convert_selected_words_to_snake_case_style %{
         execute-keys -draft 's-<ret>r_'
       }
       # Convert selected text from camel case to snake case style.
-      try %{
-        execute-keys -draft 's[A-Z]+<ret>`i_<esc>'
+      evaluate-commands -draft -verbatim try %{
+        execute-keys 'S\A[A-Z]*<ret>'
+        execute-keys 's_?[A-Z]+<ret>`<a-:><a-;>;'
+        try %{
+          execute-keys -draft '<a-k>_<ret>d'
+        }
+        execute-keys 'i_<esc>'
       }
     }
   }

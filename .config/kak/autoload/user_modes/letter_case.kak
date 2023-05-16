@@ -1,3 +1,4 @@
+# Implementation reference: https://docs.rs/inflections/latest/src/inflections/case.rs.html
 declare-user-mode letter_case
 
 define-command enter_letter_case_mode %{
@@ -17,63 +18,52 @@ define-command convert_selected_text_to_title_case %{
 }
 
 define-command convert_selected_words_to_camel_case_style %{
-  evaluate-commands -draft -verbatim try %{
-    # Select long words before iterating.
-    execute-keys 's[\w-]+<ret>'
-
-    evaluate-commands -itersel -verbatim try %{
-      # Convert selected text from snake case or kebab case style to camel case style.
-      execute-keys 's[_-]<ret>d~'
-    }
+  iterate_selected_words %{
+    convert_selected_text_to_lowercase
+    execute-keys 's[_-]<ret>d~'
   }
 }
 
 define-command convert_selected_words_to_kebab_case_style %{
-  evaluate-commands -draft -verbatim try %{
-    # Select long words before iterating.
-    execute-keys 's\w[\w-]*<ret>'
-
-    evaluate-commands -itersel -verbatim try %{
-      # Convert selected text from snake case style to kebab case style.
-      try %{
-        execute-keys -draft 's_<ret>r-'
-      }
-      # Convert selected text from camel case to kebab case style.
-      evaluate-commands -draft -verbatim try %{
-        execute-keys 'S\A[A-Z]*<ret>'
-        execute-keys 's-?[A-Z]+<ret>`<a-:><a-;>;'
-        try %{
-          execute-keys -draft '<a-k>-<ret>d'
-        }
-        execute-keys 'i-<esc>'
-      }
-    }
+  iterate_selected_words %{
+    swap_word_separator_in_selections '-'
+    break_camel_case_in_selections '-'
+    convert_selected_text_to_lowercase
   }
-  execute-keys '`'
 }
 
 define-command convert_selected_words_to_snake_case_style %{
-  evaluate-commands -draft -verbatim try %{
-    # Select long words before iterating.
-    execute-keys 's\w[\w-]*<ret>'
-
-    evaluate-commands -itersel -verbatim try %{
-      # Convert selected text from kebab case style to snake case style.
-      try %{
-        execute-keys -draft 's-<ret>r_'
-      }
-      # Convert selected text from camel case to snake case style.
-      evaluate-commands -draft -verbatim try %{
-        execute-keys 'S\A[A-Z]*<ret>'
-        execute-keys 's_?[A-Z]+<ret>`<a-:><a-;>;'
-        try %{
-          execute-keys -draft '<a-k>_<ret>d'
-        }
-        execute-keys 'i_<esc>'
-      }
-    }
+  iterate_selected_words %{
+    swap_word_separator_in_selections '_'
+    break_camel_case_in_selections '_'
+    convert_selected_text_to_lowercase
   }
-  execute-keys '`'
+}
+
+define-command iterate_selected_words -params .. %{
+  evaluate-commands -draft -verbatim try %{
+    execute-keys 's\w[\w-]*<ret>'
+    evaluate-commands -itersel -verbatim try %arg{@}
+  }
+}
+
+define-command break_camel_case_in_selections -params 1 %{
+  evaluate-commands -save-regs 'a' -draft -verbatim try %{
+    set-register a %arg{1}
+    execute-keys 'S\A[A-Z]*<ret>'
+    execute-keys 's[_-]?[A-Z]+<ret>`<a-:><a-;>;'
+    try %{
+      execute-keys -draft '<a-k>[_-]<ret>d'
+    }
+    execute-keys '"aP'
+  }
+}
+
+define-command swap_word_separator_in_selections -params 1 %{
+  evaluate-commands -save-regs 'a' -draft -verbatim try %{
+    set-register a %arg{1}
+    execute-keys 's[_-]<ret>"aR'
+  }
 }
 
 map -docstring 'uppercase' global letter_case 'u' ':convert_selected_text_to_uppercase<ret>'

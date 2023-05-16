@@ -19,7 +19,6 @@ define-command convert_selected_text_to_title_case %{
 
 define-command convert_selected_words_to_camel_case_style %{
   iterate_selected_words %{
-    convert_selected_text_to_lowercase
     execute-keys 's[_-]<ret>d~'
   }
 }

@@ -448,7 +448,6 @@ map -docstring 'Decrease indent or erase character before cursor' global insert 
 # See also “Vim digraphs” for defaults.
 # https://vimhelp.org/digraph.txt.html#digraphs-default
 declare-user-mode digraphs
-map -docstring 'erase characters before cursor to line begin' global insert <c-u> ''
 map -docstring 'enter digraphs mode' global insert <c-k> '<a-;>:enter-user-mode digraphs<ret>'
 map -docstring 'â' global digraphs 'q' ':insert_text â<ret>'
 map -docstring 'é' global digraphs 'w' ':insert_text é<ret>'

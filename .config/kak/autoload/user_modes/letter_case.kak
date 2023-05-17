@@ -14,12 +14,21 @@ define-command convert_selected_text_to_lowercase %{
 }
 
 define-command convert_selected_text_to_title_case %{
-  execute-keys -draft 's\w+<ret>`<a-:><a-;>;~'
+  iterate_selected_words %{
+    execute-keys '`<a-:><a-;>;~'
+  }
 }
 
 define-command convert_selected_words_to_camel_case_style %{
   iterate_selected_words %{
-    execute-keys 's[_-]<ret>d~'
+    join_camel_case_in_selections
+  }
+}
+
+define-command convert_selected_words_to_pascal_case_style %{
+  iterate_selected_words %{
+    execute-keys -draft '<a-:><a-;>;~'
+    join_camel_case_in_selections
   }
 }
 
@@ -46,6 +55,10 @@ define-command iterate_selected_words -params .. %{
   }
 }
 
+define-command join_camel_case_in_selections %{
+  execute-keys 's[_-]<ret>d~'
+}
+
 define-command break_camel_case_in_selections -params 1 %{
   evaluate-commands -save-regs 'a' -draft -verbatim try %{
     set-register a %arg{1}
@@ -70,7 +83,9 @@ map -docstring 'uppercase' global letter_case '~' ':convert_selected_text_to_upp
 map -docstring 'lowercase' global letter_case 'l' ':convert_selected_text_to_lowercase<ret>'
 map -docstring 'lowercase' global letter_case '`' ':convert_selected_text_to_lowercase<ret>'
 map -docstring 'title_case' global letter_case 't' ':convert_selected_text_to_title_case<ret>'
+map -docstring 'title_case' global letter_case '.' ':convert_selected_text_to_title_case<ret>'
 map -docstring 'camel_case' global letter_case 'c' ':convert_selected_words_to_camel_case_style<ret>'
+map -docstring 'pascal_case' global letter_case 'p' ':convert_selected_words_to_pascal_case_style<ret>'
 map -docstring 'kebab_case' global letter_case 'k' ':convert_selected_words_to_kebab_case_style<ret>'
 map -docstring 'kebab_case' global letter_case '<minus>' ':convert_selected_words_to_kebab_case_style<ret>'
 map -docstring 'snake_case' global letter_case 's' ':convert_selected_words_to_snake_case_style<ret>'

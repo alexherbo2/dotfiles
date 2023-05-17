@@ -8,6 +8,16 @@ define-command test_convert_selected_words_to_camel_case_style %{
   assert_buffer_eq! '*input*' '*output*'
 }
 
+define-command test_convert_selected_words_to_pascal_case_style %{
+
+  buffer_str '*input*' %[hello world, helloWorld, hello_world, hello-world]
+  buffer_str '*output*' %[hello world, HelloWorld, HelloWorld, HelloWorld]
+
+  buffer '*input*'
+  convert_selected_words_to_pascal_case_style
+  assert_buffer_eq! '*input*' '*output*'
+}
+
 define-command test_convert_selected_words_to_snake_case_style %{
 
   buffer_str '*input*' %[hello world, helloWorld, hello_world, hello-world]

@@ -1,10 +1,5 @@
 # This script provides support for the tmux terminal multiplexer.
 # https://github.com/tmux/tmux
-hook global ClientCreate .* %{
-  trigger-user-hook "TMUX=%val{client_env_TMUX}"
-  trigger-user-hook "TMUX_PANE=%val{client_env_TMUX_PANE}"
-}
-
 declare-option str client_completion %{
   echo "$kak_client_list" | tr ' ' '\n' | grep -Fxv "$kak_client"
 }

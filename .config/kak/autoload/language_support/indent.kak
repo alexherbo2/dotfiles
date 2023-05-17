@@ -34,8 +34,10 @@ define-command decrease_indent_or_erase_character_before_cursor %{
 }
 
 define-command erase_characters_before_cursor_to_line_begin %{
-  execute-keys -draft '<a-h><a-K>^.\z<ret><a-:>Hd'
-  execute-keys '<a-;><a-:><a-;><a-;>'
+  try %{
+    execute-keys -draft '<a-h><a-K>^.\z<ret><a-:>Hd'
+    execute-keys '<a-;><a-:><a-;><a-;>'
+  }
 }
 
 define-command indent_on_inserted_character_with_indentation_rules %{

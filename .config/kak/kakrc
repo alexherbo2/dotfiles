@@ -34,6 +34,15 @@ add-highlighter global/show-matching show-matching
 add-highlighter global/number-lines number-lines -hlcursor
 add-highlighter global/soft_wrap wrap -indent -marker '↪'
 
+set-option global terminal_command alacritty
+set-option global terminal_args msg create-window -e
+# set-option global terminal_command footclient
+# set-option global terminal_args
+set-option global grep_command rg
+set-option global grep_args --vimgrep --hidden
+set-option global find_command fd
+set-option global find_args --hidden --type=file
+
 # Status line
 set-option global modelinefmt '%val{bufname} %val{cursor_line}:%val{cursor_char_column} {{context_info}} {{mode_info}} - %val{client}@%val{session}'
 

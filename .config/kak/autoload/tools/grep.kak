@@ -1,5 +1,5 @@
-declare-option str grep_command rg
-declare-option str-list grep_args --vimgrep --hidden
+declare-option str grep_command grep
+declare-option str-list grep_args -R -H -n
 declare-option str grep_word_completion %{
   echo "write $kak_quoted_response_fifo" > "$kak_command_fifo"
   tr -sc '[:alnum:]' '\n' < "$kak_response_fifo"

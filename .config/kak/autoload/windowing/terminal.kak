@@ -2,7 +2,7 @@ declare-option str terminal_command xterm
 declare-option str-list terminal_args -e
 
 define-command open_terminal -params 1.. %{
-  open_terminal_app_with_args %opt{terminal_command} %opt{terminal_args} %arg{@}
+  open_terminal_with_args %opt{terminal_command} %opt{terminal_args} %arg{@}
 }
 
 define-command open_terminal_with_new_client -params .. %{

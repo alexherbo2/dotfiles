@@ -5,7 +5,7 @@ define-command open_terminal -params 1.. %{
   open_terminal_app_with_args %opt{terminal_command} %opt{terminal_args} %arg{@}
 }
 
-define-command open_terminal_with_new_client -params 1.. %{
+define-command open_terminal_with_new_client -params .. %{
   open_terminal kak -c %val{session} -e "%arg{@}"
 }
 

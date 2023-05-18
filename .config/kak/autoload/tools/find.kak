@@ -1,5 +1,5 @@
-declare-option str find_command fd
-declare-option str-list find_args --hidden --type=file
+declare-option str find_command find
+declare-option str-list find_args -type f
 
 define-command find -params .. %{
   create_buffer_from_command_output "%arg{1}.flist" %opt{find_command} %opt{find_args} -- %arg{@}

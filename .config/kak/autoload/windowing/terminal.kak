@@ -19,4 +19,4 @@ alias global terminal open_terminal
 alias global new open_new_terminal_client
 
 complete-command open_terminal shell
-complete-command open_new_client command
+complete-command open_new_terminal_client command

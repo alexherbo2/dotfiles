@@ -359,10 +359,6 @@ complete-command send_buffer_list_to_session shell-script-candidates %{
   kak -l | grep -Fxv "$kak_session"
 }
 
-define-command yank_selected_text_to_terminal_clipboard %{
-  execute-keys 'y:edit -scratch<ret><a-R>a<ret><esc><a-_><a-|>tty=/dev/$(ps -o tty= "$kak_client_pid") && { printf ''\033]52;c;''; base64; printf ''\a''; } <gt> "$tty"<ret>:delete-buffer<ret>'
-}
-
 # Aliases
 alias global = evaluate_selected_text
 

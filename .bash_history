@@ -185,6 +185,7 @@ mkdir bin
 crystal build src/crystalline.cr -o bin/crystalline --release --no-debug --progress -Dpreview_mt
 install bin/crystalline ~/.local/bin
 cd ~/.local/share/github.com/mawww/kakoune
+install src/kak.opt ~/.local/bin/kak
 install ~/.local/bin/kak /opt/homebrew/bin
 mpv https://twitch.tv/joueur_du_grenier
 mpv https://twitch.tv/randomwatchertv

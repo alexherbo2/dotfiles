@@ -44,6 +44,7 @@ define-command open_grab_buffer_in_viewport_prompt %{
 complete-command -menu swap_buffer_in_viewport shell-script-candidates %opt{client_completion}
 complete-command -menu grab_buffer_in_viewport shell-script-candidates %opt{client_completion}
 
+map -docstring 'new' global window n ':new<ret>'
 map -docstring 'quit' global window q ':quit<ret>'
 map -docstring 'quit_other_clients' global window o ':quit_other_clients<ret>'
 map -docstring 'open_grab_buffer_in_viewport_prompt' global window g ':open_grab_buffer_in_viewport_prompt<ret>'

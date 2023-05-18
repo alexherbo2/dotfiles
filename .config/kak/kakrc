@@ -561,19 +561,19 @@ define-command detect_indent_style %{
       set-register h %reg{h} 0 0
     }
     edit -scratch
-    execute-keys '"h<a-R>\a<ret><esc><a-_>s\d<plus>\n\d<plus><ret><a-j>x<a-,>ypggO0<space>0<esc><percent>s<space><ret>r<ret><percent>"hy'
-    evaluate-commands %sh{
-      printf 'echo -to-file %s -- %%reg{h}' "$kak_quoted_response_fifo" > "$kak_command_fifo"
+    execute-keys '"h<a-R>\a<ret><esc><a-_>s\d<plus>\n\d<plus><ret><a-j>x<a-,>ypggO0<space>0<esc><percent>s<space><ret>r<ret><percent>H"hy'
+    echo -debug %sh{
+      printf 'echo -to-file %s -- %%val{main_reg_h}' "$kak_quoted_response_fifo" > "$kak_command_fifo"
       histogram_0=0 histogram_2=0 histogram_4=0
       while read prev_line_is_tabs; read prev_line_leading_count; read is_tabs; read leading_count; do
-        if [ "$prev_line_is_tabs" -eq 1 -o "$prev_line_leading_count" -eq 0] && [ "$prev_line_leading_count" -lt "$leading_count" ]; then
+        if [ "$prev_line_is_tabs" -eq 1 -o "$prev_line_leading_count" -eq 0 ] && [ "$prev_line_leading_count" -lt "$leading_count" ]; then
           if [ "$is_tabs" -eq 1 ]; then
-            histogram_0=$((histogram_0 + 2)
+            histogram_0=$((histogram_0 + 2))
           else
             amount=$((leading_count - prev_line_leading_count))
             case "$amount" in
-              2) histogram_2=$((histogram_2 + 1) ;;
-              4) histogram_4=$((histogram_4 + 1) ;;
+              2) histogram_2=$((histogram_2 + 1)) ;;
+              4) histogram_4=$((histogram_4 + 1)) ;;
             esac
           fi
         fi

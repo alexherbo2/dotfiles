@@ -22,10 +22,10 @@ define-command detect_indent_style %{
     echo -debug %sh{
       eval set -- "$kak_quoted_reg_h"
       echo "$@"
-      indent_freq=${$1:-0}
-      indent=${$2:-0}
-      indent_freq_2=${$3:-0}
-      indent_2=${$4:-0}
+      indent_freq=${1:-0}
+      indent=${2:-0}
+      indent_freq_2=${3:-0}
+      indent_2=${4:-0}
       if [ "$indent_freq" -gt 0 ] && echo "$indent_freq_2 / $indent_freq < 0.66" | bc -l | grep -q 1; then
         echo set-option buffer indentwidth "$indent"
       fi

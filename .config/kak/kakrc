@@ -585,7 +585,6 @@ define-command detect_indent_style %{
         indent=${indent:-0}
         indent_freq_2=${indent_freq_2:-0}
         indent_2=${indent_2:-0}
-        echo "$indent:$indent_freq:$indent_2:$indent_freq_2"
         if [ "$indent_freq" -gt 0 ] && echo "$indent_freq_2 / $indent_freq < 0.66" | bc -l | grep -q 1; then
           echo set-option buffer indentwidth "$indent"
         fi

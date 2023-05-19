@@ -564,27 +564,23 @@ define-command detect_indent_style %{
     execute-keys '"h<a-R>\a<ret><esc><a-_>s\d<plus>\n\d<plus><ret><a-j>x<a-,>ypggO0<space>0<esc><percent>s<space><ret>r<ret><percent>H"hy'
     echo -debug %sh{
       printf 'echo -to-file %s -- %%val{main_reg_h}' "$kak_quoted_response_fifo" > "$kak_command_fifo"
-      histogram_0=0 histogram_2=0 histogram_4=0
       while read prev_line_is_tabs; read prev_line_leading_count; read is_tabs; read leading_count; do
         if [ "$prev_line_is_tabs" -eq 1 -o "$prev_line_leading_count" -eq 0 ] && [ "$prev_line_leading_count" -lt "$leading_count" ]; then
           if [ "$is_tabs" -eq 1 ]; then
-            histogram_0=$((histogram_0 + 2))
+            echo 0
+            echo 0
           else
             amount=$((leading_count - prev_line_leading_count))
-            case "$amount" in
-              2) histogram_2=$((histogram_2 + 1)) ;;
-              4) histogram_4=$((histogram_4 + 1)) ;;
-            esac
+            echo "$amount"
           fi
         fi
-      done < "$kak_response_fifo"
-      if echo "$histogram_0 > 0 && ($histogram_2 / $histogram_0) > 0.66 && ($histogram_4 / $histogram_0) > 0.66" | bc -l | grep -q 1; then
-        echo set-option buffer indentwidth 0
-      elif echo "$histogram_2 > 0 && ($histogram_0 / $histogram_2) > 0.66 && ($histogram_4 / $histogram_2) > 0.66" | bc -l | grep -q 1; then
-        echo set-option buffer indentwidth 2
-      elif echo "$histogram_4 > 0 && ($histogram_0 / $histogram_4) > 0.66 && ($histogram_2 / $histogram_4) > 0.66" | bc -l | grep -q 1; then
-        echo set-option buffer indentwidth 4
-      fi
+      done < "$kak_response_fifo" | sort | uniq -c | sort -n -r | head -n 2 | grep -o '\d\+' |
+      while read indent_freq; read indent; do
+        echo "$indent:$indent_freq"
+      done
+      # if echo "$histogram_0 > 0 && ($histogram_2 / $histogram_0) > 0.66 && ($histogram_4 / $histogram_0) > 0.66" | bc -l | grep -q 1; then
+      # echo set-option buffer indentwidth 0
+      # fi
     }
     delete-buffer
   }

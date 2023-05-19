@@ -546,7 +546,10 @@ set-option global tabstop 4
 set-option global indentwidth 2
 
 # Implementation reference:
-# https://github.com/helix-editor/helix/blob/master/helix-view/src/document.rs#:~:text=detect_indent_and_line_ending
+# https://github.com/helix-editor/helix/blob/master/helix-core/src/indent.rs
+# hook on file open and buffer reload.
+# hook global BufOpenFile '.*' detect_indent_style
+# hook global BufReload '.*' detect_indent_style
 define-command detect_indent_style %{
   evaluate-commands -save-regs 'h' -draft -verbatim try %{
     set-register h
@@ -562,7 +565,8 @@ define-command detect_indent_style %{
     }
     edit -scratch
     execute-keys '"h<a-R>\a<ret><esc><a-_>s\d<plus>\n\d<plus><ret><a-j>x<a-,>ypggO0<space>0<esc><percent>s<space><ret>r<ret><percent>H"hy'
-    echo -debug %sh{
+    delete-buffer
+    evaluate-commands %sh{
       printf 'echo -to-file %s -- %%val{main_reg_h}' "$kak_quoted_response_fifo" > "$kak_command_fifo"
       while read prev_line_is_tabs; read prev_line_leading_count; read is_tabs; read leading_count; do
         if [ "$prev_line_is_tabs" -eq 1 -o "$prev_line_leading_count" -eq 0 ] && [ "$prev_line_leading_count" -lt "$leading_count" ]; then
@@ -575,16 +579,18 @@ define-command detect_indent_style %{
           fi
         fi
       done < "$kak_response_fifo" | sort | uniq -c | sort -n -r | head -n 2 | grep -o '\d\+' |
-      while read indent_freq; read indent; do
-        echo "$indent:$indent_freq"
+      while true; do
+        read indent_freq; read indent; read indent_freq_2; read indent_2
+        indent_freq=${indent_freq:-0}
+        indent=${indent:-0}
+        indent_freq_2=${indent_freq_2:-0}
+        indent_2=${indent_2:-0}
+        echo "$indent:$indent_freq:$indent_2:$indent_freq_2"
+        if [ "$indent_freq" -gt 0 ] && echo "$indent_freq_2 / $indent_freq < 0.66" | bc -l | grep -q 1; then
+          echo set-option buffer indentwidth "$indent"
+        fi
+        break
       done
-      # if echo "$histogram_0 > 0 && ($histogram_2 / $histogram_0) > 0.66 && ($histogram_4 / $histogram_0) > 0.66" | bc -l | grep -q 1; then
-      # echo set-option buffer indentwidth 0
-      # fi
     }
-    delete-buffer
   }
 }
-# hook on file open and buffer reload.
-# hook global BufOpenFile '.*' detect_indent_style
-# hook global BufReload '.*' detect_indent_style

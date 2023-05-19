@@ -17,32 +17,18 @@ define-command detect_indent_style %{
       set-register h %reg{h} 0 0
     }
     edit -scratch
-    execute-keys '"h<a-R>\a<ret><esc><a-_>s\d<plus>\n\d<plus><ret><a-j>x<a-,>ypggO0<space>0<esc><percent>s<space><ret>r<ret><percent>H"hy'
+    execute-keys '"h<a-R>\a<ret><esc><a-_>s\d<plus>\n\d<plus><ret><a-j>x<a-,>ypggO0<space>0<esc><percent>_s\d<plus>\h\d<plus>\n\d<plus>\h\d<plus><ret><a-k>\A1|\A\d<plus>\h0<ret><semicolon>k<a-i>nyjA<minus><c-r>"<esc>xy<percent><a-R>ghWd<percent>|bc<ret><a-s>Px<a-k>\A\d<plus>\h[1<minus>9]\d*<ret>Z<a-k>\A1<ret>h<a-i>nc0<esc>zh<a-i>nLy<percent><a-R><a-_>|sort|uniq<space><minus>c|sort<space><minus>nr<ret>s\d+<ret>"hy'
     delete-buffer
-    evaluate-commands %sh{
-      printf 'echo -to-file %s -- %%val{main_reg_h}' "$kak_quoted_response_fifo" > "$kak_command_fifo"
-      while read prev_line_is_tabs; read prev_line_leading_count; read is_tabs; read leading_count; do
-        if [ "$prev_line_is_tabs" -eq 1 -o "$prev_line_leading_count" -eq 0 ] && [ "$prev_line_leading_count" -lt "$leading_count" ]; then
-          if [ "$is_tabs" -eq 1 ]; then
-            echo 0
-            echo 0
-          else
-            amount=$((leading_count - prev_line_leading_count))
-            echo "$amount"
-          fi
-        fi
-      done < "$kak_response_fifo" | sort | uniq -c | sort -n -r | head -n 2 | grep -o '\d\+' |
-      while true; do
-        read indent_freq; read indent; read indent_freq_2; read indent_2
-        indent_freq=${indent_freq:-0}
-        indent=${indent:-0}
-        indent_freq_2=${indent_freq_2:-0}
-        indent_2=${indent_2:-0}
-        if [ "$indent_freq" -gt 0 ] && echo "$indent_freq_2 / $indent_freq < 0.66" | bc -l | grep -q 1; then
-          echo set-option buffer indentwidth "$indent"
-        fi
-        break
-      done
+    echo -debug %sh{
+      eval set -- "$kak_quoted_reg_h"
+      echo "$@"
+      indent_freq=${$1:-0}
+      indent=${$2:-0}
+      indent_freq_2=${$3:-0}
+      indent_2=${$4:-0}
+      if [ "$indent_freq" -gt 0 ] && echo "$indent_freq_2 / $indent_freq < 0.66" | bc -l | grep -q 1; then
+        echo set-option buffer indentwidth "$indent"
+      fi
     }
   }
 }

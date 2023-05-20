@@ -288,49 +288,20 @@ define-command prompt_select_previous_surrounding_object %{
 
 # Porcelain commands -----------------------------------------------------------
 
-define-command restore_selections_from_register -params 1 %{
-  try %[ execute-keys """%arg{1}z" ]
-}
-
-define-command add_selections_from_register -params 1 %{
-  try %[ execute-keys """%arg{1}<a-z>a" ]
-}
-
-define-command save_selections_to_register -params 1 %{
-  execute-keys -save-regs '' """%arg{1}Z"
-}
-
-define-command consume_selections_in_register -params 1 %{
-  restore_selections_from_register %arg{1}
-  clear_register %arg{1}
-}
-
-define-command clear_register -params 1 %{
-  try %[ set-register %arg{1} ] catch %[ set-register '^' ]
-  echo -markup "{Information}cleared register '%arg{1}'"
-}
-
-define-command add_selections_to_register -params 1 %{
-  evaluate-commands -draft consume_selections_to_register %arg{1}
-  echo -markup "{Information}added %val{selection_count} selections to register '%arg{1}'"
-}
-
-define-command consume_selections_to_register -params 1 %{
-  add_selections_from_register %arg{1}
-  save_selections_to_register %arg{1}
+define-command itersel_impl -params 1 %{
+  try %[ execute-keys z ]
+  execute-keys %arg{1}
+  try %[ execute-keys <a-z>a ]
+  execute-keys -save-regs '' Z
   execute-keys ','
 }
 
-define-command iterate_next_selection_from_register -params 1 %{
-  restore_selections_from_register %arg{1}
-  execute-keys ')'
-  consume_selections_to_register %arg{1}
+define-command iterate_next_selection %{
+  itersel_impl ')'
 }
 
-define-command iterate_previous_selection_from_register -params 1 %{
-  restore_selections_from_register %arg{1}
-  execute-keys '('
-  consume_selections_to_register %arg{1}
+define-command iterate_previous_selection %{
+  itersel_impl '('
 }
 
 define-command send_selected_text_to_session -params 1 %{
@@ -427,6 +398,9 @@ map -docstring 'render whitespace' global unimpaired_right w ': add-highlighter 
 map -docstring 'rulers' global unimpaired_left r ': remove-highlighter global/rulers<ret>'
 map -docstring 'rulers' global unimpaired_right r ': add-highlighter global/rulers column 81 default,cyan<ret>'
 
+map -docstring 'iterate next selection' global insert <a-n> '<esc>:iterate_next_selection<ret>i'
+map -docstring 'iterate previous selection' global insert <a-p> '<esc>:iterate_previous_selection<ret>i'
+
 map -docstring 'move selected lines down' global normal <c-j> ':move_selected_lines_down<ret>'
 map -docstring 'move selected lines up' global normal <c-k> ':move_selected_lines_up<ret>'
 map -docstring 'select all occurrences of current selection' global normal <a-percent> ':select_highlights<ret>'
@@ -436,8 +410,8 @@ map -docstring 'buffer directory' global prompt <a-/> '%sh{dirname "$kak_bufname
 
 map -docstring 'clear register' global normal D ':clear_register %val{register}<ret>'
 map -docstring 'add selections' global normal Y ':add_selections_to_register %val{register}<ret>'
-map -docstring 'iterate next selection' global normal <c-n> ':iterate_next_selection_from_register %val{register}<ret>'
-map -docstring 'iterate previous selection' global normal <c-p> ':iterate_previous_selection_from_register %val{register}<ret>'
+map -docstring 'iterate next selection' global normal <c-n> ':iterate_next_selection<ret>'
+map -docstring 'iterate previous selection' global normal <c-p> ':iterate_previous_selection<ret>'
 map -docstring 'toggle comments' global normal '#' ':toggle_comments_with_config<ret>'
 map -docstring 'erase characters before cursor to line begin' global insert <c-u> '<a-;>:erase_characters_before_cursor_to_line_begin<ret>'
 map -docstring 'paste' global insert <c-y> '<c-r>"'

@@ -539,7 +539,7 @@ hook -always global PromptIdle '' update_selected_text_ranges
 
 # Language support -------------------------------------------------------------
 
-hook global InsertChar '.*' indent_on_inserted_character_with_indentation_rules
+hook global InsertChar .* indent_on_inserted_character_with_indentation_rules
 
 # Indentation
 set-option global tabstop 4

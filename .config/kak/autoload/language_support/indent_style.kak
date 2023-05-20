@@ -3,8 +3,18 @@
 # hook on file open and buffer reload.
 # hook global BufOpenFile '.*' detect_indent_style
 # hook global BufReload '.*' detect_indent_style
-define-command detect_indent_style %{
-  evaluate-commands -save-regs 'h' -draft -verbatim try %{
+define-command detect_current_buffer_indent_style %{
+  detect_indent_style %val{bufname}
+}
+
+define-command detect_indent_style -params 1 %{
+  create_indent_style_buffer_report %arg{1}
+  try_infer_indent_style %arg{1} %val{selections}
+  delete-buffer
+}
+
+define-command create_indent_style_buffer_report -params 1 %{
+  evaluate-commands -buffer %arg{1} -verbatim try %{
     set-register h
     execute-keys -save-regs '' '1000gGgx<a-s><a-K>^\h*$<ret>'
     evaluate-commands -draft -itersel -verbatim -- try %{
@@ -16,19 +26,20 @@ define-command detect_indent_style %{
     } catch %{
       set-register h %reg{h} 0 0
     }
-    edit -scratch
-    execute-keys '"h<a-R>\a<ret><esc><a-_>s\d<plus>\n\d<plus><ret><a-j>x<a-,>ypggO0<space>0<esc><percent>_s\d<plus>\h\d<plus>\n\d<plus>\h\d<plus><ret><a-k>\A1|\A\d<plus>\h0<ret><semicolon>k<a-i>nyjA<minus><c-r>"<esc>xy<percent><a-R>ghWd<percent>|bc<ret><a-s>Px<a-k>\A\d<plus>\h[1<minus>9]\d*<ret>Z<a-k>\A1<ret>h<a-i>nc0<esc>zh<a-i>nLy<percent><a-R><a-_>|sort|uniq<space><minus>c|sort<space><minus>nr<ret>s\d+<ret>"hy'
-    delete-buffer
-    echo -debug %sh{
-      eval set -- "$kak_quoted_reg_h"
-      echo "$@"
-      indent_freq=${1:-0}
-      indent=${2:-0}
-      indent_freq_2=${3:-0}
-      indent_2=${4:-0}
-      if [ "$indent_freq" -gt 0 ] && echo "$indent_freq_2 / $indent_freq < 0.66" | bc -l | grep -q 1; then
-        echo set-option buffer indentwidth "$indent"
-      fi
-    }
+  }
+  edit -scratch "%arg{1}.indent_style"
+  execute-keys '"h<a-R>\a<ret><esc><a-_>s\d<plus>\n\d<plus><ret><a-j>x<a-,>ypggO0<space>0<esc><percent>_s\d<plus>\h\d<plus>\n\d<plus>\h\d<plus><ret><a-k>\A1|\A\d<plus>\h0<ret><semicolon>k<a-i>nyjA<minus><c-r>"<esc>xy<percent><a-R>ghWd<percent>|bc<ret><a-s>Px<a-k>\A\d<plus>\h[1<minus>9]\d*<ret>y<percent><a-R><a-_>|sed "s/^1 [0-9]\\+/1 0/"<ret><a-s>h<a-i>nLy<percent><a-R><a-_>|sort|uniq<space><minus>c|sort<space><minus>nr<ret>s\d+<ret>'
+}
+
+define-command try_infer_indent_style -params 2.. %{
+  evaluate-commands %sh{
+    shift
+    indent_freq=${1:-0}
+    indent=${2:-0}
+    indent_freq_2=${3:-0}
+    indent_2=${4:-0}
+    if [ "$indent_freq" -gt 0 ] && echo "$indent_freq_2 / $indent_freq < 0.66" | bc -l | grep -q 1; then
+      printf 'set-option "buffer=%%arg{1}" indentwidth %d\n' "$indent"
+    fi
   }
 }

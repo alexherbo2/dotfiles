@@ -544,3 +544,5 @@ hook global InsertChar '.*' indent_on_inserted_character_with_indentation_rules
 # Indentation
 set-option global tabstop 4
 set-option global indentwidth 2
+
+hook global BufOpenFile .* detect-indent-style

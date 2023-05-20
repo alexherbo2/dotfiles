@@ -398,6 +398,14 @@ map -docstring 'render whitespace' global unimpaired_right w ': add-highlighter 
 map -docstring 'rulers' global unimpaired_left r ': remove-highlighter global/rulers<ret>'
 map -docstring 'rulers' global unimpaired_right r ': add-highlighter global/rulers column 81 default,cyan<ret>'
 
+hook global InsertCompletionShow .* %{
+  map window insert <tab> <c-n>
+  map window insert <s-tab> <c-p>
+  hook -once window InsertCompletionHide .* %{
+    unmap window insert <tab>
+    unmap window insert <s-tab>
+  }
+}
 map -docstring 'iterate next selection' global insert <a-n> '<esc>:iterate_next_selection<ret>i'
 map -docstring 'iterate previous selection' global insert <a-p> '<esc>:iterate_previous_selection<ret>i'
 

@@ -47,3 +47,7 @@ define-command try_infer_indent_style -params 2.. %{
     fi
   }
 }
+
+complete-command detect_indent_style buffer
+complete-command create_indent_style_buffer_report buffer
+complete-command try_infer_indent_style buffer

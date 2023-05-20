@@ -157,7 +157,7 @@ complete-command create_auto_named_buffer_from_command_output shell
 alias global !! create_buffer_from_command_output
 alias global ! create_auto_named_buffer_from_command_output
 
-define-command select_or_extend_lines %{
+define-command select_whole_lines_or_extend_lines_down %{
   execute-keys '<a-:>'
   try %{
     # At least one selection is not full, so select whole lines.
@@ -416,8 +416,6 @@ map -docstring 'increment selected numbers' global normal <c-a> ':increment_sele
 map -docstring 'decrement selected numbers' global normal <c-x> ':decrement_selected_numbers %val{count}<ret>'
 map -docstring 'buffer directory' global prompt <a-/> '%sh{dirname "$kak_bufname"}<a-!>/'
 
-map -docstring 'clear register' global normal D ':clear_register %val{register}<ret>'
-map -docstring 'add selections' global normal Y ':add_selections_to_register %val{register}<ret>'
 map -docstring 'iterate next selection' global normal <c-n> ':iterate_next_selection<ret>'
 map -docstring 'iterate previous selection' global normal <c-p> ':iterate_previous_selection<ret>'
 map -docstring 'toggle comments' global normal '#' ':toggle_comments_with_config<ret>'
@@ -484,7 +482,7 @@ map global normal T '<a-:><a-;><a-T>'
 # map global normal ? '<a-:><a-;><a-?>'
 # map global normal n '<a-:>?<ret>'
 # map global normal N '<a-:><a-;><a-?><ret>'
-map global normal x ':select_or_extend_lines<ret>'
+map global normal x ':select_whole_lines_or_extend_lines_down<ret>'
 map global normal X 'x<a-:><a-;>'
 map global normal { '<a-:><a-;>{p'
 map global normal } '<a-:>}p'

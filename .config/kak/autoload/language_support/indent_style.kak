@@ -1,8 +1,6 @@
 # Implementation reference:
 # https://github.com/helix-editor/helix/blob/master/helix-core/src/indent.rs
-# hook on file open and buffer reload.
-# hook global BufOpenFile '.*' detect_indent_style
-# hook global BufReload '.*' detect_indent_style
+# hook global BufOpenFile .* 'hook -once buffer NormalIdle .* detect_current_buffer_indent_style'
 define-command detect_current_buffer_indent_style %{
   detect_indent_style %val{bufname}
 }

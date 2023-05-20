@@ -1,0 +1,10 @@
+# Enable CSI u key encoding.
+key_bindings:
+
+  - { key: Return, mods: Shift, chars: "\x1b[13;2u" }
+  - { key: Tab, mods: Control, chars: "\x1b[9;5u" }
+  - { key: Return, mods: Control, chars: "\x1b[13;5u" }
+  - { key: H, mods: Control, chars: "\x1b[104;5u" }
+  - { key: I, mods: Control, chars: "\x1b[105;5u" }
+  - { key: J, mods: Control, chars: "\x1b[106;5u" }
+  - { key: M, mods: Control, chars: "\x1b[109;5u" }

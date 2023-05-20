@@ -27,7 +27,7 @@ define-command analyze_indent_style -params 1 %{
   }
   edit -scratch
   try %{
-    execute-keys '"h<a-R>a<ret><esc><a-_>s[01]\n\d+<ret><a-j>x<a-,>yp1,O0 0<esc>%s([01]+ \d+\n){2}<ret><a-k>\A1|\A0 0<ret>hk<a-i>nyjA-<c-r>"<esc>xy%<a-R>ghwd%|bc<ret><a-s>Px<a-k>\A[01] [1-9]\d*<ret>y%<a-R><a-_>|sed "s/^1 [0-9]\\+/1 0/"<ret><a-s>h<a-i>nLy%<a-R><a-_>|sort | uniq -c | sort -n -r<ret>s\d+<ret>'
+    execute-keys '"h<a-R>a<ret><esc><a-_>s[01]\n\d+<ret><a-j>x<a-,>yp1,O0 0<esc>%s([01]+ \d+\n){2}<ret><a-k>\A1|\A0 0<ret>hk<a-i>nyjA-<c-r>"<esc>xy%<a-R>ghWd%|bc<ret><a-s>Px<a-k>\A[01] [1-9]\d*<ret>y%<a-R><a-_>|sed "s/^1 [0-9]\\+/1 0/"<ret><a-s>h<a-i>nLy%<a-R><a-_>|sort | uniq -c | sort -n -r<ret>s\d+<ret>'
   } catch %{
     execute-keys '%c-1 -1<esc>%s-1<ret>'
   }

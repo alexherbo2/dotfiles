@@ -28,7 +28,11 @@ define-command create_indent_style_buffer_report -params 1 %{
     }
   }
   edit -scratch "%arg{1}.indent_style"
-  execute-keys '"h<a-R>\a<ret><esc><a-_>s\d<plus>\n\d<plus><ret><a-j>x<a-,>ypggO0<space>0<esc><percent>_s\d<plus>\h\d<plus>\n\d<plus>\h\d<plus><ret><a-k>\A1|\A\d<plus>\h0<ret><semicolon>k<a-i>nyjA<minus><c-r>"<esc>xy<percent><a-R>ghWd<percent>|bc<ret><a-s>Px<a-k>\A\d<plus>\h[1<minus>9]\d*<ret>y<percent><a-R><a-_>|sed "s/^1 [0-9]\\+/1 0/"<ret><a-s>h<a-i>nLy<percent><a-R><a-_>|sort|uniq<space><minus>c|sort<space><minus>nr<ret>s\d+<ret>'
+  try %{
+    execute-keys '"h<a-R>\a<ret><esc><a-_>s\d<plus>\n\d<plus><ret><a-j>x<a-,>ypggO0<space>0<esc><percent>_s\d<plus>\h\d<plus>\n\d<plus>\h\d<plus><ret><a-k>\A1|\A\d<plus>\h0<ret><semicolon>k<a-i>nyjA<minus><c-r>"<esc>xy<percent><a-R>ghWd<percent>|bc<ret><a-s>Px<a-k>\A\d<plus>\h[1<minus>9]\d*<ret>y<percent><a-R><a-_>|sed "s/^1 [0-9]\\+/1 0/"<ret><a-s>h<a-i>nLy<percent><a-R><a-_>|sort|uniq<space><minus>c|sort<space><minus>nr<ret>s\d+<ret>'
+  } catch %{
+    execute-keys '%c-1 -1<esc>'
+  }
 }
 
 define-command try_infer_indent_style -params 2.. %{

@@ -1,51 +1,46 @@
 # Implementation reference:
 # https://github.com/helix-editor/helix/blob/master/helix-core/src/indent.rs
 # hook global BufOpenFile .* 'hook -once buffer NormalIdle .* detect_current_buffer_indent_style'
-define-command detect_current_buffer_indent_style %{
+define-command detect-indent-style %{
   detect_indent_style %val{bufname}
 }
 
 define-command detect_indent_style -params 1 %{
-  create_indent_style_buffer_report %arg{1}
+  analyze_indent_style %arg{1}
   try_infer_indent_style %arg{1} %val{selections}
   delete-buffer
 }
 
-define-command create_indent_style_buffer_report -params 1 %{
+define-command analyze_indent_style -params 1 %{
   evaluate-commands -buffer %arg{1} -verbatim try %{
     set-register h
-    execute-keys -save-regs '' '1000gGgx<a-s><a-K>^\h*$<ret>'
-    evaluate-commands -draft -itersel -verbatim -- try %{
-      execute-keys '<a-k>^\t<ret>s^\h+<ret>s\t<ret>'
-      set-register h %reg{h} 1 %val{selection_count}
+    execute-keys '1000gGgx<a-s><a-K>^\h*$<ret>'
+    evaluate-commands -draft -itersel -verbatim try %{
+      execute-keys 's^\t+<ret>'
+      set-register h %reg{h} 1 %val{selection_length}
     } catch %{
-      execute-keys '<a-k>^<space><ret>s^\h+<ret>s<space><ret>'
-      set-register h %reg{h} 0 %val{selection_count}
+      execute-keys 's^ +<ret>'
+      set-register h %reg{h} 0 %val{selection_length}
     } catch %{
       set-register h %reg{h} 0 0
     }
   }
-  edit -scratch "%arg{1}.indent_style"
+  edit -scratch
   try %{
-    execute-keys '"h<a-R>\a<ret><esc><a-_>s\d<plus>\n\d<plus><ret><a-j>x<a-,>ypggO0<space>0<esc><percent>_s\d<plus>\h\d<plus>\n\d<plus>\h\d<plus><ret><a-k>\A1|\A\d<plus>\h0<ret><semicolon>k<a-i>nyjA<minus><c-r>"<esc>xy<percent><a-R>ghWd<percent>|bc<ret><a-s>Px<a-k>\A\d<plus>\h[1<minus>9]\d*<ret>y<percent><a-R><a-_>|sed "s/^1 [0-9]\\+/1 0/"<ret><a-s>h<a-i>nLy<percent><a-R><a-_>|sort|uniq<space><minus>c|sort<space><minus>nr<ret>s\d+<ret>'
+    execute-keys '"h<a-R>a<ret><esc><a-_>s[01]\n\d+<ret><a-j>x<a-,>yp1,O0 0<esc>%s([01]+ \d+\n){2}<ret><a-k>\A1|\A0 0<ret>hk<a-i>nyjA-<c-r>"<esc>xy%<a-R>ghwd%|bc<ret><a-s>Px<a-k>\A[01] [1-9]\d*<ret>y%<a-R><a-_>|sed "s/^1 [0-9]\\+/1 0/"<ret><a-s>h<a-i>nLy%<a-R><a-_>|sort | uniq -c | sort -n -r<ret>s\d+<ret>'
   } catch %{
     execute-keys '%c-1 -1<esc>%s-1<ret>'
   }
 }
 
-define-command try_infer_indent_style -params 2.. %{
+define-command try_infer_indent_style -params 3.. %{
   evaluate-commands %sh{
-    shift
-    indent_freq=${1:-0}
-    indent=${2:-0}
-    indent_freq_2=${3:-0}
-    indent_2=${4:-0}
-    if [ "$indent_freq" -gt 0 ] && echo "$indent_freq_2 / $indent_freq < 0.66" | bc -l | grep -q 1; then
-      printf 'set-option "buffer=%%arg{1}" indentwidth %d\n' "$indent"
+    if [ "$2" -gt 0 ] && echo "$4 / $2 < 0.66" | bc -l | grep -q 1; then
+      printf 'set-option "buffer=%%arg{1}" indentwidth %d' "$3"
     fi
   }
 }
 
 complete-command detect_indent_style buffer
-complete-command create_indent_style_buffer_report buffer
+complete-command analyze_indent_style buffer
 complete-command try_infer_indent_style buffer

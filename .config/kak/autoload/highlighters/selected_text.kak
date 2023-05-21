@@ -21,7 +21,7 @@ define-command update_selected_text_ranges %{
   }
 }
 
-add-highlighter global/selected-text ranges selected_text_ranges
+add-highlighter shared/selected_text ranges selected_text_ranges
 hook -always global NormalIdle '' update_selected_text_ranges
 hook -always global InsertIdle '' update_selected_text_ranges
 hook -always global PromptIdle '' update_selected_text_ranges

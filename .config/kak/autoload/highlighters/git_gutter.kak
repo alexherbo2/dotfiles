@@ -10,7 +10,6 @@ hook global BufOpenFile .* %{
 
 define-command -hidden gitdiff %{
   evaluate-commands %sh{
-    echo "write $kak_response_fifo" > "$kak_command_fifo"
     is_added() {
       [ "$2" -eq 0 ] && [ "$4" -gt 0 ]
     }
@@ -81,8 +80,7 @@ define-command -hidden gitdiff %{
       printf ' %d|{red}┃ ' $(($3+index))
     }
 
-    process_hunk()
-    {
+    process_hunk() {
       is_added "$@" \
         && process_added "$@" \
         && return 0
@@ -100,23 +98,28 @@ define-command -hidden gitdiff %{
         && return 0
     }
 
-    git_diff()
-    {
-      buffile="$1"
-      bufdir=${buffile%/*}
-      if [ -f "${buffile}" ]; then
-        printf 'set-option buffer git_diff_line_specs %%val{timestamp} '
-        git -C "$bufdir" --no-pager diff --no-ext-diff --no-color -U0 -- "$buffile" - |
-        grep -o '^@@[^@]*@@' | sed -E 's/([-+][0-9]) /\1,1 /g' | grep -o '[0-9]*' |
-        while read from_line; read from_count; read to_line; read to_count; do
-          process_hunk "$from_line" "$from_count" "$to_line" "$to_count"
-        done
-        printf '\n'
-      else
-        echo "set-option buffer git_diff_line_specs %val{timestamp}"
-      fi
+    git_diff() {
+      printf 'set-option buffer git_diff_line_specs %%val{timestamp} '
+      git --no-pager diff --no-ext-diff --no-color -U0 "$1" "$2" |
+      grep -o '^@@[^@]*@@' | sed -E 's/([-+][0-9]) /\1,1 /g' | grep -o '[0-9]*' |
+      while read from_line; read from_count; read to_line; read to_count; do
+        process_hunk "$from_line" "$from_count" "$to_line" "$to_count"
+      done
     }
-    git_diff "${kak_buffile}" < "$kak_response_fifo"
+    bufdir=${kak_buffile%/*}
+    bufname=${kak_buffile##*/}
+    tmpdir=$(mktemp -d)
+    a=$tmpdir/a
+    b=$tmpdir/b
+    trap 'rm -Rf "$tmpdir"' EXIT
+    echo "write $kak_response_fifo" > "$kak_command_fifo"
+    cat "$kak_response_fifo" > "$b"
+    if [ -f "${kak_buffile}" ]; then
+      git -C "$bufdir" --no-pager show "HEAD:./$bufname" > "$a" &&
+      git_diff "$a" "$b"
+    else
+      echo "set-option buffer git_diff_line_specs %val{timestamp}"
+    fi
   }
 }
 

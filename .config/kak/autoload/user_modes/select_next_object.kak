@@ -33,11 +33,11 @@ define-command -hidden select_next_grave_quote_strings %{
 }
 
 define-command -hidden select_next_object_words %{
-  execute-keys '/\W\w<ret><a-a>w'
+  execute-keys 'h/\W\w<ret><a-a>w'
 }
 
 define-command -hidden select_next_object_long_words %{
-  execute-keys '/\W\w<ret><a-a><a-w>'
+  execute-keys 'h/\W\w<ret><a-a><a-w>'
 }
 
 define-command -hidden select_next_object_sentences %{

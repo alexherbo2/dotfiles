@@ -33,11 +33,11 @@ define-command -hidden select_previous_grave_quote_strings %{
 }
 
 define-command -hidden select_previous_object_words %{
-  execute-keys '<a-/>\W\w<ret><a-a>w<a-;>'
+  execute-keys 'l<a-/>\W\w<ret><a-a>w<a-;>'
 }
 
 define-command -hidden select_previous_object_long_words %{
-  execute-keys '<a-/>\W\w<ret><a-a><a-w><a-;>'
+  execute-keys 'l<a-/>\W\w<ret><a-a><a-w><a-;>'
 }
 
 define-command -hidden select_previous_object_sentences %{

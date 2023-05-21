@@ -33,6 +33,7 @@ set-option global scrolloff 5,1
 add-highlighter global/show-matching show-matching
 add-highlighter global/number-lines number-lines -hlcursor
 add-highlighter global/soft_wrap wrap -indent -marker '↪'
+add-highlighter global/selected_text ref selected_text
 
 set-option global terminal_command alacritty
 set-option global terminal_args msg create-window -e

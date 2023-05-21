@@ -477,7 +477,7 @@ map global normal X 'x<a-:><a-;>'
 map global normal { '<a-:><a-;>{p'
 map global normal } '<a-:>}p'
 
-map -docstring 'open gitui' global open_gitui g ':open_gitui<ret>'
+map -docstring 'open gitui' global window g ':open_gitui<ret>'
 
 # Language support -------------------------------------------------------------
 

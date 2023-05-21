@@ -41,11 +41,11 @@ define-command -hidden select_previous_object_long_words %{
 }
 
 define-command -hidden select_previous_object_sentences %{
-  execute-keys 'h[sh<a-a>s<a-;>'
+  execute-keys '<a-i>s<a-;>[s<a-a>s<a-;>'
 }
 
 define-command -hidden select_previous_object_paragraphs %{
-  execute-keys 'h[ph<a-a>p<a-;>'
+  execute-keys '<a-i>p<a-;>[p'
 }
 
 define-command -hidden select_previous_object_whitespaces %{

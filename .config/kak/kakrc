@@ -168,14 +168,6 @@ define-command select_whole_lines_or_extend_lines_down %{
   }
 }
 
-define-command select_next_surrounding_object -params 1 %{
-  execute-keys "f%arg{1}<a-a>%arg{1}"
-}
-
-define-command select_previous_surrounding_object -params 1 %{
-  execute-keys "<a-f>%arg{1}h<a-a>%arg{1}"
-}
-
 define-command sort_selections %{
   evaluate-commands -save-regs '"' %sh{
     printf 'echo -to-file %s -- "%%val{selections}"' "$kak_quoted_response_fifo" > "$kak_command_fifo"
@@ -193,8 +185,8 @@ define-command copy_selected_lines_up %{
   execute-keys -draft 'xyp'
 }
 
-# map global normal <c-d> ':copy_selected_lines_down<ret>'
-# map global normal <c-u> ':copy_selected_lines_up<ret>'
+map global normal <c-j> ':copy_selected_lines_down<ret>'
+map global normal <c-k> ':copy_selected_lines_up<ret>'
 
 define-command move_selected_lines_down %{
   execute-keys -draft 'x<a-_><a-:>Z;ezjxdzP'
@@ -272,18 +264,6 @@ define-command open_file_picker %{
 
 define-command open_workspace_symbol_picker %{
   lsp-workspace-symbol-incr
-}
-
-define-command prompt_select_next_surrounding_object %{
-  on-key %{
-    select_next_surrounding_object %val{key}
-  }
-}
-
-define-command prompt_select_previous_surrounding_object %{
-  on-key %{
-    select_previous_surrounding_object %val{key}
-  }
 }
 
 # Porcelain commands -----------------------------------------------------------
@@ -366,10 +346,11 @@ map -docstring 'enter_window_mode' global normal <c-w> ':enter_window_mode<ret>'
 map -docstring 'enter_window_mode' global user w ':enter_window_mode<ret>'
 map -docstring 'enter extend mode' global normal v ':enter_extend_mode<ret>'
 map -docstring 'enter match mode' global normal m ':enter_match_mode<ret>'
+map -docstring 'enter mark mode' global normal "'" ':enter_mark_mode<ret>'
 map -docstring 'enter select mode' global normal S ':enter_select_mode<ret>'
 map -docstring 'enter surround mode' global normal q ':enter_surround_mode<ret>'
-map -docstring 'select previous surrounding object' global normal [ ':prompt_select_previous_surrounding_object<ret>'
-map -docstring 'select next surrounding object' global normal ] ':prompt_select_next_surrounding_object<ret>'
+map -docstring 'select previous surrounding object' global normal [ ':enter_select_previous_object_mode<ret>'
+map -docstring 'select next surrounding object' global normal ] ':enter_select_next_object_mode<ret>'
 map -docstring 'open file picker' global user f ':open_file_picker<ret>'
 map -docstring 'open buffer picker' global user b ':open_buffer_picker<ret>'
 map -docstring 'open global search prompt' global user / ':open_global_search_prompt<ret>'
@@ -406,6 +387,7 @@ hook global InsertCompletionShow .* %{
     unmap window insert <s-tab>
   }
 }
+map -docstring 'add selections to register' global normal Y '<a-Z>a'
 map -docstring 'iterate next selection' global insert <a-n> '<esc>:iterate_next_selection<ret>i'
 map -docstring 'iterate previous selection' global insert <a-p> '<esc>:iterate_previous_selection<ret>i'
 

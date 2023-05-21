@@ -8,6 +8,14 @@ define-command enter_window_mode %{
   enter-user-mode window
 }
 
+define-command open_new_scratch_buffer %{
+  edit -scratch
+}
+
+define-command open_new_terminal %{
+  terminal %val{client_env_SHELL}
+}
+
 define-command quit_other_clients %{
   evaluate-commands %sh{
     echo "$kak_client_list" | tr ' ' '\n' | grep -Fxv "$kak_client" |
@@ -45,6 +53,8 @@ complete-command -menu swap_buffer_in_viewport shell-script-candidates %opt{clie
 complete-command -menu grab_buffer_in_viewport shell-script-candidates %opt{client_completion}
 
 map -docstring 'new' global window n ':new<ret>'
+map -docstring 'open new scratch buffer' global window s ':open_new_scratch_buffer<ret>'
+map -docstring 'terminal' global window t ':open_new_terminal<ret>'
 map -docstring 'quit' global window q ':quit<ret>'
 map -docstring 'quit_other_clients' global window o ':quit_other_clients<ret>'
 map -docstring 'open_grab_buffer_in_viewport_prompt' global window g ':open_grab_buffer_in_viewport_prompt<ret>'

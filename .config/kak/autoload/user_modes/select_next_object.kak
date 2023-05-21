@@ -41,11 +41,11 @@ define-command -hidden select_next_object_long_words %{
 }
 
 define-command -hidden select_next_object_sentences %{
-  execute-keys 'l]sl<a-a>s'
+  execute-keys '<a-i>sl<a-a>s'
 }
 
 define-command -hidden select_next_object_paragraphs %{
-  execute-keys 'l]pl<a-a>p'
+  execute-keys '<a-i>pl<a-a>p'
 }
 
 define-command -hidden select_next_object_whitespaces %{

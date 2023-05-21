@@ -6,7 +6,12 @@ declare-option -hidden -docstring \
 str git_gutter_sh_source %sh{ echo "${kak_source%%.kak}.sh" }
 
 hook global ModeChange pop:insert:.* gitdiff
-hook global BufCreate .* gitdiff
+hook global NormalIdle .* gitdiff
+hook global BufOpenFile .* %{
+  hook -once buffer NormalIdle .* %{
+    gitdiff
+  }
+}
 
 define-command -hidden gitdiff %{
     set-option buffer gitgutter_buffer %sh{ mktemp -t gitgutter.buffer.XXXXXX }

@@ -1,7 +1,7 @@
 declare-option -hidden line-specs git_diff_line_specs
 
 hook global ModeChange pop:insert:.* gitdiff
-hook global NormalIdle .* gitdiff
+# hook global NormalIdle .* gitdiff
 hook global BufOpenFile .* %{
   hook -once buffer NormalIdle .* %{
     gitdiff

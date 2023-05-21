@@ -64,30 +64,30 @@ define-command -hidden select_previous_object_arguments %{
   execute-keys '<a-/>\(\K|,|.(?=\))<ret><a-a>u<a-;>'
 }
 
-map -docstring 'parenthesis blocks' global select_previous_object b ':select_next_parenthesis_blocks<ret>'
-map -docstring 'parenthesis blocks' global select_previous_object ( ':select_next_parenthesis_blocks<ret>'
+map -docstring 'parenthesis blocks' global select_previous_object b ':select_previous_parenthesis_blocks<ret>'
+map -docstring 'parenthesis blocks' global select_previous_object ( ':select_previous_parenthesis_blocks<ret>'
 map -docstring 'parenthesis blocks' global select_previous_object ) ':select_previous_parenthesis_blocks<ret>'
 
-map -docstring 'brace blocks' global select_previous_object B ':select_next_brace_blocks<ret>'
-map -docstring 'brace blocks' global select_previous_object { ':select_next_brace_blocks<ret>'
+map -docstring 'brace blocks' global select_previous_object B ':select_previous_brace_blocks<ret>'
+map -docstring 'brace blocks' global select_previous_object { ':select_previous_brace_blocks<ret>'
 map -docstring 'brace blocks' global select_previous_object } ':select_previous_brace_blocks<ret>'
 
-map -docstring 'bracket blocks' global select_previous_object r ':select_next_bracket_blocks<ret>'
-map -docstring 'bracket blocks' global select_previous_object [ ':select_next_bracket_blocks<ret>'
+map -docstring 'bracket blocks' global select_previous_object r ':select_previous_bracket_blocks<ret>'
+map -docstring 'bracket blocks' global select_previous_object [ ':select_previous_bracket_blocks<ret>'
 map -docstring 'bracket blocks' global select_previous_object ] ':select_previous_bracket_blocks<ret>'
 
-map -docstring 'angle blocks' global select_previous_object a ':select_next_angle_blocks<ret>'
-map -docstring 'angle blocks' global select_previous_object <lt> ':select_next_angle_blocks<ret>'
+map -docstring 'angle blocks' global select_previous_object a ':select_previous_angle_blocks<ret>'
+map -docstring 'angle blocks' global select_previous_object <lt> ':select_previous_angle_blocks<ret>'
 map -docstring 'angle blocks' global select_previous_object <gt> ':select_previous_angle_blocks<ret>'
 
-map -docstring 'double quote strings' global select_previous_object Q ':select_next_double_quote_strings<ret>'
-map -docstring 'double quote strings' global select_previous_object '"' ':select_next_double_quote_strings<ret>'
+map -docstring 'double quote strings' global select_previous_object Q ':select_previous_double_quote_strings<ret>'
+map -docstring 'double quote strings' global select_previous_object '"' ':select_previous_double_quote_strings<ret>'
 
-map -docstring 'single quote strings' global select_previous_object q ':select_next_single_quote_strings<ret>'
-map -docstring 'single quote strings' global select_previous_object "'" ':select_next_single_quote_strings<ret>'
+map -docstring 'single quote strings' global select_previous_object q ':select_previous_single_quote_strings<ret>'
+map -docstring 'single quote strings' global select_previous_object "'" ':select_previous_single_quote_strings<ret>'
 
-map -docstring 'grave quote strings' global select_previous_object g ':select_next_grave_quote_strings<ret>'
-map -docstring 'grave quote strings' global select_previous_object ` ':select_next_grave_quote_strings<ret>'
+map -docstring 'grave quote strings' global select_previous_object g ':select_previous_grave_quote_strings<ret>'
+map -docstring 'grave quote strings' global select_previous_object ` ':select_previous_grave_quote_strings<ret>'
 
 map -docstring 'words' global select_previous_object w ':select_previous_object_words<ret>'
 map -docstring 'long words' global select_previous_object W ':select_previous_object_long_words<ret>'

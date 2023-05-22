@@ -3,7 +3,7 @@ declare-option line-specs git_diff_flags
 define-command update_git_diff_flags %{
   evaluate-commands %sh{
     if git ls-files --error-unmatch "$kak_buffile" > /dev/null 2>&1; then
-      echo "set-option buffer git_diff_line_specs %val{timestamp}"
+      echo "set-option buffer git_diff_flags %val{timestamp}"
       exit 1
     fi
 
@@ -20,7 +20,7 @@ define-command update_git_diff_flags %{
     echo "write $kak_response_fifo" > "$kak_command_fifo"
     cat "$kak_response_fifo" > "$b"
 
-    printf 'set-option buffer git_diff_line_specs %%val{timestamp} '
+    printf 'set-option buffer git_diff_flags %%val{timestamp} '
 
     diff -U0 "$a" "$b" |
     grep -o '^@@[^@]*@@' | sed -E 's/([-+][0-9]) /\1,1 /g' | grep -o '[0-9]*' |

@@ -2,7 +2,7 @@ declare-option line-specs git_diff_flags
 
 define-command update_git_diff_flags %{
   evaluate-commands %sh{
-    if git ls-files --error-unmatch "$kak_buffile" > /dev/null 2>&1; then
+    if ! git ls-files --error-unmatch "$kak_buffile" > /dev/null 2>&1; then
       echo "set-option buffer git_diff_flags %val{timestamp}"
       exit 1
     fi

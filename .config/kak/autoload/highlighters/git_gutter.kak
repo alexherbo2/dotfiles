@@ -14,7 +14,7 @@ define-command update_git_diff_flags %{
     cd $(dirname "$kak_buffile")
 
     git_rev=HEAD
-    git_path=$(git ls-files "$kak_buffile")
+    git_path=$(git ls-files --full-name "$kak_buffile")
     git show "$git_rev:$git_path" > "$a"
 
     echo "write $kak_response_fifo" > "$kak_command_fifo"

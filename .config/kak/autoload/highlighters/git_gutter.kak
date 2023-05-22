@@ -1,126 +1,73 @@
-declare-option -hidden line-specs git_diff_line_specs
+declare-option line-specs git_diff_flags
 
-hook global ModeChange pop:insert:.* gitdiff
-# hook global NormalIdle .* gitdiff
-hook global BufOpenFile .* %{
-  hook -once buffer NormalIdle .* %{
-    gitdiff
-  }
-}
-
-define-command -hidden gitdiff %{
+define-command update_git_diff_flags %{
   evaluate-commands %sh{
-    is_added() {
-      [ "$2" -eq 0 ] && [ "$4" -gt 0 ]
-    }
+    if git ls-files --error-unmatch "$kak_buffile" > /dev/null 2>&1; then
+      echo "set-option buffer git_diff_line_specs %val{timestamp}"
+      exit 1
+    fi
 
-    is_removed() {
-      [ "$2" -gt 0 ] && [ "$4" -eq 0 ]
-    }
+    a=$(mktemp)
+    b=$(mktemp)
+    trap 'rm "$a" "$b"' EXIT
 
-    is_modified() {
-      [ "$2" -gt 0 ] && [ "$4" -gt 0 ] && [ "$2" -eq "$4" ]
-     }
+    cd $(dirname "$kak_buffile")
 
-    is_modified_and_added() {
-      [ "$2" -gt 0 ] && [ "$4" -gt 0 ] && [ "$2" -lt "$4" ]
-     }
+    git_rev=HEAD
+    git_path=$(git ls-files "$kak_buffile")
+    git show "$git_rev:$git_path" > "$a"
 
-    is_modified_and_removed() {
-      [ "$2" -gt 0 ] && [ "$4" -gt 0 ] && [ "$2" -gt "$4" ]
-    }
-
-    process_added() {
-      index=0
-      while [ "$index" -lt "$4" ]; do
-        line_number=$(($3+index))
-        printf ' %d|{green}┃ ' "$line_number"
-        index=$((index + 1))
-      done
-    }
-
-    process_removed() {
-      if [ "$3" -eq 0 ]; then
-        printf ' 1|{value}X '
-      else
-        printf ' %d|{value}┃ ' "$3"
-      fi
-    }
-
-    process_modified() {
-      index=0
-      while [ "$index" -lt "$4" ]; do
-        line_number=$(($3+index))
-        printf ' %d|{blue}┃ ' "$line_number"
-        index=$((index+1))
-      done
-    }
-
-    process_modified_and_added() {
-      index=0
-      while [ "$index" -lt "$2" ]; do
-        line_number=$(($3+index))
-        printf ' %d|{blue}┃ ' "$line_number"
-        index=$((index+1))
-      done
-      while [ "$index" -lt "$4" ]; do
-        line_number=$(($3+index))
-        printf ' %d|{green}┃ ' "$line_number"
-        index=$((index+1))
-      done
-    }
-
-    process_modified_and_removed() {
-      index=0
-      while [ $index -lt "$4" ]; do
-        line_number=$(($3+index))
-        printf ' %d|{blue}┃ ' "$line_number"
-        index=$((index+1))
-      done
-      printf ' %d|{red}┃ ' $(($3+index))
-    }
-
-    process_hunk() {
-      is_added "$@" \
-        && process_added "$@" \
-        && return 0
-      is_removed "$@" \
-        && process_removed "$@" \
-        && return 0
-      is_modified "$@" \
-        && process_modified "$@" \
-        && return 0
-      is_modified_and_added "$@" \
-        && process_modified_and_added "$@" \
-        && return 0
-      is_modified_and_removed "$@" \
-        && process_modified_and_removed "$@" \
-        && return 0
-    }
-
-    git_diff() {
-      printf 'set-option buffer git_diff_line_specs %%val{timestamp} '
-      git --no-pager diff --no-ext-diff --no-color -U0 "$1" "$2" |
-      grep -o '^@@[^@]*@@' | sed -E 's/([-+][0-9]) /\1,1 /g' | grep -o '[0-9]*' |
-      while read from_line; read from_count; read to_line; read to_count; do
-        process_hunk "$from_line" "$from_count" "$to_line" "$to_count"
-      done
-    }
-    bufdir=${kak_buffile%/*}
-    bufname=${kak_buffile##*/}
-    tmpdir=$(mktemp -d)
-    a=$tmpdir/a
-    b=$tmpdir/b
-    trap 'rm -Rf "$tmpdir"' EXIT
     echo "write $kak_response_fifo" > "$kak_command_fifo"
     cat "$kak_response_fifo" > "$b"
-    if [ -f "${kak_buffile}" ]; then
-      git -C "$bufdir" --no-pager show "HEAD:./$bufname" > "$a" &&
-      git_diff "$a" "$b"
-    else
-      echo "set-option buffer git_diff_line_specs %val{timestamp}"
-    fi
+
+    printf 'set-option buffer git_diff_line_specs %%val{timestamp} '
+
+    diff -U0 "$a" "$b" |
+    grep -o '^@@[^@]*@@' | sed -E 's/([-+][0-9]) /\1,1 /g' | grep -o '[0-9]*' |
+    while read from_line; read from_count; read to_line; read to_count; do
+      # is added
+      if [ "$from_count" -eq 0 ] && [ "$to_count" -gt 0 ]; then
+        printf ' %d|{green}+ ' $(seq "$to_line" $((to_line + to_count - 1)))
+      # all removed
+      elif [ "$from_count" -gt 0 ] && [ "$to_count" -eq 0 ] && [ "$to_line" -eq 0 ]; then
+        printf ' 1|{red}x '
+      # is removed
+      elif [ "$from_count" -gt 0 ] && [ "$to_count" -eq 0 ]; then
+        printf ' %d|{red}- ' "$to_line"
+      # is modified
+      elif [ "$from_count" -gt 0 ] && [ "$to_count" -gt 0 ] && [ "$from_count" -eq "$to_count" ]; then
+        printf ' %d|{blue}~ ' $(seq "$to_line" $((to_line + to_count - 1)))
+      # is modified and added
+      elif [ "$from_count" -gt 0 ] && [ "$to_count" -gt 0 ] && [ "$from_count" -lt "$to_count" ]; then
+        printf ' %d|{blue}~ ' $(seq "$to_line" $((to_line + from_count - 1)))
+        printf ' %d|{green}+ ' $(seq $((to_line + from_count)) $((to_line + to_count - 1)))
+      # is modified and removed
+      elif [ "$from_count" -gt 0 ] && [ "$to_count" -gt 0 ] && [ "$from_count" -gt "$to_count" ]; then
+        printf ' %d|{blue}~ ' $(seq "$to_line" $((to_line + to_count - 2)))
+        printf ' %d|{blue+u}v ' $((to_line + to_count - 1))
+      fi
+    done
   }
 }
 
-add-highlighter global/ flag-lines LineNumbers git_diff_line_specs
+add-highlighter shared/git_diff flag-lines LineNumbers git_diff_flags
+hook global BufWritePost .* %{
+  hook -once buffer NormalIdle .* %{
+    update_git_diff_flags
+  }
+}
+hook global BufOpenFile .* %{
+  hook -once buffer NormalIdle .* %{
+    update_git_diff_flags
+  }
+}
+hook global NormalKey 'dc' %{
+  hook -once buffer NormalIdle .* %{
+    update_git_diff_flags
+  }
+}
+hook global ModeChange pop:insert:normal %{
+  hook -once buffer NormalIdle .* %{
+    update_git_diff_flags
+  }
+}

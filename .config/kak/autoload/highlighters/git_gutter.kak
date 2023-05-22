@@ -15,14 +15,14 @@ define-command update_git_diff_flags %{
 
     git_rev=HEAD
     git_path=$(git ls-files --full-name "$kak_buffile")
-    git show "$git_rev:$git_path" > "$a"
+    git --no-pager show "$git_rev:$git_path" > "$a"
 
     echo "write $kak_response_fifo" > "$kak_command_fifo"
     cat "$kak_response_fifo" > "$b"
 
     printf 'set-option buffer git_diff_flags %%val{timestamp} '
 
-    diff -U0 "$a" "$b" |
+    git --no-pager diff --no-ext-diff --no-color -U0 "$a" "$b" |
     grep -o '^@@[^@]*@@' | sed -E 's/([-+][0-9]) /\1,1 /g' | grep -o '[0-9]*' |
     while read from_line; read from_count; read to_line; read to_count; do
       # is added
@@ -51,23 +51,4 @@ define-command update_git_diff_flags %{
 }
 
 add-highlighter shared/git_diff flag-lines LineNumbers git_diff_flags
-hook global BufWritePost .* %{
-  hook -once buffer NormalIdle .* %{
-    update_git_diff_flags
-  }
-}
-hook global BufOpenFile .* %{
-  hook -once buffer NormalIdle .* %{
-    update_git_diff_flags
-  }
-}
-hook global NormalKey 'dc' %{
-  hook -once buffer NormalIdle .* %{
-    update_git_diff_flags
-  }
-}
-hook global ModeChange pop:insert:normal %{
-  hook -once buffer NormalIdle .* %{
-    update_git_diff_flags
-  }
-}
+hook global NormalIdle .* update_git_diff_flags

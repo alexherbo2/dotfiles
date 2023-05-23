@@ -224,10 +224,6 @@ define-command open_current_buffer_with_helix %{
   terminal hx "%val{buffile}:%val{cursor_line}:%val{cursor_column}"
 }
 
-define-command open_gitui %{
-  terminal gitui
-}
-
 define-command mkdir %{
   nop %sh(mkdir -p -- "$(dirname -- "$kak_buffile")")
 }
@@ -401,7 +397,7 @@ map -docstring 'iterate previous selection' global insert <c-p> '<esc>:iterate_p
 
 map -docstring 'move selected lines down' global normal <c-j> ':move_selected_lines_down<ret>'
 map -docstring 'move selected lines up' global normal <c-k> ':move_selected_lines_up<ret>'
-map -docstring 'select all occurrences of current selection' global normal <a-percent> ':select_highlights<ret>'
+map -docstring 'select all occurrences of current selection' global normal f ':select_highlights<ret>'
 map -docstring 'increment selected numbers' global normal <c-a> ':increment_selected_numbers %val{count}<ret>'
 map -docstring 'decrement selected numbers' global normal <c-x> ':decrement_selected_numbers %val{count}<ret>'
 map -docstring 'buffer directory' global prompt <a-/> '%sh{dirname "$kak_bufname"}<a-!>/'
@@ -463,21 +459,7 @@ map -docstring 'tag' global object t 'c<lt>.+?<gt>,<lt>/.+?<gt><ret>'
 map -docstring 'line' global object x '<esc>x_'
 
 # Extended next and previous pairs
-map global normal <ret> ':'
-map global normal f '<a-:>F'
-map global normal F '<a-:><a-;><a-F>'
-map global normal t '<a-:>T'
-map global normal T '<a-:><a-;><a-T>'
-# map global normal / '<a-:>?'
-# map global normal ? '<a-:><a-;><a-?>'
-# map global normal n '<a-:>?<ret>'
-# map global normal N '<a-:><a-;><a-?><ret>'
 map global normal x ':select_whole_lines_or_extend_lines_down<ret>'
-map global normal X 'x<a-:><a-;>'
-map global normal { '<a-:><a-;>{p'
-map global normal } '<a-:>}p'
-
-map -docstring 'open gitui' global window g ':open_gitui<ret>'
 
 # Language support -------------------------------------------------------------
 

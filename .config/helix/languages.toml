@@ -1,9 +1,0 @@
-# Helix
-# https://helix-editor.com
-# https://docs.helix-editor.com/languages.html
-# https://github.com/helix-editor/helix/blob/master/languages.toml
-# https://microsoft.github.io/language-server-protocol/implementors/servers/
-
-[[language]]
-name = 'crystal'
-language-server = { command = 'crystalline', args = ['--stdio'] }

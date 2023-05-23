@@ -50,13 +50,6 @@ add-highlighter global/characters regex '[–—−×]' '0:cyan+f'
 
 # Commands ---------------------------------------------------------------------
 
-define-command insert_text -params 1 %{
-  evaluate-commands -save-regs '"' %{
-    set-register '"' %arg{1}
-    execute-keys -draft ';P'
-  }
-}
-
 define-command build_static_words_from_selections %{
   execute-keys -save-regs '' 'y:edit -scratch<ret><a-R>a<ret><esc><a-_>|sort -u<ret><a-s>H'
 }
@@ -127,6 +120,16 @@ define-command assert_buffer_eq_and_clean_them -params 2 %{
   assert_buffer_eq %arg{1} %arg{1}
   evaluate-commands -buffer "%arg{1},%arg{2}" delete-buffer
 }
+
+define-command delete_matching_buffers -params 1 %{
+  evaluate-commands -buffer * %sh{
+    evaluate-commands %sh{
+      case "$kak_buffile" in $1) echo delete-buffer ;; esac
+    }
+  }
+}
+alias global db* delete_matching_buffers
+complete-command delete_matching_buffers buffer
 
 alias global assert_buffer_eq! assert_buffer_eq_and_clean_them
 complete-command assert_buffer_eq_and_clean_them buffer
@@ -230,6 +233,8 @@ define-command mkdir %{
 define-command open_config %{
   edit "%val{config}/kakrc"
 }
+
+alias global open_kakrc open_config
 
 define-command get_character_info %{
   echo -markup %sh{printf '{Information}U+%04x' "$kak_cursor_char_value"}
@@ -369,6 +374,8 @@ map global normal <a-Q> Q
 map -docstring 'unimpaired_left' global user '[' ':enter_unimpaired_left_mode<ret>'
 map -docstring 'unimpaired_right' global user ']' ':enter_unimpaired_right_mode<ret>'
 
+map -docstring 'enter digraphs mode' global insert <c-k> '<a-;>:enter_digraphs_mode<ret>'
+
 hook global InsertCompletionShow .* %{
   map window insert <c-n> <c-n>
   map window insert <c-p> <c-p>
@@ -400,42 +407,6 @@ map -docstring 'paste' global insert <c-y> '<c-r>"'
 map -docstring 'Increase indent' global insert <tab> '<a-;>:increase_indent<ret>'
 map -docstring 'Decrease indent' global insert <s-tab> '<a-;>:decrease_indent<ret>'
 map -docstring 'Decrease indent or erase character before cursor' global insert <backspace> '<a-;>:decrease_indent_or_erase_character_before_cursor<ret>'
-
-# Insert various characters.
-# Heavily based on qwerty-lafayette.
-# https://qwerty-lafayette.org
-# See also “Vim digraphs” for defaults.
-# https://vimhelp.org/digraph.txt.html#digraphs-default
-declare-user-mode digraphs
-map -docstring 'enter digraphs mode' global insert <c-k> '<a-;>:enter-user-mode digraphs<ret>'
-map -docstring 'â' global digraphs 'q' ':insert_text â<ret>'
-map -docstring 'é' global digraphs 'w' ':insert_text é<ret>'
-map -docstring 'É' global digraphs 'W' ':insert_text É<ret>'
-map -docstring 'è' global digraphs 'e' ':insert_text è<ret>'
-map -docstring 'ë' global digraphs 'E' ':insert_text ë<ret>'
-map -docstring 'ê' global digraphs 'r' ':insert_text ê<ret>'
-map -docstring 'ù' global digraphs 'u' ':insert_text ù<ret>'
-map -docstring 'û' global digraphs 'U' ':insert_text û<ret>'
-map -docstring 'î' global digraphs 'i' ':insert_text î<ret>'
-map -docstring 'ï' global digraphs 'I' ':insert_text ï<ret>'
-map -docstring 'ô' global digraphs 'o' ':insert_text ô<ret>'
-map -docstring 'ê' global digraphs '[' ':insert_text ê<ret>'
-map -docstring 'ë' global digraphs ']' ':insert_text ë<ret>'
-map -docstring '«' global digraphs '{' ':insert_text «<ret>'
-map -docstring '»' global digraphs '}' ':insert_text »<ret>'
-map -docstring 'à' global digraphs 'a' ':insert_text à<ret>'
-map -docstring 'À' global digraphs 'A' ':insert_text À<ret>'
-map -docstring 'â' global digraphs 's' ':insert_text â<ret>'
-map -docstring 'ç' global digraphs 'c' ':insert_text ç<ret>'
-map -docstring 'Ç' global digraphs 'C' ':insert_text Ç<ret>'
-map -docstring 'æ' global digraphs 'z' ':insert_text æ<ret>'
-map -docstring 'œ' global digraphs 'x' ':insert_text œ<ret>'
-map -docstring '…' global digraphs '.' ':insert_text …<ret>'
-map -docstring '’' global digraphs '<space>' ':insert_text ’<ret>'
-map -docstring '“' global digraphs '<lt>' ':insert_text “<ret>'
-map -docstring '”' global digraphs '<gt>' ':insert_text ”<ret>'
-map -docstring '—' global digraphs '<minus>' ':insert_text —<ret>'
-map -docstring '–' global digraphs '_' ':insert_text –<ret>'
 
 # Text objects
 # Quotation marks

@@ -121,15 +121,15 @@ define-command assert_buffer_eq_and_clean_them -params 2 %{
   evaluate-commands -buffer "%arg{1},%arg{2}" delete-buffer
 }
 
-define-command delete_matching_buffers -params 1 %{
+define-command delete_buffers_matching_glob_pattern -params 1 %{
   evaluate-commands -buffer * %sh{
     evaluate-commands %sh{
       case "$kak_buffile" in $1) echo delete-buffer ;; esac
     }
   }
 }
-alias global db* delete_matching_buffers
-complete-command delete_matching_buffers buffer
+alias global db* delete_buffers_matching_glob_pattern
+complete-command delete_buffers_matching_glob_pattern buffer
 
 alias global assert_buffer_eq! assert_buffer_eq_and_clean_them
 complete-command assert_buffer_eq_and_clean_them buffer

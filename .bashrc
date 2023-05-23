@@ -144,6 +144,8 @@ alias ks=kak_server
 alias kS='kak_server "$(basename "$PWD")"'
 alias ko=kak_open
 alias ka='kak -c "$KAKOUNE_SESSION"'
+alias ks='kak -s'
+alias kc='kak -c'
 alias kn='kak -n'
 alias kl='kak -l'
 

@@ -34,7 +34,7 @@ define-command analyze_indent_style -params 1 %{
 
 define-command try_infer_indent_style -params 3.. %{
   evaluate-commands %sh{
-    if [ "$3" -eq 0 -o "$3" -eq 2 -o "$3" -eq 4 -o "$3" -eq 6 -o "$3" -eq 8 ] && [ "$2" -gt 0 ] && echo "$4 / $2 < 0.66" | bc -l | grep -q 1; then
+    if [ "$3" -eq 0 -o "$3" -eq 2 -o "$3" -eq 4 -o "$3" -eq 6 -o "$3" -eq 8 ] && [ "$2" -gt 0 ] && echo "${4:-0} / $2 < 0.66" | bc -l | grep -q 1; then
       printf 'set-option "buffer=%%arg{1}" indentwidth %d' "$3"
     fi
   }

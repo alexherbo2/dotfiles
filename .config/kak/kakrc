@@ -32,7 +32,6 @@ set-option global scrolloff 5,1
 #set-option global autoinfo ''
 add-highlighter global/match_brackets show-matching
 add-highlighter global/line_numbers number-lines -hlcursor
-add-highlighter global/soft_wrap wrap -indent -marker '↪'
 
 set-option global terminal_command alacritty
 set-option global terminal_args msg create-window -e
@@ -367,17 +366,8 @@ map -docstring 'yank selected text to the terminal clipboard' global user y ':ya
 map global normal <a-q> q
 map global normal <a-Q> Q
 
-# Vim-like unimpaired mappings
-declare-user-mode unimpaired_left
-declare-user-mode unimpaired_right
-map -docstring 'unimpaired_left' global user '[' ': enter-user-mode unimpaired_left<ret>'
-map -docstring 'unimpaired_right' global user ']' ': enter-user-mode unimpaired_right<ret>'
-map -docstring 'read-only' global unimpaired_left r ': set-option buffer readonly yes<ret>'
-map -docstring 'read-only' global unimpaired_right r ': set-option buffer readonly no<ret>'
-map -docstring 'render whitespace' global unimpaired_left w ': remove-highlighter global/render_whitespace<ret>'
-map -docstring 'render whitespace' global unimpaired_right w ': add-highlighter global/render_whitespace show-whitespaces<ret>'
-map -docstring 'rulers' global unimpaired_left r ': remove-highlighter global/rulers<ret>'
-map -docstring 'rulers' global unimpaired_right r ': add-highlighter global/rulers column 81 default,cyan<ret>'
+map -docstring 'unimpaired_left' global user '[' ':enter_unimpaired_left_mode<ret>'
+map -docstring 'unimpaired_right' global user ']' ':enter_unimpaired_right_mode<ret>'
 
 hook global InsertCompletionShow .* %{
   map window insert <c-n> <c-n>

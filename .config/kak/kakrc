@@ -30,11 +30,9 @@ set-option global ui_options terminal_set_title=no terminal_assistant=none
 set-option global matching_pairs ( ) { } [ ] < > “ ” ‘ ’ « » ‹ ›
 set-option global scrolloff 5,1
 #set-option global autoinfo ''
-add-highlighter global/show-matching show-matching
-add-highlighter global/number-lines number-lines -hlcursor
+add-highlighter global/match_brackets show-matching
+add-highlighter global/line_numbers number-lines -hlcursor
 add-highlighter global/soft_wrap wrap -indent -marker '↪'
-add-highlighter global/selected_text ref selected_text
-add-highlighter global/git_diff ref git_diff
 
 set-option global terminal_command alacritty
 set-option global terminal_args msg create-window -e
@@ -380,8 +378,8 @@ map -docstring 'unimpaired_left' global user '[' ': enter-user-mode unimpaired_l
 map -docstring 'unimpaired_right' global user ']' ': enter-user-mode unimpaired_right<ret>'
 map -docstring 'read-only' global unimpaired_left r ': set-option buffer readonly yes<ret>'
 map -docstring 'read-only' global unimpaired_right r ': set-option buffer readonly no<ret>'
-map -docstring 'render whitespace' global unimpaired_left w ': remove-highlighter global/whitespace<ret>'
-map -docstring 'render whitespace' global unimpaired_right w ': add-highlighter global/whitespace show-whitespaces<ret>'
+map -docstring 'render whitespace' global unimpaired_left w ': remove-highlighter global/render_whitespace<ret>'
+map -docstring 'render whitespace' global unimpaired_right w ': add-highlighter global/render_whitespace show-whitespaces<ret>'
 map -docstring 'rulers' global unimpaired_left r ': remove-highlighter global/rulers<ret>'
 map -docstring 'rulers' global unimpaired_right r ': add-highlighter global/rulers column 81 default,cyan<ret>'
 

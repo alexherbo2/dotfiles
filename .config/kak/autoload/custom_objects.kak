@@ -19,14 +19,8 @@ define-command -hidden select_single_angle_quotation_mark_object %{
   execute-keys 'c‹,›<ret>'
 }
 
-# Quotation marks
-map -docstring 'double quotation mark' global object <a-Q> ''
-map -docstring 'single quotation mark' global object <a-q> ''
-map -docstring 'double angle quotation mark' global object <a-G> ''
-map -docstring 'single angle quotation mark' global object <a-g> ''
-# Tag
-map -docstring 'tag' global object t '<ret>'
-##
-##
-# Line
-map -docstring 'line' global object x '<esc>x_'
+map -docstring 'tag' global object t '<a-;>select_xml_tag_object<ret>'
+map -docstring 'double quotation mark' global object <a-Q> '<a-;>select_double_quotation_mark_object<ret>'
+map -docstring 'single quotation mark' global object <a-q> '<a-;>select_single_quotation_mark_object<ret>'
+map -docstring 'double angle quotation mark' global object <a-G> '<a-;>select_double_angle_quotation_mark_object<ret>'
+map -docstring 'single angle quotation mark' global object <a-g> '<a-;>select_single_angle_quotation_mark_object<ret>'

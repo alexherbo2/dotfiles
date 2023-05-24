@@ -2,9 +2,35 @@ colors:
   primary:
     background: '#ffffff'
     foreground: '#000000'
+  cursor:
+    text: CellForeground
+    cursor: '#7f7f7f'
+  vi_mode_cursor:
+    text: CellForeground
+    cursor: '#7f7f7f'
   selection:
     text: CellForeground
     background: '#a5cdff'
+  search:
+    matches:
+      foreground: CellForeground
+      background: '#e6e6e6'
+    focused_match:
+      foreground: CellForeground
+      background: '#a5cdff'
+  hints:
+    start:
+      foreground: '#000000'
+      background: '#e5e500'
+    end:
+      foreground: '#000000'
+      background: '#e5e500'
+  line_indicator:
+    foreground: '#000000'
+    background: '#e6e6e6'
+  footer_bar:
+    foreground: '#000000'
+    background: '#e6e6e6'
   normal:
     black: '#000000'
     red: '#990000'

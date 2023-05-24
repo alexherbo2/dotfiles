@@ -93,8 +93,8 @@ map -docstring 'yank selected text to the terminal clipboard' global user y ':ya
 # Key remapping
 map global normal <a-q> q
 map global normal <a-Q> Q
-map global normal d <a-d>
-map global normal c <a-c>
+# map global normal d <a-d>
+# map global normal c <a-c>
 
 map -docstring 'unimpaired_left' global user '[' ':enter_unimpaired_left_mode<ret>'
 map -docstring 'unimpaired_right' global user ']' ':enter_unimpaired_right_mode<ret>'
@@ -134,20 +134,6 @@ map -docstring 'Decrease indent' global insert <s-tab> '<a-;>:decrease_indent<re
 map -docstring 'Decrease indent or erase character before cursor' global insert <backspace> '<a-;>:decrease_indent_or_erase_character_before_cursor<ret>'
 
 map global normal x ':select_whole_lines_or_extend_lines_down<ret>'
-
-# Text objects
-# Quotation marks
-map -docstring 'double quotation mark' global object <a-Q> 'c“,”<ret>'
-map -docstring 'single quotation mark' global object <a-q> 'c‘,’<ret>'
-map -docstring 'double angle quotation mark' global object <a-G> 'c«,»<ret>'
-map -docstring 'single angle quotation mark' global object <a-g> 'c‹,›<ret>'
-# Tag
-map -docstring 'tag' global object t 'c<lt>.+?<gt>,<lt>/.+?<gt><ret>'
-##
-map -docstring "xml tag objet" global object t %{c<lt>([\w.]+)\b[^>]*?(?<lt>!/)>,<lt>/([\w.]+)\b[^>]*?(?<lt>!/)><ret>}
-##
-# Line
-map -docstring 'line' global object x '<esc>x_'
 
 # Language support -------------------------------------------------------------
 

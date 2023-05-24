@@ -5,7 +5,7 @@ colors:
   selection:
     text: CellForeground
     background: '#a5cdff'
-normal:
+  normal:
     black: '#000000'
     red: '#990000'
     green: '#00a600'
@@ -14,7 +14,7 @@ normal:
     magenta: '#b200b2'
     cyan: '#00a6b2'
     white: '#bfbfbf'
-bright:
+  bright:
     black: '#666666'
     red: '#e50000'
     green: '#00d900'

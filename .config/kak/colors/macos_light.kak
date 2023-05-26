@@ -110,5 +110,5 @@ set-face global Whitespace "rgb:%opt{non_text}+f" # Kakoune ⇒ add-highlighter 
 set-face global WrapMarker "rgb:%opt{non_text}" # Kakoune ⇒ add-highlighter -override global/wrap wrap -marker '↪'
 
 # Custom faces
-set-face global Search "default,rgba:%opt{background_dark}%opt{selection_highlight_alpha}"
+set-face global Search "default,rgb:%opt{background_dark}"
 set-face global SelectedText "default,rgba:%opt{selection}%opt{selection_highlight_alpha}"

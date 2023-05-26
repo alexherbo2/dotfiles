@@ -108,3 +108,7 @@ set-face global LineNumbersWrapped "rgb:%opt{background}" # Kakoune ⇒ add-high
 set-face global MatchingChar "default,rgba:%opt{selection}%opt{selection_alpha}+u" # Kakoune ⇒ add-highlighter -override global/show-matching show-matching — https://github.com/dracula/vim/blob/master/colors/dracula.vim#:~:text=MatchParen
 set-face global Whitespace "rgb:%opt{non_text}+f" # Kakoune ⇒ add-highlighter -override global/show-whitespaces show-whitespaces
 set-face global WrapMarker "rgb:%opt{non_text}" # Kakoune ⇒ add-highlighter -override global/wrap wrap -marker '↪'
+
+# Custom faces
+set-face global Search "default,rgba:%opt{background_dark}%opt{selection_highlight_alpha}"
+set-face global SelectedText "default,rgba:%opt{selection}%opt{selection_highlight_alpha}"

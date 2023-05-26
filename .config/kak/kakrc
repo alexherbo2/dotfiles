@@ -32,6 +32,8 @@ set-option global scrolloff 5,1
 #set-option global autoinfo ''
 add-highlighter global/match_brackets show-matching
 add-highlighter global/line_numbers number-lines -hlcursor
+add-highlighter global/search ref search
+add-highlighter global/selected_text ref selected_text
 
 set-option global terminal_command alacritty
 set-option global terminal_args msg create-window -e

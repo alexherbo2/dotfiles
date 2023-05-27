@@ -1,10 +1,10 @@
 set-face global Search 'black,yellow+d'
 
-add-highlighter shared/search dynregex '%reg{/}' 0:Search
+add-highlighter shared/search dynregex '%reg{/}' 0:SearchRegister
 
 hook global NormalKey '/|<a-/>|\?|<a-\?>' %{
-  unset-face window Search
+  set-face global SearchRegister Search
   hook -once window ModeChange 'pop:prompt:normal' %{
-    set-face window Search Default
+    set-face global SearchRegister Default
   }
 }

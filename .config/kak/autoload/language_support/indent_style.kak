@@ -1,8 +1,9 @@
 # Implementation reference:
 # https://github.com/helix-editor/helix/blob/master/helix-core/src/indent.rs
-define-command detect-indent-style %{
+define-command detect_current_buffer_indent_style %{
   detect_indent_style %val{bufname}
 }
+alias global detect-indent-style detect_current_buffer_indent_style
 
 define-command detect_indent_style -params 1 %{
   analyze_indent_style %arg{1}

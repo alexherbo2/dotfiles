@@ -3,19 +3,6 @@ declare-option str increase_indent_pattern '[({\[]$'
 declare-option str decrease_indent_pattern '^\h*[)}\]]$'
 declare-option str ignore_indent_pattern '^\h*//'
 
-define-command occi_indent_config %{
-  hook global InsertChar '[\n(){}[\]]' indent_on_inserted_character_with_indentation_rules
-  map global insert <tab> '<a-;>:increase_indent<ret>'
-  map global insert <s-tab> '<a-;>:decrease_indent<ret>'
-  map global insert <backspace> '<a-;>:decrease_indent_or_erase_character_before_cursor<ret>'
-  map global insert <c-u> '<a-;>:erase_characters_before_cursor_to_line_begin<ret>'
-  hook global BufSetOption filetype=cpp %{
-    set-option buffer increase_indent_pattern '[({\[]$'
-    set-option buffer decrease_indent_pattern '^\h*[)}\]]$'
-    set-option buffer ignore_indent_pattern '^\h*//'
-  }
-}
-
 define-command increase_indent %{
   execute-keys -draft '<a-gt>'
 }

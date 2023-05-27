@@ -57,11 +57,6 @@ add-highlighter shared/json/string.quoted.double region '"' '(?<!\\)(?:\\\\)*"' 
 add-highlighter shared/json/string.quoted.double/escaping ref json.string
 add-highlighter shared/json/string.quoted.double/escaped regex '\\"' 0:value
 
-# Template strings
-add-highlighter shared/json/string.quoted.template region '`' '(?<!\\)(?:\\\\)*`' group
-add-highlighter shared/json/string.quoted.template/interpolated ref json.string.interpolated
-add-highlighter shared/json/string.quoted.template/escaped regex '\\`' 0:value
-
 # Regular expressions
 # https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 add-highlighter shared/json/string.quoted.regexp region '/\H' '(?<!\\)(?:\\\\)*/[imsdguy]*' group

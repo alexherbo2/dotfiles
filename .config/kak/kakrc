@@ -73,13 +73,13 @@ map global prompt <a-o> '<home>(?S)<end>'
 map -docstring 'enter_letter_case_mode' global normal '`' ':enter_letter_case_mode<ret>'
 map -docstring 'enter_window_mode' global normal <c-w> ':enter_window_mode<ret>'
 map -docstring 'enter_window_mode' global user w ':enter_window_mode<ret>'
-map -docstring 'enter extend mode' global normal V ':enter_extend_mode<ret>'
+map -docstring 'enter extend mode' global normal v ':enter_extend_mode<ret>'
 map -docstring 'enter match mode' global normal m ':enter_match_mode<ret>'
 map -docstring 'enter mark mode' global normal "'" ':enter_mark_mode<ret>'
 map -docstring 'enter select mode' global normal S ':enter_select_mode<ret>'
 map -docstring 'enter surround mode' global normal q ':enter_surround_mode<ret>'
-map -docstring 'select previous surrounding object' global normal [ ':enter_select_previous_object_mode<ret>'
-map -docstring 'select next surrounding object' global normal ] ':enter_select_next_object_mode<ret>'
+map -docstring 'select previous surrounding object' global normal F ':enter_select_previous_object_mode<ret>'
+map -docstring 'select next surrounding object' global normal f ':enter_select_next_object_mode<ret>'
 map -docstring 'open file picker' global user f ':open_file_picker<ret>'
 map -docstring 'open buffer picker' global user b ':open_buffer_picker<ret>'
 map -docstring 'open global search prompt' global user / ':open_global_search_prompt<ret>'
@@ -98,8 +98,8 @@ map global normal <a-Q> Q
 # map global normal d <a-d>
 # map global normal c <a-c>
 
-map -docstring 'unimpaired_left' global user '[' ':enter_unimpaired_left_mode<ret>'
-map -docstring 'unimpaired_right' global user ']' ':enter_unimpaired_right_mode<ret>'
+map -docstring 'unimpaired_left' global normal '[' ':enter_unimpaired_left_mode<ret>'
+map -docstring 'unimpaired_right' global normal ']' ':enter_unimpaired_right_mode<ret>'
 
 map -docstring 'enter digraphs mode' global insert <c-k> '<a-;>:enter_digraphs_mode<ret>'
 

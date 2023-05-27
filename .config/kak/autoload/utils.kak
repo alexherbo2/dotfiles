@@ -203,22 +203,6 @@ define-command open_buffer_picker %{
   }
 }
 
-define-command open_sudo_write_prompt %{
-  prompt -password password: %{
-    sudo_write %val{text}
-  }
-}
-
-alias global sudo-write open_sudo_write_prompt
-
-define-command sudo_write -params 1 %{
-  evaluate-commands %sh{
-    echo "write $kak_quoted_response_fifo" > "$kak_command_fifo"
-    echo "$1" | sudo -S dd "if=$kak_response_fifo" "of=$kak_buffile" ||
-    echo fail sudo write failed
-  }
-}
-
 define-command open_document_symbol_picker %{
   lsp-goto-document-symbol
 }

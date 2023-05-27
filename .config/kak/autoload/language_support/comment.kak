@@ -4,15 +4,6 @@
 declare-option str-list line_comment_token '//'
 declare-option str-list block_comment_tokens '/*' '*/'
 
-define-command occi_comment_config %{
-  map global normal '#' ':toggle_comments_with_config<ret>'
-
-  hook global BufSetOption filetype=cpp %{
-    set-option buffer line_comment_token '//'
-    set-option buffer block_comment_tokens '/*' '*/'
-  }
-}
-
 define-command toggle_comments_with_config %{
   try toggle_line_comments_with_config catch toggle_block_comments_with_config
 }

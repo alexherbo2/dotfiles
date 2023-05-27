@@ -30,3 +30,5 @@ map -docstring 'render whitespace' global unimpaired_left w ':remove_whitespace_
 map -docstring 'read-only' global unimpaired_left r ':disable_readonly_mode<ret>'
 map -docstring 'soft-wrap' global unimpaired_left <tab> ':disable_soft_wrap<ret>'
 map -docstring 'rulers' global unimpaired_left | ':remove_rulers<ret>'
+map -docstring 'space' global unimpaired_left <space> <a-O>
+map -docstring 'buffer' global unimpaired_left b ':buffer-previous<ret>'

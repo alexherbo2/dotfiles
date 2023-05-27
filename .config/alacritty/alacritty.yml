@@ -7,6 +7,7 @@ import:
 - ~/.config/alacritty/options/enable_csi_u_key_encoding.yml
 - ~/.config/alacritty/options/use_option_as_meta_key.yml
 - ~/.config/alacritty/colors/macos_light.yml
+# - ~/.config/alacritty/colors/macos_dark.yml
 
 # Appearance -------------------------------------------------------------------
 

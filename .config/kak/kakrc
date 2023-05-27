@@ -93,6 +93,7 @@ map -docstring 'enter lsp mode' global user l ':enter_lsp_mode<ret>'
 map -docstring 'yank selected text to the terminal clipboard' global user y ':yank_selected_text_to_terminal_clipboard<ret>'
 
 # Key remapping
+map global normal N <a-n>
 map global normal <a-q> q
 map global normal <a-Q> Q
 # map global normal d <a-d>

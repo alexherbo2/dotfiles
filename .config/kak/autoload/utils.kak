@@ -178,6 +178,15 @@ define-command open_current_buffer_with_helix %{
 define-command mkdir %{
   nop %sh(mkdir -p -- "$(dirname -- "$kak_buffile")")
 }
+define-command rm %{
+  nop %sh(rm -- "$kak_buffile")
+  delete-buffer
+}
+define-command mv -params 1 %{
+  nop %sh(mv -- "$kak_buffile" "$1")
+  rename-buffer -file -- %arg{1}
+}
+complete-command mv file
 
 define-command open_config %{
   edit "%val{config}/kakrc"

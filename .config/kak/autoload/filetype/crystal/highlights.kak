@@ -148,11 +148,11 @@ add-highlighter shared/crystal.comment/comment/ fill comment
 #
 # Check the number of horns with `#horns`.
 #
-add-highlighter shared/crystal/comment/reference regex "`[#.]?\w+[?!]?`" 0:mono
-add-highlighter shared/crystal/comment/parameter regex '\*\w+\*' 0:mono
-add-highlighter shared/crystal/comment/code-block regex '```(\h*\w+)?$' 0:block
-add-highlighter shared/crystal/comment/admonition regex '\h+([A-Z]+):\h+' 1:meta
-add-highlighter shared/crystal/comment/directive regex ':\w+:' 0:meta
+add-highlighter shared/crystal.comment/comment/reference regex "`[#.]?\w+[?!]?`" 0:mono
+add-highlighter shared/crystal.comment/comment/parameter regex '\*\w+\*' 0:mono
+add-highlighter shared/crystal.comment/comment/code-block regex '```(\h*\w+)?$' 0:block
+add-highlighter shared/crystal.comment/comment/admonition regex '\h+([A-Z]+):\h+' 1:meta
+add-highlighter shared/crystal.comment/comment/directive regex ':\w+:' 0:meta
 
 # Escape sequences
 add-highlighter shared/crystal.escape_sequence regions
@@ -167,22 +167,54 @@ add-highlighter shared/crystal.string/string/ fill string
 add-highlighter shared/crystal.string/string/ ref crystal.escape_sequence
 
 # Interpolated strings
+# Interpolation
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#interpolation
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#escaping
+# Strings
+# Reference
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html
+# String literal
+# Examples:
+#
+# simple string ⇒ "hello world"
+# double quote ⇒ "\""
+# backslash ⇒ "\\"
+#
 add-highlighter shared/crystal.string.interpolated regions
 add-highlighter shared/crystal.string.interpolated/string default-region group
 add-highlighter shared/crystal.string.interpolated/string/ fill string
 add-highlighter shared/crystal.string.interpolated/string/ ref crystal.escape_sequence
-add-highlighter shared/crystal.string.interpolated/ region -recurse '\{' '\$\{\K' '(?=\})' ref crystal
+add-highlighter shared/crystal.string.interpolated/ region -recurse '\{' '#\{\K' '(?=\})' ref crystal
 
 # Regular expressions
-add-highlighter shared/crystal.regexp regions
-add-highlighter shared/crystal.regexp/regexp default-region group
-add-highlighter shared/crystal.regexp/regexp/ fill meta
+add-highlighter shared/crystal.string.regexp regions
+add-highlighter shared/crystal.string.regexp/regexp default-region group
+add-highlighter shared/crystal.string.regexp/regexp/ fill meta
+
+# Regular expressions
+add-highlighter shared/crystal.string.regexp.interpolated regions
+add-highlighter shared/crystal.string.regexp.interpolated/regexp default-region group
+add-highlighter shared/crystal.string.regexp.interpolated/regexp/ fill meta
+add-highlighter shared/crystal.string.regexp.interpolated/ region -recurse '\{' '#\{\K' '(?=\})' ref crystal
+
+# Command literal
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/command.html
+add-highlighter shared/crystal.string.command.interpolated regions
+add-highlighter shared/crystal.string.command.interpolated/command default-region group
+add-highlighter shared/crystal.string.command.interpolated/command/ fill meta
+add-highlighter shared/crystal.string.command.interpolated/ region -recurse '\{' '#\{\K' '(?=\})' ref crystal
 
 # Syntax and semantics
+# https://crystal-lang.org/reference/master/syntax_and_semantics/
 # Method definition and call
 # https://crystal-lang.org/reference/master/syntax_and_semantics/method_arguments.html
 add-highlighter shared/crystal/code/instance_method_name_declaration regex '\bdef\h+\K(?:\w+\.|\w+::)*\w+[?!]?' 0:function
 add-highlighter shared/crystal/code/method_name_call regex '\b(?:\w+\.|\w+::)*\w+[?!]?(?=\()' 0:function
+
+# Instance and class variables
+# https://crystal-lang.org/reference/master/syntax_and_semantics/methods_and_instance_variables.html
+# https://crystal-lang.org/reference/master/syntax_and_semantics/class_variables.html
+add-highlighter shared/crystal/code/instance-and-class-variables regex '@@?\w+\b' 0:variable
 
 # Keywords
 # https://github.com/crystal-lang/crystal/blob/master/src/compiler/crystal/syntax/lexer.cr
@@ -198,65 +230,11 @@ add-highlighter shared/crystal/code/support.function.kernel.top_level_namespace 
 add-highlighter shared/crystal/code/support.function.object.object_macros regex '\bdef_equals_and_hash\b|\bforward_missing_to\b|\bclass_property\?|\bclass_property!|\bclass_property\b|\bclass_getter\?|\bclass_getter!|\bclass_setter\b|\bclass_getter\b|\bdef_equals\b|\bproperty\?|\bproperty!|\bdef_clone\b|\bproperty\b|\bdelegate\b|\bdef_hash\b|\bgetter\?|\bgetter!|\bsetter\b|\bgetter\b' 0:builtin
 
 # Operators
-add-highlighter shared/crystal/code/operator regex '[-+*/%^&!?@|<>=:(){}[\];:,.]' 0:operator
+# https://crystal-lang.org/reference/master/syntax_and_semantics/operators.html
+add-highlighter shared/crystal/code/operator regex '[-+*/%^&!?@|<>=:(){}[\];:,.~]' 0:operator
 
 # Literals
 add-highlighter shared/crystal/code/literal regex '\bthis\b|\bundefined\b|\bdocument\b|\bwindow\b|\bfalse\b|\btrue\b|\bnull\b|\b_G\b|\b_ENV\b|\d[\d_]*\.\w[\w]*|\d[\w]*|\b[A-Z]\w*\b' 0:value
-
-# Comments
-add-highlighter shared/crystal/comment region '//' '$' ref crystal.comment
-
-# Single quoted strings
-add-highlighter shared/crystal/string.quoted.single region "'" "(?<!\\)(?:\\\\)*'" group
-add-highlighter shared/crystal/string.quoted.single/escaping ref crystal.string
-add-highlighter shared/crystal/string.quoted.single/escaped regex "\\'" 0:value
-
-# Double quoted strings
-add-highlighter shared/crystal/string.quoted.double region '"' '(?<!\\)(?:\\\\)*"' group
-add-highlighter shared/crystal/string.quoted.double/escaping ref crystal.string
-add-highlighter shared/crystal/string.quoted.double/escaped regex '\\"' 0:value
-
-# Template strings
-add-highlighter shared/crystal/string.quoted.template region '`' '(?<!\\)(?:\\\\)*`' group
-add-highlighter shared/crystal/string.quoted.template/interpolated ref crystal.string.interpolated
-add-highlighter shared/crystal/string.quoted.template/escaped regex '\\`' 0:value
-
-# Regular expressions
-# https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-add-highlighter shared/crystal/string.quoted.regexp region '/\H' '(?<!\\)(?:\\\\)*/[imsdguy]*' group
-add-highlighter shared/crystal/string.quoted.regexp/regexp ref crystal.regexp
-add-highlighter shared/crystal/string.quoted.regexp/escaped regex '\\/' 0:value
-###########################################################################################################
-# Reference
-# https://crystal-lang.org/reference/master/syntax_and_semantics/
-
-# Instance and class variables
-
-# Reference
-# https://crystal-lang.org/reference/master/syntax_and_semantics/methods_and_instance_variables.html
-# https://crystal-lang.org/reference/master/syntax_and_semantics/class_variables.html
-
-add-highlighter shared/crystal/code/instance-and-class-variables regex '@@?\w+\b' 0:variable
-
-# Punctuation
-
-# punctuation.separator
-add-highlighter shared/crystal/code/punctuation.separator regex '\.|::' 0:meta
-
-# Operators
-
-# Reference
-# https://crystal-lang.org/reference/master/syntax_and_semantics/operators.html
-
-add-highlighter shared/crystal/code/operator regex '[!%&*+/<=>^|~-]' 0:operator
-add-highlighter shared/crystal/code/operator.range regex '\.\.\.?' 0:operator
-
-# Constants
-
-# Reference
-# https://crystal-lang.org/reference/master/syntax_and_semantics/constants.html
-
-add-highlighter shared/crystal/code/variable.constant regex '\b[A-Z]\w*\b' 0:value
 
 # Numbers
 
@@ -282,60 +260,34 @@ add-highlighter shared/crystal/code/constant.numeric.integer.binary regex '\b0b[
 add-highlighter shared/crystal/code/constant.numeric.integer.octal regex '\b0o[0-7]+(_[iu](8|16|32|64|128))?\b' 0:value
 add-highlighter shared/crystal/code/constant.numeric.integer.hexadecimal regex '\b0x[0-9a-fA-F]+(_[iu](8|16|32|64|128))?\b' 0:value
 
+# Constants
+# https://crystal-lang.org/reference/master/syntax_and_semantics/constants.html
+add-highlighter shared/crystal/code/variable.constant regex '\b[A-Z]\w*\b' 0:value
+
 # Comments
 # https://crystal-lang.org/reference/master/syntax_and_semantics/comments.html
-add-highlighter shared/crystal/comment region '#(?!\{)' '$' group
-add-highlighter shared/crystal/comment/fill fill comment
+add-highlighter shared/crystal/comment region '#(?!\{)' '$' ref crystal.comment
 
-# Interpolation
-
-# Reference
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#interpolation
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#escaping
-
+# Single quoted strings
 # Characters
-
 # Reference
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/char.html
-
 # Examples:
 #
 # simple character ⇒ 'a'
 # single quote ⇒ '\''
 # backslash ⇒ '\\'
 #
-add-highlighter shared/crystal/string region "'" "(?<!\\)(\\\\)*'" regions
-add-highlighter shared/crystal/string/content default-region group
-add-highlighter shared/crystal/string/content/fill fill value
-add-highlighter shared/crystal/string/content/escaped-character regex '\\.' 0:meta
-add-highlighter shared/crystal/string/content/escape-sequence regex '\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|u\{[0-9a-fA-F]+\})' 0:meta
+add-highlighter shared/crystal/string.quoted.single region "'" "(?<!\\)(?:\\\\)*'" group
+add-highlighter shared/crystal/string.quoted.single/escaping ref crystal.string
+add-highlighter shared/crystal/string.quoted.single/escaped regex "\\'" 0:value
 
-# Strings
-
-# Reference
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html
-
-# String literal
-
-# Examples:
-#
-# simple string ⇒ "hello world"
-# double quote ⇒ "\""
-# backslash ⇒ "\\"
-#
-add-highlighter shared/crystal/string.interpolated region '"' '(?<!\\)(\\\\)*"' regions
-add-highlighter shared/crystal/string.interpolated/content default-region group
-add-highlighter shared/crystal/string.interpolated/content/fill fill string
-add-highlighter shared/crystal/string.interpolated/content/escaped-character ref crystal/string/content/escaped-character
-add-highlighter shared/crystal/string.interpolated/content/escape-sequence ref crystal/string/content/escape-sequence
-add-highlighter shared/crystal/string.interpolated/interpolation region -recurse '\{' '#\{' '\}' group
-add-highlighter shared/crystal/string.interpolated/interpolation/delimiters regex '(?<opening>..).+(?<closing>.)' opening:meta closing:meta
-add-highlighter shared/crystal/string.interpolated/interpolation/crystal ref crystal
-# define-crystal-interpolated-string string.quoted.double string '"' '(?<!\\)(\\\\)*"'
+# Double quoted strings
+add-highlighter shared/crystal/string.quoted.double region '"' '(?<!\\)(?:\\\\)*"' group
+add-highlighter shared/crystal/string.quoted.double/escaping ref crystal.string
+add-highlighter shared/crystal/string.quoted.double/escaped regex '\\"' 0:value
 
 # Percent string literals
-
-# Reference
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#percent-string-literals
 
 # Example:
@@ -343,11 +295,11 @@ add-highlighter shared/crystal/string.interpolated/interpolation/crystal ref cry
 # name = "world"
 # puts %Q(hello #{name})
 #
-add-highlighter shared/crystal/string.quoted.percent.parenthesis.interpolated region -recurse '\(' '%Q?\(' '\)' ref crystal/string.interpolated
-add-highlighter shared/crystal/string.quoted.percent.bracket.interpolated region -recurse '\[' '%Q?\[' '\]' ref crystal/string.interpolated
-add-highlighter shared/crystal/string.quoted.percent.brace.interpolated region -recurse '\{' '%Q?\{' '\}' ref crystal/string.interpolated
-add-highlighter shared/crystal/string.quoted.percent.angle.interpolated region -recurse '<' '%Q?<' '>' ref crystal/string.interpolated
-add-highlighter shared/crystal/string.quoted.percent.pipe.interpolated region '%Q?\|' '\|' ref crystal/string.interpolated
+add-highlighter shared/crystal/string.quoted.percent.parenthesis.interpolated region -recurse '\(' '%Q?\(' '\)' ref crystal.string.interpolated
+add-highlighter shared/crystal/string.quoted.percent.bracket.interpolated region -recurse '\[' '%Q?\[' '\]' ref crystal.string.interpolated
+add-highlighter shared/crystal/string.quoted.percent.brace.interpolated region -recurse '\{' '%Q?\{' '\}' ref crystal.string.interpolated
+add-highlighter shared/crystal/string.quoted.percent.angle.interpolated region -recurse '<' '%Q?<' '>' ref crystal.string.interpolated
+add-highlighter shared/crystal/string.quoted.percent.pipe.interpolated region '%Q?\|' '\|' ref crystal.string.interpolated
 
 # Raw percent string literals
 
@@ -360,11 +312,11 @@ add-highlighter shared/crystal/string.quoted.percent.pipe.interpolated region '%
 #
 # puts %q(hello world)
 #
-add-highlighter shared/crystal/string.quoted.percent.parenthesis region -recurse '\(' '%[qwi]\(' '\)' ref crystal/string
-add-highlighter shared/crystal/string.quoted.percent.bracket region -recurse '\[' '%[qwi]\[' '\]' ref crystal/string
-add-highlighter shared/crystal/string.quoted.percent.brace region -recurse '\{' '%[qwi]\{' '\}' ref crystal/string
-add-highlighter shared/crystal/string.quoted.percent.angle region -recurse '<' '%[qwi]<' '>' ref crystal/string
-add-highlighter shared/crystal/string.quoted.percent.pipe region '%[qwi]\|' '\|' ref crystal/string
+add-highlighter shared/crystal/string.quoted.percent.parenthesis region -recurse '\(' '%[qwi]\(' '\)' ref crystal.string
+add-highlighter shared/crystal/string.quoted.percent.bracket region -recurse '\[' '%[qwi]\[' '\]' ref crystal.string
+add-highlighter shared/crystal/string.quoted.percent.brace region -recurse '\{' '%[qwi]\{' '\}' ref crystal.string
+add-highlighter shared/crystal/string.quoted.percent.angle region -recurse '<' '%[qwi]<' '>' ref crystal.string
+add-highlighter shared/crystal/string.quoted.percent.pipe region '%[qwi]\|' '\|' ref crystal.string
 
 # Here document
 
@@ -376,8 +328,8 @@ add-highlighter shared/crystal/string.quoted.percent.pipe region '%[qwi]\|' '\|'
 # <<-'EOF'
 # EOF
 #
-add-highlighter shared/crystal/string.unquoted.heredoc.interpolated region -match-capture '<<-(\w+)' '^\h*(\w+)$' ref crystal/string.interpolated
-add-highlighter shared/crystal/string.unquoted.heredoc.raw region -match-capture "<<-'(\w+)'" '^\h*(\w+)$' ref crystal/string
+add-highlighter shared/crystal/string.unquoted.heredoc.interpolated region -match-capture '<<-(\w+)' '^\h*(\w+)$' ref crystal.string.interpolated
+add-highlighter shared/crystal/string.unquoted.heredoc.raw region -match-capture "<<-'(\w+)'" '^\h*(\w+)$' ref crystal.string
 
 # Symbols
 
@@ -391,37 +343,18 @@ add-highlighter shared/crystal/string.unquoted.heredoc.raw region -match-capture
 # :"quoted symbol"
 #
 add-highlighter shared/crystal/code/constant.symbol regex ":\w+[?!]?" 0:value
-add-highlighter shared/crystal/string.symbol region ':"' '(?<!\\)(\\\\)*"' ref crystal/string
+add-highlighter shared/crystal/string.symbol region ':"' '(?<!\\)(\\\\)*"' ref crystal.string
 
 # Regular expressions
-
-# Reference
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/regex.html
-
 # Regex literal
-
 # Example:
 #
 # /foo/i.match("FOO")
 #
-add-highlighter shared/crystal/string.regexp.interpolated region '/' '(?<!\\)(\\\\)*/[imx]*' regions
-add-highlighter shared/crystal/string.regexp.interpolated/content default-region group
-add-highlighter shared/crystal/string.regexp.interpolated/content/fill fill meta
-add-highlighter shared/crystal/string.regexp.interpolated/content/escaped-character ref crystal/string/content/escaped-character
-add-highlighter shared/crystal/string.regexp.interpolated/content/escape-sequence ref crystal/string/content/escape-sequence
-add-highlighter shared/crystal/string.regexp.interpolated/interpolation region -recurse '\{' '#\{' '\}' group
-add-highlighter shared/crystal/string.regexp.interpolated/interpolation/delimiters ref crystal/string.interpolated/interpolation/delimiters
-add-highlighter shared/crystal/string.regexp.interpolated/interpolation/crystal ref crystal
-
-# Note: Avoid unterminated regular expression and floor division as regex.
-#
-# Examples:
-#
-# division ⇒ 1 / 2
-# floor division ⇒ 1 // 2
-#
-add-highlighter shared/crystal/division-as-region region ' //? ' '.\K' group
-add-highlighter shared/crystal/division-as-region/operator regex '//?' 0:operator
+add-highlighter shared/crystal/string.quoted.regexp region '/\H' '(?<!\\)(?:\\\\)*/[imx]*' group
+add-highlighter shared/crystal/string.quoted.regexp/regexp ref crystal.string.regexp
+add-highlighter shared/crystal/string.quoted.regexp/escaped regex '\\/' 0:value
 
 # Percent regex literals
 
@@ -429,11 +362,11 @@ add-highlighter shared/crystal/division-as-region/operator regex '//?' 0:operato
 #
 # %r(foo|bar)
 #
-add-highlighter shared/crystal/string.regexp.percent.parenthesis.interpolated region -recurse '\(' '%r\(' '\)[imx]*' ref crystal/string.regexp.interpolated
-add-highlighter shared/crystal/string.regexp.percent.bracket.interpolated region -recurse '\[' '%r\[' '\][imx]*' ref crystal/string.regexp.interpolated
-add-highlighter shared/crystal/string.regexp.percent.brace.interpolated region -recurse '\{' '%r\{' '\}[imx]*' ref crystal/string.regexp.interpolated
-add-highlighter shared/crystal/string.regexp.percent.angle.interpolated region -recurse '<' '%r<' '>[imx]*' ref crystal/string.regexp.interpolated
-add-highlighter shared/crystal/string.regexp.percent.pipe.interpolated region '%r\|' '\|[imx]*' ref crystal/string.regexp.interpolated
+add-highlighter shared/crystal/string.regexp.percent.parenthesis.interpolated region -recurse '\(' '%r\(' '\)[imx]*' ref crystal.string.regexp.interpolated
+add-highlighter shared/crystal/string.regexp.percent.bracket.interpolated region -recurse '\[' '%r\[' '\][imx]*' ref crystal.string.regexp.interpolated
+add-highlighter shared/crystal/string.regexp.percent.brace.interpolated region -recurse '\{' '%r\{' '\}[imx]*' ref crystal.string.regexp.interpolated
+add-highlighter shared/crystal/string.regexp.percent.angle.interpolated region -recurse '<' '%r<' '>[imx]*' ref crystal.string.regexp.interpolated
+add-highlighter shared/crystal/string.regexp.percent.pipe.interpolated region '%r\|' '\|[imx]*' ref crystal.string.regexp.interpolated
 
 # Command literal
 
@@ -444,7 +377,9 @@ add-highlighter shared/crystal/string.regexp.percent.pipe.interpolated region '%
 #
 # `echo foo`
 #
-add-highlighter shared/crystal/string.command region '`' '(?<!\\)(\\\\)*`' ref crystal/string.regexp.interpolated
+add-highlighter shared/crystal/string.quoted.command region '`' '(?<!\\)(?:\\\\)*`' group
+add-highlighter shared/crystal/string.quoted.command/interpolated ref crystal.string.command.interpolated
+add-highlighter shared/crystal/string.quoted.command/escaped regex '\\`' 0:value
 
 # Percent command literals
 
@@ -452,9 +387,8 @@ add-highlighter shared/crystal/string.command region '`' '(?<!\\)(\\\\)*`' ref c
 #
 # %x(echo foo)
 #
-add-highlighter shared/crystal/string.command.percent.parenthesis region -recurse '\(' '%x\(' '\)' ref crystal/string.regexp.interpolated
-add-highlighter shared/crystal/string.command.percent.bracket region -recurse '\[' '%x\[' '\]' ref crystal/string.regexp.interpolated
-add-highlighter shared/crystal/string.command.percent.brace region -recurse '\{' '%x\{' '\}' ref crystal/string.regexp.interpolated
-add-highlighter shared/crystal/string.command.percent.angle region -recurse '<' '%x<' '>' ref crystal/string.regexp.interpolated
-add-highlighter shared/crystal/string.command.percent.pipe region '%x\|' '\|' ref crystal/string.regexp.interpolated
-###########################################################################################################
+add-highlighter shared/crystal/string.command.percent.parenthesis region -recurse '\(' '%x\(' '\)' ref crystal.string.command.interpolated
+add-highlighter shared/crystal/string.command.percent.bracket region -recurse '\[' '%x\[' '\]' ref crystal.string.command.interpolated
+add-highlighter shared/crystal/string.command.percent.brace region -recurse '\{' '%x\{' '\}' ref crystal.string.command.interpolated
+add-highlighter shared/crystal/string.command.percent.angle region -recurse '<' '%x<' '>' ref crystal.string.command.interpolated
+add-highlighter shared/crystal/string.command.percent.pipe region '%x\|' '\|' ref crystal.string.command.interpolated

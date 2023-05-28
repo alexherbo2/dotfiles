@@ -33,3 +33,5 @@ bell:
 key_bindings:
   - { key: N, mods: Control|Shift, action: CreateNewWindow }
   - { key: N, mods: Command, action: CreateNewWindow }
+  - { key: P, mods: Control|Shift, action: SpawnNewInstance }
+  - { key: P, mods: Command, action: SpawnNewInstance }

@@ -1,4 +1,3 @@
-# What’s new
 # Reference
 #
 # https://crystal-lang.org/reference/master/syntax_and_semantics/control_expressions.html
@@ -392,3 +391,33 @@ add-highlighter shared/crystal/string.command.percent.bracket region -recurse '\
 add-highlighter shared/crystal/string.command.percent.brace region -recurse '\{' '%x\{' '\}' ref crystal.string.command.interpolated
 add-highlighter shared/crystal/string.command.percent.angle region -recurse '<' '%x<' '>' ref crystal.string.command.interpolated
 add-highlighter shared/crystal/string.command.percent.pipe region '%x\|' '\|' ref crystal.string.command.interpolated
+# Configuration
+# Detection
+# Indentation
+# Highlighters
+# Syntax and semantics
+# Method definition and call
+# Instance and class variables
+# Keywords
+# Built-in functions
+# Punctuation
+# Operators
+# Constants
+# Numbers
+# Comments
+# Documenting code
+# Interpolation
+# Characters
+# Strings
+# String literal
+# Percent string literals
+# Raw percent string literals
+# Here document
+# Symbols
+# Symbol literal
+# Regular expressions
+# Regex literal
+# Percent regex literals
+# Command literal
+# Percent command literals
+# What’s new

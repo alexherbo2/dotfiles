@@ -2,8 +2,6 @@
 add-highlighter shared/toml regions
 add-highlighter shared/toml/code default-region group
 ###
-# https://github.com/toml-lang/toml/tree/v0.4.0
-add-highlighter shared/toml/comment2 region '#'   $           fill comment
 add-highlighter shared/toml/string1 region  '"""' (?<!\\)(\\\\)*"""(?!") fill string
 add-highlighter shared/toml/string2 region  "'''" "'''(?!')"             fill string
 add-highlighter shared/toml/string3 region  '"'   (?<!\\)(\\\\)*"        fill string
@@ -63,10 +61,20 @@ add-highlighter shared/toml/string.quoted.single region "'" "(?<!\\)(?:\\\\)*'" 
 add-highlighter shared/toml/string.quoted.single/escaping ref toml.string
 add-highlighter shared/toml/string.quoted.single/escaped regex "\\'" 0:value
 
+# Triple Single quoted strings
+add-highlighter shared/toml/string.quoted.triple.single region "'" "(?<!\\)(?:\\\\)*'" group
+add-highlighter shared/toml/string.quoted.triple.single/escaping ref toml.string
+add-highlighter shared/toml/string.quoted.triple.single/escaped regex "\\'" 0:value
+
 # Double quoted strings
 add-highlighter shared/toml/string.quoted.double region '"' '(?<!\\)(?:\\\\)*"' group
 add-highlighter shared/toml/string.quoted.double/escaping ref toml.string
 add-highlighter shared/toml/string.quoted.double/escaped regex '\\"' 0:value
+
+# Triple Double quoted strings
+add-highlighter shared/toml/string.quoted.triple.double region '"' '(?<!\\)(?:\\\\)*"' group
+add-highlighter shared/toml/string.quoted.triple.double/escaping ref toml.string
+add-highlighter shared/toml/string.quoted.triple.double/escaped regex '\\"' 0:value
 
 # Template strings
 add-highlighter shared/toml/string.quoted.template region '`' '(?<!\\)(?:\\\\)*`' group

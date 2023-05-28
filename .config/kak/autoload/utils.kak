@@ -247,6 +247,10 @@ define-command send_buffer_list_to_session -params 1 %{
   }
 }
 
+alias global @selections send_current_buffer_to_session
+alias global @buffile send_current_buffer_to_session
+alias global @buflist send_buffer_list_to_session
+
 complete-command send_selected_text_to_session shell-script-candidates %{
   kak -l | grep -Fxv "$kak_session"
 }
@@ -259,7 +263,6 @@ complete-command send_buffer_list_to_session shell-script-candidates %{
   kak -l | grep -Fxv "$kak_session"
 }
 
-# Aliases
 alias global = evaluate_selected_text
 
 complete-command rename-session shell-script-candidates %{

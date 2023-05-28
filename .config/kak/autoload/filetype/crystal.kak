@@ -278,8 +278,8 @@ add-highlighter shared/crystal/code/variable.constant regex '\b[A-Z]\w*\b' 0:val
 # decimal number ⇒ 1_000_000
 # float number ⇒ 1_000_000.111_111
 #
-add-highlighter shared/crystal/code/constant.numeric.integer.decimal regex '\b\d(_?\d+)*(_[iu](8|16|32|64|128))?\b' 0:value
-add-highlighter shared/crystal/code/constant.numeric.float.decimal regex '\b\d(_?\d+)*\.\d(_?\d+)*(_(f32|f64))?\b' 0:value
+add-highlighter shared/crystal/code/constant.numeric.integer.decimal regex '\b[+-]?\d(_?\d+)*(?:[eE][+-]?\d(_?\d+)*)?(_[iu](8|16|32|64|128))?\b' 0:value
+add-highlighter shared/crystal/code/constant.numeric.float.decimal regex '\b[+-]?\d(_?\d+)*\.\d(_?\d+)*(?:[eE][+-]?\d(_?\d+)*)?(_(f32|f64))?\b' 0:value
 
 # Examples:
 #

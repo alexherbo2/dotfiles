@@ -7,12 +7,12 @@ hook global BufCreate '.+\.lua' %{
 
 hook global BufSetOption filetype=lua %{
   add-highlighter buffer/lua ref lua
-  set-option buffer increase_indent_pattern '[({\[]$|\b(do|else|repeat|then)$|\bfunction\h*\(.*?\)$|\bfunction\h+(?:\w+\.)*(?:\w+:)?\w+\(.*?\)$'
-  set-option buffer decrease_indent_pattern '^\h*[)}\]]$|^\h*(else|end|until)$'
-  set-option buffer ignore_indent_pattern '^\h*--'
-  set-option buffer line_comment_token '--'
-  set-option buffer block_comment_tokens '[[--' '--]]'
-  set-option buffer static_words 'and' 'break' 'do' 'else' 'elseif' 'end' 'false' 'for' 'function' 'goto' 'if' 'in' 'local' 'nil' 'not' 'or' 'repeat' 'return' 'then' 'true' 'until' 'while'
+  set-option buffer increase_indent_pattern %opt{lua_increase_indent_pattern}
+  set-option buffer decrease_indent_pattern %opt{lua_decrease_indent_pattern}
+  set-option buffer ignore_indent_pattern %opt{lua_ignore_indent_pattern}
+  set-option buffer line_comment_token %opt{lua_line_comment_token}
+  set-option buffer block_comment_tokens %opt{lua_block_comment_tokens}
+  set-option buffer static_words %opt{lua_static_words}
   hook -always -once buffer BufSetOption 'filetype=(?!lua).*' %{
     remove-highlighter buffer/lua
   }

@@ -1,17 +1,6 @@
 # Kakoune
 # https://kakoune.org
 # https://github.com/mawww/kakoune
-#
-# Configuration:
-#
-# https://github.com/Delapouite/dot-in-the-sky/blob/master/.config/kak/kakrc
-# https://github.com/mawww/config/blob/master/kakrc
-# https://github.com/occivink/config/blob/master/.config/kak/kakrc
-# https://github.com/topisani/dotfiles/blob/master/config/kak/kakrc
-# https://gitlab.com/vbauerster/dotfiles/-/blob/master/.config/kak/kakrc
-
-# VS Code keyboard shortcuts
-# https://code.visualstudio.com/docs/getstarted/keybindings#_default-keyboard-shortcuts
 
 colorscheme macos_light
 # colorscheme macos_dark
@@ -30,7 +19,6 @@ set-option global startup_info_version 20231231
 set-option global ui_options terminal_set_title=no terminal_assistant=none
 set-option global matching_pairs ( ) { } [ ] < > “ ” ‘ ’ « » ‹ ›
 set-option global scrolloff 5,1
-#set-option global autoinfo ''
 add-highlighter global/match_brackets show-matching
 add-highlighter global/line_numbers number-lines -hlcursor
 add-highlighter global/search ref search
@@ -52,26 +40,24 @@ set-option global modelinefmt '%val{bufname} %val{cursor_line}:%val{cursor_char_
 add-highlighter global/characters regex '[–—−×]' '0:cyan+f'
 
 # Mappings ---------------------------------------------------------------------
-
 # Normal mode ------------------------------------------------------------------
-
 # User mode --------------------------------------------------------------------
-
-map global normal <c-j> ':copy_selected_lines_down<ret>'
-map global normal <c-k> ':copy_selected_lines_up<ret>'
-
-# Enter command mode
-map -docstring 'enter command mode' global normal <ret> :
-
-map -docstring 'convert selected dates to ISO 8601' global user d ':convert_selected_dates_to_iso_8601<ret>'
-map -docstring 'convert selected text to ASCII' global user @ ':convert_selected_text_to_ascii<ret>'
-map -docstring 'get character info' global user u ':get_character_info<ret>'
 
 # Add search flags
 map global prompt <c-i> '<home>(?i)<end>'
 map global prompt <c-s> '<home>(?S)<end>'
 map global prompt <c-k> '<home>\Q<end>'
 
+# Key remapping
+map global normal N <a-n>
+# Enter command mode
+map -docstring 'enter command mode' global normal <ret> :
+
+map global normal <c-j> ':copy_selected_lines_down<ret>'
+map global normal <c-k> ':copy_selected_lines_up<ret>'
+map -docstring 'convert selected dates to ISO 8601' global user d ':convert_selected_dates_to_iso_8601<ret>'
+map -docstring 'convert selected text to ASCII' global user @ ':convert_selected_text_to_ascii<ret>'
+map -docstring 'get character info' global user u ':get_character_info<ret>'
 map -docstring 'enter surround mode' global match s ':enter_surround_mode<ret>'
 map -docstring 'enter_letter_case_mode' global normal '`' ':enter_letter_case_mode<ret>'
 map -docstring 'enter_window_mode' global normal <c-w> ':enter_window_mode<ret>'
@@ -93,38 +79,18 @@ map -docstring 'open workspace symbol picker' global user S ':open_workspace_sym
 map -docstring 'show definition preview hover' global user k ':show_definition_preview_hover<ret>'
 map -docstring 'enter lsp mode' global user l ':enter_lsp_mode<ret>'
 map -docstring 'yank selected text to the terminal clipboard' global user y ':yank_selected_text_to_terminal_clipboard<ret>'
-
-# Key remapping
-map global normal N <a-n>
-
 map -docstring 'unimpaired_left' global normal '[' ':enter_unimpaired_left_mode<ret>'
 map -docstring 'unimpaired_right' global normal ']' ':enter_unimpaired_right_mode<ret>'
-
 map -docstring 'enter digraphs mode' global insert <c-k> '<a-;>:enter_digraphs_mode<ret>'
-
-hook global InsertCompletionShow .* %{
-  map window insert <c-n> <c-n>
-  map window insert <c-p> <c-p>
-  map window insert <tab> <c-n>
-  map window insert <s-tab> <c-p>
-  hook -once window InsertCompletionHide .* %{
-    unmap window insert <c-n>
-    unmap window insert <c-p>
-    unmap window insert <tab>
-    unmap window insert <s-tab>
-  }
-}
 map -docstring 'add selections to register' global normal Y '<a-Z>a'
-map -docstring 'iterate next selection' global insert <c-n> '<esc>:iterate_next_selection<ret>i'
-map -docstring 'iterate previous selection' global insert <c-p> '<esc>:iterate_previous_selection<ret>i'
-
+map -docstring 'iterate next selection' global insert <a-n> '<esc>:iterate_next_selection<ret>i'
+map -docstring 'iterate previous selection' global insert <a-p> '<esc>:iterate_previous_selection<ret>i'
 map -docstring 'move selected lines down' global normal <c-down> ':move_selected_lines_down<ret>'
 map -docstring 'move selected lines up' global normal <c-up> ':move_selected_lines_up<ret>'
 map -docstring 'select all occurrences of current selection' global normal <a-%> ':select_highlights<ret>'
 map -docstring 'increment selected numbers' global normal <c-a> ':increment_selected_numbers %val{count}<ret>'
 map -docstring 'decrement selected numbers' global normal <c-x> ':decrement_selected_numbers %val{count}<ret>'
 map -docstring 'buffer directory' global prompt <a-/> '%sh{dirname "$kak_bufname"}<a-!>/'
-
 map -docstring 'iterate next selection' global normal <c-n> ':iterate_next_selection<ret>'
 map -docstring 'iterate previous selection' global normal <c-p> ':iterate_previous_selection<ret>'
 map -docstring 'toggle comments' global normal '#' ':toggle_comments_with_config<ret>'
@@ -133,8 +99,16 @@ map -docstring 'paste' global insert <c-y> '<c-r>"'
 map -docstring 'Increase indent' global insert <tab> '<a-;>:increase_indent<ret>'
 map -docstring 'Decrease indent' global insert <s-tab> '<a-;>:decrease_indent<ret>'
 map -docstring 'Decrease indent or erase character before cursor' global insert <backspace> '<a-;>:decrease_indent_or_erase_character_before_cursor<ret>'
-
 map global normal x ':select_whole_lines_or_extend_lines_down<ret>'
+
+hook global InsertCompletionShow .* %{
+  map window insert <tab> <c-n>
+  map window insert <s-tab> <c-p>
+  hook -once window InsertCompletionHide .* %{
+    unmap window insert <tab>
+    unmap window insert <s-tab>
+  }
+}
 
 # Language support -------------------------------------------------------------
 

@@ -131,6 +131,29 @@ add-highlighter shared/crystal/code default-region group
 add-highlighter shared/crystal.comment regions
 add-highlighter shared/crystal.comment/comment default-region group
 add-highlighter shared/crystal.comment/comment/ fill comment
+==
+# Documenting code
+# Reference
+# https://crystal-lang.org/reference/master/syntax_and_semantics/documenting_code.html
+# Example:
+#
+# A unicorn is a **legendary animal**.
+#
+# To create a unicorn:
+#
+# ```
+# unicorn = Unicorn.new
+# unicorn.speak
+# ```
+#
+# Check the number of horns with `#horns`.
+#
+add-highlighter shared/crystal/comment/reference regex "`[#.]?\w+[?!]?`" 0:mono
+add-highlighter shared/crystal/comment/parameter regex '\*\w+\*' 0:mono
+add-highlighter shared/crystal/comment/code-block regex '```(\h*\w+)?$' 0:block
+add-highlighter shared/crystal/comment/admonition regex '\h+([A-Z]+):\h+' 1:meta
+add-highlighter shared/crystal/comment/directive regex ':\w+:' 0:meta
+==
 
 # Escape sequences
 add-highlighter shared/crystal.escape_sequence regions
@@ -261,42 +284,9 @@ add-highlighter shared/crystal/code/constant.numeric.integer.octal regex '\b0o[0
 add-highlighter shared/crystal/code/constant.numeric.integer.hexadecimal regex '\b0x[0-9a-fA-F]+(_[iu](8|16|32|64|128))?\b' 0:value
 
 # Comments
-
-# Reference
 # https://crystal-lang.org/reference/master/syntax_and_semantics/comments.html
-
-# Note: Avoid string literals with interpolation.
-#
-# Example:
-#
-# puts "hello #{name}"
-#
 add-highlighter shared/crystal/comment region '#(?!\{)' '$' group
 add-highlighter shared/crystal/comment/fill fill comment
-
-# Documenting code
-
-# Reference
-# https://crystal-lang.org/reference/master/syntax_and_semantics/documenting_code.html
-
-# Example:
-#
-# A unicorn is a **legendary animal**.
-#
-# To create a unicorn:
-#
-# ```
-# unicorn = Unicorn.new
-# unicorn.speak
-# ```
-#
-# Check the number of horns with `#horns`.
-#
-add-highlighter shared/crystal/comment/reference regex "`[#.]?\w+[?!]?`" 0:mono
-add-highlighter shared/crystal/comment/parameter regex '\*\w+\*' 0:mono
-add-highlighter shared/crystal/comment/code-block regex '```(\h*\w+)?$' 0:block
-add-highlighter shared/crystal/comment/admonition regex '\h+([A-Z]+):\h+' 1:meta
-add-highlighter shared/crystal/comment/directive regex ':\w+:' 0:meta
 
 # Interpolation
 

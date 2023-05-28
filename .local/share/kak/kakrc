@@ -1,10 +1,13 @@
 define-command colorscheme -params 1 -docstring 'load color scheme' %{
   source "%val{config}/colors/%arg{1}.kak"
 }
+
 evaluate-commands %sh{
   find -L "$kak_config/autoload" -type f -name '*.kak' -exec printf 'source "%s";' {} +
 }
+
 source "%val{config}/kakrc"
+
 evaluate-commands %sh{
   if [ -f '.kakrc' -a -r '.kakrc' ]; then
     echo "source '.kakrc'"

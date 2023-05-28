@@ -1,23 +1,3 @@
-# Crystal
-# https://crystal-lang.org
-
-# kakoune-crystal
-# This Kakoune extension allows you to define a language configuration that controls the following declarative language features.
-# Features
-# - Comment toggling
-# - Indentation rules
-# Installation
-# Alternatively, add comment.kak and indent.kak to your autoload directory.
-# This [Kakoune] extension provides support for the [Crystal] programming language.
-
-# [Kakoune]: https://kakoune.org
-# [Crystal]: https://crystal-lang.org
-
-## Features
-
-# - Syntax highlighting
-# - Auto-indentation
-
 # Configuration ────────────────────────────────────────────────────────────────
 
 # Word pattern

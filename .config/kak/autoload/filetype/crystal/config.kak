@@ -17,7 +17,7 @@ hook global BufSetOption filetype=crystal %{
   set-option buffer decrease_indent_pattern %opt{crystal_decrease_indent_pattern}
   set-option buffer ignore_indent_pattern %opt{crystal_ignore_indent_pattern}
   set-option buffer line_comment_token %opt{crystal_line_comment_token}
-  set-option buffer extra_word_chars '_' '?' '!'
+  set-option buffer extra_word_chars %opt{crystal_extra_word_chars}
   set-option buffer static_words %opt{crystal_static_words}
   hook -always -once buffer BufSetOption 'filetype=(?!crystal).*' %{
     remove-highlighter buffer/crystal

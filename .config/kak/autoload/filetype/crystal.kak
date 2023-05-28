@@ -1,9 +1,3 @@
-# Configuration ────────────────────────────────────────────────────────────────
-
-# Word pattern
-# https://code.visualstudio.com/api/language-extensions/language-configuration-guide#word-pattern
-declare-option -docstring 'Crystal word pattern' str crystal_word_pattern '\w+[?!]?'
-
 # Reference
 #
 # https://crystal-lang.org/reference/master/syntax_and_semantics/control_expressions.html

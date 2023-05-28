@@ -7,10 +7,13 @@
 # - Comment toggling
 # - Indentation rules
 
+# Sets Crystal filetype when opening `.cr` files.
 hook global BufCreate '.+\.cr' %{
   set-option buffer filetype crystal
 }
 
+# Enables syntax highlighting for Crystal filetype.
+# Configures word selection and completion for Crystal filetype.
 hook global BufSetOption filetype=crystal %{
   add-highlighter buffer/crystal ref crystal
   set-option buffer increase_indent_pattern %opt{crystal_increase_indent_pattern}

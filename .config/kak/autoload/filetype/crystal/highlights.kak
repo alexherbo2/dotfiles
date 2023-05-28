@@ -131,7 +131,7 @@ add-highlighter shared/crystal/code default-region group
 add-highlighter shared/crystal.comment regions
 add-highlighter shared/crystal.comment/comment default-region group
 add-highlighter shared/crystal.comment/comment/ fill comment
-==
+
 # Documenting code
 # Reference
 # https://crystal-lang.org/reference/master/syntax_and_semantics/documenting_code.html
@@ -153,7 +153,6 @@ add-highlighter shared/crystal/comment/parameter regex '\*\w+\*' 0:mono
 add-highlighter shared/crystal/comment/code-block regex '```(\h*\w+)?$' 0:block
 add-highlighter shared/crystal/comment/admonition regex '\h+([A-Z]+):\h+' 1:meta
 add-highlighter shared/crystal/comment/directive regex ':\w+:' 0:meta
-==
 
 # Escape sequences
 add-highlighter shared/crystal.escape_sequence regions

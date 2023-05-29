@@ -16,7 +16,7 @@ add-highlighter shared/css.string/string/ fill string
 add-highlighter shared/css/code/operator regex '[-+*/%^&!?@|<>=:(){}[\];:,.]' 0:operator
 
 # Comments
-add-highlighter shared/css/comment region '/*' '*/' ref css.comment
+add-highlighter shared/css/comment region '/\*' '\*/' ref css.comment
 
 # Single quoted strings
 add-highlighter shared/css.tag/string.quoted.single region "'" "'" ref css.string

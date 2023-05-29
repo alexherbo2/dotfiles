@@ -83,7 +83,7 @@ set-face global Default "rgb:%opt{foreground},rgb:%opt{background}" # Editor bac
 set-face global PrimarySelection "default,rgba:%opt{selection}%opt{selection_alpha}" # Pink (alpha-blended)
 set-face global SecondarySelection "default,rgba:%opt{selection}%opt{selection_alpha}" # Purple (alpha-blended)
 set-face global PrimaryCursor "default,rgba:%opt{cursor}%opt{cursor_alpha}" # Pink (alpha-blended)
-set-face global SecondaryCursor "default,rgba:%opt{cursor}%opt{cursor_alpha}" # Purple (alpha-blended)
+set-face global SecondaryCursor "default,rgba:%opt{selection}%opt{cursor_alpha}" # Purple (alpha-blended)
 set-face global PrimaryCursorEol "rgb:%opt{background},rgb:%opt{foreground}+fg" # White (full block)
 set-face global SecondaryCursorEol "rgb:%opt{background},rgb:%opt{foreground}+fg" # White (full block)
 set-face global MenuForeground "rgb:%opt{foreground},rgb:%opt{selection}" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorSuggestWidget.selectedBackground

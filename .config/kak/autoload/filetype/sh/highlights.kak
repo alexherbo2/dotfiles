@@ -22,7 +22,7 @@ add-highlighter shared/sh.string.interpolated/ region -recurse '\(' '\$\(\K' '(?
 # Variables
 add-highlighter shared/sh.variable regions
 add-highlighter shared/sh.variable/variable default-region group
-add-highlighter shared/sh.variable/variable/ regex '(?<!\\)(\\\\)*\$\K(\w+|[#@?$!*-])' 0:variable
+add-highlighter shared/sh.variable/variable/ regex '(?<!\\)(?:\\\\)*\$\K(?:\w+|[#@?$!*-])' 0:variable
 add-highlighter shared/sh.variable/variable/ regex '\$' 0:operator
 add-highlighter shared/sh.variable/ region -recurse '\{' '\$\{\K' '(?=\})' fill variable
 
@@ -46,13 +46,13 @@ add-highlighter shared/sh/code/operator regex '[()[\]{}<>=~*&!|@;$]' 0:operator
 add-highlighter shared/sh/code/literal regex '-\w[\w-]*|\d\w*' 0:value
 
 # Comments
-add-highlighter shared/sh/comment region '(?<!\\)(\\\\)*(^|\h)\K#' '$' ref sh.comment
+add-highlighter shared/sh/comment region '(?<!\\)(?:\\\\)*(^|\h)\K#' '$' ref sh.comment
 
 # Single quoted strings
-add-highlighter shared/sh/string.quoted.single region "(?<!\\)(\\\\)*\K'" "'" ref sh.string
+add-highlighter shared/sh/string.quoted.single region "(?<!\\)(?:\\\\)*\K'" "'" ref sh.string
 
 # Double quoted strings
-add-highlighter shared/sh/string.quoted.double region '(?<!\\)(\\\\)*\K"' '(?<!\\)(\\\\)*"' group
+add-highlighter shared/sh/string.quoted.double region '(?<!\\)(?:\\\\)*\K"' '(?<!\\)(?:\\\\)*"' group
 add-highlighter shared/sh/string.quoted.double/escaped regex '\\"' 0:value
 add-highlighter shared/sh/string.quoted.double/interpolated ref sh.string.interpolated
 

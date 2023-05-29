@@ -19,7 +19,11 @@ add-highlighter shared/css/code/operator regex '[-+*/%^&!?@|<>=:(){}[\];:,.]' 0:
 add-highlighter shared/css/comment region '/\*' '\*/' ref css.comment
 
 # Single quoted strings
-add-highlighter shared/css/string.quoted.single region "'" "'" ref css.string
+add-highlighter shared/css/string.quoted.single region "(?<!\\)(?:\\\\)*\K'" "(?<!\\)(?:\\\\)*'" group
+add-highlighter shared/css/string.quoted.single/escaped regex "\\'" 0:value
+add-highlighter shared/css/string.quoted.single/ ref css.string
 
 # Double quoted strings
-add-highlighter shared/css/string.quoted.double region '"' '"' ref css.string
+add-highlighter shared/css/string.quoted.double region '(?<!\\)(?:\\\\)*\K"' '(?<!\\)(?:\\\\)*"' group
+add-highlighter shared/css/string.quoted.double/escaped regex '\\"' 0:value
+add-highlighter shared/css/string.quoted.double/ ref css.string

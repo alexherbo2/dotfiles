@@ -6,7 +6,6 @@
 # https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference
 # https://developer.mozilla.org/en-US/docs/Web/HTML/Reference
 
-[.config/kak/autoload/filetype//config.kak]
 hook global BufCreate '.+\.css' %{
   set-option buffer filetype css
 }

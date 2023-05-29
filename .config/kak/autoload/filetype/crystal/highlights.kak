@@ -342,7 +342,7 @@ add-highlighter shared/crystal/string.unquoted.heredoc.raw region -match-capture
 # :"quoted symbol"
 #
 add-highlighter shared/crystal/code/constant.symbol regex ":\w+[?!]?" 0:value
-add-highlighter shared/crystal/string.symbol region ':"' '(?<!\\)(\\\\)*"' ref crystal.string
+add-highlighter shared/crystal/string.symbol region ':"' '(?<!\\)(?:\\\\)*"' ref crystal.string
 
 # Regular expressions
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/regex.html

@@ -1,7 +1,7 @@
 # This script provides support for the YAML file format.
 # https://yaml.org
 
-hook global BufCreate '.+\.yaml|.+\.yml' %{
+hook global BufCreate '.+\.yml|.+\.yaml' %{
   set-option buffer filetype yaml
 }
 

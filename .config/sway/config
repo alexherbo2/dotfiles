@@ -2,8 +2,7 @@
 # https://swaywm.org
 # https://github.com/swaywm/sway/blob/master/config.in
 
-include colors/macos_dark
-include colors/macos_light
+include colors/macos_aqua
 
 # Options ----------------------------------------------------------------------
 

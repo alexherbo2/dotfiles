@@ -12,7 +12,7 @@ add-highlighter shared/markdown.code regions
 add-highlighter shared/markdown.code/code default-region group
 add-highlighter shared/markdown.code/code/ fill mono
 
-add-highlighter shared/markdown/text/header regex '(?S)^#{1,6}.+*=\h*(.+)\h*$' 0:header
+add-highlighter shared/markdown/text/header regex '(?S)^#{1,6}\h+.+$' 0:header
 add-highlighter shared/markdown/link region -recurse '\[' '\[\K' '(?=\])' ref markdown.link
 add-highlighter shared/markdown/code region -match-capture '(`{1,3})' '(`{1,3})' ref markdown.code
 

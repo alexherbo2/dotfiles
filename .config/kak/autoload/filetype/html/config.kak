@@ -15,7 +15,7 @@ hook global BufSetOption filetype=html %{
   set-option buffer increase_indent_pattern %opt{html_increase_indent_pattern}
   set-option buffer decrease_indent_pattern %opt{html_decrease_indent_pattern}
   set-option buffer ignore_indent_pattern %opt{html_ignore_indent_pattern}
-  set-option buffer line_comment_token %opt{html_line_comment_token}
+  set-option buffer line_comment_token
   set-option buffer block_comment_tokens %opt{html_block_comment_tokens}
   hook -always -once buffer BufSetOption 'filetype=(?!html).*' %{
     remove-highlighter buffer/html

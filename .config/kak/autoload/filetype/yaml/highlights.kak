@@ -2,6 +2,11 @@
 add-highlighter shared/yaml regions
 add-highlighter shared/yaml/code default-region group
 
+# Comments
+add-highlighter shared/yaml.comment regions
+add-highlighter shared/yaml.comment/comment default-region group
+add-highlighter shared/yaml.comment/comment/ fill comment
+
 # Strings
 add-highlighter shared/yaml.string regions
 add-highlighter shared/yaml.string/string default-region group
@@ -15,6 +20,9 @@ add-highlighter shared/yaml/code/operator regex '[-+*/%^&!?@|<>=:(){}[\];:,.]' 0
 
 # Literals
 add-highlighter shared/yaml/code/literal regex '\bfalse\b|\btrue\b|\bnull\b' 0:value
+
+# Comments
+add-highlighter shared/yaml/comment region '#' '$' ref yaml.comment
 
 # Single quoted strings
 add-highlighter shared/yaml/string.quoted.single region "'" "(?<!\\)(?:\\\\)*'" group

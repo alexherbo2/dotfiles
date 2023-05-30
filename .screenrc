@@ -1,0 +1,5 @@
+# screen
+# https://gnu.org/software/screen/
+# https://gnu.org/software/screen/manual/screen.html
+maptimeout 0
+truecolor on

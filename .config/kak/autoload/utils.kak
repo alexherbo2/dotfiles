@@ -190,18 +190,18 @@ alias global nnn open_current_buffer_with_nnn
 
 define-command mkdir %{
   evaluate-commands %sh{
-    mkdir -p -- "$(dirname -- "$kak_buffile")" 2>&1 | xargs echo fail
+    mkdir -p -- "$(dirname -- "$kak_buffile")" || echo fail mkdir
   }
 }
 define-command rm %{
   evaluate-commands %sh{
-    rm -- "$kak_buffile" 2>&1 | xargs echo fail
+    rm -- "$kak_buffile" || echo fail rm
   }
   delete-buffer
 }
 define-command mv -params 1 %{
   evaluate-commands %sh{
-    mv -- "$kak_buffile" "$1" 2>&1 | xargs echo fail
+    mv -- "$kak_buffile" "$1" || echo fail mv
   }
   rename-buffer -file -- %arg{1}
 }

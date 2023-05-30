@@ -177,6 +177,14 @@ define-command open_current_buffer_with_helix %{
   terminal hx "%val{buffile}:%val{cursor_line}:%val{cursor_column}"
 }
 
+define-command open_current_buffer_with_nnn %{
+  terminal sh -c %{
+    nnn -p - -- "$3" |
+    xargs printf "evaluate-commands -client '$2' -verbatim -- edit -- '%s';" |
+    kak -p "$1"
+  } -- %val{session} %val{client} %val{buffile}
+}
+
 define-command mkdir %{
   nop %sh(mkdir -p -- "$(dirname -- "$kak_buffile")")
 }

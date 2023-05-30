@@ -172,10 +172,12 @@ define-command open_current_buffer_with_visual_studio_code %{
     code --goto "$kak_buffile:$kak_cursor_line:$kak_cursor_column"
   }
 }
+alias global code open_current_buffer_with_visual_studio_code
 
 define-command open_current_buffer_with_helix %{
   terminal hx "%val{buffile}:%val{cursor_line}:%val{cursor_column}"
 }
+alias global hx open_current_buffer_with_helix
 
 define-command open_current_buffer_with_nnn %{
   terminal sh -c %{
@@ -184,6 +186,7 @@ define-command open_current_buffer_with_nnn %{
     kak -p "$1"
   } -- %val{session} %val{client} %val{buffile}
 }
+alias global nnn open_current_buffer_with_nnn
 
 define-command mkdir %{
   evaluate-commands %sh{

@@ -186,14 +186,20 @@ define-command open_current_buffer_with_nnn %{
 }
 
 define-command mkdir %{
-  nop %sh(mkdir -p -- "$(dirname -- "$kak_buffile")")
+  evaluate-commands %sh{
+    mkdir -p -- "$(dirname -- "$kak_buffile")" 2>&1 | xargs echo fail
+  }
 }
 define-command rm %{
-  nop %sh(rm -- "$kak_buffile")
+  evaluate-commands %sh{
+    rm -- "$kak_buffile" 2>&1 | xargs echo fail
+  }
   delete-buffer
 }
 define-command mv -params 1 %{
-  nop %sh(mv -- "$kak_buffile" "$1")
+  evaluate-commands %sh{
+    mv -- "$kak_buffile" "$1" 2>&1 | xargs echo fail
+  }
   rename-buffer -file -- %arg{1}
 }
 complete-command mv file

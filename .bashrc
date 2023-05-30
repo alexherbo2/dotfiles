@@ -123,6 +123,13 @@ alias cat=bat
 # https://curl.haxx.se
 alias curl='curl -sSL'
 
+# screen
+# https://gnu.org/software/screen/
+# https://gnu.org/software/screen/manual/screen.html
+alias sl='screen -ls'
+alias sr='screen -r'
+alias sx='screen -X screen'
+
 # Kakoune
 # https://kakoune.org
 # Reference: https://vamolessa.github.io/pepper/pepper/rc/config_recipes#load-config-file-on-startup

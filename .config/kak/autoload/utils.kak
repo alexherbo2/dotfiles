@@ -190,18 +190,21 @@ alias global nnn open_current_buffer_with_nnn
 
 define-command mkdir %{
   evaluate-commands %sh{
-    mkdir -p -- "$(dirname -- "$kak_buffile")" || echo fail mkdir
+    mkdir -p -- "$(dirname -- "$kak_buffile")" ||
+    printf "fail 'ERROR: mkdir exited with: %d.'" "$?"
   }
 }
 define-command rm %{
   evaluate-commands %sh{
-    rm -- "$kak_buffile" || echo fail rm
+    rm -- "$kak_buffile" ||
+    printf "fail 'ERROR: rm exited with: %d.'" "$?"
   }
   delete-buffer
 }
 define-command mv -params 1 %{
   evaluate-commands %sh{
-    mv -- "$kak_buffile" "$1" || echo fail mv
+    mv -- "$kak_buffile" "$1" ||
+    printf "fail 'ERROR: mv exited with: %d.'" "$?"
   }
   rename-buffer -file -- %arg{1}
 }

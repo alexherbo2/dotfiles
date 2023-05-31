@@ -153,9 +153,11 @@ alias kS='kak_server "$(basename "$PWD")"'
 alias ko=kak_open
 alias ka='kak -c "$KAKOUNE_SESSION"'
 alias ks='kak -s'
+alias kd='kak -d -s'
 alias kc='kak -c'
 alias kn='kak -n'
 alias kl='kak -l'
+alias kcl='kak -clear'
 
 # Usage:
 # kak_set_env [session] [client]

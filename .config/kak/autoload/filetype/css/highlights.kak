@@ -51,6 +51,9 @@ add-highlighter shared/css.string/string/ fill string
 
 add-highlighter shared/css.attribute_selector/attribute_selector/tag_name regex '<\K/?[\w-]+' 0:keyword
 
+# At rules
+add-highlighter shared/css/code/at_rule regex '@[\w-]+' 0:keyword
+
 # Operators
 add-highlighter shared/css/code/operator regex '[-+*/%^&!?@|<>=:(){}[\];:,.]' 0:operator
 

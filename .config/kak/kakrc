@@ -2,8 +2,8 @@
 # https://kakoune.org
 # https://github.com/mawww/kakoune
 
-colorscheme macos_light
-# colorscheme colibri
+# colorscheme macos_light
+colorscheme colibri
 
 # Preamble ---------------------------------------------------------------------
 

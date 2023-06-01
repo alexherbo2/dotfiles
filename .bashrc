@@ -131,6 +131,12 @@ alias sl='screen -ls'
 alias sr='screen -r'
 alias sx='screen -X screen'
 
+# tmux
+# https://github.com/tmux/tmux
+alias t=tmux
+alias ta='tmux attach-session'
+alias tl='tmux list-sessions'
+
 # Kakoune
 # https://kakoune.org
 # Reference: https://vamolessa.github.io/pepper/pepper/rc/config_recipes#load-config-file-on-startup

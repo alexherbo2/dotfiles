@@ -2,15 +2,16 @@
 # https://kakoune.org
 # https://github.com/mawww/kakoune
 
-# colorscheme macos_light
-colorscheme colibri
+colorscheme macos_light
+source ~/.local/share/github.com/mawww/kakoune/colors/default.kak
+set-face global Default "default,default" # Editor background
 
 # Preamble ---------------------------------------------------------------------
 
 evaluate-commands %sh{
   kak-lsp --kakoune --session "$kak_session"
 }
-lsp-enable
+# lsp-enable
 
 # Options ----------------------------------------------------------------------
 

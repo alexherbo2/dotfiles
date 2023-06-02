@@ -6,7 +6,7 @@ hook global ClientCreate .* %{
 }
 hook global User 'TMUX=.+' %{
   set-option global terminal_command tmux
-  set-option global terminal_args split-window -h
+  set-option global terminal_args display-popup -w 90% -h 90% -E --
 }
 declare-option str client_completion %{
   echo "$kak_client_list" | tr ' ' '\n' | grep -Fxv "$kak_client"
@@ -22,6 +22,10 @@ define-command tmux -params 1.. %{
   nop %sh{
     TMUX=$kak_client_env_TMUX TMUX_PANE=$kak_client_env_TMUX_PANE tmux set-environment kak_session "$kak_session" ';' set-environment kak_client "$kak_client" ';' "$@"
   }
+}
+
+define-command split_view_down_with_tmux_terminal -params .. %{
+  tmux split-window -v -- %arg{@}
 }
 
 define-command split_view_down_with_tmux_terminal -params .. %{
@@ -80,6 +84,10 @@ define-command open_new_tab_left_with_tmux -params .. %{
   open_new_tab_left_with_tmux_terminal kak -c %val{session} -e "%arg{@}"
 }
 
+define-command open_new_popup_with_tmux -params .. %{
+  tmux display-popup -w 90% -h 90% -E -- %arg{@}
+}
+
 define-command focus_client_with_tmux -params 1 %{
   evaluate-commands -client %arg{1} %{
     tmux switch-client -t %val{client_env_TMUX_PANE}
@@ -129,6 +137,7 @@ complete-command split_view_left_with_tmux command
 complete-command open_new_tab_with_tmux command
 complete-command open_new_tab_right_with_tmux command
 complete-command open_new_tab_left_with_tmux command
+complete-command open_new_popup_with_tmux command
 
 map -docstring 'split view down' global tmux s ':split_view_down_with_tmux<ret>'
 map -docstring 'split view right' global tmux v ':split_view_right_with_tmux<ret>'

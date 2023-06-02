@@ -17,7 +17,7 @@ define-command enter_tmux_mode %{
 
 define-command tmux -params 1.. %{
   nop %sh{
-    TMUX=$kak_client_env_TMUX TMUX_PANE=$kak_client_env_TMUX_PANE tmux set-environment kak_session "$kak_session" ';' set-environment kak_client "$kak_client" ';' "$@"
+    TMUX=$kak_client_env_TMUX TMUX_PANE=$kak_client_env_TMUX_PANE nohup tmux set-environment kak_session "$kak_session" ';' set-environment kak_client "$kak_client" ';' "$@" < /dev/null > /dev/null 2>&1 &
   }
 }
 

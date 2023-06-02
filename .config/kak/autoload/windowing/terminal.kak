@@ -1,6 +1,10 @@
 declare-option str terminal_command xterm
 declare-option str-list terminal_args -e
 
+hook global ClientCreate .* %{
+  trigger-user-hook "TERM=%val{client_env_TERM}"
+}
+
 define-command open_terminal -params 1.. %{
   open_terminal_with_args %opt{terminal_command} %opt{terminal_args} %arg{@}
 }

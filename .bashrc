@@ -123,14 +123,6 @@ alias cat=bat
 # https://curl.haxx.se
 alias curl='curl -sSL'
 
-# screen
-# https://gnu.org/software/screen/
-# https://gnu.org/software/screen/manual/screen.html
-alias s=screen
-alias sl='screen -ls'
-alias sr='screen -r'
-alias sx='screen -X screen'
-
 # tmux
 # https://github.com/tmux/tmux
 alias t=tmux

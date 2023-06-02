@@ -28,10 +28,6 @@ define-command split_view_down_with_tmux_terminal -params .. %{
   tmux split-window -v -- %arg{@}
 }
 
-define-command split_view_down_with_tmux_terminal -params .. %{
-  tmux split-window -v -- %arg{@}
-}
-
 define-command split_view_right_with_tmux_terminal -params .. %{
   tmux split-window -h -- %arg{@}
 }
@@ -85,7 +81,7 @@ define-command open_new_tab_left_with_tmux -params .. %{
 }
 
 define-command open_new_popup_with_tmux -params .. %{
-  tmux display-popup -w 90% -h 90% -E -- %arg{@}
+  tmux display-popup -w 90% -h 90% -E kak -c %val{session} -e "%arg{@}"
 }
 
 define-command focus_client_with_tmux -params 1 %{
@@ -145,5 +141,6 @@ map -docstring 'split view up' global tmux S ':split_view_up_with_tmux<ret>'
 map -docstring 'split view left' global tmux V ':split_view_left_with_tmux<ret>'
 map -docstring 'open new tab right' global tmux w ':open_new_tab_right_with_tmux<ret>'
 map -docstring 'open new tab left' global tmux W ':open_new_tab_left_with_tmux<ret>'
+map -docstring 'open new popup with tmux' global tmux + ':open_new_popup_with_tmux<ret>'
 map -docstring 'focus client' global tmux f ':open_prompt_focus_client_with_tmux<ret>'
 map -docstring 'yank selected text' global tmux y ':yank_selected_text_to_terminal_clipboard_with_tmux<ret>'

@@ -14,3 +14,54 @@ sudo yabai --load-sa
 
 set layout float
 set focus_follows_mouse autofocus
+################################################################################
+#!/bin/sh
+
+# yabai
+# https://github.com/koekeishiya/yabai
+
+alias set='yabai --message config'
+
+# Startup commands ─────────────────────────────────────────────────────────────
+
+sudo yabai --load-sa
+skhd --reload
+pkill limelight; limelight &
+
+# Color palette ────────────────────────────────────────────────────────────────
+
+red=0xffff5555 # Dracula
+green=0xff50fa7b # Dracula
+white=0xffeaeaea # macOS
+
+# Global settings ──────────────────────────────────────────────────────────────
+
+set mouse_follows_focus on
+set focus_follows_mouse autofocus
+set window_topmost on
+
+# Space settings ───────────────────────────────────────────────────────────────
+
+set layout bsp
+set top_padding 12
+set bottom_padding 12
+set left_padding 12
+set right_padding 12
+set window_gap 6
+
+# Border styles ────────────────────────────────────────────────────────────────
+
+set window_border off
+set window_border_width 6
+set active_window_border_color $green
+set normal_window_border_color $white
+set insert_feedback_color $red
+
+# Rules ────────────────────────────────────────────────────────────────────────
+
+disable_for_app() {
+  yabai --message rule --add app="$1" manage=off
+}
+
+disable_for_app 'System Preferences'
+disable_for_app 'Transmission'

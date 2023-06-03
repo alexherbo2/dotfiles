@@ -10,9 +10,6 @@ import:
 
 # Appearance -------------------------------------------------------------------
 
-shell:
-  program: tmux
-
 # Add a bit of transparency to reduce eye strain.
 window: { opacity: 0.80 }
 

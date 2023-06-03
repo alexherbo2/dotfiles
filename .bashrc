@@ -128,7 +128,7 @@ alias curl='curl -sSL'
 alias t=tmux
 alias ta='tmux attach-session'
 alias tl='tmux list-sessions'
-alias tc='exec tmux choose-tree -Zs'
+alias tc='tmux choose-tree -Zs'
 
 # Kakoune
 # https://kakoune.org

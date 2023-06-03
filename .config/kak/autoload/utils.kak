@@ -188,6 +188,11 @@ define-command open_current_buffer_with_nnn %{
 }
 alias global nnn open_current_buffer_with_nnn
 
+define-command open_current_buffer_with_gitui %{
+  terminal gitui -d %val{buffile}
+}
+alias global gitui open_current_buffer_with_gitui
+
 define-command mkdir %{
   evaluate-commands %sh{
     mkdir -p -- "$(dirname -- "$kak_buffile")" ||

@@ -2,7 +2,7 @@
 # https://github.com/tmux/tmux
 hook global User 'TERM=tmux' %{
   set-option global terminal_command tmux
-  set-option global terminal_args display-popup -w 90% -h 90% -E --
+  set-option global terminal_args display-popup -w 90% -h 90% -E
 }
 
 declare-option str client_completion %{
@@ -21,60 +21,32 @@ define-command tmux -params 1.. %{
   }
 }
 
-define-command split_view_down_with_tmux_terminal -params .. %{
-  tmux split-window -v -- %arg{@}
-}
-
-define-command split_view_right_with_tmux_terminal -params .. %{
-  tmux split-window -h -- %arg{@}
-}
-
-define-command split_view_up_with_tmux_terminal -params .. %{
-  tmux split-window -v -b -- %arg{@}
-}
-
-define-command split_view_left_with_tmux_terminal -params .. %{
-  tmux split-window -h -b -- %arg{@}
-}
-
-define-command open_new_tab_with_tmux_terminal -params .. %{
-  tmux new-window -- %arg{@}
-}
-
-define-command open_new_tab_right_with_tmux_terminal -params .. %{
-  tmux new-window -a -- %arg{@}
-}
-
-define-command open_new_tab_left_with_tmux_terminal -params .. %{
-  tmux new-window -b -- %arg{@}
-}
-
 define-command split_view_down_with_tmux -params .. %{
-  split_view_down_with_tmux_terminal kak -c %val{session} -e "%arg{@}"
+  tmux split-window -v kak -c %val{session} -e "%arg{@}"
 }
 
 define-command split_view_right_with_tmux -params .. %{
-  split_view_right_with_tmux_terminal kak -c %val{session} -e "%arg{@}"
+  tmux split-window -h kak -c %val{session} -e "%arg{@}"
 }
 
 define-command split_view_up_with_tmux -params .. %{
-  split_view_up_with_tmux_terminal kak -c %val{session} -e "%arg{@}"
+  tmux split-window -v -b kak -c %val{session} -e "%arg{@}"
 }
 
 define-command split_view_left_with_tmux -params .. %{
-  split_view_left_with_tmux_terminal kak -c %val{session} -e "%arg{@}"
+  tmux split-window -h -b kak -c %val{session} -e "%arg{@}"
 }
 
 define-command open_new_tab_with_tmux -params .. %{
-  open_new_tab_with_tmux_terminal kak -c %val{session} -e "%arg{@}"
+  tmux new-window kak -c %val{session} -e "%arg{@}"
 }
 
 define-command open_new_tab_right_with_tmux -params .. %{
-  open_new_tab_right_with_tmux_terminal kak -c %val{session} -e "%arg{@}"
+  tmux new-window -a kak -c %val{session} -e "%arg{@}"
 }
 
 define-command open_new_tab_left_with_tmux -params .. %{
-  open_new_tab_left_with_tmux_terminal kak -c %val{session} -e "%arg{@}"
+  tmux new-window -b kak -c %val{session} -e "%arg{@}"
 }
 
 define-command open_new_popup_with_tmux -params .. %{
@@ -136,8 +108,8 @@ map -docstring 'split view down' global tmux s ':split_view_down_with_tmux<ret>'
 map -docstring 'split view right' global tmux v ':split_view_right_with_tmux<ret>'
 map -docstring 'split view up' global tmux S ':split_view_up_with_tmux<ret>'
 map -docstring 'split view left' global tmux V ':split_view_left_with_tmux<ret>'
-map -docstring 'open new tab right' global tmux w ':open_new_tab_right_with_tmux<ret>'
-map -docstring 'open new tab left' global tmux W ':open_new_tab_left_with_tmux<ret>'
+map -docstring 'open new tab right' global tmux t ':open_new_tab_right_with_tmux<ret>'
+map -docstring 'open new tab left' global tmux T ':open_new_tab_left_with_tmux<ret>'
 map -docstring 'open new popup with tmux' global tmux + ':open_new_popup_with_tmux<ret>'
-map -docstring 'focus client' global tmux f ':open_prompt_focus_client_with_tmux<ret>'
+map -docstring 'focus client' global tmux w ':open_prompt_focus_client_with_tmux<ret>'
 map -docstring 'yank selected text' global tmux y ':yank_selected_text_to_terminal_clipboard_with_tmux<ret>'

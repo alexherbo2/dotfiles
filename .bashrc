@@ -4,15 +4,15 @@
 
 # Starship
 # https://starship.rs
-eval "$(starship init bash)"
+# eval "$(starship init bash)"
 
 # McFly
 # https://github.com/cantino/mcfly
-export MCFLY_LIGHT=TRUE
-eval "$(mcfly init bash)"
+# export MCFLY_LIGHT=TRUE
+# eval "$(mcfly init bash)"
 
 # opam configuration
-eval "$(opam env)"
+# eval "$(opam env)"
 
 # Homebrew
 # https://brew.sh

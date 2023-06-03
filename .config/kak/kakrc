@@ -51,8 +51,8 @@ map global normal N <a-n>
 map -docstring 'enter command mode' global normal <ret> :
 
 map -docstring 'enter_tmux_mode' global window w ':enter_tmux_mode<ret>'
-map -docstring 'open nnn' global window f ':nnn<ret>'
-map -docstring 'open gitui' global window ? ':gitui<ret>'
+map -docstring 'open nnn' global normal <c-e> ':nnn<ret>'
+map -docstring 'open gitui' global normal <c-l> ':gitui<ret>'
 map global normal <c-j> ':copy_selected_lines_down<ret>'
 map global normal <c-k> ':copy_selected_lines_up<ret>'
 map -docstring 'convert selected dates to ISO 8601' global user d ':convert_selected_dates_to_iso_8601<ret>'

@@ -166,9 +166,6 @@ bindsym Mod4+minus scratchpad show
 
 # Desktop ----------------------------------------------------------------------
 
-# Open GhostText.
-bindsym Mod4+e exec ghosttext
-
 # Take screenshots.
 bindsym Print exec grim ~/Desktop/$(date '+%F_%T').webp
 bindsym Shift+Print exec slurp | grim -g - ~/Desktop/$(date '+%F_%T').webp

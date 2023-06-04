@@ -11,7 +11,7 @@
 
 # Prompt -----------------------------------------------------------------------
 
-export PS1='\[\e[32m\]\u@\h\[\e[36m\](\l)\[\e[0m\] \[\e[34m\]\w\n\[\e[90m\]>>>\[\e[0m\] '
+export PS1='\[\e[32m\]\u@\h\[\e[36m\](\l)\[\e[0m\] \[\e[34m\]\w\[\e[35m\]$(__git_ps1)\n\[\e[90m\]>>>\[\e[0m\] '
 export PROMPT_COMMAND='[ $? = 0 ] || echo -e "\\e[31mERROR\\e[0m: command exited with $?"'
 
 # Environment variables --------------------------------------------------------

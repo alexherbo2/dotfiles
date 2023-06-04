@@ -1,3 +1,6 @@
-define-command define_crystal_string -params 1 %{
-  add-highlighter %arg{1} region %opt{crystal_optional_arguments} regions
+# Double quoted strings
+define-command -override add_double_quoted_string_highlighter -params 1 %{
+  add-highlighter %arg{1} region '"' '(?<!\\)(?:\\\\)*"' group
+  add-highlighter "%arg{1}/" fill string
+  add-highlighter "%arg{1}/" regex '\\"' 0:value
 }

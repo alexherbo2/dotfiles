@@ -1,3 +1,4 @@
+source "%val{config}/autoload/language_support/highlights.kak"
 # Reference
 #
 # https://crystal-lang.org/reference/master/syntax_and_semantics/control_expressions.html

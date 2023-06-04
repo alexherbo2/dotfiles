@@ -47,6 +47,7 @@ map global prompt <c-k> '<home>\Q<end>'
 
 # Key remapping
 map global normal N <a-n>
+map global normal X x
 # Enter command mode
 map -docstring 'enter command mode' global normal <ret> :
 

@@ -126,22 +126,6 @@ alias ws='rg "\\s+$|\\w\\s{2,}\\w"'
 
 # Git
 # https://git-scm.com
-# https://git-scm.com/docs/git-add
-# https://git-scm.com/docs/git-status
-# https://git-scm.com/docs/git-diff
-# https://git-scm.com/docs/git-commit
-# https://git-scm.com/docs/git-log
-# https://git-scm.com/docs/git-push
-# https://git-scm.com/docs/git-pull
-# https://git-scm.com/docs/git-reset
-# https://git-scm.com/docs/git-switch
-# https://git-scm.com/docs/git-branch
-# https://git-scm.com/docs/git-stash
-# https://git-scm.com/docs/git-restore
-# https://github.com/extrawurst/gitui
-# https://git-scm.com/docs/git-for-each-ref
-# https://git-scm.com/docs/git-for-each-ref#_field_names
-# https://cli.github.com
 alias g=git
 alias G=gitui
 alias gw='git add'

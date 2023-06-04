@@ -2,18 +2,6 @@
 # https://gnu.org/software/bash/
 # https://gnu.org/software/bash/manual/bash.html
 
-# Starship
-# https://starship.rs
-# eval "$(starship init bash)"
-
-# McFly
-# https://github.com/cantino/mcfly
-# export MCFLY_LIGHT=TRUE
-# eval "$(mcfly init bash)"
-
-# opam configuration
-# eval "$(opam env)"
-
 # Homebrew
 # https://brew.sh
 [ -x /opt/homebrew/bin/brew ] && eval "$(brew shellenv)"
@@ -23,7 +11,7 @@
 
 # Prompt -----------------------------------------------------------------------
 
-export PS1='\[\e[37m\]\u@\h \[\e[36m\]\w\n\[\e[32m\]:\[\e[0m\]'
+export PS1='\[\e[32m\]\u@\h\[\e[36m\](\l)\[\e[0m\] \[\e[34m\]\w\n\[\e[90m\]>>>\[\e[0m\] '
 export PROMPT_COMMAND='[ $? = 0 ] || echo -e "\\e[31mERROR\\e[0m: command exited with $?"'
 
 # Environment variables --------------------------------------------------------

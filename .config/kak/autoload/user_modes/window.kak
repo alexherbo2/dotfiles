@@ -1,3 +1,4 @@
+# https://docs.helix-editor.com/keymap.html#window-mode
 declare-user-mode window
 
 declare-option str client_completion %{

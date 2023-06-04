@@ -83,6 +83,11 @@ define-command delete_buffers_matching_glob_pattern -params 1 %{
 alias global db* delete_buffers_matching_glob_pattern
 complete-command delete_buffers_matching_glob_pattern buffer
 
+define-command delete_all_buffers %{
+  evaluate-commands -buffer * delete-buffer
+}
+alias global db** delete_all_buffers
+
 alias global assert_buffer_eq! assert_buffer_eq_and_clean_them
 complete-command assert_buffer_eq_and_clean_them buffer
 

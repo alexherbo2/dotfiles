@@ -14,15 +14,15 @@ define-command disable_readonly_mode %{
 }
 
 define-command remove_whitespace_rendering %{
-  add-highlighter global/render_whitespace show-whitespaces
+  remove-highlighter global/render_whitespace
 }
 
 define-command remove_rulers %{
-  add-highlighter global/rulers column 81 default,cyan
+  remove-highlighter global/rulers
 }
 
 define-command disable_soft_wrap %{
-  add-highlighter global/soft_wrap wrap -indent -marker '↪'
+  remove-highlighter global/soft_wrap
 }
 
 map -docstring 'line numbers' global unimpaired_left l ':hide_line_numbers<ret>'

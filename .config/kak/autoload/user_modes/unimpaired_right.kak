@@ -28,7 +28,7 @@ define-command enable_soft_wrap %{
 map -docstring 'line numbers' global unimpaired_right l ':show_line_numbers<ret>'
 map -docstring 'render whitespace' global unimpaired_right w ':render_whitespace<ret>'
 map -docstring 'soft-wrap' global unimpaired_right <tab> ':enable_soft_wrap<ret>'
-map -docstring 'read-only' global unimpaired_right r ':set_readonly<ret>'
+map -docstring 'read-only' global unimpaired_right r ':enable_readonly_mode<ret>'
 map -docstring 'rulers' global unimpaired_right | ':add_rulers<ret>'
 map -docstring 'space' global unimpaired_right <space> <a-o>
 map -docstring 'buffer' global unimpaired_right b ':buffer-next<ret>'

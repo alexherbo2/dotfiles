@@ -3,6 +3,10 @@ declare-user-mode extend
 
 define-command enter_extend_mode %{
   enter-user-mode -lock extend
+  set-option window autoinfo ''
+  hook -once window NormalIdle .* %{
+    unset-option window autoinfo
+  }
 }
 
 map -docstring 'left' global extend h H

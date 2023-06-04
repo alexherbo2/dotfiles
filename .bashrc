@@ -113,60 +113,13 @@ alias curl='curl -sSL'
 
 # Kakoune
 # https://kakoune.org
-# Reference: https://vamolessa.github.io/pepper/pepper/rc/config_recipes#load-config-file-on-startup
 alias k=kak
-alias ke=kak_set_env
-alias ke!='unset KAKOUNE_SESSION KAKOUNE_CLIENT'
-alias kE='kak_set_env "$(basename "$PWD")"'
-alias k0='export KAKOUNE_CLIENT=client0'
-alias k1='export KAKOUNE_CLIENT=client1'
-alias k2='export KAKOUNE_CLIENT=client2'
-alias k3='export KAKOUNE_CLIENT=client3'
-alias k4='export KAKOUNE_CLIENT=client4'
-alias k5='export KAKOUNE_CLIENT=client5'
-alias k6='export KAKOUNE_CLIENT=client6'
-alias k7='export KAKOUNE_CLIENT=client7'
-alias k8='export KAKOUNE_CLIENT=client8'
-alias k9='export KAKOUNE_CLIENT=client9'
-alias ks=kak_server
-alias kS='kak_server "$(basename "$PWD")"'
-alias ko=kak_open
-alias ka='kak -c "$KAKOUNE_SESSION"'
 alias ks='kak -s'
 alias kd='kak -d -s'
 alias kc='kak -c'
 alias kn='kak -n'
 alias kl='kak -l'
 alias kcl='kak -clear'
-
-# Usage:
-# kak_set_env [session] [client]
-# Sets `KAKOUNE_SESSION` and `KAKOUNE_CLIENT` environment variables.
-kak_set_env() {
-  export KAKOUNE_SESSION=$1 KAKOUNE_CLIENT=$2
-}
-
-# Usage:
-# kak_server <session>
-# Only runs as server.
-# Sets `KAKOUNE_SESSION` and `KAKOUNE_CLIENT` environment variables.
-kak_server() {
-  nohup kak -d -s "$1" < /dev/null > /dev/null 2>&1 &
-  kak_set_env "$1"
-}
-
-# Usage:
-# kak_open [files]
-# Uses `KAKOUNE_SESSION` and `KAKOUNE_CLIENT` environment variables.
-kak_open() {
-  {
-    for filename do
-      echo "edit -- %($filename)"
-    done
-    echo "evaluate-commands -client '$KAKOUNE_CLIENT' -verbatim -- edit -- %($1)"
-  } |
-  kak -p "$KAKOUNE_SESSION"
-}
 
 # grep
 alias ws='rg "\\s+$|\\w\\s{2,}\\w"'
@@ -202,8 +155,8 @@ alias gL='git log -p'
 alias gk='git push'
 alias gj='git pull'
 # Stash
-alias gz='git stash'
-alias gZ='git stash pop'
+alias gZ='git stash'
+alias gz='git stash pop'
 # Grep logs
 alias gF='git log -p -S'
 alias gE='git log -p -G'

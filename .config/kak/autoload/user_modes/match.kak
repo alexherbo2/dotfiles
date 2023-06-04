@@ -1,3 +1,4 @@
+# https://docs.helix-editor.com/keymap.html#match-mode
 declare-user-mode match
 
 define-command enter_match_mode %{

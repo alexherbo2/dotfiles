@@ -37,7 +37,6 @@ set-option global modelinefmt '%val{bufname} %val{cursor_line}:%val{cursor_char_
 add-highlighter global/characters regex '[–—−×]' '0:cyan+f'
 
 # Key bindings -----------------------------------------------------------------
-
 # Normal mode ------------------------------------------------------------------
 
 # Key remapping

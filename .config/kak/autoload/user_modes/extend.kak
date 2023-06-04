@@ -1,3 +1,4 @@
+# https://docs.helix-editor.com/keymap.html#extend-mode
 declare-user-mode extend
 
 define-command enter_extend_mode %{

@@ -195,8 +195,9 @@ add-highlighter shared/crystal.string.regexp.interpolated/ region -recurse '\{' 
 # Command literal
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/command.html
 add-highlighter shared/crystal.string.command.interpolated regions
-add-highlighter shared/crystal.string.command.interpolated/command default-region group
-add-highlighter shared/crystal.string.command.interpolated/command/ fill meta
+add-highlighter shared/crystal.string.command.interpolated/content default-region group
+add-highlighter shared/crystal.string.command.interpolated/content/ fill meta
+add-highlighter shared/crystal.string.command.interpolated/content/ regex '\\[abefnrtv]|\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|u\{[0-9a-fA-F]+\})' 0:value
 add-highlighter shared/crystal.string.command.interpolated/ region -recurse '\{' '#\{\K' '(?=\})' ref crystal
 
 # Syntax and semantics
@@ -377,9 +378,12 @@ add-highlighter shared/crystal/string.regexp.percent.pipe.interpolated region '%
 #
 # `echo foo`
 #
-add-highlighter shared/crystal/string.quoted.command region '`' '(?<!\\)(?:\\\\)*`' group
-add-highlighter shared/crystal/string.quoted.command/interpolated ref crystal.string.command.interpolated
-add-highlighter shared/crystal/string.quoted.command/escaped regex '\\`' 0:value
+add-highlighter shared/crystal/string.quoted.command region '`' '(?<!\\)(?:\\\\)*`' regions
+add-highlighter shared/crystal/string.quoted.command/content default-region group
+add-highlighter shared/crystal/string.quoted.command/content/ fill string
+add-highlighter shared/crystal/string.quoted.command/content/ regex '\\[abefnrtv]|\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|u\{[0-9a-fA-F]+\})' 0:value
+add-highlighter shared/crystal/string.quoted.command/content/ regex '\\`' 0:value
+add-highlighter shared/crystal/string.quoted.command/ region -recurse '\{' '#\{\K' '(?=\})' ref crystal
 
 # Percent command literals
 

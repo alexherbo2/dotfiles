@@ -127,9 +127,8 @@ add-highlighter shared/crystal regions
 add-highlighter shared/crystal/code default-region group
 
 # Comments
-add-highlighter shared/crystal.comment regions
-add-highlighter shared/crystal.comment/comment default-region group
-add-highlighter shared/crystal.comment/comment/ fill comment
+add-highlighter shared/crystal.comment group
+add-highlighter shared/crystal.comment/ fill comment
 
 # Documenting code
 # Reference
@@ -147,11 +146,11 @@ add-highlighter shared/crystal.comment/comment/ fill comment
 #
 # Check the number of horns with `#horns`.
 #
-add-highlighter shared/crystal.comment/comment/reference regex "`[#.]?\w+[?!]?`" 0:mono
-add-highlighter shared/crystal.comment/comment/parameter regex '\*\w+\*' 0:mono
-add-highlighter shared/crystal.comment/comment/code-block regex '```(\h*\w+)?$' 0:block
-add-highlighter shared/crystal.comment/comment/admonition regex '\h+([A-Z]+):\h+' 1:meta
-add-highlighter shared/crystal.comment/comment/directive regex ':\w+:' 0:meta
+add-highlighter shared/crystal.comment/reference regex "`[#.]?\w+[?!]?`" 0:mono
+add-highlighter shared/crystal.comment/parameter regex '\*\w+\*' 0:mono
+add-highlighter shared/crystal.comment/code_block regex '```(\h*\w+)?$' 0:block
+add-highlighter shared/crystal.comment/admonition regex '\h+([A-Z]+):\h+' 1:meta
+add-highlighter shared/crystal.comment/directive regex ':\w+:' 0:meta
 
 # Escape sequences
 add-highlighter shared/crystal.escape_sequence regex '\\[abefnrtv]|\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|u\{[0-9a-fA-F]+\})' 0:value
@@ -159,7 +158,7 @@ add-highlighter shared/crystal.escape_sequence regex '\\[abefnrtv]|\\(x[0-9a-fA-
 # Strings
 add-highlighter shared/crystal.string_with_escape_sequences group
 add-highlighter shared/crystal.string_with_escape_sequences/ fill string
-add-highlighter shared/crystal.string_with_escape_sequences/ regex '\\[abefnrtv]|\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|u\{[0-9a-fA-F]+\})' 0:value
+add-highlighter shared/crystal.string_with_escape_sequences/ ref crystal.escape_sequence
 
 # Interpolated strings
 # Interpolation
@@ -178,27 +177,22 @@ add-highlighter shared/crystal.string_with_escape_sequences/ regex '\\[abefnrtv]
 add-highlighter shared/crystal.string_with_escape_sequences_and_interpolation regions
 add-highlighter shared/crystal.string_with_escape_sequences_and_interpolation/content default-region group
 add-highlighter shared/crystal.string_with_escape_sequences_and_interpolation/content/ fill string
-add-highlighter shared/crystal.string_with_escape_sequences_and_interpolation/content/ regex '\\[abefnrtv]|\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|u\{[0-9a-fA-F]+\})' 0:value
+add-highlighter shared/crystal.string_with_escape_sequences_and_interpolation/content/ ref crystal.escape_sequence
 add-highlighter shared/crystal.string_with_escape_sequences_and_interpolation/ region -recurse '\{' '#\{\K' '(?=\})' ref crystal
 
 # Regular expressions
-add-highlighter shared/crystal.string.regexp regions
-add-highlighter shared/crystal.string.regexp/regexp default-region group
-add-highlighter shared/crystal.string.regexp/regexp/ fill meta
-
-# Regular expressions
-add-highlighter shared/crystal.string.regexp.interpolated regions
-add-highlighter shared/crystal.string.regexp.interpolated/regexp default-region group
-add-highlighter shared/crystal.string.regexp.interpolated/regexp/ fill meta
-add-highlighter shared/crystal.string.regexp.interpolated/ region -recurse '\{' '#\{\K' '(?=\})' ref crystal
+add-highlighter shared/crystal.regexp_with_interpolation regions
+add-highlighter shared/crystal.regexp_with_interpolation/content default-region group
+add-highlighter shared/crystal.regexp_with_interpolation/content/ fill meta
+add-highlighter shared/crystal.regexp_with_interpolation/ region -recurse '\{' '#\{\K' '(?=\})' ref crystal
 
 # Command literal
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/command.html
-add-highlighter shared/crystal.string.command.interpolated regions
-add-highlighter shared/crystal.string.command.interpolated/content default-region group
-add-highlighter shared/crystal.string.command.interpolated/content/ fill meta
-add-highlighter shared/crystal.string.command.interpolated/content/ regex '\\[abefnrtv]|\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|u\{[0-9a-fA-F]+\})' 0:value
-add-highlighter shared/crystal.string.command.interpolated/ region -recurse '\{' '#\{\K' '(?=\})' ref crystal
+add-highlighter shared/crystal.command_with_escape_sequences_and_interpolation regions
+add-highlighter shared/crystal.command_with_escape_sequences_and_interpolation/content default-region group
+add-highlighter shared/crystal.command_with_escape_sequences_and_interpolation/content/ fill meta
+add-highlighter shared/crystal.command_with_escape_sequences_and_interpolation/content/ ref crystal.escape_sequence
+add-highlighter shared/crystal.command_with_escape_sequences_and_interpolation/ region -recurse '\{' '#\{\K' '(?=\})' ref crystal
 
 # Syntax and semantics
 # https://crystal-lang.org/reference/master/syntax_and_semantics/
@@ -275,14 +269,15 @@ add-highlighter shared/crystal/comment region '#(?!\{)' '$' ref crystal.comment
 # backslash ⇒ '\\'
 #
 add-highlighter shared/crystal/string.quoted.single region "'" "(?<!\\)(?:\\\\)*'" group
-add-highlighter shared/crystal/string.quoted.single/ ref crystal.string_with_escape_sequences
+add-highlighter shared/crystal/string.quoted.single/ fill string
+add-highlighter shared/crystal/string.quoted.single/ ref crystal.escape_sequence
 add-highlighter shared/crystal/string.quoted.single/ regex "\\'" 0:value
 
 # Double quoted strings
 add-highlighter shared/crystal/string.quoted.double region '"' '(?<!\\)(?:\\\\)*"' regions
 add-highlighter shared/crystal/string.quoted.double/content default-region group
 add-highlighter shared/crystal/string.quoted.double/content/ fill string
-add-highlighter shared/crystal/string.quoted.double/content/ regex '\\[abefnrtv]|\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|u\{[0-9a-fA-F]+\})' 0:value
+add-highlighter shared/crystal/string.quoted.double/content/ ref crystal.escape_sequence
 add-highlighter shared/crystal/string.quoted.double/content/ regex '\\"' 0:value
 add-highlighter shared/crystal/string.quoted.double/ region -recurse '\{' '#\{\K' '(?=\})' ref crystal
 
@@ -363,11 +358,11 @@ add-highlighter shared/crystal/string.quoted.regexp/ region -recurse '\{' '#\{\K
 #
 # %r(foo|bar)
 #
-add-highlighter shared/crystal/string.regexp.percent.parenthesis.interpolated region -recurse '\(' '%r\(' '\)[imx]*' ref crystal.string.regexp.interpolated
-add-highlighter shared/crystal/string.regexp.percent.bracket.interpolated region -recurse '\[' '%r\[' '\][imx]*' ref crystal.string.regexp.interpolated
-add-highlighter shared/crystal/string.regexp.percent.brace.interpolated region -recurse '\{' '%r\{' '\}[imx]*' ref crystal.string.regexp.interpolated
-add-highlighter shared/crystal/string.regexp.percent.angle.interpolated region -recurse '<' '%r<' '>[imx]*' ref crystal.string.regexp.interpolated
-add-highlighter shared/crystal/string.regexp.percent.pipe.interpolated region '%r\|' '\|[imx]*' ref crystal.string.regexp.interpolated
+add-highlighter shared/crystal/string.regexp.percent.parenthesis.interpolated region -recurse '\(' '%r\(' '\)[imx]*' ref crystal.regexp_with_interpolation
+add-highlighter shared/crystal/string.regexp.percent.bracket.interpolated region -recurse '\[' '%r\[' '\][imx]*' ref crystal.regexp_with_interpolation
+add-highlighter shared/crystal/string.regexp.percent.brace.interpolated region -recurse '\{' '%r\{' '\}[imx]*' ref crystal.regexp_with_interpolation
+add-highlighter shared/crystal/string.regexp.percent.angle.interpolated region -recurse '<' '%r<' '>[imx]*' ref crystal.regexp_with_interpolation
+add-highlighter shared/crystal/string.regexp.percent.pipe.interpolated region '%r\|' '\|[imx]*' ref crystal.regexp_with_interpolation
 
 # Command literal
 
@@ -381,7 +376,7 @@ add-highlighter shared/crystal/string.regexp.percent.pipe.interpolated region '%
 add-highlighter shared/crystal/string.quoted.command region '`' '(?<!\\)(?:\\\\)*`' regions
 add-highlighter shared/crystal/string.quoted.command/content default-region group
 add-highlighter shared/crystal/string.quoted.command/content/ fill string
-add-highlighter shared/crystal/string.quoted.command/content/ regex '\\[abefnrtv]|\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|u\{[0-9a-fA-F]+\})' 0:value
+add-highlighter shared/crystal/string.quoted.command/content/ ref crystal.escape_sequence
 add-highlighter shared/crystal/string.quoted.command/content/ regex '\\`' 0:value
 add-highlighter shared/crystal/string.quoted.command/ region -recurse '\{' '#\{\K' '(?=\})' ref crystal
 
@@ -391,11 +386,11 @@ add-highlighter shared/crystal/string.quoted.command/ region -recurse '\{' '#\{\
 #
 # %x(echo foo)
 #
-add-highlighter shared/crystal/string.command.percent.parenthesis region -recurse '\(' '%x\(' '\)' ref crystal.string.command.interpolated
-add-highlighter shared/crystal/string.command.percent.bracket region -recurse '\[' '%x\[' '\]' ref crystal.string.command.interpolated
-add-highlighter shared/crystal/string.command.percent.brace region -recurse '\{' '%x\{' '\}' ref crystal.string.command.interpolated
-add-highlighter shared/crystal/string.command.percent.angle region -recurse '<' '%x<' '>' ref crystal.string.command.interpolated
-add-highlighter shared/crystal/string.command.percent.pipe region '%x\|' '\|' ref crystal.string.command.interpolated
+add-highlighter shared/crystal/string.command.percent.parenthesis region -recurse '\(' '%x\(' '\)' ref crystal.command_with_escape_sequences_and_interpolation
+add-highlighter shared/crystal/string.command.percent.bracket region -recurse '\[' '%x\[' '\]' ref crystal.command_with_escape_sequences_and_interpolation
+add-highlighter shared/crystal/string.command.percent.brace region -recurse '\{' '%x\{' '\}' ref crystal.command_with_escape_sequences_and_interpolation
+add-highlighter shared/crystal/string.command.percent.angle region -recurse '<' '%x<' '>' ref crystal.command_with_escape_sequences_and_interpolation
+add-highlighter shared/crystal/string.command.percent.pipe region '%x\|' '\|' ref crystal.command_with_escape_sequences_and_interpolation
 # Configuration
 # Detection
 # Indentation

@@ -34,11 +34,11 @@ add-highlighter shared/crystal/code/ regex '[-+*/%^&!?@|<>=:(){}[\];:,.~]' 0:ope
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/floats.html
 # https://crystal-lang.org/reference/master/syntax_and_semantics/constants.html
 # FOO
-# decimal number ⇒ 1_000_000
-# float number ⇒ 1_000_000.111_111
-# binary number ⇒ 0b1101
-# octal number ⇒ 0o123
-# hexadecimal number ⇒ 0xfe012d
+# decimal number => 1_000_000
+# float number => 1_000_000.111_111
+# binary number => 0b1101
+# octal number => 0o123
+# hexadecimal number => 0xfe012d
 add-highlighter shared/crystal/code/ regex '\bthis\b|\bundefined\b|\bdocument\b|\bwindow\b|\bfalse\b|\btrue\b|\bnull\b|\b_G\b|\b_ENV\b|\d[\d_]*\.\w[\w]*|\d[\w]*|\b[A-Z]\w*\b|\b[A-Z]\w*\b|\b[+-]?\d(_?\d+)*(?:[eE][+-]?\d(_?\d+)*)?(_[iu](8|16|32|64|128))?\b|\b[+-]?\d(_?\d+)*\.\d(_?\d+)*(?:[eE][+-]?\d(_?\d+)*)?(_(f32|f64))?\b|\b0b[0-1]+(_[iu](8|16|32|64|128))?\b|\b0o[0-7]+(_[iu](8|16|32|64|128))?\b|\b0x[0-9a-fA-F]+(_[iu](8|16|32|64|128))?\b' 0:value
 
 # Comments
@@ -58,13 +58,13 @@ add-highlighter shared/crystal/code/ regex '\bthis\b|\bundefined\b|\bdocument\b|
 add-highlighter shared/crystal/comment region '#(?!\{)' '$' group
 add-highlighter shared/crystal/comment/ fill comment
 add-highlighter shared/crystal/comment/reference regex "`[#.]?\w+[?!]?`" 0:mono
-add-highlighter shared/crystal/comment/parameter regex '\*\w+\*' 0:mono
+add-highlighter shared/crystal/comment/parameter regex '(?<!\*)\*\w+[?!]?\*(?!\*)' 0:mono
 add-highlighter shared/crystal/comment/code_block regex '```(\h*\w+)?$' 0:block
 add-highlighter shared/crystal/comment/admonition regex '\h+([A-Z]+):\h+' 1:meta
 add-highlighter shared/crystal/comment/directive regex ':\w+:' 0:meta
 
 # Escape sequences
-add-highlighter shared/crystal.escape_sequence regex '\\[abefnrtv]|\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|u\{[0-9a-fA-F]+\})' 0:value
+add-highlighter shared/crystal.escape_sequence regex '\\[\\abefnrtv]|\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|u\{[0-9a-fA-F]+\})' 0:value
 
 # Strings
 add-highlighter shared/crystal.string_with_escape_sequences group
@@ -81,9 +81,9 @@ add-highlighter shared/crystal.string_with_escape_sequences/ ref crystal.escape_
 # String literal
 # Examples:
 #
-# simple string ⇒ "hello world"
-# double quote ⇒ "\""
-# backslash ⇒ "\\"
+# simple string => "hello world"
+# double quote => "\""
+# backslash => "\\"
 #
 add-highlighter shared/crystal.string_with_escape_sequences_and_interpolation regions
 add-highlighter shared/crystal.string_with_escape_sequences_and_interpolation/content default-region group

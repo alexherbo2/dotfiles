@@ -4,7 +4,7 @@ add-highlighter shared/crystal/code default-region group
 
 # Syntax and semantics
 # https://crystal-lang.org/reference/master/syntax_and_semantics/
-# Method definition and call
+# Method declaration and call
 # https://crystal-lang.org/reference/master/syntax_and_semantics/method_arguments.html
 add-highlighter shared/crystal/code/instance_method_name_declaration regex '\bdef\h+\K(?:\w+\.|\w+::)*\w+[?!]?' 0:function
 add-highlighter shared/crystal/code/method_name_call regex '\b(?:\w+\.|\w+::)*\w+[?!]?(?=\()' 0:function

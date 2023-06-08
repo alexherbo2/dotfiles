@@ -159,7 +159,7 @@ add-highlighter shared/crystal.regexp_with_interpolation/ region -recurse '\{' '
 # Quoted regex literals
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/regex.html
 # /foo/i.match("FOO")
-add-highlighter shared/crystal/quoted_regexp region '/\H' '(?<!\\)(?:\\\\)*/[imx]*' regions
+add-highlighter shared/crystal/quoted_regexp region '\B/(?=\H)' '(?<!\\)(?:\\\\)*/[imx]*' regions
 add-highlighter shared/crystal/quoted_regexp/content default-region group
 add-highlighter shared/crystal/quoted_regexp/content/ fill meta
 add-highlighter shared/crystal/quoted_regexp/content/ regex '\\/' 0:value

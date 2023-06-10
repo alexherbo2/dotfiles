@@ -45,10 +45,7 @@ add-highlighter shared/crystal/code/ regex '\B(?<!:):\w+[?!]?' 0:string
 # https://crystal-lang.org/reference/master/syntax_and_semantics/documenting_code.html
 add-highlighter shared/crystal/comment region '#(?!\{)' '$' group
 add-highlighter shared/crystal/comment/ fill comment
-add-highlighter shared/crystal/comment/ regex '`[#.]?\w+[?!]?`|(?<!\*)\*\w+[?!]?\*(?!\*)' 0:mono
-add-highlighter shared/crystal/comment/ regex '```(\h*\w+)?$' 0:block
-add-highlighter shared/crystal/comment/ regex '\h+([A-Z]+):\h+' 1:meta
-add-highlighter shared/crystal/comment/ regex ':\w+:' 0:meta
+add-highlighter shared/crystal/comment/ regex '\b(?:BUG|DEPRECATED|EXPERIMENTAL|FIXME|NOTE|OPTIMIZE|TODO|WARNING):\B|\B:(?:ditto|nodoc|inherit):\B' 0:meta
 
 # Escape sequences
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#escaping

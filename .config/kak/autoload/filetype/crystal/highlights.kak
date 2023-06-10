@@ -37,7 +37,7 @@ add-highlighter shared/crystal/code/ regex '\bthis\b|\bundefined\b|\bdocument\b|
 
 # Symbols
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/symbol.html
-add-highlighter shared/crystal.escape_sequence regex '\B(?<!:):\w+[?!]?' 0:string
+add-highlighter shared/crystal/code/ regex '\B(?<!:):\w+[?!]?' 0:string
 
 # Comments
 # Documenting code
@@ -45,10 +45,10 @@ add-highlighter shared/crystal.escape_sequence regex '\B(?<!:):\w+[?!]?' 0:strin
 # https://crystal-lang.org/reference/master/syntax_and_semantics/documenting_code.html
 add-highlighter shared/crystal/comment region '#(?!\{)' '$' group
 add-highlighter shared/crystal/comment/ fill comment
-add-highlighter shared/crystal/comment/reference regex '`[#.]?\w+[?!]?`|(?<!\*)\*\w+[?!]?\*(?!\*)' 0:mono
-add-highlighter shared/crystal/comment/code_block regex '```(\h*\w+)?$' 0:block
-add-highlighter shared/crystal/comment/admonition regex '\h+([A-Z]+):\h+' 1:meta
-add-highlighter shared/crystal/comment/directive regex ':\w+:' 0:meta
+add-highlighter shared/crystal/comment/ regex '`[#.]?\w+[?!]?`|(?<!\*)\*\w+[?!]?\*(?!\*)' 0:mono
+add-highlighter shared/crystal/comment/ regex '```(\h*\w+)?$' 0:block
+add-highlighter shared/crystal/comment/ regex '\h+([A-Z]+):\h+' 1:meta
+add-highlighter shared/crystal/comment/ regex ':\w+:' 0:meta
 
 # Escape sequences
 add-highlighter shared/crystal.escape_sequence regex '\\[\\abefnrtv]|\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|u\{[0-9a-fA-F]+\})' 0:value

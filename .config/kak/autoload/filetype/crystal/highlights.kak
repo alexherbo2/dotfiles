@@ -29,36 +29,16 @@ _ shared/crystal/code/ regex '\braise_without_backtrace\b|\btimeout_select_actio
 _ shared/crystal/code/ regex '[-+*/%^&!?@|<>=:(){}[\];:,.~]' 0:operator
 
 # Literals
-# Constants
-# Numbers
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/integers.html
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/floats.html
 # https://crystal-lang.org/reference/master/syntax_and_semantics/constants.html
-# FOO
-# decimal number => 1_000_000
-# float number => 1_000_000.111_111
-# binary number => 0b1101
-# octal number => 0o123
-# hexadecimal number => 0xfe012d
-# Symbols
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/symbol.html
-# :unquoted_symbol
 _ shared/crystal/code/ regex ':\w+[?!]?|\bthis\b|\bundefined\b|\bdocument\b|\bwindow\b|\bfalse\b|\btrue\b|\bnull\b|\b_G\b|\b_ENV\b|\d[\d_]*\.\w[\w]*|\d[\w]*|\b[A-Z]\w*\b|\b[A-Z]\w*\b|\b[+-]?\d(_?\d+)*(?:[eE][+-]?\d(_?\d+)*)?(_[iu](8|16|32|64|128))?\b|\b[+-]?\d(_?\d+)*\.\d(_?\d+)*(?:[eE][+-]?\d(_?\d+)*)?(_(f32|f64))?\b|\b0b[0-1]+(_[iu](8|16|32|64|128))?\b|\b0o[0-7]+(_[iu](8|16|32|64|128))?\b|\b0x[0-9a-fA-F]+(_[iu](8|16|32|64|128))?\b' 0:value
 
 # Comments
-# https://crystal-lang.org/reference/master/syntax_and_semantics/comments.html
 # Documenting code
+# https://crystal-lang.org/reference/master/syntax_and_semantics/comments.html
 # https://crystal-lang.org/reference/master/syntax_and_semantics/documenting_code.html
-# A unicorn is a **legendary animal**.
-#
-# To create a unicorn:
-#
-# ```
-# unicorn = Unicorn.new
-# unicorn.speak
-# ```
-#
-# Check the number of horns with `#horns`.
 _ shared/crystal/comment region '#(?!\{)' '$' group
 _ shared/crystal/comment/ fill comment
 _ shared/crystal/comment/reference regex '`[#.]?\w+[?!]?`|(?<!\*)\*\w+[?!]?\*(?!\*)' 0:mono
@@ -75,19 +55,9 @@ _ shared/crystal.string_with_escape_sequences/ fill string
 _ shared/crystal.string_with_escape_sequences/ ref crystal.escape_sequence
 
 # Interpolated strings
-# Interpolation
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#interpolation
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#escaping
-# Strings
-# Reference
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html
-# String literal
-# Examples:
-#
-# simple string => "hello world"
-# double quote => "\""
-# backslash => "\\"
-#
 _ shared/crystal.string_with_escape_sequences_and_interpolation regions
 _ shared/crystal.string_with_escape_sequences_and_interpolation/content default-region group
 _ shared/crystal.string_with_escape_sequences_and_interpolation/content/ fill string
@@ -96,15 +66,13 @@ _ shared/crystal.string_with_escape_sequences_and_interpolation/ region -recurse
 
 # Single quoted strings
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/char.html
-# simple character => 'a'
-# single quote => '\''
-# backslash => '\\'
 _ shared/crystal/single_quoted_string region "'" "(?<!\\)(?:\\\\)*'" group
 _ shared/crystal/single_quoted_string/ fill value
 _ shared/crystal/single_quoted_string/ ref crystal.escape_sequence
 _ shared/crystal/single_quoted_string/ regex "\\'" 0:value
 
 # Double quoted strings
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html
 _ shared/crystal/double_quoted_string region '"' '(?<!\\)(?:\\\\)*"' regions
 _ shared/crystal/double_quoted_string/content default-region group
 _ shared/crystal/double_quoted_string/content/ fill string
@@ -114,7 +82,6 @@ _ shared/crystal/double_quoted_string/ region -recurse '\{' '#\{\K' '(?=\})' ref
 
 # Percent string literals
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#percent-string-literals
-# puts %Q(hello #{name})
 _ shared/crystal/ region -recurse '\(' '%Q?\(' '\)' ref crystal.string_with_escape_sequences_and_interpolation
 _ shared/crystal/ region -recurse '\[' '%Q?\[' '\]' ref crystal.string_with_escape_sequences_and_interpolation
 _ shared/crystal/ region -recurse '\{' '%Q?\{' '\}' ref crystal.string_with_escape_sequences_and_interpolation
@@ -125,9 +92,6 @@ _ shared/crystal/ region '%Q?\|' '\|' ref crystal.string_with_escape_sequences_a
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#percent-string-literals
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#percent-string-array-literal
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/symbol.html#percent-symbol-array-literal
-# puts %q(hello world)
-# puts %w(hello world)
-# puts %i(hello world)
 _ shared/crystal/ region -recurse '\(' '%[qwi]\(' '\)' fill string
 _ shared/crystal/ region -recurse '\[' '%[qwi]\[' '\]' fill string
 _ shared/crystal/ region -recurse '\{' '%[qwi]\{' '\}' fill string
@@ -136,23 +100,18 @@ _ shared/crystal/ region '%[qwi]\|' '\|' fill string
 
 # Here document
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#heredoc
-# <<-EOF
-# EOF
-# <<-'EOF'
-# EOF
 _ shared/crystal/ region -match-capture '<<-(\w+)' '^\h*(\w+)$' ref crystal.string_with_escape_sequences_and_interpolation
 _ shared/crystal/ region -match-capture "<<-'(\w+)'" '^\h*(\w+)$' fill string
 
 # Symbols
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/symbol.html
-# :unquoted_symbol
-# :"quoted symbol"
 _ shared/crystal/quoted_symbol region ':"' '(?<!\\)(?:\\\\)*"' group
 _ shared/crystal/quoted_symbol/ fill value
 _ shared/crystal/quoted_symbol/ ref crystal.escape_sequence
 _ shared/crystal/quoted_symbol/ regex "\\'" 0:value
 
 # Regular expressions
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/regex.html
 _ shared/crystal.regexp_with_interpolation regions
 _ shared/crystal.regexp_with_interpolation/content default-region group
 _ shared/crystal.regexp_with_interpolation/content/ fill meta
@@ -160,7 +119,6 @@ _ shared/crystal.regexp_with_interpolation/ region -recurse '\{' '#\{\K' '(?=\})
 
 # Quoted regex literals
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/regex.html
-# /foo/i.match("FOO")
 _ shared/crystal/quoted_regexp region '(?:^|\B)/(?=\H)' '(?<!\\)(?:\\\\)*/[imx]*' regions
 _ shared/crystal/quoted_regexp/content default-region group
 _ shared/crystal/quoted_regexp/content/ fill meta
@@ -169,7 +127,6 @@ _ shared/crystal/quoted_regexp/ region -recurse '\{' '#\{\K' '(?=\})' ref crysta
 
 # Percent regex literals
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/regex.html
-# %r(foo|bar)
 _ shared/crystal/ region -recurse '\(' '%r\(' '\)[imx]*' ref crystal.regexp_with_interpolation
 _ shared/crystal/ region -recurse '\[' '%r\[' '\][imx]*' ref crystal.regexp_with_interpolation
 _ shared/crystal/ region -recurse '\{' '%r\{' '\}[imx]*' ref crystal.regexp_with_interpolation
@@ -186,7 +143,6 @@ _ shared/crystal.command_with_escape_sequences_and_interpolation/ region -recurs
 
 # Quoted command literals
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/command.html
-# `echo foo`
 _ shared/crystal/quoted_command region '`' '(?<!\\)(?:\\\\)*`' regions
 _ shared/crystal/quoted_command/content default-region group
 _ shared/crystal/quoted_command/content/ fill string
@@ -196,7 +152,6 @@ _ shared/crystal/quoted_command/ region -recurse '\{' '#\{\K' '(?=\})' ref cryst
 
 # Percent command literals
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/command.html
-# %x(echo foo)
 _ shared/crystal/ region -recurse '\(' '%x\(' '\)' ref crystal.command_with_escape_sequences_and_interpolation
 _ shared/crystal/ region -recurse '\[' '%x\[' '\]' ref crystal.command_with_escape_sequences_and_interpolation
 _ shared/crystal/ region -recurse '\{' '%x\{' '\}' ref crystal.command_with_escape_sequences_and_interpolation

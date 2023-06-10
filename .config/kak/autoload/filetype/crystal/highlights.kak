@@ -51,13 +51,17 @@ add-highlighter shared/crystal/comment/ regex '\h+([A-Z]+):\h+' 1:meta
 add-highlighter shared/crystal/comment/ regex ':\w+:' 0:meta
 
 # Escape sequences
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#escaping
 add-highlighter shared/crystal.escape_sequence regex '\\[\\abefnrtv]|\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|u\{[0-9a-fA-F]+\})' 0:value
 
 # Strings
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#escaping
 add-highlighter shared/crystal.string_with_escape_sequences group
 add-highlighter shared/crystal.string_with_escape_sequences/ fill string
 add-highlighter shared/crystal.string_with_escape_sequences/ ref crystal.escape_sequence
 
+# Interpolated strings
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#interpolation
 add-highlighter shared/crystal.string_with_interpolation regions
 add-highlighter shared/crystal.string_with_interpolation/content default-region group
 add-highlighter shared/crystal.string_with_interpolation/content/ fill string
@@ -65,8 +69,6 @@ add-highlighter shared/crystal.string_with_interpolation/ region -recurse '\{' '
 
 # Interpolated strings
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#interpolation
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#escaping
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html
 add-highlighter shared/crystal.string_with_escape_sequences_and_interpolation regions
 add-highlighter shared/crystal.string_with_escape_sequences_and_interpolation/content default-region group
 add-highlighter shared/crystal.string_with_escape_sequences_and_interpolation/content/ fill string
@@ -147,8 +149,8 @@ add-highlighter shared/crystal/quoted_command/ region -recurse '\{' '#\{\K' '(?=
 
 # Percent command literals
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/command.html
-add-highlighter shared/crystal/ region -recurse '\(' '%x\(' '\)' ref crystal.command_with_escape_sequences_and_interpolation
-add-highlighter shared/crystal/ region -recurse '\[' '%x\[' '\]' ref crystal.command_with_escape_sequences_and_interpolation
-add-highlighter shared/crystal/ region -recurse '\{' '%x\{' '\}' ref crystal.command_with_escape_sequences_and_interpolation
-add-highlighter shared/crystal/ region -recurse '<' '%x<' '>' ref crystal.command_with_escape_sequences_and_interpolation
-add-highlighter shared/crystal/ region '%x\|' '\|' ref crystal.command_with_escape_sequences_and_interpolation
+add-highlighter shared/crystal/ region -recurse '\(' '%x\(' '\)' ref crystal.string_with_escape_sequences_and_interpolation
+add-highlighter shared/crystal/ region -recurse '\[' '%x\[' '\]' ref crystal.string_with_escape_sequences_and_interpolation
+add-highlighter shared/crystal/ region -recurse '\{' '%x\{' '\}' ref crystal.string_with_escape_sequences_and_interpolation
+add-highlighter shared/crystal/ region -recurse '<' '%x<' '>' ref crystal.string_with_escape_sequences_and_interpolation
+add-highlighter shared/crystal/ region '%x\|' '\|' ref crystal.string_with_escape_sequences_and_interpolation

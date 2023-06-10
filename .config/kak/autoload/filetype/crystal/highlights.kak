@@ -26,12 +26,15 @@ add-highlighter shared/crystal/code/ regex '\braise_without_backtrace\b|\btimeou
 # https://crystal-lang.org/reference/master/syntax_and_semantics/operators.html
 add-highlighter shared/crystal/code/ regex '[-+*/%^&!?@|<>=:(){}[\];:,.~]' 0:operator
 
+# Constants
+# https://crystal-lang.org/reference/master/syntax_and_semantics/constants.html
+add-highlighter shared/crystal/code/ regex '\b[A-Z]\w*\b' 0:variable
+
 # Literals
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/integers.html
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/floats.html
-# https://crystal-lang.org/reference/master/syntax_and_semantics/constants.html
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/symbol.html
-add-highlighter shared/crystal/code/ regex ':\w+[?!]?|\bthis\b|\bundefined\b|\bdocument\b|\bwindow\b|\bfalse\b|\btrue\b|\bnull\b|\b_G\b|\b_ENV\b|\d[\d_]*\.\w[\w]*|\d[\w]*|\b[A-Z]\w*\b|\b[A-Z]\w*\b|\b[+-]?\d(_?\d+)*(?:[eE][+-]?\d(_?\d+)*)?(_[iu](8|16|32|64|128))?\b|\b[+-]?\d(_?\d+)*\.\d(_?\d+)*(?:[eE][+-]?\d(_?\d+)*)?(_(f32|f64))?\b|\b0b[0-1]+(_[iu](8|16|32|64|128))?\b|\b0o[0-7]+(_[iu](8|16|32|64|128))?\b|\b0x[0-9a-fA-F]+(_[iu](8|16|32|64|128))?\b' 0:value
+add-highlighter shared/crystal/code/ regex ':\w+[?!]?|\bthis\b|\bundefined\b|\bdocument\b|\bwindow\b|\bfalse\b|\btrue\b|\bnull\b|\b_G\b|\b_ENV\b|\d[\d_]*\.\w[\w]*|\d[\w]*|\b[+-]?\d(_?\d+)*(?:[eE][+-]?\d(_?\d+)*)?(_[iu](8|16|32|64|128))?\b|\b[+-]?\d(_?\d+)*\.\d(_?\d+)*(?:[eE][+-]?\d(_?\d+)*)?(_(f32|f64))?\b|\b0b[0-1]+(_[iu](8|16|32|64|128))?\b|\b0o[0-7]+(_[iu](8|16|32|64|128))?\b|\b0x[0-9a-fA-F]+(_[iu](8|16|32|64|128))?\b' 0:value
 
 # Comments
 # Documenting code

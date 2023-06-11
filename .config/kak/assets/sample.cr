@@ -170,11 +170,8 @@ paint :red
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/floats.html
 # https://crystal-lang.org/reference/master/syntax_and_semantics/constants.html
 FOO
-1_000_000
-1_000_000.111_111
-0b1101
-0o123
-0xfe012d
+puts "I say: \"Hello, \\\n\t#{:crystal_lang.to_s + '\u{1f48e}'}!\""
+array_of_strings = [1_000_000, 1_000_000.111_111, 0b1101, 0o123, 0xfe012d]
 
 # Comments
 # https://crystal-lang.org/reference/master/syntax_and_semantics/comments.html
@@ -191,15 +188,10 @@ FOO
 #
 # Check the number of horns with `#horns`.
 
-# Strings
-
 # Interpolated strings
 # Interpolation
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#interpolation
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#escaping
-puts "hello world"
-puts "\""
-puts "\\"
 
 # Single quoted strings
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/char.html
@@ -209,7 +201,6 @@ puts '\\'
 
 # Percent string literals
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#percent-string-literals
-puts %Q(hello #{name})
 
 # Raw percent string literals
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#percent-string-literals

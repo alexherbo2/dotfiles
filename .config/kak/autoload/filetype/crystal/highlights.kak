@@ -11,7 +11,7 @@ add-highlighter shared/crystal/code/ regex '\bdef\h+\K(?:\w+\.|\w+::)*\w+[?!]?|\
 # Instance and class variables
 # https://crystal-lang.org/reference/master/syntax_and_semantics/methods_and_instance_variables.html
 # https://crystal-lang.org/reference/master/syntax_and_semantics/class_variables.html
-add-highlighter shared/crystal/code/instance_and_class_variables regex '@@?\w+\b' 0:variable
+add-highlighter shared/crystal/code/instance_and_class_variables regex '\b[A-Z]\w*\b|@@?\w+\b' 0:variable
 
 # Keywords
 # https://github.com/crystal-lang/crystal/blob/master/src/compiler/crystal/syntax/lexer.cr
@@ -25,10 +25,6 @@ add-highlighter shared/crystal/code/ regex '\braise_without_backtrace\b|\btimeou
 # Operators
 # https://crystal-lang.org/reference/master/syntax_and_semantics/operators.html
 add-highlighter shared/crystal/code/ regex '[-+*/%^&!?@|<>=:(){}[\];:,.~]' 0:operator
-
-# Constants
-# https://crystal-lang.org/reference/master/syntax_and_semantics/constants.html
-add-highlighter shared/crystal/code/ regex '\b[A-Z]\w*\b' 0:variable
 
 # Literals
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/integers.html

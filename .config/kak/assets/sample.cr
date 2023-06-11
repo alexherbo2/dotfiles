@@ -5,30 +5,37 @@
 
 # https://crystal-lang.org/reference/master/syntax_and_semantics/if.html
 
-value = if some_condition
-elsif some_other_condition
-else
-end
-
 # https://crystal-lang.org/reference/master/syntax_and_semantics/unless.html
-
-value = unless some_condition
-end
 
 # https://crystal-lang.org/reference/master/syntax_and_semantics/case.html
 
-value = case expression
-when value
+value = case {x, y}
+when {0, _}
+  1
+when {_, 0}
+  1
+when {_, _}
+  0
 end
 
-value = case expression
-in value
+value = case {x, y}
+in {0, _}
+  1
+in {_, 0}
+  1
+in {_, _}
+  0
 end
 
 # https://crystal-lang.org/reference/master/syntax_and_semantics/while.html
 
 while some_condition
   do_this
+end
+
+loop do
+  do_this
+  break if some_condition
 end
 
 # https://crystal-lang.org/reference/master/syntax_and_semantics/until.html
@@ -49,9 +56,6 @@ private class Person
 end
 
 abstract class Person
-end
-
-private abstract class Person
 end
 
 def name
@@ -145,45 +149,24 @@ def paint(color : Color)
 end
 
 paint :red
-# Syntax and semantics
-# https://crystal-lang.org/reference/master/syntax_and_semantics/
-# Method definition and call
-# https://crystal-lang.org/reference/master/syntax_and_semantics/method_arguments.html
 
-# Instance and class variables
-# https://crystal-lang.org/reference/master/syntax_and_semantics/methods_and_instance_variables.html
-# https://crystal-lang.org/reference/master/syntax_and_semantics/class_variables.html
-
-# Keywords
-# https://github.com/crystal-lang/crystal/blob/master/src/compiler/crystal/syntax/lexer.cr
-
-# Built-in functions
-# https://crystal-lang.org/api/master/toplevel.html
-# https://crystal-lang.org/api/master/Object.html
-
-# Operators
-# https://crystal-lang.org/reference/master/syntax_and_semantics/operators.html
-
-# Literals
-# Constants
-# Numbers
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/integers.html
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/floats.html
-# https://crystal-lang.org/reference/master/syntax_and_semantics/constants.html
-FOO
 puts "I say: \"Hello, \\\n\t#{:crystal_lang.to_s + '\u{1f48e}'}!\""
-array_of_strings = [1_000_000, 1_000_000.111_111, 0b1101, 0o123, 0xfe012d]
+array_of_numbers = [1_000_000, 1_000_000.111_111, 0b1101, 0o123, 0xfe012d]
+array_of_strings = []
 
-# Comments
-# https://crystal-lang.org/reference/master/syntax_and_semantics/comments.html
-# Documenting code
-# https://crystal-lang.org/reference/master/syntax_and_semantics/documenting_code.html
-# TODO: OPTIMIZE.
-# :ditto:
-# *horns*
-# `horns`
-# Creates a new `Unicorn` instance.
-# A unicorn is a **legendary animal**.
+# :nodoc:
+private module Legendary
+end
+
+# :nodoc:
+private abstract class Animal
+  # Returns the name of `self`.
+  abstract def name : String
+end
+
+# A unicorn is a **legendary animal** (see the `Legendary` module) that has been
+# described since antiquity as a beast with a large, spiraling horn projecting
+# from its forehead.
 #
 # To create a unicorn:
 #
@@ -192,32 +175,60 @@ array_of_strings = [1_000_000, 1_000_000.111_111, 0b1101, 0o123, 0xfe012d]
 # unicorn.speak
 # ```
 #
+# The above produces:
+#
+# ``` text
+# "I’m a unicorn"
+# ```
+#
 # Check the number of horns with `#horns`.
+class Unicorn < Animal
+  include Legendary
 
-# Interpolated strings
-# Interpolation
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#interpolation
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#escaping
+  def name : String
+    "unicorn"
+  end
 
-# Single quoted strings
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/char.html
-puts 'a'
-puts '\''
-puts '\\'
+  # Creates a unicorn with the specified number of *horns*.
+  def initialize(@horns : Int32 = 1)
+    raise "Not a unicorn" if @horns != 1
+  end
 
-# Percent string literals
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#percent-string-literals
+  # :nodoc:
+  def self.new
+    new(1)
+  end
 
-# Raw percent string literals
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#percent-string-literals
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#percent-string-array-literal
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/symbol.html#percent-symbol-array-literal
+  # Returns the number of horns this unicorn has.
+  def horns
+    @horns
+  end
+
+  # :ditto:
+  def number_of_horns
+    horns
+  end
+
+  # Makes the unicorn speak to `STDOUT`.
+  #
+  # NOTE: Although unicorns don’t normally talk, this one is special.
+  # TODO: Check if unicorn is asleep and raise exception if not able to speak.
+  # TODO: Create another `speak` method that takes and prints a string.
+  def speak
+    puts "I’m a unicorn"
+  end
+
+  # Makes the unicorn talk to `STDOUT`.
+  @[Deprecated("Use `speak` instead")]
+  def talk
+    puts "I’m a unicorn"
+  end
+end
+
 puts %q(hello world)
 puts %w(hello world)
 puts %i(hello world)
 
-# Here document
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#heredoc
 puts <<-EOF
 hello\nworld
 EOF
@@ -226,28 +237,13 @@ puts <<-'EOF'
 hello world
 EOF
 
-# Symbols
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/symbol.html
 :unquoted_symbol
 :"quoted symbol"
 
-# Regular expressions
-
-# Quoted regex literals
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/regex.html
 /foo/i.match("FOO")
 
-# Percent regex literals
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/regex.html
 %r(foo|bar)
 
-# Command literal
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/command.html
-
-# Quoted command literals
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/command.html
 `echo foo`
 
-# Percent command literals
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/command.html
 %x(echo foo)

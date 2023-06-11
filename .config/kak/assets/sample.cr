@@ -28,6 +28,7 @@ end
 # https://crystal-lang.org/reference/master/syntax_and_semantics/while.html
 
 while some_condition
+  do_this
 end
 
 # https://crystal-lang.org/reference/master/syntax_and_semantics/until.html

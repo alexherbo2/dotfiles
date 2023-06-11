@@ -178,6 +178,11 @@ array_of_strings = [1_000_000, 1_000_000.111_111, 0b1101, 0o123, 0xfe012d]
 # https://crystal-lang.org/reference/master/syntax_and_semantics/comments.html
 # Documenting code
 # https://crystal-lang.org/reference/master/syntax_and_semantics/documenting_code.html
+# TODO: OPTIMIZE.
+# :ditto:
+# *horns*
+# `horns`
+# Creates a new `Unicorn` instance.
 # A unicorn is a **legendary animal**.
 #
 # To create a unicorn:

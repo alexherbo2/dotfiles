@@ -43,7 +43,7 @@ add-highlighter shared/sh/code/builtin regex '\.|:|\[|\balias\b|\bbg\b|\bbind\b|
 # Operators
 add-highlighter shared/sh/code/operator regex '[()[\]{}<>=~*&!|@;$]' 0:operator
 # Literals
-add-highlighter shared/sh/code/literal regex '-\w[\w-]*|\d\w*' 0:value
+add-highlighter shared/sh/code/literal regex '\B-{1,2}\B|\B-{1,2}\w[\w-]*\b|\b\d\w*\b' 0:value
 
 # Comments
 add-highlighter shared/sh/comment region '(?<!\\)(?:\\\\)*(^|\h)\K#' '$' ref sh.comment

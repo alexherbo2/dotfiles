@@ -31,5 +31,10 @@ hook global BufSetOption filetype=find %{
 }
 
 define-command -hidden jump_to_files %{
-  execute-keys 'x<a-s>_gf'
+  evaluate-commands -draft %{
+    execute-keys 'x<a-s>H'
+    evaluate-commands -itersel %{
+      evaluate-commands -client %val{client} -- edit -existing -- %val{selection}
+    }
+  }
 }

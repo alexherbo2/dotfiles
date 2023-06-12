@@ -37,7 +37,10 @@ hook global BufSetOption filetype=grep %{
 
 define-command -hidden jump_to_references %{
   evaluate-commands -draft %{
-    execute-keys ',;xs^(.+?):(\d+):(\d+):(.+?)$<ret>'
-    evaluate-commands -client %val{client} -- edit -existing %reg{1} %reg{2} %reg{3}
+    execute-keys 'x<a-s>H'
+    evaluate-commands -itersel %{
+      execute-keys 's^(.+?):(\d+):(\d+):(.+?)$<ret>'
+      evaluate-commands -client %val{client} -- edit -existing -- %reg{1} %reg{2} %reg{3}
+    }
   }
 }

@@ -6,13 +6,13 @@
 import:
 - ~/.config/alacritty/options/enable_csi_u_key_encoding.yml
 - ~/.config/alacritty/options/use_option_as_meta_key.yml
-- ~/.config/alacritty/colors/macos_light.yml
+# - ~/.config/alacritty/colors/macos_light.yml
 
 # Appearance -------------------------------------------------------------------
 
 # Add a bit of transparency to reduce eye strain.
 window:
-  opacity: 0.9
+  opacity: 0.8
 
 font:
   size: 14.0

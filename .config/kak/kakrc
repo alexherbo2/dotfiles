@@ -6,6 +6,7 @@ colorscheme macos_light
 
 # Add a bit of transparency to reduce eye strain.
 set-face global Default "default,default"
+source ~/.local/share/github.com/mawww/kakoune/colors/default.kak
 
 # Preamble ---------------------------------------------------------------------
 

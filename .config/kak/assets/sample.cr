@@ -9,6 +9,29 @@
 
 # https://crystal-lang.org/reference/master/syntax_and_semantics/case.html
 
+puts %q(hello world)
+puts %w(hello world)
+puts %i(hello world)
+
+puts <<-EOF
+hello\nworld
+EOF
+
+puts <<-'EOF'
+hello world
+EOF
+
+:unquoted_symbol
+:"quoted symbol"
+
+/foo/i.match("FOO")
+
+%r(foo|bar)
+
+`echo foo`
+
+%x(echo foo)
+
 value = case {x, y}
 when {0, _}
   1
@@ -224,26 +247,3 @@ class Unicorn < Animal
     puts "I’m a unicorn"
   end
 end
-
-puts %q(hello world)
-puts %w(hello world)
-puts %i(hello world)
-
-puts <<-EOF
-hello\nworld
-EOF
-
-puts <<-'EOF'
-hello world
-EOF
-
-:unquoted_symbol
-:"quoted symbol"
-
-/foo/i.match("FOO")
-
-%r(foo|bar)
-
-`echo foo`
-
-%x(echo foo)

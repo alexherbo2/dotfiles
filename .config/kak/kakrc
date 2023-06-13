@@ -96,6 +96,7 @@ map -docstring 'yank selected text to the terminal clipboard' global user y ':ya
 # Prompt mode ------------------------------------------------------------------
 
 map -docstring 'buffer directory' global prompt <a-/> '%sh{dirname "$kak_bufname"}<a-!>/'
+map global prompt <c-y> '<c-r>"'
 
 # Add search flags
 map global prompt <c-i> '<home>(?i)<end>'

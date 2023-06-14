@@ -9,6 +9,10 @@
 
 # https://crystal-lang.org/reference/master/syntax_and_semantics/case.html
 
+puts "I say: \"Hello, \\\n\t#{:crystal_lang.to_s + '\u{1f48e}'}!\""
+array_of_numbers = [1_000_000, 1_000_000.111_111, 0b1101, 0o123, 0xfe012d]
+array_of_strings = []
+
 puts %q(hello world)
 puts %w(hello world)
 puts %i(hello world)
@@ -172,10 +176,6 @@ def paint(color : Color)
 end
 
 paint :red
-
-puts "I say: \"Hello, \\\n\t#{:crystal_lang.to_s + '\u{1f48e}'}!\""
-array_of_numbers = [1_000_000, 1_000_000.111_111, 0b1101, 0o123, 0xfe012d]
-array_of_strings = []
 
 # :nodoc:
 private module Legendary

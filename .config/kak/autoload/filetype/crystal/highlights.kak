@@ -58,7 +58,8 @@ add-highlighter shared/crystal.string_with_escape_sequences/ ref crystal.escape_
 add-highlighter shared/crystal.string_with_interpolation regions
 add-highlighter shared/crystal.string_with_interpolation/content default-region group
 add-highlighter shared/crystal.string_with_interpolation/content/ fill string
-add-highlighter shared/crystal.string_with_interpolation/ region -recurse '\{' '#\{\K' '(?=\})' ref crystal
+add-highlighter shared/crystal.string_with_interpolation/content/ regex '\\#' 0:value
+add-highlighter shared/crystal.string_with_interpolation/ region -recurse '\{' '[^\\]#\{\K' '(?=\})' ref crystal
 
 # Interpolated strings
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#interpolation
@@ -66,7 +67,7 @@ add-highlighter shared/crystal.string_with_escape_sequences_and_interpolation re
 add-highlighter shared/crystal.string_with_escape_sequences_and_interpolation/content default-region group
 add-highlighter shared/crystal.string_with_escape_sequences_and_interpolation/content/ fill string
 add-highlighter shared/crystal.string_with_escape_sequences_and_interpolation/content/ ref crystal.escape_sequence
-add-highlighter shared/crystal.string_with_escape_sequences_and_interpolation/ region -recurse '\{' '#\{\K' '(?=\})' ref crystal
+add-highlighter shared/crystal.string_with_escape_sequences_and_interpolation/ region -recurse '\{' '[^\\]#\{\K' '(?=\})' ref crystal
 
 # Single quoted strings
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/char.html
@@ -81,8 +82,8 @@ add-highlighter shared/crystal/double_quoted_string region '"' '(?<!\\)(?:\\\\)*
 add-highlighter shared/crystal/double_quoted_string/content default-region group
 add-highlighter shared/crystal/double_quoted_string/content/ fill string
 add-highlighter shared/crystal/double_quoted_string/content/ ref crystal.escape_sequence
-add-highlighter shared/crystal/double_quoted_string/content/ regex '\\"' 0:value
-add-highlighter shared/crystal/double_quoted_string/ region -recurse '\{' '#\{\K' '(?=\})' ref crystal
+add-highlighter shared/crystal/double_quoted_string/content/ regex '\\["#]' 0:value
+add-highlighter shared/crystal/double_quoted_string/ region -recurse '\{' '[^\\]#\{\K' '(?=\})' ref crystal
 
 # Percent string literals
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#percent-string-literals
@@ -119,8 +120,8 @@ add-highlighter shared/crystal/quoted_symbol/ regex '\\"' 0:value
 add-highlighter shared/crystal/quoted_regexp region '(?:^|\B)/(?=\H)' '(?<!\\)(?:\\\\)*/[imx]*' regions
 add-highlighter shared/crystal/quoted_regexp/content default-region group
 add-highlighter shared/crystal/quoted_regexp/content/ fill string
-add-highlighter shared/crystal/quoted_regexp/content/ regex '\\/' 0:value
-add-highlighter shared/crystal/quoted_regexp/ region -recurse '\{' '#\{\K' '(?=\})' ref crystal
+add-highlighter shared/crystal/quoted_regexp/content/ regex '\\[/#]' 0:value
+add-highlighter shared/crystal/quoted_regexp/ region -recurse '\{' '[^\\]#\{\K' '(?=\})' ref crystal
 
 # Regular expressions
 # Percent regex literals
@@ -137,8 +138,8 @@ add-highlighter shared/crystal/quoted_command region '`' '(?<!\\)(?:\\\\)*`' reg
 add-highlighter shared/crystal/quoted_command/content default-region group
 add-highlighter shared/crystal/quoted_command/content/ fill string
 add-highlighter shared/crystal/quoted_command/content/ ref crystal.escape_sequence
-add-highlighter shared/crystal/quoted_command/content/ regex '\\`' 0:value
-add-highlighter shared/crystal/quoted_command/ region -recurse '\{' '#\{\K' '(?=\})' ref crystal
+add-highlighter shared/crystal/quoted_command/content/ regex '\\[`#]' 0:value
+add-highlighter shared/crystal/quoted_command/ region -recurse '\{' '[^\\]#\{\K' '(?=\})' ref crystal
 
 # Percent command literals
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/command.html

@@ -258,6 +258,18 @@ define-command open_workspace_symbol_picker %{
   lsp-workspace-symbol-incr
 }
 
+define-command set_mark_on_next_key %{
+  on-key mark: %{
+    execute-keys -save-regs '' """%val{key}Z"
+  }
+}
+
+define-command jump_to_mark_on_next_key %{
+  on-key mark: %{
+    execute-keys """%val{key}z"
+  }
+}
+
 define-command itersel_impl -params 1 %{
   try %[ execute-keys z ]
   execute-keys %arg{1}

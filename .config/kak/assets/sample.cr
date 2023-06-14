@@ -1,4 +1,21 @@
 # Syntax and semantics
+# https://learnxinyminutes.com/docs/bash/
+# https://learnxinyminutes.com/docs/crystal/
+# https://learnxinyminutes.com/docs/css/
+# https://learnxinyminutes.com/docs/docker/
+# https://learnxinyminutes.com/docs/git/
+# https://learnxinyminutes.com/docs/html/
+# https://learnxinyminutes.com/docs/javascript/
+# https://learnxinyminutes.com/docs/json/
+# https://learnxinyminutes.com/docs/lua/
+# https://learnxinyminutes.com/docs/make/
+# https://learnxinyminutes.com/docs/markdown/
+# https://learnxinyminutes.com/docs/ruby/
+# https://learnxinyminutes.com/docs/rust/
+# https://learnxinyminutes.com/docs/toml/
+# https://learnxinyminutes.com/docs/typescript/
+# https://learnxinyminutes.com/docs/xml/
+# https://learnxinyminutes.com/docs/yaml/
 # Reference
 
 # https://crystal-lang.org/reference/master/syntax_and_semantics/control_expressions.html
@@ -9,10 +26,22 @@
 
 # https://crystal-lang.org/reference/master/syntax_and_semantics/case.html
 
-puts "I say: \"Hello, \\\n\t#{:crystal_lang.to_s + '\u{1f48e}'}!\""
-array_of_numbers = [1_000_000, 1_000_000.111_111, 0b1101, 0o123, 0xfe012d]
-array_of_strings = []
-
+# This is a comment.
+1_000_000
+1_000_000.111_111.class
+0b1101
+0o123
+0xfe012d
+1 + 2 # => 3
+'a' # : Char
+'\''
+'\n'
+'\u{1f48e}'
+"sum = #{1 + 2}" # => "sum = 3"
+"hello" # : String
+"\"hello world\"" # : String
+"\n"
+"\""
 puts %q(hello world)
 puts %w(hello world)
 puts %i(hello world)

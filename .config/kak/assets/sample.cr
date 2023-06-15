@@ -33,24 +33,32 @@
 0o123
 0xfe012d
 1 + 2 # => 3
+
 'a' # : Char
-'\''
-'\n'
-'\u{1f48e}'
+'\'' # single quote
+'\\' # backslash
+'\n' # newline
+'\n' # newline
+'\u{1f48e}' # hexadecimal unicode character
+
+"\"" # double quote
+"\\" # backslash
+"\#" # hash character (to escape interpolation)
+"\n" # newline
+
 "sum = #{1 + 2}" # => "sum = 3"
 "hello" # : String
 "\"hello world\"" # : String
-"\n"
-"\""
-puts %q(hello world)
-puts %w(hello world)
-puts %i(hello world)
 
-puts <<-EOF
+%q(hello world) # => "hello world"
+%w(one two three) # => ["one" "two" "three"]
+%i(one two three) # => [:one :two :three]
+
+<<-EOF
 hello\nworld
 EOF
 
-puts <<-'EOF'
+<<-'EOF'
 hello world
 EOF
 

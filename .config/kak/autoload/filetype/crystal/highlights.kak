@@ -45,7 +45,7 @@ add-highlighter shared/crystal/comment/ regex '\B`[#.]?\w+[?!]?`\B|\B(?<!\*)\*\w
 
 # Escape sequences
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#escaping
-add-highlighter shared/crystal.escape_sequence regex '\\[\\abefnrtv]|\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|u\{[0-9a-fA-F]+\})' 0:value
+add-highlighter shared/crystal.escape_sequence regex '\\[\\abefnrtv]|\\[0-7]{1,3}|\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|u\{[0-9a-fA-F]+\})' 0:value
 
 # Strings
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#escaping

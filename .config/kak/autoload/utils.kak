@@ -259,13 +259,13 @@ define-command open_workspace_symbol_picker %{
 }
 
 define-command set_mark_on_next_key %{
-  on-key mark: %{
+  on-key %{
     execute-keys -save-regs '' """%val{key}Z"
   }
 }
 
 define-command jump_to_mark_on_next_key %{
-  on-key mark: %{
+  on-key %{
     execute-keys """%val{key}z"
   }
 }

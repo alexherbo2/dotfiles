@@ -68,7 +68,22 @@
 "\uFFFF" # hexadecimal unicode character
 "\u{1f48e}" # hexadecimal unicode character
 
-/\// # slash
+/foo|bar/ # : Regex
+/\// # single quote
+/\\/ # backslash
+/\a/ # alert
+/\b/ # backspace
+/\e/ # escape
+/\f/ # form feed
+/\n/ # newline
+/\r/ # carriage return
+/\t/ # tab
+/\v/ # vertical tab
+/\0/ # null character
+/\377/ # octal ASCII character
+/\xFF/ # hexadecimal ASCII character
+/\uFFFF/ # hexadecimal unicode character
+/\u{1f48e}/ # hexadecimal unicode character
 
 "sum = #{1 + 2}" # => "sum = 3"
 "hello" # : String
@@ -237,6 +252,10 @@ def paint(color : Color)
 end
 
 paint :red
+
+# Documenting code
+# https://crystal-lang.org/reference/master/syntax_and_semantics/comments.html
+# https://crystal-lang.org/reference/master/syntax_and_semantics/documenting_code.html
 
 # :nodoc:
 private module Legendary

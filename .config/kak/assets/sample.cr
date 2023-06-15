@@ -37,14 +37,38 @@
 'a' # : Char
 '\'' # single quote
 '\\' # backslash
+'\a' # alert
+'\b' # backspace
+'\e' # escape
+'\f' # form feed
 '\n' # newline
-'\n' # newline
+'\r' # carriage return
+'\t' # tab
+'\v' # vertical tab
+'\0' # null character
+'\377' # octal ASCII character
+'\xFF' # hexadecimal ASCII character
+'\uFFFF' # hexadecimal unicode character
 '\u{1f48e}' # hexadecimal unicode character
 
 "\"" # double quote
 "\\" # backslash
 "\#" # hash character (to escape interpolation)
+"\a" # alert
+"\b" # backspace
+"\e" # escape
+"\f" # form feed
 "\n" # newline
+"\r" # carriage return
+"\t" # tab
+"\v" # vertical tab
+"\0" # null character
+"\377" # octal ASCII character
+"\xFF" # hexadecimal ASCII character
+"\uFFFF" # hexadecimal unicode character
+"\u{1f48e}" # hexadecimal unicode character
+
+/\// # slash
 
 "sum = #{1 + 2}" # => "sum = 3"
 "hello" # : String

@@ -1,6 +1,8 @@
+# Source: https://crystal-lang.org/reference/master/syntax_and_semantics/
 # Source: https://learnxinyminutes.com/docs/crystal/
-# This is a comment.
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/integers.html
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/floats.html
 1_000_000
 1_000_000.111_111.class
 0b1101
@@ -8,6 +10,7 @@
 0xfe012d
 1 + 2 # => 3
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/char.html
 'a' # : Char
 '\'' # single quote
 '\\' # backslash
@@ -25,6 +28,8 @@
 '\uFFFF' # hexadecimal unicode character
 '\u{1f48e}' # hexadecimal unicode character
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#escaping
 "hello" # : String
 "\"" # double quote
 "\\" # backslash
@@ -43,12 +48,15 @@
 "\uFFFF" # hexadecimal unicode character
 "\u{1f48e}" # hexadecimal unicode character
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#interpolation
 "sum = #{1 + 2}" # => "sum = 3"
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#percent-string-literals
 %(hello world) # => "hello world"
 %Q(hello world) # => "hello world"
 %q(hello world) # => "hello world"
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#heredoc
 <<-EOF
 hello\nworld
 EOF
@@ -57,6 +65,7 @@ EOF
 hello world
 EOF
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/regex.html
 /foo|bar/ # : Regex
 /\// # single quote
 /\\/ # backslash
@@ -76,16 +85,22 @@ EOF
 /foo/i.match("FOO")
 %r(foo|bar)
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/array.html
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/array.html#percent-array-literals
 [1, 2, 3] # : Array(Int32)
 %w(one two three) # => ["one" "two" "three"]
 %i(one two three) # => [:one :two :three]
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/symbol.html
 :unquoted_symbol
 :"quoted symbol"
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/command.html
 `echo foo`
 %x(echo foo)
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/comments.html
+# https://crystal-lang.org/reference/master/syntax_and_semantics/documenting_code.html
 private module Legendary
 end
 

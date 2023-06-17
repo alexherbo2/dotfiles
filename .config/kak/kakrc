@@ -2,8 +2,7 @@
 # https://kakoune.org
 # https://github.com/mawww/kakoune
 
-map -docstring 'enter_tmux_mode' global window w ':enter_tmux_mode<ret>'
-map -docstring 'enter_tmux_repl_mode' global tmux r ':enter_tmux_repl_mode<ret>'
+map global normal <tab> ':enter_tmux_mode<ret>'
 
 colorscheme macos_light
 

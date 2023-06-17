@@ -1,9 +1,14 @@
 # Source: https://crystal-lang.org/reference/master/syntax_and_semantics/
 # Source: https://learnxinyminutes.com/docs/crystal/
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/nil.html
 nil # : Nil
+
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/bool.html
 true # : Bool
 false # : Bool
+
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/integers.html
 1 # : Int32
 1_i8 # : Int8
 1_i32 # : Int32
@@ -27,6 +32,7 @@ false # : Bool
 
 1 + 2 # => 3
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/floats.html
 1.0 # => Float64
 1.0_f32 # => Float32
 1_f32 # => Float32
@@ -39,6 +45,7 @@ false # : Bool
 
 1.0 + 2 # => 3.0
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/char.html
 'a' # : Char
 '\'' # single quote
 '\\' # backslash
@@ -54,6 +61,7 @@ false # : Bool
 '\uFFFF' # hexadecimal unicode character
 '\u{10FFFF}' # hexadecimal unicode character
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html
 "hello world" # : String
 "\"" # double quote
 "\\" # backslash
@@ -109,12 +117,14 @@ EOF
 hello\n#{name}
 EOF
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/symbol.html
 :unquoted_symbol # : Symbol
 :"quoted symbol" # : Symbol
 :"a" # => :a
 :question? # => :"question?"
 :exclamation! # => :"exclamation!"
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/array.html
 [1, 2, 3] # : Array(Int32)
 [1, "hello", 'x'] # : Array(Int32 | String | Char)
 [] of Int32 # : Array(Int32)
@@ -123,16 +133,19 @@ EOF
 Array{1, 2, 3} # => [1, 2, 3]
 Set{1, 2, 3} # => Set{1, 2, 3}
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/hash.html
 { "one" => 1, "two" => 2 } # : Hash(String, Int32)
 {} of String => Int32 # : Hash(String, Int32)
 Hash{"one" => 1, "two" => 2} # => {"one" => 1, "two" => 2}
 HTTP::Headers{"foo" => "bar"} # => HTTP::Headers{"foo" => "bar"}
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/range.html
 0..9 # : Range(Int32, Int32)
 0...9 # : Range(Int32, Int32)
 (0..9).to_a # => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 (0...9).to_a # => [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/regex.html
 /foo|bar/ # : Regex
 /\// # slash
 /\\/ # backslash
@@ -157,11 +170,14 @@ HTTP::Headers{"foo" => "bar"} # => HTTP::Headers{"foo" => "bar"}
 %r<foo <bar>> # => /foo <bar>/
 %r|foo bar| # => /foo bar/
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/tuple.html
 {1, 2, 3} # : Tuple(Int32)
 {1, "hello", 'x'} # : Tuple(Int32 | String | Char)
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/named_tuple.html
 {name: "Crystal", year: 2011} # : NamedTuple(name: String, year: Int32)
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/proc.html
 ->{ 1 } # : Proc(Int32)
 
 proc = ->(x : Int32, y : Int32) { x + y } # : Proc(Int32, Int32, Int32)
@@ -184,9 +200,11 @@ proc = ->str.count(Char)
 proc.call('e') # => 1
 proc.call('l') # => 2
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/command.html
 `echo foo` # => "foo\n"
 %x(echo foo) # => "foo\n"
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/documenting_code.html
 private module Legendary
 end
 

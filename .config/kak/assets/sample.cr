@@ -115,10 +115,27 @@ EOF
 :question? # => :"question?"
 :exclamation! # => :"exclamation!"
 
+[1, 2, 3] # : Array(Int32)
+[1, "hello", 'x'] # : Array(Int32 | String | Char)
+[] of Int32 # : Array(Int32)
+%w(one two three) # => ["one" "two" "three"]
+%i(one two three) # => [:one :two :three]
+Array{1, 2, 3} # => [1, 2, 3]
+Set{1, 2, 3} # => Set{1, 2, 3}
+
+{ "one" => 1, "two" => 2 } # : Hash(String, Int32)
+{} of String => Int32 # : Hash(String, Int32)
+Hash{"one" => 1, "two" => 2} # => {"one" => 1, "two" => 2}
+HTTP::Headers{"foo" => "bar"} # => HTTP::Headers{"foo" => "bar"}
+
+0..9 # : Range(Int32, Int32)
+0...9 # : Range(Int32, Int32)
+(0..9).to_a # => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+(0...9).to_a # => [0, 1, 2, 3, 4, 5, 6, 7, 8]
+
 /foo|bar/ # : Regex
-/\// # single quote
+/\// # slash
 /\\/ # backslash
-/\a/ # alert
 /\b/ # backspace
 /\e/ # escape
 /\f/ # form feed
@@ -129,23 +146,47 @@ EOF
 /\0/ # null character
 /\377/ # octal ASCII character
 /\xFF/ # hexadecimal ASCII character
-/\uFFFF/ # hexadecimal unicode character
-/\u{1f48e}/ # hexadecimal unicode character
-/foo/i.match("FOO")
-%r(foo|bar)
+/\x{FFFF}/ # hexadecimal unicode character
+/\x{10FFFF}/ # hexadecimal unicode character
 
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/array.html
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/array.html#percent-array-literals
-[1, 2, 3] # : Array(Int32)
-%w(one two three) # => ["one" "two" "three"]
-%i(one two three) # => [:one :two :three]
+/foo/i.match("FOO") # => Regex::MatchData("FOO")
 
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/command.html
-`echo foo`
-%x(echo foo)
+%r(foo (bar)) # => /foo (bar)/
+%r[foo [bar]] # => /foo [bar]/
+%r{foo {bar}} # => /foo {bar}/
+%r<foo <bar>> # => /foo <bar>/
+%r|foo bar| # => /foo bar/
 
-# https://crystal-lang.org/reference/master/syntax_and_semantics/comments.html
-# https://crystal-lang.org/reference/master/syntax_and_semantics/documenting_code.html
+{1, 2, 3} # : Tuple(Int32)
+{1, "hello", 'x'} # : Tuple(Int32 | String | Char)
+
+{name: "Crystal", year: 2011} # : NamedTuple(name: String, year: Int32)
+
+->{ 1 } # : Proc(Int32)
+
+proc = ->(x : Int32, y : Int32) { x + y } # : Proc(Int32, Int32, Int32)
+proc.call(1, 2) # => 3
+
+def one
+  1
+end
+proc = ->one
+proc.call # => 1
+
+def plus_one(x)
+  x + 1
+end
+proc = ->plus_one(Int32)
+proc.call(41) # => 42
+
+str = "hello"
+proc = ->str.count(Char)
+proc.call('e') # => 1
+proc.call('l') # => 2
+
+`echo foo` # => "foo\n"
+%x(echo foo) # => "foo\n"
+
 private module Legendary
 end
 

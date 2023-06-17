@@ -221,22 +221,21 @@ class Unicorn < Animal
   end
 
   # Creates a unicorn with the specified number of *horns*.
-  def initialize(@horns : Int32 = 1)
+  def initialize(@horns : Int32)
     raise "Not a unicorn" if @horns != 1
   end
 
-  # :nodoc:
-  def self.new
+  def self.new : self
     new(1)
   end
 
   # Returns the number of horns this unicorn has.
-  def horns
+  def horns : Int32
     @horns
   end
 
   # :ditto:
-  def number_of_horns
+  def number_of_horns : Int32
     horns
   end
 
@@ -244,14 +243,18 @@ class Unicorn < Animal
   #
   # NOTE: Although unicorns don’t normally talk, this one is special.
   # TODO: Check if unicorn is asleep and raise exception if not able to speak.
-  # TODO: Create another `speak` method that takes and prints a string.
+  # TODO: Create another `#speak` method that takes and prints a string.
   def speak
     puts "I’m a unicorn"
   end
 
   # Makes the unicorn talk to `STDOUT`.
-  @[Deprecated("Use `speak` instead")]
+  @[Deprecated("Use `#speak` instead")]
   def talk
     puts "I’m a unicorn"
+  end
+
+  # :nodoc:
+  class Helper
   end
 end

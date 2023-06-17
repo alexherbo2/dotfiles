@@ -53,6 +53,10 @@ define-command move_window_right_with_tmux %{
   tmux swap-pane -s '{right-of}'
 }
 
+define-command move_window_to_new_tab_with_tmux %{
+  tmux break-pane -a
+}
+
 define-command resize_window_left_with_tmux %{
   tmux resize-pane -L 5
 }
@@ -161,6 +165,8 @@ map -docstring 'move window left' global tmux H ':move_window_left_with_tmux<ret
 map -docstring 'move window below' global tmux J ':move_window_below_with_tmux<ret>'
 map -docstring 'move window above' global tmux K ':move_window_above_with_tmux<ret>'
 map -docstring 'move window right' global tmux L ':move_window_right_with_tmux<ret>'
+
+map -docstring 'move window to new tab' global tmux T ':move_window_to_new_tab_with_tmux<ret>'
 
 map -docstring 'resize window left' global tmux <c-h> ':resize_window_left_with_tmux<ret>'
 map -docstring 'resize window down' global tmux <c-j> ':resize_window_down_with_tmux<ret>'

@@ -119,7 +119,7 @@ alias tl='tmux list-sessions'
 alias tc='tmux choose-tree -Zs'
 
 kamux() {
-  tmux -L "$$" -f /dev/null -T RGB \
+  tmux -L "$$" -f /dev/null -T 'clipboard,extkeys,RGB' \
   set-option -g prefix None ';' \
   set -s extended-keys on ';' \
   set-option -s -g escape-time 0 ';' \

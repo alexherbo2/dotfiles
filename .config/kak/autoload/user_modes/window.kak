@@ -53,10 +53,10 @@ define-command open_grab_buffer_in_viewport_prompt %{
 complete-command -menu swap_buffer_in_viewport shell-script-candidates %opt{client_completion}
 complete-command -menu grab_buffer_in_viewport shell-script-candidates %opt{client_completion}
 
-map -docstring 'open new scratch buffer' global window s ':open_new_scratch_buffer<ret>'
-map -docstring 'new' global window n ':new<ret>'
-map -docstring 'terminal' global window N ':open_new_terminal<ret>'
+map -docstring 'open new terminal' global window ! ':open_new_terminal<ret>'
+map -docstring 'open new scratch buffer' global window n ':open_new_scratch_buffer<ret>'
+map -docstring 'new' global window N ':new<ret>'
 map -docstring 'quit' global window q ':quit<ret>'
-map -docstring 'quit_other_clients' global window o ':quit_other_clients<ret>'
-map -docstring 'open_grab_buffer_in_viewport_prompt' global window g ':open_grab_buffer_in_viewport_prompt<ret>'
-map -docstring 'open_swap_buffer_in_viewport_prompt' global window s ':open_swap_buffer_in_viewport_prompt<ret>'
+map -docstring 'quit_other_clients' global window Q ':quit_other_clients<ret>'
+map -docstring 'open_grab_buffer_in_viewport_prompt' global window w ':open_grab_buffer_in_viewport_prompt<ret>'
+map -docstring 'open_swap_buffer_in_viewport_prompt' global window W ':open_swap_buffer_in_viewport_prompt<ret>'

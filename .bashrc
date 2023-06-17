@@ -119,7 +119,7 @@ alias tl='tmux list-sessions'
 alias tc='tmux choose-tree -Zs'
 
 kamux() {
-  tmux -L "$$" -f /dev/null \
+  tmux -L "$$" -f /dev/null -T RGB \
   set-option -g prefix None ';' \
   set -s extended-keys on ';' \
   set-option -s -g escape-time 0 ';' \
@@ -128,7 +128,6 @@ kamux() {
   set-option -g focus-events on ';' \
   set-option -s set-clipboard on ';' \
   set-option -g default-terminal tmux ';' \
-  set-option -a -s terminal-features '*:RGB' ';' \
   new-session kak "$@"
 }
 

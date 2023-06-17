@@ -1,16 +1,44 @@
 # Source: https://crystal-lang.org/reference/master/syntax_and_semantics/
 # Source: https://learnxinyminutes.com/docs/crystal/
 
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/integers.html
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/floats.html
-1_000_000
-1_000_000.111_111.class
-0b1101
-0o123
-0xfe012d
+nil # : Nil
+true # : Bool
+false # : Bool
+1 # : Int32
+1_i8 # : Int8
+1_i32 # : Int32
+1_i64 # : Int64
+1_i128 # : Int128
+1_u8 # : UInt8
+1_u32 # : UInt32
+1_u64 # : UInt64
+1_u128 # : UInt128
++10 # : Int32
+-20 # : Int32
+2147483647 # Int32
+2147483648 # Int64
+-2147483648 # Int32
+-2147483649 # Int64
+1_000_000 # => 1000000
+0b1101 # => 13
+0o123 # => 83
+0xFE012D # => 16646445
+0xfe012d # => 16646445
+
 1 + 2 # => 3
 
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/char.html
+1.0 # => Float64
+1.0_f32 # => Float32
+1_f32 # => Float32
+1e10 # => Float64
+1.5e10 # => Float64
+1.5e-7 # => Float64
++1.3 # => Float64
+-0.5 # => Float64
+1_000_000.111_111.class # => Float64
+
+1.0 + 2 # => 3.0
+
 'a' # : Char
 '\'' # single quote
 '\\' # backslash
@@ -23,14 +51,10 @@
 '\t' # tab
 '\v' # vertical tab
 '\0' # null character
-'\377' # octal ASCII character
-'\xFF' # hexadecimal ASCII character
 '\uFFFF' # hexadecimal unicode character
-'\u{1f48e}' # hexadecimal unicode character
+'\u{10FFFF}' # hexadecimal unicode character
 
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#escaping
-"hello" # : String
+"hello world" # : String
 "\"" # double quote
 "\\" # backslash
 "\#" # hash character (to escape interpolation)
@@ -46,26 +70,51 @@
 "\377" # octal ASCII character
 "\xFF" # hexadecimal ASCII character
 "\uFFFF" # hexadecimal unicode character
-"\u{1f48e}" # hexadecimal unicode character
+"\u{0}".."\u{10FFFF}" # hexadecimal unicode character
 
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#interpolation
-"sum = #{1 + 2}" # => "sum = 3"
+a = 1
+b = 2
+"sum: #{a} + #{b} = #{a + b}" # => "sum: 1 + 2 = 3"
 
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#percent-string-literals
-%(hello world) # => "hello world"
-%Q(hello world) # => "hello world"
-%q(hello world) # => "hello world"
+"\#{a + b}" # => "#{a + b}"
+%q(#{a + b}) # => "#{a + b}"
 
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#heredoc
-<<-EOF
-hello\nworld
+%(hello (world)) # => "hello (world)"
+%[hello [world]] # => "hello [world]"
+%{hello {world}} # => "hello {world}"
+%<hello <world>> # => "hello <world>"
+%|hello world| # => "hello world"
+
+name = "world"
+%(hello\n#{name}) # => "hello\nworld"
+%Q(hello\n#{name}) # => "hello\nworld"
+%q(hello\n#{name}) # => "hello\\n\#{name}"
+
+"hello
+  world" # => "hello\n  world"
+
+"hello " \
+"world, " \
+"no newlines." # => "hello world, no newlines."
+
+"hello \
+  world, \
+  no newlines." # => "hello world, no newlines."
+
+<<-EOF # => "hello\nworld"
+hello\n#{name}
 EOF
 
-<<-'EOF'
-hello world
+<<-'EOF' # => "hello\\n\#{name}"
+hello\n#{name}
 EOF
 
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/regex.html
+:unquoted_symbol # : Symbol
+:"quoted symbol" # : Symbol
+:"a" # => :a
+:question? # => :"question?"
+:exclamation! # => :"exclamation!"
+
 /foo|bar/ # : Regex
 /\// # single quote
 /\\/ # backslash
@@ -90,10 +139,6 @@ EOF
 [1, 2, 3] # : Array(Int32)
 %w(one two three) # => ["one" "two" "three"]
 %i(one two three) # => [:one :two :three]
-
-# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/symbol.html
-:unquoted_symbol
-:"quoted symbol"
 
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/command.html
 `echo foo`

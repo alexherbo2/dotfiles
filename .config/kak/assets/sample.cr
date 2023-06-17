@@ -1,6 +1,7 @@
 # Source: https://crystal-lang.org/reference/master/syntax_and_semantics/
 # Source: https://learnxinyminutes.com/docs/crystal/
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/nil.html
 nil # : Nil
 

@@ -47,6 +47,8 @@ false # : Bool
 
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/char.html
 'a' # : Char
+
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/char.html#escaping
 '\'' # single quote
 '\\' # backslash
 '\a' # alert
@@ -63,6 +65,8 @@ false # : Bool
 
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html
 "hello world" # : String
+
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#escaping
 "\"" # double quote
 "\\" # backslash
 "\#" # hash character (to escape interpolation)
@@ -80,6 +84,7 @@ false # : Bool
 "\uFFFF" # hexadecimal unicode character
 "\u{0}".."\u{10FFFF}" # hexadecimal unicode character
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#interpolation
 a = 1
 b = 2
 "sum: #{a} + #{b} = #{a + b}" # => "sum: 1 + 2 = 3"
@@ -87,6 +92,7 @@ b = 2
 "\#{a + b}" # => "#{a + b}"
 %q(#{a + b}) # => "#{a + b}"
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#percent-string-literals
 %(hello (world)) # => "hello (world)"
 %[hello [world]] # => "hello [world]"
 %{hello {world}} # => "hello {world}"
@@ -98,6 +104,7 @@ name = "world"
 %Q(hello\n#{name}) # => "hello\nworld"
 %q(hello\n#{name}) # => "hello\\n\#{name}"
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#multiline-strings
 "hello
   world" # => "hello\n  world"
 
@@ -109,6 +116,7 @@ name = "world"
   world, \
   no newlines." # => "hello world, no newlines."
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#heredoc
 <<-EOF # => "hello\nworld"
 hello\n#{name}
 EOF
@@ -128,14 +136,20 @@ EOF
 [1, 2, 3] # : Array(Int32)
 [1, "hello", 'x'] # : Array(Int32 | String | Char)
 [] of Int32 # : Array(Int32)
+
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/array.html#percent-array-literals
 %w(one two three) # => ["one" "two" "three"]
 %i(one two three) # => [:one :two :three]
+
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/array.html#array-like-type-literal
 Array{1, 2, 3} # => [1, 2, 3]
 Set{1, 2, 3} # => Set{1, 2, 3}
 
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/hash.html
 { "one" => 1, "two" => 2 } # : Hash(String, Int32)
 {} of String => Int32 # : Hash(String, Int32)
+
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/hash.html#hash-like-type-literal
 Hash{"one" => 1, "two" => 2} # => {"one" => 1, "two" => 2}
 HTTP::Headers{"foo" => "bar"} # => HTTP::Headers{"foo" => "bar"}
 
@@ -147,6 +161,8 @@ HTTP::Headers{"foo" => "bar"} # => HTTP::Headers{"foo" => "bar"}
 
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/regex.html
 /foo|bar/ # : Regex
+
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/regex.html#escaping
 /\// # slash
 /\\/ # backslash
 /\b/ # backspace
@@ -162,8 +178,10 @@ HTTP::Headers{"foo" => "bar"} # => HTTP::Headers{"foo" => "bar"}
 /\x{FFFF}/ # hexadecimal unicode character
 /\x{10FFFF}/ # hexadecimal unicode character
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/regex.html#modifiers
 /foo/i.match("FOO") # => Regex::MatchData("FOO")
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/regex.html#percent-regex-literals
 %r(foo (bar)) # => /foo (bar)/
 %r[foo [bar]] # => /foo [bar]/
 %r{foo {bar}} # => /foo {bar}/
@@ -180,21 +198,25 @@ HTTP::Headers{"foo" => "bar"} # => HTTP::Headers{"foo" => "bar"}
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/proc.html
 ->{ 1 } # : Proc(Int32)
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/proc.html#invoking
 proc = ->(x : Int32, y : Int32) { x + y } # : Proc(Int32, Int32, Int32)
 proc.call(1, 2) # => 3
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/proc.html#from-methods
 def one
   1
 end
 proc = ->one
 proc.call # => 1
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/proc.html#from-methods
 def plus_one(x)
   x + 1
 end
 proc = ->plus_one(Int32)
 proc.call(41) # => 42
 
+# https://crystal-lang.org/reference/master/syntax_and_semantics/literals/proc.html#from-methods
 str = "hello"
 proc = ->str.count(Char)
 proc.call('e') # => 1

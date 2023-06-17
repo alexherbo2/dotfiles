@@ -105,6 +105,14 @@ define-command open_new_popup_with_tmux -params .. %{
   tmux display-popup -w 90% -h 90% -E kak -c %val{session} -e "%arg{@}"
 }
 
+define-command close_current_viewport_with_tmux %{
+  tmux kill-pane
+}
+
+define-command close_other_viewports_with_tmux %{
+  tmux kill-pane -a
+}
+
 define-command focus_client_with_tmux -params 1 %{
   evaluate-commands -client %arg{1} %{
     tmux switch-client -t %val{client_env_TMUX_PANE}
@@ -179,6 +187,10 @@ map -docstring 'split view up' global tmux <a-o> ':split_view_up_with_tmux<ret>'
 map -docstring 'split view left' global tmux <a-O> ':split_view_left_with_tmux<ret>'
 map -docstring 'open new tab right' global tmux t ':open_new_tab_right_with_tmux<ret>'
 map -docstring 'open new tab left' global tmux T ':open_new_tab_left_with_tmux<ret>'
+
+map -docstring 'close current viewport' global tmux x ':close_current_viewport_with_tmux<ret>'
+map -docstring 'close other viewports' global tmux X ':close_other_viewports_with_tmux<ret>'
+
 map -docstring 'open new popup with tmux' global tmux + ':open_new_popup_with_tmux<ret>'
 map -docstring 'focus client' global tmux w ':open_prompt_focus_client_with_tmux<ret>'
 map -docstring 'yank selected text' global tmux y ':yank_selected_text_to_terminal_clipboard_with_tmux<ret>'

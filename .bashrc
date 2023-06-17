@@ -124,7 +124,7 @@ kamux() {
   set -s extended-keys on ';' \
   set-option -s -g escape-time 0 ';' \
   set-option -g status off ';' \
-  set-option -g mouse off ';' \
+  set-option -g mouse on ';' \
   set-option -g focus-events on ';' \
   set-option -s set-clipboard on ';' \
   set-option -g default-terminal tmux ';' \

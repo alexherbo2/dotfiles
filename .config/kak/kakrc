@@ -2,8 +2,6 @@
 # https://kakoune.org
 # https://github.com/mawww/kakoune
 
-map global normal <tab> ':enter_tmux_mode<ret>'
-
 colorscheme macos_light
 
 # Preamble ---------------------------------------------------------------------
@@ -52,7 +50,7 @@ map global normal <c-l> ':gitui<ret>'
 map global normal <c-j> ':copy_selected_lines_down<ret>'
 map global normal <c-k> ':copy_selected_lines_up<ret>'
 map global normal ` ':enter_letter_case_mode<ret>'
-map global normal <c-w> ':enter_window_mode<ret>'
+map global normal <c-w> ':enter_tmux_mode<ret>'
 map global normal v ':enter_extend_mode<ret>'
 map global normal m ':enter_match_mode<ret>'
 map global normal "'" ':enter_mark_mode<ret>'

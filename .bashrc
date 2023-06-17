@@ -128,6 +128,7 @@ kamux() {
   set-option -g focus-events on ';' \
   set-option -s set-clipboard on ';' \
   set-option -g default-terminal tmux ';' \
+  set-option -a -s terminal-features '*:RGB' ';' \
   new-session kak "$@"
 }
 

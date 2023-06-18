@@ -7,7 +7,7 @@ hook global User 'TERM=tmux' %{
 
 define-command open_terminal_with_tmux -params .. %{
   terminal sh -c %{
-    tmux -S "${TMUX%%,*}" new-session kak "$@"
+    tmux -S "${TMUX%%,*}" new-session "$@"
   } -- %arg{@}
 }
 

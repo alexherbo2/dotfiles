@@ -158,9 +158,6 @@ complete-command open_new_tab_with_tmux command
 complete-command open_new_tab_right_with_tmux command
 complete-command open_new_tab_left_with_tmux command
 complete-command open_new_popup_with_tmux command
-complete-command open_new_terminal_with_tmux shell
-
-alias global termux open_new_terminal_with_tmux
 
 map -docstring 'focus window left' global tmux h ':focus_window_left_with_tmux<ret>'
 map -docstring 'focus window below' global tmux j ':focus_window_below_with_tmux<ret>'

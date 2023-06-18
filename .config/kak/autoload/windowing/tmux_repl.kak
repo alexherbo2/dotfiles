@@ -11,9 +11,9 @@ define-command set_tmux_repl -params 1 %{
 }
 
 define-command choose_tmux_repl %{
-  tmux choose-tree -Zw %{
+  tmux display-panes -d 0 %{
     run-shell '
-      echo set_tmux_repl "%%" | kak -p "$kak_session"
+      echo set_tmux_repl "\\%%" | kak -p "$kak_session"
     '
   }
 }

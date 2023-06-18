@@ -39,6 +39,7 @@ define-command send_current_buffer_to_tmux_repl %{
 
 complete-command open_tmux_repl shell
 
+map -docstring 'open REPL' global tmux_repl o ':open_tmux_repl<ret>'
 map -docstring 'choose REPL' global tmux_repl r ':choose_tmux_repl<ret>'
 map -docstring 'send selected text to REPL with macro recording' global tmux_repl <ret> 'Q:send_selected_text_to_tmux_repl<ret>Q'
 map -docstring 'send selected lines to REPL with macro recording' global tmux_repl 'x' 'Q:send_selected_lines_to_tmux_repl<ret>Q'

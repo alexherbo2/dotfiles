@@ -14,6 +14,15 @@
 export PS1='\[\e[32m\]\u@\h\[\e[36m\](\l)\[\e[0m\] \[\e[34m\]\w\[\e[0m\]\n\[\e[90m\]>>>\[\e[0m\] '
 export PROMPT_COMMAND='[ $? = 0 ] || echo -e "\\e[31mERROR\\e[0m: command exited with $?"'
 
+# Starship
+# https://starship.rs
+# McFly
+# https://github.com/cantino/mcfly
+set_prompt() {
+  export MCFLY_LIGHT=TRUE
+  eval "$(starship init bash; mcfly init bash)"
+}
+
 # Environment variables --------------------------------------------------------
 
 # Bash history size

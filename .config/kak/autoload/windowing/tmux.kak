@@ -1,10 +1,5 @@
 # This script provides support for the tmux terminal multiplexer.
 # https://github.com/tmux/tmux
-hook global User 'TERM=tmux' %{
-  set-option global terminal_command tmux
-  set-option global terminal_args display-popup -w 90% -h 90% -E
-}
-
 declare-option str client_completion %{
   echo "$kak_client_list" | tr ' ' '\n' | grep -Fxv "$kak_client"
 }

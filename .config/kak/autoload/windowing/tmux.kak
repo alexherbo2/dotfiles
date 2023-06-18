@@ -1,8 +1,20 @@
 # This script provides support for the tmux terminal multiplexer.
 # https://github.com/tmux/tmux
 hook global User 'TERM=tmux' %{
-  set-option global terminal_command tmux
-  set-option global terminal_args display-popup -w 90% -h 90% -E
+  # set-option global terminal_command tmux
+  # set-option global terminal_args display-popup -w 90% -h 90% -E
+}
+
+define-command open_terminal_with_tmux -params .. %{
+  terminal sh -c %{
+    tmux -S "${TMUX%%,*}" new-session kak "$@"
+  } -- %arg{@}
+}
+
+define-command tmux -params 1.. %{
+  nop %sh{
+    TMUX=$kak_client_env_TMUX TMUX_PANE=$kak_client_env_TMUX_PANE nohup tmux set-environment kak_session "$kak_session" ';' set-environment kak_client "$kak_client" ';' "$@" < /dev/null > /dev/null 2>&1 &
+  }
 }
 
 declare-option str client_completion %{

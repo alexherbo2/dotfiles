@@ -23,6 +23,8 @@ add-highlighter global/line_numbers number-lines -hlcursor
 add-highlighter global/search ref search
 add-highlighter global/selected_text ref selected_text
 
+set-option global terminal_command alacritty
+set-option global terminal_args msg create-window -e
 set-option global grep_command rg
 set-option global grep_args --vimgrep --hidden
 set-option global find_command fd

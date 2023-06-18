@@ -5,10 +5,12 @@ hook global User 'TERM=tmux' %{
   # set-option global terminal_args display-popup -w 90% -h 90% -E
 }
 
-define-command open_terminal_with_tmux -params .. %{
+define-command open_new_terminal_with_tmux -params .. %{
   terminal sh -c %{
-    tmux -S "${TMUX%%,*}" new-session "$@"
-  } -- %arg{@}
+    TMUX_SOCKET=${1%%,*}
+    shift
+    tmux -S "$TMUX_SOCKET" new-session "$@"
+  } -- %val{client_env_TMUX} %arg{@}
 }
 
 declare-option str client_completion %{
@@ -169,6 +171,9 @@ complete-command open_new_tab_with_tmux command
 complete-command open_new_tab_right_with_tmux command
 complete-command open_new_tab_left_with_tmux command
 complete-command open_new_popup_with_tmux command
+complete-command open_new_terminal_with_tmux shell
+
+alias global termux open_new_terminal_with_tmux
 
 map -docstring 'focus window left' global tmux h ':focus_window_left_with_tmux<ret>'
 map -docstring 'focus window below' global tmux j ':focus_window_below_with_tmux<ret>'

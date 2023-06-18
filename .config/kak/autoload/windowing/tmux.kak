@@ -5,14 +5,6 @@ hook global User 'TERM=tmux' %{
   set-option global terminal_args display-popup -w 90% -h 90% -E
 }
 
-define-command open_new_terminal_with_tmux -params .. %{
-  terminal sh -c %{
-    TMUX_SOCKET=${1%%,*}
-    shift
-    tmux -S "$TMUX_SOCKET" new-session "$@"
-  } -- %val{client_env_TMUX} %arg{@}
-}
-
 declare-option str client_completion %{
   echo "$kak_client_list" | tr ' ' '\n' | grep -Fxv "$kak_client"
 }

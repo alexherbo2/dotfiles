@@ -11,12 +11,6 @@ define-command open_terminal_with_tmux -params .. %{
   } -- %arg{@}
 }
 
-define-command tmux -params 1.. %{
-  nop %sh{
-    TMUX=$kak_client_env_TMUX TMUX_PANE=$kak_client_env_TMUX_PANE nohup tmux set-environment kak_session "$kak_session" ';' set-environment kak_client "$kak_client" ';' "$@" < /dev/null > /dev/null 2>&1 &
-  }
-}
-
 declare-option str client_completion %{
   echo "$kak_client_list" | tr ' ' '\n' | grep -Fxv "$kak_client"
 }

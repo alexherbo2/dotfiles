@@ -150,6 +150,10 @@ define-command send_current_buffer_to_tmux_pane -params 1 %{
   }
 }
 
+define-command choose_tmux_window %{
+  tmux choose-tree -Zw
+}
+
 complete-command split_view_down_with_tmux command
 complete-command split_view_right_with_tmux command
 complete-command split_view_up_with_tmux command
@@ -180,13 +184,13 @@ map -docstring 'split view down' global tmux o ':split_view_down_with_tmux<ret>'
 map -docstring 'split view right' global tmux O ':split_view_right_with_tmux<ret>'
 map -docstring 'split view up' global tmux <a-o> ':split_view_up_with_tmux<ret>'
 map -docstring 'split view left' global tmux <a-O> ':split_view_left_with_tmux<ret>'
-map -docstring 'open new tab right' global tmux t ':open_new_tab_right_with_tmux<ret>'
-map -docstring 'open new tab left' global tmux T ':open_new_tab_left_with_tmux<ret>'
+map -docstring 'open new tab' global tmux t ':open_new_tab_right_with_tmux<ret>'
 
 map -docstring 'close current viewport' global tmux x ':close_current_viewport_with_tmux<ret>'
 map -docstring 'close other viewports' global tmux X ':close_other_viewports_with_tmux<ret>'
 
 map -docstring 'open new popup with tmux' global tmux + ':open_new_popup_with_tmux<ret>'
 map -docstring 'focus client' global tmux w ':open_prompt_focus_client_with_tmux<ret>'
+map -docstring 'choose window' global tmux W ':choose_tmux_window<ret>'
 map -docstring 'yank selected text' global tmux y ':yank_selected_text_to_terminal_clipboard_with_tmux<ret>'
 map -docstring 'repl' global tmux r ':enter_tmux_repl_mode<ret>'

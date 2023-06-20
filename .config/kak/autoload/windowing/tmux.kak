@@ -184,7 +184,7 @@ map -docstring 'split view down' global tmux o ':split_view_down_with_tmux<ret>'
 map -docstring 'split view right' global tmux O ':split_view_right_with_tmux<ret>'
 map -docstring 'split view up' global tmux <a-o> ':split_view_up_with_tmux<ret>'
 map -docstring 'split view left' global tmux <a-O> ':split_view_left_with_tmux<ret>'
-map -docstring 'open new tab' global tmux t ':open_new_tab_right_with_tmux<ret>'
+map -docstring 'open new tab' global tmux n ':open_new_tab_right_with_tmux<ret>'
 
 map -docstring 'close current viewport' global tmux x ':close_current_viewport_with_tmux<ret>'
 map -docstring 'close other viewports' global tmux X ':close_other_viewports_with_tmux<ret>'

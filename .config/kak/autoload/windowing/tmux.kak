@@ -154,6 +154,19 @@ define-command choose_tmux_window %{
   tmux choose-tree -Zw
 }
 
+# Pane picker
+define-command open_pane_picker_move_window_below_with_tmux -params 1 %{
+  tmux choose-tree -Z %{
+    join-pane -v -s '%%'
+  }
+}
+
+define-command open_pane_picker_move_window_right_with_tmux -params 1 %{
+  tmux choose-tree -Z %{
+    join-pane -h -s '%%'
+  }
+}
+
 complete-command split_view_down_with_tmux command
 complete-command split_view_right_with_tmux command
 complete-command split_view_up_with_tmux command
@@ -182,8 +195,8 @@ map -docstring 'resize window right' global tmux <c-l> ':resize_window_right_wit
 
 map -docstring 'split view down' global tmux o ':split_view_down_with_tmux<ret>'
 map -docstring 'split view right' global tmux O ':split_view_right_with_tmux<ret>'
-map -docstring 'split view up' global tmux <a-o> ':split_view_up_with_tmux<ret>'
-map -docstring 'split view left' global tmux <a-O> ':split_view_left_with_tmux<ret>'
+map -docstring 'pane_picker: move window below' global tmux <a-o> ':open_pane_picker_move_window_below_with_tmux<ret>'
+map -docstring 'pane_picker: move window right' global tmux <a-O> ':open_pane_picker_move_window_right_with_tmux<ret>'
 map -docstring 'open new tab' global tmux n ':open_new_tab_right_with_tmux<ret>'
 
 map -docstring 'close current viewport' global tmux x ':close_current_viewport_with_tmux<ret>'

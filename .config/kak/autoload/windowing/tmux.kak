@@ -155,13 +155,13 @@ define-command choose_tmux_window %{
 }
 
 # Pane picker
-define-command open_pane_picker_move_window_below_with_tmux -params 1 %{
+define-command open_pane_picker_move_window_below_with_tmux %{
   tmux choose-tree -Z %{
     join-pane -v -s '%%'
   }
 }
 
-define-command open_pane_picker_move_window_right_with_tmux -params 1 %{
+define-command open_pane_picker_move_window_right_with_tmux %{
   tmux choose-tree -Z %{
     join-pane -h -s '%%'
   }

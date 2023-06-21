@@ -144,14 +144,14 @@ define-command tmux_choose_move_pane_to_window %{
   }
 }
 
-complete-command split_view_down_with_tmux command
-complete-command split_view_right_with_tmux command
-complete-command split_view_up_with_tmux command
-complete-command split_view_left_with_tmux command
-complete-command open_new_tab_with_tmux command
-complete-command open_new_tab_right_with_tmux command
-complete-command open_new_tab_left_with_tmux command
-complete-command open_new_popup_with_tmux command
+# complete-command split_view_down_with_tmux command
+# complete-command split_view_right_with_tmux command
+# complete-command split_view_up_with_tmux command
+# complete-command split_view_left_with_tmux command
+# complete-command open_new_tab_with_tmux command
+# complete-command open_new_tab_right_with_tmux command
+# complete-command open_new_tab_left_with_tmux command
+# complete-command open_new_popup_with_tmux command
 
 map -docstring 'focus pane left' global tmux h ':tmux_focus_pane_left<ret>'
 map -docstring 'focus pane down' global tmux j ':tmux_focus_pane_down<ret>'

@@ -143,7 +143,6 @@ define-command send_current_buffer_to_tmux_pane -params 1 %{
 complete-command split_view_down_with_tmux command
 complete-command split_view_right_with_tmux command
 complete-command create_view_in_new_window_with_tmux command
-complete-command open_view_in_popup_with_tmux command
 
 map -docstring 'jump view left' global tmux h ':jump_view_left_with_tmux<ret>'
 map -docstring 'jump view down' global tmux j ':jump_view_down_with_tmux<ret>'

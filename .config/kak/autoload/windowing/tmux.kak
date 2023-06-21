@@ -180,6 +180,6 @@ map -docstring 'close other viewports' global tmux X ':tmux_close_other_panes<re
 map -docstring 'move pane to window' global tmux @ ':tmux_choose_move_pane_to_window<ret>'
 map -docstring 'open new popup with tmux' global tmux + ':open_new_popup_with_tmux<ret>'
 map -docstring 'focus client' global tmux w ':tmux_open_prompt_focus_client<ret>'
-map -docstring 'choose window' global tmux W ':tmux_choose_window<ret>'
+map -docstring 'choose window' global tmux s ':tmux_choose_window<ret>'
 map -docstring 'yank selected text' global tmux y ':yank_selected_text_to_terminal_clipboard_with_tmux<ret>'
 map -docstring 'repl' global tmux r ':enter_tmux_repl_mode<ret>'

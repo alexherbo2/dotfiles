@@ -140,7 +140,7 @@ define-command tmux_choose_window %{
 
 define-command tmux_choose_move_pane_to_window %{
   tmux choose-tree -Zw %{
-    join-pane -s '%%'
+    join-pane -t '%%'
   }
 }
 

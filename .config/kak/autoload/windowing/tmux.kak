@@ -16,87 +16,101 @@ define-command tmux -params 1.. %{
   }
 }
 
-define-command tmux_focus_pane_left %{
+define-command jump_view_left_with_tmux %{
   tmux select-pane -L
 }
 
-define-command tmux_focus_pane_down %{
+define-command jump_view_down_with_tmux %{
   tmux select-pane -D
 }
 
-define-command tmux_focus_pane_up %{
+define-command jump_view_up_with_tmux %{
   tmux select-pane -U
 }
 
-define-command tmux_focus_pane_right %{
+define-command jump_view_right_with_tmux %{
   tmux select-pane -R
 }
 
-define-command tmux_move_pane_left %{
+define-command swap_view_left_with_tmux %{
   tmux swap-pane -s '{left-of}'
 }
 
-define-command tmux_move_pane_down %{
+define-command swap_view_down_with_tmux %{
   tmux swap-pane -s '{down-of}'
 }
 
-define-command tmux_move_pane_up %{
+define-command swap_view_up_with_tmux %{
   tmux swap-pane -s '{up-of}'
 }
 
-define-command tmux_move_pane_right %{
+define-command swap_view_right_with_tmux %{
   tmux swap-pane -s '{right-of}'
 }
 
-define-command tmux_resize_pane_left %{
+define-command shrink_viewport_right_with_tmux %{
   tmux resize-pane -L 5
 }
 
-define-command tmux_resize_pane_down %{
+define-command grow_viewport_down_with_tmux %{
   tmux resize-pane -D 2
 }
 
-define-command tmux_resize_pane_up %{
+define-command shrink_viewport_down_with_tmux %{
   tmux resize-pane -U 2
 }
 
-define-command tmux_resize_pane_right %{
+define-command grow_viewport_right_with_tmux %{
   tmux resize-pane -R 5
 }
 
-define-command tmux_open_new_pane_down -params .. %{
+define-command split_view_down_with_tmux -params .. %{
   tmux split-window -v kak -c %val{session} -e "%arg{@}"
 }
 
-define-command tmux_open_new_pane_right -params .. %{
+define-command split_view_right_with_tmux -params .. %{
   tmux split-window -h kak -c %val{session} -e "%arg{@}"
 }
 
-define-command tmux_open_new_window -params .. %{
+define-command create_view_in_new_window_with_tmux -params .. %{
   tmux new-window -a kak -c %val{session} -e "%arg{@}"
 }
 
-define-command open_new_popup_with_tmux -params .. %{
-  tmux display-popup -w 90% -h 90% -E kak -c %val{session} -e "%arg{@}"
+define-command move_view_to_new_window_with_tmux %{
+  tmux break-pane -a
 }
 
-define-command tmux_close_pane %{
+define-command close_view_with_tmux %{
   tmux kill-pane
 }
 
-define-command tmux_close_other_panes %{
+define-command close_other_viewports_with_tmux %{
   tmux kill-pane -a
 }
 
-define-command tmux_focus_client -params 1 %{
+define-command open_view_in_popup_with_tmux -params .. %{
+  tmux display-popup -w 90% -h 90% -E kak -c %val{session} -e "%arg{@}"
+}
+
+define-command focus_client_with_tmux -params 1 %{
   evaluate-commands -client %arg{1} %{
     tmux switch-client -t %val{client_env_TMUX_PANE}
   }
 }
 
-define-command tmux_open_prompt_focus_client %{
+define-command open_prompt_focus_client_with_tmux %{
   prompt -menu client_picker: -shell-script-candidates %opt{client_completion} %{
     focus_client_with_tmux %val{text}
+  }
+}
+
+define-command choose_view_with_tmux %{
+  tmux choose-tree -Zw
+}
+
+define-command move_view_to_window_with_tmux_menu %{
+  tmux choose-tree -Zw %{
+    join-pane -t '%%'
   }
 }
 
@@ -130,56 +144,40 @@ define-command send_current_buffer_to_tmux_pane -params 1 %{
   }
 }
 
-define-command tmux_move_pane_to_new_window %{
-  tmux break-pane -a
-}
+complete-command split_view_down_with_tmux command
+complete-command split_view_right_with_tmux command
+complete-command create_view_in_new_window_with_tmux command
+complete-command open_view_in_popup_with_tmux command
 
-define-command tmux_choose_window %{
-  tmux choose-tree -Zw
-}
+map -docstring 'jump_view_left_with_tmux' global tmux h ':jump_view_left_with_tmux<ret>'
+map -docstring 'jump_view_down_with_tmux' global tmux j ':jump_view_down_with_tmux<ret>'
+map -docstring 'jump_view_up_with_tmux' global tmux k ':jump_view_up_with_tmux<ret>'
+map -docstring 'jump_view_right_with_tmux' global tmux l ':jump_view_right_with_tmux<ret>'
 
-define-command tmux_choose_move_pane_to_window %{
-  tmux choose-tree -Zw %{
-    join-pane -t '%%'
-  }
-}
+map -docstring 'swap_view_left_with_tmux' global tmux H ':swap_view_left_with_tmux<ret>'
+map -docstring 'swap_view_down_with_tmux' global tmux J ':swap_view_down_with_tmux<ret>'
+map -docstring 'swap_view_up_with_tmux' global tmux K ':swap_view_up_with_tmux<ret>'
+map -docstring 'swap_view_right_with_tmux' global tmux L ':swap_view_right_with_tmux<ret>'
 
-# complete-command split_view_down_with_tmux command
-# complete-command split_view_right_with_tmux command
-# complete-command split_view_up_with_tmux command
-# complete-command split_view_left_with_tmux command
-# complete-command open_new_tab_with_tmux command
-# complete-command open_new_tab_right_with_tmux command
-# complete-command open_new_tab_left_with_tmux command
-# complete-command open_new_popup_with_tmux command
+map -docstring 'shrink_viewport_right_with_tmux' global tmux <c-h> ':shrink_viewport_right_with_tmux<ret>'
+map -docstring 'grow_viewport_down_with_tmux' global tmux <c-j> ':grow_viewport_down_with_tmux<ret>'
+map -docstring 'shrink_viewport_down_with_tmux' global tmux <c-k> ':shrink_viewport_down_with_tmux<ret>'
+map -docstring 'grow_viewport_right_with_tmux' global tmux <c-l> ':grow_viewport_right_with_tmux<ret>'
 
-map -docstring 'focus pane left' global tmux h ':tmux_focus_pane_left<ret>'
-map -docstring 'focus pane down' global tmux j ':tmux_focus_pane_down<ret>'
-map -docstring 'focus pane up' global tmux k ':tmux_focus_pane_up<ret>'
-map -docstring 'focus pane right' global tmux l ':tmux_focus_pane_right<ret>'
+map -docstring 'split_view_down_with_tmux' global tmux o ':split_view_down_with_tmux<ret>'
+map -docstring 'split_view_right_with_tmux' global tmux O ':split_view_right_with_tmux<ret>'
 
-map -docstring 'move pane left' global tmux H ':tmux_move_pane_left<ret>'
-map -docstring 'move pane down' global tmux J ':tmux_move_pane_down<ret>'
-map -docstring 'move pane up' global tmux K ':tmux_move_pane_up<ret>'
-map -docstring 'move pane right' global tmux L ':tmux_move_pane_right<ret>'
+map -docstring 'create_view_in_new_window_with_tmux' global tmux n ':create_view_in_new_window_with_tmux<ret>'
+map -docstring 'move_view_to_new_window_with_tmux' global tmux T ':move_view_to_new_window_with_tmux<ret>'
 
-map -docstring 'resize pane left' global tmux <c-h> ':tmux_resize_pane_left<ret>'
-map -docstring 'resize pane down' global tmux <c-j> ':tmux_resize_pane_down<ret>'
-map -docstring 'resize pane up' global tmux <c-k> ':tmux_resize_pane_up<ret>'
-map -docstring 'resize pane right' global tmux <c-l> ':tmux_resize_pane_right<ret>'
+map -docstring 'close_view_with_tmux' global tmux x ':close_view_with_tmux<ret>'
+map -docstring 'close_other_viewports_with_tmux' global tmux X ':close_other_viewports_with_tmux<ret>'
 
-map -docstring 'open new pane down' global tmux o ':tmux_open_new_pane_down<ret>'
-map -docstring 'open new pane right' global tmux O ':tmux_open_new_pane_right<ret>'
+map -docstring 'open_view_in_popup_with_tmux' global tmux + ':open_view_in_popup_with_tmux<ret>'
 
-map -docstring 'open new window' global tmux n ':tmux_open_new_window<ret>'
-map -docstring 'move pane to new window' global tmux T ':tmux_move_pane_to_new_window<ret>'
+map -docstring 'open_prompt_focus_client_with_tmux' global tmux w ':open_prompt_focus_client_with_tmux<ret>'
+map -docstring 'choose_view_with_tmux' global tmux s ':choose_view_with_tmux<ret>'
+map -docstring 'move_view_to_window_with_tmux_menu' global tmux @ ':move_view_to_window_with_tmux_menu<ret>'
 
-map -docstring 'close current viewport' global tmux x ':tmux_close_pane<ret>'
-map -docstring 'close other viewports' global tmux X ':tmux_close_other_panes<ret>'
-
-map -docstring 'move pane to window' global tmux @ ':tmux_choose_move_pane_to_window<ret>'
-map -docstring 'open new popup with tmux' global tmux + ':open_new_popup_with_tmux<ret>'
-map -docstring 'focus client' global tmux w ':tmux_open_prompt_focus_client<ret>'
-map -docstring 'choose window' global tmux s ':tmux_choose_window<ret>'
-map -docstring 'yank selected text' global tmux y ':yank_selected_text_to_terminal_clipboard_with_tmux<ret>'
-map -docstring 'repl' global tmux r ':enter_tmux_repl_mode<ret>'
+map -docstring 'yank_selected_text_to_terminal_clipboard_with_tmux' global tmux y ':yank_selected_text_to_terminal_clipboard_with_tmux<ret>'
+map -docstring 'enter_tmux_repl_mode' global tmux r ':enter_tmux_repl_mode<ret>'

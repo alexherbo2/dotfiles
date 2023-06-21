@@ -80,6 +80,14 @@ define-command move_view_to_new_window_with_tmux %{
   tmux break-pane -a
 }
 
+define-command focus_next_window_with_tmux %{
+  tmux next-window
+}
+
+define-command focus_previous_window_with_tmux %{
+  tmux previous-window
+}
+
 define-command close_view_with_tmux %{
   tmux kill-pane
 }
@@ -162,8 +170,11 @@ map -docstring 'grow viewport right' global tmux <c-l> ':grow_viewport_right_wit
 map -docstring 'split view down' global tmux o ':split_view_down_with_tmux<ret>'
 map -docstring 'split view right' global tmux O ':split_view_right_with_tmux<ret>'
 
-map -docstring 'create view in new window' global tmux n ':create_view_in_new_window_with_tmux<ret>'
+map -docstring 'create view in new window' global tmux c ':create_view_in_new_window_with_tmux<ret>'
 map -docstring 'move view to new window' global tmux T ':move_view_to_new_window_with_tmux<ret>'
+
+map -docstring 'focus next window' global tmux n ':focus_next_window_with_tmux<ret>'
+map -docstring 'focus previous window' global tmux p ':focus_previous_window_with_tmux<ret>'
 
 map -docstring 'close view' global tmux x ':close_view_with_tmux<ret>'
 map -docstring 'close other viewports' global tmux X ':close_other_viewports_with_tmux<ret>'

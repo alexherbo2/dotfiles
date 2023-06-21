@@ -88,10 +88,6 @@ define-command close_other_viewports_with_tmux %{
   tmux kill-pane -a
 }
 
-define-command open_view_in_popup_with_tmux -params .. %{
-  tmux display-popup -w 90% -h 90% -E kak -c %val{session} -e "%arg{@}"
-}
-
 define-command focus_client_with_tmux -params 1 %{
   evaluate-commands -client %arg{1} %{
     tmux switch-client -t %val{client_env_TMUX_PANE}
@@ -149,35 +145,33 @@ complete-command split_view_right_with_tmux command
 complete-command create_view_in_new_window_with_tmux command
 complete-command open_view_in_popup_with_tmux command
 
-map -docstring 'jump_view_left_with_tmux' global tmux h ':jump_view_left_with_tmux<ret>'
-map -docstring 'jump_view_down_with_tmux' global tmux j ':jump_view_down_with_tmux<ret>'
-map -docstring 'jump_view_up_with_tmux' global tmux k ':jump_view_up_with_tmux<ret>'
-map -docstring 'jump_view_right_with_tmux' global tmux l ':jump_view_right_with_tmux<ret>'
+map -docstring 'jump view left' global tmux h ':jump_view_left_with_tmux<ret>'
+map -docstring 'jump view down' global tmux j ':jump_view_down_with_tmux<ret>'
+map -docstring 'jump view up' global tmux k ':jump_view_up_with_tmux<ret>'
+map -docstring 'jump view right' global tmux l ':jump_view_right_with_tmux<ret>'
 
-map -docstring 'swap_view_left_with_tmux' global tmux H ':swap_view_left_with_tmux<ret>'
-map -docstring 'swap_view_down_with_tmux' global tmux J ':swap_view_down_with_tmux<ret>'
-map -docstring 'swap_view_up_with_tmux' global tmux K ':swap_view_up_with_tmux<ret>'
-map -docstring 'swap_view_right_with_tmux' global tmux L ':swap_view_right_with_tmux<ret>'
+map -docstring 'swap view left' global tmux H ':swap_view_left_with_tmux<ret>'
+map -docstring 'swap view down' global tmux J ':swap_view_down_with_tmux<ret>'
+map -docstring 'swap view up' global tmux K ':swap_view_up_with_tmux<ret>'
+map -docstring 'swap view right' global tmux L ':swap_view_right_with_tmux<ret>'
 
-map -docstring 'shrink_viewport_right_with_tmux' global tmux <c-h> ':shrink_viewport_right_with_tmux<ret>'
-map -docstring 'grow_viewport_down_with_tmux' global tmux <c-j> ':grow_viewport_down_with_tmux<ret>'
-map -docstring 'shrink_viewport_down_with_tmux' global tmux <c-k> ':shrink_viewport_down_with_tmux<ret>'
-map -docstring 'grow_viewport_right_with_tmux' global tmux <c-l> ':grow_viewport_right_with_tmux<ret>'
+map -docstring 'shrink viewport right' global tmux <c-h> ':shrink_viewport_right_with_tmux<ret>'
+map -docstring 'grow viewport down' global tmux <c-j> ':grow_viewport_down_with_tmux<ret>'
+map -docstring 'shrink viewport down' global tmux <c-k> ':shrink_viewport_down_with_tmux<ret>'
+map -docstring 'grow viewport right' global tmux <c-l> ':grow_viewport_right_with_tmux<ret>'
 
-map -docstring 'split_view_down_with_tmux' global tmux o ':split_view_down_with_tmux<ret>'
-map -docstring 'split_view_right_with_tmux' global tmux O ':split_view_right_with_tmux<ret>'
+map -docstring 'split view down' global tmux o ':split_view_down_with_tmux<ret>'
+map -docstring 'split view right' global tmux O ':split_view_right_with_tmux<ret>'
 
-map -docstring 'create_view_in_new_window_with_tmux' global tmux n ':create_view_in_new_window_with_tmux<ret>'
-map -docstring 'move_view_to_new_window_with_tmux' global tmux T ':move_view_to_new_window_with_tmux<ret>'
+map -docstring 'create view in new window' global tmux n ':create_view_in_new_window_with_tmux<ret>'
+map -docstring 'move view to new window' global tmux T ':move_view_to_new_window_with_tmux<ret>'
 
-map -docstring 'close_view_with_tmux' global tmux x ':close_view_with_tmux<ret>'
-map -docstring 'close_other_viewports_with_tmux' global tmux X ':close_other_viewports_with_tmux<ret>'
+map -docstring 'close view' global tmux x ':close_view_with_tmux<ret>'
+map -docstring 'close other viewports' global tmux X ':close_other_viewports_with_tmux<ret>'
 
-map -docstring 'open_view_in_popup_with_tmux' global tmux + ':open_view_in_popup_with_tmux<ret>'
+map -docstring 'open prompt focus client' global tmux w ':open_prompt_focus_client_with_tmux<ret>'
+map -docstring 'choose view' global tmux s ':choose_view_with_tmux<ret>'
+map -docstring 'move view to window menu' global tmux m ':move_view_to_window_with_tmux_menu<ret>'
 
-map -docstring 'open_prompt_focus_client_with_tmux' global tmux w ':open_prompt_focus_client_with_tmux<ret>'
-map -docstring 'choose_view_with_tmux' global tmux s ':choose_view_with_tmux<ret>'
-map -docstring 'move_view_to_window_with_tmux_menu' global tmux @ ':move_view_to_window_with_tmux_menu<ret>'
-
-map -docstring 'yank_selected_text_to_terminal_clipboard_with_tmux' global tmux y ':yank_selected_text_to_terminal_clipboard_with_tmux<ret>'
-map -docstring 'enter_tmux_repl_mode' global tmux r ':enter_tmux_repl_mode<ret>'
+map -docstring 'yank selected text to terminal clipboard' global tmux y ':yank_selected_text_to_terminal_clipboard_with_tmux<ret>'
+map -docstring 'enter tmux repl mode' global tmux r ':enter_tmux_repl_mode<ret>'

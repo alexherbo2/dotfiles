@@ -18,14 +18,6 @@ define-command choose_tmux_repl %{
   }
 }
 
-define-command choose_tmux_repl %{
-  tmux display-panes -d 0 %{
-    run-shell '
-      echo set_tmux_repl "\\%%" | kak -p "$kak_session"
-    '
-  }
-}
-
 define-command open_new_tmux_repl -params .. %{
   nop %sh{
     tmux split-window -d -h -P -F "set_tmux_repl '#D'" -- "$@" |

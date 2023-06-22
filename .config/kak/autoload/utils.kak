@@ -327,3 +327,13 @@ define-command find_friendly_session_name %{
     shuf -n 1 "$kak_config/friendly_session_names.txt"
   }
 }
+
+complete-command rename-client shell-script-candidates %{
+  cat "$kak_config/friendly_client_names.txt"
+}
+
+define-command find_friendly_client_name %{
+  rename-client %sh{
+    shuf -n 1 "$kak_config/friendly_client_names.txt"
+  }
+}

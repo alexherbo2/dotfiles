@@ -108,7 +108,11 @@ define-command open_prompt_focus_client_with_tmux %{
   }
 }
 
-define-command choose_view_with_tmux %{
+define-command choose_viewport_with_tmux %{
+  tmux display-panes -d 0
+}
+
+define-command choose_window_with_tmux %{
   tmux choose-tree -Zw
 }
 
@@ -180,7 +184,8 @@ map -docstring 'close view' global tmux x ':close_view_with_tmux<ret>'
 map -docstring 'close other viewports' global tmux X ':close_other_viewports_with_tmux<ret>'
 
 map -docstring 'open prompt focus client' global tmux w ':open_prompt_focus_client_with_tmux<ret>'
-map -docstring 'choose view' global tmux s ':choose_view_with_tmux<ret>'
+map -docstring 'choose viewport' global tmux f ':choose_viewport_with_tmux<ret>'
+map -docstring 'choose window' global tmux s ':choose_window_with_tmux<ret>'
 map -docstring 'move view to window menu' global tmux m ':move_view_to_window_with_tmux_menu<ret>'
 
 map -docstring 'yank selected text to terminal clipboard' global tmux y ':yank_selected_text_to_terminal_clipboard_with_tmux<ret>'

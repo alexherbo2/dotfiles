@@ -35,6 +35,7 @@ declare-option str selection_highlight_alpha '20'
 # UI variants
 declare-option str foreground_lighter '333333'
 declare-option str foreground_light '1a1a1a'
+declare-option str background_slightly_dark 'f2f2f2'
 declare-option str background_dark 'e6e6e6'
 declare-option str background_darker 'cccccc'
 
@@ -112,4 +113,4 @@ set-face global WrapMarker "rgb:%opt{non_text}" # Kakoune ⇒ add-highlighter -o
 # Custom faces
 set-face global Search "rgb:%opt{black},rgb:%opt{bright_yellow}+fg"
 set-face global SelectedText "default,rgba:%opt{selection}%opt{selection_highlight_alpha}"
-set-face global StatusLineInactive "rgb:%opt{foreground},rgb:%opt{background}"
+set-face global StatusLineInactive "rgb:%opt{foreground},rgb:%opt{background_slightly_dark}"

@@ -337,3 +337,32 @@ define-command find_friendly_client_name %{
     shuf -n 1 "$kak_config/friendly_client_names.txt"
   }
 }
+# https://docs.helix-editor.com/keymap.html#window-mode
+
+declare-option str client_completion %{
+  echo "$kak_client_list" | tr ' ' '\n' | grep -Fxv "$kak_client"
+}
+
+define-command quit_other_clients %{
+  evaluate-commands %sh{
+    echo "$kak_client_list" | tr ' ' '\n' | grep -Fxv "$kak_client" |
+    while read kak_client
+    do echo "evaluate-commands -client '$kak_client' quit"
+    done
+  }
+}
+
+define-command swap_buffer_in_viewport -params 1 %{
+  execute-keys '"sZ'
+  execute-keys -client %arg{1} '"tZ'
+  execute-keys '"tz<esc>'
+  execute-keys -client %arg{1} '"sz<esc>'
+}
+
+define-command grab_buffer_in_viewport -params 1 %{
+  execute-keys -client %arg{1} '"tZ<esc>'
+  execute-keys '"tz<esc>'
+}
+
+complete-command -menu swap_buffer_in_viewport shell-script-candidates %opt{client_completion}
+complete-command -menu grab_buffer_in_viewport shell-script-candidates %opt{client_completion}

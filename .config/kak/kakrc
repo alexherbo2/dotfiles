@@ -11,6 +11,8 @@ hook global FocusIn .* %{
   unset-face window SecondaryCursor
   unset-face window PrimaryCursorEol
   unset-face window SecondaryCursorEol
+  unset-face window Information
+  unset-face window Error
   unset-face window StatusLine
   unset-face window LineNumberCursor
   unset-face window MatchingChar
@@ -26,6 +28,8 @@ hook global FocusOut .* %{
   set-face window SecondaryCursor ''
   set-face window PrimaryCursorEol ''
   set-face window SecondaryCursorEol ''
+  set-face window Information ''
+  set-face window Error ''
   set-face window StatusLine StatusLineInactive
   set-face window LineNumberCursor LineNumbers
   set-face window MatchingChar ''

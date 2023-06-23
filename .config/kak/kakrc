@@ -117,10 +117,26 @@ map global insert <s-tab> '<a-;>:decrease_indent<ret>'
 map global insert <backspace> '<a-;>:decrease_indent_or_erase_character_before_cursor<ret>'
 
 hook global FocusIn .* %{
+  unset-face window PrimarySelection
+  unset-face window SecondarySelection
+  unset-face window PrimaryCursor
+  unset-face window SecondaryCursor
+  unset-face window PrimaryCursorEol
+  unset-face window SecondaryCursorEol
+  unset-face window LineNumberCursor
   unset-face window StatusLine
+  unset-face window SelectedText
 }
 hook global FocusOut .* %{
+  set-face window PrimarySelection "default,default"
+  set-face window SecondarySelection "default,default"
+  set-face window PrimaryCursor "default,default"
+  set-face window SecondaryCursor "default,default"
+  set-face window PrimaryCursorEol "default,default"
+  set-face window SecondaryCursorEol "default,default"
+  set-face window LineNumberCursor LineNumbers
   set-face window StatusLine StatusLineInactive
+  set-face window SelectedText "default,default"
 }
 hook global InsertCompletionShow .* %{
   map window insert <tab> <c-n>

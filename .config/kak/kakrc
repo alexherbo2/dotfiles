@@ -116,6 +116,12 @@ map global insert <tab> '<a-;>:increase_indent<ret>'
 map global insert <s-tab> '<a-;>:decrease_indent<ret>'
 map global insert <backspace> '<a-;>:decrease_indent_or_erase_character_before_cursor<ret>'
 
+hook global FocusIn .* %{
+  unset-face window StatusLine
+}
+hook global FocusOut .* %{
+  set-face window StatusLine StatusLineInactive
+}
 hook global InsertCompletionShow .* %{
   map window insert <tab> <c-n>
   map window insert <s-tab> <c-p>

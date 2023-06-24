@@ -4,46 +4,6 @@
 
 colorscheme macos_light
 
-hook global FocusIn .* %{
-  unset-face window PrimarySelection
-  unset-face window SecondarySelection
-  unset-face window PrimaryCursor
-  unset-face window SecondaryCursor
-  unset-face window PrimaryCursorEol
-  unset-face window SecondaryCursorEol
-  unset-face window Information
-  unset-face window Error
-  unset-face window StatusLine
-  unset-face window StatusLineMode
-  unset-face window StatusLineInfo
-  unset-face window StatusLineValue
-  unset-face window LineNumberCursor
-  unset-face window MatchingChar
-  unset-face window Whitespace
-  unset-face window Search
-  unset-face window SelectedText
-}
-
-hook global FocusOut .* %{
-  set-face window PrimarySelection ''
-  set-face window SecondarySelection ''
-  set-face window PrimaryCursor ''
-  set-face window SecondaryCursor ''
-  set-face window PrimaryCursorEol ''
-  set-face window SecondaryCursorEol ''
-  set-face window Information ''
-  set-face window Error ''
-  set-face window StatusLine StatusLineInactive
-  set-face window StatusLineMode ''
-  set-face window StatusLineInfo ''
-  set-face window StatusLineValue ''
-  set-face window LineNumberCursor LineNumbers
-  set-face window MatchingChar ''
-  set-face window Whitespace ''
-  set-face window Search ''
-  set-face window SelectedText ''
-}
-
 # Preamble ---------------------------------------------------------------------
 
 evaluate-commands %sh{
@@ -121,7 +81,6 @@ map -docstring 'select next surrounding object' global match n ':enter_select_ne
 map -docstring 'convert selected dates to ISO 8601' global user d ':convert_selected_dates_to_iso_8601<ret>'
 map -docstring 'convert selected text to ASCII' global user @ ':convert_selected_text_to_ascii<ret>'
 map -docstring 'get character info' global user u ':get_character_info<ret>'
-# map -docstring 'enter_window_mode' global user w ':enter_window_mode<ret>'
 map -docstring 'enter_window_mode' global user w ':enter_tmux_mode<ret>'
 map -docstring 'open file picker' global user f ':open_file_picker<ret>'
 map -docstring 'open buffer picker' global user b ':open_buffer_picker<ret>'

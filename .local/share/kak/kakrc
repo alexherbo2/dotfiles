@@ -1,3 +1,8 @@
+declare-option str toolsclient
+declare-option str docsclient
+declare-option str jumpclient
+declare-option int grep_current_line
+
 define-command colorscheme -params 1 -docstring 'load color scheme' %{
   source "%val{config}/colors/%arg{1}.kak"
 }

@@ -14,6 +14,9 @@ hook global FocusIn .* %{
   unset-face window Information
   unset-face window Error
   unset-face window StatusLine
+  unset-face window StatusLineMode
+  unset-face window StatusLineInfo
+  unset-face window StatusLineValue
   unset-face window LineNumberCursor
   unset-face window MatchingChar
   unset-face window Whitespace
@@ -31,6 +34,9 @@ hook global FocusOut .* %{
   set-face window Information ''
   set-face window Error ''
   set-face window StatusLine StatusLineInactive
+  set-face window StatusLineMode ''
+  set-face window StatusLineInfo ''
+  set-face window StatusLineValue ''
   set-face window LineNumberCursor LineNumbers
   set-face window MatchingChar ''
   set-face window Whitespace ''

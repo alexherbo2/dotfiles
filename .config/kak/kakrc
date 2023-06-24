@@ -9,6 +9,9 @@ colorscheme macos_light
 evaluate-commands %sh{
   kak-lsp --kakoune --session "$kak_session"
 }
+hook global BufSetOption filetype=lsp-goto %{
+  map buffer normal <ret> ':jump_to_references<ret>'
+}
 lsp-enable
 
 # Options ----------------------------------------------------------------------

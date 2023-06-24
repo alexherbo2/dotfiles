@@ -18,7 +18,7 @@ export PROMPT_COMMAND='[ $? = 0 ] || echo -e "\\e[31mERROR\\e[0m: command exited
 # https://starship.rs
 # McFly
 # https://github.com/cantino/mcfly
-set_prompt() {
+p() {
   export MCFLY_LIGHT=TRUE
   eval "$(starship init bash; mcfly init bash)"
 }

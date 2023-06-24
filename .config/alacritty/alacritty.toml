@@ -15,7 +15,7 @@ font.normal.family = 'JetBrains Mono'
 selection.save_to_clipboard = true
 
 [bell.command]
-program = osascript
+program = 'osascript'
 args = ['-e', 'beep']
 
 # Key bindings -----------------------------------------------------------------

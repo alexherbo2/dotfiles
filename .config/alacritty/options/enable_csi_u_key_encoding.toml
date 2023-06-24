@@ -1,35 +1,35 @@
 # Enable CSI u key encoding.
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Return'
 mods = 'Shift'
 chars = "\u001b[13;2u"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Tab'
 mods = 'Control'
 chars = "\u001b[9;5u"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Return'
 mods = 'Control'
 chars = "\u001b[13;5u"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'H'
 mods = 'Control'
 chars = "\u001b[104;5u"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'I'
 mods = 'Control'
 chars = "\u001b[105;5u"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'J'
 mods = 'Control'
 chars = "\u001b[106;5u"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'M'
 mods = 'Control'
 chars = "\u001b[109;5u"

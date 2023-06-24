@@ -20,22 +20,22 @@ args = ['-e', 'beep']
 
 # Key bindings -----------------------------------------------------------------
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'N'
 mods = 'Control|Shift'
 action = 'CreateNewWindow'
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'N'
 mods = 'Command'
 action = 'CreateNewWindow'
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'P'
 mods = 'Control|Shift'
 action = 'SpawnNewInstance'
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'P'
 mods = 'Command'
 action = 'SpawnNewInstance'

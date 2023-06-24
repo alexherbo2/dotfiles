@@ -1,485 +1,485 @@
-# Use Option as Meta key.
-[[key.bindings]]
+# Use Option as Meta keyboard.
+[[keyboard.bindings]]
 key = 'Key0'
 mods = 'Alt'
 chars = "\u001b0"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Key1'
 mods = 'Alt'
 chars = "\u001b1"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Key2'
 mods = 'Alt'
 chars = "\u001b2"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Key3'
 mods = 'Alt'
 chars = "\u001b3"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Key4'
 mods = 'Alt'
 chars = "\u001b4"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Key5'
 mods = 'Alt'
 chars = "\u001b5"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Key6'
 mods = 'Alt'
 chars = "\u001b6"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Key7'
 mods = 'Alt'
 chars = "\u001b7"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Key8'
 mods = 'Alt'
 chars = "\u001b8"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Key9'
 mods = 'Alt'
 chars = "\u001b9"
 
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'A'
 mods = 'Alt'
 chars = "\u001ba"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'B'
 mods = 'Alt'
 chars = "\u001bb"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'C'
 mods = 'Alt'
 chars = "\u001bc"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'D'
 mods = 'Alt'
 chars = "\u001bd"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'E'
 mods = 'Alt'
 chars = "\u001be"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'F'
 mods = 'Alt'
 chars = "\u001bf"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'G'
 mods = 'Alt'
 chars = "\u001bg"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'H'
 mods = 'Alt'
 chars = "\u001bh"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'I'
 mods = 'Alt'
 chars = "\u001bi"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'J'
 mods = 'Alt'
 chars = "\u001bj"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'K'
 mods = 'Alt'
 chars = "\u001bk"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'L'
 mods = 'Alt'
 chars = "\u001bl"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'M'
 mods = 'Alt'
 chars = "\u001bm"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'N'
 mods = 'Alt'
 chars = "\u001bn"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'O'
 mods = 'Alt'
 chars = "\u001bo"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'P'
 mods = 'Alt'
 chars = "\u001bp"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Q'
 mods = 'Alt'
 chars = "\u001bq"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'R'
 mods = 'Alt'
 chars = "\u001br"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'S'
 mods = 'Alt'
 chars = "\u001bs"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'T'
 mods = 'Alt'
 chars = "\u001bt"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'U'
 mods = 'Alt'
 chars = "\u001bu"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'V'
 mods = 'Alt'
 chars = "\u001bv"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'W'
 mods = 'Alt'
 chars = "\u001bw"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'X'
 mods = 'Alt'
 chars = "\u001bx"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Y'
 mods = 'Alt'
 chars = "\u001by"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Z'
 mods = 'Alt'
 chars = "\u001bz"
 
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'A'
 mods = 'Alt|Shift'
 chars = "\u001bA"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'B'
 mods = 'Alt|Shift'
 chars = "\u001bB"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'C'
 mods = 'Alt|Shift'
 chars = "\u001bC"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'D'
 mods = 'Alt|Shift'
 chars = "\u001bD"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'E'
 mods = 'Alt|Shift'
 chars = "\u001bE"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'F'
 mods = 'Alt|Shift'
 chars = "\u001bF"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'G'
 mods = 'Alt|Shift'
 chars = "\u001bG"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'H'
 mods = 'Alt|Shift'
 chars = "\u001bH"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'I'
 mods = 'Alt|Shift'
 chars = "\u001bI"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'J'
 mods = 'Alt|Shift'
 chars = "\u001bJ"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'K'
 mods = 'Alt|Shift'
 chars = "\u001bK"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'L'
 mods = 'Alt|Shift'
 chars = "\u001bL"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'M'
 mods = 'Alt|Shift'
 chars = "\u001bM"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'N'
 mods = 'Alt|Shift'
 chars = "\u001bN"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'O'
 mods = 'Alt|Shift'
 chars = "\u001bO"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'P'
 mods = 'Alt|Shift'
 chars = "\u001bP"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Q'
 mods = 'Alt|Shift'
 chars = "\u001bQ"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'R'
 mods = 'Alt|Shift'
 chars = "\u001bR"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'S'
 mods = 'Alt|Shift'
 chars = "\u001bS"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'T'
 mods = 'Alt|Shift'
 chars = "\u001bT"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'U'
 mods = 'Alt|Shift'
 chars = "\u001bU"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'V'
 mods = 'Alt|Shift'
 chars = "\u001bV"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'W'
 mods = 'Alt|Shift'
 chars = "\u001bW"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'X'
 mods = 'Alt|Shift'
 chars = "\u001bX"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Y'
 mods = 'Alt|Shift'
 chars = "\u001bY"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Z'
 mods = 'Alt|Shift'
 chars = "\u001bZ"
 
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Space'
 mods = 'Alt'
 chars = "\u001b "
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Return'
 mods = 'Alt'
 chars = "\u001b\r"
 
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Grave'
 mods = 'Alt'
 chars = "\u001b`"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Minus'
 mods = 'Alt'
 chars = "\u001b-"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Equals'
 mods = 'Alt'
 chars = "\u001b="
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'LBracket'
 mods = 'Alt'
 chars = "\u001b["
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'RBracket'
 mods = 'Alt'
 chars = "\u001b]"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Backslash'
 mods = 'Alt'
 chars = "\u001b\\"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Semicolon'
 mods = 'Alt'
 chars = "\u001b;"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Apostrophe'
 mods = 'Alt'
 chars = "\u001b'"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Comma'
 mods = 'Alt'
 chars = "\u001b,"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Period'
 mods = 'Alt'
 chars = "\u001b."
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Slash'
 mods = 'Alt'
 chars = "\u001b/"
 
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Grave'
 mods = 'Alt|Shift'
 chars = "\u001b~"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Key1'
 mods = 'Alt|Shift'
 chars = "\u001b!"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Key2'
 mods = 'Alt|Shift'
 chars = "\u001b@"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Key3'
 mods = 'Alt|Shift'
 chars = "\u001b#"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Key4'
 mods = 'Alt|Shift'
 chars = "\u001b$"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Key5'
 mods = 'Alt|Shift'
 chars = "\u001b%"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Key6'
 mods = 'Alt|Shift'
 chars = "\u001b^"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Key7'
 mods = 'Alt|Shift'
 chars = "\u001b&"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Key8'
 mods = 'Alt|Shift'
 chars = "\u001b*"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Key9'
 mods = 'Alt|Shift'
 chars = "\u001b("
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Key0'
 mods = 'Alt|Shift'
 chars = "\u001b)"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Minus'
 mods = 'Alt|Shift'
 chars = "\u001b_"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Equals'
 mods = 'Alt|Shift'
 chars = "\u001b+"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'LBracket'
 mods = 'Alt|Shift'
 chars = "\u001b{"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'RBracket'
 mods = 'Alt|Shift'
 chars = "\u001b}"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Backslash'
 mods = 'Alt|Shift'
 chars = "\u001b|"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Semicolon'
 mods = 'Alt|Shift'
 chars = "\u001b:"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Apostrophe'
 mods = 'Alt|Shift'
 chars = "\u001b\""
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Comma'
 mods = 'Alt|Shift'
 chars = "\u001b<"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Period'
 mods = 'Alt|Shift'
 chars = "\u001b>"
 
-[[key.bindings]]
+[[keyboard.bindings]]
 key = 'Slash'
 mods = 'Alt|Shift'
 chars = "\u001b?"

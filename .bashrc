@@ -129,7 +129,7 @@ alias tc='tmux choose-tree -Zs'
 
 # Kakoune
 # https://kakoune.org
-alias k=kak
+alias k=kamux
 alias ks='kak -s'
 alias kd='kak -d -s'
 alias kc='kak -c'

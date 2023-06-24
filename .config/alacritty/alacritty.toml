@@ -1,12 +1,12 @@
 # Alacritty
 # https://alacritty.org
 # https://github.com/alacritty/alacritty
-# https://github.com/alacritty/alacritty/blob/master/alacritty.yml
+# https://github.com/alacritty/alacritty/blob/master/alacritty.toml
 
 import:
-- ~/.config/alacritty/options/enable_csi_u_key_encoding.yml
-- ~/.config/alacritty/options/use_option_as_meta_key.yml
-- ~/.config/alacritty/colors/macos_light.yml
+- ~/.config/alacritty/options/enable_csi_u_key_encoding.toml
+- ~/.config/alacritty/options/use_option_as_meta_key.toml
+- ~/.config/alacritty/colors/macos_light.toml
 
 # Appearance -------------------------------------------------------------------
 

@@ -33,14 +33,15 @@ declare-option str selection_alpha '80'
 declare-option str selection_highlight_alpha '20'
 
 # UI variants
-declare-option str foreground_lighter '333333'
-declare-option str foreground_light '1a1a1a'
+declare-option str dim_foreground '696969'
+declare-option str lighter_foreground '333333'
+declare-option str light_foreground '1a1a1a'
 declare-option str dim_background 'f5f5f5'
-declare-option str background_dark 'e6e6e6'
-declare-option str background_darker 'cccccc'
+declare-option str dark_background 'e6e6e6'
+declare-option str darker_background 'cccccc'
 
 # Other
-declare-option str non_text "%opt{background_darker}"
+declare-option str non_text "%opt{darker_background}"
 
 # Template
 # https://github.com/mawww/kakoune/blob/master/colors/default.kak
@@ -53,7 +54,7 @@ set-face global module "rgb:%opt{green}" # C++ ⇒ #include [<stdio.h>]
 set-face global function "rgb:%opt{magenta}" # https://spec.draculatheme.com#FunctionNames
 set-face global string "rgb:%opt{green}" # https://spec.draculatheme.com#String
 set-face global keyword "rgb:%opt{blue}" # https://spec.draculatheme.com#Keyword
-set-face global operator "rgb:%opt{foreground_lighter}" # Shell ⇒ true [&&] false
+set-face global operator "rgb:%opt{lighter_foreground}" # Shell ⇒ true [&&] false
 set-face global attribute "rgb:%opt{green}" # C++ ⇒ [enum] Color { ... };
 set-face global comment "rgb:%opt{comment}" # https://spec.draculatheme.com#Comment
 set-face global documentation comment # Rust ⇒ /// Returns `true`.
@@ -88,13 +89,13 @@ set-face global SecondaryCursor "default,rgba:%opt{selection}%opt{cursor_alpha}"
 set-face global PrimaryCursorEol "default,rgb:%opt{cursor}+fg" # White (full block)
 set-face global SecondaryCursorEol "default,rgb:%opt{selection}+fg" # White (full block)
 set-face global MenuForeground "rgb:%opt{foreground},rgb:%opt{selection}" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorSuggestWidget.selectedBackground
-set-face global MenuBackground "rgb:%opt{foreground},rgb:%opt{background_dark}" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorSuggestWidget.background
+set-face global MenuBackground "rgb:%opt{foreground},rgb:%opt{dark_background}" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorSuggestWidget.background
 set-face global MenuInfo "rgb:%opt{comment}" # IntelliSense suggestions
-set-face global Information "rgb:%opt{foreground},rgb:%opt{background_dark}" # Contextual help blends with the editor background.
-set-face global Error "rgb:%opt{red},rgb:%opt{background_dark}" # https://spec.draculatheme.com#Invalid
+set-face global Information "rgb:%opt{foreground},rgb:%opt{dark_background}" # Contextual help blends with the editor background.
+set-face global Error "rgb:%opt{red},rgb:%opt{dark_background}" # https://spec.draculatheme.com#Invalid
 set-face global DiagnosticError "rgb:%opt{red}" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorError.foreground
 set-face global DiagnosticWarning "rgb:%opt{yellow}" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorWarning.foreground
-set-face global StatusLine "rgb:%opt{foreground},rgb:%opt{background_dark}" # Prefer background dark here — https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=statusBar.background
+set-face global StatusLine "rgb:%opt{foreground},rgb:%opt{dark_background}" # Prefer background dark here — https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=statusBar.background
 set-face global StatusLineMode "rgb:%opt{yellow}" # [insert]
 set-face global StatusLineInfo "rgb:%opt{blue}" # 1 sel
 set-face global StatusLineValue "rgb:%opt{green}" # 1 sel param=[42] reg=[y]
@@ -113,4 +114,4 @@ set-face global WrapMarker "rgb:%opt{non_text}" # Kakoune ⇒ add-highlighter -o
 # Custom faces
 set-face global Search "rgb:%opt{black},rgb:%opt{bright_yellow}+fg"
 set-face global SelectedText "default,rgba:%opt{selection}%opt{selection_highlight_alpha}"
-set-face global StatusLineInactive "rgb:%opt{foreground},rgb:%opt{dim_background}"
+set-face global StatusLineInactive "rgb:%opt{dim_foreground},rgb:%opt{dim_background}"

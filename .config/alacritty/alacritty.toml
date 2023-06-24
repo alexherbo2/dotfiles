@@ -1,32 +1,41 @@
 # Alacritty
 # https://alacritty.org
-# https://github.com/alacritty/alacritty
-# https://github.com/alacritty/alacritty/blob/master/alacritty.toml
 
-import:
-- ~/.config/alacritty/options/enable_csi_u_key_encoding.toml
-- ~/.config/alacritty/options/use_option_as_meta_key.toml
-- ~/.config/alacritty/colors/macos_light.toml
+import = [
+  '~/.config/alacritty/options/enable_csi_u_key_encoding.toml',
+  '~/.config/alacritty/options/use_option_as_meta_key.toml',
+  '~/.config/alacritty/colors/macos_light.toml'
+]
 
 # Appearance -------------------------------------------------------------------
 
-font:
-  size: 14.0
-  normal:
-    family: JetBrains Mono
+font.size = 14.0
+font.normal.family = 'JetBrains Mono'
 
-selection:
-  save_to_clipboard: true
+selection.save_to_clipboard = true
 
-bell:
-  command:
-    program: osascript
-    args: ['-e', 'beep']
+[bell.command]
+program = osascript
+args = ['-e', 'beep']
 
 # Key bindings -----------------------------------------------------------------
 
-key_bindings:
-  - { key: N, mods: Control|Shift, action: CreateNewWindow }
-  - { key: N, mods: Command, action: CreateNewWindow }
-  - { key: P, mods: Control|Shift, action: SpawnNewInstance }
-  - { key: P, mods: Command, action: SpawnNewInstance }
+[[key.bindings]]
+key = 'N'
+mods = 'Control|Shift'
+action = 'CreateNewWindow'
+
+[[key.bindings]]
+key = 'N'
+mods = 'Command'
+action = 'CreateNewWindow'
+
+[[key.bindings]]
+key = 'P'
+mods = 'Control|Shift'
+action = 'SpawnNewInstance'
+
+[[key.bindings]]
+key = 'P'
+mods = 'Command'
+action = 'SpawnNewInstance'

@@ -1,51 +1,59 @@
-colors:
-  primary:
-    background: '#ffffff'
-    foreground: '#000000'
-  cursor:
-    text: CellForeground
-    cursor: '#7f7f7f'
-  vi_mode_cursor:
-    text: CellForeground
-    cursor: '#7f7f7f'
-  selection:
-    text: CellForeground
-    background: '#a5cdff'
-  search:
-    matches:
-      foreground: CellForeground
-      background: '#e6e6e6'
-    focused_match:
-      foreground: CellForeground
-      background: '#a5cdff'
-  hints:
-    start:
-      foreground: '#000000'
-      background: '#e5e500'
-    end:
-      foreground: '#000000'
-      background: '#e5e500'
-  line_indicator:
-    foreground: '#000000'
-    background: '#e6e6e6'
-  footer_bar:
-    foreground: '#000000'
-    background: '#e6e6e6'
-  normal:
-    black: '#000000'
-    red: '#990000'
-    green: '#00a600'
-    yellow: '#999900'
-    blue: '#0000b2'
-    magenta: '#b200b2'
-    cyan: '#00a6b2'
-    white: '#bfbfbf'
-  bright:
-    black: '#666666'
-    red: '#e50000'
-    green: '#00d900'
-    yellow: '#e5e500'
-    blue: '#0000ff'
-    magenta: '#e500e5'
-    cyan: '#00e5e5'
-    white: '#e5e5e5'
+[colors.primary]
+background = '#ffffff'
+foreground = '#000000'
+
+[colors.cursor]
+text = 'CellForeground'
+cursor = '#7f7f7f'
+
+[colors.vi_mode_cursor]
+text = 'CellForeground'
+cursor = '#7f7f7f'
+
+[colors.selection]
+text = 'CellForeground'
+background = '#a5cdff'
+
+[colors.search.matches]
+foreground = 'CellForeground'
+background = '#e6e6e6'
+
+[colors.search.focused_match]
+foreground = 'CellForeground'
+background = '#a5cdff'
+
+[colors.hints.start]
+foreground = '#000000'
+background = '#e5e500'
+
+[colors.hints.end]
+foreground = '#000000'
+background = '#e5e500'
+
+[colors.line_indicator]
+foreground = '#000000'
+background = '#e6e6e6'
+
+[colors.footer_bar]
+foreground = '#000000'
+background = '#e6e6e6'
+
+[colors.normal]
+black = '#000000'
+red = '#990000'
+green = '#00a600'
+yellow = '#999900'
+blue = '#0000b2'
+magenta = '#b200b2'
+cyan = '#00a6b2'
+white = '#bfbfbf'
+
+[colors.bright]
+black = '#666666'
+red = '#e50000'
+green = '#00d900'
+yellow = '#e5e500'
+blue = '#0000ff'
+magenta = '#e500e5'
+cyan = '#00e5e5'
+white = '#e5e5e5'

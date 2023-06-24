@@ -1,10 +1,35 @@
 # Enable CSI u key encoding.
-key_bindings:
+[[key.bindings]]
+key = 'Return'
+mods = 'Shift'
+chars = "\u001b[13;2u"
 
-  - { key: Return, mods: Shift, chars: "\x1b[13;2u" }
-  - { key: Tab, mods: Control, chars: "\x1b[9;5u" }
-  - { key: Return, mods: Control, chars: "\x1b[13;5u" }
-  - { key: H, mods: Control, chars: "\x1b[104;5u" }
-  - { key: I, mods: Control, chars: "\x1b[105;5u" }
-  - { key: J, mods: Control, chars: "\x1b[106;5u" }
-  - { key: M, mods: Control, chars: "\x1b[109;5u" }
+[[key.bindings]]
+key = 'Tab'
+mods = 'Control'
+chars = "\u001b[9;5u"
+
+[[key.bindings]]
+key = 'Return'
+mods = 'Control'
+chars = "\u001b[13;5u"
+
+[[key.bindings]]
+key = 'H'
+mods = 'Control'
+chars = "\u001b[104;5u"
+
+[[key.bindings]]
+key = 'I'
+mods = 'Control'
+chars = "\u001b[105;5u"
+
+[[key.bindings]]
+key = 'J'
+mods = 'Control'
+chars = "\u001b[106;5u"
+
+[[key.bindings]]
+key = 'M'
+mods = 'Control'
+chars = "\u001b[109;5u"

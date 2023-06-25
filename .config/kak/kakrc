@@ -9,7 +9,7 @@ colorscheme macos_light
 evaluate-commands %sh{
   kak-lsp --kakoune --session "$kak_session"
 }
-lsp-enable
+alias global lsp lsp-enable
 
 # Options ----------------------------------------------------------------------
 

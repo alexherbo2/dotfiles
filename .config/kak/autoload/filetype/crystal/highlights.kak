@@ -74,7 +74,7 @@ syntax shared/crystal.string_with_escape_sequences_and_interpolation/ region -re
 # Single quoted strings
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/char.html
 syntax shared/crystal/single_quoted_string region "'" "(?<!\\)(?:\\\\)*'" group
-syntax shared/crystal/single_quoted_string/ fill value
+syntax shared/crystal/single_quoted_string/ fill string
 syntax shared/crystal/single_quoted_string/ ref crystal.escape_sequence
 syntax shared/crystal/single_quoted_string/ regex "\\'" 0:value
 

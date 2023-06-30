@@ -1,3 +1,0 @@
-#!/bin/sh
-
-tmux -L kak -f "$0.conf" new-session kak "$@"

@@ -130,7 +130,15 @@ alias kn='kak -n'
 alias kl='kak -l'
 alias kcl='kak -clear'
 alias kcl='kak -clear'
+
 alias kamux='tmux -L kak -f ~/.config/kamux.conf new-session kak'
+kmux() {
+  kak_session=$1
+  shift
+  tmux -L kak new-session -d -- "$@"
+  tmux -L kak display-message -p "set_tmux_repl '#D'" | kak -p "$kak_session"
+  tmux -L kak attach-session
+}
 
 # grep
 alias ws='rg "\\s+$|\\w\\s{2,}\\w"'

@@ -18,19 +18,6 @@ define-command choose_tmux_repl %{
   }
 }
 
-define-command open_new_tmux_repl -params .. %{
-  nop %sh{
-    tmux split-window -d -h -P -F "set_tmux_repl '#D'" -- "$@" |
-    kak -p "$kak_session"
-  }
-}
-
-define-command open_new_tmux_repl_prompt %{
-  prompt open_repl: -shell-completion %{
-    open_new_tmux_repl sh -c %val{text}
-  }
-}
-
 define-command send_selected_text_to_tmux_repl %{
   send_selected_text_to_tmux_pane %opt{tmux_repl_id}
 }
@@ -43,9 +30,6 @@ define-command send_current_buffer_to_tmux_repl %{
   send_current_buffer_to_tmux_pane %opt{tmux_repl_id}
 }
 
-complete-command open_new_tmux_repl shell
-
-map -docstring 'new REPL' global tmux_repl n ':open_new_tmux_repl_prompt<ret>'
 map -docstring 'choose REPL' global tmux_repl r ':choose_tmux_repl<ret>'
 map -docstring 'send selected text to REPL with macro recording' global tmux_repl <ret> 'Q:send_selected_text_to_tmux_repl<ret>Q'
 map -docstring 'send selected lines to REPL with macro recording' global tmux_repl 'x' 'Q:send_selected_lines_to_tmux_repl<ret>Q'

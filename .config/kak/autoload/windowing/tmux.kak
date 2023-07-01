@@ -139,7 +139,7 @@ define-command yank_selected_text_to_terminal_clipboard_with_tmux %{
 }
 
 define-command send_text_to_tmux_pane -params 2 %{
-  tmux set-buffer %arg{1} ';' paste-buffer -p -t %arg{2}
+  tmux set-buffer -- %arg{1} ';' paste-buffer -p -t %arg{2}
 }
 
 define-command send_selected_text_to_tmux_pane -params 1 %{

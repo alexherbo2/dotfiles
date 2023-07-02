@@ -139,7 +139,7 @@ define-command yank_selected_text_to_terminal_clipboard_with_tmux %{
 }
 
 define-command send_text_to_tmux_pane -params 2 %{
-  tmux set-buffer -- %arg{1} ';' paste-buffer -p -t %arg{2}
+  tmux set-buffer -- %arg{1} ';' paste-buffer -p -t %arg{2} ';' send-keys -t %arg{2} Enter
 }
 
 define-command send_selected_text_to_tmux_pane -params 1 %{
@@ -194,4 +194,3 @@ map -docstring 'choose window' global tmux s ':choose_window_with_tmux<ret>'
 map -docstring 'move view to window menu' global tmux m ':move_view_to_window_with_tmux_menu<ret>'
 
 map -docstring 'yank selected text to terminal clipboard' global tmux y ':yank_selected_text_to_terminal_clipboard_with_tmux<ret>'
-map -docstring 'enter tmux repl mode' global tmux r ':enter_tmux_repl_mode<ret>'

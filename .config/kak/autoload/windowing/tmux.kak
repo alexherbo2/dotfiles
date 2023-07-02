@@ -146,14 +146,6 @@ define-command send_selected_text_to_tmux_pane -params 1 %{
   send_text_to_tmux_pane %val{selection} %arg{1}
 }
 
-define-command send_selected_lines_to_tmux_pane -params 1 %{
-  execute-keys "Zx:send_selected_text_to_tmux_pane '%arg{1}'<ret>z<esc>"
-}
-
-define-command send_current_buffer_to_tmux_pane -params 1 %{
-  execute-keys "Z%%:send_selected_text_to_tmux_pane '%arg{1}'<ret>z<esc>"
-}
-
 complete-command split_view_down_with_tmux command
 complete-command split_view_right_with_tmux command
 complete-command create_view_in_new_window_with_tmux command

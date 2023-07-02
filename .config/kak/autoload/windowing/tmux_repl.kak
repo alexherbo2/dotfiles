@@ -11,26 +11,20 @@ define-command set_tmux_repl -params 1 %{
 }
 
 define-command choose_tmux_repl %{
-  tmux display-panes -d 0 %{
+  tmux choose-tree -Zw %{
     run-shell '
-      echo set_tmux_repl "\\%%" | kak -p "$kak_session"
+      echo set_tmux_repl "%%" | kak -p "$kak_session"
     '
   }
+}
+
+define-command send_text_to_tmux_repl -params 1 %{
+  send_text_to_tmux_pane %arg{1} %opt{tmux_repl_id}
 }
 
 define-command send_selected_text_to_tmux_repl %{
   send_selected_text_to_tmux_pane %opt{tmux_repl_id}
 }
 
-define-command send_selected_lines_to_tmux_repl %{
-  send_selected_lines_to_tmux_pane %opt{tmux_repl_id}
-}
-
-define-command send_current_buffer_to_tmux_repl %{
-  send_current_buffer_to_tmux_pane %opt{tmux_repl_id}
-}
-
 map -docstring 'choose REPL' global tmux_repl r ':choose_tmux_repl<ret>'
-map -docstring 'send selected text to REPL with macro recording' global tmux_repl <ret> 'Q:send_selected_text_to_tmux_repl<ret>Q'
-map -docstring 'send selected lines to REPL with macro recording' global tmux_repl 'x' 'Q:send_selected_lines_to_tmux_repl<ret>Q'
-map -docstring 'send current buffer to REPL with macro recording' global tmux_repl '%' 'Q:send_current_buffer_to_tmux_repl<ret>Q'
+map -docstring 'send selected text to REPL' global tmux_repl <ret> ':send_selected_text_to_tmux_repl<ret>'

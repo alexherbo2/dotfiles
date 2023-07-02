@@ -121,11 +121,11 @@ define-command choose_viewport_with_tmux %{
 }
 
 define-command choose_window_with_tmux %{
-  tmux choose-tree -Zw
+  tmux choose-tree -Zw -f '#{==:kak,#W}'
 }
 
 define-command move_view_to_window_with_tmux_menu %{
-  tmux choose-tree -Zw %{
+  tmux choose-tree -Zw -f '#{==:kak,#W}' %{
     join-pane -t '%%'
   }
 }

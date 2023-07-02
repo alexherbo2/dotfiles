@@ -136,7 +136,7 @@ kmux() {
   kak_session=$1
   shift
   tmux -L kak new-session -d -- "$@"
-  tmux -L kak display-message -p "set_tmux_repl '#D'" | kak -p "$kak_session"
+  tmux -L kak display-message -p "set_tmux_repl '#{pane_id}'" | kak -p "$kak_session"
   tmux -L kak attach-session
 }
 

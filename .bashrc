@@ -130,7 +130,9 @@ alias kn='kak -n'
 alias kl='kak -l'
 alias kcl='kak -clear'
 alias kcl='kak -clear'
-alias kamux='tmux -L kak -f ~/.config/kamux.conf new-session kak'
+
+alias kamux='kamux_shell kak'
+alias kamux_shell='tmux -L kak -f ~/.config/kamux.conf new-session --'
 
 # grep
 alias ws='rg "\\s+$|\\w\\s{2,}\\w"'

@@ -19,8 +19,3 @@ define-command send_text_to_tmux_repl -params 1 %{
 define-command send_selected_text_to_tmux_repl %{
   send_selected_text_to_tmux_pane %opt{tmux_repl_id}
 }
-
-hook global KakBegin .* %{
-map -docstring 'choose REPL' global tmux r ':choose_tmux_repl<ret>'
-map -docstring 'send selected text to REPL' global tmux <ret> ':send_selected_text_to_tmux_repl<ret>'
-}

@@ -104,6 +104,7 @@ map -docstring 'yank selected text to the terminal clipboard' global user y ':ya
 
 map global prompt <a-/> '%sh{dirname "$kak_bufname"}<a-!>/'
 map global prompt <a-y> '<c-r>"'
+map global prompt <a-.> '<c-r>.'
 
 # Add search flags
 map global prompt <a-i> '<home>(?i)<end>'

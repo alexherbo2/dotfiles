@@ -167,9 +167,7 @@ define-command decrement_selected_numbers -params 0..1 %{
 }
 
 define-command evaluate_selected_text %{
-  evaluate-commands -itersel %{
-    evaluate-commands %val{selection}
-  }
+  execute-keys -with-hooks ':<c-r><a-.><ret>'
 }
 
 define-command open_current_buffer_with_visual_studio_code %{

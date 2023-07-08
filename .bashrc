@@ -18,9 +18,11 @@ export PROMPT_COMMAND='[ $? = 0 ] || echo -e "\\e[31mERROR\\e[0m: command exited
 # https://starship.rs
 # McFly
 # https://github.com/cantino/mcfly
+# zoxide
+# https://github.com/ajeetdsouza/zoxide
 p() {
   export MCFLY_LIGHT=TRUE
-  eval "$(starship init bash; mcfly init bash)"
+  eval "$(starship init bash; mcfly init bash; zoxide init bash)"
 }
 
 # Environment variables --------------------------------------------------------
@@ -137,9 +139,7 @@ alias kn='kak -n'
 alias kl='kak -l'
 alias kcl='kak -clear'
 alias kcl='kak -clear'
-
-alias kamux='kamux_shell kak'
-alias kamux_shell='tmux -L kak -f ~/.config/kamux.conf new-session --'
+alias kamux='tmux -L kak -f ~/.config/kamux.conf new-session kak'
 
 # grep
 alias ws='rg "\\s+$|\\w\\s{2,}\\w"'

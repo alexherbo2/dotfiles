@@ -20,7 +20,7 @@ define-command choose_tmux_repl %{
 
 define-command open_new_tmux_repl -params .. %{
   nop %sh{
-    tmux split-window -d -f -h -P -F "set_tmux_repl '#D'" -- "$@" |
+    tmux split-window -d -f -P -F "set_tmux_repl '#D'" -- "$@" |
     kak -p "$kak_session"
   }
 }

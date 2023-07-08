@@ -339,7 +339,7 @@ define-command find_friendly_client_name %{
 }
 # https://docs.helix-editor.com/keymap.html#window-mode
 
-declare-option str client_completion %{
+declare-option str other_clients_completion %{
   echo "$kak_client_list" | tr ' ' '\n' | grep -Fxv "$kak_client"
 }
 
@@ -364,5 +364,5 @@ define-command grab_buffer_in_viewport -params 1 %{
   execute-keys '"tz<esc>'
 }
 
-complete-command -menu swap_buffer_in_viewport shell-script-candidates %opt{client_completion}
-complete-command -menu grab_buffer_in_viewport shell-script-candidates %opt{client_completion}
+complete-command -menu swap_buffer_in_viewport shell-script-candidates %opt{other_clients_completion}
+complete-command -menu grab_buffer_in_viewport shell-script-candidates %opt{other_clients_completion}

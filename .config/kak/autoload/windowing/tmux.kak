@@ -1,6 +1,6 @@
 # This script provides support for the tmux terminal multiplexer.
 # https://github.com/tmux/tmux
-declare-option str client_completion %{
+declare-option str other_clients_completion %{
   echo "$kak_client_list" | tr ' ' '\n' | grep -Fxv "$kak_client"
 }
 
@@ -111,7 +111,7 @@ define-command focus_client_with_tmux -params 1 %{
 }
 
 define-command open_prompt_focus_client_with_tmux %{
-  prompt -menu client_picker: -shell-script-candidates %opt{client_completion} %{
+  prompt -menu client_picker: -shell-script-candidates %opt{other_clients_completion} %{
     focus_client_with_tmux %val{text}
   }
 }
@@ -131,7 +131,7 @@ define-command move_view_to_window_with_tmux_menu %{
 }
 
 define-command yank_text_to_terminal_clipboard_with_tmux -params 1 %{
-  tmux set-buffer -w %arg{1}
+  tmux set-buffer -w -- %arg{1}
 }
 
 define-command yank_selected_text_to_terminal_clipboard_with_tmux %{

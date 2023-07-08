@@ -78,7 +78,8 @@ map -docstring 'select next surrounding object' global match n ':enter_select_ne
 
 # tmux mode --------------------------------------------------------------------
 
-map -docstring 'choose REPL' global tmux r ':choose_tmux_repl<ret>'
+map -docstring 'new REPL' global tmux r ':open_new_tmux_repl_prompt<ret>'
+map -docstring 'choose REPL' global tmux R ':choose_tmux_repl<ret>'
 map -docstring 'send selected text to REPL' global tmux <ret> ':send_selected_text_to_tmux_repl<ret>'
 
 # User mode --------------------------------------------------------------------

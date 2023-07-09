@@ -48,9 +48,9 @@ font pango:JetBrains Mono 11
 # Color scheme
 # client.<class> <border> <background> <text> <indicator> <child_border>
 # https://github.com/swaywm/sway/raw/master/sway/sway.5.scd#:~:text=client.
-client.focused $aqua_gray_6 $aqua_gray_6 $dark_gray_6 $aqua_blue $aqua_gray_6
-client.focused_inactive $aqua_gray_5 $aqua_gray_5 $dark_gray_5 $aqua_gray_5 $aqua_gray_5
-client.unfocused $aqua_gray_5 $aqua_gray_5 $dark_gray_5 $aqua_gray_5 $aqua_gray_5
+client.focused $aqua_gray_6 $aqua_gray_6 $dark_gray_6 $dark_teal $aqua_teal
+client.focused_inactive $aqua_gray_5 $aqua_gray_5 $dark_gray $aqua_gray_5 $aqua_gray_5
+client.unfocused $aqua_gray_5 $aqua_gray_5 $dark_gray $aqua_gray_5 $aqua_gray_5
 
 # Status bar -------------------------------------------------------------------
 

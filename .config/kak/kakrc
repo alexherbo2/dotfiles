@@ -76,12 +76,6 @@ map -docstring 'enter surround mode' global match s ':enter_surround_mode<ret>'
 map -docstring 'select previous surrounding object' global match p ':enter_select_previous_object_mode<ret>'
 map -docstring 'select next surrounding object' global match n ':enter_select_next_object_mode<ret>'
 
-# tmux mode --------------------------------------------------------------------
-
-map -docstring 'new REPL' global tmux r ':open_new_tmux_repl_prompt<ret>'
-map -docstring 'choose REPL' global tmux R ':choose_tmux_repl<ret>'
-map -docstring 'send selected text to REPL' global tmux <ret> ':send_selected_text_to_tmux_repl<ret>'
-
 # User mode --------------------------------------------------------------------
 
 map -docstring 'convert selected dates to ISO 8601' global user d ':convert_selected_dates_to_iso_8601<ret>'

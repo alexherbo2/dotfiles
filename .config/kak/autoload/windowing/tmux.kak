@@ -12,7 +12,7 @@ define-command enter_tmux_mode %{
 
 define-command tmux -params 1.. %{
   nop %sh{
-    TMUX=$kak_client_env_TMUX TMUX_PANE=$kak_client_env_TMUX_PANE nohup tmux set-environment kak_session "$kak_session" ';' set-environment kak_client "$kak_client" ';' "$@" < /dev/null > /dev/null 2>&1 &
+    TMUX=$kak_client_env_TMUX TMUX_PANE=$kak_client_env_TMUX_PANE nohup tmux set-environment -F TMUX_SESSION '#{session_id}' ';' set-environment kak_session "$kak_session" ';' set-environment kak_client "$kak_client" ';' "$@" < /dev/null > /dev/null 2>&1 &
   }
 }
 
@@ -116,34 +116,30 @@ define-command open_prompt_focus_client_with_tmux %{
   }
 }
 
-define-command choose_viewport_with_tmux %{
-  tmux display-panes -d 0
+define-command select_view_with_tmux %{
+  choose_pane_with_tmux %{
+    select-pane -t '%%'
+  }
 }
 
-define-command choose_window_with_tmux %{
-  tmux choose-tree -Zsw -f '#{==:kak,#{pane_current_command}}'
+define-command select_window_with_tmux %{
+  choose_window_with_tmux %{
+    switch-client -t '%%'
+  }
 }
 
 define-command move_view_to_window_with_tmux_menu %{
-  tmux choose-tree -Zsw -f '#{==:kak,#{pane_current_command}}' %{
+  choose_window_with_tmux %{
     join-pane -t '%%'
   }
 }
 
-define-command yank_text_to_terminal_clipboard_with_tmux -params 1 %{
-  tmux set-buffer -w -- %arg{1}
+define-command choose_pane_with_tmux -params .. %{
+  tmux display-panes -d 0 %arg{@}
 }
 
-define-command yank_selected_text_to_terminal_clipboard_with_tmux %{
-  yank_text_to_terminal_clipboard_with_tmux %val{selection}
-}
-
-define-command send_text_to_tmux_pane -params 2 %{
-  tmux set-buffer -- %arg{1} ';' paste-buffer -p -t %arg{2} ';' send-keys -t %arg{2} Enter
-}
-
-define-command send_selected_text_to_tmux_pane -params 1 %{
-  send_text_to_tmux_pane %val{selection} %arg{1}
+define-command choose_window_with_tmux -params .. %{
+  tmux choose-tree -Zw -f '#{==:#{TMUX_SESSION},#{session_id}}' %arg{@}
 }
 
 complete-command split_view_down_with_tmux command
@@ -181,8 +177,6 @@ map -docstring 'close view' global tmux x ':close_view_with_tmux<ret>'
 map -docstring 'close other viewports' global tmux X ':close_other_viewports_with_tmux<ret>'
 
 map -docstring 'open prompt focus client' global tmux / ':open_prompt_focus_client_with_tmux<ret>'
-map -docstring 'choose viewport' global tmux f ':choose_viewport_with_tmux<ret>'
-map -docstring 'choose window' global tmux s ':choose_window_with_tmux<ret>'
-map -docstring 'move view to window menu' global tmux m ':move_view_to_window_with_tmux_menu<ret>'
-
-map -docstring 'yank selected text to terminal clipboard' global tmux y ':yank_selected_text_to_terminal_clipboard_with_tmux<ret>'
+map -docstring 'select view' global tmux f ':select_view_with_tmux<ret>'
+map -docstring 'select window' global tmux s ':select_window_with_tmux<ret>'
+map -docstring 'move view to window' global tmux m ':move_view_to_window_with_tmux_menu<ret>'

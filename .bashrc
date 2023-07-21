@@ -125,6 +125,7 @@ alias curl='curl -sSL'
 # tmux
 # https://github.com/tmux/tmux
 alias t=tmux
+alias tn='tmux new-session'
 alias ta='tmux attach-session'
 alias tl='tmux list-sessions'
 alias tc='tmux choose-tree -Zs'

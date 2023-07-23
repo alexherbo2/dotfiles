@@ -21,6 +21,10 @@ input type:keyboard {
   xkb_options grp:caps_toggle
 }
 
+input type:pointer {
+  natural_scroll enabled
+}
+
 input type:touchpad {
   natural_scroll enabled
   tap enabled

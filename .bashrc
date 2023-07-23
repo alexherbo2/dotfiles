@@ -138,7 +138,6 @@ alias kc='kak -c'
 alias kn='kak -n'
 alias kl='kak -l'
 alias kcl='kak -clear'
-alias kcl='kak -clear'
 alias kamux='tmux -L kak -f ~/.config/kamux.conf new-session kak'
 
 # grep

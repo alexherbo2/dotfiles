@@ -5,11 +5,20 @@ set -e
 # install
 # brew install gum yt-dlp
 
+gum format <<-'EOF'
+give...
+
+1. a target directory,
+2. a YouTube URL,
+
+... and download!
+EOF
 gum format "source directory:"
 target_directory=$(gum file --file=false --directory)
 cd "$target_directory"
-while gum format "enter YouTube URL:"; gum input --placeholder="YouTube URL" | yt-dlp -a -
+while :
 do
-  :
+  gum format "enter YouTube URL:"
+  gum input --placeholder="YouTube URL" | yt-dlp -a -
 done
 gum format "goodbye"

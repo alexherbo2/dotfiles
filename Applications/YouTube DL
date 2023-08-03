@@ -15,6 +15,7 @@ give...
 EOF
 gum format "source directory:"
 target_directory=$(gum file --file=false --directory)
+gum format "entering directory: '$target_directory'"
 cd "$target_directory"
 while :
 do

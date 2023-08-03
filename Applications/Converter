@@ -15,9 +15,9 @@ give...
 ... and get your files converted!
 EOF
 gum format "input format:"
-input_formats=$(gum filter --no-limit "jpg" "mkv" "mp3" "mp4" "png" "webm" "webp")
+input_formats=$(printf '%s\n' "jpg" "mkv" "mp3" "mp4" "png" "webm" "webp" | gum filter --no-limit)
 gum format "output format:"
-output_formats=$(gum filter --no-limit "jpg" "mkv" "mp3" "mp4" "png" "webm" "webp")
+output_formats=$(printf '%s\n' "jpg" "mkv" "mp3" "mp4" "png" "webm" "webp" | gum filter --no-limit)
 while :
 do
   gum format "source directory:"

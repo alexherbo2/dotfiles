@@ -22,6 +22,7 @@ while :
 do
   gum format "source directory:"
   source_directory=$(gum file --file=false --directory)
+  gum confirm "confirm [$input_formats][$output_formats][$source_directory]"
   {
     for input_format in $input_formats
     do

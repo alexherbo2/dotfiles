@@ -5,67 +5,79 @@ set -e
 # install
 # brew install gum ffmpeg
 
+gum format <<-'EOF'
+give...
+
+1. an input format,
+2. an output format,
+3. a source directory,
+
+... and get your files converted!
+EOF
 gum format "input format:"
-input_formats=$(gum choose --no-limit "jpg" "mkv" "mp3" "mp4" "png" "webm" "webp")
+input_formats=$(gum filter --no-limit "jpg" "mkv" "mp3" "mp4" "png" "webm" "webp")
 gum format "output format:"
-output_formats=$(gum choose --no-limit "jpg" "mkv" "mp3" "mp4" "png" "webm" "webp")
-gum format "source directory:"
-source_directory=$(gum file --file=false --directory)
-{
-  for input_format in $input_formats
-  do
-    case "$input_format" in
-      jpg)
-        find -L "$source_directory" -type f "(" -iname "*.jpg" -or -iname "*.jpeg" ")"
-        ;;
-      mkv)
-        find -L "$source_directory" -type f -iname "*.mkv"
-        ;;
-      mp3)
-        find -L "$source_directory" -type f -iname "*.mp3"
-        ;;
-      mp4)
-        find -L "$source_directory" -type f -iname "*.mp4"
-        ;;
-      png)
-        find -L "$source_directory" -type f -iname "*.png"
-        ;;
-      webm)
-        find -L "$source_directory" -type f -iname "*.webm"
-        ;;
-      webp)
-        find -L "$source_directory" -type f -iname "*.webp"
-        ;;
-    esac
-  done
-} |
-while read input_file
+output_formats=$(gum filter --no-limit "jpg" "mkv" "mp3" "mp4" "png" "webm" "webp")
+while :
 do
-  for output_format in $output_formats
+  gum format "source directory:"
+  source_directory=$(gum file --file=false --directory)
+  {
+    for input_format in $input_formats
+    do
+      case "$input_format" in
+        jpg)
+          find -L "$source_directory" -type f "(" -iname "*.jpg" -or -iname "*.jpeg" ")"
+          ;;
+        mkv)
+          find -L "$source_directory" -type f -iname "*.mkv"
+          ;;
+        mp3)
+          find -L "$source_directory" -type f -iname "*.mp3"
+          ;;
+        mp4)
+          find -L "$source_directory" -type f -iname "*.mp4"
+          ;;
+        png)
+          find -L "$source_directory" -type f -iname "*.png"
+          ;;
+        webm)
+          find -L "$source_directory" -type f -iname "*.webm"
+          ;;
+        webp)
+          find -L "$source_directory" -type f -iname "*.webp"
+          ;;
+      esac
+    done
+  } |
+  while read input_file
   do
-    case "$output_format" in
-      jpg)
-        echo ffmpeg -n -i "$input_file" -- "$input_file.jpg"
-        ;;
-      mkv)
-        echo ffmpeg -n -i "$input_file" -- "$input_file.mkv"
-        ;;
-      mp3)
-        echo ffmpeg -n -i "$input_file" -- "$input_file.mp3"
-        ;;
-      mp4)
-        echo ffmpeg -n -i "$input_file" -- "$input_file.mp4"
-        ;;
-      png)
-        echo ffmpeg -n -i "$input_file" -- "$input_file.png"
-        ;;
-      webm)
-        echo ffmpeg -n -i "$input_file" -- "$input_file.webm"
-        ;;
-      webp)
-        echo ffmpeg -n -i "$input_file" -- "$input_file.webp"
-        ;;
-    esac
+    for output_format in $output_formats
+    do
+      case "$output_format" in
+        jpg)
+          echo ffmpeg -n -i "$input_file" -- "$input_file.jpg"
+          ;;
+        mkv)
+          echo ffmpeg -n -i "$input_file" -- "$input_file.mkv"
+          ;;
+        mp3)
+          echo ffmpeg -n -i "$input_file" -- "$input_file.mp3"
+          ;;
+        mp4)
+          echo ffmpeg -n -i "$input_file" -- "$input_file.mp4"
+          ;;
+        png)
+          echo ffmpeg -n -i "$input_file" -- "$input_file.png"
+          ;;
+        webm)
+          echo ffmpeg -n -i "$input_file" -- "$input_file.webm"
+          ;;
+        webp)
+          echo ffmpeg -n -i "$input_file" -- "$input_file.webp"
+          ;;
+      esac
+    done
   done
 done
 gum format "goodbye"

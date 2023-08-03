@@ -16,25 +16,25 @@ source_directory=$(gum file --file=false --directory)
   do
     case "$input_format" in
       jpg)
-        find "$source_directory" -type f "(" -iname "*.jpg" -or -iname "*.jpeg" ")"
+        find -L "$source_directory" -type f "(" -iname "*.jpg" -or -iname "*.jpeg" ")"
         ;;
       mkv)
-        find "$source_directory" -type f -iname "*.mkv"
+        find -L "$source_directory" -type f -iname "*.mkv"
         ;;
       mp3)
-        find "$source_directory" -type f -iname "*.mp3"
+        find -L "$source_directory" -type f -iname "*.mp3"
         ;;
       mp4)
-        find "$source_directory" -type f -iname "*.mp4"
+        find -L "$source_directory" -type f -iname "*.mp4"
         ;;
       png)
-        find "$source_directory" -type f -iname "*.png"
+        find -L "$source_directory" -type f -iname "*.png"
         ;;
       webm)
-        find "$source_directory" -type f -iname "*.webm"
+        find -L "$source_directory" -type f -iname "*.webm"
         ;;
       webp)
-        find "$source_directory" -type f -iname "*.webp"
+        find -L "$source_directory" -type f -iname "*.webp"
         ;;
     esac
   done

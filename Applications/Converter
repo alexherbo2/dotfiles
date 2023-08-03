@@ -36,6 +36,7 @@ source_directory=$(gum file --file=false --directory)
       webp)
         find "$source_directory" -type f -iname "*.webp"
         ;;
+    esac
   done
 } |
 while read input_file
@@ -64,6 +65,7 @@ do
       webp)
         echo ffmpeg -n -i "$input_file" -- "$input_file.webp"
         ;;
+    esac
   done
 done
 gum format "goodbye"

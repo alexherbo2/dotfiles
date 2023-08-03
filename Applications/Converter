@@ -1,0 +1,69 @@
+#!/bin/sh
+
+set -e
+
+# install
+# brew install gum ffmpeg
+
+gum format "input format:"
+input_formats=$(gum choose --no-limit "jpg" "mkv" "mp3" "mp4" "png" "webm" "webp")
+gum format "output format:"
+output_formats=$(gum choose --no-limit "jpg" "mkv" "mp3" "mp4" "png" "webm" "webp")
+gum format "source directory:"
+source_directory=$(gum file --file=false --directory)
+{
+  for input_format in $input_formats
+  do
+    case "$input_format" in
+      jpg)
+        find "$source_directory" -type f "(" -iname "*.jpg" -or -iname "*.jpeg" ")"
+        ;;
+      mkv)
+        find "$source_directory" -type f -iname "*.mkv"
+        ;;
+      mp3)
+        find "$source_directory" -type f -iname "*.mp3"
+        ;;
+      mp4)
+        find "$source_directory" -type f -iname "*.mp4"
+        ;;
+      png)
+        find "$source_directory" -type f -iname "*.png"
+        ;;
+      webm)
+        find "$source_directory" -type f -iname "*.webm"
+        ;;
+      webp)
+        find "$source_directory" -type f -iname "*.webp"
+        ;;
+  done
+} |
+while read input_file
+do
+  for output_format in $output_formats
+  do
+    case "$output_format" in
+      jpg)
+        echo ffmpeg -n -i "$input_file" -- "$input_file.jpg"
+        ;;
+      mkv)
+        echo ffmpeg -n -i "$input_file" -- "$input_file.mkv"
+        ;;
+      mp3)
+        echo ffmpeg -n -i "$input_file" -- "$input_file.mp3"
+        ;;
+      mp4)
+        echo ffmpeg -n -i "$input_file" -- "$input_file.mp4"
+        ;;
+      png)
+        echo ffmpeg -n -i "$input_file" -- "$input_file.png"
+        ;;
+      webm)
+        echo ffmpeg -n -i "$input_file" -- "$input_file.webm"
+        ;;
+      webp)
+        echo ffmpeg -n -i "$input_file" -- "$input_file.webp"
+        ;;
+  done
+done
+gum format "goodbye"

@@ -1,84 +1,93 @@
 #!/bin/sh
 
-set -e
-
 # install
 # brew install gum ffmpeg
 
-gum format <<-'EOF'
-give...
-
-1. an input format,
-2. an output format,
-3. a source directory,
-
-... and get your files converted!
-EOF
-gum format "input format:"
-input_formats=$(printf '%s\n' "jpg" "mkv" "mp3" "mp4" "png" "webm" "webp" | gum filter --placeholder="input format" --no-limit)
-gum format "output format:"
-output_formats=$(printf '%s\n' "jpg" "mkv" "mp3" "mp4" "png" "webm" "webp" | gum filter --placeholder="output format" --no-limit)
+set -e
+gum format "choose the kind of file you want to convert: (multiple allowed)"
+INPUT_FORMATS=$(gum choose --no-limit "jpg" "mkv" "mp3" "mp4" "png" "webm" "webp")
+test -n "$INPUT_FORMATS"
+gum format "$INPUT_FORMATS"
+gum format "choose a desired format: (multiple allowed)"
+OUTPUT_FORMATS=$(gum choose --no-limit "jpg" "mkv" "mp3" "mp4" "png" "webm" "webp")
+test -n "$OUTPUT_FORMATS"
+gum format "$OUTPUT_FORMATS"
 while :
 do
-  gum format "source directory:"
-  source_directory=$(gum file --file=false --directory)
-  gum confirm "convert from [$input_formats] to [$output_formats] in '$source_directory'?"
+  gum format "choose source directory:"
+  SOURCE_DIRECTORY=$(gum file --file=false --directory)
+  echo "> $SOURCE_DIRECTORY"
+  gum confirm "search [$INPUT_FORMATS] files in '$SOURCE_DIRECTORY' and convert them to [$OUTPUT_FORMATS]?"
   {
-    for input_format in $input_formats
+    for input_format in $INPUT_FORMATS
     do
       case "$input_format" in
         jpg)
-          find -L "$source_directory" -type f "(" -iname "*.jpg" -or -iname "*.jpeg" ")"
+          find -L "$SOURCE_DIRECTORY" -type f "(" -iname "*.jpg" -or -iname "*.jpeg" ")"
           ;;
         mkv)
-          find -L "$source_directory" -type f -iname "*.mkv"
+          find -L "$SOURCE_DIRECTORY" -type f -iname "*.mkv"
           ;;
         mp3)
-          find -L "$source_directory" -type f -iname "*.mp3"
+          find -L "$SOURCE_DIRECTORY" -type f -iname "*.mp3"
           ;;
         mp4)
-          find -L "$source_directory" -type f -iname "*.mp4"
+          find -L "$SOURCE_DIRECTORY" -type f -iname "*.mp4"
           ;;
         png)
-          find -L "$source_directory" -type f -iname "*.png"
+          find -L "$SOURCE_DIRECTORY" -type f -iname "*.png"
           ;;
         webm)
-          find -L "$source_directory" -type f -iname "*.webm"
+          find -L "$SOURCE_DIRECTORY" -type f -iname "*.webm"
           ;;
         webp)
-          find -L "$source_directory" -type f -iname "*.webp"
+          find -L "$SOURCE_DIRECTORY" -type f -iname "*.webp"
           ;;
       esac
     done
   } |
   while read input_file
   do
-    for output_format in $output_formats
+    for output_format in $OUTPUT_FORMATS
     do
       case "$output_format" in
         jpg)
-          echo ffmpeg -n -i "$input_file" -- "$input_file.jpg"
+          gum spin --title="converting '$input_file' to '$output_format'..." -- ffmpeg -n -i "$input_file" -- "$input_file.jpg" &&
+          gum format "converted '$input_file' to '$output_format'..." ||
+          :
           ;;
         mkv)
-          echo ffmpeg -n -i "$input_file" -- "$input_file.mkv"
+          gum spin --title="converting '$input_file' to '$output_format'..." -- ffmpeg -n -i "$input_file" -- "$input_file.mkv" &&
+          gum format "converted '$input_file' to '$output_format'..." ||
+          :
           ;;
         mp3)
-          echo ffmpeg -n -i "$input_file" -- "$input_file.mp3"
+          gum spin --title="converting '$input_file' to '$output_format'..." -- ffmpeg -n -i "$input_file" -- "$input_file.mp3" &&
+          gum format "converted '$input_file' to '$output_format'..." ||
+          :
           ;;
         mp4)
-          echo ffmpeg -n -i "$input_file" -- "$input_file.mp4"
+          gum spin --title="converting '$input_file' to '$output_format'..." -- ffmpeg -n -i "$input_file" -- "$input_file.mp4" &&
+          gum format "converted '$input_file' to '$output_format'..." ||
+          :
           ;;
         png)
-          echo ffmpeg -n -i "$input_file" -- "$input_file.png"
+          gum spin --title="converting '$input_file' to '$output_format'..." -- ffmpeg -n -i "$input_file" -- "$input_file.png" &&
+          gum format "converted '$input_file' to '$output_format'..." ||
+          :
           ;;
         webm)
-          echo ffmpeg -n -i "$input_file" -- "$input_file.webm"
+          gum spin --title="converting '$input_file' to '$output_format'..." -- ffmpeg -n -i "$input_file" -- "$input_file.webm" &&
+          gum format "converted '$input_file' to '$output_format'..." ||
+          :
           ;;
         webp)
-          echo ffmpeg -n -i "$input_file" -- "$input_file.webp"
+          gum spin --title="converting '$input_file' to '$output_format'..." -- ffmpeg -n -i "$input_file" -- "$input_file.webp" &&
+          gum format "converted '$input_file' to '$output_format'..." ||
+          :
           ;;
       esac
     done
   done
+  gum format "done"
 done
-gum format "goodbye"

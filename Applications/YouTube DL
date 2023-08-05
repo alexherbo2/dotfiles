@@ -4,14 +4,14 @@
 # brew install gum yt-dlp
 
 set -e
-gum format "choose where to download files:"
+gum format "Choose where to download files:"
 TARGET_DIRECTORY=$(gum file --file=false --directory)
 echo "> $TARGET_DIRECTORY"
 while :
 do
-  gum format "enter YouTube URL:"
+  gum format "Enter a YouTube URL:"
   URL=$(gum input --placeholder="YouTube URL")
   test -n "$URL"
-  gum spin --title="downloading '$URL' at '$TARGET_DIRECTORY'..." -- yt-dlp -P "$TARGET_DIRECTORY" -- "$URL"
-  gum format "downloaded '$URL' at '$TARGET_DIRECTORY'"
+  gum spin --title="Downloading '$URL' at '$TARGET_DIRECTORY'..." -- yt-dlp -P "$TARGET_DIRECTORY" -- "$URL"
+  gum format "Downloaded '$URL' at '$TARGET_DIRECTORY'."
 done

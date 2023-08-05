@@ -4,11 +4,11 @@
 # brew install gum ffmpeg
 
 set -e
-gum format "choose the kind of file you want to convert: (multiple allowed)"
+gum format "Choose the kind of file you want to convert: (multiple formats allowed)"
 INPUT_FORMATS=$(gum choose --no-limit "jpg" "mkv" "mp3" "mp4" "png" "webm" "webp")
 test -n "$INPUT_FORMATS"
 gum format "$INPUT_FORMATS"
-gum format "choose a desired format: (multiple allowed)"
+gum format "Choose a desired format: (multiple formats allowed)"
 OUTPUT_FORMATS=$(gum choose --no-limit "jpg" "mkv" "mp3" "mp4" "png" "webm" "webp")
 test -n "$OUTPUT_FORMATS"
 gum format "$OUTPUT_FORMATS"
@@ -16,10 +16,10 @@ JOINED_INPUT_FORMATS=$(echo "$INPUT_FORMATS" | paste -s -d "," -)
 JOINED_OUTPUT_FORMATS=$(echo "$OUTPUT_FORMATS" | paste -s -d "," -)
 while :
 do
-  gum format "choose source directory:"
+  gum format "Choose your source directory:"
   SOURCE_DIRECTORY=$(gum file --file=false --directory)
   echo "> $SOURCE_DIRECTORY"
-  gum confirm "search [$JOINED_INPUT_FORMATS] files in '$SOURCE_DIRECTORY' and convert them to [$JOINED_OUTPUT_FORMATS]?"
+  gum confirm "Search [$JOINED_INPUT_FORMATS] files in '$SOURCE_DIRECTORY' and convert them to [$JOINED_OUTPUT_FORMATS]?"
   {
     for input_format in $INPUT_FORMATS
     do
@@ -54,42 +54,41 @@ do
     do
       case "$output_format" in
         jpg)
-          gum spin --title="converting '$input_file' to '$output_format'..." -- ffmpeg -n -i "$input_file" -- "$input_file.jpg" &&
-          gum format "converted '$input_file' to '$output_format'..." ||
+          gum spin --title="Converting '$input_file' to '$output_format'..." -- ffmpeg -n -i "$input_file" -- "$input_file.jpg" &&
+          gum format "Converted '$input_file' to '$output_format'." ||
           :
           ;;
         mkv)
-          gum spin --title="converting '$input_file' to '$output_format'..." -- ffmpeg -n -i "$input_file" -- "$input_file.mkv" &&
-          gum format "converted '$input_file' to '$output_format'..." ||
+          gum spin --title="Converting '$input_file' to '$output_format'..." -- ffmpeg -n -i "$input_file" -- "$input_file.mkv" &&
+          gum format "Converted '$input_file' to '$output_format'." ||
           :
           ;;
         mp3)
-          gum spin --title="converting '$input_file' to '$output_format'..." -- ffmpeg -n -i "$input_file" -- "$input_file.mp3" &&
-          gum format "converted '$input_file' to '$output_format'..." ||
+          gum spin --title="Converting '$input_file' to '$output_format'..." -- ffmpeg -n -i "$input_file" -- "$input_file.mp3" &&
+          gum format "Converted '$input_file' to '$output_format'." ||
           :
           ;;
         mp4)
-          gum spin --title="converting '$input_file' to '$output_format'..." -- ffmpeg -n -i "$input_file" -- "$input_file.mp4" &&
-          gum format "converted '$input_file' to '$output_format'..." ||
+          gum spin --title="Converting '$input_file' to '$output_format'..." -- ffmpeg -n -i "$input_file" -- "$input_file.mp4" &&
+          gum format "Converted '$input_file' to '$output_format'." ||
           :
           ;;
         png)
-          gum spin --title="converting '$input_file' to '$output_format'..." -- ffmpeg -n -i "$input_file" -- "$input_file.png" &&
-          gum format "converted '$input_file' to '$output_format'..." ||
+          gum spin --title="Converting '$input_file' to '$output_format'..." -- ffmpeg -n -i "$input_file" -- "$input_file.png" &&
+          gum format "Converted '$input_file' to '$output_format'." ||
           :
           ;;
         webm)
-          gum spin --title="converting '$input_file' to '$output_format'..." -- ffmpeg -n -i "$input_file" -- "$input_file.webm" &&
-          gum format "converted '$input_file' to '$output_format'..." ||
+          gum spin --title="Converting '$input_file' to '$output_format'..." -- ffmpeg -n -i "$input_file" -- "$input_file.webm" &&
+          gum format "Converted '$input_file' to '$output_format'." ||
           :
           ;;
         webp)
-          gum spin --title="converting '$input_file' to '$output_format'..." -- ffmpeg -n -i "$input_file" -- "$input_file.webp" &&
-          gum format "converted '$input_file' to '$output_format'..." ||
+          gum spin --title="Converting '$input_file' to '$output_format'..." -- ffmpeg -n -i "$input_file" -- "$input_file.webp" &&
+          gum format "Converted '$input_file' to '$output_format'." ||
           :
           ;;
       esac
     done
   done
-  gum format "done"
 done

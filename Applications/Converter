@@ -12,8 +12,8 @@ gum format "choose a desired format: (multiple allowed)"
 OUTPUT_FORMATS=$(gum choose --no-limit "jpg" "mkv" "mp3" "mp4" "png" "webm" "webp")
 test -n "$OUTPUT_FORMATS"
 gum format "$OUTPUT_FORMATS"
-JOINED_INPUT_FORMATS=$(echo "$INPUT_FORMATS" | paste -s -d ",")
-JOINED_OUTPUT_FORMATS=$(echo "$OUTPUT_FORMATS" | paste -s -d ",")
+JOINED_INPUT_FORMATS=$(echo "$INPUT_FORMATS" | paste -s -d "," -)
+JOINED_OUTPUT_FORMATS=$(echo "$OUTPUT_FORMATS" | paste -s -d "," -)
 while :
 do
   gum format "choose source directory:"

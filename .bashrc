@@ -72,6 +72,11 @@ alias n=nnn
 alias ..='cd ..'
 alias -- -='cd -'
 
+# ssh
+# Note: Runs command with aliases.
+alias @host='ssh host -t '
+alias @guest='ssh guest -t '
+
 # Run `sudo` with aliases.
 alias sudo='sudo '
 
@@ -139,7 +144,11 @@ alias kc='kak -c'
 alias kn='kak -n'
 alias kl='kak -l'
 alias kcl='kak -clear'
+
+# kamux
 alias kamux='tmux -L kak -f ~/.config/kamux.conf new-session kak'
+alias kS='kamux -s'
+alias kC='kamux -c'
 
 # grep
 alias ws='rg "\\s+$|\\w\\s{2,}\\w"'

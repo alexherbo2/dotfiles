@@ -11,6 +11,7 @@ while :
 do
   gum format "enter YouTube URL:"
   URL=$(gum input --placeholder="YouTube URL")
+  test -n "$URL"
   gum spin --title="downloading '$URL' at '$TARGET_DIRECTORY'..." -- yt-dlp -P "$TARGET_DIRECTORY" -- "$URL"
   gum format "downloaded '$URL' at '$TARGET_DIRECTORY'"
 done

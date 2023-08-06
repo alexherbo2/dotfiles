@@ -98,7 +98,7 @@ define-command create_buffer_from_command_output -params 2.. %{
     mkfifo "$kak_reg_f"
     { "$@" > "$kak_reg_f" 2>&1; } < /dev/null > /dev/null 2>&1 &
   }
-  edit! -scroll -fifo %reg{f} %arg{1}
+  edit! -scroll -fifo %reg{f} -- %arg{1}
   hook -always -once buffer BufCloseFifo '' "
     nop %%sh{
       unlink ""%reg{f}""

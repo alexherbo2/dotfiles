@@ -1,5 +1,4 @@
 # Syntax and semantics
-# https://tsv-lang.org/reference/master/syntax_and_semantics/
 alias global syntax add-highlighter
 
 # Creates the base regions

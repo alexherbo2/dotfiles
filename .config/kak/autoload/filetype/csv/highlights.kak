@@ -1,5 +1,5 @@
 # Syntax and semantics
-# https://csv-lang.org/reference/master/syntax_and_semantics/
+# https://datatracker.ietf.org/doc/html/rfc4180
 alias global syntax add-highlighter
 
 # Creates the base regions

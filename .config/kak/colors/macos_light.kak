@@ -1,3 +1,4 @@
+# Ported by Mathieu Ablasou <taupiqueur.kanto@gmail.com>
 # Color palette
 
 # Standard

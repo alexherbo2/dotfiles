@@ -137,18 +137,9 @@ alias tc='tmux choose-tree -Zs'
 
 # Kakoune
 # https://kakoune.org
-alias k=kak
-alias ks='kak -s'
-alias kd='kak -d -s'
-alias kc='kak -c'
-alias kn='kak -n'
-alias kl='kak -l'
-alias kcl='kak -clear'
-
-# kamux
 alias kamux='tmux -L kak -f ~/.config/kamux.conf new-session kak'
-alias kS='kamux -s'
-alias kC='kamux -c'
+alias k=kamux
+alias kc='kak -l | fzy | xargs -o git kamux -c'
 
 # grep
 alias ws='rg "\\s+$|\\w\\s{2,}\\w"'

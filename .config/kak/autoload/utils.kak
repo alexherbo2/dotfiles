@@ -298,7 +298,7 @@ define-command send_buffer_list_to_session -params 1 %{
   }
 }
 
-alias global @selections send_current_buffer_to_session
+alias global @selections send_selected_text_to_session
 alias global @buffile send_current_buffer_to_session
 alias global @buflist send_buffer_list_to_session
 

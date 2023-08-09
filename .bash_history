@@ -94,6 +94,7 @@ git clone https://github.com/asterite/adventofcode2021.git ~/.local/share/github
 git clone https://github.com/asterite/adventofcode2022.git ~/.local/share/github.com/asterite/adventofcode2022
 kak
 sway
+brew link --force curl
 brew link --force ncurses
 alacritty msg create-window
 rsync 'host:Library/Application Support/Google/Chrome/.' .config/chromium

@@ -79,7 +79,6 @@ alias @guest='ssh guest -t '
 
 # Run commands with aliases.
 alias sudo='sudo '
-alias xargs='xargs -o '
 
 # Application launcher
 # Note: Runs command with aliases.
@@ -141,7 +140,7 @@ alias tc='tmux choose-tree -Zs'
 alias kamux='tmux -L kak -f ~/.config/kamux.conf new-session kak'
 alias k=kamux
 alias kl='kak -l'
-alias kc='kak -l | fzy | xargs kamux -c'
+alias kc='kamux -c'
 
 # grep
 alias ws='rg "\\s+$|\\w\\s{2,}\\w"'

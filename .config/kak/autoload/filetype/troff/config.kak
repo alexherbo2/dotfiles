@@ -1,7 +1,7 @@
 # This script provides support for POSIX shells.
 # https://gnu.org/software/bash/manual/bash.html
 
-hook global BufCreate '.+\.troff|.+\.profile|.+/profile' %{
+hook global BufCreate '.+\.troff|.+\.[1-8]' %{
   set-option buffer filetype troff
 }
 

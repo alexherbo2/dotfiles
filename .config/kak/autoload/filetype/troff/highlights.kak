@@ -27,6 +27,8 @@ add-highlighter shared/troff.variable/variable/ regex '\$' 0:operator
 add-highlighter shared/troff.variable/ region -recurse '\{' '\$\{\K' '(?=\})' fill variable
 
 # Syntax and semantics
+add-highlighter shared/troff/code/ regex '^\.\w*' 0:meta
+add-highlighter shared/troff/code/ regex '\h[A-Z][a-z]\h' 0:attribute
 add-highlighter shared/troff/code/function_name_declaration regex '^\h*\K\w+(?=\(\))' 0:function
 add-highlighter shared/troff/code/variable_name_declaration regex '\b\w+(?==)' 0:variable
 add-highlighter shared/troff/code/alias_name_declaration regex '^\h*alias\h*\K[\w.-]+(?==)' 0:variable

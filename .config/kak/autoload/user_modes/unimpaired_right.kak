@@ -10,7 +10,7 @@ define-command show_line_numbers %{
 }
 
 define-command enable_readonly_mode %{
-  set-option buffer readonly yes
+  set-option global readonly yes
 }
 
 define-command render_whitespace %{

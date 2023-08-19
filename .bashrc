@@ -93,6 +93,14 @@ alias mr='make release'
 alias mi='DESTDIR= PREFIX=~/.local make install'
 alias mu='DESTDIR= PREFIX=~/.local make uninstall'
 
+# Publish a release for aarch64 Linux users.
+alias make-aarch64-unknown-linux-musl-release='sh scripts/docker-run.sh make static=yes release version=nightly target=aarch64-unknown-linux-musl'
+alias upload-aarch64-unknown-linux-musl-release='gh release upload nightly releases/*-nightly-aarch64-unknown-linux-musl.tar.xz'
+
+# Publish a release for aarch64 macOS users.
+alias make-aarch64-apple-darwin-release='make release version=nightly target=aarch64-apple-darwin'
+alias upload-aarch64-apple-darwin-release='gh release upload nightly releases/*-nightly-aarch64-apple-darwin.tar.xz'
+
 # cargo
 alias cb='cargo build --release'
 alias ci='cargo install --path .'
@@ -240,9 +248,6 @@ alias yay-uninstall='paru -Qeq | fzy | xargs -o paru -Rs'
 alias yay-clean='paru -Sc'
 
 # macOS ------------------------------------------------------------------------
-
-# Publish a release for aarch64 macOS users.
-alias publish-macos-release='make release version=nightly target=aarch64-apple-darwin && gh release upload nightly releases/*-nightly-aarch64-apple-darwin.tar.xz'
 
 # Keep MacBook awake with lid closed
 # https://caffeinated.app/keep-macbook-awake-with-lid-closed/

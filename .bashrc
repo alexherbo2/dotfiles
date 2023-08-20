@@ -12,7 +12,7 @@
 # Prompt -----------------------------------------------------------------------
 
 export PS1='\[\e[32m\]\u@\h\[\e[36m\](\l)\[\e[0m\] \[\e[34m\]\w\[\e[0m\]\n\[\e[90m\]>>>\[\e[0m\] '
-export PROMPT_COMMAND='[ $? = 0 ] && date '+%A %F %R' | pokemonsay || echo -e "\\e[31mERROR\\e[0m: command exited with $?"'
+export PROMPT_COMMAND='[ $? = 0 ] && date "+%A %F %R" | pokemonsay || echo -e "\\e[31mERROR\\e[0m: command exited with $?"'
 
 # Starship
 # https://starship.rs

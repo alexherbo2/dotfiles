@@ -5,19 +5,19 @@ define-command -hidden enter_select_previous_object_mode %{
 }
 
 define-command -hidden select_previous_parenthesis_blocks %{
-  execute-keys '<a-f>(h<a-a>b<a-;>'
+  execute-keys '<a-f>(<a-a>b<a-;>'
 }
 
 define-command -hidden select_previous_brace_blocks %{
-  execute-keys '<a-f>{h<a-a>B<a-;>' # }
+  execute-keys '<a-f>{<a-a>B<a-;>' # }
 }
 
 define-command -hidden select_previous_bracket_blocks %{
-  execute-keys '<a-f>[h<a-a>r<a-;>'
+  execute-keys '<a-f>[<a-a>r<a-;>'
 }
 
 define-command -hidden select_previous_angle_blocks %{
-  execute-keys 's<lt>h<a-a>a<a-;>'
+  execute-keys 's<lt><a-a>a<a-;>'
 }
 
 define-command -hidden select_previous_double_quote_strings %{

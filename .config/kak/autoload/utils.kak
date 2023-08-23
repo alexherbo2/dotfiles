@@ -155,7 +155,7 @@ define-command move_selected_lines_up %{
 }
 
 define-command select_highlights %{
-  execute-keys '"aZ*%s<ret>"bZ"az"b<a-z>a'
+  execute-keys -save-regs 'ab' '"aZ*%s<ret>"bZ"az"b<a-z>a'
 }
 
 define-command increment_selected_numbers -params 0..1 %{

@@ -266,4 +266,4 @@ alias disable-macos-font-smoothing='defaults write -g AppleFontSmoothing -int 0'
 # Erases .DS_Store and .localized files from your home folder.
 alias DS_Store="find ~ '(' -name '*.DS_Store' -or -name '*.localized' ')' -print -exec rm -Ri -- {} +"
 
-pokemonsay -n < /dev/null | tail -n +8
+pokemonsay -n < /dev/null | tail -n +8 | sed '$d'

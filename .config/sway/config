@@ -165,6 +165,14 @@ bindsym Mod4+Shift+8 move container to workspace number 8
 bindsym Mod4+Shift+9 move container to workspace number 9
 bindsym Mod4+Shift+0 move container to workspace number 10
 
+# Switch to the next or previous workspace.
+bindsym Mod4+n workspace next
+bindsym Mod4+Shift+n workspace prev
+
+# Switch to the last workspace.
+bindsym Mod4+Tab workspace back_and_forth
+bindsym Mod4+Shift+Tab move container to workspace back_and_forth
+
 # Move windows in and out of the scratchpad.
 bindsym Mod4+Shift+minus move scratchpad
 bindsym Mod4+minus scratchpad show

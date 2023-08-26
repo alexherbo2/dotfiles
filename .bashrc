@@ -148,6 +148,7 @@ alias tc='tmux choose-tree -Zs'
 alias kamux='tmux -L kak -f ~/.config/kamux.conf new-session kak'
 alias k=kamux
 alias kl='kak -l'
+alias kn='kak -n'
 alias kc='kamux -c'
 
 # grep

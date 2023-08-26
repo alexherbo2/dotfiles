@@ -196,6 +196,7 @@ alias tree='exa --tree --all --ignore-glob .git'
 
 # batch
 # https://github.com/taupiqueur/batch
+# interactive mv
 imv() {
   batch \
     -e kak \
@@ -209,6 +210,7 @@ imv() {
     "$@"
 }
 
+# graphical mv
 alias xmv='nnn -p - | imv'
 
 # ffmpeg

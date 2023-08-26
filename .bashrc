@@ -196,20 +196,17 @@ alias tree='exa --tree --all --ignore-glob .git'
 
 # batch
 # https://github.com/taupiqueur/batch
-imap() {
+imv() {
   batch \
     -e kak \
     -f 'iconv -f UTF-8 -t ASCII//TRANSLIT//IGNORE' \
     -f 'tr [:upper:] [:lower:]' \
     -f "tr -s \\'[:blank:] -" \
-    -f 'tr -d ?!,' "$@"
-}
-
-imv() {
-  imap \
+    -f 'tr -d ?!,' \
     -p : \
     -M 'mkdir -vp -- "$(dirname -- "$2")" && mv -vi -- "$1" "$2"' \
-    -d 'rm -vi --' "$@"
+    -d 'rm -vi --' \
+    "$@"
 }
 
 alias xmv='nnn -p - | imv'

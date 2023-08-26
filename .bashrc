@@ -196,25 +196,23 @@ alias tree='exa --tree --all --ignore-glob .git'
 
 # batch
 # https://github.com/taupiqueur/batch
-# interactive map
 imap() {
-  batch -e kak -f 'iconv -f UTF-8 -t ASCII//TRANSLIT//IGNORE' -f 'tr [:upper:] [:lower:]' -f "tr -s \\'[:blank:] -" -f 'tr -d ?!,' "$@"
+  batch \
+    -e kak \
+    -f 'iconv -f UTF-8 -t ASCII//TRANSLIT//IGNORE' \
+    -f 'tr [:upper:] [:lower:]' \
+    -f "tr -s \\'[:blank:] -" \
+    -f 'tr -d ?!,' "$@"
 }
 
-# auto map
-amap() {
-  imap -E "$@"
-}
-
-# interactive mv
 imv() {
-  imap -p : -M 'mkdir -vp -- "$(dirname -- "$2")" && mv -vi -- "$1" "$2"' -d 'rm -vi --' "$@"
+  imap \
+    -p : \
+    -M 'mkdir -vp -- "$(dirname -- "$2")" && mv -vi -- "$1" "$2"' \
+    -d 'rm -vi --' "$@"
 }
 
-# graphical mv
-xmv() {
-  nnn -p - | imv "$@"
-}
+alias xmv='nnn -p - | imv'
 
 # ffmpeg
 # Reference: https://trac.ffmpeg.org/wiki/Encode/H.265

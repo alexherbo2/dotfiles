@@ -197,19 +197,19 @@ alias tree='exa --tree --all --ignore-glob .git'
 
 # batch
 # https://github.com/taupiqueur/batch
+BATCH_CONFIG=(
+  --editor='kak'
+  --filter='iconv -f UTF-8 -t ASCII//TRANSLIT//IGNORE'
+  --filter='tr [:upper:] [:lower:]'
+  --filter='tr -s "'"'"'[:blank:]" -'
+  --filter='tr -d ?!,'
+  --pick-command=':'
+  --map-shell-script='mkdir -vp -- "$(dirname -- "$2")" && mv -vi -- "$1" "$2"'
+  --drop-command='rm -vi --'
+)
+
 # interactive mv
-imv() {
-  batch \
-    -e kak \
-    -f 'iconv -f UTF-8 -t ASCII//TRANSLIT//IGNORE' \
-    -f 'tr [:upper:] [:lower:]' \
-    -f "tr -s \\'[:blank:] -" \
-    -f 'tr -d ?!,' \
-    -p : \
-    -M 'mkdir -vp -- "$(dirname -- "$2")" && mv -vi -- "$1" "$2"' \
-    -d 'rm -vi --' \
-    "$@"
-}
+alias imv='batch "${BATCH_CONFIG[@]}"'
 
 # graphical mv
 alias xmv='nnn -p - | imv'

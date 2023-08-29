@@ -197,22 +197,15 @@ alias tree='exa --tree --all --ignore-glob .git'
 
 # batch
 # https://github.com/taupiqueur/batch
-BATCH_CONFIG=(
-  --editor='kak'
-  --filter='iconv -f UTF-8 -t ASCII//TRANSLIT//IGNORE'
-  --filter='tr "A-Z" "a-z"'
-  --filter='tr -s " '"'"'" "-"'
-  --filter='tr -d "?!,"'
-  --pick-command=':'
-  --map-shell-script='mkdir -vp -- "$(dirname -- "$2")" && mv -vi -- "$1" "$2"'
-  --drop-command='rm -vi --'
-)
-
 # interactive mv
-alias imv='batch "${BATCH_CONFIG[@]}"'
+imv() {
+  batch -e 'kak' -f 'iconv -f "UTF-8" -t "ASCII//TRANSLIT//IGNORE"' -f 'tr "A-Z" "a-z"' -f 'tr -s " '"'"'" "-"' -f 'tr -d "!,?"' -p ':' -M 'mkdir -vp -- "$(dirname -- "$2")" && mv -vi -- "$1" "$2"' -d 'rm -vi --' "$@"
+}
 
 # graphical mv
-alias xmv='nnn -p - | imv'
+xmv() {
+  nnn -p - | imv "$@"
+}
 
 # ffmpeg
 # Reference: https://trac.ffmpeg.org/wiki/Encode/H.265

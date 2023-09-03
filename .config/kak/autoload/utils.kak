@@ -196,6 +196,11 @@ define-command open_current_buffer_with_gitui %{
 }
 alias global gitui open_current_buffer_with_gitui
 
+define-command open_new_shell %{
+  terminal %val{client_env_SHELL}
+}
+alias global sh open_new_shell
+
 define-command mkdir %{
   evaluate-commands %sh{
     mkdir -p -- "$(dirname -- "$kak_buffile")" ||

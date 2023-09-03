@@ -49,6 +49,7 @@ map -docstring 'set mark' global unimpaired_right m ':set_mark_on_next_key<ret>'
 
 map global normal <c-e> ':nnn<ret>'
 map global normal <c-l> ':gitui<ret>'
+map global normal <c-space> ':sh<ret>'
 map global normal <c-j> ':copy_selected_lines_down<ret>'
 map global normal <c-k> ':copy_selected_lines_up<ret>'
 map global normal ` ':enter_letter_case_mode<ret>'

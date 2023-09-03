@@ -10,7 +10,7 @@ define-command hide_line_numbers %{
 }
 
 define-command disable_readonly_mode %{
-  set-option global readonly yes
+  set-option global readonly no
 }
 
 define-command remove_whitespace_rendering %{

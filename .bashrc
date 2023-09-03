@@ -11,17 +11,8 @@
 
 # Prompt -----------------------------------------------------------------------
 
-export PS1='\[\e[32m\]\u@\h\[\e[36m\](\l)\[\e[0m\] \[\e[34m\]\w\[\e[0m\]\n\[\e[90m\]>>>\[\e[0m\] '
-export PROMPT_COMMAND=_prompt_command
-
-_prompt_command() {
-  if [ $? = 0 ]
-  then
-    printf '\e]7;file://%s%s\e\\\e]133;A\e\\' "$HOSTNAME" "$PWD"
-  else
-    printf '\e]7;file://%s%s\e\\\e]133;A\e\\\e[31mERROR\e[0m: command exited with %d\n' "$HOSTNAME" "$PWD" "$?"
-  fi
-}
+export PS1='\[\e[32m\]\u@\h\[\e[36m\](\l)\[\e[0m\] \[\e[34m\]\w\[\e[0m\] \[\e[34m\][$?]\[\e[0m\]\n\[\e[90m\]>>>\[\e[0m\] '
+export PROMPT_COMMAND='printf "\\e]7;file://%s%s\\e\\\\\\e]133;A\\e\\\\" "$HOSTNAME" "$PWD"'
 
 # Starship
 # https://starship.rs

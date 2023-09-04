@@ -64,6 +64,10 @@ define-command grow_viewport_right_with_tmux %{
   tmux resize-pane -R 5
 }
 
+define-command toggle_fullscreen_with_tmux %{
+  tmux resize-pane -Z
+}
+
 define-command split_view_down_with_tmux -params .. %{
   tmux split-window -v kak -c %val{session} -e "%arg{@}"
 }
@@ -160,6 +164,8 @@ map -docstring 'shrink viewport right' global tmux <c-h> ':shrink_viewport_right
 map -docstring 'grow viewport down' global tmux <c-j> ':grow_viewport_down_with_tmux<ret>'
 map -docstring 'shrink viewport down' global tmux <c-k> ':shrink_viewport_down_with_tmux<ret>'
 map -docstring 'grow viewport right' global tmux <c-l> ':grow_viewport_right_with_tmux<ret>'
+
+map -docstring 'toggle fullscreen' global tmux f ':toggle_fullscreen_with_tmux<ret>'
 
 map -docstring 'split view down' global tmux o ':split_view_down_with_tmux<ret>'
 map -docstring 'split view right' global tmux O ':split_view_right_with_tmux<ret>'

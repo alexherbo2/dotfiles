@@ -135,6 +135,7 @@ pw --length=10 lichess.org taupiqueur
 pw --length=10 paragon-software.com taupiqueur.kanto@gmail.com
 pw --length=10 paypal.com taupiqueur.kanto@gmail.com
 pw --length=10 libera.chat taupiqueur
+pw --length=10 amazon.com taupiqueur.kanto@gmail.com
 kak ~/docs/todo.txt
 cat ~/docs/todo.txt
 kak ~/docs/notes.txt

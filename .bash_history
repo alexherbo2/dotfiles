@@ -4,6 +4,7 @@ alacritty --config-file=/dev/null -o window.opacity=0.9
 alacritty msg config window.opacity=0.9
 kak -s megumin -e 'rename-client chomusuke'
 kak -c megumin
+git clone https://github.com/fish-shell/fish-shell.git ~/.local/share/github.com/fish-shell/fish-shell
 git clone https://github.com/possatti/pokemonsay.git ~/.local/share/github.com/possatti/pokemonsay
 git clone https://github.com/watzon/arg_parser.git ~/.local/share/github.com/watzon/arg_parser
 git clone https://github.com/kak-lsp/kak-lsp.git ~/.local/share/github.com/kak-lsp/kak-lsp

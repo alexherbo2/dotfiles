@@ -8,9 +8,13 @@ define-command erase_characters_before_cursor_to_line_begin %{
 map global insert <c-u> '<a-;>:erase_characters_before_cursor_to_line_begin<ret>'
 
 define-command erase_word_before_cursor %{
-  try %{
-    execute-keys -draft 'h<a-K>\n<ret>Bd'
-    execute-keys '<a-;><a-:><a-;><a-;>'
+  evaluate-commands -draft -itersel -verbatim -- try %{
+    execute-keys ';<a-K>^.\z<ret>h'
+    try %{
+      execute-keys -draft '<a-k>^.\z<ret>d'
+    } catch %{
+      execute-keys -draft 'Bd'
+    }
   }
 }
 

@@ -20,13 +20,6 @@ define-command decrease_indent_or_erase_character_before_cursor %{
   }
 }
 
-define-command erase_characters_before_cursor_to_line_begin %{
-  try %{
-    execute-keys -draft '<a-h><a-K>^.\z<ret><a-:>Hd'
-    execute-keys '<a-;><a-:><a-;><a-;>'
-  }
-}
-
 define-command indent_on_inserted_character_with_indentation_rules %{
   indent_on_inserted_character_with_args %opt{increase_indent_pattern} %opt{decrease_indent_pattern} %opt{ignore_indent_pattern}
 }

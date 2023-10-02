@@ -43,6 +43,10 @@ add-highlighter global/characters regex '[–—−×]' '0:cyan+f'
 map global normal N <a-n>
 map global normal X x
 map global normal <ret> :
+map global normal w '<a-i>w'
+map global normal W '<a-i><a-w>'
+map global normal <a-w> '<a-a>w'
+map global normal <a-W> '<a-a><a-w>'
 
 map -docstring 'jump to mark' global unimpaired_left m ':jump_to_mark_on_next_key<ret>'
 map -docstring 'set mark' global unimpaired_right m ':set_mark_on_next_key<ret>'

@@ -1,3 +1,5 @@
+set-face global StatusLineInactive StatusLine
+
 hook global FocusIn .* %{
   unset-face window PrimarySelection
   unset-face window SecondarySelection

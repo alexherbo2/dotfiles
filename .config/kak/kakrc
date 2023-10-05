@@ -2,7 +2,7 @@
 # https://kakoune.org
 # https://github.com/mawww/kakoune
 
-colorscheme macos_light
+colorscheme "%val{config}/colors/macos_light.kak"
 
 # Preamble ---------------------------------------------------------------------
 

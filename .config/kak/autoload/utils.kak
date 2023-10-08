@@ -127,6 +127,19 @@ define-command select_whole_lines_or_extend_lines_down %{
   }
 }
 
+define-command select_whole_words_or_next_words %{
+  execute-keys '<a-:>'
+  try %{
+    execute-keys -draft '<a-k>\W\z<ret>'
+    execute-keys '/\w<ret><a-i>w'
+  } catch %{
+    execute-keys -draft '<a-K>\A\b.+\b\z<ret>'
+    execute-keys '<a-i>w'
+  } catch %{
+    execute-keys '/\w<ret><a-i>w'
+  }
+}
+
 define-command sort_selections %{
   evaluate-commands -save-regs '"' %sh{
     printf 'echo -to-file %s -- "%%val{selections}"' "$kak_quoted_response_fifo" > "$kak_command_fifo"

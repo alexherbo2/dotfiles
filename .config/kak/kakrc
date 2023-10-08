@@ -73,6 +73,7 @@ map global normal <c-x> ':decrement_selected_numbers %val{count}<ret>'
 map global normal <c-n> ':iterate_next_selection<ret>'
 map global normal <c-p> ':iterate_previous_selection<ret>'
 map global normal '#' ':toggle_comments_with_config<ret>'
+map global normal w ':select_whole_words_or_next_words<ret>'
 map global normal x ':select_whole_lines_or_extend_lines_down<ret>'
 
 # Match mode -------------------------------------------------------------------

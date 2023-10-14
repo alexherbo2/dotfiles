@@ -128,15 +128,14 @@ define-command select_whole_lines_or_extend_lines_down %{
 }
 
 define-command select_whole_words_or_next_words %{
-  execute-keys '<a-:>'
   try %{
-    execute-keys -draft '<a-k>\W\z<ret>'
-    execute-keys '/\w<ret><a-i>w'
+    execute-keys -draft ';<a-k>\W<ret>'
+    execute-keys ';/\w<ret><a-i>w'
   } catch %{
-    execute-keys -draft '<a-K>\A\b.+\b\z<ret>'
+    execute-keys -draft '<a-k>\A\B|\B\z<ret>'
     execute-keys '<a-i>w'
   } catch %{
-    execute-keys '/\w<ret><a-i>w'
+    execute-keys ';/\w<ret><a-i>w'
   }
 }
 

@@ -129,7 +129,7 @@ define-command select_whole_lines_or_extend_lines_down %{
 
 define-command select_whole_words_or_next_words %{
   try %{
-    execute-keys -draft ';<a-K>\W<ret>'
+    execute-keys -draft ';<a-k>\W<ret>'
   } catch %{
     execute-keys -draft '<a-k>\A\B|\B\z<ret>'
     execute-keys '<a-i>w'

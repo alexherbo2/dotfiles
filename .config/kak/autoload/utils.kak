@@ -129,10 +129,42 @@ define-command select_whole_lines_or_extend_lines_down %{
 
 define-command select_whole_words_or_next_words %{
   try %{
-    execute-keys -draft -itersel ';<a-k>\W<ret>'
+    evaluate-commands -draft %{
+      execute-keys ';'
+      evaluate-commands -itersel %{
+        try %{
+          execute-keys '<a-k>\W<ret>'
+        } catch %{
+          fail
+        }
+      }
+    }
+    execute-keys ';/\w<ret><a-i>w'
+  } catch %{
+    evaluate-commands -draft %{
+      execute-keys ';'
+      evaluate-commands -itersel %{
+        try %{
+          execute-keys '<a-k>\w<ret>'
+        } catch %{
+          fail
+        }
+      }
+    }
     execute-keys -draft '<a-k>\A\B|\B\z<ret>'
     execute-keys '<a-i>w'
   } catch %{
+    evaluate-commands -draft %{
+      execute-keys ';'
+      evaluate-commands -itersel %{
+        try %{
+          execute-keys '<a-k>\w<ret>'
+        } catch %{
+          fail
+        }
+      }
+    }
+    execute-keys -draft '<a-k>\A\b|\b\z<ret>'
     execute-keys ';/\w<ret><a-i>w'
   }
 }

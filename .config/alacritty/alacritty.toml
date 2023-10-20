@@ -23,12 +23,12 @@ args = ['-e', 'beep']
 
 # macOS
 [[keyboard.bindings]]
-key = 'N'
+key = 'n'
 mods = 'Command'
 action = 'CreateNewWindow'
 
 [[keyboard.bindings]]
-key = 'P'
+key = 'p'
 mods = 'Command'
 action = 'SpawnNewInstance'
 
@@ -44,12 +44,12 @@ action = 'SelectNextTab'
 
 # Linux
 [[keyboard.bindings]]
-key = 'N'
+key = 'n'
 mods = 'Control|Shift'
 action = 'CreateNewWindow'
 
 [[keyboard.bindings]]
-key = 'P'
+key = 'p'
 mods = 'Control|Shift'
 action = 'SpawnNewInstance'
 

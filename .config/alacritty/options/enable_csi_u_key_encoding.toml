@@ -1,6 +1,6 @@
 # Enable CSI u key encoding.
 [[keyboard.bindings]]
-key = 'Return'
+key = 'Enter'
 mods = 'Shift'
 chars = "\u001b[13;2u"
 
@@ -10,7 +10,7 @@ mods = 'Control'
 chars = "\u001b[9;5u"
 
 [[keyboard.bindings]]
-key = 'Return'
+key = 'Enter'
 mods = 'Control'
 chars = "\u001b[13;5u"
 

@@ -1,4 +1,5 @@
 git clone https://github.com/ajeetdsouza/zoxide.git ~/.local/share/github.com/ajeetdsouza/zoxide
+git clone https://github.com/jdx/rtx.git ~/.local/share/github.com/jdx/rtx
 foot --config=/dev/null -o colors.alpha=0.9
 alacritty --config-file=/dev/null -o window.opacity=0.9
 alacritty msg config window.opacity=0.9

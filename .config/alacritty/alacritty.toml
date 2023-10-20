@@ -3,7 +3,6 @@
 
 import = [
   '~/.config/alacritty/options/enable_csi_u_key_encoding.toml',
-  '~/.config/alacritty/options/use_option_as_meta_key.toml',
   '~/.config/alacritty/colors/macos_light.toml'
 ]
 
@@ -14,20 +13,39 @@ font.normal.family = 'JetBrains Mono'
 
 selection.save_to_clipboard = true
 
+window.option_as_alt = 'Both'
+
 [bell.command]
 program = 'osascript'
 args = ['-e', 'beep']
 
 # Key bindings -----------------------------------------------------------------
 
-[[keyboard.bindings]]
-key = 'N'
-mods = 'Control|Shift'
-action = 'CreateNewWindow'
-
+# macOS
 [[keyboard.bindings]]
 key = 'N'
 mods = 'Command'
+action = 'CreateNewWindow'
+
+[[keyboard.bindings]]
+key = 'P'
+mods = 'Command'
+action = 'SpawnNewInstance'
+
+[[keyboard.bindings]]
+key = '['
+mods = 'Command'
+action = 'SelectPreviousTab'
+
+[[keyboard.bindings]]
+key = ']'
+mods = 'Command'
+action = 'SelectNextTab'
+
+# Linux
+[[keyboard.bindings]]
+key = 'N'
+mods = 'Control|Shift'
 action = 'CreateNewWindow'
 
 [[keyboard.bindings]]
@@ -36,6 +54,11 @@ mods = 'Control|Shift'
 action = 'SpawnNewInstance'
 
 [[keyboard.bindings]]
-key = 'P'
-mods = 'Command'
-action = 'SpawnNewInstance'
+key = 'PageUp'
+mods = 'Control'
+action = 'SelectPreviousTab'
+
+[[keyboard.bindings]]
+key = 'PageDown'
+mods = 'Control'
+action = 'SelectNextTab'

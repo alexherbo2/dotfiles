@@ -10,13 +10,6 @@ set-face global GitNewFile 'green'
 set-face global GitDeletedFile 'red'
 set-face global GitRenamedFile 'yellow'
 
-# Generics
-set-face global DiffText 'comment'
-set-face global DiffHeader 'comment'
-set-face global DiffInserted 'green'
-set-face global DiffDeleted 'red'
-set-face global DiffChanged 'yellow'
-
 # Commands ─────────────────────────────────────────────────────────────────────
 
 # Provides basic Git integration for Kakoune.
@@ -29,15 +22,6 @@ set-face global DiffChanged 'yellow'
 # - `GitNewFile`
 # - `GitDeletedFile`
 # - `GitRenamedFile`
-
-# === Generics
-
-# - `DiffText`
-# - `DiffHeader`
-# - `DiffInserted`
-# - `DiffDeleted`
-# - `DiffChanged`
-# Aliases ──────────────────────────────────────────────────────────────────────
 
 # Highlighters ─────────────────────────────────────────────────────────────────
 
@@ -69,19 +53,7 @@ add-highlighter shared/git/commit/comments/scissors regex '# -------------------
 # Diffs
 add-highlighter shared/git/commit/diffs region '^diff --git' '^(?=diff --git)' group
 add-highlighter shared/git/commit/diffs/information regex '^\w.+$' 0:GitInformation
-add-highlighter shared/git/commit/diffs/regions ref git/diff
-
-# Diff ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-# https://git-scm.com/docs/git-diff
-# https://en.wikipedia.org/wiki/Diff#Unified_format
-add-highlighter shared/git/diff regions
-add-highlighter shared/git/diff/original_files region '^---' '$' fill DiffHeader
-add-highlighter shared/git/diff/new_files region '^\Q+++' '$' fill DiffHeader
-add-highlighter shared/git/diff/range_information region '^@@' '$' fill DiffHeader
-add-highlighter shared/git/diff/line_additions region '^\+' '$' fill DiffInserted
-add-highlighter shared/git/diff/line_deletions region '^-' '$' fill DiffDeleted
-add-highlighter shared/git/diff/contextual_lines region '^\h' '$' fill DiffText
+add-highlighter shared/git/commit/diffs/regions ref diff
 
 # Rebase ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 

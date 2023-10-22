@@ -12,7 +12,7 @@ define-command enter_tmux_mode %{
 
 define-command tmux -params 1.. %{
   nop %sh{
-    TMUX=$kak_client_env_TMUX TMUX_PANE=$kak_client_env_TMUX_PANE nohup tmux set-environment -F TMUX_SESSION '#{session_id}' ';' set-environment kak_session "$kak_session" ';' set-environment kak_client "$kak_client" ';' "$@" < /dev/null > /dev/null 2>&1 &
+    TMUX=$kak_client_env_TMUX TMUX_PANE=$kak_client_env_TMUX_PANE nohup tmux set-environment kak_session "$kak_session" ';' set-environment kak_client "$kak_client" ';' "$@" < /dev/null > /dev/null 2>&1 &
   }
 }
 
@@ -143,7 +143,9 @@ define-command choose_pane_with_tmux -params .. %{
 }
 
 define-command choose_window_with_tmux -params .. %{
-  tmux choose-tree -Zw -f '#{==:#{TMUX_SESSION},#{session_id}}' %arg{@}
+  tmux run-shell %exp{
+    tmux choose-tree -Zw -f '##{==:##{session_name},#{session_name}}' %arg{@}
+  }
 }
 
 complete-command split_view_down_with_tmux command

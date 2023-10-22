@@ -3,9 +3,14 @@ add-highlighter shared/javascript regions
 add-highlighter shared/javascript/code default-region group
 
 # Comments
+# https://jsdoc.app
+# WIP
 add-highlighter shared/javascript.comment regions
 add-highlighter shared/javascript.comment/comment default-region group
 add-highlighter shared/javascript.comment/comment/ fill comment
+add-highlighter shared/javascript.comment/comment/ regex '\B`[#.]?\w+[?!]?`\B|\B(?<!\*)\*\w+[?!]?\*(?!\*)\B' 0:meta
+add-highlighter shared/javascript.comment/comment/ regex '\B(@param)\h+(\{[^}]+\})\h+(\[[^\]]+\]\B|\S+\b)' 1:keyword 2:type 3:variable
+add-highlighter shared/javascript.comment/comment/ regex '\B(?:@\w+)\b' 0:keyword
 
 # Escape sequences
 add-highlighter shared/javascript.escape_sequence regions

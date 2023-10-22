@@ -144,7 +144,7 @@ define-command choose_pane_with_tmux -params .. %{
 
 define-command choose_window_with_tmux -params .. %{
   tmux run-shell %exp{
-    tmux choose-tree -Zw -f '##{==:##{session_name},#{session_name}}' %arg{@}
+    tmux choose-tree -Zw -f '##{==:##{session_name},#{session_name}}' "%arg{@}"
   }
 }
 

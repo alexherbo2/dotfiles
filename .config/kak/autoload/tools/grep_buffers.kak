@@ -9,6 +9,7 @@ define-command grep_buffers -params 1 %{
       execute-keys -buffer "%arg{1}.refs" 'ge"apH"bp<a-j>'
     }
   }
+  execute-keys 'd'
 }
 
 define-command open_buffer_search_prompt %{

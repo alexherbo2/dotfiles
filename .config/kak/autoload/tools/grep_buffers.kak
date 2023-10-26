@@ -10,7 +10,7 @@ define-command grep_buffers -params 1 %{
       execute-keys -buffer "%arg{1}_tmp.refs" 'ge"apH"bp<a-j>'
     }
   }
-  execute-keys 'd%y:delete-buffer<ret>R'
+  execute-keys 'd%y:delete-buffer<ret>Rgg'
 }
 
 define-command open_buffer_search_prompt %{

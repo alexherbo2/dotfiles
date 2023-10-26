@@ -16,12 +16,6 @@ define-command open_global_search_prompt %{
   }
 }
 
-define-command open_buffer_search_prompt %{
-  prompt buffer_search: -shell-script-candidates %opt{grep_word_completion} %{
-    grep %val{text} %val{buflist}
-  }
-}
-
 complete-command grep file
 
 add-highlighter shared/grep regex '^(.+?)(:)(\d+)(:)(\d+)(:)(.+?)$' 1:string 2:operator 3:value 4:operator 5:value 6:operator

@@ -1,6 +1,7 @@
 define-command grep_buffers -params 1 %{
   set-register / %arg{1}
-  edit! -scratch -debug -- "%arg{1}.refs"
+  edit! -scratch -- "%arg{1}.refs"
+  edit! -scratch -debug -- "%arg{1}_tmp.refs"
   evaluate-commands -no-hooks -buffer '*' -verbatim -- try %{
     execute-keys '%s<ret><a-;>'
     evaluate-commands -itersel -save-regs 'ab' %{
@@ -9,7 +10,7 @@ define-command grep_buffers -params 1 %{
       execute-keys -buffer "%arg{1}.refs" 'ge"apH"bp<a-j>'
     }
   }
-  execute-keys 'd'
+  execute-keys 'd%y:delete-buffer<ret>R'
 }
 
 define-command open_buffer_search_prompt %{

@@ -15,7 +15,8 @@ complete-command find file
 
 add-highlighter shared/find regex '^(.+?)$' 0:value
 
-hook global BufOpenFifo '.+\.flist' %{
+# BufOpenFifo
+hook global BufCreate '.+\.flist' %{
   set-option buffer filetype find
 }
 

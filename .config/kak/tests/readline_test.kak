@@ -27,11 +27,11 @@ define-command test_readline_erase_characters_before_cursor_to_line_begin %{
 define-command test_readline_erase_word_before_cursor %{
 
   buffer_str! '*input*' %[
-    Star Platinum Magician's Red Hermit Purple Hierophant Green Silver Chariot The Fool
+    [Star] Platinum Magician's [Red] Hermit Purple Hierophant Green Silver Chariot The [Fool]
   ]
 
   buffer_str! '*output*' %[
-    Star Platinum Magician's Red Hermit Purple Hierophant Green Silver Chariot The Fool
+  [Star] Platinum Magician'[Red] Hermit Purple Hierophant Green Silver Chariot [Fool]
   ]
 
   buffer '*input*'

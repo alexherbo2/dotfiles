@@ -82,7 +82,7 @@ define-command assert_buffer_eq -params 2 %{
 complete-command assert_buffer_eq buffer
 
 define-command assert_buffer_eq_and_clean_them -params 2 %{
-  assert_buffer_eq %arg{1} %arg{1}
+  assert_buffer_eq %arg{1} %arg{2}
   evaluate-commands -buffer "%arg{1},%arg{2}" delete-buffer
 }
 

@@ -20,7 +20,7 @@ define-command test_readline_erase_characters_before_cursor_to_line_begin %{
   ]
 
   buffer '*input*'
-  execute-keys 'i<a-;>:erase_characters_before_cursor_to_line_begin<ret>'
+  execute-keys 'i<a-;>:erase_characters_before_cursor_to_line_begin<ret><esc><a-:>'
   assert_buffer_eq! '*input*' '*output*'
 }
 
@@ -35,6 +35,6 @@ define-command test_readline_erase_word_before_cursor %{
   ]
 
   buffer '*input*'
-  execute-keys 'i<a-;>:erase_word_before_cursor<ret>'
+  execute-keys 'i<a-;>:erase_word_before_cursor<ret><esc><a-:>'
   assert_buffer_eq! '*input*' '*output*'
 }

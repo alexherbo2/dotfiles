@@ -1,4 +1,3 @@
-# https://crystal-lang.org/reference/master/syntax_and_semantics/enum.html
 define-command test_readline_erase_characters_before_cursor_to_line_begin %{
 
   buffer_str! '*input*' %[
@@ -42,12 +41,12 @@ define-command test_readline_i_erase_word_before_cursor %{
 define-command test_readline_a_erase_word_before_cursor %{
 
   buffer_str! '*input*' %[
-    [Star] Platinum Magician's [Red] Hermit Purple Hierophant Green Silver Chariot The [Fool]
+    [Star] Platinum Magician's [Red] Hermit Purple [Hierophant Green] Silver Chariot The [Fool]
 
   ]
 
   buffer_str! '*output*' %[
-    [ ]Platinum Magician's [ ]Hermit Purple Hierophant Green Silver Chariot The [
+    [ ]Platinum Magician's [ ]Hermit Purple [Hierophant  ]Silver Chariot The [
   ]
   ]
 

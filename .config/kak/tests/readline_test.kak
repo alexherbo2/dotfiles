@@ -51,6 +51,6 @@ define-command test_readline_a_erase_word_before_cursor %{
   ]
 
   buffer '*input*'
-  execute-keys 'a<a-;>:erase_word_before_cursor<ret><esc><a-:>'
+  execute-keys 'a<a-;>:erase_word_before_cursor<ret>'
   assert_buffer_eq! '*input*' '*output*'
 }

@@ -46,11 +46,11 @@ define-command test_readline_a_erase_word_before_cursor %{
   ]
 
   buffer_str! '*output*' %[
-    [ ]Platinum Magician's [ ]Hermit Purple [Hierophant  ]Silver Chariot The [
+    [ ]Platinum Magician's [ ]Hermit Purple [Hierophant ] Silver Chariot The [
   ]
   ]
 
   buffer '*input*'
-  execute-keys 'a<a-;>:erase_word_before_cursor<ret>'
+  execute-keys 'a<a-;>:erase_word_before_cursor<ret><esc><a-:>'
   assert_buffer_eq! '*input*' '*output*'
 }

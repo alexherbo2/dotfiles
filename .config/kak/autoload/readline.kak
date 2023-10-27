@@ -6,7 +6,7 @@ define-command erase_characters_before_cursor_to_line_begin %{
     } catch %{
       execute-keys '<a-k>^\h+.\z<ret><a-:>Hd'
     } catch %{
-      execute-keys '<a-k>^\h+\H<ret>WH<a-:>Hd'
+      execute-keys '<a-k>^\h+\H<ret>WL<a-:>Hd'
     } catch %{
       execute-keys '<a-:>Hd'
     } catch %{}

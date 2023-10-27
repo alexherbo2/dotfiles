@@ -1,8 +1,17 @@
 define-command erase_characters_before_cursor_to_line_begin %{
-  try %{
-    execute-keys -draft '<a-h><a-K>^.\z<ret><a-:>Hd'
-    execute-keys '<a-;><a-:><a-;><a-;>'
+  evaluate-commands -draft %{
+    execute-keys '<a-h>'
+    evaluate-commands -draft -itersel -verbatim -- try %{
+      execute-keys '<a-k>^.\z<ret>'
+    } catch %{
+      execute-keys '<a-k>^\h+.\z<ret><a-:>Hd'
+    } catch %{
+      execute-keys '<a-k>^\h+\H<ret>WH<a-:>Hd'
+    } catch %{
+      execute-keys '<a-:>Hd'
+    } catch %{}
   }
+  execute-keys '<a-;><a-:><a-;><a-;>'
 }
 
 map global insert <c-u> '<a-;>:erase_characters_before_cursor_to_line_begin<ret>'

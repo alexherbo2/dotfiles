@@ -7,7 +7,7 @@ define-command test_readline_erase_characters_before_cursor_to_line_begin %{
     Hermit [Purple]
     Hierophant Green
     Silver Chariot
-    The Fool
+  [The] Fool
   ]
 
   buffer_str! '*output*' %[
@@ -16,7 +16,7 @@ define-command test_readline_erase_characters_before_cursor_to_line_begin %{
     [Purple]
     Hierophant Green
     Silver Chariot
-    The Fool
+  [The] Fool
   ]
 
   buffer '*input*'
@@ -24,7 +24,7 @@ define-command test_readline_erase_characters_before_cursor_to_line_begin %{
   assert_buffer_eq! '*input*' '*output*'
 }
 
-define-command test_readline_erase_word_before_cursor %{
+define-command test_readline_i_erase_word_before_cursor %{
 
   buffer_str! '*input*' %[
     [Star] Platinum Magician's [Red] Hermit Purple Hierophant Green Silver Chariot The [Fool]
@@ -36,5 +36,22 @@ define-command test_readline_erase_word_before_cursor %{
 
   buffer '*input*'
   execute-keys 'i<a-;>:erase_word_before_cursor<ret><esc><a-:>'
+  assert_buffer_eq! '*input*' '*output*'
+}
+
+define-command test_readline_a_erase_word_before_cursor %{
+
+  buffer_str! '*input*' %[
+    [Star] Platinum Magician's [Red] Hermit Purple Hierophant Green Silver Chariot The [Fool]
+
+  ]
+
+  buffer_str! '*output*' %[
+    [ ]Platinum Magician's [ ]Hermit Purple Hierophant Green Silver Chariot The [
+  ]
+  ]
+
+  buffer '*input*'
+  execute-keys 'a<a-;>:erase_word_before_cursor<ret><esc><a-:>'
   assert_buffer_eq! '*input*' '*output*'
 }

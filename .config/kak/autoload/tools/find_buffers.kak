@@ -1,6 +1,6 @@
 define-command find_buffers -params 1 %{
-  edit! -scratch -- "%arg{1}.refs"
-  evaluate-commands -save-regs '"/' %sh{
+  edit! -scratch -- "%arg{1}.flist"
+  evaluate-commands -save-regs '"/' %{
     set-register dquote %val{buflist}
     execute-keys '<a-R>a<ret><esc>'
     try %{

@@ -2,12 +2,12 @@ declare-option str find_command find
 declare-option str-list find_args -type f
 
 define-command find -params .. %{
-  create_buffer_from_command_output "%arg{1}.flist" %opt{find_command} %opt{find_args} %arg{@}
+  create_buffer_from_command_output "%arg{1}.flist" %opt{find_command} %opt{find_args} -- %arg{@}
 }
 
 define-command open_file_finder %{
   prompt find_file: -file-completion %{
-    find -- %val{text}
+    find %val{text}
   }
 }
 

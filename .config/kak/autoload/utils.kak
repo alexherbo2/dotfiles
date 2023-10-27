@@ -10,7 +10,7 @@ define-command map_inserted_characters -params 3 %{
   }
   hook global InsertChar "\Q%arg{1}\E" %exp{
     hook -once window InsertChar .* "
-      trigger-user-hook 'InsertChars=%arg{1}%arg{2}'
+      trigger-user-hook 'InsertChars=%arg{1}%%val{hook_param}'
     "
   }
 }

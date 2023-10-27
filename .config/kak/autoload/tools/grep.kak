@@ -7,12 +7,12 @@ declare-option str grep_word_completion %{
 
 define-command grep -params .. %{
   set-register / %arg{1}
-  create_buffer_from_command_output "%arg{1}.refs" %opt{grep_command} %opt{grep_args} -- %arg{@}
+  create_buffer_from_command_output "%arg{1}.refs" %opt{grep_command} %opt{grep_args} %arg{@}
 }
 
 define-command open_global_search_prompt %{
   prompt global_search: -shell-script-candidates %opt{grep_word_completion} %{
-    grep %val{text}
+    grep -- %val{text}
   }
 }
 

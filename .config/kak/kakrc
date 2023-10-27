@@ -51,6 +51,7 @@ map global normal <ret> :
 map -docstring 'jump to mark' global unimpaired_left m ':jump_to_mark_on_next_key<ret>'
 map -docstring 'set mark' global unimpaired_right m ':set_mark_on_next_key<ret>'
 
+map global normal V 'vtvm'
 map global normal <c-e> ':nnn<ret>'
 map global normal <c-l> ':gitui<ret>'
 map global normal <c-space> ':sh<ret>'

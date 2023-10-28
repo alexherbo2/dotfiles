@@ -20,7 +20,7 @@ define-command open_terminal_with_args -params 1.. %{
 }
 
 define-command yank_selected_text_to_terminal_clipboard %{
-  execute-keys 'y:edit -scratch<ret><a-R>a<ret><esc><a-_><a-|>{ printf ''\033]52;c;''; base64; printf ''\a''; } <gt> /dev/tty<ret>:delete-buffer<ret>'
+  execute-keys 'y:edit -scratch<ret><a-R>a<ret><esc><a-_><a-|>{ printf ''\033]52;c;''; base64; printf ''\a''; } | tee "/proc/$kak_client_pid/fd/0" <gt> /dev/tty<ret>:delete-buffer<ret>'
 }
 
 alias global terminal open_terminal

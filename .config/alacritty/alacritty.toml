@@ -54,6 +54,16 @@ mods = 'Control|Shift'
 action = 'SpawnNewInstance'
 
 [[keyboard.bindings]]
+key = 'Tab'
+mods = 'Control|Shift'
+action = 'SelectPreviousTab'
+
+[[keyboard.bindings]]
+key = 'Tab'
+mods = 'Control'
+action = 'SelectNextTab'
+
+[[keyboard.bindings]]
 key = 'PageUp'
 mods = 'Control'
 action = 'SelectPreviousTab'

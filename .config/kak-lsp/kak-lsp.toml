@@ -6,6 +6,7 @@
 # https://docs.helix-editor.com/languages.html
 # https://github.com/helix-editor/helix/blob/master/languages.toml
 # https://microsoft.github.io/language-server-protocol/implementors/servers/
+# https://microsoft.github.io/language-server-protocol/specifications/specification-current/
 
 # Global settings --------------------------------------------------------------
 
@@ -18,27 +19,37 @@ verbosity = 2
 
 timeout = 1800 # seconds (30 minutes)
 
+# Language identifiers ---------------------------------------------------------
+
+[language_ids]
+
+# Reference
+# https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocumentItem
+
+bash = 'shellscript'
+sh = 'shellscript'
+
 # Language servers -------------------------------------------------------------
 
-[language]
+[language_server]
 
 # Reference
 # https://microsoft.github.io/language-server-protocol/implementors/servers/
 
-bash = { filetypes = ['sh'], roots = ['.git'], command = 'bash-language-server', args = ['start'] }
-crystal = { filetypes = ['crystal'], roots = ['shard.yml'], command = 'crystalline', args = ['--stdio'] }
-javascript = { filetypes = ['javascript'], roots = ['.git'], command = 'typescript-language-server', args = ['--stdio'] }
-typescript = { filetypes = ['typescript'], roots = ['.git'], command = 'typescript-language-server', args = ['--stdio'] }
-kotlin = { filetypes = ['kotlin'], roots = ['.git'], command = 'kotlin-language-server' }
-ruby = { filetypes = ['ruby'], roots = ['Gemfile'], command = 'solargraph', args = ['stdio'] }
-rust = { filetypes = ['rust'], roots = ['Cargo.toml'], command = 'rust-analyzer' }
-toml = { filetypes = ['toml'], roots = ['.git'], command = 'taplo', args = ['lsp', 'stdio'] }
-yaml = { filetypes = ['yaml'], roots = ['.git'], command = 'yaml-language-server', args = ['--stdio'] }
-json = { filetypes = ['json'], roots = ['.git'], command = 'vscode-json-languageserver' }
-html = { filetypes = ['html'], roots = ['.git'], command = 'vscode-html-languageserver' }
-css = { filetypes = ['css'], roots = ['.git'], command = 'vscode-css-languageserver' }
-lua = { filetypes = ['lua'], roots = ['.git'], command = 'lua-language-server' }
-markdown = { filetypes = ['markdown'], roots = ['.git'], command = 'marksman', args = ['server'] }
+bash_language_server = { filetypes = ['sh'], roots = ['.git'], command = 'bash-language-server', args = ['start'] }
+crystalline = { filetypes = ['crystal'], roots = ['shard.yml'], command = 'crystalline', args = ['--stdio'] }
+typescript_language_server = { filetypes = ['javascript'], roots = ['.git'], command = 'typescript-language-server', args = ['--stdio'] }
+typescript_language_server = { filetypes = ['typescript'], roots = ['.git'], command = 'typescript-language-server', args = ['--stdio'] }
+kotlin_language_server = { filetypes = ['kotlin'], roots = ['.git'], command = 'kotlin-language-server' }
+solargraph = { filetypes = ['ruby'], roots = ['Gemfile'], command = 'solargraph', args = ['stdio'] }
+rust_analyzer = { filetypes = ['rust'], roots = ['Cargo.toml'], command = 'rust-analyzer' }
+taplo = { filetypes = ['toml'], roots = ['.git'], command = 'taplo', args = ['lsp', 'stdio'] }
+yaml_language_server = { filetypes = ['yaml'], roots = ['.git'], command = 'yaml-language-server', args = ['--stdio'] }
+vscode_json_languageserver = { filetypes = ['json'], roots = ['.git'], command = 'vscode-json-languageserver' }
+vscode_html_languageserver = { filetypes = ['html'], roots = ['.git'], command = 'vscode-html-languageserver' }
+vscode_css_languageserver = { filetypes = ['css'], roots = ['.git'], command = 'vscode-css-languageserver' }
+lua_language_server = { filetypes = ['lua'], roots = ['.git'], command = 'lua-language-server' }
+marksman = { filetypes = ['markdown'], roots = ['.git'], command = 'marksman', args = ['server'] }
 
 # Semantic tokens --------------------------------------------------------------
 

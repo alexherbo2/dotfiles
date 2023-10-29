@@ -132,12 +132,12 @@ hook global InsertCompletionShow .* %{
 
 # User hooks -------------------------------------------------------------------
 
-hook global User 'InsertChars=kj' %{
+hook global User 'InsertChars=.*kj' %{
   execute-keys -draft 'hHd'
   execute-keys <esc>
 }
 
-hook global InsertChar .* add_insert_chars_user_hook
+add_insert_chars_user_hook
 
 # Language support -------------------------------------------------------------
 

@@ -1,7 +1,7 @@
 declare-option str inserted_characters
 
-define-command add_insert_chars_user_hook %{
-  hook global ModeChange 'push:normal:insert' %{
+define-command add_insert_chars_user_hook -params 1 %{
+  hook %arg{1} ModeChange 'push:normal:insert' %{
     hook -group InsertChars -always window InsertChar .* %{
       set-option -add window inserted_characters %val{hook_param}
       trigger-user-hook "InsertChars=%opt{inserted_characters}"

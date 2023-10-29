@@ -40,9 +40,9 @@ syntax shared/crystal/code/ regex '\B(?<!:):\w+[?!]?' 0:string
 # Documenting code
 # https://crystal-lang.org/reference/master/syntax_and_semantics/comments.html
 # https://crystal-lang.org/reference/master/syntax_and_semantics/documenting_code.html
-syntax shared/crystal/comment region '#(?!\{)' '$' group
-syntax shared/crystal/comment/ fill comment
-syntax shared/crystal/comment/ regex '\B`[#.]?\w+[?!]?`\B|\B(?<!\*)\*\w+[?!]?\*(?!\*)\B|\b(?:BUG|DEPRECATED|EXPERIMENTAL|FIXME|NOTE|OPTIMIZE|TODO|WARNING)\b|\B:(?:ditto|nodoc|inherit):$' 0:meta
+syntax shared/crystal/line_comment region '#(?!\{)' '$' group
+syntax shared/crystal/line_comment/ fill comment
+syntax shared/crystal/line_comment/ regex '\B`[#.]?\w+[?!]?`\B|\B(?<!\*)\*\w+[?!]?\*(?!\*)\B|\b(?:BUG|DEPRECATED|EXPERIMENTAL|FIXME|NOTE|OPTIMIZE|TODO|WARNING)\b|\B:(?:ditto|nodoc|inherit):$' 0:meta
 
 # Escape sequences
 # https://crystal-lang.org/reference/master/syntax_and_semantics/literals/string.html#escaping

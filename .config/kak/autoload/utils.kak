@@ -3,18 +3,6 @@
 # Porcelain commands -----------------------------------------------------------
 # Command completion
 
-define-command map_inserted_characters -params 3 %{
-  hook global User "InsertChars=(\Q%arg{1}%arg{2}\E)" %exp{
-    execute-keys -draft 'hHd'
-    execute-keys %arg{3}
-  }
-  hook global InsertChar "\Q%arg{1}\E" %exp{
-    hook -once window InsertChar .* %%{
-      trigger-user-hook "InsertChars=%arg{1}%%val{hook_param}"
-    }
-  }
-}
-
 define-command build_static_words_from_selections %{
   execute-keys -save-regs '' 'y:edit -scratch<ret><a-R>a<ret><esc><a-_>|sort -u<ret><a-s>H'
 }

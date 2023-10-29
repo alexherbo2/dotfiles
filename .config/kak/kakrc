@@ -137,7 +137,7 @@ hook global User 'InsertChars=.*kj' %{
   execute-keys <esc>
 }
 
-add_insert_chars_user_hook
+add_insert_chars_user_hook global
 
 # Language support -------------------------------------------------------------
 

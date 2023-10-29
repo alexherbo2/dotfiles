@@ -38,8 +38,7 @@ sh = 'shellscript'
 
 bash_language_server = { filetypes = ['sh'], roots = ['.git'], command = 'bash-language-server', args = ['start'] }
 crystalline = { filetypes = ['crystal'], roots = ['shard.yml'], command = 'crystalline', args = ['--stdio'] }
-typescript_language_server = { filetypes = ['javascript'], roots = ['.git'], command = 'typescript-language-server', args = ['--stdio'] }
-typescript_language_server = { filetypes = ['typescript'], roots = ['.git'], command = 'typescript-language-server', args = ['--stdio'] }
+typescript_language_server = { filetypes = ['javascript', 'typescript'], roots = ['.git'], command = 'typescript-language-server', args = ['--stdio'] }
 kotlin_language_server = { filetypes = ['kotlin'], roots = ['.git'], command = 'kotlin-language-server' }
 solargraph = { filetypes = ['ruby'], roots = ['Gemfile'], command = 'solargraph', args = ['stdio'] }
 rust_analyzer = { filetypes = ['rust'], roots = ['Cargo.toml'], command = 'rust-analyzer' }

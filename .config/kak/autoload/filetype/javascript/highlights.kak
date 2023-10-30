@@ -4,6 +4,8 @@ add-highlighter shared/javascript/code default-region group
 
 # Comments
 # https://jsdoc.app
+# JSDoc reference
+# https://typescriptlang.org/docs/handbook/jsdoc-supported-types.html
 # WIP
 add-highlighter shared/javascript.comment regions
 add-highlighter shared/javascript.comment/comment default-region group

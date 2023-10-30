@@ -216,6 +216,9 @@ xmv() {
 ffmpeg_x265() {
   ffmpeg -i "$1" -map 0 -c copy -c:v libx265 -crf 28 -preset veryslow -- "$1.mkv"
 }
+ffmpeg_sub() {
+  ffmpeg -i "$1" -map "0:s:${2:-0}" -- "$1.srt"
+}
 
 # yt-dlp
 # https://github.com/yt-dlp/yt-dlp

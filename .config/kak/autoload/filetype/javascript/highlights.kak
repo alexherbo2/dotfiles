@@ -9,7 +9,7 @@ add-highlighter shared/javascript.comment regions
 add-highlighter shared/javascript.comment/comment default-region group
 add-highlighter shared/javascript.comment/comment/ fill comment
 add-highlighter shared/javascript.comment/comment/ regex '\B`[#.]?\w+[?!]?`\B|\B(?<!\*)\*\w+[?!]?\*(?!\*)\B' 0:meta
-add-highlighter shared/javascript.comment/comment/ regex '\B(@(?:param|property|returns|typedef))\h+(\{[^}]+\})(?:\h+(\[[^\]]+\]\B|\S+\b))' 1:keyword 2:type 3:variable
+add-highlighter shared/javascript.comment/comment/ regex '\B(@(?:enum|param|property|returns|typedef))\h+(\{[^}]+\})(?:\h+(\[[^\]]+\]\B|\S+\b))' 1:keyword 2:type 3:variable
 add-highlighter shared/javascript.comment/comment/ regex '\B(?:@\w+)\b' 0:keyword
 
 # Escape sequences

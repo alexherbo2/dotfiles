@@ -69,15 +69,24 @@ define-command toggle_fullscreen_with_tmux %{
 }
 
 define-command split_view_down_with_tmux -params .. %{
-  tmux split-window -v kak -c %val{session} -e "%arg{@}"
+  tmux split-window -v kak -c %val{session} -e %exp{
+    grab_buffer_in_viewport %val{client}
+    %arg{@}
+  }
 }
 
 define-command split_view_right_with_tmux -params .. %{
-  tmux split-window -h kak -c %val{session} -e "%arg{@}"
+  tmux split-window -h kak -c %val{session} -e %exp{
+    grab_buffer_in_viewport %val{client}
+    %arg{@}
+  }
 }
 
 define-command create_view_in_new_window_with_tmux -params .. %{
-  tmux new-window -a kak -c %val{session} -e "%arg{@}"
+  tmux new-window -a kak -c %val{session} -e %exp{
+    grab_buffer_in_viewport %val{client}
+    %arg{@}
+  }
 }
 
 define-command move_view_to_new_window_with_tmux %{

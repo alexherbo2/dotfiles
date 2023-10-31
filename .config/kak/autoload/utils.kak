@@ -404,15 +404,19 @@ define-command quit_other_clients %{
 }
 
 define-command swap_buffer_in_viewport -params 1 %{
-  execute-keys '"sZ'
-  execute-keys -client %arg{1} '"tZ'
-  execute-keys '"tz<esc>'
-  execute-keys -client %arg{1} '"sz<esc>'
+  evaluate-commands -save-regs 'st' %{
+    execute-keys '"sZ'
+    execute-keys -client %arg{1} '"tZ'
+    execute-keys '"tz<esc>'
+    execute-keys -client %arg{1} '"sz<esc>'
+  }
 }
 
 define-command grab_buffer_in_viewport -params 1 %{
-  execute-keys -client %arg{1} '"tZ<esc>'
-  execute-keys '"tz<esc>'
+  evaluate-commands -save-regs 't' %{
+    execute-keys -client %arg{1} '"tZ<esc>'
+    execute-keys '"tz<esc>'
+  }
 }
 
 complete-command -menu swap_buffer_in_viewport shell-script-candidates %opt{other_clients_completion}

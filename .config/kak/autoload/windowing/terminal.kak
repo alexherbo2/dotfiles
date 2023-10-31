@@ -10,7 +10,10 @@ define-command open_terminal -params 1.. %{
 }
 
 define-command open_terminal_with_new_client -params .. %{
-  open_terminal kak -c %val{session} -e "%arg{@}"
+  open_terminal kak -c %val{session} -e %exp{
+    grab_buffer_in_viewport %val{client}
+    %arg{@}
+  }
 }
 
 define-command open_terminal_with_args -params 1.. %{

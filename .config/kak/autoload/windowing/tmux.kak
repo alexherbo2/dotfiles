@@ -222,3 +222,6 @@ map -docstring 'close view' global tmux <c-q> ':close_view_with_tmux<ret>'
 map -docstring 'close other viewports' global tmux <c-o> ':close_other_viewports_with_tmux<ret>'
 
 map -docstring 'new split scratch buffer' global tmux <c-n> ':enter_tmux_new_split_scratch_buffer_mode<ret>'
+
+map -docstring 'split view down with new scratch buffer' global tmux_new_split_scratch_buffer <c-s> ':split_view_down_with_tmux edit -scratch<ret>'
+map -docstring 'split view right with new scratch buffer' global tmux_new_split_scratch_buffer <c-v> ':split_view_right_with_tmux edit -scratch<ret>'

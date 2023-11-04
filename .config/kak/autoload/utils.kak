@@ -275,7 +275,7 @@ define-command read_file_contents_into_current_buffer -params 1.. %{
   edit -scratch
   evaluate-commands -save-regs 'a' %{
     set-register a %arg{@}
-    execute-keys '|cat %reg{a}<ret>'
+    execute-keys '|eval set -- "$kak_quoted_reg_a"; cat "$@"<ret>'
   }
   execute-keys 'y:delete-buffer<ret>p'
 }

@@ -271,12 +271,19 @@ define-command mv -params 1 %{
 }
 complete-command mv file
 
-define-command read_file_contents_into_current_buffer -params 1 %{
+define-command read_file_contents_into_current_buffer -params 1.. %{
   evaluate-commands -save-regs '"' %{
-    evaluate-commands -draft %{
-      edit -existing -- %arg{1}
-      execute-keys -save-regs '' '%y'
+    edit -scratch
+    set-register dquote %arg{@}
+    execute-keys '<a-R>'
+    evaluate-commands -itersel %{
+      try %{
+        execute-keys 'gf%ygaR'
+      } catch %{
+        execute-keys 'd'
+      }
     }
+    delete-buffer
     execute-keys 'p'
   }
 }

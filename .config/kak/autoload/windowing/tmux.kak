@@ -88,6 +88,13 @@ define-command split_view_right_with_tmux -params .. %{
 }
 
 define-command create_view_in_new_window_with_tmux -params .. %{
+  tmux new-window kak -c %val{session} -e %exp{
+    grab_buffer_in_viewport %val{client}
+    %arg{@}
+  }
+}
+
+define-command create_view_in_new_window_right_with_tmux -params .. %{
   tmux new-window -a kak -c %val{session} -e %exp{
     grab_buffer_in_viewport %val{client}
     %arg{@}
@@ -112,6 +119,14 @@ define-command focus_next_window_with_tmux %{
 
 define-command focus_previous_window_with_tmux %{
   tmux previous-window
+}
+
+define-command move_window_left_with_tmux %{
+  tmux swap-window -t :-1 ';' previous-window
+}
+
+define-command move_window_right_with_tmux %{
+  tmux swap-window -t :+1 ';' next-window
 }
 
 define-command close_view_with_tmux %{
@@ -165,6 +180,7 @@ define-command choose_window_with_tmux -params .. %{
 complete-command split_view_down_with_tmux command
 complete-command split_view_right_with_tmux command
 complete-command create_view_in_new_window_with_tmux command
+complete-command create_view_in_new_window_right_with_tmux command
 
 map -docstring 'jump view left' global tmux h ':jump_view_left_with_tmux<ret>'
 map -docstring 'jump view down' global tmux j ':jump_view_down_with_tmux<ret>'
@@ -186,14 +202,18 @@ map -docstring 'toggle fullscreen' global tmux f ':toggle_fullscreen_with_tmux<r
 map -docstring 'split view down' global tmux o ':split_view_down_with_tmux<ret>'
 map -docstring 'split view right' global tmux O ':split_view_right_with_tmux<ret>'
 
-map -docstring 'create view in new window' global tmux c ':create_view_in_new_window_with_tmux<ret>'
+map -docstring 'create view in new window right' global tmux c ':create_view_in_new_window_right_with_tmux<ret>'
+map -docstring 'create view in new window' global tmux C ':create_view_in_new_window_with_tmux<ret>'
 map -docstring 'move view to new window' global tmux T ':move_view_to_new_window_with_tmux<ret>'
 
 map -docstring 'focus next viewport' global tmux w ':focus_next_viewport_with_tmux<ret>'
 map -docstring 'focus previous viewport' global tmux W ':focus_previous_viewport_with_tmux<ret>'
 
-# map -docstring 'focus next window' global tmux n ':focus_next_window_with_tmux<ret>'
-# map -docstring 'focus previous window' global tmux p ':focus_previous_window_with_tmux<ret>'
+map -docstring 'focus next window' global tmux n ':focus_next_window_with_tmux<ret>'
+map -docstring 'focus previous window' global tmux p ':focus_previous_window_with_tmux<ret>'
+
+map -docstring 'move window left' global tmux P ':move_window_left_with_tmux<ret>'
+map -docstring 'move window right' global tmux N ':move_window_right_with_tmux<ret>'
 
 map -docstring 'close view' global tmux x ':close_view_with_tmux<ret>'
 map -docstring 'close other viewports' global tmux X ':close_other_viewports_with_tmux<ret>'
@@ -203,7 +223,7 @@ map -docstring 'select view' global tmux q ':select_view_with_tmux<ret>'
 map -docstring 'select window' global tmux s ':select_window_with_tmux<ret>'
 map -docstring 'move view to window' global tmux m ':move_view_to_window_with_tmux_menu<ret>'
 
-map -docstring 'new split scratch buffer' global tmux n ':enter_tmux_new_split_scratch_buffer_mode<ret>'
+# map -docstring 'new split scratch buffer' global tmux n ':enter_tmux_new_split_scratch_buffer_mode<ret>'
 
 map -docstring 'split view down with new scratch buffer' global tmux_new_split_scratch_buffer o ':split_view_down_with_tmux edit -scratch<ret>'
 map -docstring 'split view right with new scratch buffer' global tmux_new_split_scratch_buffer O ':split_view_right_with_tmux edit -scratch<ret>'

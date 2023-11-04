@@ -271,6 +271,18 @@ define-command mv -params 1 %{
 }
 complete-command mv file
 
+define-command read_file_contents_into_current_buffer -params 1 %{
+  evaluate-commands -save-regs '"' %{
+    evaluate-commands -draft %{
+      edit -existing -- %arg{1}
+      execute-keys -save-regs '' '%y'
+    }
+    execute-keys 'p'
+  }
+}
+complete-command read_file_contents_into_current_buffer file
+alias global r read_file_contents_into_current_buffer
+
 define-command open_config %{
   edit "%val{config}/kakrc"
 }

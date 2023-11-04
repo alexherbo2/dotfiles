@@ -273,9 +273,13 @@ complete-command mv file
 
 define-command read_file_contents_into_current_buffer -params 1.. %{
   edit -scratch
-  evaluate-commands -save-regs 'a' %{
+  evaluate-commands -save-regs '|a' %{
     set-register a %arg{@}
-    execute-keys '|eval set -- "$kak_quoted_reg_a"; cat "$@"<ret>'
+    set-register | %{
+      eval set -- "$kak_quoted_reg_a"
+      cat "$@"
+    }
+    execute-keys '|<ret>'
   }
   execute-keys 'y:delete-buffer<ret>p'
 }

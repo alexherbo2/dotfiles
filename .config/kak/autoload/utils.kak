@@ -273,7 +273,7 @@ complete-command mv file
 
 define-command read_file_contents_into_current_buffer -params 1.. %{
   edit -scratch
-  evaluate-commands -save-regs '|a' %{
+  evaluate-commands -save-regs 'a|' %{
     set-register a %arg{@}
     set-register | %{
       eval set -- "$kak_quoted_reg_a"

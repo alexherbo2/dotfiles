@@ -283,6 +283,7 @@ define-command read_file_contents_into_current_buffer -params 1.. %{
         execute-keys 'd'
       }
     }
+    execute-keys -save-regs '' '%y'
     delete-buffer
     execute-keys 'p'
   }

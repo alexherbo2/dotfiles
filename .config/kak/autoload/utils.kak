@@ -272,20 +272,16 @@ define-command mv -params 1 %{
 complete-command mv file
 
 define-command read_file_contents_into_current_buffer -params 1.. %{
-  edit -scratch
-  evaluate-commands -save-regs 'a|' %{
-    set-register a %arg{@}
-    set-register | %{
-      eval set -- "$kak_quoted_reg_a"
-      cat "$@"
-    }
-    execute-keys '|<ret>'
+  create_auto_named_buffer_from_command_output cat -- %arg{@}
+  hook -always -once buffer BufCloseFifo '' %{
+    execute-keys '%Hy:delete-buffer<ret>p'
   }
-  execute-keys 'y:delete-buffer<ret>p'
 }
 complete-command read_file_contents_into_current_buffer file
 alias global r read_file_contents_into_current_buffer
 
+complete-command diff_buffers buffer
+alias global diff diff_buffers
 define-command open_config %{
   edit "%val{config}/kakrc"
 }

@@ -200,6 +200,11 @@ cargo build --release
 cargo install --locked --path helix-term
 install ~/.cargo/bin/hx /opt/homebrew/bin
 export GIT_SSH_COMMAND='ssh -i ~/.ssh/id_ed25519_alexherbo2'
+git config core.sshCommand 'ssh -i ~/.ssh/id_ed25519_alexherbo2'
+git config user.email alexherbo2@gmail.com
+export GIT_SSH_COMMAND='ssh -i ~/.ssh/id_ed25519_mathieuablasou'
+git config core.sshCommand 'ssh -i ~/.ssh/id_ed25519_mathieuablasou'
+git config user.email mathieu.ablasou@cashbee.fr
 export EDITOR='kak -n'
 unset GIT_SSH_COMMAND
 rm .git/COMMIT_EDITMSG

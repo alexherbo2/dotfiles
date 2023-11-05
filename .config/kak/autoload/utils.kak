@@ -271,15 +271,6 @@ define-command mv -params 1 %{
 }
 complete-command mv file
 
-define-command read_file_contents_into_current_buffer -params 1.. %{
-  create_auto_named_buffer_from_command_output cat -- %arg{@}
-  hook -always -once buffer BufCloseFifo '' %{
-    execute-keys '%Hy:delete-buffer<ret>p'
-  }
-}
-complete-command read_file_contents_into_current_buffer file
-alias global r read_file_contents_into_current_buffer
-
 define-command open_config %{
   edit "%val{config}/kakrc"
 }

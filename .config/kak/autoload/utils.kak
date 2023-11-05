@@ -280,8 +280,6 @@ define-command read_file_contents_into_current_buffer -params 1.. %{
 complete-command read_file_contents_into_current_buffer file
 alias global r read_file_contents_into_current_buffer
 
-complete-command diff_buffers buffer
-alias global diff diff_buffers
 define-command open_config %{
   edit "%val{config}/kakrc"
 }

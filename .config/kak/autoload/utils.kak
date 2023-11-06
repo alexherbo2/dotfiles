@@ -81,17 +81,6 @@ define-command insert_buffer_contents -params 1 %{
 complete-command insert_buffer_contents buffer
 alias global r insert_buffer_contents
 
-define-command edit_scratch -params .. %{
-  edit -scratch -- %arg{@}
-}
-alias global scratch edit_scratch
-
-define-command edit_readonly -params .. %{
-  edit -readonly -- %arg{@}
-}
-alias global ro edit_readonly
-complete-command edit_readonly file
-
 define-command delete_buffers_matching_glob_pattern -params 1 %{
   evaluate-commands -buffer * %{
     evaluate-commands %sh{

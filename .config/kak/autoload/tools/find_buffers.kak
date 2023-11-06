@@ -14,7 +14,7 @@ define-command find_buffers -params 1 %{
 
 define-command open_buffer_finder %{
   prompt find_buffer: -buffer-completion %{
-    find_buffers -- %val{text}
+    find_buffers %val{text}
   }
 }
 

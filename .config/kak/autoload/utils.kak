@@ -175,14 +175,6 @@ define-command select_whole_words_or_next_words %{
   }
 }
 
-define-command sort_selections %{
-  evaluate-commands -save-regs '"' %sh{
-    printf 'echo -to-file %s -- "%%val{selections}"' "$kak_quoted_response_fifo" > "$kak_command_fifo"
-    jq -s -R -r 'split("\u0000") | sort | ["set-register", "dquote"] + map("\u0027" + gsub("\u0027"; "\u0027" + "\u0027") + "\u0027") | join(" ")' "$kak_response_fifo"
-    echo execute-keys R
-  }
-}
-
 # VS Code keyboard shortcuts
 # https://code.visualstudio.com/docs/getstarted/keybindings#_default-keyboard-shortcuts
 # https://code.visualstudio.com/docs/getstarted/keybindings#_basic-editing
@@ -218,59 +210,6 @@ define-command evaluate_selected_text %{
   execute-keys -with-hooks ':<c-r><a-.><ret>'
 }
 
-define-command open_current_buffer_with_visual_studio_code %{
-  nop %sh{
-    code --goto "$kak_buffile:$kak_cursor_line:$kak_cursor_column"
-  }
-}
-alias global code open_current_buffer_with_visual_studio_code
-
-define-command open_current_buffer_with_helix %{
-  terminal hx "%val{buffile}:%val{cursor_line}:%val{cursor_column}"
-}
-alias global hx open_current_buffer_with_helix
-
-define-command open_current_buffer_with_nnn %{
-  terminal sh -c %{
-    nnn -p - -- "$3" |
-    xargs printf "evaluate-commands -client '$2' -verbatim -- edit -- '%s';" |
-    kak -p "$1"
-  } -- %val{session} %val{client} %val{buffile}
-}
-alias global nnn open_current_buffer_with_nnn
-
-define-command open_current_buffer_with_gitui %{
-  terminal gitui -d %val{buffile}
-}
-alias global gitui open_current_buffer_with_gitui
-
-define-command open_new_shell %{
-  terminal %val{client_env_SHELL}
-}
-alias global sh open_new_shell
-
-define-command mkdir %{
-  evaluate-commands %sh{
-    mkdir -p -- "$(dirname -- "$kak_buffile")" ||
-    printf "fail 'ERROR: mkdir exited with: %d.'" "$?"
-  }
-}
-define-command rm %{
-  evaluate-commands %sh{
-    rm -- "$kak_buffile" ||
-    printf "fail 'ERROR: rm exited with: %d.'" "$?"
-  }
-  delete-buffer
-}
-define-command mv -params 1 %{
-  evaluate-commands %sh{
-    mv -- "$kak_buffile" "$1" ||
-    printf "fail 'ERROR: mv exited with: %d.'" "$?"
-  }
-  rename-buffer -file -- %arg{1}
-}
-complete-command mv file
-
 define-command open_config %{
   edit "%val{config}/kakrc"
 }
@@ -279,10 +218,6 @@ alias global open_kakrc open_config
 
 define-command get_character_info %{
   echo -markup %sh{printf '{Information}U+%04x' "$kak_cursor_char_value"}
-}
-
-define-command pwd %{
-  echo -markup "{Information}%sh{pwd}"
 }
 
 define-command show_definition_preview_hover %{

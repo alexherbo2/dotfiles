@@ -69,6 +69,29 @@ define-command assert_buffer_eq_and_clean_them -params 2 %{
   evaluate-commands -buffer "%arg{1},%arg{2}" delete-buffer
 }
 
+define-command insert_buffer_contents -params 1 %{
+  evaluate-commands -save-regs '"' %{
+    evaluate-commands -buffer %arg{1} %{
+      execute-keys -save-regs '' '%y'
+    }
+    execute-keys 'p'
+  }
+}
+
+complete-command insert_buffer_contents buffer
+alias global r insert_buffer_contents
+
+define-command edit_scratch -params .. %{
+  edit -scratch -- %arg{@}
+}
+alias global scratch edit_scratch
+
+define-command edit_readonly -params .. %{
+  edit -readonly -- %arg{@}
+}
+alias global ro edit_readonly
+complete-command edit_readonly file
+
 define-command delete_buffers_matching_glob_pattern -params 1 %{
   evaluate-commands -buffer * %{
     evaluate-commands %sh{

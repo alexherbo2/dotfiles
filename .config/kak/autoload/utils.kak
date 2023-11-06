@@ -1,8 +1,3 @@
-# Commands ---------------------------------------------------------------------
-# Prompt commands --------------------------------------------------------------
-# Porcelain commands -----------------------------------------------------------
-# Command completion
-
 define-command build_static_words_from_selections %{
   execute-keys -save-regs '' 'y:edit -scratch<ret><a-R>a<ret><esc><a-_>|sort -u<ret><a-s>H'
 }
@@ -323,6 +318,7 @@ define-command find_friendly_client_name %{
     shuf -n 1 "$kak_config/friendly_client_names.txt"
   }
 }
+
 # https://docs.helix-editor.com/keymap.html#window-mode
 
 declare-option str other_clients_completion %{

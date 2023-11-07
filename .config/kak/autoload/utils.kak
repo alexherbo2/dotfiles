@@ -99,31 +99,6 @@ alias global dba delete_all_buffers
 alias global assert_buffer_eq! assert_buffer_eq_and_clean_them
 complete-command assert_buffer_eq_and_clean_them buffer
 
-define-command create_buffer_from_command_output -params 2.. %{
-  set-register f %sh{mktemp -u}
-  nop %sh{
-    shift
-    mkfifo "$kak_reg_f"
-    { "$@" > "$kak_reg_f" 2>&1; } < /dev/null > /dev/null 2>&1 &
-  }
-  edit! -scroll -fifo %reg{f} -- %arg{1}
-  hook -always -once buffer BufCloseFifo '' "
-    nop %%sh{
-      unlink ""%reg{f}""
-    }
-  "
-}
-
-define-command create_auto_named_buffer_from_command_output -params 1.. %{
-  create_buffer_from_command_output "%arg{@}.output" %arg{@}
-}
-
-complete-command create_buffer_from_command_output shell
-complete-command create_auto_named_buffer_from_command_output shell
-
-alias global !! create_buffer_from_command_output
-alias global ! create_auto_named_buffer_from_command_output
-
 define-command select_whole_lines_or_extend_lines_down %{
   execute-keys '<a-:>'
   try %{

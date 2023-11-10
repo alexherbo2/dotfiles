@@ -1,7 +1,14 @@
 # Syntax and semantics
-# https://datatracker.ietf.org/doc/html/rfc4180
 alias global syntax add-highlighter
 
 # Creates the base regions
-syntax shared/log group
-syntax shared/log/ regex '^((?:".*?"|.*?)(?:,|$))?((?:".*?"|.*?)(?:,|$))?((?:".*?"|.*?)(?:,|$))?((?:".*?"|.*?)(?:,|$))?((?:".*?"|.*?)(?:,|$))?((?:".*?"|.*?)(?:,|$))?((?:".*?"|.*?)(?:,|$))?((?:".*?"|.*?)(?:,|$))?((?:".*?"|.*?)(?:,|$))?((?:".*?"|.*?)(?:,|$))?((?:".*?"|.*?)(?:,|$))?((?:".*?"|.*?)(?:,|$))?' 1:default 2:red 3:green 4:blue 5:default 6:yellow 7:cyan 8:magenta 9:default 10:red 11:green 12:blue
+syntax shared/log regions
+syntax shared/log/code default-region group
+syntax shared/log/code/ regex '' 0:keyword
+
+syntax shared/log/single_quoted_string region "'" "(?<!\\)(?:\\\\)*'" group
+syntax shared/log/single_quoted_string/ fill string
+
+syntax shared/log/double_quoted_string region '"' '(?<!\\)(?:\\\\)*"' regions
+syntax shared/log/double_quoted_string/content default-region group
+syntax shared/log/double_quoted_string/content/ fill string

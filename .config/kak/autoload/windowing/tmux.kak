@@ -121,6 +121,46 @@ define-command focus_previous_window_with_tmux %{
   tmux previous-window
 }
 
+define-command focus_window_by_index_with_tmux -params 1 %{
+  tmux select-window -t %arg{1}
+}
+
+define-command focus_first_window_with_tmux %{
+  focus_window_by_index_with_tmux 1
+}
+
+define-command focus_second_window_with_tmux %{
+  focus_window_by_index_with_tmux 2
+}
+
+define-command focus_third_window_with_tmux %{
+  focus_window_by_index_with_tmux 3
+}
+
+define-command focus_fourth_window_with_tmux %{
+  focus_window_by_index_with_tmux 4
+}
+
+define-command focus_fifth_window_with_tmux %{
+  focus_window_by_index_with_tmux 5
+}
+
+define-command focus_sixth_window_with_tmux %{
+  focus_window_by_index_with_tmux 6
+}
+
+define-command focus_seventh_window_with_tmux %{
+  focus_window_by_index_with_tmux 7
+}
+
+define-command focus_eighth_window_with_tmux %{
+  focus_window_by_index_with_tmux 8
+}
+
+define-command focus_last_window_with_tmux %{
+  focus_window_by_index_with_tmux '#{last_window_index}'
+}
+
 define-command move_window_left_with_tmux %{
   tmux swap-window -t :-1 ';' previous-window
 }
@@ -211,6 +251,16 @@ map -docstring 'focus previous viewport' global tmux W ':focus_previous_viewport
 
 map -docstring 'focus next window' global tmux n ':focus_next_window_with_tmux<ret>'
 map -docstring 'focus previous window' global tmux p ':focus_previous_window_with_tmux<ret>'
+
+map -docstring 'focus first window' global tmux 1 ':focus_first_window_with_tmux<ret>'
+map -docstring 'focus second window' global tmux 2 ':focus_second_window_with_tmux<ret>'
+map -docstring 'focus third window' global tmux 3 ':focus_third_window_with_tmux<ret>'
+map -docstring 'focus fourth window' global tmux 4 ':focus_fourth_window_with_tmux<ret>'
+map -docstring 'focus fifth window' global tmux 5 ':focus_fifth_window_with_tmux<ret>'
+map -docstring 'focus sixth window' global tmux 6 ':focus_sixth_window_with_tmux<ret>'
+map -docstring 'focus seventh window' global tmux 7 ':focus_seventh_window_with_tmux<ret>'
+map -docstring 'focus eighth window' global tmux 8 ':focus_eighth_window_with_tmux<ret>'
+map -docstring 'focus last window' global tmux 9 ':focus_last_window_with_tmux<ret>'
 
 map -docstring 'move window left' global tmux P ':move_window_left_with_tmux<ret>'
 map -docstring 'move window right' global tmux N ':move_window_right_with_tmux<ret>'

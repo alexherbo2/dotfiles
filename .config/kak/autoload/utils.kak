@@ -206,26 +206,6 @@ define-command show_definition_preview_hover %{
   lsp-hover
 }
 
-define-command open_buffer_picker %{
-  prompt open: -menu -buffer-completion %{
-    buffer %val{text}
-  }
-}
-
-define-command open_document_symbol_picker %{
-  lsp-goto-document-symbol
-}
-
-define-command open_file_picker %{
-  prompt open: -menu -shell-script-candidates 'eval "$kak_quoted_opt_find_command" "$kak_quoted_opt_find_args"' %{
-    edit -existing %val{text}
-  }
-}
-
-define-command open_workspace_symbol_picker %{
-  lsp-workspace-symbol-incr
-}
-
 define-command set_mark_on_next_key %{
   on-key %{
     execute-keys -save-regs '' """%val{key}Z"

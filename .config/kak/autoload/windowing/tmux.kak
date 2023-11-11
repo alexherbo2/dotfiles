@@ -1,8 +1,5 @@
 # This script provides support for the tmux terminal multiplexer.
 # https://github.com/tmux/tmux
-declare-option str other_clients_completion %{
-  echo "$kak_client_list" | tr ' ' '\n' | grep -Fxv "$kak_client"
-}
 
 declare-user-mode tmux
 declare-user-mode tmux_new_split_scratch_buffer

@@ -1,3 +1,7 @@
+declare-option str other_sessions_completion %{
+  kak -l | grep -Fxv "$kak_session"
+}
+
 declare-option str other_clients_completion %{
   echo "$kak_client_list" | tr ' ' '\n' | grep -Fxv "$kak_client"
 }

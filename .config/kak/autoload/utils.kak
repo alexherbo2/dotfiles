@@ -292,6 +292,11 @@ declare-option str other_clients_completion %{
   echo "$kak_client_list" | tr ' ' '\n' | grep -Fxv "$kak_client"
 }
 
+declare-option str other_buffers_completion %{
+  eval set -- "$kak_quoted_buflist"
+  printf '%s\n' "$@" | grep -Fxv "$kak_bufname"
+}
+
 define-command quit_other_clients %{
   evaluate-commands %sh{
     echo "$kak_client_list" | tr ' ' '\n' | grep -Fxv "$kak_client" |

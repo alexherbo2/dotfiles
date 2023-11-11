@@ -252,17 +252,9 @@ alias global @selections send_selected_text_to_session
 alias global @buffile send_current_buffer_to_session
 alias global @buflist send_buffer_list_to_session
 
-complete-command send_selected_text_to_session shell-script-candidates %{
-  kak -l | grep -Fxv "$kak_session"
-}
-
-complete-command send_current_buffer_to_session shell-script-candidates %{
-  kak -l | grep -Fxv "$kak_session"
-}
-
-complete-command send_buffer_list_to_session shell-script-candidates %{
-  kak -l | grep -Fxv "$kak_session"
-}
+complete-command send_selected_text_to_session shell-script-candidates %opt{other_buffers_completion}
+complete-command send_current_buffer_to_session shell-script-candidates %opt{other_buffers_completion}
+complete-command send_buffer_list_to_session shell-script-candidates %opt{other_buffers_completion}
 
 alias global = evaluate_selected_text
 

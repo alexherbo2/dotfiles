@@ -1,12 +1,11 @@
-# https://docs.helix-editor.com/keymap.html#window-mode
 declare-option str other_clients_completion %{
   echo "$kak_client_list" | tr ' ' '\n' | grep -Fxv "$kak_client"
 }
 
-declare-user-mode window
+declare-user-mode space
 
-define-command enter_window_mode %{
-  enter-user-mode window
+define-command enter_space_mode %{
+  enter-user-mode space
 }
 
 define-command quit_other_clients %{
@@ -49,15 +48,15 @@ define-command open_prompt_grab_buffer_in_viewport %{
 complete-command -menu swap_buffer_in_viewport shell-script-candidates %opt{other_clients_completion}
 complete-command -menu grab_buffer_in_viewport shell-script-candidates %opt{other_clients_completion}
 
-map -docstring 'edit scratch' global window n ':edit -scratch<ret>'
-map -docstring 'write' global window w ':write<ret>'
-map -docstring 'write force' global window W ':write!<ret>'
-map -docstring 'delete buffer' global window <c-w> ':delete-buffer<ret>'
-map -docstring 'quit' global window q ':quit<ret>'
-map -docstring 'quit force' global window Q ':quit!<ret>'
-map -docstring 'quit other clients' global window o ':quit_other_clients<ret>'
-map -docstring 'swap buffer in viewport' global window x ':open_prompt_swap_buffer_in_viewport<ret>'
-map -docstring 'grab buffer in viewport' global window g ':open_prompt_grab_buffer_in_viewport<ret>'
-map -docstring 'edit scratch' global window <c-n> ':edit -scratch<ret>'
-map -docstring 'go to last buffer' global window <c-a> 'ga'
-map -docstring 'kill session' global window <c-q> ':kill<ret>'
+map -docstring 'edit scratch' global space n ':edit -scratch<ret>'
+map -docstring 'write' global space w ':write<ret>'
+map -docstring 'write force' global space W ':write!<ret>'
+map -docstring 'delete buffer' global space <c-w> ':delete-buffer<ret>'
+map -docstring 'quit' global space q ':quit<ret>'
+map -docstring 'quit force' global space Q ':quit!<ret>'
+map -docstring 'quit other clients' global space o ':quit_other_clients<ret>'
+map -docstring 'swap buffer in viewport' global space x ':open_prompt_swap_buffer_in_viewport<ret>'
+map -docstring 'grab buffer in viewport' global space g ':open_prompt_grab_buffer_in_viewport<ret>'
+map -docstring 'edit scratch' global space <c-n> ':edit -scratch<ret>'
+map -docstring 'go to last buffer' global space <c-a> 'ga'
+map -docstring 'kill session' global space <c-q> ':kill<ret>'

@@ -60,3 +60,4 @@ map -docstring 'swap buffer in viewport' global window x ':open_prompt_swap_buff
 map -docstring 'grab buffer in viewport' global window g ':open_prompt_grab_buffer_in_viewport<ret>'
 map -docstring 'edit scratch' global window <c-n> ':edit -scratch<ret>'
 map -docstring 'go to last buffer' global window <c-a> 'ga'
+map -docstring 'kill session' global window <c-q> ':kill<ret>'

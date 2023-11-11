@@ -116,3 +116,18 @@ set-face global WrapMarker "rgb:%opt{non_text}" # Kakoune ⇒ add-highlighter -o
 set-face global Search "rgb:%opt{black},rgb:%opt{bright_yellow}+fg"
 set-face global SelectedText "default,rgba:%opt{selection}%opt{selection_highlight_alpha}"
 set-face global StatusLineInactive "rgb:%opt{dim_foreground},rgb:%opt{dim_background}"
+
+# Infobox faces
+set-face global InfoDefault Information
+set-face global InfoHeader header
+set-face global InfoMono mono
+set-face global InfoBlock block
+set-face global InfoBlockQuote block
+set-face global InfoLink link
+set-face global InfoLinkMono link
+set-face global InfoBullet bullet
+set-face global InfoRule comment
+set-face global InfoDiagnosticError InlayDiagnosticError
+set-face global InfoDiagnosticWarning InlayDiagnosticWarning
+set-face global InfoDiagnosticInformation InlayDiagnosticInfo
+set-face global InfoDiagnosticHint InlayDiagnosticHint

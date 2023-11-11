@@ -252,6 +252,11 @@ alias global @selections send_selected_text_to_session
 alias global @buffile send_current_buffer_to_session
 alias global @buflist send_buffer_list_to_session
 
+declare-option str other_buffers_completion %{
+  eval set -- "$kak_quoted_buflist"
+  printf '%s\n' "$@" | grep -Fxv "$kak_bufname"
+}
+
 complete-command send_selected_text_to_session shell-script-candidates %opt{other_buffers_completion}
 complete-command send_current_buffer_to_session shell-script-candidates %opt{other_buffers_completion}
 complete-command send_buffer_list_to_session shell-script-candidates %opt{other_buffers_completion}

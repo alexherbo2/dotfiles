@@ -4,7 +4,7 @@ define-command open_file_picker %{
     set-register ^ %val{selections_desc}
     set-register t %opt{filetype}
     edit -scratch "%val{client}.preview"
-    set-option filetype %reg{t}
+    set-option buffer filetype %reg{t}
     execute-keys '%R'
     select %reg{^}
   }

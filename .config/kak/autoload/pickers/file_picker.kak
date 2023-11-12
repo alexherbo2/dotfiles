@@ -17,12 +17,14 @@ define-command open_file_picker %{
       set-option "buffer=%val{client}.preview" filetype %opt{filetype}
       execute-keys -save-regs '' '%y'
       execute-keys -buffer "%val{client}.preview" '%R'
+      execute-keys -client %val{client} '<a-;>gg'
     } catch %{
       edit -existing -- %val{text}
       set-option "buffer=%val{client}.preview" filetype %opt{filetype}
       execute-keys -save-regs '' '%y'
       execute-keys -buffer "%val{client}.preview" '%R'
       delete-buffer -- %val{text}
+      execute-keys -client %val{client} '<a-;>gg'
     } catch %{
     }
   } -on-abort %{

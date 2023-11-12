@@ -1,3 +1,16 @@
+declare-option str other_sessions_completion %{
+  kak -l | grep -Fxv "$kak_session"
+}
+
+declare-option str other_clients_completion %{
+  echo "$kak_client_list" | tr ' ' '\n' | grep -Fxv "$kak_client"
+}
+
+declare-option str other_buffers_completion %{
+  eval set -- "$kak_quoted_buflist"
+  printf '%s\n' "$@" | grep -Fxv "$kak_bufname"
+}
+
 define-command build_static_words_from_selections %{
   execute-keys -save-regs '' 'y:edit -scratch<ret><a-R>a<ret><esc><a-_>|sort -u<ret><a-s>H'
 }
@@ -252,14 +265,9 @@ alias global @selections send_selected_text_to_session
 alias global @buffile send_current_buffer_to_session
 alias global @buflist send_buffer_list_to_session
 
-declare-option str other_buffers_completion %{
-  eval set -- "$kak_quoted_buflist"
-  printf '%s\n' "$@" | grep -Fxv "$kak_bufname"
-}
-
-complete-command send_selected_text_to_session shell-script-candidates %opt{other_buffers_completion}
-complete-command send_current_buffer_to_session shell-script-candidates %opt{other_buffers_completion}
-complete-command send_buffer_list_to_session shell-script-candidates %opt{other_buffers_completion}
+complete-command send_selected_text_to_session shell-script-candidates %opt{other_sessions_completion}
+complete-command send_current_buffer_to_session shell-script-candidates %opt{other_sessions_completion}
+complete-command send_buffer_list_to_session shell-script-candidates %opt{other_sessions_completion}
 
 alias global = evaluate_selected_text
 
@@ -282,3 +290,44 @@ define-command find_friendly_client_name %{
     shuf -n 1 "$kak_config/friendly_client_names.txt"
   }
 }
+
+define-command quit_other_clients %{
+  evaluate-commands %sh{
+    echo "$kak_client_list" | tr ' ' '\n' | grep -Fxv "$kak_client" |
+    while read kak_client
+    do echo "evaluate-commands -client '$kak_client' quit"
+    done
+  }
+}
+
+define-command swap_buffer_in_viewport -params 1 %{
+  evaluate-commands -save-regs 'st' %{
+    execute-keys '"sZ'
+    execute-keys -client %arg{1} '"tZ'
+    execute-keys '"tz<esc>'
+    execute-keys -client %arg{1} '"sz<esc>'
+  }
+}
+
+define-command grab_buffer_in_viewport -params 1 %{
+  evaluate-commands -save-regs 't' %{
+    execute-keys -client %arg{1} '"tZ<esc>'
+    execute-keys '"tz<esc>'
+  }
+}
+
+complete-command -menu swap_buffer_in_viewport shell-script-candidates %opt{other_clients_completion}
+complete-command -menu grab_buffer_in_viewport shell-script-candidates %opt{other_clients_completion}
+
+define-command edit_scratch -params .. %{
+  edit -scratch -- %arg{@}
+}
+
+alias global scratch edit_scratch
+
+define-command edit_readonly -params .. %{
+  edit -readonly -- %arg{@}
+}
+
+alias global ro edit_readonly
+complete-command edit_readonly file

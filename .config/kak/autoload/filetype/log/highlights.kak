@@ -1,4 +1,11 @@
 # Syntax and semantics
+# https://en.wikipedia.org/wiki/ISO_8601
+# https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString
+# https://github.com/bensadeh/tailspin
+# https://github.com/bensadeh/tailspin/blob/main/src/regex/mod.rs
+# https://github.com/bensadeh/tailspin/tree/main/src/highlighters
+# https://github.com/MTDL9/vim-log-highlighting
+# https://github.com/MTDL9/vim-log-highlighting/blob/master/syntax/log.vim
 alias global syntax add-highlighter
 
 # Creates the base regions

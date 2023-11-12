@@ -2,7 +2,9 @@ define-command open_file_picker %{
   evaluate-commands -save-regs '^"' %{
     execute-keys -draft -save-regs '' '%y'
     set-register ^ %val{selections_desc}
+    set-register t %opt{filetype}
     edit -scratch "%val{client}.preview"
+    set-option filetype %reg{t}
     execute-keys '%R'
     select %reg{^}
   }

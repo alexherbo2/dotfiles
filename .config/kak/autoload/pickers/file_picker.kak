@@ -9,7 +9,7 @@ define-command open_file_picker %{
     set-register t %opt{filetype}
     edit -scratch "%val{client}.preview"
     set-option buffer filetype %reg{t}
-    execute-keys "%%""cRge%reg{w}g"
+    execute-keys "%%""cRge%reg{w}gvt"
     select %reg{s}
   }
   prompt open: -menu -shell-script-candidates %opt{find_completion} %{

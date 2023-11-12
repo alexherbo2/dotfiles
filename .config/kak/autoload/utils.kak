@@ -27,6 +27,12 @@ define-command convert_selected_dates_to_iso_8601 %{
   execute-keys '|date -I -d "$kak_selection"<ret>'
 }
 
+define-command evaluate_commands_with_values -params 1.. %{
+  evaluate-commands %arg{1}
+}
+
+complete-command evaluate_commands_with_values command
+
 # Creates a buffer from the given string.
 # https://github.com/mawww/kakoune/blob/master/src/buffer_utils.cc#:~:text=create_buffer_from_string
 define-command create_buffer_from_string -params 2 %{

@@ -22,7 +22,7 @@ define-command open_file_picker %{
       set-option "buffer=%val{client}.preview" filetype %opt{filetype}
       execute-keys -save-regs '' '%y'
       execute-keys -buffer "%val{client}.preview" '%R'
-      delete-buffer "%val{client}.preview"
+      delete-buffer -- %val{text}
     } catch %{
     }
   } -on-abort %{

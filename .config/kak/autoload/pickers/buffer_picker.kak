@@ -1,12 +1,16 @@
 define-command open_buffer_picker %{
-  evaluate-commands -save-regs '^"t' %{
-    execute-keys -draft -save-regs '' '%y'
-    set-register ^ %val{selections_desc}
+  evaluate-commands -save-regs 'swct' %{
+    execute-keys -draft '%"cy'
+    set-register s %val{selections_desc}
+    evaluate-commands -draft %{
+      execute-keys 'gt'
+      set-register w %val{cursor_line}
+    }
     set-register t %opt{filetype}
     edit -scratch "%val{client}.preview"
     set-option buffer filetype %reg{t}
-    execute-keys '%R'
-    select %reg{^}
+    execute-keys "%%""cRge%reg{w}g"
+    select %reg{s}
   }
   prompt open: -menu -shell-script-candidates %opt{other_buffers_completion} %{
     delete-buffer "%val{client}.preview"

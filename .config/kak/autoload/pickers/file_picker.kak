@@ -2,14 +2,13 @@ define-command open_file_picker %{
   evaluate-commands -save-regs 'swct' %{
     execute-keys -draft '%"cy'
     set-register s %val{selections_desc}
-    evaluate-commands -draft %{
-      execute-keys 'gt'
-      set-register w %val{cursor_line}
-    }
+    set-register w %val{window_range}
     set-register t %opt{filetype}
     edit -scratch "%val{client}.preview"
     set-option buffer filetype %reg{t}
-    execute-keys "%%""cRge%reg{w}gvt"
+    evaluate_commands_with_values %{
+      execute-keys "%%""cRge%arg{2}gjvt"
+    } %reg{w}
     select %reg{s}
   }
   prompt open: -menu -shell-script-candidates %opt{find_completion} %{

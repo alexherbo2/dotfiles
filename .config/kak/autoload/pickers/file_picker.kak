@@ -1,5 +1,5 @@
 define-command open_file_picker %{
-  evaluate-commands -save-regs '^"' %{
+  evaluate-commands -save-regs '^"t' %{
     execute-keys -draft -save-regs '' '%y'
     set-register ^ %val{selections_desc}
     set-register t %opt{filetype}
@@ -17,14 +17,14 @@ define-command open_file_picker %{
       set-option "buffer=%val{client}.preview" filetype %opt{filetype}
       execute-keys -save-regs '' '%y'
       execute-keys -buffer "%val{client}.preview" '%R'
-      execute-keys -client %val{client} '<a-;>gg'
+      # execute-keys -client %val{client} '<a-;>gg'
     } catch %{
       edit -existing -- %val{text}
       set-option "buffer=%val{client}.preview" filetype %opt{filetype}
       execute-keys -save-regs '' '%y'
       execute-keys -buffer "%val{client}.preview" '%R'
       delete-buffer -- %val{text}
-      execute-keys -client %val{client} '<a-;>gg'
+      # execute-keys -client %val{client} '<a-;>gg'
     } catch %{
     }
   } -on-abort %{

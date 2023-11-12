@@ -1,6 +1,10 @@
 declare-option str find_command find
 declare-option str-list find_args -type f
 
+declare-option str find_completion %{
+  eval "$kak_quoted_opt_find_command" "$kak_quoted_opt_find_args"
+}
+
 define-command find -params .. %{
   create_buffer_from_command_output "%arg{1}.flist" %opt{find_command} %opt{find_args} -- %arg{@}
 }

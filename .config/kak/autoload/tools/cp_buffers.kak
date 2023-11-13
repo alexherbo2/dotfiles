@@ -6,7 +6,9 @@ define-command cp_buffers -params 2 %{
     set-register c %val{window_range}
     set-register d %opt{filetype}
     buffer -- %arg{2}
-    execute-keys "%%""aRge%reg{c}gjvt"
+    evaluate_commands_with_values %{
+      execute-keys "%%""aRgg%arg{2}jvt%arg{3}vl"
+    } %reg{c}
     set-option buffer filetype %reg{d}
     select %reg{b}
   }

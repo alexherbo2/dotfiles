@@ -9,7 +9,7 @@ define-command open_file_picker %{
       evaluate-commands -draft -verbatim cp_buffers %val{text} "%val{client}.preview"
       execute-keys '<a-;>gg'
     } catch %{
-      edit -existing -- %val{text}
+      evaluate-commands -draft -verbatim edit -existing -- %val{text}
       evaluate-commands -draft -verbatim cp_buffers %val{text} "%val{client}.preview"
       delete-buffer -- %val{text}
       execute-keys '<a-;>gg'

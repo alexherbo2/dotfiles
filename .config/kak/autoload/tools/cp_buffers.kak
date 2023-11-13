@@ -3,12 +3,14 @@ define-command cp_buffers -params 2 %{
     buffer -- %arg{1}
     execute-keys -draft '%"ay'
     set-register b %val{selections_desc}
-    set-register c %val{window_range}
+    evaluate-commands -draft %{
+      execute-keys 'gt'
+      set-register c %val{window_range}
+      # set-register c %val{window_range}
+    }
     set-register d %opt{filetype}
     buffer -- %arg{2}
-    evaluate_commands_with_values %{
-      execute-keys "%%""aRgg%arg{2}jvt%arg{3}vl"
-    } %reg{c}
+    execute-keys "%%""aRge%reg{2}gvt"
     set-option buffer filetype %reg{d}
     select %reg{b}
   }

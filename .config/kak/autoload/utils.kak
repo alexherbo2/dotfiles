@@ -67,11 +67,11 @@ define-command assert_eq -params 2 %{
 # Asserts that two buffers are equal to each other.
 # Buffer contents and selected text should be equal.
 define-command assert_buffer_eq -params 2 %{
-  buffer %arg{1}
+  buffer -- %arg{1}
   execute-keys -draft '%"ay'
   set-register c %val{selections_desc}
 
-  buffer %arg{2}
+  buffer -- %arg{2}
   execute-keys -draft '%"by'
   set-register d %val{selections_desc}
 

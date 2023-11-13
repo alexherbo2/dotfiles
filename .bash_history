@@ -1,3 +1,4 @@
+git clone https://github.com/raiguard/kak-one.git ~/.local/share/github.com/raiguard/kak-one
 git clone https://github.com/natecraddock/zf.git ~/.local/share/github.com/natecraddock/zf
 git clone https://github.com/ajeetdsouza/zoxide.git ~/.local/share/github.com/ajeetdsouza/zoxide
 git clone https://github.com/jdx/rtx.git ~/.local/share/github.com/jdx/rtx

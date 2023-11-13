@@ -218,6 +218,7 @@ complete-command split_view_down_with_tmux command
 complete-command split_view_right_with_tmux command
 complete-command create_view_in_new_window_with_tmux command
 complete-command create_view_in_new_window_right_with_tmux command
+complete-command focus_client_with_tmux shell-script-candidates %opt{other_clients_completion}
 
 map -docstring 'jump view left' global tmux h ':jump_view_left_with_tmux<ret>'
 map -docstring 'jump view down' global tmux j ':jump_view_down_with_tmux<ret>'

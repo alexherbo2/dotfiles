@@ -1,18 +1,19 @@
 define-command cp_buffers -params 2 %{
-  evaluate-commands -save-regs 'abcd' %{
+  evaluate-commands -save-regs '"stw' %{
+
     buffer -- %arg{1}
-    execute-keys -draft '%"ay'
-    set-register b %val{selections_desc}
     evaluate-commands -draft %{
+      set-register s %val{selections_desc}
       execute-keys 'gt'
-      set-register c %val{cursor_line}
-      # set-register c %val{window_range}
+      set-register w %val{cursor_line}
+      execute-keys -save-regs '' '%y'
+      set-register t %opt{filetype}
     }
-    set-register d %opt{filetype}
+
     buffer -- %arg{2}
-    execute-keys "%%""aRge%reg{c}gvt"
-    set-option buffer filetype %reg{d}
-    select %reg{b}
+    set-option buffer filetype %reg{t}
+    execute-keys "%%R%reg{w}gvt"
+    select %reg{s}
   }
 }
 

@@ -19,7 +19,9 @@ set-option global ui_options terminal_set_title=no terminal_assistant=none
 set-option global matching_pairs ( ) { } [ ] < > “ ” ‘ ’ « » ‹ ›
 set-option global scrolloff 5,1
 add-highlighter global/match_brackets show-matching
-add-highlighter global/line_numbers number-lines -hlcursor
+hook global WinCreate .* %{
+  add-highlighter window/line_numbers number-lines -hlcursor
+}
 add-highlighter global/search ref search
 add-highlighter global/selected_text ref selected_text
 

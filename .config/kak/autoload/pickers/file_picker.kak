@@ -10,7 +10,9 @@ define-command open_file_picker %{
       edit -existing -- %val{text}
       update_preview %val{text}
       delete-buffer -- %val{text}
-    } catch %{}
+    } catch %{
+      remove_preview
+    }
     execute-keys '<a-;>gg'
   } -on-abort %{
     close_preview

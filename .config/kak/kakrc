@@ -102,6 +102,7 @@ map -docstring 'open workspace symbol picker' global user S ':open_workspace_sym
 map -docstring 'show definition preview hover' global user k ':show_definition_preview_hover<ret>'
 map -docstring 'enter lsp mode' global user l ':enter_lsp_mode<ret>'
 map -docstring 'yank selected text to the terminal clipboard' global user y ':yank_selected_text_to_terminal_clipboard<ret>'
+map -docstring 'open goto line prompt' global user g ':open_goto_line_prompt<ret>'
 
 # Prompt mode ------------------------------------------------------------------
 

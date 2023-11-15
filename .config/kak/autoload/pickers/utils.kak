@@ -9,8 +9,15 @@ hook global WinSetOption filetype=preview %{
   # set-face buffer LineNumbersWrapped ''
 }
 
+# <buffer> <line_range>
 define-command update_preview -params 1 %{
-  ditto_viewport %arg{1} "%val{client}.preview"
+  evaluate-commands -save-regs '"' %{
+    buffer -- %arg{1}
+    execute-keys -draft -save-regs '' 'gg40Gxy'
+    set-option "buffer=%val{client}.preview" filetype %opt{filetype}
+    buffer -- "%val{client}.preview"
+    execute-keys '%Rgg'
+  }
 }
 
 define-command open_preview %{
@@ -19,16 +26,4 @@ define-command open_preview %{
 
 define-command close_preview %{
   delete-buffer -- "%val{client}.preview"
-}
-
-define-command ditto_viewport -params 2 %{
-  evaluate-commands -save-regs '"' %{
-    buffer -- %arg{1}
-    # execute-keys -draft -save-regs '' 'gtGbxy'
-    execute-keys -draft -save-regs '' '%y'
-    set-option "buffer=%arg{2}" filetype %opt{filetype}
-    buffer -- %arg{2}
-    # execute-keys '%Rgg'
-    execute-keys '%R'
-  }
 }

@@ -1,8 +1,8 @@
 define-command open_goto_line_prompt %{
   prompt goto_line: %{
-    evaluate-commands -verbatim goto_lines %val{text}
+    goto_lines_from_text %val{text}
   } -on-change %{
-    evaluate-commands -verbatim goto_lines %val{text}
+    goto_lines_from_text %val{text}
   } -on-abort %exp{
     select -timestamp %val{timestamp} %val{selections_desc}
     restore_viewport %val{window_range}
@@ -13,10 +13,12 @@ define-command restore_viewport -params 4 %{
   execute-keys "%arg{1}gjvt%arg{2}vlvh"
 }
 
-define-command goto_lines -params .. %{
-  evaluate-commands -verbatim select %sh{
-    for cursor_line do
-      echo "$cursor_line.1,$cursor_line.1"
+define-command goto_lines_from_text -params .. %{
+  evaluate-commands %sh{
+    select_command='select '
+    for cursor_line in $kak_text
+    do select_command="$kak_command $cursor_line.1,$cursor_line.1 "
     done
+    echo "$select_command"
   }
 }

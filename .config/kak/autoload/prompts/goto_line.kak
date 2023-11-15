@@ -19,8 +19,10 @@ define-command restore_viewport -params 4 %{
 
 define-command goto_lines -params .. %{
   evaluate-commands select %sh{
-    for cursor_line do
-      printf '%d.1,%d.1 ' "$cursor_line" "$cursor_line"
+    index=$#
+    while [ "$index" -ge 1 ]; do
+      printf '"%%arg{%d}.1,%%arg{%d}.1" ' "$index" "$index"
+      index=$((index - 1))
     done
   }
 }

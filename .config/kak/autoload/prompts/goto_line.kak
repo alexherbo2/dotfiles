@@ -16,8 +16,8 @@ define-command restore_viewport -params 4 %{
 define-command goto_lines_from_text -params .. %{
   evaluate-commands %sh{
     select_command='select '
-    for cursor_line in $kak_text
-    do select_command="$kak_command $cursor_line.1,$cursor_line.1 "
+    for cursor_line in $@
+    do select_command="$select_command $cursor_line.1,$cursor_line.1 "
     done
     echo "$select_command"
   }

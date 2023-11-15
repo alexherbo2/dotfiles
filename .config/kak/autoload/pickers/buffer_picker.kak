@@ -2,7 +2,6 @@ define-command open_buffer_picker %{
   open_preview
   prompt open: -menu -shell-script-candidates %opt{other_buffers_completion} %{
     close_preview
-    edit -existing -- %val{text}
     buffer -- %val{text}
   } -on-change %{
     evaluate-commands -draft -verbatim try %{

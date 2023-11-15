@@ -11,13 +11,17 @@ hook global WinSetOption filetype=preview %{
 
 # <buffer> <line_range>
 define-command update_preview -params 1 %{
-  evaluate-commands -save-regs '"' %{
+  evaluate-commands -buffer "%val{client}.preview" -save-regs '"' %{
     buffer -- %arg{1}
     execute-keys -draft -save-regs '' 'gg40Gxy'
     set-option "buffer=%val{client}.preview" filetype %opt{filetype}
     buffer -- "%val{client}.preview"
-    execute-keys '%Rgg'
+    execute-keys '%R'
   }
+}
+
+define-command remove_preview %{
+  execute-keys -buffer "%val{client}.preview" '%d'
 }
 
 define-command open_preview %{

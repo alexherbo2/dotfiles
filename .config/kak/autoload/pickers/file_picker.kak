@@ -3,9 +3,9 @@ hook global BufCreate '.+\.preview' %{
 }
 
 hook global BufSetOption filetype=preview %{
-  set-face buffer LineNumbers ''
-  set-face buffer LineNumberCursor ''
-  set-face buffer LineNumbersWrapped ''
+  # set-face buffer LineNumbers ''
+  # set-face buffer LineNumberCursor ''
+  # set-face buffer LineNumbersWrapped ''
 }
 
 define-command ditto_viewport -params 2 %{

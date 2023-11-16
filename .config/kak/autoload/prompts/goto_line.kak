@@ -1,29 +1,23 @@
 define-command open_goto_line_prompt %{
   prompt goto_line: %{
-    evaluate-commands goto_lines %val{text}
+    goto_lines_from_text %val{text}
   } -on-change %exp{
     try %%{
-      evaluate-commands goto_lines %%val{text}
+      goto_lines_from_text %%val{text}
     } catch %%{
-      # restore_viewport %val{window_range}
       select -timestamp %val{timestamp} %val{selections_desc}
     }
   } -on-abort %exp{
-    # restore_viewport %val{window_range}
     select -timestamp %val{timestamp} %val{selections_desc}
   }
 }
 
-define-command restore_viewport -params 4 %{
-  execute-keys "%arg{1}gjvt%arg{2}vlvh"
-}
-
-define-command goto_lines -params .. %{
+define-command goto_lines_from_text -params 1 %{
   evaluate-commands select %sh{
-    index=$#
-    while [ "$index" -ge 1 ]; do
-      printf '"%%arg{%d}.1,%%arg{%d}.1" ' "$index" "$index"
-      index=$((index - 1))
+    selections_desc=
+    for cursor_line in $1
+    do selections_desc="$cursor_line.1,$cursor_line.1 $selections_desc"
     done
+    echo "$selections_desc"
   }
 }

@@ -86,6 +86,7 @@ map -docstring 'select next surrounding object' global match n ':enter_select_ne
 
 # User mode --------------------------------------------------------------------
 
+map -docstring 'enter command mode' global user <space> :
 map -docstring 'convert selected dates to ISO 8601' global user d ':convert_selected_dates_to_iso_8601<ret>'
 map -docstring 'convert selected text to ASCII' global user @ ':convert_selected_text_to_ascii<ret>'
 map -docstring 'get character info' global user u ':get_character_info<ret>'
@@ -108,8 +109,8 @@ map -docstring 'open goto line prompt' global user g ':open_goto_line_prompt<ret
 map global prompt <a-/> '%sh{dirname "$kak_bufname"}<a-!>/'
 map global prompt <a-y> '<c-r>"'
 map global prompt <a-.> '<c-r>.'
-map global prompt <c-n> '<a-;>n'
-map global prompt <c-p> '<a-;><a-n>'
+map global prompt <a-n> '<a-;>n'
+map global prompt <a-p> '<a-;><a-n>'
 
 # Add search flags
 map global prompt <a-i> '<home>(?i)<end>'

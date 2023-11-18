@@ -76,7 +76,6 @@ map global normal <c-x> ':decrement_selected_numbers %val{count}<ret>'
 map global normal <c-n> ':iterate_next_selection<ret>'
 map global normal <c-p> ':iterate_previous_selection<ret>'
 map global normal '#' ':toggle_comments_with_config<ret>'
-map global normal w ':select_whole_words_or_next_words<ret>'
 map global normal x ':select_whole_lines_or_extend_lines_down<ret>'
 
 # Match mode -------------------------------------------------------------------
@@ -109,6 +108,8 @@ map -docstring 'open goto line prompt' global user g ':open_goto_line_prompt<ret
 map global prompt <a-/> '%sh{dirname "$kak_bufname"}<a-!>/'
 map global prompt <a-y> '<c-r>"'
 map global prompt <a-.> '<c-r>.'
+map global prompt <c-n> '<a-;>n'
+map global prompt <c-p> '<a-;><a-n>'
 
 # Add search flags
 map global prompt <a-i> '<home>(?i)<end>'

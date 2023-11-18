@@ -123,53 +123,6 @@ define-command select_whole_lines_or_extend_lines_down %{
   }
 }
 
-define-command select_whole_words_or_next_words %{
-  try %{
-    # All cursors are under a non-word character, so select the next word.
-    evaluate-commands -draft %{
-      execute-keys ';'
-      evaluate-commands -itersel %{
-        try %{
-          execute-keys '<a-k>\W<ret>'
-        } catch %{
-          fail
-        }
-      }
-    }
-    execute-keys ';/\w<ret><a-i>w'
-  } catch %{
-    # All cursors are under a word character.
-    evaluate-commands -draft %{
-      execute-keys ';'
-      evaluate-commands -itersel %{
-        try %{
-          execute-keys '<a-k>\w<ret>'
-        } catch %{
-          fail
-        }
-      }
-    }
-    # At least one selection does not fully select a word, so select the whole word.
-    execute-keys -draft '<a-k>\A\B|\B\z<ret>'
-    execute-keys '<a-i>w'
-  } catch %{
-    # All selections select a whole word, so select the next word.
-    evaluate-commands -draft %{
-      execute-keys ';'
-      evaluate-commands -itersel %{
-        try %{
-          execute-keys '<a-k>\A\b|\b\z<ret>'
-        } catch %{
-          fail
-        }
-      }
-    }
-    execute-keys ';/\w<ret><a-i>w'
-  } catch %{
-    fail 'cannot select whole words or next words'
-  }
-}
-
 # VS Code keyboard shortcuts
 # https://code.visualstudio.com/docs/getstarted/keybindings#_default-keyboard-shortcuts
 # https://code.visualstudio.com/docs/getstarted/keybindings#_basic-editing

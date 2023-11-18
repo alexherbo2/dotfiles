@@ -109,6 +109,7 @@ map -docstring 'open goto line prompt' global user g ':open_goto_line_prompt<ret
 map global prompt <a-/> '%sh{dirname "$kak_bufname"}<a-!>/'
 map global prompt <a-y> '<c-r>"'
 map global prompt <a-.> '<c-r>.'
+map global prompt <a-%> '<c-r>%'
 map global prompt <a-n> '<a-;>n'
 map global prompt <a-p> '<a-;><a-n>'
 

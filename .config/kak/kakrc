@@ -54,8 +54,8 @@ map -docstring 'jump to mark' global unimpaired_left m ':jump_to_mark_on_next_ke
 map -docstring 'set mark' global unimpaired_right m ':set_mark_on_next_key<ret>'
 
 map global normal V 'vtvm'
-map global normal <c-e> ':nnn<ret>'
-map global normal <c-l> ':gitui<ret>'
+map global normal <c-e> ':open_current_buffer_with_nnn<ret>'
+map global normal <c-l> ':open_current_buffer_with_gitui<ret>'
 map global normal <c-space> ':sh<ret>'
 map global normal <c-j> ':copy_selected_lines_down<ret>'
 map global normal <c-k> ':copy_selected_lines_up<ret>'
@@ -108,6 +108,7 @@ map -docstring 'open goto line prompt' global user g ':open_goto_line_prompt<ret
 
 map global prompt <a-/> '%sh{dirname "$kak_bufname"}<a-!>/'
 map global prompt <a-y> '<c-r>"'
+map global prompt <a-"> '<c-r>"'
 map global prompt <a-.> '<c-r>.'
 map global prompt <a-%> '<c-r>%'
 map global prompt <a-n> '<a-;>n'
@@ -137,6 +138,10 @@ hook global InsertCompletionShow .* %{
 }
 
 # User hooks -------------------------------------------------------------------
+
+hook global User 'OpenDirectory=(.+)' %{
+  nnn %val{hook_param_capture_1}
+}
 
 hook global User 'InsertChars=.*kj' %{
   execute-keys -draft 'hHd'

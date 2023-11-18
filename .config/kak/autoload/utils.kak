@@ -164,7 +164,7 @@ define-command open_config %{
 
 alias global open_kakrc open_config
 
-define-command get_character_info %{
+define-command show_character_info %{
   echo -markup %sh{printf '{Information}U+%04x' "$kak_cursor_char_value"}
 }
 

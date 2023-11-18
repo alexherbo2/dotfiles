@@ -15,6 +15,7 @@ define-command open_goto_line_prompt %{
 define-command goto_lines_from_text -params 1 %{
   evaluate-commands %sh{
     selections_desc=
+    IFS=','
     for cursor_line in $1
     do
       if [ "$cursor_line" -eq "$cursor_line" ]

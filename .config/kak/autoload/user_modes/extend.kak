@@ -21,6 +21,10 @@ map -docstring 'next long word end' global extend E <a-E>
 map -docstring 'previous long word start' global extend B <a-B>
 map -docstring 'next match' global extend n N
 map -docstring 'previous match' global extend N <a-N>
+map -docstring 'select whole lines' global extend x x
 map -docstring 'flip selections' global extend ';' '<a-;>'
+map -docstring 'remove primary selection' global extend <space> '<a-,>'
+map -docstring 'rotate selections backward' global extend ( (
+map -docstring 'rotate selections forward' global extend ) )
 map -docstring 'copy selections on next lines' global extend 'c' 'C'
 map -docstring 'copy selections on previous lines' global extend 'C' '<a-C>'

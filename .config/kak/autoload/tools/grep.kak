@@ -26,7 +26,7 @@ hook global BufCreate '.+\.refs' %{
 
 hook global BufSetOption filetype=grep %{
   add-highlighter buffer/grep ref grep
-  map -docstring 'jump to references' buffer goto f ':jump_to_references<ret>'
+  map -docstring 'jump to references' buffer goto f '<a-;>:jump_to_references<ret>'
 }
 
 define-command -hidden jump_to_references %{

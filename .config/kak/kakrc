@@ -105,8 +105,8 @@ map global prompt <a-y> '<c-r>"'
 map global prompt <a-"> '<c-r>"'
 map global prompt <a-.> '<c-r>.'
 map global prompt <a-%> '<c-r>%'
-map global prompt <a-n> '<a-;>n'
-map global prompt <a-p> '<a-;><a-n>'
+map global prompt <a-n> '<a-;>n<a-;>Z'
+map global prompt <a-p> '<a-;><a-n><a-;>Z'
 
 # Add search flags
 map global prompt <a-i> '<home>(?i)<end>'

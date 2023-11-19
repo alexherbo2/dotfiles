@@ -105,13 +105,23 @@ map global prompt <a-y> '<c-r>"'
 map global prompt <a-"> '<c-r>"'
 map global prompt <a-.> '<c-r>.'
 map global prompt <a-%> '<c-r>%'
-map global prompt <a-n> '<a-;>n<a-;>Z'
-map global prompt <a-p> '<a-;><a-n><a-;>Z'
 
-# Add search flags
-map global prompt <a-i> '<home>(?i)<end>'
-map global prompt <a-m> '<home>(?S)<end>'
-map global prompt <a-f> '<home>\Q<end>'
+hook global User 'SearchBegin=.*' %{
+  # Add search flags
+  map window prompt <a-i> '<home>(?i)<end>'
+  map window prompt <a-m> '<home>(?S)<end>'
+  map window prompt <a-f> '<home>\Q<end>'
+  # Jump through occurrences
+  map window prompt <a-n> '<a-;>n<a-;>Z<ret>z/<up><a-;>z'
+  map window prompt <a-p> '<a-;><a-n><a-;>Z<ret>z/<up><a-;>z'
+  hook -once window User 'SearchEnd=.*' %{
+    unmap window prompt <a-i>
+    unmap window prompt <a-m>
+    unmap window prompt <a-f>
+    unmap window prompt <a-n>
+    unmap window prompt <a-p>
+  }
+}
 
 # Insert mode ------------------------------------------------------------------
 
@@ -143,6 +153,7 @@ hook global User 'OpenDirectory=(.+)' %{
 }
 
 add_insert_chars_user_hook global
+add_search_mode_user_hooks global
 add_open_directory_user_hook global
 
 # Language support -------------------------------------------------------------

@@ -2,14 +2,14 @@ set-face global Search 'black,yellow+d'
 
 add-highlighter shared/search dynregex '%reg{/}' 0:SearchRegister
 
-hook global NormalKey '/|<a-/>|\?|<a-\?>' %{
+hook global User 'SearchBegin=(/|<a-/>|\?|<a-\?>)' %{
   set-face global SearchRegister Search
-  hook -once window ModeChange 'pop:prompt:normal' %{
+  hook -once window User 'SearchEnd=.*' %{
     set-face global SearchRegister Default
   }
 }
 
-hook global NormalKey '\*|<a-\*>|n|<a-n>|N|<a-N>' %{
+hook global User 'SearchMatch=.*' %{
   set-face global SearchRegister Search
 }
 

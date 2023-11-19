@@ -60,6 +60,7 @@ bind -x '"\C-r":"READLINE_LINE=$(history -w /dev/stdout | tac | awk !seen[\$0]++
 # Reload bashrc.
 alias rc='. ~/.bashrc'
 
+alias q='exit'
 alias md='mkdir -p --'
 alias cp='cp -n'
 alias mv='mv -n'

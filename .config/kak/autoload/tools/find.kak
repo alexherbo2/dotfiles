@@ -19,14 +19,13 @@ complete-command find file
 
 add-highlighter shared/find regex '^(.+?)$' 0:value
 
-# BufOpenFifo
 hook global BufCreate '.+\.flist' %{
   set-option buffer filetype find
 }
 
 hook global BufSetOption filetype=find %{
   add-highlighter buffer/find ref find
-  map buffer normal <ret> ':jump_to_files<ret>'
+  map -docstring 'jump to files' buffer goto f ':jump_to_files<ret>'
 }
 
 define-command -hidden jump_to_files %{

@@ -1,5 +1,5 @@
 declare-option str other_sessions_completion %{
-  kak -l | grep -Fxv "$kak_session"
+  kak -l | grep -xv -Fe "$kak_session" -Ee '^.+\s\(dead\)$'
 }
 
 declare-option str other_clients_completion %{

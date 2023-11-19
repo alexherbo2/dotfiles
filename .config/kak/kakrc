@@ -42,13 +42,15 @@ add-highlighter global/characters regex '[–—−×]' '0:cyan+f'
 # Normal mode ------------------------------------------------------------------
 
 # Key remapping
+# The following key bindings expand to:
 map global normal N <a-n>
 map global normal X x
 map global normal <ret> :
-# map global normal w '<a-i>w'
-# map global normal W '<a-i><a-w>'
-# map global normal <a-w> '<a-a>w'
-# map global normal <a-W> '<a-a><a-w>'
+map global normal <esc> ',;'
+map global normal w '_<a-i>w'
+map global normal W '_<a-i><a-w>'
+map global normal <a-w> '_<a-a>w'
+map global normal <a-W> '_<a-a><a-w>'
 
 map -docstring 'jump to mark' global unimpaired_left m ':jump_to_mark_on_next_key<ret>'
 map -docstring 'set mark' global unimpaired_right m ':set_mark_on_next_key<ret>'
@@ -86,7 +88,6 @@ map -docstring 'select next surrounding object' global match n ':enter_select_ne
 
 # User mode --------------------------------------------------------------------
 
-map -docstring 'enter command mode' global user <space> :
 map -docstring 'convert selected dates to ISO 8601' global user d ':convert_selected_dates_to_iso_8601<ret>'
 map -docstring 'convert selected text to ASCII' global user @ ':convert_selected_text_to_ascii<ret>'
 map -docstring 'get character info' global user u ':get_character_info<ret>'

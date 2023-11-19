@@ -20,14 +20,13 @@ complete-command grep file
 
 add-highlighter shared/grep regex '^(.+?)(:)(\d+)(:)(\d+)(:)(.+?)$' 1:string 2:operator 3:value 4:operator 5:value 6:operator
 
-# BufOpenFifo
 hook global BufCreate '.+\.refs' %{
   set-option buffer filetype grep
 }
 
 hook global BufSetOption filetype=grep %{
   add-highlighter buffer/grep ref grep
-  map buffer normal <ret> ':jump_to_references<ret>'
+  map -docstring 'jump to references' buffer goto f ':jump_to_references<ret>'
 }
 
 define-command -hidden jump_to_references %{

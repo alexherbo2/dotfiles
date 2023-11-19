@@ -15,3 +15,14 @@ hook global NormalKey '\*|<a-\*>' %{
     set-face global SearchRegister Default
   }
 }
+
+hook global NormalKey '\*|<a-\*>' %{
+  set-face global SearchRegister Search
+  hook -once window NormalIdle .* %{
+    set-face global SearchRegister Default
+  }
+}
+
+hook global NormalKey '<esc>' %{
+  set-face global SearchRegister Default
+}

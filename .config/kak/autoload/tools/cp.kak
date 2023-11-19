@@ -10,3 +10,4 @@ define-command cp_f -params 1 %{
 
 complete-command cp file
 complete-command cp_f file
+alias global cp! cp_f

@@ -46,7 +46,7 @@ add-highlighter global/characters regex '[–—−×]' '0:cyan+f'
 map global normal N <a-n>
 map global normal X x
 map global normal <ret> :
-map global normal <esc> ',;'
+map global normal <esc> ',;<esc>'
 
 map global normal V 'vtvm'
 map global normal <c-e> ':open_current_buffer_with_nnn<ret>'

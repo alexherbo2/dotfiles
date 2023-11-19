@@ -139,16 +139,17 @@ hook global InsertCompletionShow .* %{
 
 # User hooks -------------------------------------------------------------------
 
-hook global User 'OpenDirectory=(.+)' %{
-  nnn %val{hook_param_capture_1}
-}
-
 hook global User 'InsertChars=.*kj' %{
   execute-keys -draft 'hHd'
   execute-keys <esc>
 }
 
+hook global User 'OpenDirectory=(.+)' %{
+  nnn %val{hook_param_capture_1}
+}
+
 add_insert_chars_user_hook global
+add_open_directory_user_hook global
 
 # Language support -------------------------------------------------------------
 

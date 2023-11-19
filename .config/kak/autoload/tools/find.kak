@@ -25,7 +25,7 @@ hook global BufCreate '.+\.flist' %{
 
 hook global BufSetOption filetype=find %{
   add-highlighter buffer/find ref find
-  map -docstring 'jump to files' buffer goto f ':jump_to_files<ret>'
+  map -docstring 'jump to files' buffer goto f '<a-;>:jump_to_files<ret>'
 }
 
 define-command -hidden jump_to_files %{

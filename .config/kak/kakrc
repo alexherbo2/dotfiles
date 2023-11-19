@@ -112,8 +112,8 @@ hook global User 'SearchBegin=.*' %{
   map window prompt <a-m> '<home>(?S)<end>'
   map window prompt <a-f> '<home>\Q<end>'
   # Jump through occurrences
-  map window prompt <a-n> '<a-;>n<a-;>Z<ret>z/<up><a-;>z'
-  map window prompt <a-p> '<a-;><a-n><a-;>Z<ret>z/<up><a-;>z'
+  map window prompt <a-n> '<a-;>n<a-;>Z'
+  map window prompt <a-p> '<a-;><a-n><a-;>Z'
   hook -once window User 'SearchEnd=.*' %{
     unmap window prompt <a-i>
     unmap window prompt <a-m>

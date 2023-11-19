@@ -22,3 +22,5 @@ map -docstring 'previous long word start' global extend B <a-B>
 map -docstring 'next match' global extend n N
 map -docstring 'previous match' global extend N <a-N>
 map -docstring 'flip selections' global extend ';' '<a-;>'
+map -docstring 'copy selections on next lines' global extend 'c' 'C'
+map -docstring 'copy selections on previous lines' global extend 'C' '<a-C>'

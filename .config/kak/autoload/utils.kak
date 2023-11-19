@@ -277,6 +277,7 @@ define-command edit_scratch -params .. %{
 }
 
 alias global scratch edit_scratch
+alias global n edit_scratch
 
 define-command edit_readonly -params .. %{
   edit -readonly -- %arg{@}

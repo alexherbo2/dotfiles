@@ -43,14 +43,14 @@ add-highlighter global/characters regex '[–—−×]' '0:cyan+f'
 
 # Key remapping
 # The following key bindings expand to:
-map global normal N <a-n>
-map global normal X x
-map global normal <ret> :
-map global normal <esc> ',;<esc>'
-map global normal <del> '<a-,>'
-map global normal <backspace> ';'
+map -docstring 'select previous match' global normal N <a-n>
+map -docstring 'select whole lines' global normal X x
+map -docstring 'enter command mode' global normal <ret> :
+map -docstring 'keep primary selection' global normal <esc> ',<esc>'
+map -docstring 'remove primary selection' global normal <del> '<a-,>'
+map -docstring 'collapse selections' global normal <backspace> ';'
 
-map global normal V 'vtvm'
+map -docstring 'recenter viewport' global normal V 'vt5vkvm'
 map global normal <c-e> ':open_current_buffer_with_nnn<ret>'
 map global normal <c-l> ':open_current_buffer_with_gitui<ret>'
 map global normal <c-space> ':sh<ret>'
@@ -60,11 +60,10 @@ map global normal ` ':enter_letter_case_mode<ret>'
 map global normal <c-w> ':enter_tmux_mode<ret>'
 map global normal v ':enter_extend_mode<ret>'
 map global normal m ':enter_match_mode<ret>'
-map global normal "'" ':enter_mark_mode<ret>'
 map global normal S ':enter_select_mode<ret>'
 map global normal '[' ':enter_unimpaired_left_mode<ret>'
 map global normal ']' ':enter_unimpaired_right_mode<ret>'
-map global normal Y '<a-Z>a'
+map -docstring 'save selections in append mode' global normal Y '<a-Z>a'
 map global normal <c-down> ':move_selected_lines_down<ret>'
 map global normal <c-up> ':move_selected_lines_up<ret>'
 map global normal <a-%> ':select_highlights<ret>'
@@ -102,20 +101,20 @@ map -docstring 'open goto line prompt' global user g ':open_goto_line_prompt<ret
 
 # Prompt mode ------------------------------------------------------------------
 
-map global prompt <a-/> '%sh{dirname "$kak_bufname"}<a-!>/'
-map global prompt <a-y> '<c-r>"'
-map global prompt <a-"> '<c-r>"'
-map global prompt <a-.> '<c-r>.'
-map global prompt <a-%> '<c-r>%'
+map -docstring 'insert buffer directory name' global prompt <a-/> '%sh{dirname "$kak_bufname"}<a-!>/'
+map -docstring 'insert yanked text' global prompt <a-y> '<c-r>"'
+map -docstring 'insert yanked text' global prompt <a-"> '<c-r>"'
+map -docstring 'insert selected text' global prompt <a-.> '<c-r>.'
+map -docstring 'insert buffer name' global prompt <a-%> '<c-r>%'
 
 hook global User 'SearchBegin=.*' %{
   # Add search flags
-  map window prompt <a-i> '<home>(?i)<end>'
-  map window prompt <a-m> '<home>(?S)<end>'
-  map window prompt <a-f> '<home>\Q<end>'
+  map -docstring 'enable case-insensitive matching' window prompt <a-i> '<home>(?i)<end>'
+  map -docstring 'disable multiline matching' window prompt <a-m> '<home>(?S)<end>'
+  map -docstring 'disable regex matching' window prompt <a-f> '<home>\Q<end>'
   # Jump through occurrences
-  map window prompt <a-n> '<a-;>n<a-;>Z'
-  map window prompt <a-p> '<a-;><a-n><a-;>Z'
+  map -docstring 'select next search match' window prompt <a-n> '<a-;>n<a-;>Z'
+  map -docstring 'select previous search match' window prompt <a-p> '<a-;><a-n><a-;>Z'
   hook -once window User 'SearchEnd=.*' %{
     unmap window prompt <a-i>
     unmap window prompt <a-m>

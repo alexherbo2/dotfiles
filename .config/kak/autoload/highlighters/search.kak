@@ -9,18 +9,8 @@ hook global NormalKey '/|<a-/>|\?|<a-\?>' %{
   }
 }
 
-hook global NormalKey '\*|<a-\*>' %{
+hook global NormalKey '\*|<a-\*>|n|<a-n>|N|<a-N>' %{
   set-face global SearchRegister Search
-  hook -once window NormalIdle .* %{
-    set-face global SearchRegister Default
-  }
-}
-
-hook global NormalKey '\*|<a-\*>' %{
-  set-face global SearchRegister Search
-  hook -once window NormalIdle .* %{
-    set-face global SearchRegister Default
-  }
 }
 
 hook global NormalKey '<esc>' %{

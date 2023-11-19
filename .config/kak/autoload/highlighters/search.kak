@@ -13,6 +13,10 @@ hook global User 'SearchMatch=.*' %{
   set-face global SearchRegister Search
 }
 
+hook global User 'SearchSelection=.*' %{
+  set-face global SearchRegister Search
+}
+
 hook global NormalKey '<esc>' %{
   set-face global SearchRegister Default
 }

@@ -5,7 +5,10 @@ define-command add_search_mode_user_hooks -params 1 %{
       trigger-user-hook "SearchEnd=%val{hook_param}"
     }
   }
-  hook %arg{1} NormalKey '\*|<a-\*>|n|<a-n>|N|<a-N>' %{
+  hook %arg{1} NormalKey 'n|<a-n>|N|<a-N>' %{
     trigger-user-hook "SearchMatch=%val{hook_param}"
+  }
+  hook %arg{1} NormalKey '\*|<a-\*>' %{
+    trigger-user-hook "SearchSelection=%val{hook_param}"
   }
 }

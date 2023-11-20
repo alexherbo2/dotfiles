@@ -105,6 +105,7 @@ kak
 sway
 brew install koekeishiya/formulae/yabai
 brew install koekeishiya/formulae/skhd
+echo '%wheel ALL=(ALL:ALL) ALL' >> /etc/sudoers
 yabai --start-service
 skhd --start-service
 brew install FelixKratz/formulae/borders

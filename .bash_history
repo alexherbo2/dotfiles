@@ -103,12 +103,13 @@ git clone https://github.com/asterite/adventofcode2021.git ~/.local/share/github
 git clone https://github.com/asterite/adventofcode2022.git ~/.local/share/github.com/asterite/adventofcode2022
 kak
 sway
-csrutil enable --without fs --without debug --without nvram
-sudo nvram boot-args=-arm64e_preview_abi
 brew install koekeishiya/formulae/yabai
 brew install koekeishiya/formulae/skhd
-echo '%wheel ALL=(ALL:ALL) NOPASSWD:ALL' >> /etc/sudoers
-echo '%admin ALL=(ALL:ALL) NOPASSWD:ALL' >> /etc/sudoers
+echo '%wheel ALL=(ALL:ALL) NOPASSWD: ALL' >> /etc/sudoers
+echo '%admin ALL=(ALL:ALL) NOPASSWD: ALL' >> /etc/sudoers
+csrutil enable --without fs --without debug --without nvram
+csrutil status
+sudo nvram boot-args=-arm64e_preview_abi
 yabai --start-service
 skhd --start-service
 brew install FelixKratz/formulae/borders

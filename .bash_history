@@ -1,4 +1,8 @@
 git clone https://github.com/raiguard/kak-one.git ~/.local/share/github.com/raiguard/kak-one
+git clone https://github.com/FelixKratz/JankyBorders.git ~/.local/share/github.com/FelixKratz/JankyBorders
+git clone https://github.com/FelixKratz/dotfiles.git ~/.local/share/github.com/FelixKratz/dotfiles
+git clone https://github.com/FelixKratz/SketchyBar.git ~/.local/share/github.com/FelixKratz/SketchyBar
+git clone https://github.com/FelixKratz/SketchyVim.git ~/.local/share/github.com/FelixKratz/SketchyVim
 git clone https://github.com/natecraddock/zf.git ~/.local/share/github.com/natecraddock/zf
 git clone https://github.com/ajeetdsouza/zoxide.git ~/.local/share/github.com/ajeetdsouza/zoxide
 git clone https://github.com/jdx/rtx.git ~/.local/share/github.com/jdx/rtx
@@ -99,6 +103,15 @@ git clone https://github.com/asterite/adventofcode2021.git ~/.local/share/github
 git clone https://github.com/asterite/adventofcode2022.git ~/.local/share/github.com/asterite/adventofcode2022
 kak
 sway
+brew install koekeishiya/formulae/yabai
+brew install koekeishiya/formulae/skhd
+yabai --start-service
+skhd --start-service
+brew install FelixKratz/formulae/borders
+brew services start borders
+git clone https://github.com/koekeishiya/yabai.git ~/.local/share/github.com/koekeishiya/yabai
+git clone https://github.com/koekeishiya/skhd.git ~/.local/share/github.com/koekeishiya/skhd
+git clone https://github.com/koekeishiya/dotfiles.git ~/.local/share/github.com/koekeishiya/dotfiles
 brew link --force curl
 brew link --force ncurses
 alacritty msg create-window

@@ -112,6 +112,8 @@ csrutil status
 sudo nvram boot-args=-arm64e_preview_abi
 yabai --start-service
 skhd --start-service
+yabai --restart-service
+skhd --restart-service
 brew install FelixKratz/formulae/borders
 brew services start borders
 git clone https://github.com/koekeishiya/yabai.git ~/.local/share/github.com/koekeishiya/yabai

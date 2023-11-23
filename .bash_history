@@ -109,6 +109,8 @@ echo '%wheel ALL=(ALL:ALL) NOPASSWD: ALL' >> /etc/sudoers
 echo '%admin ALL=(ALL:ALL) NOPASSWD: ALL' >> /etc/sudoers
 csrutil enable --without fs --without debug --without nvram
 csrutil status
+csrutil disable
+csrutil enable
 sudo nvram boot-args=-arm64e_preview_abi
 yabai --start-service
 skhd --start-service

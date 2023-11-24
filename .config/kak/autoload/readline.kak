@@ -24,6 +24,8 @@ define-command erase_word_before_cursor %{
     } catch %{
       execute-keys -draft 'h<a-k>^.\z<ret>d'
     } catch %{
+      execute-keys -draft 'h<a-k>\b\w|\B\W<ret>d'
+    } catch %{
       execute-keys -draft 'hBd'
     } catch %{}
   }

@@ -18,4 +18,23 @@ define-command open_buffer_finder %{
   }
 }
 
+define-command -hidden open_command_mode_for_each_selected_buffer %{
+  prompt iterbuf: -command-completion %{
+    iterbuf_impl %val{text}
+  }
+}
+
+define-command -hidden iterbuf_impl -params 1 %{
+  evaluate-commands -draft %{
+    execute-keys 'x<a-s>H<a-K>\A\h+.\z<ret>'
+    evaluate-commands -itersel %{
+      evaluate-commands -buffer %val{selection} -- %arg{1}
+    }
+  }
+}
+
 complete-command find_buffers buffer
+
+hook global BufSetOption filetype=find %{
+  map -docstring 'open command mode for each selected buffer' buffer user : ':open_command_mode_for_each_selected_buffer<ret>'
+}

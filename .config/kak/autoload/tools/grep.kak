@@ -10,12 +10,6 @@ define-command grep -params .. %{
   create_buffer_from_command_output "%arg{1}.refs" %opt{grep_command} %opt{grep_args} -- %arg{@}
 }
 
-define-command open_global_search_prompt %{
-  prompt global_search: -shell-script-candidates %opt{grep_word_completion} %{
-    grep %val{text}
-  }
-}
-
 complete-command grep file
 
 add-highlighter shared/grep regex '^(.+?)(:)(\d+)(:)(\d+)(:)(.+?)$' 1:string 2:operator 3:value 4:operator 5:value 6:operator

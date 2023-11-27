@@ -12,9 +12,3 @@ define-command grep_buffers -params 1 %{
   }
   execute-keys 'd%y:delete-buffer<ret>Rgg'
 }
-
-define-command open_buffer_search_prompt %{
-  prompt buffer_search: -shell-script-candidates %opt{grep_word_completion} %{
-    grep_buffers %val{text}
-  }
-}

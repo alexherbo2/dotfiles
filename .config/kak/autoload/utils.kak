@@ -188,6 +188,16 @@ define-command iterate_previous_selection %{
   itersel_impl '('
 }
 
+define-command send_handshake_to_client -params 1 %{
+  try %{
+    evaluate-commands -client %arg{1} ''
+  } catch %{
+    fail "client handshake failed: %arg{1}"
+  }
+}
+
+complete-command send_handshake_to_client shell-script-candidates %opt{other_clients_completion}
+
 define-command send_handshake_to_session -params 1 %{
   evaluate-commands %sh{
     printf '' | kak -p "$1" ||
@@ -198,6 +208,11 @@ define-command send_handshake_to_session -params 1 %{
 define-command send_selected_text_to_session -params 1 %{
   send_handshake_to_session %arg{1}
   echo -quoting kakoune -to-shell-script "kak -p %arg{1}" set-register '"' %val{selections}
+}
+
+define-command send_search_register_to_session -params 1 %{
+  send_handshake_to_session %arg{1}
+  echo -quoting kakoune -to-shell-script "kak -p %arg{1}" set-register '/' %reg{/}
 }
 
 define-command send_current_buffer_to_session -params 1 %{
@@ -213,6 +228,7 @@ define-command send_buffer_list_to_session -params 1 %{
 }
 
 alias global @selections send_selected_text_to_session
+alias global @search send_search_register_to_session
 alias global @buffile send_current_buffer_to_session
 alias global @buflist send_buffer_list_to_session
 

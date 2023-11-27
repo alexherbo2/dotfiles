@@ -5,13 +5,10 @@ hook global BufSetOption filetype=grep %{
 }
 
 define-command enter_grep_preview_mode %{
-  execute-keys ',;'
-  jump_to_references
+  send_handshake_to_jump_client
+  execute-keys ',;gh'
   enter-user-mode -lock grep_preview
-  hook -once window NormalIdle .* %{
-    execute-keys 'ga'
-  }
 }
 
-map -docstring 'next match' global grep_preview j 'gaj:jump_to_references<ret>'
-map -docstring 'previous match' global grep_preview k 'gak:jump_to_references<ret>'
+map -docstring 'next match' global grep_preview j 'j:jump_to_references %opt{jump_client}<ret>'
+map -docstring 'previous match' global grep_preview k 'k:jump_to_references %opt{jump_client}<ret>'

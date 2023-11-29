@@ -20,16 +20,16 @@ hook global BufCreate '.+\.refs' %{
 
 hook global BufSetOption filetype=grep %{
   add-highlighter buffer/grep ref grep
-  map -docstring 'jump to references' buffer goto f '<a-;>:jump_to_references<ret>'
+  map -docstring 'jump to references in current client' buffer goto f '<a-;>:jump_to_references %val{client}<ret>'
   map -docstring 'jump to references in jump client' buffer goto F '<a-;>:jump_to_references %opt{jump_client}<ret>'
 }
 
-define-command -hidden jump_to_references %{
+define-command -hidden jump_to_references -params 1 %{
   evaluate-commands -draft %{
     execute-keys 'x<a-s>H<a-K>\A\h+.\z<ret>'
     evaluate-commands -itersel %{
       execute-keys 's^(.+?):(\d+):(\d+):(.+?)$<ret>'
-      evaluate-commands -client %val{client} -- edit -existing -- %reg{1} %reg{2} %reg{3}
+      evaluate-commands -client %arg{1} -- edit -existing -- %reg{1} %reg{2} %reg{3}
     }
   }
 }

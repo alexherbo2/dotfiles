@@ -6,7 +6,7 @@ declare-option str find_completion %{
 }
 
 define-command find -params .. %{
-  create_buffer_from_command_output "%arg{1}.flist" %opt{find_command} %opt{find_args} -- %arg{@}
+  evaluate-commands -try-client %opt{tools_client} -verbatim create_buffer_from_command_output "%arg{1}.flist" %opt{find_command} %opt{find_args} %arg{@}
 }
 
 complete-command find file
@@ -19,15 +19,14 @@ hook global BufCreate '.+\.flist' %{
 
 hook global BufSetOption filetype=find %{
   add-highlighter buffer/find ref find
-  map -docstring 'jump to files in current client' buffer goto f '<a-;>:jump_to_files %val{client}<ret>'
-  map -docstring 'jump to files in jump client' buffer goto F '<a-;>:jump_to_files %opt{jump_client}<ret>'
+  map -docstring 'jump to files' buffer goto f '<a-;>:jump_to_files<ret>'
 }
 
-define-command -hidden jump_to_files -params 1 %{
+define-command -hidden jump_to_files %{
   evaluate-commands -draft %{
     execute-keys 'x<a-s>H<a-K>\A\h+.\z<ret>'
     evaluate-commands -itersel %{
-      evaluate-commands -client %arg{1} -- edit -existing -- %val{selection}
+      evaluate-commands -try-client %opt{jump_client} -verbatim edit -existing -- %val{selection}
     }
   }
 }

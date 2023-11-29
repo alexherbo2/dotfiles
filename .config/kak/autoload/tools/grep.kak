@@ -7,7 +7,7 @@ declare-option str grep_word_completion %{
 
 define-command grep -params .. %{
   set-register / %arg{1}
-  create_buffer_from_command_output "%arg{1}.refs" %opt{grep_command} %opt{grep_args} -- %arg{@}
+  evaluate-commands -try-client %opt{tools_client} -verbatim create_buffer_from_command_output "%arg{1}.refs" %opt{grep_command} %opt{grep_args} %arg{@}
 }
 
 complete-command grep file
@@ -20,16 +20,15 @@ hook global BufCreate '.+\.refs' %{
 
 hook global BufSetOption filetype=grep %{
   add-highlighter buffer/grep ref grep
-  map -docstring 'jump to references in current client' buffer goto f '<a-;>:jump_to_references %val{client}<ret>'
-  map -docstring 'jump to references in jump client' buffer goto F '<a-;>:jump_to_references %opt{jump_client}<ret>'
+  map -docstring 'jump to references' buffer goto f '<a-;>:jump_to_references<ret>'
 }
 
-define-command -hidden jump_to_references -params 1 %{
+define-command -hidden jump_to_references %{
   evaluate-commands -draft %{
     execute-keys 'x<a-s>H<a-K>\A\h+.\z<ret>'
     evaluate-commands -itersel %{
       execute-keys 's^(.+?):(\d+):(\d+):(.+?)$<ret>'
-      evaluate-commands -client %arg{1} -- edit -existing -- %reg{1} %reg{2} %reg{3}
+      evaluate-commands -try-client %opt{jump_client} -verbatim edit -existing -- %reg{1} %reg{2} %reg{3}
     }
   }
 }

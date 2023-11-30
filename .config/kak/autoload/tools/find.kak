@@ -6,7 +6,7 @@ declare-option str find_completion %{
 }
 
 define-command find -params .. %{
-  evaluate-commands -try-client %opt{tools_client} -verbatim create_buffer_from_command_output "%arg{1}.flist" %opt{find_command} %opt{find_args} %arg{@}
+  evaluate-commands -try-client %opt{tools_client} -verbatim create_buffer_from_command_output find.flist %opt{find_command} %opt{find_args} %arg{@}
 }
 
 complete-command find file

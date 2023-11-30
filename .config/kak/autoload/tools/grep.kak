@@ -28,7 +28,11 @@ define-command -hidden jump_to_references %{
     execute-keys 'x<a-s><a-K>^\n<ret>H'
     evaluate-commands -itersel %{
       execute-keys 's^(.+?):(\d+):(\d+):(.+?)$<ret>'
-      evaluate-commands -try-client %opt{jump_client} -verbatim edit -existing -- %reg{1} %reg{2} %reg{3}
+      try %{
+        evaluate-commands -client %opt{jump_client} -verbatim edit -existing -- %reg{1} %reg{2} %reg{3}
+      } catch %{
+        evaluate-commands -client %val{client} -verbatim edit -existing -- %reg{1} %reg{2} %reg{3}
+      }
     }
   }
 }

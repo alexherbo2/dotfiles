@@ -24,15 +24,17 @@ hook global BufSetOption filetype=grep %{
 }
 
 define-command -hidden jump_to_references %{
-  evaluate-commands -draft %{
+  evaluate-commands -draft -save-regs 'c' %{
+    try %{
+      send_handshake_to_client %opt{jump_client}
+      set-register 'c' %opt{jump_client}
+    } catch %{
+      set-register 'c' %val{client}
+    }
     execute-keys 'x<a-s><a-K>^\n<ret>H'
     evaluate-commands -itersel %{
       execute-keys 's^(.+?):(\d+):(\d+):(.+?)$<ret>'
-      try %{
-        evaluate-commands -client %opt{jump_client} -verbatim edit -existing -- %reg{1} %reg{2} %reg{3}
-      } catch %{
-        evaluate-commands -client %val{client} -verbatim edit -existing -- %reg{1} %reg{2} %reg{3}
-      }
+      evaluate-commands -client %reg{c} -verbatim edit -existing -- %reg{1} %reg{2} %reg{3}
     }
   }
 }

@@ -6,7 +6,15 @@ declare-option str grep_word_completion %{
 }
 
 define-command grep -params .. %{
-  evaluate-commands -try-client %opt{tools_client} -verbatim create_buffer_from_command_output '*grep*' %opt{grep_command} %opt{grep_args} %arg{@}
+  evaluate-commands -save-regs '"' %{
+    try %{
+      execute-keys -buffer '*grep*' -save-regs '' '%y'
+    } catch %{
+      set-register dquote
+    }
+    evaluate-commands -try-client %opt{tools_client} -verbatim create_buffer_from_command_output '*grep*' %opt{grep_command} %opt{grep_args} %arg{@}
+    execute-keys -buffer '*grep*' 'P'
+  }
 }
 
 complete-command grep file

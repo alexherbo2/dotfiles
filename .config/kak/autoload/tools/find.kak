@@ -26,7 +26,7 @@ define-command -hidden jump_to_files %{
   evaluate-commands -draft %{
     execute-keys 'x<a-s><a-K>^\n<ret>H'
     evaluate-commands -itersel %{
-      evaluate-commands -try-client %opt{jump_client} -verbatim edit -existing -- %val{selection}
+      evaluate-commands -client %val{client} -verbatim evaluate-commands -try-client %opt{jump_client} -verbatim edit -existing -- %val{selection}
     }
   }
 }

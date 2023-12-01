@@ -5,6 +5,10 @@ define-command enter_unimpaired_left_mode %{
   enter-user-mode unimpaired_left
 }
 
+define-command enter_sticky_unimpaired_left_mode %{
+  enter-user-mode -lock unimpaired_left
+}
+
 define-command hide_line_numbers %{
   add-highlighter global/line_numbers number-lines -hlcursor
 }

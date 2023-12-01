@@ -1,14 +1,14 @@
 define-command grep_buffers -params 1 %{
   evaluate-commands -try-client %opt{tools_client} %{
     set-register / %arg{1}
-    edit! -scratch -- "%arg{1}.refs"
-    edit! -scratch -debug -- "%arg{1}_tmp.refs"
+    edit! -scratch -- '*grep*'
+    edit! -scratch -debug -- '*grep_tmp*'
     evaluate-commands -no-hooks -buffer '*' -verbatim -- try %{
       execute-keys '%s<ret><a-;>'
       evaluate-commands -itersel -save-regs 'ab' %{
         set-register a "%val{bufname}:%val{cursor_line}:%val{cursor_column}:"
         execute-keys 'x<a-:>H"by'
-        execute-keys -buffer "%arg{1}_tmp.refs" 'ge"apH"bp<a-j>'
+        execute-keys -buffer '*grep_tmp*' 'ge"apH"bp<a-j>'
       }
     }
     execute-keys 'd%y:delete-buffer<ret>Rgg'

@@ -1,6 +1,6 @@
 define-command find_buffers -params 1 %{
   evaluate-commands -try-client %opt{tools_client} %{
-    edit! -scratch -- "%arg{1}.flist"
+    edit! -scratch '*find*'
     evaluate-commands -save-regs '"/' %{
       set-register dquote %val{buflist}
       execute-keys '<a-R>a<ret><esc>'

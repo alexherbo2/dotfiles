@@ -5,6 +5,10 @@ define-command enter_unimpaired_right_mode %{
   enter-user-mode unimpaired_right
 }
 
+define-command enter_sticky_unimpaired_right_mode %{
+  enter-user-mode -lock unimpaired_right
+}
+
 define-command show_line_numbers %{
   add-highlighter global/line_numbers number-lines -hlcursor
 }

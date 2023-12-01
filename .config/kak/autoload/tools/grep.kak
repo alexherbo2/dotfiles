@@ -41,7 +41,7 @@ define-command -hidden jump_to_references_and_close_grep_buffer %{
 define-command -hidden open_grep_buffer_and_jump_to_references -params 1 %{
   evaluate-commands -try-client %opt{tools_client} %{
     buffer '*grep*'
-    execute-keys ",gh%arg{1}"
+    execute-keys ",;%arg{1}gh"
     jump_to_references
   }
 }
@@ -52,4 +52,12 @@ define-command jump_to_next_reference %{
 
 define-command jump_to_previous_reference %{
   open_grep_buffer_and_jump_to_references 'k'
+}
+
+define-command jump_to_first_reference %{
+  open_grep_buffer_and_jump_to_references 'gk'
+}
+
+define-command jump_to_last_reference %{
+  open_grep_buffer_and_jump_to_references 'gj'
 }

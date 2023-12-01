@@ -32,3 +32,9 @@ map -docstring 'soft-wrap' global unimpaired_left <tab> ':disable_soft_wrap<ret>
 map -docstring 'rulers' global unimpaired_left | ':remove_rulers<ret>'
 map -docstring 'space' global unimpaired_left <space> <a-O>
 map -docstring 'buffer' global unimpaired_left b ':buffer-previous<ret>'
+
+map -docstring 'jump to previous reference' global unimpaired_left g ':jump_to_previous_reference<ret>'
+map -docstring 'jump to first reference' global unimpaired_left G ':jump_to_first_reference<ret>'
+
+map -docstring 'jump to previous file' global unimpaired_left f ':jump_to_previous_file<ret>'
+map -docstring 'jump to first file' global unimpaired_left F ':jump_to_first_file<ret>'

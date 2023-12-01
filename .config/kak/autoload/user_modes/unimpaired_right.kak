@@ -32,3 +32,9 @@ map -docstring 'read-only' global unimpaired_right r ':enable_readonly_mode<ret>
 map -docstring 'rulers' global unimpaired_right | ':add_rulers<ret>'
 map -docstring 'space' global unimpaired_right <space> <a-o>
 map -docstring 'buffer' global unimpaired_right b ':buffer-next<ret>'
+
+map -docstring 'jump to next reference' global unimpaired_right g ':jump_to_next_reference<ret>'
+map -docstring 'jump to last reference' global unimpaired_right G ':jump_to_last_reference<ret>'
+
+map -docstring 'jump to next file' global unimpaired_right f ':jump_to_next_file<ret>'
+map -docstring 'jump to last file' global unimpaired_right F ':jump_to_last_file<ret>'

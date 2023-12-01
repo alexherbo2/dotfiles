@@ -6,20 +6,21 @@ declare-option str find_completion %{
 }
 
 define-command find -params .. %{
-  evaluate-commands -try-client %opt{tools_client} -verbatim create_buffer_from_command_output find.flist %opt{find_command} %opt{find_args} %arg{@}
+  evaluate-commands -try-client %opt{tools_client} -verbatim create_buffer_from_command_output '*find*' %opt{find_command} %opt{find_args} %arg{@}
 }
 
 complete-command find file
 
 add-highlighter shared/find regex '^(.+?)$' 0:value
 
-hook global BufCreate '.+\.flist' %{
+hook global BufCreate '\*find\*' %{
   set-option buffer filetype find
 }
 
 hook global BufSetOption filetype=find %{
   add-highlighter buffer/find ref find
   map -docstring 'jump to files' buffer goto f '<a-;>:jump_to_files<ret>'
+  map -docstring 'jump to files and close find buffer' buffer goto F '<a-;>:jump_to_files_and_close_find_buffer<ret>'
 }
 
 define-command -hidden jump_to_files %{
@@ -29,4 +30,33 @@ define-command -hidden jump_to_files %{
       evaluate-commands -client %val{client} -verbatim evaluate-commands -try-client %opt{jump_client} -verbatim edit -existing -- %val{selection}
     }
   }
+}
+
+define-command -hidden jump_to_files_and_close_find_buffer %{
+  jump_to_files
+  delete-buffer '*find*'
+}
+
+define-command -hidden open_find_buffer_and_jump_to_files -params 1 %{
+  evaluate-commands -try-client %opt{tools_client} %{
+    buffer '*find*'
+    execute-keys ",;%arg{1}gh"
+    jump_to_files
+  }
+}
+
+define-command jump_to_next_file %{
+  open_find_buffer_and_jump_to_files 'j'
+}
+
+define-command jump_to_previous_file %{
+  open_find_buffer_and_jump_to_files 'k'
+}
+
+define-command jump_to_first_file %{
+  open_find_buffer_and_jump_to_files 'gk'
+}
+
+define-command jump_to_last_file %{
+  open_find_buffer_and_jump_to_files 'gj'
 }

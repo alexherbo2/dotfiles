@@ -30,6 +30,7 @@ git clone https://github.com/mdn/webextensions-examples.git ~/.local/share/githu
 git clone https://codeberg.org/dnkl/foot.git ~/.local/share/codeberg.org/dnkl/foot
 git clone https://git.sr.ht/~chambln/dots ~/.local/share/git.sr.ht/~chambln/dots
 git clone https://git.sr.ht/~emersion/dotfiles ~/.local/share/git.sr.ht/~emersion/dotfiles
+git clone https://git.sr.ht/~lessa/pepper.git ~/.local/share/git.sr.ht/~lessa/pepper
 git clone https://git.sr.ht/~krobelus/dotfiles ~/.local/share/git.sr.ht/~krobelus/dotfiles
 git clone https://git.sr.ht/~sircmpwn/dotfiles ~/.local/share/git.sr.ht/~sircmpwn/dotfiles
 git clone https://github.com/71/dotfiles.git ~/.local/share/github.com/71/dotfiles
@@ -74,7 +75,6 @@ git clone https://github.com/jarun/nnn.git ~/.local/share/github.com/jarun/nnn
 git clone https://github.com/atlas-engineer/nyxt.git ~/.local/share/github.com/atlas-engineer/nyxt
 git clone https://github.com/ocaml/ocaml.git ~/.local/share/github.com/ocaml/ocaml
 git clone https://github.com/Morganamilo/paru.git ~/.local/share/github.com/Morganamilo/paru
-git clone https://github.com/vamolessa/pepper.git ~/.local/share/github.com/vamolessa/pepper
 git clone https://github.com/microsoft/playwright.git ~/.local/share/github.com/microsoft/playwright
 git clone https://github.com/taupiqueur/pw.git ~/.local/share/github.com/taupiqueur/pw
 git clone https://github.com/ranger/ranger.git ~/.local/share/github.com/ranger/ranger

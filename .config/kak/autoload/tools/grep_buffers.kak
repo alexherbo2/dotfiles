@@ -16,7 +16,7 @@ define-command grep_buffers -params 1 %{
         execute-keys -buffer '*grep_tmp*' 'ge"apH"bp<a-j>'
       }
     }
-    execute-keys 'd%y:delete-buffer<ret>Rgg'
+    execute-keys 'd%y:delete-buffer<ret>Pgg'
     execute-keys -buffer '*grep*' 'Pld'
   }
 }

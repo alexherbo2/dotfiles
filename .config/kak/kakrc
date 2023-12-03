@@ -3,6 +3,7 @@
 # https://github.com/mawww/kakoune
 
 colorscheme "%val{config}/colors/macos_light.kak"
+colorscheme "%val{config}/colors/default.kak"
 colorscheme "%val{config}/colors/one-dark.kak"
 
 # Preamble ---------------------------------------------------------------------

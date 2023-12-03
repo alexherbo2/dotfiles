@@ -3,10 +3,13 @@
 
 import = [
   '~/.config/alacritty/options/enable_csi_u_key_encoding.toml',
-  '~/.config/alacritty/colors/macos_light.toml'
+  # '~/.config/alacritty/colors/macos_light.toml'
 ]
 
 # Appearance -------------------------------------------------------------------
+
+# Add a bit of transparency to reduce eye strain.
+window.opacity = 0.8
 
 font.size = 14.0
 font.normal.family = 'JetBrains Mono'

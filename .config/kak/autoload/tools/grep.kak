@@ -13,7 +13,7 @@ define-command grep -params .. %{
       set-register dquote
     }
     create_buffer_from_command_output '*grep*' %opt{grep_command} %opt{grep_args} %arg{@}
-    execute-keys -buffer '*grep*' 'P;d'
+    execute-keys -buffer '*grep*' 'P'
   }
 }
 

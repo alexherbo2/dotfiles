@@ -6,7 +6,15 @@ declare-option str find_completion %{
 }
 
 define-command find -params .. %{
-  create_buffer_from_command_output '*find*' %opt{find_command} %opt{find_args} %arg{@}
+  evaluate-commands -save-regs '"' %{
+    try %{
+      execute-keys -buffer '*find*' -save-regs '' '%y'
+    } catch %{
+      set-register dquote
+    }
+    create_buffer_from_command_output '*find*' %opt{find_command} %opt{find_args} %arg{@}
+    execute-keys -buffer '*find*' 'Pld'
+  }
 }
 
 complete-command find file

@@ -12,8 +12,8 @@ define-command grep -params .. %{
     } catch %{
       set-register dquote
     }
-    evaluate-commands -try-client %opt{tools_client} -verbatim create_buffer_from_command_output '*grep*' %opt{grep_command} %opt{grep_args} %arg{@}
-    execute-keys -buffer '*grep*' 'P'
+    create_buffer_from_command_output '*grep*' %opt{grep_command} %opt{grep_args} %arg{@}
+    execute-keys -buffer '*grep*' 'Pld'
   }
 }
 
@@ -27,8 +27,8 @@ hook global BufCreate '\*grep\*' %{
 
 hook global BufSetOption filetype=grep %{
   add-highlighter buffer/grep ref grep
-  map -docstring 'jump to references' buffer goto f '<a-;>:jump_to_references<ret>'
-  map -docstring 'jump to references and close grep buffer' buffer goto F '<a-;>:jump_to_references_and_close_grep_buffer<ret>'
+  map -docstring 'jump to references' buffer normal <ret> ':jump_to_references<ret>'
+  map -docstring 'jump to references and close grep buffer' buffer normal <s-ret> ':jump_to_references_and_close_grep_buffer<ret>'
 }
 
 define-command -hidden jump_to_references %{
@@ -36,7 +36,7 @@ define-command -hidden jump_to_references %{
     execute-keys 'x<a-s><a-K>^\n<ret>H'
     evaluate-commands -itersel %{
       execute-keys 's^(.+?):(\d+):(\d+):(.+?)$<ret>'
-      evaluate-commands -client %val{client} -verbatim evaluate-commands -try-client %opt{jump_client} -verbatim edit -existing -- %reg{1} %reg{2} %reg{3}
+      evaluate-commands -client %val{client} -verbatim edit -existing -- %reg{1} %reg{2} %reg{3}
     }
   }
 }
@@ -47,11 +47,9 @@ define-command -hidden jump_to_references_and_close_grep_buffer %{
 }
 
 define-command -hidden open_grep_buffer_and_jump_to_references -params 1 %{
-  evaluate-commands -try-client %opt{tools_client} %{
-    buffer '*grep*'
-    execute-keys ",;%arg{1}gh"
-    jump_to_references
-  }
+  buffer '*grep*'
+  execute-keys ",;%arg{1}gh"
+  jump_to_references
 }
 
 define-command jump_to_next_reference %{

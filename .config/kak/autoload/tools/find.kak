@@ -13,7 +13,7 @@ define-command find -params .. %{
       set-register dquote
     }
     create_buffer_from_command_output '*find*' %opt{find_command} %opt{find_args} %arg{@}
-    execute-keys -buffer '*find*' 'Pld'
+    execute-keys -buffer '*find*' 'P;d'
   }
 }
 

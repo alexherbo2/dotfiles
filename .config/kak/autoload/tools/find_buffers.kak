@@ -16,7 +16,7 @@ define-command find_buffers -params 1 %{
         execute-keys '%d'
       }
     }
-    execute-keys -buffer '*find*' 'Pld'
+    execute-keys -buffer '*find*' 'P;d'
   }
 }
 

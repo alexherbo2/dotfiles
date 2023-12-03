@@ -9,7 +9,14 @@ define-command list_buffers %{
   }
 }
 
-add-highlighter shared/buffer_list regex '^(.+?) (\()(.+?)(\))$' 1:string 2:operator 3:value 4:operator
+add-highlighter shared/buffer_list regions
+add-highlighter shared/buffer_list/entry default-region fill string
+add-highlighter shared/buffer_list/property_list region '^(.+?) \K\(' '\)' regions
+add-highlighter shared/buffer_list/property_list/property default-region group
+add-highlighter shared/buffer_list/property_list/property/ regex '\bfalse\b|\btrue\b' 0:value
+add-highlighter shared/buffer_list/property_list/property/ regex '[\w-]+(?==)' 0:attribute
+add-highlighter shared/buffer_list/property_list/property/ regex '[-+*/%^&!?@|<>=:(){}[\];:,.]' 0:operator
+add-highlighter shared/buffer_list/property_list/ region '"' '"' fill string
 
 hook global BufCreate '\*buffers\*' %{
   set-option buffer filetype buffer_list

@@ -7,7 +7,7 @@ declare-option -hidden range-specs easy_motion_ranges
 declare-option -hidden str-to-str-map easy_motion_label_selection_map
 
 set-face global EasyMotionBackground comment
-set-face global EasyMotionLabel 'rgb:990000+f'
+set-face global EasyMotionLabel 'rgb:f07a2b+F'
 
 add-highlighter shared/easy_motion group
 add-highlighter shared/easy_motion/ fill EasyMotionBackground

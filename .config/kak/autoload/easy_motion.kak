@@ -44,7 +44,7 @@ define-command easy_motion_on_begin %{
   # TODO: cleanup =======[
   eval -draft -save-regs '' %{
     exec "gtGbx<a-s>gh%val{window_width}L"
-    exec 's.<ret><a-i>w'
+    exec 's.<ret><a-i>w<a-k>\A.{2,}\z<ret>'
     set window easy_motion_ranges %val{timestamp}
     reg a %val{selections_desc}
     reg b %opt{easy_motion_labels}

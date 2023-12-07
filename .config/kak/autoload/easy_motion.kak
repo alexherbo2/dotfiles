@@ -41,22 +41,34 @@ define-command easy_motion_enter_select_mode -params 2 %{
 }
 
 define-command easy_motion_on_begin %{
-  # TODO: cleanup =======[
-  eval -draft -save-regs '' %{
-    exec "gtGbx<a-s>gh%val{window_width}L"
-    exec 's.<ret><a-i>w<a-k>\A.{2,}\z<ret>'
-    set window easy_motion_ranges %val{timestamp}
-    reg a %val{selections_desc}
-    reg b %opt{easy_motion_labels}
-    e -scratch
-    exec -save-regs '' '"a<a-R>Za<ret><esc>zxypIset-option -add window easy_motion_label_selection_map "<c-r>b=<esc>A"<esc>kghf,;GldIset-option -add window easy_motion_ranges "<esc>A+2|{EasyMotionLabel}<c-r>b"<esc>%"zy'
-    db
-  }
-  eval %reg{z}
-  # ========]
-  easy_motion_create_label_selection_map_buffer %opt{easy_motion_label_selection_map}
+  unset-option window easy_motion_selections
+  unset-option window easy_motion_ranges
+  unset-option window easy_motion_label_selection_map
   add-highlighter window/easy_motion ref easy_motion
-  # set-option window easy_motion_selections
+  evaluate-commands -save-regs '"' %{
+    evaluate-commands -draft -save-regs 'abc' %{
+      execute-keys 'gtGbxs\w+<ret><a-i>w<a-k>\A.{2,}\z<ret>'
+      set-register a %val{selections_desc}
+      execute-keys '<a-;>;L'
+      set-register b %val{selections_desc}
+      set-register c %opt{easy_motion_labels}
+      edit -scratch
+      execute-keys '"a<a-P>a<space><esc>Z"bpa<space><esc><a-Z>u"cp<a-z>u'
+      evaluate-commands -itersel %{
+        execute-keys 's\A(\d+\.\d+,\d+\.\d+) (\d+\.\d+,\d+\.\d+) (\w+)\z<ret>'
+        set-register dquote %exp{
+          set-option -add window easy_motion_ranges "%reg{2}|{EasyMotionLabel}%reg{3}";
+          set-option -add window easy_motion_label_selection_map "%reg{3}=%reg{1}";
+        }
+        execute-keys 'R'
+      }
+      execute-keys -save-regs '' '%y'
+      delete-buffer
+    }
+    set-option window easy_motion_ranges %val{timestamp}
+    evaluate-commands %reg{dquote}
+  }
+  easy_motion_create_label_selection_map_buffer %opt{easy_motion_label_selection_map}
 }
 
 define-command easy_motion_on_end %{

@@ -6,8 +6,7 @@ define-command update_selected_text_ranges %{
   # Reset ranges
   unset-option window selected_text_ranges
   evaluate-commands -draft -save-regs '^' -verbatim -- try %{
-    execute-keys '<a-k>..<ret>'
-    execute-keys '<a-K>\A\h+\z<ret>'
+    execute-keys '<a-K>\A(.|\h+)\z<ret>'
     # Initialize ranges
     set-option window selected_text_ranges %val{timestamp}
     evaluate-commands -draft %{

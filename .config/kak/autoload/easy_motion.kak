@@ -57,8 +57,8 @@ define-command easy_motion_on_begin %{
       evaluate-commands -itersel %{
         execute-keys 's\A(\d+\.\d+,\d+\.\d+) (\d+\.\d+,\d+\.\d+) (\w+)\z<ret>'
         set-register dquote %exp{
-          set-option -add window easy_motion_ranges "%reg{2}|{EasyMotionLabel}%reg{3}";
-          set-option -add window easy_motion_label_selection_map "%reg{3}=%reg{1}";
+          set-option -add window easy_motion_ranges "%reg{2}|{EasyMotionLabel}%reg{3}"
+          set-option -add window easy_motion_label_selection_map "%reg{3}=%reg{1}"
         }
         execute-keys 'R'
       }

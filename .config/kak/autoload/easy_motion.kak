@@ -11,40 +11,26 @@ set-face global EasyMotionLabel 'rgb:f07a2b+f'
 
 add-highlighter shared/easy_motion group
 add-highlighter shared/easy_motion/ fill EasyMotionBackground
-add-highlighter global/easy_motion_ranges replace-ranges easy_motion_ranges
 
-define-command easy_motion_enter_replace_mode %{
-  easy_motion_enter_select_mode easy_motion_replace_mode: 'z'
-}
-
-define-command easy_motion_enter_extend_mode %{
-  easy_motion_enter_select_mode easy_motion_extend_mode: ',<a-z>u'
-}
-
-define-command easy_motion_enter_append_mode %{
-  easy_motion_enter_select_mode easy_motion_append_mode: '<a-z>a'
-}
-
-define-command easy_motion_enter_select_mode -params 2 %{
-  easy_motion_on_begin
-  prompt %arg{1} %{
-    easy_motion_on_end
-  } -on-change %{
-    try %{
-      easy_motion_match_with_label %val{text} %exp{
-        execute-keys "<esc>%arg{2}<esc>"
-      }
-    }
-  } -on-abort %{
-    easy_motion_on_end
+define-command enter_easy_motion_replace_mode %{
+  enter_easy_motion_mode 'easy_motion (replace):' %{
+    execute-keys '<esc>z<esc>'
   }
 }
 
-define-command easy_motion_on_begin %{
-  unset-option window easy_motion_selections
-  unset-option window easy_motion_ranges
-  unset-option window easy_motion_label_selection_map
-  add-highlighter window/easy_motion ref easy_motion
+define-command enter_easy_motion_extend_mode %{
+  enter_easy_motion_mode 'easy_motion (extend):' %{
+    execute-keys '<esc>,<a-z>u<esc>'
+  }
+}
+
+define-command enter_easy_motion_append_mode %{
+  enter_easy_motion_mode 'easy_motion (append):' %{
+    execute-keys '<esc><a-z>a<esc>'
+  }
+}
+
+define-command enter_easy_motion_mode -params 2 %{
   evaluate-commands -save-regs '"' %{
     evaluate-commands -draft -save-regs 'abc' %{
       execute-keys 'gtGbxs\w+<ret><a-i>w<a-k>\A.{2,}\z<ret>'
@@ -68,34 +54,48 @@ define-command easy_motion_on_begin %{
     set-option window easy_motion_ranges %val{timestamp}
     evaluate-commands %reg{dquote}
   }
-  easy_motion_create_label_selection_map_buffer %opt{easy_motion_label_selection_map}
+  add-highlighter window/easy_motion ref easy_motion
+  add-highlighter window/easy_motion_ranges replace-ranges easy_motion_ranges
+  create_easy_motion_label_selection_map_option_buffer
+  prompt %arg{1} %{
+    exit_easy_motion_mode
+  } -on-change %{
+    try %{
+      easy_motion_match_with_label %val{text} %exp{
+        execute-keys "<esc>%arg{2}<esc>"
+      }
+    }
+  } -on-abort %{
+    exit_easy_motion_mode
+  }
 }
 
-define-command easy_motion_on_end %{
+define-command exit_easy_motion_mode %{
   unset-option window easy_motion_selections
   unset-option window easy_motion_ranges
   unset-option window easy_motion_label_selection_map
   remove-highlighter window/easy_motion
-  easy_motion_close_label_selection_map_buffer
+  remove-highlighter window/easy_motion_ranges
+  close_easy_motion_label_selection_map_option_buffer
 }
 
-define-command easy_motion_create_label_selection_map_buffer -params .. %{
-  evaluate-commands -draft -save-regs '"' %{
+define-command create_easy_motion_label_selection_map_option_buffer %{
+  evaluate-commands -draft -save-regs '"' %exp{
     edit -scratch "easy_motion_label_selection_map@%val{client}.option"
-    set-register dquote %arg{@}
-    execute-keys '<a-R>'
-    set-option buffer easy_motion_selections %val{selections_desc}
+    set-register dquote %opt{easy_motion_label_selection_map}
+    execute-keys '<a-P>Z:set-option buffer easy_motion_selections %%reg{^}<ret>'
   }
 }
 
-define-command easy_motion_close_label_selection_map_buffer %{
+define-command close_easy_motion_label_selection_map_option_buffer %{
   delete-buffer "easy_motion_label_selection_map@%val{client}.option"
 }
 
 define-command easy_motion_match_with_label -params 2 %{
   evaluate-commands -draft -save-regs '^/' %{
     buffer "easy_motion_label_selection_map@%val{client}.option"
-    select %opt{easy_motion_selections}
+    set-register ^ %opt{easy_motion_selections}
+    execute-keys 'z'
     set-register / "\A\Q%arg{1}\E=(\d+\.\d+,\d+\.\d+)\z"
     execute-keys '1s<ret>'
     evaluate-commands -draft -client %val{client} %exp{
@@ -106,6 +106,6 @@ define-command easy_motion_match_with_label -params 2 %{
   }
 }
 
-map -docstring 'easy_motion_enter_replace_mode' global normal f ':easy_motion_enter_replace_mode<ret>'
-map -docstring 'easy_motion_enter_extend_mode' global normal F ':easy_motion_enter_extend_mode<ret>'
-map -docstring 'easy_motion_enter_append_mode' global normal <a-f> ':easy_motion_enter_append_mode<ret>'
+map -docstring 'enter_easy_motion_replace_mode' global normal f ':enter_easy_motion_replace_mode<ret>'
+map -docstring 'enter_easy_motion_extend_mode' global normal F ':enter_easy_motion_extend_mode<ret>'
+map -docstring 'enter_easy_motion_append_mode' global normal <a-f> ':enter_easy_motion_append_mode<ret>'

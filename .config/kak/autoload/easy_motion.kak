@@ -23,7 +23,9 @@ define-command enter_easy_motion_extend_mode %{
 
 define-command enter_easy_motion_append_mode %{
   enter_easy_motion_mode 'easy_motion (append):' %{
-    execute-keys '<esc><a-z>a<esc>'
+    evaluate-commands -save-regs 'st' %{
+      execute-keys '<esc>"sZz"s<a-z>a<esc>'
+    }
   }
 }
 

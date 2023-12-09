@@ -36,7 +36,7 @@ define-command enter_easy_motion_mode -params 2 %{
   prompt %arg{1} %{
     exit_easy_motion_mode
   } -on-change %{
-    match_easy_motion_label %val{text} %arg{2}
+    handle_easy_motion_state %val{text} %arg{2}
   } -on-abort %{
     exit_easy_motion_mode
   }
@@ -62,7 +62,7 @@ define-command build_easy_motion_state -params .. %{
   }
 }
 
-define-command match_easy_motion_label -params 2 %{
+define-command handle_easy_motion_state -params 2 %{
   evaluate-commands %sh{
     jq -r -n '
       env.kak_opt_easy_motion_label_selection_map | fromjson |

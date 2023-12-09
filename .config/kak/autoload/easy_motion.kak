@@ -91,16 +91,15 @@ define-command create_easy_motion_state -params .. %{
 }
 
 define-command handle_easy_motion_input -params 2 %{
-  evaluate-commands -draft -save-regs '^/' -verbatim try %{
-    buffer "easy_motion_label_selection_map@%val{client}.option"
-    select %opt{easy_motion_selections}
-    set-register / "\A\Q%arg{1}\E=(\d+\.\d+,\d+\.\d+)\z"
+  evaluate-commands -buffer "easy_motion_label_selection_map@%val{client}.option" -save-regs '^/' -verbatim try %exp{
+    select %%opt{easy_motion_selections}
+    set-register / "\A\Q%%arg{1}\E=(\d+\.\d+,\d+\.\d+)\z"
     execute-keys '1s<ret>'
-    evaluate-commands -draft -client %val{client} %exp{
-      select %val{selection}
+    evaluate-commands -draft -client %val{client} %%exp{
+      select %%val{selection}
       execute-keys -save-regs '' 'Z'
     }
-    evaluate-commands -client %val{client} %arg{2}
+    evaluate-commands -client %val{client} %%arg{2}
   }
 }
 

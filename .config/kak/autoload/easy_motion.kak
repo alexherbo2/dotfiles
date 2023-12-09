@@ -82,6 +82,7 @@ define-command activate_easy_motion_label -params 6 %{
       select "%arg{2}.%arg{3},%arg{4}.%arg{5}"
       execute-keys -save-regs '' 'Z'
     }
+    info -anchor "%arg{2}.%arg{3}" -markup "{EasyMotionLabel}%arg{1}"
     evaluate-commands %arg{6}
   }
 }

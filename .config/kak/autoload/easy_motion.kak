@@ -29,14 +29,14 @@ define-command enter_easy_motion_append_mode %{
 define-command enter_easy_motion_mode -params 2 %{
   evaluate-commands -draft %{
     execute-keys 'gtGbxs\w+<ret><a-i>w<a-k>\A.{2,}\z<ret>)'
-    build_easy_motion_state %val{selections_desc}
+    create_new_easy_motion_state %val{selections_desc}
   }
   add-highlighter window/easy_motion ref easy_motion
   add-highlighter window/easy_motion_ranges replace-ranges easy_motion_ranges
   prompt %arg{1} %{
     exit_easy_motion_mode
   } -on-change %{
-    handle_easy_motion_state %val{text} %arg{2}
+    handle_easy_motion_input %val{text} %arg{2}
   } -on-abort %{
     exit_easy_motion_mode
   }
@@ -50,7 +50,7 @@ define-command exit_easy_motion_mode %{
   remove-highlighter window/easy_motion_ranges
 }
 
-define-command build_easy_motion_state -params .. %{
+define-command create_new_easy_motion_state -params .. %{
   evaluate-commands %sh{
     jq -r -n '
       $ARGS.positional | map(split(",") | map(split(".") | map(tonumber))) as $kak_selections_desc |
@@ -62,13 +62,13 @@ define-command build_easy_motion_state -params .. %{
   }
 }
 
-define-command handle_easy_motion_state -params 2 %{
+define-command handle_easy_motion_input -params 2 %{
   evaluate-commands %sh{
     jq -r -n '
       env.kak_opt_easy_motion_label_selection_map | fromjson |
       if has($ARGS.positional[0])
       then
-        ["with_easy_motion_label", .[$ARGS.positional[0]][0][0], .[$ARGS.positional[0]][0][1], .[$ARGS.positional[0]][1][0], .[$ARGS.positional[0]][1][1], "%arg{2}"] | join(" ")
+        ["activate_easy_motion_label", $ARGS.positional[0], .[$ARGS.positional[0]][0][0], .[$ARGS.positional[0]][0][1], .[$ARGS.positional[0]][1][0], .[$ARGS.positional[0]][1][1], "%arg{2}"] | join(" ")
       else
         empty
       end
@@ -76,13 +76,13 @@ define-command handle_easy_motion_state -params 2 %{
   }
 }
 
-define-command with_easy_motion_label -params 5 %{
+define-command activate_easy_motion_label -params 6 %{
   evaluate-commands -save-regs '^' %{
     evaluate-commands -draft %{
-      select "%arg{1}.%arg{2},%arg{3}.%arg{4}"
+      select "%arg{2}.%arg{3},%arg{4}.%arg{5}"
       execute-keys -save-regs '' 'Z'
     }
-    evaluate-commands %arg{5}
+    evaluate-commands %arg{6}
   }
 }
 

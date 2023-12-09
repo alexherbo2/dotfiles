@@ -28,7 +28,7 @@ define-command enter_easy_motion_append_mode %{
 
 define-command enter_easy_motion_mode -params 2 %{
   evaluate-commands -draft %{
-    execute-keys 'gtGbxs\w+<ret><a-i>w<a-k>\A.{2,}\z<ret>'
+    execute-keys 'gtGbxs\w+<ret><a-i>w<a-k>\A.{2,}\z<ret>)'
     build_easy_motion_state %val{selections_desc}
   }
   add-highlighter window/easy_motion ref easy_motion

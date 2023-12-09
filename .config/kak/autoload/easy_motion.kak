@@ -61,9 +61,7 @@ define-command enter_easy_motion_mode -params 2 %{
     exit_easy_motion_mode
   } -on-change %{
     try %{
-      easy_motion_match_with_label %val{text} %exp{
-        execute-keys "<esc>%arg{2}<esc>"
-      }
+      easy_motion_match_with_label %val{text} %arg{2}
     }
   } -on-abort %{
     exit_easy_motion_mode

@@ -83,7 +83,8 @@ define-command create_easy_motion_label_selection_map_option_buffer %{
   evaluate-commands -draft -save-regs '"' %exp{
     edit -scratch "easy_motion_label_selection_map@%val{client}.option"
     set-register dquote %opt{easy_motion_label_selection_map}
-    execute-keys '<a-P>Z:set-option buffer easy_motion_selections %%reg{^}<ret>'
+    execute-keys '<a-P>'
+    set-option buffer easy_motion_selections %%val{selections_desc}
   }
 }
 
@@ -94,8 +95,7 @@ define-command close_easy_motion_label_selection_map_option_buffer %{
 define-command easy_motion_match_with_label -params 2 %{
   evaluate-commands -draft -save-regs '^/' %{
     buffer "easy_motion_label_selection_map@%val{client}.option"
-    set-register ^ %opt{easy_motion_selections}
-    execute-keys 'z'
+    select %opt{easy_motion_selections}
     set-register / "\A\Q%arg{1}\E=(\d+\.\d+,\d+\.\d+)\z"
     execute-keys '1s<ret>'
     evaluate-commands -draft -client %val{client} %exp{

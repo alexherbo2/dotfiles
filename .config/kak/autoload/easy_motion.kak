@@ -60,9 +60,7 @@ define-command enter_easy_motion_mode -params 2 %{
   prompt %arg{1} %{
     exit_easy_motion_mode
   } -on-change %{
-    try %{
-      easy_motion_match_with_label %val{text} %arg{2}
-    }
+    match_easy_motion_label %val{text} %arg{2}
   } -on-abort %{
     exit_easy_motion_mode
   }
@@ -90,8 +88,8 @@ define-command close_easy_motion_label_selection_map_option_buffer %{
   delete-buffer "easy_motion_label_selection_map@%val{client}.option"
 }
 
-define-command easy_motion_match_with_label -params 2 %{
-  evaluate-commands -draft -save-regs '^/' %{
+define-command match_easy_motion_label -params 2 %{
+  evaluate-commands -draft -save-regs '^/' -verbatim try %{
     buffer "easy_motion_label_selection_map@%val{client}.option"
     select %opt{easy_motion_selections}
     set-register / "\A\Q%arg{1}\E=(\d+\.\d+,\d+\.\d+)\z"

@@ -45,9 +45,6 @@ define-command enter_easy_motion_mode -params 2 %{
 }
 
 define-command exit_easy_motion_mode %{
-  unset-option window easy_motion_selections
-  unset-option window easy_motion_ranges
-  unset-option window easy_motion_label_selection_map
   remove-highlighter window/easy_motion
   remove-highlighter window/easy_motion_ranges
   close_easy_motion_label_selection_map_option_buffer
@@ -83,6 +80,7 @@ define-command create_easy_motion_state -params .. %{
     execute-keys -save-regs '' '%y'
     delete-buffer
     set-option window easy_motion_ranges %val{timestamp}
+    set-option window easy_motion_label_selection_map
     evaluate-commands %reg{dquote}
   }
 }

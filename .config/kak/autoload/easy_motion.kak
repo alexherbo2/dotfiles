@@ -99,7 +99,3 @@ define-command handle_easy_motion_input -params 2 %{
     evaluate-commands -client %val{client} %%arg{2}
   }
 }
-
-map -docstring 'enter_easy_motion_replace_mode' global normal f ':enter_easy_motion_replace_mode<ret>'
-map -docstring 'enter_easy_motion_extend_mode' global normal F ':enter_easy_motion_extend_mode<ret>'
-map -docstring 'enter_easy_motion_append_mode' global normal <a-f> ':enter_easy_motion_append_mode<ret>'

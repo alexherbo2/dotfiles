@@ -67,7 +67,7 @@ define-command close_easy_motion_label_selection_map_option_buffer %{
 }
 
 define-command create_easy_motion_state -params .. %{
-  evaluate-commands -save-regs 'abc' %{
+  evaluate-commands -save-regs '"ab' %{
     set-register a %arg{@}
     set-register b %opt{easy_motion_labels}
     edit -scratch
@@ -80,10 +80,10 @@ define-command create_easy_motion_state -params .. %{
       }
       execute-keys 'R'
     }
-    execute-keys -save-regs '' '%"cy'
+    execute-keys -save-regs '' '%y'
     delete-buffer
     set-option window easy_motion_ranges %val{timestamp}
-    evaluate-commands %reg{c}
+    evaluate-commands %reg{dquote}
   }
 }
 

@@ -32,7 +32,7 @@ define-command enter_easy_motion_append_mode %{
 define-command enter_easy_motion_mode -params 2 %{
   evaluate-commands -draft %{
     execute-keys 'gtGbxs\w+<ret><a-i>w<a-k>\A.{2,}\z<ret>)'
-    evaluate-commands -client %val{client} -verbatim create_easy_motion_state %val{selections_desc}
+    evaluate-commands -client %val{client} -verbatim create_easy_motion_state %opt{easy_motion_selections}
   }
   add-highlighter window/easy_motion ref easy_motion
   add-highlighter window/easy_motion_ranges replace-ranges easy_motion_ranges
@@ -53,11 +53,13 @@ define-command exit_easy_motion_mode %{
 }
 
 define-command create_easy_motion_label_selection_map_option_buffer %{
-  evaluate-commands -draft -save-regs '"' %exp{
-    edit -scratch "easy_motion_label_selection_map@%val{client}.option"
+  evaluate-commands -save-regs '"' %{
     set-register dquote %opt{easy_motion_label_selection_map}
-    execute-keys '<a-P>'
-    set-option buffer easy_motion_selections %%val{selections_desc}
+    evaluate-commands -draft %{
+      edit -scratch "easy_motion_label_selection_map@%val{client}.option"
+      execute-keys '<a-P>'
+      set-option buffer easy_motion_selections %val{selections_desc}
+    }
   }
 }
 
@@ -69,18 +71,20 @@ define-command create_easy_motion_state -params .. %{
   evaluate-commands -save-regs '"ab' %{
     set-register a %arg{@}
     set-register b %opt{easy_motion_labels}
-    edit -scratch
-    execute-keys '"a<a-P>a<space><c-r>b<esc>'
-    evaluate-commands -itersel %{
-      execute-keys 's\A(\d+)\.(\d+),(\d+)\.(\d+) (\w+)\z<ret>'
-      set-register dquote %exp{
-        set-option -add window easy_motion_ranges "%reg{1}.%reg{2}+2|{EasyMotionLabel}%reg{5}"
-        set-option -add window easy_motion_label_selection_map "%reg{5}=%reg{1}.%reg{2},%reg{3}.%reg{4}"
+    evaluate-commands -draft %{
+      edit -scratch
+      execute-keys '"a<a-P>a<space><c-r>b<esc>'
+      evaluate-commands -itersel %{
+        execute-keys 's\A(\d+)\.(\d+),(\d+)\.(\d+) (\w+)\z<ret>'
+        set-register dquote %exp{
+          set-option -add window easy_motion_ranges "%reg{1}.%reg{2}+2|{EasyMotionLabel}%reg{5}"
+          set-option -add window easy_motion_label_selection_map "%reg{5}=%reg{1}.%reg{2},%reg{3}.%reg{4}"
+        }
+        execute-keys 'R'
       }
-      execute-keys 'R'
+      execute-keys -save-regs '' '%y'
+      delete-buffer
     }
-    execute-keys -save-regs '' '%y'
-    delete-buffer
     set-option window easy_motion_ranges %val{timestamp}
     set-option window easy_motion_label_selection_map
     evaluate-commands %reg{dquote}
@@ -88,14 +92,15 @@ define-command create_easy_motion_state -params .. %{
 }
 
 define-command handle_easy_motion_input -params 2 %{
-  evaluate-commands -buffer "easy_motion_label_selection_map@%val{client}.option" -save-regs '^/' -verbatim try %exp{
-    select %%opt{easy_motion_selections}
-    set-register / "\A\Q%%arg{1}\E=(\d+\.\d+,\d+\.\d+)\z"
+  evaluate-commands -draft -save-regs '^/' -verbatim -- try %{
+    buffer "easy_motion_label_selection_map@%val{client}.option"
+    select %opt{easy_motion_selections}
+    set-register / "\A\Q%arg{1}\E=(\d+\.\d+,\d+\.\d+)\z"
     execute-keys '1s<ret>'
-    evaluate-commands -draft -client %val{client} %%exp{
-      select %%val{selection}
+    evaluate-commands -draft -client %val{client} %exp{
+      select %val{selection}
       execute-keys -save-regs '' 'Z'
     }
-    evaluate-commands -client %val{client} %%arg{2}
+    evaluate-commands -client %val{client} %arg{2}
   }
 }

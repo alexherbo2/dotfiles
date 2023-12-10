@@ -5,7 +5,7 @@ declare-option -hidden range-specs selected_text_ranges
 define-command update_selected_text_ranges %{
   # Reset ranges
   unset-option window selected_text_ranges
-  evaluate-commands -draft -save-regs '^' -verbatim -- try %{
+  evaluate-commands -draft -verbatim try %{
     execute-keys '<a-K>\A(.|\h+)\z<ret>'
     # Initialize ranges
     set-option window selected_text_ranges %val{timestamp}

@@ -12,13 +12,17 @@ add-highlighter shared/easy_motion/ fill EasyMotionBackground
 
 define-command enter_easy_motion_replace_mode %{
   enter_easy_motion_mode 'easy_motion (replace):' %{
-    execute-keys '<esc>z<esc>'
+    try %{
+      execute-keys -save-regs 's' '<esc><a-,>"sZz"s<a-z>a<esc>'
+    } catch %{
+      execute-keys '<esc>z<esc>'
+    }
   }
 }
 
 define-command enter_easy_motion_extend_mode %{
   enter_easy_motion_mode 'easy_motion (extend):' %{
-    execute-keys '<esc>,<a-z>u<esc>'
+    execute-keys -save-regs 's' '<esc>"sZ,<a-z>u"s<a-z>a<esc>'
   }
 }
 

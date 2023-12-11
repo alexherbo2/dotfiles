@@ -44,7 +44,7 @@ define-command exit_easy_motion_mode %{
 
 define-command render_easy_motion_labels %{
   add-highlighter window/easy_motion ref easy_motion
-  add-highlighter window/easy_motion_ranges ranges easy_motion_ranges
+  add-highlighter window/easy_motion_ranges replace-ranges easy_motion_ranges
 }
 
 define-command unrender_easy_motion_labels %{
@@ -76,11 +76,15 @@ define-command open_easy_motion_label_selection_map_option_buffer %{
   select %opt{easy_motion_selections}
 }
 
+define-command close_easy_motion_label_selection_map_option_buffer %{
+  delete-buffer "easy_motion_label_selection_map@%val{client}.option"
+}
+
 define-command handle_easy_motion_input -params 2 %{
   evaluate-commands -save-regs '^/' -draft -verbatim try %{
     open_easy_motion_label_selection_map_option_buffer
     set-register / "\A\Q%arg{1}\E=(\d+\.\d+,\d+\.\d+)\z"
-    execute-keys '<a-k><ret>'
+    execute-keys 's<ret>'
     evaluate-commands -draft -client %val{client} %exp{
       select -timestamp %%opt{easy_motion_timestamp} %reg{1}
       execute-keys -save-regs '' 'Z'
@@ -91,7 +95,7 @@ define-command handle_easy_motion_input -params 2 %{
 
 define-command create_easy_motion_state_from_words_in_viewport %{
   create_easy_motion_state_from_selections_in_viewport %{
-    execute-keys 's\w+<ret><a-i>w<a-k>\A.{2,}\z<ret>'
+    execute-keys 's\w+<ret><a-i>w'
   }
 }
 
@@ -99,7 +103,7 @@ define-command create_easy_motion_state_from_selections_in_viewport -params 1 %{
   evaluate-commands -draft %{
     execute-keys 'gtGbx'
     evaluate-commands %arg{1}
-    execute-keys ')'
+    execute-keys '<a-k>\A.{2,}\z<ret>)'
     evaluate-commands -client %val{client} -verbatim create_easy_motion_state %val{selections_desc}
   }
 }
@@ -113,7 +117,7 @@ define-command create_easy_motion_state -params .. %{
       edit -scratch
       execute-keys '"a<a-P>a<space><c-r>b<esc>'
       evaluate-commands -itersel %{
-        execute-keys '<a-k>\A(\d+)\.(\d+),(\d+)\.(\d+) (\w+)\z<ret>'
+        execute-keys 's\A(\d+)\.(\d+),(\d+)\.(\d+) (\w+)\z<ret>'
         set-register dquote %exp{
           set-option -add window easy_motion_ranges "%reg{1}.%reg{2}+2|{EasyMotionLabel}%reg{5}"
           set-option -add window easy_motion_label_selection_map "%reg{5}=%reg{1}.%reg{2},%reg{3}.%reg{4}"

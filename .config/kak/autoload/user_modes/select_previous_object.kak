@@ -17,7 +17,7 @@ define-command -hidden select_previous_bracket_blocks %{
 }
 
 define-command -hidden select_previous_angle_blocks %{
-  execute-keys 's<lt><a-a>a<a-;>'
+  execute-keys '<a-f><lt><a-a>a<a-;>'
 }
 
 define-command -hidden select_previous_double_quote_strings %{

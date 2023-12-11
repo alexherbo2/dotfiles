@@ -76,10 +76,6 @@ define-command open_easy_motion_label_selection_map_option_buffer %{
   select %opt{easy_motion_selections}
 }
 
-define-command open_easy_motion_label_selection_map_option_buffer %{
-  edit -scratch "easy_motion_label_selection_map@%val{client}.option"
-}
-
 define-command handle_easy_motion_input -params 2 %{
   evaluate-commands -save-regs '^/' -draft -verbatim try %{
     open_easy_motion_label_selection_map_option_buffer

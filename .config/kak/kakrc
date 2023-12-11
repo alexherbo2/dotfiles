@@ -78,6 +78,10 @@ map global normal <c-p> ':iterate_previous_selection<ret>'
 map global normal '#' ':toggle_comments_with_config<ret>'
 map global normal x ':select_whole_lines_or_extend_lines_down<ret>'
 
+map -docstring 'enter easy_motion replace mode' global normal f ':enter_easy_motion_replace_mode<ret>'
+map -docstring 'enter easy_motion extend mode' global normal F ':enter_easy_motion_extend_mode<ret>'
+map -docstring 'enter easy_motion append mode' global normal <a-f> ':enter_easy_motion_append_mode<ret>'
+
 # Match mode -------------------------------------------------------------------
 
 map -docstring 'enter surround mode' global match s ':enter_surround_mode<ret>'

@@ -17,7 +17,7 @@ define-command -hidden select_next_bracket_blocks %{
 }
 
 define-command -hidden select_next_angle_blocks %{
-  execute-keys 's<lt><a-a>a'
+  execute-keys 'f<lt><a-a>a'
 }
 
 define-command -hidden select_next_double_quote_strings %{

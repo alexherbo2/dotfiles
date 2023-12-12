@@ -244,6 +244,14 @@ swaymsg reload
 chown -R taupiqueur:users home storage shared
 chown -R taupiqueur:staff home storage shared
 xattr -rc home storage shared
+mkdir -p mnt/Disk
+mkdir -p mnt/USB
+sudo mount /dev/disk/by-label/Disk mnt
+sudo mount /dev/disk/by-label/USB mnt
+sudo umount /dev/disk/by-label/Disk
+sudo umount /dev/disk/by-label/USB
+rsync home storage shared guest:mnt/Disk
+rsync home shared guest:mnt/USB
 rsync home storage shared /Volumes/Disk
 rsync home shared /Volumes/USB
 rm -R /Volumes/Disk/.fseventsd

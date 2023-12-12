@@ -4,8 +4,11 @@ declare-option str-to-str-map easy_motion_label_selection_map
 declare-option int easy_motion_timestamp
 declare-option str-list easy_motion_selections
 
+set-face global EasyMotionForeground 'black,bright-yellow+f'
 set-face global EasyMotionBackground comment
-set-face global EasyMotionLabel 'rgb:f07a2b+f'
+
+set-face global EasyMotionForeground OverlayForeground
+set-face global EasyMotionBackground OverlayBackground
 
 add-highlighter shared/easy_motion group
 add-highlighter shared/easy_motion/ fill EasyMotionBackground
@@ -123,7 +126,7 @@ define-command create_easy_motion_state -params .. %{
       evaluate-commands -itersel %{
         execute-keys 's\A(\d+)\.(\d+),(\d+)\.(\d+) (\w+)\z<ret>'
         set-register dquote %exp{
-          set-option -add window easy_motion_ranges "%reg{1}.%reg{2}+2|{EasyMotionLabel}%reg{5}"
+          set-option -add window easy_motion_ranges "%reg{1}.%reg{2}+2|{EasyMotionForeground}%reg{5}"
           set-option -add window easy_motion_label_selection_map "%reg{5}=%reg{1}.%reg{2},%reg{3}.%reg{4}"
         }
         execute-keys 'R'

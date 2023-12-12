@@ -18,6 +18,8 @@ define-command helpgrep -params 1 -docstring 'grep help' %{
   grep %arg{1} "%val{runtime}/doc" "%val{runtime}/autoload" "%val{config}/autoload"
 }
 
+colorscheme "%val{config}/colors/default.kak"
+
 evaluate-commands %sh{
   find -L "$kak_config/autoload" -type f -name '*.kak' -exec printf 'source "%s";' {} +
 }

@@ -1,1 +1,0 @@
-macos_light.kak

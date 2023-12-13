@@ -1,0 +1,6 @@
+import = [
+  '~/.config/alacritty/colors/macos_light.toml'
+]
+
+[colors.primary]
+background = '#f5f5f5'

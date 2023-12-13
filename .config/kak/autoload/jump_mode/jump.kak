@@ -127,7 +127,7 @@ define-command create_jump_state -params .. %{
       edit -scratch
       execute-keys '"a<a-P>a<space><c-r>b<esc>'
       evaluate-commands -itersel %{
-        execute-keys 's\A(\d+)\.(\d+),(\d+)\.(\d+) (\w+)\z<ret>'
+        execute-keys 's\A(\d+)\.(\d+),(\d+)\.(\d+) (..)\z<ret>'
         set-register dquote %exp{
           set-option -add window jump_ranges "%reg{1}.%reg{2}+2|{JumpLabel}%reg{5}"
           set-option -add window jump_label_selection_map "%reg{5}=%reg{1}.%reg{2},%reg{3}.%reg{4}"

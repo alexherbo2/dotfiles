@@ -169,15 +169,15 @@ define-command generate_jump_labels -params .. %{
     for jump_char do
       if [ "${#jump_char}" -ne 1 ]
       then
-        printf 'fail "cannot parse args as a list of chars: %%arg{%d}"' "$i"
+        printf 'fail "generate_jump_labels: %%arg{%d} is not a char"' "$i"
         exit 1
       fi
       j=1
       for jump_char do
         kak_command="$kak_command \"%arg{$i}%arg{$j}\""
-        j=$((j+1))
+        j=$(( j + 1 ))
       done
-      i=$((i+1))
+      i=$(( i + 1 ))
     done
     echo "$kak_command"
   }

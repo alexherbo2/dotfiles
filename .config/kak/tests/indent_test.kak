@@ -1,5 +1,5 @@
 # https://crystal-lang.org/reference/master/syntax_and_semantics/enum.html
-define-command test_toggle_line_comments %{
+define-command test_indent_on_inserted_character_with_indentation_rules %{
 
   buffer_str! '*input*' %[
     enum Color

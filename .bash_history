@@ -61,6 +61,7 @@ git clone https://github.com/codemirror/dev.git ~/.local/share/github.com/codemi
 git clone https://github.com/crystal-lang/crystal.git ~/.local/share/github.com/crystal-lang/crystal
 git clone https://github.com/elixir-lang/elixir.git ~/.local/share/github.com/elixir-lang/elixir
 git clone https://github.com/jhawthorn/fzy.git ~/.local/share/github.com/jhawthorn/fzy
+git clone https://github.com/jmacdonald/amp.git ~/.local/share/github.com/jmacdonald/amp
 git clone https://github.com/helix-editor/helix.git ~/.local/share/github.com/helix-editor/helix
 git clone https://github.com/rabite0/hunter.git ~/.local/share/github.com/rabite0/hunter
 git clone https://github.com/i3/i3.git ~/.local/share/github.com/i3/i3

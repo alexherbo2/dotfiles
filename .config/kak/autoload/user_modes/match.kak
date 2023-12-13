@@ -1,4 +1,13 @@
-# https://docs.helix-editor.com/keymap.html#match-mode
+# These mappings are in the style of Helix’s match mode.
+# Helix’s match mode: https://docs.helix-editor.com/keymap.html#match-mode
+#
+# require "enter_surround_mode"
+# require "enter_select_mode"
+# require "enter_select_previous_object_mode"
+# require "enter_select_next_object_mode"
+#
+# Example configuration:
+# map global normal m ':enter_match_mode<ret>'
 declare-user-mode match
 
 define-command enter_match_mode %{

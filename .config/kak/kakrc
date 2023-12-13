@@ -2,10 +2,7 @@
 # https://kakoune.org
 # https://github.com/mawww/kakoune
 
-colorscheme "%val{config}/colors/macos_light.kak"
-colorscheme "%val{config}/colors/one-dark.kak"
-set-face global OverlayForeground 'black,bright-yellow+f'
-set-face global OverlayBackground comment
+colorscheme macos_light_low_contrast
 
 # Preamble ---------------------------------------------------------------------
 

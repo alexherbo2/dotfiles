@@ -2,6 +2,7 @@ declare-option range-specs jump_ranges
 declare-option str-to-str-map jump_label_selection_map
 declare-option int jump_timestamp
 declare-option str-list jump_selections
+declare-option str-list jump_chars 'a' 'b' 'c' 'd' 'e' 'f' 'g' 'h' 'i' 'j' 'k' 'l' 'm' 'n' 'o' 'p' 'q' 'r' 's' 't' 'u' 'v' 'w' 'x' 'y' 'z'
 declare-option str-list jump_labels \
   'aa' 'ab' 'ac' 'ad' 'ae' 'af' 'ag' 'ah' 'ai' 'aj' 'ak' 'al' 'am' 'an' 'ao' 'ap' 'aq' 'ar' 'as' 'at' 'au' 'av' 'aw' 'ax' 'ay' 'az' \
   'ba' 'bb' 'bc' 'bd' 'be' 'bf' 'bg' 'bh' 'bi' 'bj' 'bk' 'bl' 'bm' 'bn' 'bo' 'bp' 'bq' 'br' 'bs' 'bt' 'bu' 'bv' 'bw' 'bx' 'by' 'bz' \
@@ -29,6 +30,10 @@ declare-option str-list jump_labels \
   'xa' 'xb' 'xc' 'xd' 'xe' 'xf' 'xg' 'xh' 'xi' 'xj' 'xk' 'xl' 'xm' 'xn' 'xo' 'xp' 'xq' 'xr' 'xs' 'xt' 'xu' 'xv' 'xw' 'xx' 'xy' 'xz' \
   'ya' 'yb' 'yc' 'yd' 'ye' 'yf' 'yg' 'yh' 'yi' 'yj' 'yk' 'yl' 'ym' 'yn' 'yo' 'yp' 'yq' 'yr' 'ys' 'yt' 'yu' 'yv' 'yw' 'yx' 'yy' 'yz' \
   'za' 'zb' 'zc' 'zd' 'ze' 'zf' 'zg' 'zh' 'zi' 'zj' 'zk' 'zl' 'zm' 'zn' 'zo' 'zp' 'zq' 'zr' 'zs' 'zt' 'zu' 'zv' 'zw' 'zx' 'zy' 'zz'
+
+hook global GlobalSetOption jump_chars=.* %{
+  generate_jump_labels %opt{jump_chars}
+}
 
 set-face global JumpLabel 'black,bright-yellow+f'
 set-face global JumpOverlay comment
@@ -155,4 +160,25 @@ define-command open_jump_label_selection_map_option_buffer %{
 
 define-command close_jump_label_selection_map_option_buffer %{
   delete-buffer "jump_label_selection_map@%val{client}.option"
+}
+
+define-command generate_jump_labels -params .. %{
+  evaluate-commands %sh{
+    kak_command='set-option global jump_labels'
+    i=1
+    for jump_char do
+      if [ "${#jump_char}" -ne 1 ]
+      then
+        printf 'fail "cannot parse args as a list of chars: %%arg{%d}"' "$i"
+        exit 1
+      fi
+      j=1
+      for jump_char do
+        kak_command="$kak_command \"%arg{$i}%arg{$j}\""
+        j=$((j+1))
+      done
+      i=$((i+1))
+    done
+    echo "$kak_command"
+  }
 }

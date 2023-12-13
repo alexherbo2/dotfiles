@@ -78,7 +78,7 @@ map global normal x ':select_whole_lines_or_extend_lines_down<ret>'
 
 map -docstring 'enter word jump replace mode' global normal f ':enter_word_jump_replace_mode<ret>'
 map -docstring 'enter word jump extend mode' global normal F ':enter_word_jump_extend_mode<ret>'
-map -docstring 'enter word jump append mode' global normal <a-F> ':enter_word_jump_append_mode<ret>'
+map -docstring 'enter word jump append mode' global normal <a-f> ':enter_word_jump_append_mode<ret>'
 
 # User mode --------------------------------------------------------------------
 

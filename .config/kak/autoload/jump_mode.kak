@@ -1,3 +1,11 @@
+# name: kakoune_jump_mode
+# version: 0.1.0
+# description: Click with your keyboard.
+# authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
+# kakoune: 2023-12-12
+# license: MIT
+# dependencies: []
+#
 # Example configuration:
 # set-option global jump_chars 'a' 'b' 'c' 'd' 'e' 'f' 'g' 'h' 'i' 'j' 'k' 'l' 'm' 'n' 'o' 'p' 'q' 'r' 's' 't' 'u' 'v' 'w' 'x' 'y' 'z'
 # set-face global JumpLabel 'black,bright-yellow+f'

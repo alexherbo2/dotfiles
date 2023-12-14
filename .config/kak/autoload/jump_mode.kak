@@ -44,7 +44,7 @@ hook global GlobalSetOption 'jump_chars=.*' %{
   generate_jump_labels %opt{jump_chars}
 }
 
-set-face global JumpLabel 'black,bright-yellow+f'
+set-face global JumpLabel 'black,bright-yellow+F'
 set-face global JumpOverlay default
 
 add-highlighter shared/jump group

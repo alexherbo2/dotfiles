@@ -3,5 +3,5 @@ define-command rm %{
     rm -- "$kak_buffile" ||
     printf "fail 'ERROR: rm exited with: %d.'" "$?"
   }
-  delete-buffer
+  delete-buffer!
 }

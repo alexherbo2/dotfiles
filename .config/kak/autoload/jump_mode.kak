@@ -5,6 +5,8 @@
 # kakoune: 2023-12-12
 # license: MIT
 # dependencies: []
+# doc: yes
+# tests: no
 declare-option range-specs jump_ranges
 declare-option str-to-str-map jump_label_selection_map
 declare-option int jump_timestamp

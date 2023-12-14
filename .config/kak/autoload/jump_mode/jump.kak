@@ -48,17 +48,17 @@ add-highlighter shared/jump/ fill JumpOverlay
 
 define-command enter_jump_mode_with_replace_select_mode %{
   create_jump_state_from_words_in_viewport
-  enter_jump_replace_mode
+  enter_jump_mode_with_replace_select_mode_impl
 }
 
 define-command enter_jump_mode_with_extend_select_mode %{
   create_jump_state_from_words_in_viewport
-  enter_jump_extend_mode
+  enter_jump_mode_with_extend_select_mode_impl
 }
 
 define-command enter_jump_mode_with_append_select_mode %{
   create_jump_state_from_words_in_viewport
-  enter_jump_append_mode
+  enter_jump_mode_with_append_select_mode_impl
 }
 
 define-command enter_jump_mode_with_replace_select_mode_impl %{

@@ -1,3 +1,8 @@
+# Example configuration:
+# map -docstring 'enter jump mode (select mode: replace)' global normal f ':enter_jump_mode_with_replace_select_mode<ret>'
+# map -docstring 'enter jump mode (select mode: extend)' global normal F ':enter_jump_mode_with_extend_select_mode<ret>'
+# map -docstring 'enter jump mode (select mode: append)' global normal <a-f> ':enter_jump_mode_with_append_select_mode<ret>'
+
 declare-option range-specs jump_ranges
 declare-option str-to-str-map jump_label_selection_map
 declare-option int jump_timestamp
@@ -31,7 +36,7 @@ declare-option str-list jump_labels \
   'ya' 'yb' 'yc' 'yd' 'ye' 'yf' 'yg' 'yh' 'yi' 'yj' 'yk' 'yl' 'ym' 'yn' 'yo' 'yp' 'yq' 'yr' 'ys' 'yt' 'yu' 'yv' 'yw' 'yx' 'yy' 'yz' \
   'za' 'zb' 'zc' 'zd' 'ze' 'zf' 'zg' 'zh' 'zi' 'zj' 'zk' 'zl' 'zm' 'zn' 'zo' 'zp' 'zq' 'zr' 'zs' 'zt' 'zu' 'zv' 'zw' 'zx' 'zy' 'zz'
 
-hook global GlobalSetOption jump_chars=.* %{
+hook global GlobalSetOption 'jump_chars=.*' %{
   generate_jump_labels %opt{jump_chars}
 }
 
@@ -41,8 +46,23 @@ set-face global JumpOverlay comment
 add-highlighter shared/jump group
 add-highlighter shared/jump/ fill JumpOverlay
 
-define-command enter_jump_replace_mode %{
-  enter_jump_mode 'jump (replace):' %{
+define-command enter_jump_mode_with_replace_select_mode %{
+  create_jump_state_from_words_in_viewport
+  enter_jump_replace_mode
+}
+
+define-command enter_jump_mode_with_extend_select_mode %{
+  create_jump_state_from_words_in_viewport
+  enter_jump_extend_mode
+}
+
+define-command enter_jump_mode_with_append_select_mode %{
+  create_jump_state_from_words_in_viewport
+  enter_jump_append_mode
+}
+
+define-command enter_jump_mode_with_replace_select_mode_impl %{
+  enter_jump_mode_impl 'jump (replace):' %{
     try %{
       execute-keys -save-regs 's' '<esc><a-,>"sZz"s<a-z>a<esc>'
     } catch %{
@@ -51,19 +71,19 @@ define-command enter_jump_replace_mode %{
   }
 }
 
-define-command enter_jump_extend_mode %{
-  enter_jump_mode 'jump (extend):' %{
+define-command enter_jump_mode_with_extend_select_mode_impl %{
+  enter_jump_mode_impl 'jump (extend):' %{
     execute-keys -save-regs 's' '<esc>"sZ,<a-z>u"s<a-z>a<esc>'
   }
 }
 
-define-command enter_jump_append_mode %{
-  enter_jump_mode 'jump (append):' %{
+define-command enter_jump_mode_with_append_select_mode_impl %{
+  enter_jump_mode_impl 'jump (append):' %{
     execute-keys -save-regs 's' '<esc>"sZz"s<a-z>a<esc>'
   }
 }
 
-define-command enter_jump_mode -params 2 %{
+define-command enter_jump_mode_impl -params 2 %{
   evaluate-commands -draft %{
     create_jump_label_selection_map_option_buffer
   }
@@ -106,6 +126,12 @@ define-command handle_jump_input -params 2 %{
       execute-keys -save-regs '' 'Z'
     }
     evaluate-commands -client %val{client} %arg{2}
+  }
+}
+
+define-command create_jump_state_from_words_in_viewport %{
+  create_jump_state_from_selections_in_viewport %{
+    execute-keys 's\w+<ret><a-i>w'
   }
 }
 

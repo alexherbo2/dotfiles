@@ -19,7 +19,7 @@ set-option global ui_options terminal_set_title=no terminal_assistant=none
 set-option global matching_pairs ( ) { } [ ] < > “ ” ‘ ’ « » ‹ ›
 # set-option global scrolloff 5,1
 add-highlighter global/match_brackets show-matching
-hook global WinCreate .* %{
+hook global WinCreate '.*' %{
   add-highlighter window/line_numbers number-lines -hlcursor
 }
 add-highlighter global/search ref search
@@ -76,9 +76,9 @@ map global normal <c-p> ':iterate_previous_selection<ret>'
 map global normal '#' ':toggle_comments_with_config<ret>'
 map global normal x ':select_whole_lines_or_extend_lines_down<ret>'
 
-map -docstring 'enter word jump replace mode' global normal f ':enter_word_jump_replace_mode<ret>'
-map -docstring 'enter word jump extend mode' global normal F ':enter_word_jump_extend_mode<ret>'
-map -docstring 'enter word jump append mode' global normal <a-f> ':enter_word_jump_append_mode<ret>'
+map -docstring 'enter jump mode (select mode: replace)' global normal f ':enter_jump_mode_with_replace_select_mode<ret>'
+map -docstring 'enter jump mode (select mode: extend)' global normal F ':enter_jump_mode_with_extend_select_mode<ret>'
+map -docstring 'enter jump mode (select mode: append)' global normal <a-f> ':enter_jump_mode_with_append_select_mode<ret>'
 
 # User mode --------------------------------------------------------------------
 
@@ -134,10 +134,10 @@ map global insert <tab> '<a-;>:increase_indent<ret>'
 map global insert <s-tab> '<a-;>:decrease_indent<ret>'
 map global insert <backspace> '<a-;>:decrease_indent_or_erase_character_before_cursor<ret>'
 
-hook global InsertCompletionShow .* %{
+hook global InsertCompletionShow '.*' %{
   map window insert <tab> <c-n>
   map window insert <s-tab> <c-p>
-  hook -once window InsertCompletionHide .* %{
+  hook -once window InsertCompletionHide '.*' %{
     unmap window insert <tab>
     unmap window insert <s-tab>
   }
@@ -160,14 +160,14 @@ add_open_directory_user_hook global
 
 # Language support -------------------------------------------------------------
 
-hook global InsertChar .* indent_on_inserted_character_with_indentation_rules
+hook global InsertChar '.*' indent_on_inserted_character_with_indentation_rules
 
 # Indentation
 set-option global tabstop 4
 set-option global indentwidth 2
 
-hook global BufOpenFile .* %{
-  hook -once buffer NormalIdle .* %{
+hook global BufOpenFile '.*' %{
+  hook -once buffer NormalIdle '.*' %{
     detect-indent-style
   }
 }

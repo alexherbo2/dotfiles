@@ -9,7 +9,7 @@ define-command docgrep -params 1 -docstring 'grep doc' %{
 }
 
 complete-command docgrep shell-script-candidates %{
-  find -L "$kak_config/autoload" "$kak_runtime/doc" "$kak_runtime/rc" -type f -name '*.asciidoc' | xargs grep -o -h '\w\+' -- | sort -u
+  find -L "$kak_config/autoload" "$kak_runtime/doc" "$kak_runtime/rc" -type f -name '*.asciidoc' | xargs egrep -o -h '[\w-]+' -- | sort -u
 }
 
 alias global dg docgrep

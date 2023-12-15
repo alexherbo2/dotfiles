@@ -3,7 +3,7 @@ define-command helpgrep -params 1 -docstring 'grep help' %{
 }
 
 complete-command helpgrep shell-script-candidates %{
-  find -L "$kak_runtime/doc" "$kak_runtime/autoload" "$kak_config/doc" "$kak_config/autoload" -type f '(' -name '*.asciidoc' -or -name '*.md' ')' -exec grep -o -h '\w\+' -- {} +
+  find -L "$kak_runtime/doc" "$kak_runtime/autoload" "$kak_config/doc" "$kak_config/autoload" -type f '(' -name '*.asciidoc' -or -name '*.md' ')' -exec grep -o -h '\w\+' -- {} + | sort -u
 }
 
 alias global hg helpgrep

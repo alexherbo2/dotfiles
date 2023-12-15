@@ -1,4 +1,4 @@
-define-command helpgrep -params 1 -docstring 'grep help' %{
+define-command docgrep -params 1 -docstring 'grep doc' %{
   evaluate-commands -save-regs 'f' %{
     set-register f
     evaluate-commands %sh{
@@ -8,8 +8,8 @@ define-command helpgrep -params 1 -docstring 'grep help' %{
   }
 }
 
-complete-command helpgrep shell-script-candidates %{
+complete-command docgrep shell-script-candidates %{
   find -L "$kak_config/autoload" "$kak_runtime/doc" "$kak_runtime/rc" -type f -name '*.asciidoc' | xargs grep -o -h '\w\+' -- | sort -u
 }
 
-alias global hg helpgrep
+alias global dg docgrep

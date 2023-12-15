@@ -1,5 +1,6 @@
 declare-option str grep_command grep
 declare-option str-list grep_args -R -H -n
+
 declare-option str grep_word_completion %{
   kak_response_fifo=$(mktemp -u)
   mkfifo "$kak_response_fifo"

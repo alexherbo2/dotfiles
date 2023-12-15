@@ -1,9 +1,15 @@
 define-command helpgrep -params 1 -docstring 'grep help' %{
-  grep %arg{1} "%val{runtime}/doc" "%val{runtime}/autoload" "%val{config}/doc" "%val{config}/autoload"
+  evaluate-commands -save-regs 'f' %{
+    set-register f
+    evaluate-commands %sh{
+      find -L "$kak_config/autoload" "$kak_runtime/doc" "$kak_runtime/rc" -type f -name '*.asciidoc' | xargs printf "set-register f %%reg{f} '%s';"
+    }
+    grep %arg{1} %reg{f}
+  }
 }
 
 complete-command helpgrep shell-script-candidates %{
-  find -L "$kak_runtime/doc" "$kak_runtime/autoload" "$kak_config/doc" "$kak_config/autoload" -type f '(' -name '*.asciidoc' -or -name '*.md' ')' -exec grep -o -h '\w\+' -- {} + | sort -u
+  find -L "$kak_config/autoload" "$kak_runtime/doc" "$kak_runtime/rc" -type f -name '*.asciidoc' | xargs grep -o -h '\w\+' -- | sort -u
 }
 
 alias global hg helpgrep

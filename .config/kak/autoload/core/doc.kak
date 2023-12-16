@@ -13,5 +13,5 @@ define-command grep_doc -params 1 -docstring 'grep doc' %{
 }
 
 complete-command grep_doc shell-script-candidates %{
-  find -L "$kak_config/doc" "$kak_runtime/doc" -type f '(' -name '*.asciidoc' -or -name '*.md' ')' -exec grep -o -h -w '[[:alpha:]][[:alnum:]]\+' -- {} + | sort -u
+  find -L "$kak_config/doc" "$kak_runtime/doc" -type f '(' -name '*.asciidoc' -or -name '*.md' ')' -exec grep -o -h -w '[[:alpha:]][[:alnum:]_-]\+' -- {} + | sort -u
 }

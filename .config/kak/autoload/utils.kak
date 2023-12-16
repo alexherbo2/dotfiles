@@ -58,6 +58,12 @@ define-command assert_eq -params 2 %{
   }
 }
 
+define-command load_tests %{
+  evaluate-commands %sh{
+    find -L "$kak_config/tests" -type f -name '*.kak' -exec printf 'source "%s";' {} +
+  }
+}
+
 # Asserts that two buffers are equal to each other.
 # Buffer contents and selected text should be equal.
 define-command assert_buffer_eq -params 2 %{

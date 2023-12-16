@@ -158,12 +158,6 @@ define-command evaluate_selected_text %{
   execute-keys -with-hooks ':<c-r><a-.><ret>'
 }
 
-define-command open_config %{
-  edit "%val{config}/kakrc"
-}
-
-alias global open_kakrc open_config
-
 define-command show_character_info %{
   echo -markup %sh{printf '{Information}U+%04x' "$kak_cursor_char_value"}
 }

@@ -9,7 +9,7 @@ import = [
 # Appearance -------------------------------------------------------------------
 
 font.size = 14.0
-font.normal.family = 'JetBrains Mono'
+font.normal.family = 'Menlo'
 
 selection.save_to_clipboard = true
 

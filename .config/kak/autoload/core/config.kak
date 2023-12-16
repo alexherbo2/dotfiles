@@ -17,5 +17,5 @@ define-command grep_config -params 1 -docstring 'grep config' %{
 }
 
 complete-command grep_config shell-script-candidates %{
-  find -L "$kak_config/autoload" "$kak_runtime/rc" -type f -name '*.kak' -exec grep -o -h -w '[[:alpha:]][[:alnum:]]\+' -- {} + | sort -u
+  find -L "$kak_config/autoload" "$kak_runtime/rc" -type f -name '*.kak' -exec grep -o -h -w '[[:alpha:]][[:alnum:]_-]\+' -- {} + | sort -u
 }

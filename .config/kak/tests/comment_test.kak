@@ -1,5 +1,5 @@
 # https://crystal-lang.org/reference/master/syntax_and_semantics/enum.html
-define-command test_toggle_line_comments %{
+test test_toggle_line_comments %{
 
   buffer_str! '*input*' %[
     enum Color
@@ -55,7 +55,7 @@ define-command test_toggle_line_comments %{
   assert_buffer_eq! '*input*' '*output*'
 }
 
-define-command test_toggle_block_comments %{
+test test_toggle_block_comments %{
 
   buffer_str! '*input*' %[
     enum Color

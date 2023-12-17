@@ -34,6 +34,9 @@ complete-command load_tests file
 
 define-command clear_tests %{
   set-option global tests
+  set-option global success_count 0
+  set-option global failure_count 0
+  set-option global test_count 0
 }
 
 # Reference: https://doc.rust-lang.org/test/fn.run_tests.html

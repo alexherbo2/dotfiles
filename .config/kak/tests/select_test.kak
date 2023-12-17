@@ -1,4 +1,4 @@
-define-command test_select_words %{
+test test_select_words %{
 
   buffer_str! '*input*' %[
     [enum Color
@@ -29,7 +29,7 @@ define-command test_select_words %{
   assert_buffer_eq! '*input*' '*output*'
 }
 
-define-command test_select_big_words %{
+test test_select_big_words %{
 
   buffer_str! '*input*' %[
     [enum Color

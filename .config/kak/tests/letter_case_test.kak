@@ -1,4 +1,4 @@
-define-command test_convert_selected_words_to_camel_case_style %{
+test test_convert_selected_words_to_camel_case_style %{
 
   buffer_str '*input*' %[hello world, helloWorld, hello_world, hello-world]
   buffer_str '*output*' %[hello world, helloWorld, helloWorld, helloWorld]
@@ -8,7 +8,7 @@ define-command test_convert_selected_words_to_camel_case_style %{
   assert_buffer_eq! '*input*' '*output*'
 }
 
-define-command test_convert_selected_words_to_pascal_case_style %{
+test test_convert_selected_words_to_pascal_case_style %{
 
   buffer_str '*input*' %[hello world, helloWorld, hello_world, hello-world]
   buffer_str '*output*' %[hello world, HelloWorld, HelloWorld, HelloWorld]
@@ -18,7 +18,7 @@ define-command test_convert_selected_words_to_pascal_case_style %{
   assert_buffer_eq! '*input*' '*output*'
 }
 
-define-command test_convert_selected_words_to_snake_case_style %{
+test test_convert_selected_words_to_snake_case_style %{
 
   buffer_str '*input*' %[hello world, helloWorld, hello_world, hello-world]
   buffer_str '*output*' %[hello world, hello_world, hello_world, hello_world]
@@ -28,7 +28,7 @@ define-command test_convert_selected_words_to_snake_case_style %{
   assert_buffer_eq! '*input*' '*output*'
 }
 
-define-command test_convert_selected_words_to_kebab_case_style %{
+test test_convert_selected_words_to_kebab_case_style %{
 
   buffer_str '*input*' %[hello world, helloWorld, hello_world, hello-world]
   buffer_str '*output*' %[hello world, hello-world, hello-world, hello-world]
@@ -38,7 +38,7 @@ define-command test_convert_selected_words_to_kebab_case_style %{
   assert_buffer_eq! '*input*' '*output*'
 }
 
-define-command test_convert_selected_text_to_title_case %{
+test test_convert_selected_text_to_title_case %{
 
   buffer_str '*input*' %[hello world]
   buffer_str '*output*' %[Hello World]

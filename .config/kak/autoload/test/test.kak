@@ -43,14 +43,13 @@ define-command run_test -params 1 %{
   set-option global test_count 1
   set-option -add global test_count %opt{success_count}
   set-option -add global test_count %opt{failure_count}
-  echo -debug "test #%opt{test_count} %arg{1}"
   try %{
     evaluate-commands %arg{1}
     set-option -add global success_count 1
-    echo -debug "%arg{1}: ok"
+    echo -debug "test #%opt{test_count} %arg{1}: ok"
   } catch %{
     set-option -add global failure_count 1
-    echo -debug "%arg{1}: failed"
+    echo -debug "test #%opt{test_count} %arg{1}: failed"
     echo -debug "%val{error}"
   }
 }

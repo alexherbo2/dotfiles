@@ -27,6 +27,7 @@ define-command load_tests %{
 
 # Reference: https://doc.rust-lang.org/test/fn.run_tests.html
 define-command run_tests %{
+  buffer '*debug*'
   evaluate-commands %sh{
     eval set -- "$kak_quoted_opt_tests"
     printf 'run_test "%s";' "$@"

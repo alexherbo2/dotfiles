@@ -2,6 +2,15 @@ define-command open_kakrc %{
   edit "%val{config}/kakrc"
 }
 
+define-command load_local_kakrc %{
+  evaluate-commands %sh{
+    if [ -f '.kakrc' -a -r '.kakrc' ]
+    then
+      echo "source '.kakrc'"
+    fi
+  }
+}
+
 define-command open_config -params 1 -docstring 'open config' %{
   edit -existing -readonly %arg{1}
 }

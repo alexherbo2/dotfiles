@@ -15,29 +15,29 @@ define-command add_test -params 2 %{
 
 alias global test add_test
 
-define-command clear_tests %{
-  set-option global tests
-}
-
 define-command load_tests %{
+  clear_tests
   evaluate-commands %sh{
     find -L "$kak_config/tests" -type f -name '*_test.kak' -exec printf 'source "%s";' {} +
   }
 }
 
+define-command clear_tests %{
+  set-option global tests
+}
+
 # Reference: https://doc.rust-lang.org/test/fn.run_tests.html
 define-command run_tests %{
-  buffer '*debug*'
   evaluate-commands %sh{
     eval set -- "$kak_quoted_opt_tests"
     printf 'run_test "%s";' "$@"
   }
   echo -debug "test result: %opt{success_count} passed, %opt{failure_count} failed."
+  buffer '*debug*'
 }
 
 # Reference: https://doc.rust-lang.org/test/fn.run_test.html
 define-command run_test -params 1 %{
-  buffer '*debug*'
   set-option global test_count 0
   try %{
     evaluate-commands %arg{1}
@@ -52,6 +52,7 @@ define-command run_test -params 1 %{
     echo -debug "test #%opt{test_count} %arg{1}: failed"
     echo -debug "%val{error}"
   }
+  buffer '*debug*'
 }
 
 complete-command run_test shell-script-candidates %{
@@ -60,7 +61,6 @@ complete-command run_test shell-script-candidates %{
 }
 
 define-command load_and_run_tests %{
-  clear_tests
   load_tests
   run_tests
 }

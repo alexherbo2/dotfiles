@@ -104,6 +104,10 @@ define-command evaluate_selected_text %{
   execute-keys -with-hooks ':<c-r><a-.><ret>'
 }
 
+define-command reload_selected_commands %{
+  echo -to-shell-script "sed 's/define-command /define-command -override /g' | kak -p %val{session}" -- %val{selections}
+}
+
 define-command show_character_info %{
   echo -markup %sh{printf '{Information}U+%04x' "$kak_cursor_char_value"}
 }

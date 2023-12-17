@@ -9,7 +9,7 @@ define-command assert_eq -params 2 -docstring 'assert_eq <actual_value> <expecte
     [ "$1" = "$2" ] || echo fail
   } catch %{
     fail %sh{
-      printf '%s\n' "assert_eq '%arg{1}' '%arg{2}'" 'Expected:' '%arg{2}' 'Got:' '%arg{1}'
+      printf '%s\n' "assert_eq '$1' '$2'" 'Expected:' "$2" 'Got:' "$1"
     }
   }
 }
@@ -49,7 +49,7 @@ define-command assert_buffer_eq -params 2 %{
       delete-buffer
 
       fail %sh{
-        printf '%s\n' "assert_buffer_eq '%arg{1}' '%arg{2}'" 'Expected:' '%reg{f}' 'Got:' '%reg{e}'
+        printf '%s\n' "assert_buffer_eq '$1' '$2'" 'Expected:' "$kak_reg_f" 'Got:' "$kak_reg_e"
       }
     }
   }

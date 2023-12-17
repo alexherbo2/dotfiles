@@ -15,12 +15,18 @@ define-command add_test -params 2 %{
 
 alias global test add_test
 
-define-command load_tests %{
+define-command load_config_tests %{
+  load_tests "%val{config}/tests"
+}
+
+define-command load_tests -params 1.. %{
   clear_tests
   evaluate-commands %sh{
-    find -L "$kak_config/tests" -type f -name '*_test.kak' -exec printf 'source "%s";' {} +
+    find -L "$@" -type f -name '*_test.kak' -exec printf 'source "%s";' {} +
   }
 }
+
+complete-command load_tests file
 
 define-command clear_tests %{
   set-option global tests
@@ -58,6 +64,11 @@ define-command run_test -params 1 %{
 complete-command run_test shell-script-candidates %{
   eval set -- "$kak_quoted_opt_tests"
   printf '%s\n' "$@"
+}
+
+define-command load_and_run_config_tests %{
+  load_config_tests
+  run_tests
 }
 
 define-command load_and_run_tests %{

@@ -37,7 +37,7 @@ define-command -override add_test -params 2 %{
 alias global test add_test
 
 define-command -override clear_tests %{
-  set-option global tests
+  unset-option global tests
 }
 
 # Reference:

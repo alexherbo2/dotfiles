@@ -39,11 +39,13 @@ define-command assert_buffer_eq -params 2 %{
     select %reg{c}
     execute-keys 'i[<esc>a]<esc>'
     write
+    delete-buffer
 
     edit %reg{b}
     select %reg{d}
     execute-keys 'i[<esc>a]<esc>'
     write
+    delete-buffer
 
     echo -debug "assert_buffer_eq '%arg{1}' '%arg{2}': failed"
     echo -debug 'Expected:'

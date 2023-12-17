@@ -17,6 +17,12 @@ hook -always global KakEnd '' %{
   nop %sh(rm -Rf "$kak_opt_tmp")
 }
 
+define-command load_tests %{
+  evaluate-commands %sh{
+    find -L "$kak_config/tests" -type f -name '*.kak' -exec printf 'source "%s";' {} +
+  }
+}
+
 # Commands ─────────────────────────────────────────────────────────────────────
 
 # Syntax:
@@ -42,38 +48,24 @@ define-command -override run_tests %{
     echo "echo running $# tests"
     printf 'run_test "%s";' "$@"
   }
-  # Print result
-  set-option global final_status_message %sh[ [ "$kak_opt_failure_count" = 0 ] && [ "$kak_opt_error_count" = 0 ] && echo 'ok' || echo 'not ok' ]
-  echo -debug "test result: %opt{final_status_message}. %opt{success_count} passed, %opt{failure_count} failed, %opt{error_count} panicked."
 }
 
 # Reference:
 # https://doc.rust-lang.org/test/fn.run_test.html
 define-command -override run_test -params 1 -shell-script-candidates 'eval set -- "$kak_quoted_opt_tests" && printf ''%s\n'' "$@"' %{
-  define-command %arg{1} %exp{
-    %arg{2}
-    echo -debug "%arg{1}: ok"
-  }
   echo -debug "test %arg{1}"
-  edit -scratch '*test*'
   try %{
-    # Yields commands
     evaluate-commands %arg{1}
-    set-option -add global success_count 1
+    echo -debug "%arg{1}: ok"
   } catch %{
-    # Rescue `fail` status.
-    # <https://github.com/crystal-lang/crystal/blob/master/src/spec/context.cr#:~:text=enum Status>
-    try %{
-      evaluate-commands %sh[ [ "$kak_error" = fail ] || echo fail ]
-      set-option -add global failure_count 1
-      set-option global exit_code 1
-    } catch %{
-      echo -debug "Error: %val{error}"
-      set-option -add global error_count 1
-      set-option global exit_code 1
-    }
+    echo -debug "%arg{1}: failed"
+    echo -debug "Error: %val{error}"
   }
-  delete-buffer '*test*'
+}
+
+define-command -override load_and_run_tests %{
+  load_tests
+  run_tests
 }
 
 define-command -override run_tests_and_exit -params 1 %{

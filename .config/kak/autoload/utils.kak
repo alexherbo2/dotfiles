@@ -27,65 +27,8 @@ define-command convert_selected_dates_to_iso_8601 %{
   execute-keys '|date -I -d "$kak_selection"<ret>'
 }
 
-# Creates a buffer from the given string.
-# https://github.com/mawww/kakoune/blob/master/src/buffer_utils.cc#:~:text=create_buffer_from_string
-define-command create_buffer_from_string -params 2 %{
-  edit -scratch -- %arg{1}
-  set-register dquote %arg{2}
-  execute-keys '%R'
-}
-
-alias global buffer_str create_buffer_from_string
-
-# Leading whitespace is removed from the string contents according to the number of whitespace in the last line before the string delimiter.
-# Text enclosed in square brackets denotes selected text.
-define-command create_buffer_from_template_string -params 2 %{
-  create_buffer_from_string %arg{1} %arg{2}
-  execute-keys '%s\A\n|\n\z<ret>d%1s(\h+)\n\z<ret>y%s^\Q<c-r>"<ret>dged%s\[<ret><a-i>ri<backspace><esc>a<del><esc>'
-}
-
-alias global buffer_str! create_buffer_from_template_string
-
 define-command enter_lsp_mode %{
   enter-user-mode lsp
-}
-
-# https://doc.rust-lang.org/std/macro.assert_eq.html
-define-command assert_eq -params 2 %{
-  try %sh[[ "$1" != "$2" ] && echo fail] catch %{
-    echo -debug -quoting kakoune %arg{1} %arg{2}
-    fail assert_eq %arg{1} %arg{2}
-  }
-}
-
-define-command load_tests %{
-  evaluate-commands %sh{
-    find -L "$kak_config/tests" -type f -name '*.kak' -exec printf 'source "%s";' {} +
-  }
-}
-
-# Asserts that two buffers are equal to each other.
-# Buffer contents and selected text should be equal.
-define-command assert_buffer_eq -params 2 %{
-  buffer -- %arg{1}
-  execute-keys -draft '%"ay'
-  set-register c %val{selections_desc}
-
-  buffer -- %arg{2}
-  execute-keys -draft '%"by'
-  set-register d %val{selections_desc}
-
-  try %sh[[ "$kak_reg_a" != "$kak_reg_b" ] || [ "$kak_reg_c" != "$kak_reg_d" ] && echo fail] catch %{
-    echo -debug -quoting kakoune %reg{a} %reg{b} %reg{c} %reg{d}
-    fail assert_buffer_eq %arg{1} %arg{2}
-  }
-}
-
-complete-command assert_buffer_eq buffer
-
-define-command assert_buffer_eq_and_clean_them -params 2 %{
-  assert_buffer_eq %arg{1} %arg{2}
-  evaluate-commands -buffer "%arg{1},%arg{2}" delete-buffer
 }
 
 define-command insert_buffer_contents -params 1 %{
@@ -114,9 +57,6 @@ define-command delete_all_buffers %{
   evaluate-commands -buffer * delete-buffer
 }
 alias global dba delete_all_buffers
-
-alias global assert_buffer_eq! assert_buffer_eq_and_clean_them
-complete-command assert_buffer_eq_and_clean_them buffer
 
 define-command select_whole_lines_or_extend_lines_down %{
   execute-keys '<a-:>'

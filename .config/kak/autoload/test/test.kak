@@ -19,6 +19,10 @@ define-command load_config_tests %{
   load_tests "%val{config}/tests"
 }
 
+define-command load_current_file_tests %{
+  load_tests %val{buffile}
+}
+
 define-command load_tests -params 1.. %{
   clear_tests
   evaluate-commands %sh{
@@ -58,7 +62,6 @@ define-command run_test -params 1 %{
     echo -debug "test #%opt{test_count} %arg{1}: failed"
     echo -debug "%val{error}"
   }
-  buffer '*debug*'
 }
 
 complete-command run_test shell-script-candidates %{
@@ -68,6 +71,11 @@ complete-command run_test shell-script-candidates %{
 
 define-command load_and_run_config_tests %{
   load_config_tests
+  run_tests
+}
+
+define-command load_and_run_current_file_tests %{
+  load_current_file_tests
   run_tests
 }
 

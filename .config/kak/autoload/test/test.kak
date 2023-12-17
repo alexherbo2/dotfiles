@@ -36,7 +36,7 @@ define-command run_tests %{
 
 # Reference: https://doc.rust-lang.org/test/fn.run_test.html
 define-command run_test -params 1 %{
-  unset-option global test_count
+  set-option global test_count 0
   try %{
     evaluate-commands %arg{1}
     set-option -add global success_count 1

@@ -5,12 +5,13 @@
 
 # https://doc.rust-lang.org/std/macro.assert_eq.html
 define-command assert_eq -params 2 -docstring 'assert_eq <actual_value> <expected_value>' %{
-  evaluate-commands %sh{
-    if [ "$1" != "$2" ]
-    then
-      printf 'echo -debug "%s"\n' "assert_eq: failed" "Expected:" "%arg{2}" "Got:" "%arg{1}"
-      echo "fail"
-    fi
+  try %sh[[ "$1" = "$2" ] || echo fail] catch %{
+    echo -debug "assert_eq: failed"
+    echo -debug "Expected:"
+    echo -debug "%arg{2}"
+    echo -debug "Got:"
+    echo -debug "%arg{1}"
+    fail
   }
 }
 

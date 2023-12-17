@@ -17,20 +17,20 @@ define-command load_tests %{
   }
 }
 
-define-command -override add_test -params 2 %{
+define-command add_test -params 2 %{
   define-command -override -hidden %arg{1} %arg{2}
   set-option -add global tests %arg{1}
 }
 
 alias global test add_test
 
-define-command -override clear_tests %{
+define-command clear_tests %{
   unset-option global tests
 }
 
 # Reference:
 # https://doc.rust-lang.org/test/fn.run_tests.html
-define-command -override run_tests %{
+define-command run_tests %{
   evaluate-commands %sh{
     eval set -- "$kak_quoted_opt_tests"
     echo "echo -debug running $# tests"
@@ -40,7 +40,7 @@ define-command -override run_tests %{
 
 # Reference:
 # https://doc.rust-lang.org/test/fn.run_test.html
-define-command -override run_test -params 1 %{
+define-command run_test -params 1 %{
   echo -debug "test %arg{1}"
   try %{
     evaluate-commands %arg{1}

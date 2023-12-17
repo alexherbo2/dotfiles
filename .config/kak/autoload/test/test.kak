@@ -16,7 +16,7 @@ define-command add_test -params 2 %{
 alias global test add_test
 
 define-command clear_tests %{
-  unset-option global tests
+  set-option global tests
 }
 
 define-command load_tests %{

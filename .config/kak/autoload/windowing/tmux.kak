@@ -4,7 +4,7 @@
 # authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
 # kakoune: 2023-12-12
 # license: MIT
-# dependencies: []
+# dependencies: ["grab_buffer_in_viewport"]
 # doc: yes
 # tests: no
 declare-user-mode tmux

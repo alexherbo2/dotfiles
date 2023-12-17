@@ -1,9 +1,11 @@
 # Creates a buffer from the given string.
 # https://github.com/mawww/kakoune/blob/master/src/buffer_utils.cc#:~:text=create_buffer_from_string
 define-command create_buffer_from_string -params 2 %{
-  edit -scratch -- %arg{1}
-  set-register dquote %arg{2}
-  execute-keys '%R'
+  evaluate-commands -save-regs '"' %{
+    edit -scratch -- %arg{1}
+    set-register dquote %arg{2}
+    execute-keys '%R'
+  }
 }
 
 alias global buffer_str create_buffer_from_string

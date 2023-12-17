@@ -8,67 +8,49 @@ define-command assert_eq -params 2 -docstring 'assert_eq <actual_value> <expecte
   try %sh{
     [ "$1" = "$2" ] || echo fail
   } catch %{
-    echo -debug "assert_eq: failed"
-    echo -debug "Expected:"
-    echo -debug "%arg{2}"
-    echo -debug "Got:"
-    echo -debug "%arg{1}"
-    fail
+    fail %sh{
+      printf '%s\n' "assert_eq '%arg{1}' '%arg{2}'" 'Expected:' '%arg{2}' 'Got:' '%arg{1}'
+    }
   }
 }
 
 # Asserts that two buffers are equal to each other.
 # Buffer contents and selected text should be equal.
 define-command assert_buffer_eq -params 2 %{
-  evaluate-commands -save-regs 'abt' %{
-    set-register t %sh{mktemp -d}
-    set-register a "%reg{t}/a"
-    set-register b "%reg{t}/b"
-
+  evaluate-commands -save-regs 'abcdef' %{
     buffer -- %arg{1}
+    execute-keys -draft '%"ay'
     set-register c %val{selections_desc}
-    write! %reg{a}
 
     buffer -- %arg{2}
+    execute-keys -draft '%"by'
     set-register d %val{selections_desc}
-    write! %reg{b}
 
     # Asserts that two buffers are equal to each other.
     # Buffer contents and selected text should be equal.
     try %sh{
-      cmp -s "$kak_reg_a" "$kak_reg_b" && [ "$kak_reg_c" = "$kak_reg_d" ] || echo fail
+      [ "$kak_reg_a" = "$kak_reg_b" ] && [ "$kak_reg_c" = "$kak_reg_d" ] || echo fail
     } catch %{
       # Failure message
       # Mark selected text
       # Text enclosed in square brackets `[]` denotes selected text.
-      edit %reg{a}
+      edit -scratch
+      execute-keys '"aR'
       select %reg{c}
       execute-keys 'i[<esc>a]<esc>'
-      write
+      execute-keys -draft '%"ey'
       delete-buffer
 
-      edit %reg{b}
+      edit -scratch
+      execute-keys '"bR'
       select %reg{d}
       execute-keys 'i[<esc>a]<esc>'
-      write
+      execute-keys -draft '%"fy'
       delete-buffer
 
-      echo -debug "assert_buffer_eq '%arg{1}' '%arg{2}': failed"
-      echo -debug 'Expected:'
-      evaluate-commands "echo -debug %%file{%reg{b}}"
-      echo -debug 'Got:'
-      evaluate-commands "echo -debug %%file{%reg{a}}"
-      nop %sh{
-        unlink "$kak_reg_a"
-        unlink "$kak_reg_b"
-        rmdir "$kak_reg_t"
+      fail %sh{
+        printf '%s\n' "assert_buffer_eq '%arg{1}' '%arg{2}'" 'Expected:' '%reg{f}' 'Got:' '%reg{e}'
       }
-      fail
-    }
-    nop %sh{
-      unlink "$kak_reg_a"
-      unlink "$kak_reg_b"
-      rmdir "$kak_reg_t"
     }
   }
 }

@@ -2,9 +2,9 @@
 # https://github.com/mawww/kakoune/blob/master/src/buffer_utils.cc#:~:text=create_buffer_from_string
 define-command create_buffer_from_string -params 2 %{
   evaluate-commands -save-regs '"' %{
-    edit -scratch -- %arg{1}
+    edit! -scratch -- %arg{1}
     set-register dquote %arg{2}
-    execute-keys '%R'
+    execute-keys 'R'
   }
 }
 

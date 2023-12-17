@@ -1,6 +1,12 @@
-# This script provides support for the tmux terminal multiplexer.
-# https://github.com/tmux/tmux
-
+# name: kakoune_tmux
+# version: 0.1.0
+# description: This script provides support for the tmux terminal multiplexer.
+# authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
+# kakoune: 2023-12-12
+# license: MIT
+# dependencies: []
+# doc: yes
+# tests: no
 declare-user-mode tmux
 declare-user-mode tmux_new_split_scratch_buffer
 

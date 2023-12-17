@@ -50,6 +50,10 @@ define-command -override run_tests %{
 # Reference:
 # https://doc.rust-lang.org/test/fn.run_test.html
 define-command -override run_test -params 1 -shell-script-candidates 'eval set -- "$kak_quoted_opt_tests" && printf ''%s\n'' "$@"' %{
+  define-command %arg{1} %exp{
+    %arg{2}
+    echo -debug "%arg{1}: ok"
+  }
   echo -debug "test %arg{1}"
   edit -scratch '*test*'
   try %{

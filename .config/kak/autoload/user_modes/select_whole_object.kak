@@ -46,35 +46,35 @@ define-command -hidden select_whole_grave_quote_strings %{
 }
 
 define-command -hidden select_whole_words %{
-  execute-keys 's\w+<ret><a-i>w'
+  execute-keys 's\w+<ret><a-a>w'
 }
 
 define-command -hidden select_whole_long_words %{
-  execute-keys 's\w+<ret><a-i><a-w>'
+  execute-keys 's\w+<ret><a-a><a-w>'
 }
 
 define-command -hidden select_whole_sentences %{
-  execute-keys 's[^\n]+<ret><a-i>s'
+  execute-keys 's[^\n]+<ret><a-a>s'
 }
 
 define-command -hidden select_whole_paragraphs %{
-  execute-keys 's[^\n]+<ret><a-i>p'
+  execute-keys 's[^\n]+<ret><a-a>p'
 }
 
 define-command -hidden select_whole_whitespaces %{
-  execute-keys 's\h+<ret><a-i><space>'
+  execute-keys 's\h+<ret><a-a><space>'
 }
 
 define-command -hidden select_whole_indent %{
-  execute-keys 's^\h+<ret><a-i><space>'
+  execute-keys 's^\h+<ret><a-a><space>'
 }
 
 define-command -hidden select_whole_numbers %{
-  execute-keys 's\d+<ret><a-i>n'
+  execute-keys 's\d+<ret><a-a>n'
 }
 
 define-command -hidden select_whole_arguments %{
-  execute-keys 's\(<ret><a-i>bs\w+<ret><a-i>u'
+  execute-keys 's\(<ret><a-i>bs\w+<ret><a-a>u'
 }
 
 map -docstring 'regex matches' global select_whole_object / ':select_whole_regex_matches<ret>'

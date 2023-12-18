@@ -1,4 +1,12 @@
-# Vim-like unimpaired mappings
+# name: kakoune_unimpaired_mode
+# version: 0.1.0
+# description: This script provides Vim-like unimpaired mappings.
+# authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
+# kakoune: 2023-12-12
+# license: MIT
+# dependencies: ["jump_to_previous_reference", "jump_to_first_reference", "jump_to_previous_file", "jump_to_first_file"]
+# doc: yes
+# tests: no
 declare-user-mode unimpaired_left
 
 define-command enter_unimpaired_left_mode %{
@@ -14,10 +22,10 @@ define-command hide_line_numbers %{
 }
 
 define-command disable_readonly_mode %{
-  set-option global readonly no
+  set-option buffer readonly no
 }
 
-define-command remove_whitespace_rendering %{
+define-command unrender_whitespace %{
   remove-highlighter global/render_whitespace
 }
 
@@ -29,13 +37,13 @@ define-command disable_soft_wrap %{
   remove-highlighter global/soft_wrap
 }
 
-map -docstring 'line numbers' global unimpaired_left l ':hide_line_numbers<ret>'
-map -docstring 'render whitespace' global unimpaired_left w ':remove_whitespace_rendering<ret>'
-map -docstring 'read-only' global unimpaired_left r ':disable_readonly_mode<ret>'
-map -docstring 'soft-wrap' global unimpaired_left <tab> ':disable_soft_wrap<ret>'
-map -docstring 'rulers' global unimpaired_left | ':remove_rulers<ret>'
-map -docstring 'space' global unimpaired_left <space> <a-O>
-map -docstring 'buffer' global unimpaired_left b ':buffer-previous<ret>'
+map -docstring 'hide line numbers' global unimpaired_left l ':hide_line_numbers<ret>'
+map -docstring 'unrender whitespace' global unimpaired_left w ':unrender_whitespace<ret>'
+map -docstring 'disable read-only mode' global unimpaired_left r ':disable_readonly_mode<ret>'
+map -docstring 'disable soft-wrap' global unimpaired_left <tab> ':disable_soft_wrap<ret>'
+map -docstring 'remove rulers' global unimpaired_left | ':remove_rulers<ret>'
+map -docstring 'add new line above' global unimpaired_left <space> <a-O>
+map -docstring 'jump to previous buffer' global unimpaired_left b ':buffer-previous<ret>'
 
 map -docstring 'jump to previous reference' global unimpaired_left g ':jump_to_previous_reference<ret>'
 map -docstring 'jump to first reference' global unimpaired_left G ':jump_to_first_reference<ret>'

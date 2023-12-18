@@ -63,13 +63,10 @@ set-face global meta "rgb:%opt{magenta}" # C++ ⇒ [#include] <stdio.h>
 set-face global builtin "rgb:%opt{magenta}" # https://spec.draculatheme.com#Support
 # set-face global builtin "rgb:%opt{cyan}+i" # https://spec.draculatheme.com#Support
 
-# Diffs
-# https://spec.draculatheme.com#sec-Diffs
-# set-face global DiffText "rgb:%opt{comment}"
-# set-face global DiffHeader "rgb:%opt{comment}"
-# set-face global DiffInserted "rgb:%opt{green},rgba:%opt{green}20" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=diffEditor.insertedTextBackground
-# set-face global DiffDeleted "rgb:%opt{red},rgba:%opt{red}50" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=diffEditor.removedTextBackground
-# set-face global DiffChanged "rgb:%opt{orange}"
+# For diffs
+set-face global added "rgb:%opt{green},rgba:%opt{green}20" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=diffEditor.insertedTextBackground
+set-face global deleted "rgb:%opt{red},rgba:%opt{red}50" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=diffEditor.removedTextBackground
+set-face global changed "rgb:%opt{yellow}"
 
 # For markup
 set-face global title "rgb:%opt{blue}+b" # AsciiDoc ⇒ = Document title — https://spec.draculatheme.com#MarkupHeading

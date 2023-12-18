@@ -104,9 +104,13 @@ define-command evaluate_selected_text %{
   execute-keys -with-hooks ':<c-r><a-.><ret>'
 }
 
+alias global = evaluate_selected_text
+
 define-command reload_selected_commands %{
   echo -to-shell-script "sed 's/define-command /define-command -override /g' | kak -p %val{session}" -- %val{selections}
 }
+
+alias global == reload_selected_commands
 
 define-command show_character_info %{
   echo -markup %sh{printf '{Information}U+%04x' "$kak_cursor_char_value"}
@@ -180,8 +184,6 @@ complete-command send_handshake_to_session shell-script-candidates %opt{other_se
 complete-command send_selected_text_to_session shell-script-candidates %opt{other_sessions_completion}
 complete-command send_current_buffer_to_session shell-script-candidates %opt{other_sessions_completion}
 complete-command send_buffer_list_to_session shell-script-candidates %opt{other_sessions_completion}
-
-alias global = evaluate_selected_text
 
 complete-command rename-session shell-script-candidates %{
   cat "$kak_config/friendly_session_names.txt"

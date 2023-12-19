@@ -1,3 +1,11 @@
+Build from source:
+
+Install Crystal.
+
+```
+build_jump_scripts
+```
+
 Example configuration:
 
 ```

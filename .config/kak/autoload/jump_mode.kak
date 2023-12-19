@@ -69,7 +69,6 @@ define-command enter_jump_mode_impl -params 2 %{
 
 define-command exit_jump_mode %{
   unrender_jump_labels
-  close_jump_label_selection_map_option_buffer
 }
 
 define-command render_jump_labels %{

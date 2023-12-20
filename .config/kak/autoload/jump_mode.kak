@@ -41,22 +41,7 @@ declare-option str-list jump_labels \
 set-face global JumpLabel 'black,bright-yellow+F'
 
 define-command enter_jump_mode_with_replace_select_mode %{
-  create_jump_state_from_words_in_viewport
-  enter_jump_mode_with_replace_select_mode_impl
-}
-
-define-command enter_jump_mode_with_extend_select_mode %{
-  create_jump_state_from_words_in_viewport
-  enter_jump_mode_with_extend_select_mode_impl
-}
-
-define-command enter_jump_mode_with_append_select_mode %{
-  create_jump_state_from_words_in_viewport
-  enter_jump_mode_with_append_select_mode_impl
-}
-
-define-command enter_jump_mode_with_replace_select_mode_impl %{
-  enter_jump_mode_impl 'jump (replace):' %{
+  enter_jump_mode 'jump (replace):' %{
     try %{
       execute-keys -save-regs 's' '<esc><a-,>"sZz"s<a-z>a<esc>'
     } catch %{
@@ -65,22 +50,22 @@ define-command enter_jump_mode_with_replace_select_mode_impl %{
   }
 }
 
-define-command enter_jump_mode_with_extend_select_mode_impl %{
-  enter_jump_mode_impl 'jump (extend):' %{
+define-command enter_jump_mode_with_extend_select_mode %{
+  enter_jump_mode 'jump (extend):' %{
     execute-keys -save-regs 's' '<esc>"sZ,<a-z>u"s<a-z>a<esc>'
   }
 }
 
-define-command enter_jump_mode_with_append_select_mode_impl %{
-  enter_jump_mode_impl 'jump (append):' %{
+define-command enter_jump_mode_with_append_select_mode %{
+  enter_jump_mode 'jump (append):' %{
     execute-keys -save-regs 's' '<esc>"sZz"s<a-z>a<esc>'
   }
 }
 
-define-command enter_jump_mode_impl -params 2 %{
-  evaluate-commands -draft %{
-    create_jump_label_selection_map_option_buffer
-  }
+define-command enter_jump_mode -params 2 %{
+  create_jump_state_from_words_in_viewport
+  create_jump_label_selection_map_option_buffer
+  execute-keys 'ga'
   render_jump_labels
   open_jump_prompt %arg{1} %arg{2}
 }

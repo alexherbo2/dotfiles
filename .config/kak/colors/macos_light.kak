@@ -114,7 +114,6 @@ set-face global Search "default,rgba:%opt{bright_yellow}%opt{selection_highlight
 set-face global SelectedText "default,rgba:%opt{selection}%opt{selection_highlight_alpha}"
 set-face global StatusLineInactive "rgb:%opt{dim_foreground},rgb:%opt{dim_background}"
 set-face global JumpLabel "rgb:%opt{black},rgb:%opt{bright_yellow}+F"
-set-face global JumpOverlay default
 
 # Infobox faces
 set-face global InfoDefault Information

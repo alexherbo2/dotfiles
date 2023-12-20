@@ -1,5 +1,4 @@
 .config/env
-.config/kak/bin
 .config/chromium
 .config/gh/config.yml
 .config/gh/hosts.yml

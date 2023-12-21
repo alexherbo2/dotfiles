@@ -12,6 +12,12 @@ define-command -hidden surround_selected_text -params 2 %{
   }
 }
 
+define-command -hidden surround_selected_text_on_next_key -params 2 %{
+  on-key %{
+    surround_selected_text %val{key} %val{key}
+  }
+}
+
 define-command -hidden delete_surrounding_characters %{
   execute-keys '<a-k>...<ret>i<del><esc>a<backspace><esc>'
 }
@@ -95,5 +101,6 @@ map -docstring 'single angle quotation mark' global surround <a-g> ':surround_se
 map -docstring 'single angle quotation mark' global surround ‹ ':surround_selected_text_with_single_angle_quotation_mark<ret>'
 map -docstring 'single angle quotation mark' global surround › ':surround_selected_text_with_single_angle_quotation_mark<ret>'
 map -docstring 'space' global surround <space> ':add_space_around_selected_text<ret>'
+map -docstring 'custom character' global surround c ':surround_selected_text_on_next_key<ret>'
 map -docstring 'delete' global surround <backspace> ':delete_surrounding_characters<ret>'
 map -docstring 'delete' global surround <del> ':delete_surrounding_characters<ret>'

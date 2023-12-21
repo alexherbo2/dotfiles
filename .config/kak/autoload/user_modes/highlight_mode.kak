@@ -46,35 +46,35 @@ define-command highlight_selected_text_in_white %{
 }
 
 define-command highlight_selected_text_in_bright_black %{
-  highlight_selected_text white bright_black
+  highlight_selected_text white bright-black
 }
 
 define-command highlight_selected_text_in_bright_red %{
-  highlight_selected_text white bright_red
+  highlight_selected_text white bright-red
 }
 
 define-command highlight_selected_text_in_bright_green %{
-  highlight_selected_text white bright_green
+  highlight_selected_text white bright-green
 }
 
 define-command highlight_selected_text_in_bright_yellow %{
-  highlight_selected_text white bright_yellow
+  highlight_selected_text white bright-yellow
 }
 
 define-command highlight_selected_text_in_bright_blue %{
-  highlight_selected_text white bright_blue
+  highlight_selected_text white bright-blue
 }
 
 define-command highlight_selected_text_in_bright_magenta %{
-  highlight_selected_text white bright_magenta
+  highlight_selected_text white bright-magenta
 }
 
 define-command highlight_selected_text_in_bright_cyan %{
-  highlight_selected_text white bright_cyan
+  highlight_selected_text white bright-cyan
 }
 
 define-command highlight_selected_text_in_bright_white %{
-  highlight_selected_text white bright_white
+  highlight_selected_text white bright-white
 }
 
 alias global hir0 highlight_selected_text_in_black

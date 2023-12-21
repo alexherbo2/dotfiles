@@ -1,3 +1,12 @@
+# name: kakoune_find
+# version: 0.1.0
+# description: This script provides support for the find command-line utility.
+# authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
+# kakoune: 2023-12-12
+# license: MIT
+# dependencies: ["create_buffer_from_command_output"]
+# doc: yes
+# tests: no
 declare-option str find_command find
 declare-option str-list find_args -type f
 

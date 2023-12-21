@@ -4,7 +4,7 @@
 # authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
 # kakoune: 2023-12-12
 # license: MIT
-# dependencies: ["jump_to_next_reference", "jump_to_last_reference", "jump_to_next_file", "jump_to_last_file"]
+# dependencies: []
 # doc: yes
 # tests: no
 declare-user-mode unimpaired_right
@@ -44,9 +44,3 @@ map -docstring 'enable read-only mode' global unimpaired_right r ':enable_readon
 map -docstring 'add rulers' global unimpaired_right | ':add_rulers<ret>'
 map -docstring 'add new line below' global unimpaired_right <space> <a-o>
 map -docstring 'jump to next buffer' global unimpaired_right b ':buffer-next<ret>'
-
-map -docstring 'jump to next reference' global unimpaired_right g ':jump_to_next_reference<ret>'
-map -docstring 'jump to last reference' global unimpaired_right G ':jump_to_last_reference<ret>'
-
-map -docstring 'jump to next file' global unimpaired_right f ':jump_to_next_file<ret>'
-map -docstring 'jump to last file' global unimpaired_right F ':jump_to_last_file<ret>'

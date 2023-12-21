@@ -37,9 +37,8 @@ hook global BufSetOption filetype=grep %{
 
 define-command -hidden jump_to_references %{
   evaluate-commands -draft %{
-    execute-keys 'x<a-s><a-K>^\n<ret>H'
+    execute-keys 'x<a-s><a-K>^\n<ret>Hs^(.+?):(\d+):(\d+):(.+?)$<ret>'
     evaluate-commands -itersel %{
-      execute-keys 's^(.+?):(\d+):(\d+):(.+?)$<ret>'
       evaluate-commands -client %val{client} -verbatim edit -existing -- %reg{1} %reg{2} %reg{3}
     }
   }
@@ -64,10 +63,5 @@ define-command jump_to_previous_reference %{
   open_grep_buffer_and_jump_to_references 'k'
 }
 
-define-command jump_to_first_reference %{
-  open_grep_buffer_and_jump_to_references 'gk'
-}
-
-define-command jump_to_last_reference %{
-  open_grep_buffer_and_jump_to_references 'gj'
-}
+alias global gn jump_to_next_reference
+alias global gp jump_to_previous_reference

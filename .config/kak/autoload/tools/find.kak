@@ -59,10 +59,5 @@ define-command jump_to_previous_file %{
   open_find_buffer_and_jump_to_files 'k'
 }
 
-define-command jump_to_first_file %{
-  open_find_buffer_and_jump_to_files 'gk'
-}
-
-define-command jump_to_last_file %{
-  open_find_buffer_and_jump_to_files 'gj'
-}
+alias global fn jump_to_next_file
+alias global fp jump_to_previous_file

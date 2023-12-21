@@ -99,6 +99,7 @@ map -docstring 'show definition preview hover' global user k ':show_definition_p
 map -docstring 'enter lsp mode' global user l ':enter_lsp_mode<ret>'
 map -docstring 'yank selected text to the terminal clipboard' global user y ':yank_selected_text_to_terminal_clipboard<ret>'
 map -docstring 'open goto line prompt' global user g ':open_goto_line_prompt<ret>'
+map -docstring 'enter highlight mode' global user '*' ':enter_highlight_mode<ret>'
 
 # Prompt mode ------------------------------------------------------------------
 
@@ -155,7 +156,7 @@ hook global User 'OpenDirectory=(.+)' %{
 }
 
 add_insert_chars_user_hook global
-add_search_mode_user_hooks global
+add_search_user_hooks global
 add_open_directory_user_hook global
 
 # Language support -------------------------------------------------------------

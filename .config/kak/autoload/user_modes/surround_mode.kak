@@ -12,7 +12,7 @@ define-command -hidden surround_selected_text -params 2 %{
   }
 }
 
-define-command -hidden surround_selected_text_on_next_key -params 2 %{
+define-command -hidden surround_selected_text_on_next_key %{
   on-key %{
     surround_selected_text %val{key} %val{key}
   }

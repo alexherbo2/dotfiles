@@ -1,3 +1,12 @@
+# name: kakoune_list_buffers
+# version: 0.1.0
+# description: This script provides the functionality to list buffers.
+# authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
+# kakoune: 2023-12-12
+# license: MIT
+# dependencies: []
+# doc: no
+# tests: no
 define-command list_buffers %{
   edit! -scratch '*buffers*'
   evaluate-commands -no-hooks -buffer '*' -verbatim -- try %{

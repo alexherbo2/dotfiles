@@ -1,4 +1,4 @@
-define-command add_search_mode_user_hooks -params 1 %{
+define-command add_search_user_hooks -params 1 %{
   hook %arg{1} NormalKey '/|<a-/>|\?|<a-\?>|s|S|<a-k>|<a-K>' %{
     trigger-user-hook "SearchBegin=%val{hook_param}"
     hook -once window ModeChange 'pop:prompt:normal' %exp{

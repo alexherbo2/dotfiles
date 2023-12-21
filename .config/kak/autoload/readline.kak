@@ -33,4 +33,4 @@ define-command erase_word_before_cursor %{
 
 map global insert <c-w> '<a-;>:erase_word_before_cursor<ret>'
 
-map global insert <c-y> '<c-r>"'
+map -docstring 'insert clipboard contents' global insert <c-y> '<c-r>"'

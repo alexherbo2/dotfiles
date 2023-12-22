@@ -4,7 +4,7 @@
 # authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
 # kakoune: 2023-12-12
 # license: MIT
-# dependencies: ["create_buffer_from_command_output"]
+# dependencies: []
 # doc: no
 # tests: no
 set-face global BlackHighlighter 'white,black'

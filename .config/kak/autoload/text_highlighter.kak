@@ -25,8 +25,8 @@ set-face global BrightCyanHighlighter 'white,bright-cyan'
 set-face global BrightWhiteHighlighter 'white,bright-white'
 
 define-command highlight_selected_text -params 1 %{
-  search_selected_text_with_auto_named_highlighter %{
-    add-highlighter "buffer/%reg{n}" regex "%reg{/}" "0:%arg{1}"
+  search_selected_text_with_auto_named_highlighter %exp{
+    add-highlighter "buffer/%%reg{n}" regex "%%reg{/}" "0:%arg{1}"
   }
 }
 

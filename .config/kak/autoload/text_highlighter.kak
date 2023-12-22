@@ -47,9 +47,13 @@ define-command search_selected_text_with_auto_named_highlighter -params 1 %{
 }
 
 define-command open_text_highlighter_prompt %{
-  prompt highlight: -menu -shell-script-candidates 'printf ''%s\n'' black red green yellow blue magenta cyan white bright_black bright_red bright_green bright_yellow bright_blue bright_magenta bright_cyan bright_white' %{
+  prompt highlight: -menu -shell-script-candidates 'printf ''%s\n'' none black red green yellow blue magenta cyan white bright_black bright_red bright_green bright_yellow bright_blue bright_magenta bright_cyan bright_white' %{
     "highlight_selected_text_in_%val{text}"
   }
+}
+
+define-command highlight_selected_text_in_none %{
+  unhighlight_selected_text
 }
 
 define-command highlight_selected_text_in_black %{

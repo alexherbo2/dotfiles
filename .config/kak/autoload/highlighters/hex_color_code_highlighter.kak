@@ -1,3 +1,12 @@
+# name: kakoune_hex_color_code_highlighter
+# version: 0.1.0
+# description: This script provides support for hex color code highlighting.
+# authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
+# kakoune: 2023-12-12
+# license: MIT
+# dependencies: []
+# doc: yes
+# tests: no
 declare-option -hidden range-specs hex_color_code_ranges
 
 define-command update_hex_color_code_ranges %{

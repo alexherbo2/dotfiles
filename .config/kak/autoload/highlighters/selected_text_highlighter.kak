@@ -1,3 +1,12 @@
+# name: kakoune_selected_text_highlighter
+# version: 0.1.0
+# description: This script provides support for selected text highlighting.
+# authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
+# kakoune: 2023-12-12
+# license: MIT
+# dependencies: []
+# doc: yes
+# tests: no
 set-face global SelectedText 'black,bright-blue+f'
 
 declare-option -hidden range-specs selected_text_ranges

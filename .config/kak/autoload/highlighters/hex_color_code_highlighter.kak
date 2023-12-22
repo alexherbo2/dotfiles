@@ -14,7 +14,7 @@ define-command update_hex_color_code_ranges %{
   evaluate-commands -draft %{
     execute-keys 'gtGbx'
     evaluate-commands -draft -verbatim try %{
-      execute-keys 's\B#?([0-9A-Fa-f]{6})\b<ret>'
+      execute-keys 's\B#([0-9A-Fa-f]{6})\b<ret>'
       evaluate-commands -itersel %{
         set-option -add window hex_color_code_ranges "%val{selection_desc}|default,rgb:%reg{1}"
       }

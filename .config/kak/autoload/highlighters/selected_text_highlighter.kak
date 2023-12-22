@@ -10,7 +10,7 @@ define-command update_selected_text_ranges %{
     # Initialize ranges
     set-option window selected_text_ranges %val{timestamp}
     evaluate-commands -draft %{
-      execute-keys '*gtGbs<ret>'
+      execute-keys '*gtGbxs<ret>'
       evaluate-commands -itersel %{
         set-option -add window selected_text_ranges "%val{selection_desc}|SelectedText"
       }

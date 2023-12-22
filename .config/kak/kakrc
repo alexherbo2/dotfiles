@@ -24,6 +24,7 @@ hook global WinCreate '.*' %{
 }
 add-highlighter global/search ref search
 add-highlighter global/selected_text ref selected_text
+add-highlighter global/hex_color_code ref hex_color_code
 
 set-option global terminal_command alacritty
 set-option global terminal_args msg create-window -e

@@ -100,6 +100,12 @@ git clone https://github.com/wez/wezterm.git ~/.local/share/github.com/wez/wezte
 git clone https://github.com/sayanarijit/xplr.git ~/.local/share/github.com/sayanarijit/xplr
 git clone https://github.com/occivink/advent2021.git ~/.local/share/github.com/occivink/advent2021
 git clone https://github.com/HertzDevil/advent-of-code.git ~/.local/share/github.com/HertzDevil/advent-of-code
+git clone https://github.com/asterite/adventofcode2015.git ~/.local/share/github.com/asterite/adventofcode2015
+git clone https://github.com/asterite/adventofcode2016.git ~/.local/share/github.com/asterite/adventofcode2016
+git clone https://github.com/asterite/adventofcode2017.git ~/.local/share/github.com/asterite/adventofcode2017
+git clone https://github.com/asterite/adventofcode2018.git ~/.local/share/github.com/asterite/adventofcode2018
+git clone https://github.com/asterite/adventofcode2019.git ~/.local/share/github.com/asterite/adventofcode2019
+git clone https://github.com/asterite/adventofcode2020.git ~/.local/share/github.com/asterite/adventofcode2020
 git clone https://github.com/asterite/adventofcode2021.git ~/.local/share/github.com/asterite/adventofcode2021
 git clone https://github.com/asterite/adventofcode2022.git ~/.local/share/github.com/asterite/adventofcode2022
 kak

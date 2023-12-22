@@ -25,11 +25,24 @@ set-face global BrightCyanHighlighter 'white,bright-cyan'
 set-face global BrightWhiteHighlighter 'white,bright-white'
 
 define-command highlight_selected_text -params 1 %{
-  evaluate-commands -save-regs '/' -verbatim try %{
+  highlight_selected_text_with_auto_named_highlighter %{
+    add-highlighter "buffer/%reg{n}" regex "%reg{/}" "0:%arg{1}"
+  }
+}
+
+define-command unhighlight_selected_text %{
+  highlight_selected_text_with_auto_named_highlighter %{
+    remove-highlighter "buffer/%reg{n}"
+  }
+}
+
+define-command highlight_selected_text_with_auto_named_highlighter -params 1 %{
+  evaluate-commands -save-regs '/n' %{
     execute-keys -save-regs '' '*'
-    add-highlighter buffer/ regex "%reg{/}" "0:%arg{1}"
-  } catch %{
-    remove-highlighter "buffer/regex_%reg{/}_0:%arg{1}"
+    set-register n %sh{
+      printf 'regex_%s' "$kak_reg_slash" | sed 's,/,<slash>,g'
+    }
+    evaluate-commands %arg{1}
   }
 }
 

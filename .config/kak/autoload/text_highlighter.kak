@@ -4,77 +4,94 @@ define-command enter_highlight_mode %{
   enter-user-mode highlight
 }
 
-define-command highlight_selected_text -params 2 %{
+set-face global HighlightBlack 'white:black'
+set-face global HighlightRed 'white:red'
+set-face global HighlightGreen 'white:green'
+set-face global HighlightYellow 'white:yellow'
+set-face global HighlightBlue 'white:blue'
+set-face global HighlightMagenta 'white:magenta'
+set-face global HighlightCyan 'white:cyan'
+set-face global HighlightWhite 'white:white'
+set-face global HighlightBrightBlack 'white:bright-black'
+set-face global HighlightBrightRed 'white:bright-red'
+set-face global HighlightBrightGreen 'white:bright-green'
+set-face global HighlightBrightYellow 'white:bright-yellow'
+set-face global HighlightBrightBlue 'white:bright-blue'
+set-face global HighlightBrightMagenta 'white:bright-magenta'
+set-face global HighlightBrightCyan 'white:bright-cyan'
+set-face global HighlightBrightWhite 'white:bright-white'
+
+define-command highlight_selected_text -params 1 %{
   evaluate-commands -save-regs '/' -verbatim try %{
     execute-keys -save-regs '' '*'
-    add-highlighter buffer/ regex "%reg{/}" "0:%arg{1},%arg{2}"
+    add-highlighter buffer/ regex "%reg{/}" "0:%arg{1}"
   } catch %{
-    remove-highlighter "buffer/regex_%reg{/}_0:%arg{1},%arg{2}"
+    remove-highlighter "buffer/regex_%reg{/}_0:%arg{1}"
   }
 }
 
 define-command highlight_selected_text_in_black %{
-  highlight_selected_text white black
+  highlight_selected_text HighlightBlack
 }
 
 define-command highlight_selected_text_in_red %{
-  highlight_selected_text white red
+  highlight_selected_text HighlightRed
 }
 
 define-command highlight_selected_text_in_green %{
-  highlight_selected_text white green
+  highlight_selected_text HighlightGreen
 }
 
 define-command highlight_selected_text_in_yellow %{
-  highlight_selected_text white yellow
+  highlight_selected_text HighlightYellow
 }
 
 define-command highlight_selected_text_in_blue %{
-  highlight_selected_text white blue
+  highlight_selected_text HighlightBlue
 }
 
 define-command highlight_selected_text_in_magenta %{
-  highlight_selected_text white magenta
+  highlight_selected_text HighlightMagenta
 }
 
 define-command highlight_selected_text_in_cyan %{
-  highlight_selected_text white cyan
+  highlight_selected_text HighlightCyan
 }
 
 define-command highlight_selected_text_in_white %{
-  highlight_selected_text white white
+  highlight_selected_text HighlightWhite
 }
 
 define-command highlight_selected_text_in_bright_black %{
-  highlight_selected_text white bright-black
+  highlight_selected_text HighlightBrightBlack
 }
 
 define-command highlight_selected_text_in_bright_red %{
-  highlight_selected_text white bright-red
+  highlight_selected_text HighlightBrightRed
 }
 
 define-command highlight_selected_text_in_bright_green %{
-  highlight_selected_text white bright-green
+  highlight_selected_text HighlightBrightGreen
 }
 
 define-command highlight_selected_text_in_bright_yellow %{
-  highlight_selected_text white bright-yellow
+  highlight_selected_text HighlightBrightYellow
 }
 
 define-command highlight_selected_text_in_bright_blue %{
-  highlight_selected_text white bright-blue
+  highlight_selected_text HighlightBrightBlue
 }
 
 define-command highlight_selected_text_in_bright_magenta %{
-  highlight_selected_text white bright-magenta
+  highlight_selected_text HighlightBrightMagenta
 }
 
 define-command highlight_selected_text_in_bright_cyan %{
-  highlight_selected_text white bright-cyan
+  highlight_selected_text HighlightBrightCyan
 }
 
 define-command highlight_selected_text_in_bright_white %{
-  highlight_selected_text white bright-white
+  highlight_selected_text HighlightBrightWhite
 }
 
 alias global hir0 highlight_selected_text_in_black

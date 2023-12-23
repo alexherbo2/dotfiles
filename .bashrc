@@ -230,6 +230,9 @@ alias y=yt-dlp
 # https://pandoc.org
 alias pandoc='pandoc --pdf-engine tectonic'
 
+# Pokémon Play
+alias pokemonplay='clear && pokemonsay -n < /dev/null | tail -n +8 && mpv --no-config --really-quiet --no-video --shuffle --loop-playlist --'
+
 # Package managers -------------------------------------------------------------
 
 # macOS

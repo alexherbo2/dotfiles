@@ -63,6 +63,8 @@ git clone https://github.com/Blacksmoke16/oq.git ~/.local/share/github.com/Black
 git clone https://github.com/Canop/broot.git ~/.local/share/github.com/Canop/broot
 git clone https://github.com/codemirror/dev.git ~/.local/share/github.com/codemirror/dev
 git clone https://github.com/crystal-lang/crystal.git ~/.local/share/github.com/crystal-lang/crystal
+git clone https://github.com/ziglang/zig.git ~/.local/share/github.com/ziglang/zig
+git clone https://github.com/rust-lang/rust.git ~/.local/share/github.com/rust-lang/rust
 git clone https://github.com/elixir-lang/elixir.git ~/.local/share/github.com/elixir-lang/elixir
 git clone https://github.com/jhawthorn/fzy.git ~/.local/share/github.com/jhawthorn/fzy
 git clone https://github.com/jmacdonald/amp.git ~/.local/share/github.com/jmacdonald/amp

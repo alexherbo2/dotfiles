@@ -259,8 +259,8 @@ chown -R taupiqueur:staff home storage shared
 xattr -rc home storage shared
 mkdir -p mnt/Disk
 mkdir -p mnt/USB
-sudo mount /dev/disk/by-label/Disk mnt
-sudo mount /dev/disk/by-label/USB mnt
+sudo mount /dev/disk/by-label/Disk mnt/Disk
+sudo mount /dev/disk/by-label/USB mnt/USB
 sudo umount /dev/disk/by-label/Disk
 sudo umount /dev/disk/by-label/USB
 rsync home storage shared guest:mnt/Disk

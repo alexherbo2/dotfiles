@@ -49,6 +49,7 @@ vscode_html_languageserver = { filetypes = ['html'], roots = ['.git'], command =
 vscode_css_languageserver = { filetypes = ['css'], roots = ['.git'], command = 'vscode-css-languageserver' }
 lua_language_server = { filetypes = ['lua'], roots = ['.git'], command = 'lua-language-server' }
 marksman = { filetypes = ['markdown'], roots = ['.git'], command = 'marksman', args = ['server'] }
+zls = { filetypes = ['zig'], roots = ['build.zig'], command = 'zls' }
 
 # Semantic tokens --------------------------------------------------------------
 

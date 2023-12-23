@@ -11,6 +11,7 @@ alacritty --config-file=/dev/null -o window.opacity=0.9
 alacritty msg config window.opacity=0.9
 kak -s megumin -e 'rename-client chomusuke'
 kak -c megumin
+git clone https://github.com/charmbracelet/glow.git ~/.local/share/github.com/charmbracelet/glow
 git clone https://github.com/charmbracelet/gum.git ~/.local/share/github.com/charmbracelet/gum
 git clone https://github.com/charmbracelet/mods.git ~/.local/share/github.com/charmbracelet/mods
 git clone https://github.com/fish-shell/fish-shell.git ~/.local/share/github.com/fish-shell/fish-shell

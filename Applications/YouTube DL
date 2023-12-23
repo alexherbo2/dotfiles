@@ -1,8 +1,13 @@
 #!/bin/sh
-
-# install
-# brew install gum yt-dlp
-
+# name: YouTube DL
+# version: 0.1.0
+# description: TODO.
+# authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
+# license: MIT
+# dependencies: ["gum", "yt-dlp"]
+# macos_install: brew install gum yt-dlp
+# docs: no
+# tests: no
 set -e
 gum format "Choose where to download files:"
 TARGET_DIRECTORY=$(gum file --file=false --directory)
@@ -14,4 +19,5 @@ do
   test -n "$URL"
   gum spin --title="Downloading '$URL' at '$TARGET_DIRECTORY'..." -- yt-dlp -P "$TARGET_DIRECTORY" -- "$URL"
   gum format "Downloaded '$URL' at '$TARGET_DIRECTORY'."
+  echo "$URL" >> "$TARGET_DIRECTORY/youtube_dl_history.txt"
 done

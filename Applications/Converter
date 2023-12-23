@@ -1,8 +1,13 @@
 #!/bin/sh
-
-# install
-# brew install gum ffmpeg
-
+# name: Converter
+# version: 0.1.0
+# description: TODO.
+# authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
+# license: MIT
+# dependencies: ["gum", "ffmpeg"]
+# macos_install: brew install gum ffmpeg
+# docs: no
+# tests: no
 set -e
 gum format "Choose the kind of file you want to convert: (multiple formats allowed)"
 INPUT_FORMATS=$(gum choose --no-limit "jpg" "mkv" "mp3" "mp4" "png" "webm" "webp")

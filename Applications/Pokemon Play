@@ -1,0 +1,24 @@
+#!/bin/sh
+# name: Pokémon Play
+# version: 0.1.0
+# description: TODO.
+# authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
+# license: MIT
+# dependencies: ["gum", "mpv", "pokemonsay"]
+# macos_install: brew install gum mpv possatti/possatti/pokemonsay
+# docs: no
+# tests: no
+set -e
+at_exit() {
+  tput cnorm
+}
+trap at_exit EXIT
+gum format "Choose the directory you want to play:"
+PLAYLIST_DIRECTORY=$(gum file --file=false --directory)
+tput civis
+while :
+do
+  clear
+  pokemonsay -n < /dev/null | tail -n +8 | sed '$d'
+  mpv --really-quiet --no-config --no-video --shuffle --loop-playlist -- "$PLAYLIST_DIRECTORY"
+done

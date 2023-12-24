@@ -116,6 +116,8 @@ git clone https://github.com/asterite/adventofcode2021.git ~/.local/share/github
 git clone https://github.com/asterite/adventofcode2022.git ~/.local/share/github.com/asterite/adventofcode2022
 kak
 sway
+brew install kak-lsp/kak-lsp/kak-lsp
+brew install possatti/possatti/pokemonsay
 brew install koekeishiya/formulae/yabai
 brew install koekeishiya/formulae/skhd
 echo '%wheel ALL=(ALL:ALL) NOPASSWD: ALL' >> /etc/sudoers

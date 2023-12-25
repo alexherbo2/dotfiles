@@ -8,25 +8,33 @@
 # doc: no
 # tests: no
 define-command list_buffers %{
-  edit! -scratch '*buffers*'
-  evaluate-commands -no-hooks -buffer '*' -verbatim -- try %{
-    set-register dquote "%val{bufname}:readonly=%opt{readonly}:modified=%val{modified}"
-    execute-keys -buffer '*buffers*' 'gep'
-  }
-  execute-keys 'd'
-  evaluate-commands -draft %{
-    execute-keys '%<a-s>H2<a-f>:'
-    try %{
-      execute-keys -draft 's\A:readonly=false:modified=false\z<ret>d'
+  evaluate-commands -save-regs 'b' %{
+    set-register b %val{bufname}
+    edit! -scratch '*buffers*'
+    evaluate-commands -no-hooks -buffer '*' -verbatim -- try %{
+      set-register dquote "%val{bufname}:readonly=%opt{readonly}:modified=%val{modified}"
+      execute-keys -buffer '*buffers*' 'gep'
     }
+    execute-keys 'd'
     try %{
-      execute-keys -draft 's\A:readonly=true:modified=true\z<ret>c (readonly, modified)<esc>'
+      execute-keys '%<a-s>2<a-F>:H<a-k>\A\Q<c-r>b\E\z<ret>gh'
+    } catch %{
+      execute-keys 'gg'
     }
-    try %{
-      execute-keys -draft 's\A:readonly=true:modified=false\z<ret>c (readonly)<esc>'
-    }
-    try %{
-      execute-keys -draft 's\A:readonly=false:modified=true\z<ret>c (modified)<esc>'
+    evaluate-commands -draft %{
+      execute-keys '%<a-s>H2<a-f>:'
+      try %{
+        execute-keys -draft 's\A:readonly=false:modified=false\z<ret>d'
+      }
+      try %{
+        execute-keys -draft 's\A:readonly=true:modified=true\z<ret>c (readonly, modified)<esc>'
+      }
+      try %{
+        execute-keys -draft 's\A:readonly=true:modified=false\z<ret>c (readonly)<esc>'
+      }
+      try %{
+        execute-keys -draft 's\A:readonly=false:modified=true\z<ret>c (modified)<esc>'
+      }
     }
   }
 }

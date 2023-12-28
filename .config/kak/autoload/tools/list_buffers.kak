@@ -8,7 +8,7 @@
 # doc: no
 # tests: no
 define-command list_buffers %{
-  evaluate-commands -save-regs 'b' %{
+  evaluate-commands -save-regs '"b' %{
     set-register b %val{bufname}
     edit! -scratch '*buffers*'
     evaluate-commands -no-hooks -buffer '*' -verbatim -- try %{

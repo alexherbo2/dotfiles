@@ -53,9 +53,9 @@ font pango:JetBrains Mono 11
 # Color scheme
 # client.<class> <border> <background> <text> <indicator> <child_border>
 # https://github.com/swaywm/sway/raw/master/sway/sway.5.scd#:~:text=client.
-client.focused $aqua_gray_6 $aqua_gray_6 $dark_gray_6 $dark_teal $aqua_teal
-client.focused_inactive $aqua_gray_5 $aqua_gray_5 $dark_gray $aqua_gray_5 $aqua_gray_5
-client.unfocused $aqua_gray_5 $aqua_gray_5 $dark_gray $aqua_gray_5 $aqua_gray_5
+client.focused $aqua_gray_6_color $aqua_gray_6_color $dark_gray_6_color $dark_teal_color $aqua_teal_color
+client.focused_inactive $aqua_gray_5_color $aqua_gray_5_color $dark_gray_color $aqua_gray_5_color $aqua_gray_5_color
+client.unfocused $aqua_gray_5_color $aqua_gray_5_color $dark_gray_color $aqua_gray_5_color $aqua_gray_5_color
 
 # Status bar -------------------------------------------------------------------
 
@@ -67,12 +67,12 @@ bar {
 
   # https://github.com/swaywm/sway/raw/master/sway/sway-bar.5.scd#:~:text=colors
   colors {
-    background $aqua_gray_6
-    statusline $dark_gray_6
+    background $aqua_gray_6_color
+    statusline $dark_gray_6_color
     # <class> <border> <background> <text>
-    focused_workspace $aqua_gray_5 $aqua_gray_5 $dark_gray_5
-    active_workspace $aqua_gray_6 $aqua_gray_6 $dark_gray_6
-    inactive_workspace $aqua_gray_6 $aqua_gray_6 $dark_gray_6
+    focused_workspace $aqua_gray_5_color $aqua_gray_5_color $dark_gray_5_color
+    active_workspace $aqua_gray_6_color $aqua_gray_6_color $dark_gray_6_color
+    inactive_workspace $aqua_gray_6_color $aqua_gray_6_color $dark_gray_6_color
   }
 }
 

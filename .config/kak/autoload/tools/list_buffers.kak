@@ -11,7 +11,7 @@ define-command list_buffers %{
   evaluate-commands -save-regs '"b' %{
     set-register b %val{bufname}
     edit! -scratch '*buffers*'
-    evaluate-commands -no-hooks -buffer '*' -verbatim -- try %{
+    evaluate-commands -no-hooks -buffer '*' %{
       set-register dquote "%val{bufname}:readonly=%opt{readonly}:modified=%val{modified}"
       execute-keys -buffer '*buffers*' 'gep'
     }

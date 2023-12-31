@@ -41,7 +41,7 @@ declare-option str dark_text_background_color 'e6e6e6'
 declare-option str darker_text_background_color 'cccccc'
 
 # Other
-set-face global non_text "rgb:%opt{darker_text_background_color}"
+declare-option str non_text_color "%opt{darker_text_background_color}"
 
 # Template
 # https://github.com/mawww/kakoune/blob/master/colors/default.kak
@@ -97,15 +97,15 @@ set-face global StatusLineInfo "rgb:%opt{blue_color}" # 1 sel
 set-face global StatusLineValue "rgb:%opt{green_color}" # 1 sel param=[42] reg=[y]
 set-face global StatusCursor "default,rgb:%opt{cursor_color}" # Cursor in command mode
 set-face global Prompt StatusLine # Same as the status line, since they live at the same place.
-set-face global BufferPadding non_text # Kakoune ⇒ set-option global ui_options terminal_padding_fill=yes
+set-face global BufferPadding "rgb:%opt{non_text_color}" # Kakoune ⇒ set-option global ui_options terminal_padding_fill=yes
 
 # Builtin highlighter faces
-set-face global LineNumbers non_text # Kakoune ⇒ add-highlighter -override global/number-lines number-lines — Prefer non-text here — https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorLineNumber
+set-face global LineNumbers "rgb:%opt{non_text_color}" # Kakoune ⇒ add-highlighter -override global/number-lines number-lines — Prefer non-text here — https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorLineNumber
 set-face global LineNumberCursor "rgb:%opt{text_color}" # Kakoune ⇒ add-highlighter -override global/number-lines number-lines -hlcursor
 set-face global LineNumbersWrapped "rgb:%opt{text_background_color}" # Kakoune ⇒ add-highlighter -override global/number-lines number-lines; add-highlighter -override global/wrap wrap
 set-face global MatchingChar "default,rgba:%opt{bright_blue_color}%opt{selection_low_opacity}" # Kakoune ⇒ add-highlighter -override global/show-matching show-matching — https://github.com/dracula/vim/blob/master/colors/dracula.vim#:~:text=MatchParen
-set-face global Whitespace '+f@non_text' # Kakoune ⇒ add-highlighter -override global/show-whitespaces show-whitespaces
-set-face global WrapMarker non_text # Kakoune ⇒ add-highlighter -override global/wrap wrap -marker '↪'
+set-face global Whitespace "rgb:%opt{non_text_color}+f" # Kakoune ⇒ add-highlighter -override global/show-whitespaces show-whitespaces
+set-face global WrapMarker "rgb:%opt{non_text_color}" # Kakoune ⇒ add-highlighter -override global/wrap wrap -marker '↪'
 
 # Custom faces
 set-face global Search "default,rgba:%opt{bright_yellow_color}%opt{selection_low_opacity}"

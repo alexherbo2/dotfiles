@@ -50,6 +50,8 @@ map -docstring 'enter command mode' global normal <ret> :
 map -docstring 'keep primary selection' global normal <esc> ',<esc>'
 map -docstring 'remove primary selection' global normal <del> '<a-,>'
 map -docstring 'collapse selections' global normal <backspace> ';'
+map -docstring 'select inner words' global normal w '<a-i>w'
+map -docstring 'select inner long words' global normal W '<a-i><a-W>'
 
 map -docstring 'recenter viewport' global normal V 'vt5vkvm'
 map global normal <c-e> ':open_current_buffer_with_nnn<ret>'

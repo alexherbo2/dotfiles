@@ -9,6 +9,7 @@ define-command enter_extend_mode %{
   }
 }
 
+# map -docstring 'delete selected text' global extend d 'd<esc>'
 map -docstring 'left' global extend h H
 map -docstring 'down' global extend j J
 map -docstring 'up' global extend k K

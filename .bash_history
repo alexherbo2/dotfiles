@@ -172,6 +172,7 @@ pw --length=10 kanto taupiqueur
 pw --length=10 google.com taupiqueur.kanto
 pw --length=10 github.com taupiqueur
 pw --length=10 apple.com taupiqueur.kanto@gmail.com
+pw --length=10 kobo.com taupiqueur.kanto@gmail.com
 pw --length=10 lichess.org taupiqueur
 pw --length=10 paragon-software.com taupiqueur.kanto@gmail.com
 pw --length=10 paypal.com taupiqueur.kanto@gmail.com

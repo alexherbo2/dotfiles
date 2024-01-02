@@ -2,9 +2,9 @@ hook global BufCreate '.+\.preview' %{
   set-option buffer filetype preview
 }
 
-hook global WinSetOption filetype=preview %{
-  remove-highlighter window/line_numbers
-}
+# hook global WinSetOption filetype=preview %{
+#   remove-highlighter window/line_numbers
+# }
 
 define-command open_preview %{
   edit -scratch -- "%val{client}.preview"

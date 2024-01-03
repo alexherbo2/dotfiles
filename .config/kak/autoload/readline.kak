@@ -34,3 +34,7 @@ define-command erase_word_before_cursor %{
 map global insert <c-w> '<a-;>:erase_word_before_cursor<ret>'
 
 map -docstring 'insert clipboard contents' global insert <c-y> '<c-r>"'
+map -docstring 'move cursors to the start of the line' global insert <c-a> '<home>'
+map -docstring 'move cursors to the end of the line' global insert <c-e> '<end>'
+map -docstring 'move cursors to the next character' global insert <c-f> '<right>'
+map -docstring 'move cursors to the previous character' global insert <c-b> '<left>'

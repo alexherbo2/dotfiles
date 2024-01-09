@@ -154,6 +154,7 @@ alias kak_test='kak -e "load_and_run_config_tests"'
 alias k=kamux
 alias kl='kak -l'
 alias kn='kak -n'
+alias ks='kamux -s'
 alias kc='kamux -c'
 
 # grep

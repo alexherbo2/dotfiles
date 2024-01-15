@@ -14,7 +14,7 @@ define-command decrease_indent %{
 define-command decrease_indent_or_erase_character_before_cursor %{
   try %{
     execute-keys -draft -itersel '<a-h><a-k>\A\h+.\z<ret>'
-    execute-keys -draft '<lt>'
+    execute-keys -draft ';<lt>'
   } catch %{
     execute-keys -draft ';i<backspace>'
   }

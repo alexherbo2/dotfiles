@@ -82,6 +82,9 @@ map global normal <c-p> ':iterate_previous_selection<ret>'
 map global normal '#' ':toggle_comments_with_config<ret>'
 map global normal x ':select_whole_lines_or_extend_lines_down<ret>'
 
+map -docstring 'save current buffer to its file' global normal <c-s> ':write<ret>'
+map -docstring 'goto last accessed buffer' global normal <c-a> 'ga'
+
 map -docstring 'enter jump mode (select mode: replace)' global normal f ':enter_jump_mode_with_replace_select_mode<ret>'
 map -docstring 'enter jump mode (select mode: extend)' global normal F ':enter_jump_mode_with_extend_select_mode<ret>'
 map -docstring 'enter jump mode (select mode: append)' global normal <a-f> ':enter_jump_mode_with_append_select_mode<ret>'

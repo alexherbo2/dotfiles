@@ -11,15 +11,18 @@ declare-user-mode extend
 
 define-command enter_extend_mode %{
   enter-user-mode extend
+}
+
+hook -always global ModeChange '\Qpush:normal:next-key[user.extend]\E' %{
   set-option window autoinfo ''
-  hook -once window NormalIdle .* %{
+  hook -always -once window ModeChange '\Qpop:next-key[user.extend]:normal\E' %{
     unset-option window autoinfo
   }
 }
 
 define-command reenter_extend_mode_after_key -params 1 %{
   execute-keys -with-hooks %arg{1}
-  enter-user-mode extend
+  enter_extend_mode
 }
 
 define-command reenter_extend_mode_after_to_char_key -params 1 %{
@@ -30,9 +33,13 @@ define-command reenter_extend_mode_after_prompt_key -params 1 %{
   reenter_extend_mode_after_mode_change 'prompt' %arg{1}
 }
 
+define-command reenter_extend_mode_after_goto_key -params 1 %{
+  reenter_extend_mode_after_mode_change 'next-key[goto]' %arg{1}
+}
+
 define-command reenter_extend_mode_after_mode_change -params 2 %{
   hook -once window ModeChange "\Qpop:%arg{1}:normal\E" %{
-    enter-user-mode extend
+    enter_extend_mode
   }
   execute-keys -with-hooks %arg{2}
 }
@@ -64,6 +71,7 @@ map -docstring 'rotate selections backward' global extend ( ':reenter_extend_mod
 map -docstring 'rotate selections forward' global extend ) ':reenter_extend_mode_after_key )<ret>'
 map -docstring 'copy selections on next lines' global extend 'c' ':reenter_extend_mode_after_key C<ret>'
 map -docstring 'copy selections on previous lines' global extend 'C' ':reenter_extend_mode_after_key <lt>a-C<gt><ret>'
+map -docstring 'goto location' global extend g ':reenter_extend_mode_after_goto_key G<ret>'
 map -docstring 'search forward for {pattern}' global extend / ':reenter_extend_mode_after_prompt_key ?<ret>'
 map -docstring 'search backward for {pattern}' global extend ? ':reenter_extend_mode_after_prompt_key <lt>a-?<gt><ret>'
 map -docstring 'search forward for {char}' global extend f ':reenter_extend_mode_after_to_char_key F<ret>'

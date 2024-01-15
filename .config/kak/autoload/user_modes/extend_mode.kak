@@ -1,4 +1,12 @@
-# https://docs.helix-editor.com/keymap.html#extend-mode
+# name: kakoune_extend_mode
+# version: 0.1.0
+# description: "This script provides access to the extend mode.\nThese mappings are in the style of Helix’s select mode.\nHelix’s select mode: https://docs.helix-editor.com/keymap.html#select--extend-mode"
+# authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
+# kakoune: 2023-12-12
+# license: MIT
+# dependencies: []
+# doc: yes
+# tests: no
 declare-user-mode extend
 
 define-command enter_extend_mode %{
@@ -31,11 +39,11 @@ define-command reenter_extend_mode_after_mode_change -params 2 %{
 
 map -docstring 'enter insert mode' global extend i i
 map -docstring 'enter insert “append” mode' global extend a a
+map -docstring 'yank selected text' global extend y y
 map -docstring 'delete selected text' global extend d d
 map -docstring 'delete selected text without yanking' global extend <a-d> <a-d>
 map -docstring 'delete selected text and enter insert mode' global extend c c
 map -docstring 'delete selected text without yanking and enter insert mode' global extend <a-c> <a-c>
-map -docstring 'yank selected text' global extend y y
 map -docstring 'replace selected text with yanked text' global extend R R
 map -docstring 'left' global extend h ':reenter_extend_mode_after_key H<ret>'
 map -docstring 'down' global extend j ':reenter_extend_mode_after_key J<ret>'

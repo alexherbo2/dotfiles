@@ -76,5 +76,5 @@ map -docstring 'search forward for {pattern}' global extend / ':reenter_extend_m
 map -docstring 'search backward for {pattern}' global extend ? ':reenter_extend_mode_after_prompt_key <lt>a-?<gt><ret>'
 map -docstring 'search forward for {char}' global extend f ':reenter_extend_mode_after_to_char_key F<ret>'
 map -docstring 'search backward for {char}' global extend F ':reenter_extend_mode_after_to_char_key <lt>a-F<gt><ret>'
-map -docstring 'search forward ’til {char}' global extend t ':reenter_extend_mode_after_to_char_key t<ret>'
+map -docstring 'search forward ’til {char}' global extend t ':reenter_extend_mode_after_to_char_key T<ret>'
 map -docstring 'search backward ’til {char}' global extend T ':reenter_extend_mode_after_to_char_key <lt>a-T<gt><ret>'

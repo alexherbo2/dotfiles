@@ -36,6 +36,12 @@ set-option global find_args --hidden --type=file
 
 # Status line
 set-option global modelinefmt '%opt{lsp_modeline_code_actions}%opt{lsp_modeline_progress}%opt{lsp_modeline_message_requests} %val{bufname} %val{cursor_line}:%val{cursor_char_column} {{context_info}} {{mode_info}} %val{client}@%val{session}'
+hook global NormalIdle '.*' %{
+  echo -markup "{white,blue} NOR {default} {blue}%val{selection_count} sels{default}"
+}
+hook global InsertIdle '.*' %{
+  echo -markup "{white,green} INS {default} {blue}%val{selection_count} sels{default}"
+}
 
 # Highlight various characters
 add-highlighter global/characters regex '[–—−×]' '0:cyan+f'

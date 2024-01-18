@@ -37,28 +37,26 @@ set-option global find_args --hidden --type=file
 # Status line
 set-option global modelinefmt '%opt{lsp_modeline_code_actions}%opt{lsp_modeline_progress}%opt{lsp_modeline_message_requests} %val{bufname} %val{cursor_line}:%val{cursor_char_column} {{context_info}} {{mode_info}} %val{client}@%val{session}'
 
-hook global NormalIdle '' %{
+hook global NormalIdle '.*' %{
+  unset-face window PrimarySelection
   unset-face window PrimaryCursor
-  unset-face window SecondaryCursor
-  unset-face window LineNumberCursor
 
   try %{
     # Determine multiple selections.
     execute-keys -draft '<a-,>'
-    set-face window PrimaryCursor PrimaryCursorEol
-    set-face window SecondaryCursor SecondaryCursorEol
-    set-face window LineNumberCursor DiagnosticWarning
 
     try %{
       # Determine hidden selections above.
       execute-keys -draft -save-regs 't' 'Zgt"tZb"tzGe<a-z>a<a-,>'
-      set-face window LineNumberCursor DiagnosticError
+      set-face window PrimarySelection 'white,bright-red'
+      set-face window PrimaryCursor 'white,red'
     }
 
     try %{
       # Determine hidden selections below.
       execute-keys -draft -save-regs 'b' 'Zgbx;"bZe"bzGg<a-z>a<a-,>'
-      set-face window LineNumberCursor DiagnosticError
+      set-face window PrimarySelection 'white,bright-red'
+      set-face window PrimaryCursor 'white,red'
     }
   }
 }

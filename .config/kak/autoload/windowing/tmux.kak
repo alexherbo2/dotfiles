@@ -108,60 +108,60 @@ define-command move_view_to_new_window_with_tmux %{
   tmux break-pane -a
 }
 
-define-command focus_next_viewport_with_tmux %{
+define-command activate_next_viewport_with_tmux %{
   tmux select-pane -t '{next}'
 }
 
-define-command focus_previous_viewport_with_tmux %{
+define-command activate_previous_viewport_with_tmux %{
   tmux select-pane -t '{previous}'
 }
 
-define-command focus_next_window_with_tmux %{
+define-command activate_next_window_with_tmux %{
   tmux next-window
 }
 
-define-command focus_previous_window_with_tmux %{
+define-command activate_previous_window_with_tmux %{
   tmux previous-window
 }
 
-define-command focus_window_by_index_with_tmux -params 1 %{
+define-command activate_window_by_index_with_tmux -params 1 %{
   tmux select-window -t %arg{1}
 }
 
-define-command focus_first_window_with_tmux %{
-  focus_window_by_index_with_tmux 1
+define-command activate_first_window_with_tmux %{
+  activate_window_by_index_with_tmux 1
 }
 
-define-command focus_second_window_with_tmux %{
-  focus_window_by_index_with_tmux 2
+define-command activate_second_window_with_tmux %{
+  activate_window_by_index_with_tmux 2
 }
 
-define-command focus_third_window_with_tmux %{
-  focus_window_by_index_with_tmux 3
+define-command activate_third_window_with_tmux %{
+  activate_window_by_index_with_tmux 3
 }
 
-define-command focus_fourth_window_with_tmux %{
-  focus_window_by_index_with_tmux 4
+define-command activate_fourth_window_with_tmux %{
+  activate_window_by_index_with_tmux 4
 }
 
-define-command focus_fifth_window_with_tmux %{
-  focus_window_by_index_with_tmux 5
+define-command activate_fifth_window_with_tmux %{
+  activate_window_by_index_with_tmux 5
 }
 
-define-command focus_sixth_window_with_tmux %{
-  focus_window_by_index_with_tmux 6
+define-command activate_sixth_window_with_tmux %{
+  activate_window_by_index_with_tmux 6
 }
 
-define-command focus_seventh_window_with_tmux %{
-  focus_window_by_index_with_tmux 7
+define-command activate_seventh_window_with_tmux %{
+  activate_window_by_index_with_tmux 7
 }
 
-define-command focus_eighth_window_with_tmux %{
-  focus_window_by_index_with_tmux 8
+define-command activate_eighth_window_with_tmux %{
+  activate_window_by_index_with_tmux 8
 }
 
-define-command focus_last_window_with_tmux %{
-  focus_window_by_index_with_tmux '#{last_window_index}'
+define-command activate_last_window_with_tmux %{
+  activate_window_by_index_with_tmux '#{last_window_index}'
 }
 
 define-command move_window_left_with_tmux %{
@@ -180,15 +180,15 @@ define-command close_other_viewports_with_tmux %{
   tmux kill-pane -a
 }
 
-define-command focus_client_with_tmux -params 1 %{
+define-command activate_client_with_tmux -params 1 %{
   evaluate-commands -client %arg{1} %{
     tmux switch-client -t %val{client_env_TMUX_PANE}
   }
 }
 
-define-command open_prompt_focus_client_with_tmux %{
+define-command open_prompt_activate_client_with_tmux %{
   prompt -menu client_picker: -shell-script-candidates %opt{other_clients_completion} %{
-    focus_client_with_tmux %val{text}
+    activate_client_with_tmux %val{text}
   }
 }
 
@@ -224,7 +224,7 @@ complete-command split_view_down_with_tmux command
 complete-command split_view_right_with_tmux command
 complete-command create_view_in_new_window_with_tmux command
 complete-command create_view_in_new_window_right_with_tmux command
-complete-command focus_client_with_tmux shell-script-candidates %opt{other_clients_completion}
+complete-command activate_client_with_tmux shell-script-candidates %opt{other_clients_completion}
 
 map -docstring 'jump view left' global tmux h ':jump_view_left_with_tmux<ret>'
 map -docstring 'jump view down' global tmux j ':jump_view_down_with_tmux<ret>'
@@ -250,21 +250,21 @@ map -docstring 'create view in new window right' global tmux c ':create_view_in_
 map -docstring 'create view in new window' global tmux C ':create_view_in_new_window_with_tmux<ret>'
 map -docstring 'move view to new window' global tmux T ':move_view_to_new_window_with_tmux<ret>'
 
-map -docstring 'focus next viewport' global tmux w ':focus_next_viewport_with_tmux<ret>'
-map -docstring 'focus previous viewport' global tmux W ':focus_previous_viewport_with_tmux<ret>'
+map -docstring 'activate next viewport' global tmux w ':activate_next_viewport_with_tmux<ret>'
+map -docstring 'activate previous viewport' global tmux W ':activate_previous_viewport_with_tmux<ret>'
 
-map -docstring 'focus next window' global tmux n ':focus_next_window_with_tmux<ret>'
-map -docstring 'focus previous window' global tmux p ':focus_previous_window_with_tmux<ret>'
+map -docstring 'activate next window' global tmux n ':activate_next_window_with_tmux<ret>'
+map -docstring 'activate previous window' global tmux p ':activate_previous_window_with_tmux<ret>'
 
-map -docstring 'focus first window' global tmux 1 ':focus_first_window_with_tmux<ret>'
-map -docstring 'focus second window' global tmux 2 ':focus_second_window_with_tmux<ret>'
-map -docstring 'focus third window' global tmux 3 ':focus_third_window_with_tmux<ret>'
-map -docstring 'focus fourth window' global tmux 4 ':focus_fourth_window_with_tmux<ret>'
-map -docstring 'focus fifth window' global tmux 5 ':focus_fifth_window_with_tmux<ret>'
-map -docstring 'focus sixth window' global tmux 6 ':focus_sixth_window_with_tmux<ret>'
-map -docstring 'focus seventh window' global tmux 7 ':focus_seventh_window_with_tmux<ret>'
-map -docstring 'focus eighth window' global tmux 8 ':focus_eighth_window_with_tmux<ret>'
-map -docstring 'focus last window' global tmux 9 ':focus_last_window_with_tmux<ret>'
+map -docstring 'activate first window' global tmux 1 ':activate_first_window_with_tmux<ret>'
+map -docstring 'activate second window' global tmux 2 ':activate_second_window_with_tmux<ret>'
+map -docstring 'activate third window' global tmux 3 ':activate_third_window_with_tmux<ret>'
+map -docstring 'activate fourth window' global tmux 4 ':activate_fourth_window_with_tmux<ret>'
+map -docstring 'activate fifth window' global tmux 5 ':activate_fifth_window_with_tmux<ret>'
+map -docstring 'activate sixth window' global tmux 6 ':activate_sixth_window_with_tmux<ret>'
+map -docstring 'activate seventh window' global tmux 7 ':activate_seventh_window_with_tmux<ret>'
+map -docstring 'activate eighth window' global tmux 8 ':activate_eighth_window_with_tmux<ret>'
+map -docstring 'activate last window' global tmux 9 ':activate_last_window_with_tmux<ret>'
 
 map -docstring 'move window left' global tmux P ':move_window_left_with_tmux<ret>'
 map -docstring 'move window right' global tmux N ':move_window_right_with_tmux<ret>'
@@ -272,7 +272,7 @@ map -docstring 'move window right' global tmux N ':move_window_right_with_tmux<r
 map -docstring 'close view' global tmux x ':close_view_with_tmux<ret>'
 map -docstring 'close other viewports' global tmux X ':close_other_viewports_with_tmux<ret>'
 
-map -docstring 'open prompt focus client' global tmux / ':open_prompt_focus_client_with_tmux<ret>'
+map -docstring 'open prompt activate client' global tmux / ':open_prompt_activate_client_with_tmux<ret>'
 map -docstring 'select view' global tmux q ':select_view_with_tmux<ret>'
 map -docstring 'select window' global tmux s ':select_window_with_tmux<ret>'
 map -docstring 'move view to window' global tmux m ':move_view_to_window_with_tmux_menu<ret>'
@@ -290,7 +290,7 @@ map -docstring 'jump view right' global tmux <c-l> ':jump_view_right_with_tmux<r
 map -docstring 'split view down' global tmux <c-s> ':split_view_down_with_tmux<ret>'
 map -docstring 'split view right' global tmux <c-v> ':split_view_right_with_tmux<ret>'
 
-map -docstring 'focus next viewport' global tmux <c-w> ':focus_next_viewport_with_tmux<ret>'
+map -docstring 'activate next viewport' global tmux <c-w> ':activate_next_viewport_with_tmux<ret>'
 
 map -docstring 'close view' global tmux <c-q> ':close_view_with_tmux<ret>'
 map -docstring 'close other viewports' global tmux <c-o> ':close_other_viewports_with_tmux<ret>'

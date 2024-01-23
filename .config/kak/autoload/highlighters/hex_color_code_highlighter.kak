@@ -20,9 +20,9 @@ define-command update_hex_color_code_ranges %{
       }
     }
     evaluate-commands -draft -verbatim try %{
-      execute-keys 's\B#([0-9A-Fa-f]{3})\b<ret>'
+      execute-keys 's\B#([0-9A-Fa-f])([0-9A-Fa-f])([0-9A-Fa-f])\b<ret>'
       evaluate-commands -itersel %{
-        set-option -add window hex_color_code_ranges "%val{selection_desc}|default,rgb:%reg{1}%reg{1}"
+        set-option -add window hex_color_code_ranges "%val{selection_desc}|default,rgb:%reg{1}%reg{1}%reg{2}%reg{2}%reg{3}%reg{3}"
       }
     }
   }

@@ -113,6 +113,10 @@ set-face global SelectedText "default,rgba:%opt{selection_color}%opt{selection_l
 set-face global StatusLineInactive "rgb:%opt{dim_text_color},rgb:%opt{dim_text_background_color}"
 set-face global JumpLabel "rgb:%opt{black_color},rgb:%opt{bright_yellow_color}+F"
 
+set-face global PrimarySelectionMulti "default,rgba:ffec8b%opt{selection_opacity}" # Pink (alpha-blended)
+set-face global PrimaryCursorMulti "default,rgba:%opt{text_color}%opt{cursor_opacity}" # Pink (alpha-blended)
+set-face global PrimaryCursorEolMulti "default,rgb:%opt{text_color}+fg" # White (full block)
+
 # Infobox faces
 set-face global InfoDefault Information
 set-face global InfoHeader header

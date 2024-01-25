@@ -58,48 +58,9 @@ define-command delete_all_buffers %{
 }
 alias global dba delete_all_buffers
 
-define-command select_whole_lines_or_extend_lines_down %{
-  execute-keys '<a-:>'
-  try %{
-    # At least one selection is not full, so select whole lines.
-    execute-keys -draft '<a-K>\A^.*\n\z<ret>'
-    execute-keys 'x'
-  } catch %{
-    execute-keys 'Jx'
-  }
-}
-
 # VS Code keyboard shortcuts
 # https://code.visualstudio.com/docs/getstarted/keybindings#_default-keyboard-shortcuts
 # https://code.visualstudio.com/docs/getstarted/keybindings#_basic-editing
-define-command copy_selected_lines_down %{
-  execute-keys -draft 'xyP'
-}
-
-define-command copy_selected_lines_up %{
-  execute-keys -draft 'xyp'
-}
-
-define-command move_selected_lines_down %{
-  execute-keys -draft 'x<a-_><a-:>Z;ezjxdzP'
-}
-
-define-command move_selected_lines_up %{
-  execute-keys -draft 'x<a-_><a-:><a-;>Z;bzkxdzp'
-}
-
-define-command select_highlights %{
-  execute-keys -save-regs 'ab' '"aZ*%s<ret>"bZ"az"b<a-z>a'
-}
-
-define-command increment_selected_numbers -params 0..1 %{
-  execute-keys "a+%sh{expr $1 '|' 1}<esc>|{ cat; echo; } | bc<ret>"
-}
-
-define-command decrement_selected_numbers -params 0..1 %{
-  execute-keys "a-%sh{expr $1 '|' 1}<esc>|{ cat; echo; } | bc<ret>"
-}
-
 define-command evaluate_selected_text %{
   execute-keys -with-hooks ':<c-r><a-.><ret>'
 }

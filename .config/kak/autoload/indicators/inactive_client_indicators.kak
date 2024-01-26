@@ -18,6 +18,9 @@ hook global FocusIn .* %{
   unset-face window Whitespace
   unset-face window Search
   unset-face window SelectedText
+  unset-face window StatusLineNormal
+  unset-face window StatusLineInsert
+  unset-face window StatusLineExtend
 }
 
 hook global FocusOut .* %{
@@ -38,4 +41,7 @@ hook global FocusOut .* %{
   set-face window Whitespace ''
   set-face window Search ''
   set-face window SelectedText ''
+  set-face window StatusLineNormal ''
+  set-face window StatusLineInsert ''
+  set-face window StatusLineExtend ''
 }

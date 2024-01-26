@@ -111,11 +111,10 @@ set-face global WrapMarker "rgb:%opt{non_text_color}" # Kakoune ⇒ add-highligh
 set-face global Search "default,rgba:%opt{bright_yellow_color}%opt{selection_low_opacity}"
 set-face global SelectedText "default,rgba:%opt{selection_color}%opt{selection_low_opacity}"
 set-face global StatusLineInactive "rgb:%opt{dim_text_color},rgb:%opt{dim_text_background_color}"
+set-face global StatusLineNormal "rgb:%opt{bright_white_color},rgb:%opt{bright_blue_color}"
+set-face global StatusLineInsert "rgb:%opt{bright_white_color},rgb:%opt{green_color}"
+set-face global StatusLineExtend "rgb:%opt{bright_white_color},rgb:%opt{magenta_color}"
 set-face global JumpLabel "rgb:%opt{black_color},rgb:%opt{bright_yellow_color}+F"
-
-set-face global PrimarySelectionMulti "default,rgba:ffec8b%opt{selection_opacity}" # Pink (alpha-blended)
-set-face global PrimaryCursorMulti "default,rgba:%opt{text_color}%opt{cursor_opacity}" # Pink (alpha-blended)
-set-face global PrimaryCursorEolMulti "default,rgb:%opt{text_color}+fg" # White (full block)
 
 # Infobox faces
 set-face global InfoDefault Information

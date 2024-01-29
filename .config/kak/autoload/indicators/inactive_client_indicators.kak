@@ -41,7 +41,7 @@ hook global FocusOut .* %{
   set-face window Whitespace ''
   set-face window Search ''
   set-face window SelectedText ''
-  set-face window StatusLineNormal ''
-  set-face window StatusLineInsert ''
-  set-face window StatusLineExtend ''
+  set-face window StatusLineNormal StatusLineInactive
+  set-face window StatusLineInsert StatusLineInactive
+  set-face window StatusLineExtend StatusLineInactive
 }

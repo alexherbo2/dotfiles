@@ -290,12 +290,17 @@ map -docstring 'jump view right' global tmux <c-l> ':jump_view_right_with_tmux<r
 map -docstring 'split view down' global tmux <c-s> ':split_view_down_with_tmux<ret>'
 map -docstring 'split view right' global tmux <c-v> ':split_view_right_with_tmux<ret>'
 
+map -docstring 'create view in new window right' global tmux <c-t> ':create_view_in_new_window_right_with_tmux<ret>'
+
 map -docstring 'activate next viewport' global tmux <c-w> ':activate_next_viewport_with_tmux<ret>'
+
+map -docstring 'activate next window' global tmux <c-n> ':activate_next_window_with_tmux<ret>'
+map -docstring 'activate previous window' global tmux <c-p> ':activate_previous_window_with_tmux<ret>'
 
 map -docstring 'close view' global tmux <c-q> ':close_view_with_tmux<ret>'
 map -docstring 'close other viewports' global tmux <c-o> ':close_other_viewports_with_tmux<ret>'
 
-map -docstring 'new split scratch buffer' global tmux <c-n> ':enter_tmux_new_split_scratch_buffer_mode<ret>'
+# map -docstring 'new split scratch buffer' global tmux <c-n> ':enter_tmux_new_split_scratch_buffer_mode<ret>'
 
 map -docstring 'split view down with new scratch buffer' global tmux_new_split_scratch_buffer <c-s> ':split_view_down_with_tmux edit -scratch<ret>'
 map -docstring 'split view right with new scratch buffer' global tmux_new_split_scratch_buffer <c-v> ':split_view_right_with_tmux edit -scratch<ret>'

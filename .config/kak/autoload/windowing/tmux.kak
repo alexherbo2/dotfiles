@@ -222,7 +222,7 @@ define-command choose_window_with_tmux -params .. %{
 
 define-command open_tmux_panel -params .. %{
   set-option window terminal_command env
-  set-option window terminal_args "TMUX=%val{client_env_TMUX}" "TMUX_PANE=%val{client_env_TMUX_PANE}" tmux split-window -h -b -l 30 -t '{left}' -d '#{pane_current_path}'
+  set-option window terminal_args "TMUX=%val{client_env_TMUX}" "TMUX_PANE=%val{client_env_TMUX_PANE}" tmux split-window -h -b -l 30 -t '{left}'
   evaluate-commands -verbatim -- %arg{@}
   unset-option window terminal_command
   unset-option window terminal_args

@@ -3,11 +3,11 @@
 # https://github.com/mawww/kakoune
 
 colorscheme macos_light_low_contrast
-# colorscheme one-dark
-# set-face global StatusLineInactive "rgb:%opt{fg},rgb:%opt{subbg}"
-# set-face global StatusLineNormal "rgb:%opt{bg},rgb:%opt{blue}"
-# set-face global StatusLineInsert "rgb:%opt{bg},rgb:%opt{green}"
-# set-face global StatusLineExtend "rgb:%opt{bg},rgb:%opt{magenta}"
+colorscheme one-dark
+set-face global StatusLineInactive "rgb:%opt{fg},rgb:%opt{subbg}"
+set-face global StatusLineNormal "rgb:%opt{bg},rgb:%opt{blue}"
+set-face global StatusLineInsert "rgb:%opt{bg},rgb:%opt{green}"
+set-face global StatusLineExtend "rgb:%opt{bg},rgb:%opt{magenta}"
 
 # Preamble ---------------------------------------------------------------------
 
@@ -62,7 +62,7 @@ map -docstring 'select inner words' global normal w '<a-i>w'
 map -docstring 'select inner long words' global normal W '<a-i><a-w>'
 
 map -docstring 'recenter viewport' global normal V 'vt5vkvm'
-map global normal <c-e> ':open_current_buffer_with_nnn<ret>'
+map global normal <c-e> ':open_terminal_as_panel_with_tmux open_current_buffer_with_nnn<ret>'
 map global normal <c-l> ':open_current_buffer_with_gitui<ret>'
 map global normal <c-space> ':sh<ret>'
 map global normal <c-j> ':copy_selected_lines_down<ret>'

@@ -8,7 +8,6 @@
 # doc: no
 # tests: no
 define-command grep_buffers -params 1 %{
-  set-register / %arg{1}
   evaluate-commands -save-regs '"' %{
     try %{
       execute-keys -buffer '*grep*' -save-regs '' '%y'

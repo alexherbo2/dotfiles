@@ -180,60 +180,51 @@ define-command close_other_viewports_with_tmux %{
   tmux kill-pane -a
 }
 
-define-command activate_client_with_tmux -params 1 %{
+define-command activate_view_with_tmux -params 1 %{
   evaluate-commands -client %arg{1} %{
     tmux switch-client -t %val{client_env_TMUX_PANE}
   }
 }
 
-define-command open_prompt_activate_client_with_tmux %{
+define-command search_view_with_tmux %{
   prompt -menu client_picker: -shell-script-candidates %opt{other_clients_completion} %{
     activate_client_with_tmux %val{text}
   }
 }
 
 define-command select_view_with_tmux %{
-  choose_pane_with_tmux %{
+  activate_pane_select_with_tmux %{
     select-pane -t '%%'
   }
 }
 
 define-command select_window_with_tmux %{
-  choose_window_with_tmux %{
+  activate_window_select_with_tmux %{
     switch-client -t '%%'
   }
 }
 
-define-command move_view_to_window_with_tmux_menu %{
-  choose_window_with_tmux %{
+define-command move_view_to_window_with_tmux_window_select %{
+  activate_window_select_with_tmux %{
     join-pane -t '%%'
   }
 }
 
-define-command choose_pane_with_tmux -params .. %{
+define-command activate_pane_select_with_tmux -params .. %{
   tmux display-panes -d 0 %arg{@}
 }
 
-define-command choose_window_with_tmux -params .. %{
+define-command activate_window_select_with_tmux -params .. %{
   tmux run-shell %exp{
     tmux choose-tree -Zw -f '##{==:##{session_name},#{session_name}}' "%arg{@}"
   }
-}
-
-define-command open_tmux_panel -params .. %{
-  set-option window terminal_command env
-  set-option window terminal_args "TMUX=%val{client_env_TMUX}" "TMUX_PANE=%val{client_env_TMUX_PANE}" tmux split-window -h -b -l 30 -t '{left}'
-  evaluate-commands -verbatim -- %arg{@}
-  unset-option window terminal_command
-  unset-option window terminal_args
 }
 
 complete-command split_view_down_with_tmux command
 complete-command split_view_right_with_tmux command
 complete-command create_view_in_new_window_with_tmux command
 complete-command create_view_in_new_window_right_with_tmux command
-complete-command activate_client_with_tmux shell-script-candidates %opt{other_clients_completion}
-complete-command open_tmux_panel command
+complete-command activate_view_with_tmux shell-script-candidates %opt{other_clients_completion}
 
 map -docstring 'jump view left' global tmux h ':jump_view_left_with_tmux<ret>'
 map -docstring 'jump view down' global tmux j ':jump_view_down_with_tmux<ret>'
@@ -281,10 +272,10 @@ map -docstring 'move window right' global tmux N ':move_window_right_with_tmux<r
 map -docstring 'close view' global tmux x ':close_view_with_tmux<ret>'
 map -docstring 'close other viewports' global tmux X ':close_other_viewports_with_tmux<ret>'
 
-map -docstring 'open prompt activate client' global tmux / ':open_prompt_activate_client_with_tmux<ret>'
+map -docstring 'search view' global tmux / ':search_view_with_tmux<ret>'
 map -docstring 'select view' global tmux q ':select_view_with_tmux<ret>'
 map -docstring 'select window' global tmux s ':select_window_with_tmux<ret>'
-map -docstring 'move view to window' global tmux m ':move_view_to_window_with_tmux_menu<ret>'
+map -docstring 'move view to window' global tmux m ':move_view_to_window_with_tmux_window_select<ret>'
 
 # map -docstring 'new split scratch buffer' global tmux n ':enter_tmux_new_split_scratch_buffer_mode<ret>'
 

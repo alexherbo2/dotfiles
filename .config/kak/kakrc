@@ -115,10 +115,6 @@ map -docstring 'yank selected text to the terminal clipboard' global user y ':ya
 map -docstring 'open goto line prompt' global user g ':open_goto_line_prompt<ret>'
 map -docstring 'open text highlighter prompt' global user '*' ':open_text_highlighter_prompt<ret>'
 
-# Window mode ------------------------------------------------------------------
-
-map -docstring 'open nnn' global tmux E ':open_tmux_panel open_current_buffer_with_nnn<ret>'
-
 # Prompt mode ------------------------------------------------------------------
 
 map -docstring 'insert buffer directory name' global prompt <a-/> '%sh{dirname "$kak_bufname"}<a-!>/'

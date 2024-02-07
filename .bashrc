@@ -157,6 +157,8 @@ alias kn='kak -n'
 alias ks='kamux -s'
 alias kc='kamux -c'
 
+alias tide='tmux -L ide -f ~/.config/tide.conf'
+
 # grep
 alias ws='rg "\\s+$|\\w\\s{2,}\\w"'
 

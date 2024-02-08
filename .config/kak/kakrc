@@ -3,11 +3,11 @@
 # https://github.com/mawww/kakoune
 
 colorscheme macos_light_low_contrast
-# colorscheme one-dark
-# set-face global StatusLineInactive "rgb:%opt{fg},rgb:%opt{subbg}"
-# set-face global StatusLineNormal "rgb:%opt{bg},rgb:%opt{blue}"
-# set-face global StatusLineInsert "rgb:%opt{bg},rgb:%opt{green}"
-# set-face global StatusLineExtend "rgb:%opt{bg},rgb:%opt{magenta}"
+colorscheme one-dark
+set-face global StatusLineInactive "rgb:%opt{fg},rgb:%opt{subbg}"
+set-face global StatusLineNormal "rgb:%opt{bg},rgb:%opt{blue}"
+set-face global StatusLineInsert "rgb:%opt{bg},rgb:%opt{green}"
+set-face global StatusLineExtend "rgb:%opt{bg},rgb:%opt{magenta}"
 
 # Preamble ---------------------------------------------------------------------
 

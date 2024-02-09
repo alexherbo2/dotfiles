@@ -188,7 +188,7 @@ define-command activate_view_with_tmux -params 1 %{
 
 define-command search_view_with_tmux %{
   prompt -menu client_picker: -shell-script-candidates %opt{other_clients_completion} %{
-    activate_client_with_tmux %val{text}
+    activate_view_with_tmux %val{text}
   }
 }
 

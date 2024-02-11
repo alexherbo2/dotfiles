@@ -13,6 +13,11 @@ alias global lsp lsp-enable
 
 colorscheme macos_light_low_contrast
 
+set-face global Tab WhitespaceDiagnosticError
+set-face global Newline Whitespace
+set-face global NonBreakingSpace WhitespaceDiagnosticError
+set-face global Indent Whitespace
+
 # Options ----------------------------------------------------------------------
 
 # UI options

@@ -25,12 +25,8 @@ define-command disable_readonly_mode %{
   set-option buffer readonly no
 }
 
-define-command unrender_whitespace %{
-  remove-highlighter global/render_whitespace
-}
-
-define-command remove_rulers %{
-  remove-highlighter global/rulers
+define-command hide_whitespace %{
+  remove-highlighter global/whitespace
 }
 
 define-command disable_soft_wrap %{
@@ -38,9 +34,8 @@ define-command disable_soft_wrap %{
 }
 
 map -docstring 'hide line numbers' global unimpaired_left l ':hide_line_numbers<ret>'
-map -docstring 'unrender whitespace' global unimpaired_left w ':unrender_whitespace<ret>'
+map -docstring 'hide whitespace' global unimpaired_left w ':hide_whitespace<ret>'
 map -docstring 'disable read-only mode' global unimpaired_left r ':disable_readonly_mode<ret>'
 map -docstring 'disable soft-wrap' global unimpaired_left <tab> ':disable_soft_wrap<ret>'
-map -docstring 'remove rulers' global unimpaired_left | ':remove_rulers<ret>'
 map -docstring 'add new line above' global unimpaired_left <space> <a-O>
 map -docstring 'jump to previous buffer' global unimpaired_left b ':buffer-previous<ret>'

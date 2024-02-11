@@ -25,12 +25,8 @@ define-command enable_readonly_mode %{
   set-option buffer readonly yes
 }
 
-define-command render_whitespace %{
-  add-highlighter global/render_whitespace show-whitespaces
-}
-
-define-command add_rulers %{
-  add-highlighter global/rulers column 81 default,cyan
+define-command show_whitespace %{
+  add-highlighter global/whitespace show-whitespaces
 }
 
 define-command enable_soft_wrap %{
@@ -38,9 +34,8 @@ define-command enable_soft_wrap %{
 }
 
 map -docstring 'show line numbers' global unimpaired_right l ':show_line_numbers<ret>'
-map -docstring 'render whitespace' global unimpaired_right w ':render_whitespace<ret>'
+map -docstring 'show whitespace' global unimpaired_right w ':show_whitespace<ret>'
 map -docstring 'enable soft-wrap mode' global unimpaired_right <tab> ':enable_soft_wrap<ret>'
 map -docstring 'enable read-only mode' global unimpaired_right r ':enable_readonly_mode<ret>'
-map -docstring 'add rulers' global unimpaired_right | ':add_rulers<ret>'
 map -docstring 'add new line below' global unimpaired_right <space> <a-o>
 map -docstring 'jump to next buffer' global unimpaired_right b ':buffer-next<ret>'

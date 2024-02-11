@@ -89,8 +89,10 @@ set-face global MenuBackground "rgb:%opt{text_color},rgb:%opt{dark_text_backgrou
 set-face global MenuInfo "rgb:%opt{white_color}" # IntelliSense suggestions
 set-face global Information "rgb:%opt{text_color},rgb:%opt{dark_text_background_color}" # Contextual help blends with the editor background.
 set-face global Error "rgb:%opt{red_color},rgb:%opt{dark_text_background_color}" # https://spec.draculatheme.com#Invalid
-set-face global DiagnosticError "rgb:%opt{red_color}" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorError.foreground
-set-face global DiagnosticWarning "rgb:%opt{yellow_color}" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorWarning.foreground
+set-face global DiagnosticError ",,rgb:%opt{red_color}+c" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorError.foreground
+set-face global DiagnosticWarning ",,rgb:%opt{yellow_color}+c" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorWarning.foreground
+set-face global DiagnosticInfo ",,rgb:%opt{blue_color}+c" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorWarning.foreground
+set-face global DiagnosticHint ",,rgb:%opt{green_color}+u" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorWarning.foreground
 set-face global StatusLine "rgb:%opt{text_color},rgb:%opt{dark_text_background_color}" # Prefer background dark here — https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=statusBar.background
 set-face global StatusLineMode "rgb:%opt{yellow_color}" # [insert]
 set-face global StatusLineInfo "rgb:%opt{blue_color}" # 1 sel

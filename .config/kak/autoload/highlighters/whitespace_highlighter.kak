@@ -1,11 +1,11 @@
-set-face global Tab Whitespace
+set-face global Tab WhitespaceDiagnosticInfo
 set-face global Newline Whitespace
-set-face global NonBreakingSpace Whitespace
+set-face global NonBreakingSpace WhitespaceDiagnosticInfo
 set-face global Indent Whitespace
 set-face global MixedIndent WhitespaceDiagnosticError
 set-face global OddIndent WhitespaceDiagnosticError
 set-face global TrailingWhitespace WhitespaceDiagnosticError
-set-face global ConsecutiveWhitespace WhitespaceDiagnosticWarning
+set-face global ConsecutiveWhitespace WhitespaceDiagnosticError
 set-face global WhitespaceRuler WhitespaceDiagnosticHint
 
 set-face global WhitespaceDiagnosticError DiagnosticError

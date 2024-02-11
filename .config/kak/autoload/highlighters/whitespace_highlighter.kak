@@ -1,6 +1,6 @@
-set-face global Tab WhitespaceDiagnosticInfo
+set-face global Tab Whitespace
 set-face global Newline Whitespace
-set-face global NonBreakingSpace WhitespaceDiagnosticInfo
+set-face global NonBreakingSpace Whitespace
 set-face global Indent Whitespace
 set-face global MixedIndent WhitespaceDiagnosticError
 set-face global OddIndent WhitespaceDiagnosticError
@@ -22,7 +22,7 @@ add-highlighter shared/whitespace/ regex '^\h+' '0:Indent'
 add-highlighter shared/whitespace/ regex '\h+$' '0:TrailingWhitespace'
 add-highlighter shared/whitespace/ regex '^( {1}| {3}| {5}| {7}| {9}| {11}| {13}| {15}| {17}| {19})(?![*\s])' '0:OddIndent'
 add-highlighter shared/whitespace/ regex '^(\t+ | +\t)\h*' '0:MixedIndent'
-add-highlighter shared/whitespace/ regex '(?S)^.{80}$\K\n' '0:WhitespaceRuler'
+add-highlighter shared/whitespace/ regex '(?S)^.{79}\K.$' '0:WhitespaceRuler'
 
 hook global ModeChange 'push:normal:insert' %{
   set-face window TrailingWhitespace Whitespace

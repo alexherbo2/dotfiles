@@ -2,14 +2,16 @@
 # https://kakoune.org
 # https://github.com/mawww/kakoune
 
-colorscheme macos_light_low_contrast
-
 # Preamble ---------------------------------------------------------------------
 
 evaluate-commands %sh{
   kak-lsp --kakoune --session "$kak_session"
 }
 alias global lsp lsp-enable
+
+# Appearance -------------------------------------------------------------------
+
+colorscheme macos_light_low_contrast
 
 # Options ----------------------------------------------------------------------
 

@@ -15,14 +15,6 @@ define-command add_test -params 2 %{
 
 alias global test add_test
 
-define-command load_config_tests %{
-  load_tests "%val{config}/tests"
-}
-
-define-command load_current_file_tests %{
-  load_tests %val{buffile}
-}
-
 define-command load_tests -params 1.. %{
   clear_tests
   evaluate-commands %sh{
@@ -72,17 +64,19 @@ complete-command run_test shell-script-candidates %{
   printf '%s\n' "$@"
 }
 
+define-command load_and_run_tests -params 1.. %{
+  load_tests %arg{@}
+  run_tests
+}
+
+complete-command load_and_run_tests file
+
 define-command load_and_run_config_tests %{
-  load_config_tests
+  load_tests "%val{config}/tests"
   run_tests
 }
 
 define-command load_and_run_current_file_tests %{
-  load_current_file_tests
-  run_tests
-}
-
-define-command load_and_run_tests %{
-  load_tests
+  load_tests %val{buffile}
   run_tests
 }

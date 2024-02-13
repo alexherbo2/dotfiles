@@ -48,6 +48,7 @@ map -docstring 'enter insert mode' global extend i i
 map -docstring 'enter insert “append” mode' global extend a a
 map -docstring 'yank selected text' global extend y y
 map -docstring 'delete selected text' global extend d d
+map -docstring 'search selected text' global extend * *
 map -docstring 'delete selected text without yanking' global extend <a-d> <a-d>
 map -docstring 'delete selected text and enter insert mode' global extend c c
 map -docstring 'delete selected text without yanking and enter insert mode' global extend <a-c> <a-c>

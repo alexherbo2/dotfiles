@@ -86,7 +86,7 @@ add-highlighter shared/test/ regex 'test result: (\d+) passed, (\d+) failed.' 0:
 add-highlighter shared/test/ regex 'test #\d+ [\w-]+: ok' 0:green
 add-highlighter shared/test/ regex 'test #\d+ [\w-]+: failed' 0:red
 add-highlighter shared/test/ regex "^(assert_eq|assert_buffer_eq) '.*?' '.*?'$" 0:red
-add-highlighter shared/test/ regex '^(Expected|Got):\B' 0:yellow
+add-highlighter shared/test/ regex '^(Expected|Got):\B' 0:red
 
 hook global BufCreate '\*debug\*' %{
   add-highlighter buffer/test ref test

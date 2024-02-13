@@ -80,3 +80,12 @@ define-command load_and_run_current_file_tests %{
   load_tests %val{buffile}
   run_tests
 }
+
+add-highlighter shared/test group
+add-highlighter shared/test/ regex 'test result: (\d+) passed, (\d+) failed.' 0:Information 1:green 2:red
+add-highlighter shared/test/ regex 'test #\d+ [\w-]+: ok' 0:green
+add-highlighter shared/test/ regex 'test #\d+ [\w-]+: failed' 0:red
+
+hook global BufCreate '\*debug\*' %{
+  add-highlighter buffer/test ref test
+}

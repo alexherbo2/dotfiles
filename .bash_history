@@ -18,7 +18,7 @@ git clone https://github.com/charmbracelet/mods.git ~/.local/share/github.com/ch
 git clone https://github.com/fish-shell/fish-shell.git ~/.local/share/github.com/fish-shell/fish-shell
 git clone https://github.com/possatti/pokemonsay.git ~/.local/share/github.com/possatti/pokemonsay
 git clone https://github.com/watzon/arg_parser.git ~/.local/share/github.com/watzon/arg_parser
-git clone https://github.com/kak-lsp/kak-lsp.git ~/.local/share/github.com/kak-lsp/kak-lsp
+git clone https://github.com/kakoune-lsp/kakoune-lsp.git ~/.local/share/github.com/kakoune-lsp/kakoune-lsp
 git clone https://github.com/zellij-org/zellij.git ~/.local/share/github.com/zellij-org/zellij
 git clone https://github.com/cantino/mcfly.git ~/.local/share/github.com/cantino/mcfly
 git clone https://github.com/doomemacs/doomemacs.git ~/.local/share/github.com/doomemacs/doomemacs
@@ -116,7 +116,7 @@ git clone https://github.com/asterite/adventofcode2021.git ~/.local/share/github
 git clone https://github.com/asterite/adventofcode2022.git ~/.local/share/github.com/asterite/adventofcode2022
 kak
 sway
-brew install kak-lsp/kak-lsp/kak-lsp
+brew install kakoune-lsp/kakoune-lsp/kakoune-lsp
 brew install possatti/possatti/pokemonsay
 brew install koekeishiya/formulae/yabai
 brew install koekeishiya/formulae/skhd

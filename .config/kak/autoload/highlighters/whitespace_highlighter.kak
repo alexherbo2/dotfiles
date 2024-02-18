@@ -22,7 +22,7 @@ add-highlighter shared/whitespace/ regex '^\h+' '0:Indent'
 add-highlighter shared/whitespace/ regex '\h+$' '0:TrailingWhitespace'
 add-highlighter shared/whitespace/ regex '^( {1}| {3}| {5}| {7}| {9}| {11}| {13}| {15}| {17}| {19})(?![*\s])' '0:OddIndent'
 add-highlighter shared/whitespace/ regex '^(\t+ | +\t)\h*' '0:MixedIndent'
-add-highlighter shared/whitespace/ regex '(?S)^.{79}\K\H$' '0:LineLength80'
+add-highlighter shared/whitespace/ regex '(?S)^.{79}\K\S$' '0:LineLength80'
 
 hook global ModeChange 'push:normal:insert' %{
   set-face window TrailingWhitespace Whitespace

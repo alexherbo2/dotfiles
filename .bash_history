@@ -18,6 +18,11 @@ git clone https://github.com/charmbracelet/mods.git ~/.local/share/github.com/ch
 git clone https://github.com/fish-shell/fish-shell.git ~/.local/share/github.com/fish-shell/fish-shell
 git clone https://github.com/possatti/pokemonsay.git ~/.local/share/github.com/possatti/pokemonsay
 git clone https://github.com/watzon/arg_parser.git ~/.local/share/github.com/watzon/arg_parser
+git clone https://github.com/phaazon/kak-tree-sitter.git ~/.local/share/github.com/phaazon/kak-tree-sitter
+cd ~/.local/share/github.com/phaazon/kak-tree-sitter/kak-tree-sitter
+ktsctl -fci rust
+cd ~/.local/share/github.com/phaazon/kak-tree-sitter/ktsctl
+cd ~/.local/share/github.com/phaazon/kak-tree-sitter
 git clone https://github.com/kakoune-lsp/kakoune-lsp.git ~/.local/share/github.com/kakoune-lsp/kakoune-lsp
 git clone https://github.com/zellij-org/zellij.git ~/.local/share/github.com/zellij-org/zellij
 git clone https://github.com/cantino/mcfly.git ~/.local/share/github.com/cantino/mcfly

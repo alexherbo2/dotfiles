@@ -190,3 +190,7 @@ hook global BufOpenFile '.*' %{
     detect-indent-style
   }
 }
+
+hook global BufCreate '.+/i3status/config|.+/sway/config|.+/tmux\.conf|.+/kamux\.conf' %{
+  set-option buffer filetype sh
+}

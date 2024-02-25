@@ -22,7 +22,7 @@ set-face global Indent Whitespace
 # Options ----------------------------------------------------------------------
 
 # UI options
-set-option global startup_info_version 20231231
+set-option global startup_info_version 20241231
 set-option global ui_options terminal_set_title=no terminal_assistant=none
 set-option global matching_pairs ( ) { } [ ] < > “ ” ‘ ’ « » ‹ ›
 # set-option global scrolloff 5,1

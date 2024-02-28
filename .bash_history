@@ -294,6 +294,8 @@ mpv ~/anime/nicky-larson/01
 mpv ~/sounds/waves.opus
 git init
 git commit --message='Initial commit'
+git tag -l
+git tag -d nightly
 gh repo create
 clear
 kitty -o allow_remote_control=yes

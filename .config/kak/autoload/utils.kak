@@ -23,6 +23,14 @@ define-command convert_selected_text_to_ascii %{
   execute-keys '|iconv -f UTF-8 -t ASCII//TRANSLIT//IGNORE<ret>'
 }
 
+define-command align_selections_to_main_cursor %{
+  evaluate-commands -itersel -save-regs '^' %exp{
+    execute-keys -save-regs '' 'Z'
+    select "%%val{cursor_line}.%val{cursor_char_column},%%val{cursor_line}.%val{cursor_char_column}"
+    execute-keys '<a-z>u'
+  }
+}
+
 define-command convert_selected_dates_to_iso_8601 %{
   execute-keys '|date -I -d "$kak_selection"<ret>'
 }

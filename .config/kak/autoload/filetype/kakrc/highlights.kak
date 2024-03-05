@@ -21,7 +21,7 @@ add-highlighter shared/kakrc.string.interpolated/string/ ref kakrc.expansion
 # Expansions
 add-highlighter shared/kakrc.expansion regions
 add-highlighter shared/kakrc.expansion/expansion default-region group
-add-highlighter shared/kakrc.expansion/expansion/ regex '\B%(arg|file|opt|val|sh)\b' 0:meta
+add-highlighter shared/kakrc.expansion/expansion/ regex '\B%(arg|file|opt|val|sh|exp)\b' 0:meta
 add-highlighter shared/kakrc.expansion/ region -recurse '\(' '[^%]%sh\(\K' '(?=\))' ref sh
 add-highlighter shared/kakrc.expansion/ region -recurse '\[' '[^%]%sh\[\K' '(?=\])' ref sh
 add-highlighter shared/kakrc.expansion/ region -recurse '\{' '[^%]%sh\{\K' '(?=\})' ref sh

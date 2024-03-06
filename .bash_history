@@ -264,6 +264,7 @@ ssh host
 ssh guest
 ssh mawww
 ssh phaazon
+ssh phaazon -t tmux attach-session
 rsync home guest:
 sshfs host: shared/kanto
 ngrok tcp 22

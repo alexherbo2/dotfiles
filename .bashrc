@@ -80,6 +80,7 @@ alias -- -='cd -'
 # Note: Runs command with aliases.
 alias @host='ssh host -t '
 alias @guest='ssh guest -t '
+alias @phaazon='ssh phaazon -t tmux attach-session'
 
 # Run commands with aliases.
 alias sudo='sudo '

@@ -173,6 +173,10 @@ rm ~/docs/bookmarks_*_*_*.html
 mv ~/Documents/bookmarks_*_*_*.html ~/docs
 weechat
 rm -R .config/weechat .local/share/weechat .cache/weechat
+pw --length=10 strongly-typed-thoughts.net taupiqueur
+passwd taupiqueur
+tmux
+tmux attach-session
 pw --length=10 kanto taupiqueur
 pw --length=10 google.com taupiqueur.kanto
 pw --length=10 github.com taupiqueur

@@ -1,1 +1,74 @@
-/Users/taupiqueur/.local/share/github.com/kakoune-lsp/kakoune-lsp/kak-lsp.toml
+# kakoune-lsp
+# https://github.com/kakoune-lsp/kakoune-lsp
+# https://github.com/kakoune-lsp/kakoune-lsp/blob/master/kak-lsp.toml
+# Helix
+# https://helix-editor.com
+# https://docs.helix-editor.com/languages.html
+# https://github.com/helix-editor/helix/blob/master/languages.toml
+# https://microsoft.github.io/language-server-protocol/implementors/servers/
+# https://microsoft.github.io/language-server-protocol/specifications/specification-current/
+
+# Global settings --------------------------------------------------------------
+
+snippet_support = false
+verbosity = 2
+
+# Server options ---------------------------------------------------------------
+
+[server]
+
+timeout = 1800 # seconds (30 minutes)
+
+# Language identifiers ---------------------------------------------------------
+
+[language_ids]
+
+# Reference
+# https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocumentItem
+
+bash = 'shellscript'
+sh = 'shellscript'
+
+# Language servers -------------------------------------------------------------
+
+[language_server]
+
+# Reference
+# https://microsoft.github.io/language-server-protocol/implementors/servers/
+
+bash_language_server = { filetypes = ['sh'], roots = ['.git'], command = 'bash-language-server', args = ['start'] }
+crystalline = { filetypes = ['crystal'], roots = ['shard.yml'], command = 'crystalline', args = ['--stdio'] }
+typescript_language_server = { filetypes = ['javascript', 'typescript'], roots = ['.git'], command = 'typescript-language-server', args = ['--stdio'] }
+kotlin_language_server = { filetypes = ['kotlin'], roots = ['.git'], command = 'kotlin-language-server' }
+solargraph = { filetypes = ['ruby'], roots = ['Gemfile'], command = 'solargraph', args = ['stdio'] }
+rust_analyzer = { filetypes = ['rust'], roots = ['Cargo.toml'], command = 'rust-analyzer' }
+taplo = { filetypes = ['toml'], roots = ['.git'], command = 'taplo', args = ['lsp', 'stdio'] }
+yaml_language_server = { filetypes = ['yaml'], roots = ['.git'], command = 'yaml-language-server', args = ['--stdio'] }
+vscode_json_languageserver = { filetypes = ['json'], roots = ['.git'], command = 'vscode-json-languageserver' }
+vscode_html_languageserver = { filetypes = ['html'], roots = ['.git'], command = 'vscode-html-languageserver' }
+vscode_css_languageserver = { filetypes = ['css'], roots = ['.git'], command = 'vscode-css-languageserver' }
+lua_language_server = { filetypes = ['lua'], roots = ['.git'], command = 'lua-language-server' }
+marksman = { filetypes = ['markdown'], roots = ['.git'], command = 'marksman', args = ['server'] }
+zls = { filetypes = ['zig'], roots = ['build.zig'], command = 'zls' }
+typos_lsp = { filetypes = ['sh', 'crystal', 'javascript', 'typescript', 'kotlin', 'ruby', 'rust', 'toml', 'yaml', 'json', 'html', 'css', 'lua', 'markdown', 'zig'], roots = ['.git'], command = 'typos-lsp' }
+
+# Semantic tokens --------------------------------------------------------------
+
+[semantic_tokens]
+
+# Reference
+# https://microsoft.github.io/language-server-protocol/specification#textDocument_semanticTokens
+
+faces = [
+  { face = 'documentation', token = 'comment', modifiers = ['documentation'] },
+  { face = 'comment', token = 'comment' },
+  { face = 'function', token = 'function' },
+  { face = 'keyword', token = 'keyword' },
+  { face = 'module', token = 'namespace' },
+  { face = 'operator', token = 'operator' },
+  { face = 'string', token = 'string' },
+  { face = 'type', token = 'type' },
+  { face = 'default+d', token = 'variable', modifiers = ['readonly'] },
+  { face = 'default+d', token = 'variable', modifiers = ['constant'] },
+  { face = 'variable', token = 'variable' }
+]

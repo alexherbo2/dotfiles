@@ -55,6 +55,8 @@ git clone https://github.com/nekonako/dotfiles.git ~/.local/share/github.com/nek
 hg clone https://hg.stevelosh.com/dotfiles ~/.local/share/hg.stevelosh.com/dotfiles
 git clone https://github.com/topisani/dotfiles.git ~/.local/share/github.com/topisani/dotfiles
 git clone https://gitlab.com/vbauerster/dotfiles.git ~/.local/share/gitlab.com/vbauerster/dotfiles
+git clone https://github.com/tekumara/typos-lsp.git ~/.local/share/github.com/tekumara/typos-lsp
+cd ~/.local/share/github.com/tekumara/typos-lsp/crates/typos-lsp
 git clone https://github.com/mawww/config.git ~/.local/share/github.com/mawww/config
 git clone https://github.com/occivink/config.git ~/.local/share/github.com/occivink/config
 git clone https://github.com/phaazon/config.git ~/.local/share/github.com/phaazon/config

@@ -258,6 +258,8 @@ sudo kak /private/var/db/dhcpd_leases
 find /private/var/folders -name '*icon*' -print -exec rm -Ri -- {} +
 ssh host
 ssh guest
+ssh mawww
+ssh phaazon
 rsync home guest:
 sshfs host: shared/kanto
 ngrok tcp 22

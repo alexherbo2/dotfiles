@@ -305,6 +305,7 @@ git init
 git commit --message='Initial commit'
 git tag -l
 git tag -d nightly
+git rebase -i HEAD^
 gh repo create
 clear
 kitty -o allow_remote_control=yes

@@ -163,7 +163,6 @@ set-face global ts_operator operator
 set-face global ts_property variable
 set-face global ts_punctuation operator
 set-face global ts_special meta
-set-face global ts_spell DiagnosticError
 set-face global ts_spell Error
 set-face global ts_string string
 set-face global ts_tag keyword

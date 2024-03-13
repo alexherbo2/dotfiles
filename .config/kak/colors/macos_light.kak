@@ -138,7 +138,7 @@ set-face global ts_attribute attribute
 set-face global ts_comment comment
 set-face global ts_conceal Error
 set-face global ts_constant value
-set-face global ts_constructor Error
+set-face global ts_constructor value
 set-face global ts_diff_delta changed
 set-face global ts_diff_minus deleted
 set-face global ts_diff_plus added

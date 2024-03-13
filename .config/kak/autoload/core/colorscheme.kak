@@ -7,3 +7,11 @@ complete-command -menu load_colorscheme shell-script-candidates %{
 }
 
 alias global colorscheme load_colorscheme
+
+define-command open_colorscheme -params 1 -docstring 'open colorscheme' %{
+  edit -existing -readonly %arg{1}
+}
+
+complete-command -menu open_colorscheme shell-script-candidates %{
+  find -L "$kak_config/colors" "$kak_runtime/colors" -type f -name '*.kak'
+}

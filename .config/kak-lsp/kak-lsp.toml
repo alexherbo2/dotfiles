@@ -37,6 +37,7 @@ sh = 'shellscript'
 # https://microsoft.github.io/language-server-protocol/implementors/servers/
 
 bash_language_server = { filetypes = ['sh'], roots = ['.git'], command = 'bash-language-server', args = ['start'] }
+elixir_ls = { filetypes = ['elixir'], roots = ['mix.exs'], command = 'elixir-ls' }
 crystalline = { filetypes = ['crystal'], roots = ['shard.yml'], command = 'crystalline', args = ['--stdio'] }
 typescript_language_server = { filetypes = ['javascript', 'typescript'], roots = ['.git'], command = 'typescript-language-server', args = ['--stdio'] }
 kotlin_language_server = { filetypes = ['kotlin'], roots = ['.git'], command = 'kotlin-language-server' }

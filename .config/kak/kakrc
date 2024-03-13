@@ -6,7 +6,7 @@
 
 evaluate-commands %sh{
   kak-lsp --kakoune --session "$kak_session"
-  kak-tree-sitter -dks --session "$kak_session"
+  kak-tree-sitter -dks --with-text-objects --session "$kak_session"
 }
 alias global lsp lsp-enable
 

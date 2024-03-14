@@ -137,7 +137,7 @@ set-face global InfoDiagnosticHint InlayDiagnosticHint
 set-face global ts_attribute attribute
 set-face global ts_comment comment
 set-face global ts_conceal Error
-set-face global ts_constant value
+set-face global ts_constant "rgb:%opt{red_color}" # value
 set-face global ts_constructor value
 set-face global ts_diff_delta changed
 set-face global ts_diff_minus deleted
@@ -158,7 +158,7 @@ set-face global ts_markup_quote string
 set-face global ts_markup_raw mono
 set-face global ts_markup_raw_block block
 set-face global ts_markup_strikethrough +s
-set-face global ts_namespace module
+set-face global ts_namespace "rgb:%opt{green_color}" # module
 set-face global ts_operator operator
 set-face global ts_property variable
 set-face global ts_punctuation operator

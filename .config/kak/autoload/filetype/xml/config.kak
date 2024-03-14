@@ -6,7 +6,7 @@
 # https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference
 # https://developer.mozilla.org/en-US/docs/Web/HTML/Reference
 
-hook global BufCreate '.+\.xml' %{
+hook global BufCreate '.+\.xml|.+\.svg' %{
   set-option buffer filetype xml
 }
 

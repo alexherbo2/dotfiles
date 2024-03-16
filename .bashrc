@@ -20,11 +20,11 @@ export PROMPT_COMMAND='printf "\\e]7;file://%s%s\\e\\\\\\e]133;A\\e\\\\" "$HOSTN
 # https://github.com/cantino/mcfly
 # zoxide
 # https://github.com/ajeetdsouza/zoxide
-# rtx
-# https://github.com/jdx/rtx
+# mise
+# https://mise.jdx.dev
 p() {
   export MCFLY_LIGHT=TRUE
-  eval "$(starship init bash; mcfly init bash; zoxide init bash; rtx activate bash)"
+  eval "$(starship init bash; mcfly init bash; zoxide init bash; mise activate bash)"
 }
 
 # Environment variables --------------------------------------------------------

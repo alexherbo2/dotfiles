@@ -45,9 +45,9 @@ solargraph = { filetypes = ['ruby'], roots = ['Gemfile'], command = 'solargraph'
 rust_analyzer = { filetypes = ['rust'], roots = ['Cargo.toml'], command = 'rust-analyzer' }
 taplo = { filetypes = ['toml'], roots = ['.git'], command = 'taplo', args = ['lsp', 'stdio'] }
 yaml_language_server = { filetypes = ['yaml'], roots = ['.git'], command = 'yaml-language-server', args = ['--stdio'] }
-vscode_json_languageserver = { filetypes = ['json'], roots = ['.git'], command = 'vscode-json-languageserver' }
-vscode_html_languageserver = { filetypes = ['html'], roots = ['.git'], command = 'vscode-html-languageserver' }
-vscode_css_languageserver = { filetypes = ['css'], roots = ['.git'], command = 'vscode-css-languageserver' }
+vscode_json_language_server = { filetypes = ['json'], roots = ['.git'], command = 'vscode-json-language-server', args = ['--stdio'] }
+vscode_html_language_server = { filetypes = ['html'], roots = ['.git'], command = 'vscode-html-language-server', args = ['--stdio'] }
+vscode_css_language_server = { filetypes = ['css'], roots = ['.git'], command = 'vscode-css-language-server', args = ['--stdio'] }
 lua_language_server = { filetypes = ['lua'], roots = ['.git'], command = 'lua-language-server' }
 marksman = { filetypes = ['markdown'], roots = ['.git'], command = 'marksman', args = ['server'] }
 zls = { filetypes = ['zig'], roots = ['build.zig'], command = 'zls' }

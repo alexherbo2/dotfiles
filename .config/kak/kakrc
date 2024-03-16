@@ -4,6 +4,10 @@
 
 # Preamble ---------------------------------------------------------------------
 
+hook global ClientCreate .* %{
+  find_friendly_client_name
+}
+find_friendly_session_name
 evaluate-commands %sh{
   kak-lsp --kakoune --session "$kak_session"
   kak-tree-sitter -dks --with-text-objects --session "$kak_session"

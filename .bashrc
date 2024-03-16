@@ -65,6 +65,7 @@ alias md='mkdir -p --'
 alias cp='cp -n'
 alias mv='mv -n'
 alias _='rm -Rf --'
+alias _ssh='ssh-add -D && rm -f ~/.ssh/control_masters/*'
 
 # Bash history
 alias hk='history -a'

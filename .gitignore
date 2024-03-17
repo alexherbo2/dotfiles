@@ -2,6 +2,7 @@
 .config/kak-tree-sitter/grammars
 .config/kak-tree-sitter/queries
 .config/chromium
+.config/mozilla
 .config/gh/config.yml
 .config/gh/hosts.yml
 .config/mpv/watch_later
@@ -16,3 +17,5 @@
 Library/Application Support/McFly
 Library/Application Support/zoxide
 Library/Application Support/Google/Chrome
+Library/Application Support/Firefox
+Library/Application Support/Mozilla

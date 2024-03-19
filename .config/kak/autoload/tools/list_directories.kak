@@ -12,12 +12,12 @@ declare-option str-list ls_args -a -p -L
 define-command list_directories %{
   evaluate-commands -save-regs '"' %{
     try %{
-      execute-keys -buffer '*find*' -save-regs '' '%y'
+      execute-keys -buffer '*ls*' -save-regs '' '%y'
     } catch %{
       set-register dquote
     }
-    create_buffer_from_command_output '*find*' %opt{find_command} %opt{find_args} %arg{@}
-    execute-keys -buffer '*find*' 'P'
+    create_buffer_from_command_output '*ls*' %opt{find_command} %opt{find_args} %arg{@}
+    execute-keys -buffer '*ls*' 'P'
   }
   evaluate-commands -save-regs '"b' %{
     set-register b %val{bufname}

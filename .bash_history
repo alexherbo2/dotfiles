@@ -167,6 +167,7 @@ rustup update
 rustup toolchain list
 rustup toolchain install nightly
 rustup default nightly
+rustup default stable
 export LIBGL_ALWAYS_SOFTWARE=1
 export WLR_RENDERER=pixman
 export WLR_NO_HARDWARE_CURSORS=1

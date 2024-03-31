@@ -157,7 +157,7 @@ alias k=kamux
 alias kl='kak -l'
 alias kn='kak -n'
 alias ks='kamux -s'
-alias kc='kamux -c'
+alias kc='kak -l | fzy | xargs -o -I {} kamux -c {}'
 
 # grep
 alias ws='rg "\\s+$|\\w\\s{2,}\\w"'

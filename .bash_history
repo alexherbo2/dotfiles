@@ -20,7 +20,8 @@ git clone https://github.com/possatti/pokemonsay.git ~/.local/share/github.com/p
 git clone https://github.com/watzon/arg_parser.git ~/.local/share/github.com/watzon/arg_parser
 git clone https://github.com/phaazon/kak-tree-sitter.git ~/.local/share/github.com/phaazon/kak-tree-sitter
 cd ~/.local/share/github.com/phaazon/kak-tree-sitter/kak-tree-sitter
-ktsctl -fci rust
+ktsctl manage -fci rust
+ktsctl info -a
 cd ~/.local/share/github.com/phaazon/kak-tree-sitter/ktsctl
 cd ~/.local/share/github.com/phaazon/kak-tree-sitter
 git clone https://github.com/kakoune-lsp/kakoune-lsp.git ~/.local/share/github.com/kakoune-lsp/kakoune-lsp

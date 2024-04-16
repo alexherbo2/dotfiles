@@ -19,6 +19,17 @@ define-command build_regex_highlighter_from_selections %{
   execute-keys -save-regs '' 'y:edit -scratch<ret><a-R>a<ret><esc><a-_>|sort -u | awk ''{ print length, $0 }'' | sort -n -r | cut -d " " -f 2-<ret><a-s>H*'
 }
 
+define-command toggle_readonly_flag %{
+  set-option buffer readonly %sh{
+    if [ "$kak_opt_readonly" = true ]
+    then
+      printf false
+    else
+      printf true
+    fi
+  }
+}
+
 define-command convert_selected_text_to_ascii %{
   execute-keys '|iconv -f UTF-8 -t ASCII//TRANSLIT//IGNORE<ret>'
 }

@@ -157,7 +157,7 @@ alias k=kamux
 alias kl='kak -l'
 alias kn='kak -n'
 alias ks='kamux -s'
-alias kc='kak -l | fzy | xargs -o -I {} tmux -L kak -f ~/.config/kamux.conf new-session kak -c {}'
+alias kc='kamux -c "$(kak -l | fzy)"'
 
 # grep
 alias ws='rg "\\s+$|\\w\\s{2,}\\w"'

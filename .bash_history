@@ -19,6 +19,10 @@ git clone https://github.com/fish-shell/fish-shell.git ~/.local/share/github.com
 git clone https://github.com/possatti/pokemonsay.git ~/.local/share/github.com/possatti/pokemonsay
 git clone https://github.com/watzon/arg_parser.git ~/.local/share/github.com/watzon/arg_parser
 git clone https://github.com/phaazon/kak-tree-sitter.git ~/.local/share/github.com/phaazon/kak-tree-sitter
+git clone https://git.sr.ht/~hadronized/kak-tree-sitter ~/.local/share/git.sr.ht/~hadronized/kak-tree-sitter
+cd ~/.local/share/git.sr.ht/~hadronized/kak-tree-sitter/kak-tree-sitter
+cd ~/.local/share/git.sr.ht/~hadronized/kak-tree-sitter/ktsctl
+git clone https://github.com/phaazon/kak-tree-sitter.git ~/.local/share/github.com/phaazon/kak-tree-sitter
 cd ~/.local/share/github.com/phaazon/kak-tree-sitter/kak-tree-sitter
 ktsctl manage -fci rust
 ktsctl info -a

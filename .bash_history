@@ -26,6 +26,7 @@ git clone https://github.com/phaazon/kak-tree-sitter.git ~/.local/share/github.c
 cd ~/.local/share/github.com/phaazon/kak-tree-sitter/kak-tree-sitter
 ktsctl manage -fci rust
 ktsctl manage -fcia
+ktsctl manage -sa
 ktsctl info -a
 cd ~/.local/share/github.com/phaazon/kak-tree-sitter/ktsctl
 cd ~/.local/share/github.com/phaazon/kak-tree-sitter

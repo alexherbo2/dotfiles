@@ -8,12 +8,17 @@ import = [
 
 # Appearance -------------------------------------------------------------------
 
-font.size = 14.0
 font.normal.family = 'Menlo'
+font.size = 11.25
 
 selection.save_to_clipboard = true
 
 window.option_as_alt = 'Both'
+
+cursor.style.shape = 'Beam'
+cursor.style.blinking = 'On'
+cursor.blink_timeout = 0
+cursor.unfocused_hollow = false
 
 [bell.command]
 program = 'osascript'

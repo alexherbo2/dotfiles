@@ -10,7 +10,7 @@ hook global ClientCreate .* %{
 find_friendly_session_name
 evaluate-commands %sh{
   kak-lsp --kakoune --session "$kak_session"
-  kak-tree-sitter -dks --init "$kak_session" --with-highlighting --with-text-objects
+  kak-tree-sitter -dks --init "$kak_session"
 }
 alias global lsp lsp-enable
 

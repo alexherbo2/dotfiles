@@ -24,10 +24,11 @@ cd ~/.local/share/git.sr.ht/~hadronized/kak-tree-sitter/kak-tree-sitter
 cd ~/.local/share/git.sr.ht/~hadronized/kak-tree-sitter/ktsctl
 git clone https://github.com/phaazon/kak-tree-sitter.git ~/.local/share/github.com/phaazon/kak-tree-sitter
 cd ~/.local/share/github.com/phaazon/kak-tree-sitter/kak-tree-sitter
-ktsctl manage -fci rust
-ktsctl manage -fcia
-ktsctl manage -sa
-ktsctl info -a
+ktsctl fetch -a
+ktsctl compile -a
+ktsctl install -a
+ktsctl sync -a
+ktsctl query -a
 cd ~/.local/share/github.com/phaazon/kak-tree-sitter/ktsctl
 cd ~/.local/share/github.com/phaazon/kak-tree-sitter
 git clone https://github.com/kakoune-lsp/kakoune-lsp.git ~/.local/share/github.com/kakoune-lsp/kakoune-lsp

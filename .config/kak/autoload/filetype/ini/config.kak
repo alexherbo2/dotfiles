@@ -11,7 +11,6 @@ hook global BufSetOption filetype=ini %{
   set-option buffer decrease_indent_pattern %opt{ini_decrease_indent_pattern}
   set-option buffer ignore_indent_pattern %opt{ini_ignore_indent_pattern}
   set-option buffer line_comment_token %opt{ini_line_comment_token}
-  set-option buffer static_words %opt{ini_static_words}
   hook -always -once buffer BufSetOption 'filetype=(?!ini).*' %{
     remove-highlighter buffer/ini
   }

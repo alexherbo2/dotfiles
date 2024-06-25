@@ -233,6 +233,8 @@ cd ~/config
 cd ~/data
 cd ~/tmp
 cd ~/code/batch
+xattr -rc ~/code/chrome-shortcuts
+find ~/code/chrome-shortcuts -name '*.DS_Store'
 cd ~/code/chrome-shortcuts
 cd ~/code/pw
 cd ~/code/mpv-clip

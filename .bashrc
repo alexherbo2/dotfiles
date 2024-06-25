@@ -54,6 +54,7 @@ export KAKOUNE_POSIX_SHELL=/bin/dash
 
 # Bash history
 bind -x '"\C-r":"READLINE_LINE=$(history -w /dev/stdout | tac | awk !seen[\$0]++ | fzy) READLINE_POINT=${#READLINE_LINE}"'
+bind -x '"\C-x":"READLINE_LINE=$(tac ~/.bash_history~ | awk !seen[\$0]++ | fzy) READLINE_POINT=${#READLINE_LINE}"'
 
 # Aliases ----------------------------------------------------------------------
 

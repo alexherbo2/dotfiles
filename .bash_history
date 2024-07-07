@@ -232,10 +232,15 @@ nnn ~/.local/share/hg.stevelosh.com
 cd ~/config
 cd ~/data
 cd ~/tmp
-cd ~/code/batch
 xattr -rc ~/code/chrome-shortcuts
 find ~/code/chrome-shortcuts -name '*.DS_Store'
 cd ~/code/chrome-shortcuts
+cd ~/code/chrome-shell
+cd ~/code/chrome-dmenu
+cd ~/code/chrome-mpv
+cd ~/code/chrome-nano
+cd ~/code/chrome-pandoc
+cd ~/code/batch
 cd ~/code/pw
 cd ~/code/mpv-clip
 caffeinate -d

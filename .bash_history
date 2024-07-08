@@ -20,6 +20,7 @@ git clone https://github.com/possatti/pokemonsay.git ~/.local/share/github.com/p
 git clone https://github.com/watzon/arg_parser.git ~/.local/share/github.com/watzon/arg_parser
 git clone https://github.com/phaazon/kak-tree-sitter.git ~/.local/share/github.com/phaazon/kak-tree-sitter
 git clone https://git.sr.ht/~hadronized/kak-tree-sitter ~/.local/share/git.sr.ht/~hadronized/kak-tree-sitter
+cd ~/.local/share/git.sr.ht/~hadronized/kak-tree-sitter
 cd ~/.local/share/git.sr.ht/~hadronized/kak-tree-sitter/kak-tree-sitter
 cd ~/.local/share/git.sr.ht/~hadronized/kak-tree-sitter/ktsctl
 git clone https://github.com/phaazon/kak-tree-sitter.git ~/.local/share/github.com/phaazon/kak-tree-sitter
@@ -32,6 +33,7 @@ ktsctl query -a
 cd ~/.local/share/github.com/phaazon/kak-tree-sitter/ktsctl
 cd ~/.local/share/github.com/phaazon/kak-tree-sitter
 git clone https://github.com/kakoune-lsp/kakoune-lsp.git ~/.local/share/github.com/kakoune-lsp/kakoune-lsp
+cd ~/.local/share/github.com/kakoune-lsp/kakoune-lsp
 git clone https://github.com/zellij-org/zellij.git ~/.local/share/github.com/zellij-org/zellij
 git clone https://github.com/cantino/mcfly.git ~/.local/share/github.com/cantino/mcfly
 git clone https://github.com/doomemacs/doomemacs.git ~/.local/share/github.com/doomemacs/doomemacs
@@ -64,6 +66,7 @@ hg clone https://hg.stevelosh.com/dotfiles ~/.local/share/hg.stevelosh.com/dotfi
 git clone https://github.com/topisani/dotfiles.git ~/.local/share/github.com/topisani/dotfiles
 git clone https://gitlab.com/vbauerster/dotfiles.git ~/.local/share/gitlab.com/vbauerster/dotfiles
 git clone https://github.com/tekumara/typos-lsp.git ~/.local/share/github.com/tekumara/typos-lsp
+cd ~/.local/share/github.com/tekumara/typos-lsp
 cd ~/.local/share/github.com/tekumara/typos-lsp/crates/typos-lsp
 git clone https://github.com/mawww/config.git ~/.local/share/github.com/mawww/config
 git clone https://github.com/occivink/config.git ~/.local/share/github.com/occivink/config
@@ -71,6 +74,7 @@ git clone https://github.com/phaazon/config.git ~/.local/share/github.com/phaazo
 git clone https://git.sr.ht/~emersion/grim ~/.local/share/git.sr.ht/~emersion/grim
 git clone https://git.sr.ht/~emersion/kanshi ~/.local/share/git.sr.ht/~emersion/kanshi
 git clone https://github.com/alacritty/alacritty.git ~/.local/share/github.com/alacritty/alacritty
+cd ~/.local/share/github.com/alacritty/alacritty
 git clone https://github.com/alacritty/alacritty-theme.git ~/.local/share/github.com/alacritty/alacritty-theme
 git clone https://github.com/ianyh/Amethyst.git ~/.local/share/github.com/ianyh/Amethyst
 git clone https://github.com/taupiqueur/batch.git ~/.local/share/github.com/taupiqueur/batch
@@ -89,6 +93,7 @@ git clone https://github.com/i3/i3.git ~/.local/share/github.com/i3/i3
 git clone https://github.com/stedolan/jq.git ~/.local/share/github.com/stedolan/jq
 git clone https://github.com/mawww/kakoune.git ~/.local/share/github.com/mawww/kakoune
 git clone https://github.com/lydell/LinkHints.git ~/.local/share/github.com/lydell/LinkHints
+cd ~/.local/share/github.com/lydell/LinkHints
 git clone https://github.com/emersion/mako.git ~/.local/share/github.com/emersion/mako
 git clone https://github.com/mpv-player/mpv.git ~/.local/share/github.com/mpv-player/mpv
 git clone https://github.com/taupiqueur/mpv-clip.git ~/.local/share/github.com/taupiqueur/mpv-clip

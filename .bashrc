@@ -61,6 +61,7 @@ bind -x '"\C-x":"READLINE_LINE=$(tac ~/.bash_history~ | awk !seen[\$0]++ | fzy) 
 # Reload bashrc.
 alias rc='. ~/.bashrc'
 
+alias e=kamux
 alias q='exit'
 alias md='mkdir -p --'
 alias cp='cp -n'

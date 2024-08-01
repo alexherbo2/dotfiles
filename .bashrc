@@ -200,11 +200,11 @@ alias gsquash^='git reset --soft HEAD^'
 alias grb='git reset --hard'
 alias grb^='git reset --hard HEAD^'
 
-# exa
-# https://the.exa.website
-alias ls='exa --group-directories-first --all'
-alias ll='exa --group-directories-first --all --long --git'
-alias tree='exa --tree --all --ignore-glob .git'
+# eza
+# https://eza.rocks
+alias ls='eza --group-directories-first --all'
+alias ll='eza --group-directories-first --all --long --git'
+alias tree='eza --tree --all --ignore-glob .git'
 
 # batch
 # https://github.com/taupiqueur/batch

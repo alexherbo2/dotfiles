@@ -34,6 +34,9 @@ cd ~/.local/share/github.com/phaazon/kak-tree-sitter/ktsctl
 cd ~/.local/share/github.com/phaazon/kak-tree-sitter
 git clone https://github.com/kakoune-lsp/kakoune-lsp.git ~/.local/share/github.com/kakoune-lsp/kakoune-lsp
 cd ~/.local/share/github.com/kakoune-lsp/kakoune-lsp
+install ~/.cargo/bin/kak-lsp /opt/homebrew/bin
+install ~/.cargo/bin/kak-tree-sitter /opt/homebrew/bin
+install ~/.cargo/bin/ktsctl /opt/homebrew/bin
 git clone https://github.com/zellij-org/zellij.git ~/.local/share/github.com/zellij-org/zellij
 git clone https://github.com/cantino/mcfly.git ~/.local/share/github.com/cantino/mcfly
 git clone https://github.com/doomemacs/doomemacs.git ~/.local/share/github.com/doomemacs/doomemacs

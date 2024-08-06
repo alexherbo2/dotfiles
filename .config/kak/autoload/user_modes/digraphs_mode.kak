@@ -16,6 +16,13 @@ define-command insert_text -params 1 %{
   }
 }
 
+define-command open_insert_unicode_character_prompt %{
+  prompt unicode_code_point: %{
+    insert_text %sh{bash -c 'printf "\u$kak_text"'}
+  }
+}
+
+map -docstring 'insert unicode character' global digraphs '=' ':open_insert_unicode_character_prompt<ret>'
 map -docstring 'â' global digraphs 'q' ':insert_text â<ret>'
 map -docstring 'é' global digraphs 'w' ':insert_text é<ret>'
 map -docstring 'É' global digraphs 'W' ':insert_text É<ret>'

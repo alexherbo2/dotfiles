@@ -54,12 +54,21 @@ export KAKOUNE_POSIX_SHELL=/bin/dash
 
 # Bash history
 fzy_bash_history() {
-  READLINE_LINE=$(history -w /dev/stdout | tac | awk '!seen[$0]++' | fzy -q "$READLINE_LINE")
+  READLINE_LINE=$(
+    history -w /dev/stdout |
+    tac |
+    awk '!seen[$0]++' |
+    fzy -q "$READLINE_LINE"
+  )
   READLINE_POINT=${#READLINE_LINE}
 }
 
 fzy_bash_history_file() {
-  READLINE_LINE=$(tac ~/.bash_history~ | awk '!seen[$0]++' | fzy -q "$READLINE_LINE")
+  READLINE_LINE=$(
+    tac ~/.bash_history~ |
+    awk '!seen[$0]++' |
+    fzy -q "$READLINE_LINE"
+  )
   READLINE_POINT=${#READLINE_LINE}
 }
 

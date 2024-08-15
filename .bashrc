@@ -58,13 +58,13 @@ fzy_bash_history() {
   READLINE_POINT=${#READLINE_LINE}
 }
 
-fzy_saved_bash_history() {
+fzy_bash_history_file() {
   READLINE_LINE=$(tac ~/.bash_history~ | awk '!seen[$0]++' | fzy -q "$READLINE_LINE")
   READLINE_POINT=${#READLINE_LINE}
 }
 
 bind -x '"\C-r":"fzy_bash_history"'
-bind -x '"\C-x":"fzy_saved_bash_history"'
+bind -x '"\C-x":"fzy_bash_history_file"'
 
 # Aliases ----------------------------------------------------------------------
 

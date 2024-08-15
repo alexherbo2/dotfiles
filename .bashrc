@@ -53,8 +53,18 @@ export KAKOUNE_POSIX_SHELL=/bin/dash
 # Key bindings -----------------------------------------------------------------
 
 # Bash history
-bind -x '"\C-r":"READLINE_LINE=$(history -w /dev/stdout | tac | awk !seen[\$0]++ | fzy) READLINE_POINT=${#READLINE_LINE}"'
-bind -x '"\C-x":"READLINE_LINE=$(tac ~/.bash_history~ | awk !seen[\$0]++ | fzy) READLINE_POINT=${#READLINE_LINE}"'
+fzy_bash_history() {
+  READLINE_LINE=$(history -w /dev/stdout | tac | awk '!seen[$0]++' | fzy -q "$READLINE_LINE")
+  READLINE_POINT=${#READLINE_LINE}
+}
+
+fzy_saved_bash_history() {
+  READLINE_LINE=$(tac ~/.bash_history~ | awk '!seen[$0]++' | fzy -q "$READLINE_LINE")
+  READLINE_POINT=${#READLINE_LINE}
+}
+
+bind -x '"\C-r":"fzy_bash_history"'
+bind -x '"\C-x":"fzy_saved_bash_history"'
 
 # Aliases ----------------------------------------------------------------------
 

@@ -328,6 +328,7 @@ mpv ~/anime/nicky-larson/01
 mpv ~/sounds/waves.opus
 git init
 git commit --message='Initial commit'
+git commit --message='Bump version to 0.1.0'
 git tag -l
 git tag -d nightly
 git rebase -i HEAD^

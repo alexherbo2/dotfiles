@@ -33,6 +33,10 @@ ktsctl sync -a
 ktsctl query -a
 cd ~/.local/share/github.com/phaazon/kak-tree-sitter/ktsctl
 cd ~/.local/share/github.com/phaazon/kak-tree-sitter
+git clone https://github.com/refined-github/refined-github.git ~/.local/share/github.com/refined-github/refined-github
+cd ~/.local/share/github.com/refined-github/refined-github
+git clone https://github.com/gorhill/uBlock.git ~/.local/share/github.com/gorhill/uBlock
+cd ~/.local/share/github.com/gorhill/uBlock
 git clone https://github.com/kakoune-lsp/kakoune-lsp.git ~/.local/share/github.com/kakoune-lsp/kakoune-lsp
 cd ~/.local/share/github.com/kakoune-lsp/kakoune-lsp
 install ~/.cargo/bin/kak-lsp /opt/homebrew/bin

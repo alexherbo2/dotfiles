@@ -53,6 +53,7 @@ cargo install pepper-plugin-lsp
 git clone https://github.com/watzon/ngrok.cr.git ~/.local/share/github.com/watzon/ngrok.cr
 git clone https://github.com/crystal-lang/crystal-book.git ~/.local/share/github.com/crystal-lang/crystal-book
 git clone https://github.com/GoogleChrome/chrome-extensions-samples.git ~/.local/share/github.com/GoogleChrome/chrome-extensions-samples
+cd ~/.local/share/github.com/GoogleChrome/chrome-extensions-samples
 git clone https://github.com/mdn/webextensions-examples.git ~/.local/share/github.com/mdn/webextensions-examples
 git clone https://codeberg.org/dnkl/foot.git ~/.local/share/codeberg.org/dnkl/foot
 git clone https://git.sr.ht/~chambln/dots ~/.local/share/git.sr.ht/~chambln/dots

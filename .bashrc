@@ -176,7 +176,7 @@ alias kamux='tmux -L kak -f ~/.config/kamux.conf new-session kak'
 alias kak_test='kak -e "load_and_run_config_tests"'
 alias k=kamux
 alias kl='kak -l'
-alias kn='kak -n'
+alias kn='kak -n -e "set-option global indentwidth 2; map global normal <ret> :; map global normal <c-a> ga"'
 alias ks='kamux -s'
 alias kc='kamux -c "$(kak -l | fzy)"'
 

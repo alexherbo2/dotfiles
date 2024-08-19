@@ -51,6 +51,7 @@ vscode_css_language_server = { filetypes = ['css'], roots = ['.git'], command = 
 lua_language_server = { filetypes = ['lua'], roots = ['.git'], command = 'lua-language-server' }
 marksman = { filetypes = ['markdown'], roots = ['.git'], command = 'marksman', args = ['server'] }
 zls = { filetypes = ['zig'], roots = ['build.zig'], command = 'zls' }
+nil = { filetypes = ['nix'], roots = ['flake.nix', 'shell.nix'], command = 'nil' }
 typos_lsp = { filetypes = ['sh', 'crystal', 'javascript', 'typescript', 'kotlin', 'ruby', 'rust', 'toml', 'yaml', 'json', 'html', 'css', 'lua', 'markdown', 'zig'], roots = ['.git'], command = 'typos-lsp' }
 
 # Semantic tokens --------------------------------------------------------------

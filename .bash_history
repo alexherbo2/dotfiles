@@ -341,5 +341,6 @@ git rebase -i HEAD^
 gh repo create
 clear
 kitty -o allow_remote_control=yes
+kamux
 cd
 exit

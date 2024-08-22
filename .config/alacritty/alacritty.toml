@@ -2,7 +2,6 @@
 # https://alacritty.org
 
 import = [
-  '~/.config/alacritty/options/enable_csi_u_key_encoding.toml',
   '~/.config/alacritty/colors/macos_light_low_contrast.toml'
 ]
 

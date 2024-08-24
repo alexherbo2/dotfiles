@@ -255,6 +255,7 @@ cd ~/config
 cd ~/data
 cd ~/tmp
 xattr -rc ~/code/chrome-shortcuts
+sudo xattr -rc ~/code/chrome-shortcuts
 find ~/code/chrome-shortcuts -name '*.DS_Store'
 cd ~/code/chrome-shortcuts
 cd ~/code/chrome-shell
@@ -313,6 +314,7 @@ swaymsg reload
 chown -R taupiqueur:users home storage shared
 chown -R taupiqueur:staff home storage shared
 xattr -rc home storage shared
+sudo xattr -rc home storage shared
 mkdir -p mnt/Disk
 mkdir -p mnt/USB
 sudo mount /dev/disk/by-label/Disk mnt/Disk
@@ -350,6 +352,9 @@ git tag -l
 git tag -d nightly
 git rebase -i HEAD^
 gh repo create
+@host
+@guest
+@phaazon
 clear
 kitty -o allow_remote_control=yes
 kamux

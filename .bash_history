@@ -331,6 +331,7 @@ shutdown now
 gh repo view --web
 gh repo fork
 rm -R Movies/TV
+rm -R Music/Music
 nnn ~/anime
 nnn ~/series
 nnn ~/movies

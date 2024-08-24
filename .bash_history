@@ -192,7 +192,7 @@ yay-clean
 DS_Store
 pbcopy < /dev/null
 wl-copy --clear
-tldr --update
+tldr -u
 rustup update
 rustup toolchain list
 rustup toolchain install nightly

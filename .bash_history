@@ -342,6 +342,7 @@ mpv ~/sounds/waves.opus
 mpv --shuffle ~/shorts
 cd ~/shorts
 kamux ytdlp_list.sh
+sh ytdlp_list.sh
 git init
 git commit --message='Initial commit'
 git commit --message='Bump version to 0.1.0'

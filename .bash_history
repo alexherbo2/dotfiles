@@ -339,6 +339,9 @@ mpv ~/anime/one-piece/06
 mpv ~/series/stargate/stargate-sg-1/french/01
 mpv ~/anime/nicky-larson/01
 mpv ~/sounds/waves.opus
+mpv --shuffle ~/shorts
+cd ~/shorts
+kamux ytdlp_list.sh
 git init
 git commit --message='Initial commit'
 git commit --message='Bump version to 0.1.0'

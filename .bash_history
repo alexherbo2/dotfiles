@@ -10,6 +10,7 @@ foot --config=/dev/null -o colors.alpha=0.9
 alacritty --config-file=/dev/null -o 'window.option_as_alt="Both"' -o 'window.opacity=0.9'
 alacritty msg config 'window.opacity=0.9'
 alacritty msg config 'window.option_as_alt="Both"'
+alacritty msg config "$(find -L ~/.local/share/github.com/alacritty/alacritty-theme -type f -name '*.toml' | fzy)"
 kak -s megumin -e 'rename-client chomusuke'
 kak -c megumin
 git clone https://github.com/zed-industries/zed.git ~/.local/share/github.com/zed-industries/zed
@@ -87,6 +88,7 @@ git clone https://git.sr.ht/~emersion/kanshi ~/.local/share/git.sr.ht/~emersion/
 git clone https://github.com/alacritty/alacritty.git ~/.local/share/github.com/alacritty/alacritty
 cd ~/.local/share/github.com/alacritty/alacritty
 git clone https://github.com/alacritty/alacritty-theme.git ~/.local/share/github.com/alacritty/alacritty-theme
+cd ~/.local/share/github.com/alacritty/alacritty-theme
 git clone https://github.com/ianyh/Amethyst.git ~/.local/share/github.com/ianyh/Amethyst
 git clone https://github.com/taupiqueur/batch.git ~/.local/share/github.com/taupiqueur/batch
 git clone https://github.com/Blacksmoke16/oq.git ~/.local/share/github.com/Blacksmoke16/oq
@@ -346,5 +348,6 @@ gh repo create
 clear
 kitty -o allow_remote_control=yes
 kamux
+kamux .bash_history
 cd
 exit

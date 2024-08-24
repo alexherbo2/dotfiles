@@ -171,6 +171,7 @@ brew link --force ncurses
 alacritty msg create-window
 rsync 'host:Library/Application Support/Google/Chrome/.' .config/chromium
 open .
+open target/release
 npm update
 npm update -g
 brew-update

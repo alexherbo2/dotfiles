@@ -106,6 +106,8 @@ git clone https://github.com/rabite0/hunter.git ~/.local/share/github.com/rabite
 git clone https://github.com/i3/i3.git ~/.local/share/github.com/i3/i3
 git clone https://github.com/stedolan/jq.git ~/.local/share/github.com/stedolan/jq
 git clone https://github.com/mawww/kakoune.git ~/.local/share/github.com/mawww/kakoune
+git clone https://github.com/lydell/browser-tweaks.git ~/.local/share/github.com/lydell/browser-tweaks
+cd ~/.local/share/github.com/lydell/browser-tweaks
 git clone https://github.com/lydell/LinkHints.git ~/.local/share/github.com/lydell/LinkHints
 cd ~/.local/share/github.com/lydell/LinkHints
 git clone https://github.com/emersion/mako.git ~/.local/share/github.com/emersion/mako
@@ -137,6 +139,7 @@ git clone https://github.com/philc/vimium.git ~/.local/share/github.com/philc/vi
 git clone https://github.com/dmulholl/vimv.git ~/.local/share/github.com/dmulholl/vimv
 git clone https://github.com/WayfireWM/wayfire.git ~/.local/share/github.com/WayfireWM/wayfire
 git clone https://github.com/wez/wezterm.git ~/.local/share/github.com/wez/wezterm
+cd ~/.local/share/github.com/wez/wezterm
 git clone https://github.com/sayanarijit/xplr.git ~/.local/share/github.com/sayanarijit/xplr
 git clone https://github.com/occivink/advent2021.git ~/.local/share/github.com/occivink/advent2021
 git clone https://github.com/HertzDevil/advent-of-code.git ~/.local/share/github.com/HertzDevil/advent-of-code

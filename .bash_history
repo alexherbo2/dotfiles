@@ -363,5 +363,7 @@ clear
 kitty -o allow_remote_control=yes
 kamux
 kamux .bash_history
+cd -
+cd ~
 cd
 exit

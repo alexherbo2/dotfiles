@@ -365,5 +365,4 @@ kamux
 kamux .bash_history
 cd -
 cd ~
-cd
 exit

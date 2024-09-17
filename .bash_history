@@ -350,6 +350,7 @@ cd ~/shorts
 kamux ytdlp_list.sh
 sh ytdlp_list.sh
 git init
+git log --pretty='[%s]|[%b]'
 git commit --message='Initial commit'
 git commit --message='Bump version to 0.1.0'
 git tag -l

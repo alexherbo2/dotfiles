@@ -1,0 +1,76 @@
+# Helix
+# https://helix-editor.com
+# https://docs.helix-editor.com/languages.html
+# https://github.com/helix-editor/helix/blob/master/languages.toml
+# https://microsoft.github.io/language-server-protocol/implementors/servers/
+
+[language-server]
+typos-lsp = { command = 'typos-lsp' }
+
+[[language]]
+name = 'javascript'
+language-servers = ['typescript-language-server', 'typos-lsp']
+
+[[language]]
+name = 'typescript'
+language-servers = ['typescript-language-server', 'typos-lsp']
+
+[[language]]
+name = 'markdown'
+language-servers = ['marksman', 'typos-lsp']
+
+[[language]]
+name = 'css'
+language-servers = ['vscode-css-language-server', 'typos-lsp']
+
+[[language]]
+name = 'html'
+language-servers = ['vscode-html-language-server', 'typos-lsp']
+
+[[language]]
+name = 'json'
+language-servers = ['vscode-json-language-server', 'typos-lsp']
+
+[[language]]
+name = 'yaml'
+language-servers = ['yaml-language-server', 'typos-lsp']
+
+[[language]]
+name = 'toml'
+language-servers = ['taplo', 'typos-lsp']
+
+[[language]]
+name = 'rust'
+language-servers = ['rust-analyzer', 'typos-lsp']
+
+[[language]]
+name = 'ruby'
+language-servers = ['solargraph', 'typos-lsp']
+
+[[language]]
+name = 'elixir'
+language-servers = ['elixir-ls', 'typos-lsp']
+
+[[language]]
+name = 'bash'
+language-servers = ['bash-language-server', 'typos-lsp']
+
+[[language]]
+name = 'kotlin'
+language-servers = ['kotlin-language-server', 'typos-lsp']
+
+[[language]]
+name = 'lua'
+language-servers = ['lua-language-server', 'typos-lsp']
+
+[[language]]
+name = 'zig'
+language-servers = ['zls', 'typos-lsp']
+
+[[language]]
+name = 'nix'
+language-servers = ['nil', 'typos-lsp']
+
+[[language]]
+name = 'crystal'
+language-servers = ['crystalline', 'typos-lsp']

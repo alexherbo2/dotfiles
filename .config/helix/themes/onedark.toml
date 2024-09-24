@@ -1,0 +1,2 @@
+inherits = 'onedark'
+"ui.virtual.jump-label" = { fg = 'black', bg = 'yellow' }

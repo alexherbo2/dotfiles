@@ -354,6 +354,10 @@ git init
 git log --pretty='[%s][%b]'
 git log --pretty='[%s][%b]' | rg -F ''
 git rebase -i ''
+git add .
+date "+%F %T" | git commit --file=-
+git commit --amend --no-edit
+git commit --amend
 git commit --message='Initial commit'
 git commit --message='Bump version to 0.1.0'
 git tag -l

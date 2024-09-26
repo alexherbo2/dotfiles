@@ -152,6 +152,7 @@ git clone https://github.com/asterite/adventofcode2020.git ~/.local/share/github
 git clone https://github.com/asterite/adventofcode2021.git ~/.local/share/github.com/asterite/adventofcode2021
 git clone https://github.com/asterite/adventofcode2022.git ~/.local/share/github.com/asterite/adventofcode2022
 kak
+hx
 sway
 brew install kakoune-lsp/kakoune-lsp/kakoune-lsp
 brew install possatti/possatti/pokemonsay
@@ -352,6 +353,7 @@ sh ytdlp_list.sh
 git init
 git log --pretty='[%s][%b]'
 git log --pretty='[%s][%b]' | rg -F ''
+git rebase -i ''
 git commit --message='Initial commit'
 git commit --message='Bump version to 0.1.0'
 git tag -l

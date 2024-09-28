@@ -10,6 +10,7 @@ foot --config=/dev/null -o colors.alpha=0.9
 alacritty --config-file=/dev/null -o 'window.option_as_alt="Both"' -o 'window.opacity=0.9'
 alacritty msg config 'window.opacity=0.9'
 alacritty msg config 'window.option_as_alt="Both"'
+alacritty msg config "$(find -L ~/.local/share/github.com/alacritty/alacritty-theme -type f -name '*.toml' | fzy | xargs cat)" -w -1
 alacritty msg config "$(find -L ~/.local/share/github.com/alacritty/alacritty-theme -type f -name '*.toml' | fzy | xargs cat)"
 alacritty msg config -r
 kak -s megumin -e 'rename-client chomusuke'

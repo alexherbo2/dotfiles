@@ -1,0 +1,3 @@
+#!/bin/sh
+
+tmux -L kak -f ~/.config/kamux.conf new-session kak "$@"

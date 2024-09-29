@@ -93,6 +93,8 @@ set-face global DiagnosticError ",,rgb:%opt{red_color}+ca" # https://github.com/
 set-face global DiagnosticWarning ",,rgb:%opt{yellow_color}+ca" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorWarning.foreground
 set-face global DiagnosticInfo ",,rgb:%opt{blue_color}+ca" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorWarning.foreground
 set-face global DiagnosticHint ",,rgb:%opt{green_color}+ua" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorWarning.foreground
+set-face global DiagnosticTagUnnecessary +d
+set-face global DiagnosticTagDeprecated +s
 set-face global StatusLine "rgb:%opt{text_color},rgb:%opt{dark_text_background_color}" # Prefer background dark here — https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=statusBar.background
 set-face global StatusLineMode "rgb:%opt{yellow_color}" # [insert]
 set-face global StatusLineInfo "rgb:%opt{blue_color}" # 1 sel

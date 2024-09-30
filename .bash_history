@@ -356,6 +356,9 @@ git log --pretty='[%s][%b]'
 git log --pretty='[%s][%b]' | rg -F ''
 git rebase -i ''
 git add .
+git push
+git pull
+git pull upstream master
 date "+%F %T" | git commit --file=-
 git commit --amend --no-edit
 git commit --amend

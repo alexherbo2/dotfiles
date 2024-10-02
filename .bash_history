@@ -365,6 +365,11 @@ git commit --amend --no-edit
 git commit --amend
 git commit --message='Initial commit'
 git commit --message='Bump version to 0.1.0'
+git remote add origin git@github.com:taupiqueur/taupiqueur.git
+git remote add origin git@github.com:alexherbo2/alexherbo2.git
+git remote add upstream git@github.com:taupiqueur/taupiqueur.git
+git remote add upstream git@github.com:alexherbo2/alexherbo2.git
+git add .
 git tag -l
 git tag -d nightly
 git rebase -i HEAD^

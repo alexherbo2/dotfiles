@@ -353,8 +353,8 @@ cd ~/shorts
 kamux ytdlp_list.sh
 sh ytdlp_list.sh
 git init
-git log --pretty='[%s][%b]'
-git log --pretty='[%s][%b]' | rg -F ''
+git log --pretty='[%h][%s][%b]'
+git log --pretty='[%h][%s][%b]' | rg -F ''
 git rebase -i ''
 git add .
 git push

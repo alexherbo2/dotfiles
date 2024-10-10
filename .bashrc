@@ -9,6 +9,10 @@
 # Enable Bash completion on macOS.
 [ -r /opt/homebrew/etc/profile.d/bash_completion.sh ] && . /opt/homebrew/etc/profile.d/bash_completion.sh
 
+# Nix
+# https://nixos.org
+[ -r /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ] && . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+
 # Prompt -----------------------------------------------------------------------
 
 export PS1='\[\e[32m\]\u@\h\[\e[36m\](\l)\[\e[0m\] \[\e[34m\]\w\[\e[0m\] \[\e[34m\][$?]\[\e[0m\]\n\[\e[90m\]>>>\[\e[0m\] '

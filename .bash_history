@@ -353,6 +353,8 @@ cd ~/shorts
 kamux ytdlp_list.sh
 sh ytdlp_list.sh
 sh ~/shorts/twitch.sh
+find -L ~/shorts -type f -name '*.mp4' -exec printf "file '%s'\\n" {} + | shuf > /tmp/shorts.ffconcat
+ffmpeg -f concat -safe 0 -i /tmp/shorts.ffconcat -c:v libx264 -f flv "rtmp://live.twitch.tv/app/$TWITCH_STREAM_KEY"
 git init
 git log --pretty='[%h][%s][%b]'
 git log --pretty='[%h][%s][%b]' | rg -F ''

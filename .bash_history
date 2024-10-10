@@ -352,6 +352,7 @@ mpv --shuffle ~/shorts
 cd ~/shorts
 kamux ytdlp_list.sh
 sh ytdlp_list.sh
+sh ~/shorts/twitch.sh
 git init
 git log --pretty='[%h][%s][%b]'
 git log --pretty='[%h][%s][%b]' | rg -F ''

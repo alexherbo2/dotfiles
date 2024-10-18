@@ -39,14 +39,42 @@ editor.file-picker.hidden = false
 # Reference:
 # https://github.com/mawww/kakoune/blob/master/src/normal.cc
 
+[keys.normal.':']
+d = 'delete_selection'
+c = 'change_selection'
+'*' = 'search_selection'
+
 [keys.select]
-w = 'extend_next_sub_word_start'
-e = 'extend_next_sub_word_end'
-b = 'extend_prev_sub_word_start'
+esc = ['exit_select_mode', 'collapse_selection']
+v = ['normal_mode', 'collapse_selection']
+w = ['ensure_selections_forward', 'extend_next_sub_word_start']
+e = ['ensure_selections_forward', 'extend_next_sub_word_end']
+b = ['ensure_selections_forward', 'flip_selections', 'extend_prev_sub_word_start']
+W = ['ensure_selections_forward', 'extend_next_long_word_start']
+E = ['ensure_selections_forward', 'extend_next_long_word_end']
+B = ['ensure_selections_forward', 'flip_selections', 'extend_prev_long_word_start']
+i = 'select_textobject_inner'
+a = 'select_textobject_around'
+
+C-down = ['ensure_selections_forward', 'extend_to_line_bounds', 'extend_char_right', 'extend_char_left', 'delete_selection', 'paste_after']
+C-up = ['ensure_selections_forward', 'extend_to_line_bounds', 'extend_char_right', 'extend_char_left', 'delete_selection', 'move_line_up', 'paste_before']
 
 [keys.normal]
 # Enter command mode
 ret = 'command_mode'
+
+'*' = '@miw:*<A-;>;<esc>'
+
+pagedown = ['keep_primary_selection', 'collapse_selection', 'page_down']
+pageup = ['keep_primary_selection', 'collapse_selection', 'page_up']
+C-d = ['keep_primary_selection', 'collapse_selection', 'page_cursor_half_down']
+C-u = ['keep_primary_selection', 'collapse_selection', 'page_cursor_half_up']
+
+C-a = 'goto_last_accessed_file'
+C-s = ':write'
+
+D = ['collapse_selection', 'extend_to_line_end', 'delete_selection']
+C = ['collapse_selection', 'extend_to_line_end', 'change_selection']
 
 # Moving around
 H = 'extend_char_left'
@@ -63,21 +91,13 @@ t = ['ensure_selections_forward', 'extend_till_char']
 T = ['ensure_selections_forward', 'flip_selections', 'extend_till_prev_char']
 
 # Word motions
-w = 'move_next_sub_word_start'
-e = 'move_next_sub_word_end'
-b = 'move_prev_sub_word_start'
+w = ['collapse_selection', 'move_next_sub_word_start', 'collapse_selection']
+e = ['collapse_selection', 'move_next_sub_word_end', 'collapse_selection']
+b = ['collapse_selection', 'move_prev_sub_word_start', 'collapse_selection']
 
-W = 'extend_next_sub_word_start'
-E = 'extend_next_sub_word_end'
-B = 'extend_prev_sub_word_start'
-
-A-w = 'move_next_long_word_start'
-A-e = 'move_next_long_word_end'
-A-b = 'move_prev_long_word_start'
-
-A-W = 'extend_next_long_word_start'
-A-E = 'extend_next_long_word_end'
-A-B = 'extend_prev_long_word_start'
+W = ['collapse_selection', 'move_next_long_word_start', 'collapse_selection']
+E = ['collapse_selection', 'move_next_long_word_end', 'collapse_selection']
+B = ['collapse_selection', 'move_prev_long_word_start', 'collapse_selection']
 
 # Line motions
 A-h = ['ensure_selections_forward', 'flip_selections', 'extend_to_line_start']
@@ -96,10 +116,31 @@ M = ['select_mode', 'match_brackets', 'exit_select_mode']
 
 minus = ['ensure_selections_forward', 'extend_char_right', 'extend_char_left']
 
-d.i.w = ['collapse_selection', 'select_textobject_inner', '@w', 'delete_selection']
+d.i.w = '@;miw:d'
+d.i.p = '@;mip:d'
+d.i.'(' = '@;mi(:d'
+d.i.'{' = '@;mi{:d'
+d.i.'[' = '@;mi[:d'
 
-v = 'select_textobject_inner'
-V = 'select_textobject_around'
+d.a.w = '@;maw:d'
+d.a.p = '@;map:d'
+d.a.'(' = '@;ma(:d'
+d.a.'{' = '@;ma{:d'
+d.a.'[' = '@;ma[:d'
+
+c.i.w = '@;miw:c'
+c.i.p = '@;mip:c'
+c.i.'(' = '@;mi(:c'
+c.i.'{' = '@;mi{:c'
+c.i.'[' = '@;mi[:c'
+
+c.a.w = '@;maw:c'
+c.a.p = '@;map:c'
+c.a.'(' = '@;ma(:c'
+c.a.'{' = '@;ma{:c'
+c.a.'[' = '@;ma[:c'
+
+x = '@;:d'
 
 # Join and keep matching selections
 A-j = 'join_selections'
@@ -124,8 +165,8 @@ A-k = 'keep_selections'
 
 '@' = 'replay_macro'
 
-D = ['ensure_selections_forward', 'extend_to_line_bounds', 'extend_char_right', 'extend_char_left', 'delete_selection', 'paste_after']
-Y = ['ensure_selections_forward', 'extend_to_line_bounds', 'extend_char_right', 'extend_char_left', 'delete_selection', 'move_line_up', 'paste_before']
+C-down = ['ensure_selections_forward', 'extend_to_line_bounds', 'extend_char_right', 'extend_char_left', 'delete_selection', 'paste_after']
+C-up = ['ensure_selections_forward', 'extend_to_line_bounds', 'extend_char_right', 'extend_char_left', 'delete_selection', 'move_line_up', 'paste_before']
 
 '#' = 'toggle_comments'
 

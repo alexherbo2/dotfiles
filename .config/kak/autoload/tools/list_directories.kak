@@ -23,7 +23,7 @@ define-command list_directories -params 1 %{
 complete-command list_directories file
 
 add-highlighter shared/file_list group
-add-highlighter shared/file_list/ regex '^\.$|^\.\.$|^.*/$' 0:value
+add-highlighter shared/file_list/ regex '^\.$|^\.\.$|^.*?/$' 0:value
 
 hook global BufCreate '\*ls\*' %{
   set-option buffer filetype file_list

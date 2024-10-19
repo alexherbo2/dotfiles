@@ -18,6 +18,7 @@ define-command find -params .. %{
   evaluate-commands -save-regs '"' %{
     try %{
       execute-keys -buffer '*find*' -save-regs '' '%y'
+      delete-buffer '*find*'
     } catch %{
       set-register dquote
     }

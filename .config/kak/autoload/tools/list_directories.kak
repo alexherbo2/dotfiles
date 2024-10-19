@@ -24,6 +24,9 @@ define-command ls -params 0..1 %{
 
 define-command -hidden ls_impl -params 1 %{
   evaluate-commands -save-regs '"' %{
+    try %{
+      delete-buffer '*ls*'
+    }
     fifo %opt{ls_command} %opt{ls_args} %arg{1}
     rename-buffer '*ls*'
     set-option buffer filetype ls

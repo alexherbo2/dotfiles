@@ -7,8 +7,11 @@
 # dependencies: ["fifo"]
 # doc: no
 # tests: no
-declare-option str ex_command ls
-declare-option str-list ex_args -a -p -L
+declare-option str ex_command sh
+declare-option str-list ex_args -c %{
+  echo ../
+  ls -A -p -L "$@"
+}
 declare-option str ex_working_directory
 
 define-command ex -params 0..1 %{

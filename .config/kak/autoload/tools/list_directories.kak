@@ -47,7 +47,7 @@ hook global BufCreate '\*ex\*' %{
 hook global BufSetOption filetype=ex %{
   add-highlighter buffer/ex ref ex
   map -docstring 'jump to files or directories' buffer normal <ret> ':jump_to_files_or_directories<ret>'
-  map -docstring 'jump to files or directories and close ex buffer' buffer normal <s-ret> ':jump_to_files_or_directories_and_close_ls_buffer<ret>'
+  map -docstring 'jump to files or directories and close ex buffer' buffer normal <s-ret> ':jump_to_files_or_directories_and_close_ex_buffer<ret>'
 }
 
 define-command -hidden jump_to_files_or_directories %{
@@ -68,7 +68,7 @@ define-command -hidden jump_to_files_or_directories %{
   }
 }
 
-define-command -hidden jump_to_files_or_directories_and_close_ls_buffer %{
+define-command -hidden jump_to_files_or_directories_and_close_ex_buffer %{
   jump_to_files_or_directories
   delete-buffer '*ex*'
 }

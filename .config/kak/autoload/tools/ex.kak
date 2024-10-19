@@ -10,7 +10,7 @@
 declare-option str ex_command sh
 declare-option str-list ex_args -c %{
   echo ../
-  ls -A -p -L "$@"
+  ls -A -p -L -- "$1"
 }
 declare-option str ex_working_directory
 
@@ -27,7 +27,7 @@ define-command ex -params 0..1 %{
 
 define-command -hidden ex_impl -params 1 %{
   evaluate-commands -save-regs '"' %{
-    fifo -name '*ex*' -- %opt{ex_command} %opt{ex_args} %arg{1}
+    fifo -name '*ex*' -- %opt{ex_command} %opt{ex_args} -- %arg{1}
     set-option buffer ex_working_directory %sh{
       realpath -- "$1"
     }

@@ -5,12 +5,7 @@ define-command diff_buffers -params 2 %{
     cat <<EOF
       evaluate-commands -buffer "$1" write "$a"
       evaluate-commands -buffer "$2" write "$b"
-      try %{
-        delete-buffer "$a_$b.diff"
-      }
-      fifo diff -u -- "$a" "$b"
-      rename-buffer "$a_$b.diff"
-      set-option buffer filetype diff
+      fifo -name "$a_$b.diff" diff -u -- "$a" "$b"
       hook -always -once buffer BufCloseFifo "" %{
         nop %sh{
           rm -- "$a" "$b"

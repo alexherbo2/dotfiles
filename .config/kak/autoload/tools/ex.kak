@@ -24,12 +24,7 @@ define-command ex -params 0..1 %{
 
 define-command -hidden ex_impl -params 1 %{
   evaluate-commands -save-regs '"' %{
-    try %{
-      delete-buffer '*ex*'
-    }
-    fifo %opt{ex_command} %opt{ex_args} %arg{1}
-    rename-buffer '*ex*'
-    set-option buffer filetype ex
+    fifo -name '*ex*' %opt{ex_command} %opt{ex_args} %arg{1}
     set-option buffer ex_working_directory %sh{
       realpath -- "$1"
     }

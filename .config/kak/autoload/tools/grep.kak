@@ -14,13 +14,10 @@ define-command grep -params .. %{
   evaluate-commands -save-regs '"' %{
     try %{
       execute-keys -buffer '*grep*' -save-regs '' '%y'
-      delete-buffer '*grep*'
     } catch %{
       set-register dquote
     }
-    fifo %opt{grep_command} %opt{grep_args} %arg{@}
-    rename-buffer '*grep*'
-    set-option buffer filetype grep
+    fifo -name '*grep*' %opt{grep_command} %opt{grep_args} %arg{@}
     execute-keys -buffer '*grep*' 'P'
   }
 }

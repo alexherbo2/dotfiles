@@ -22,6 +22,7 @@ define-command grep -params .. %{
   evaluate-commands -save-regs '"' %{
     try %{
       execute-keys -buffer '*grep*' -save-regs '' '%y'
+      delete-buffer '*grep*'
     } catch %{
       set-register dquote
     }

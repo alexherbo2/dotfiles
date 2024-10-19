@@ -17,7 +17,7 @@ define-command grep -params .. %{
     } catch %{
       set-register dquote
     }
-    fifo -name '*grep*' %opt{grep_command} %opt{grep_args} %arg{@}
+    fifo -name '*grep*' -- %opt{grep_command} %opt{grep_args} %arg{@}
     execute-keys -buffer '*grep*' 'P'
   }
 }

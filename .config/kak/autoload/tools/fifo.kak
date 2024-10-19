@@ -38,7 +38,7 @@ define-command fifo -params 1.. %{
       edit! ${fifo_flags} -fifo "$fifo" -- "$fifo_name"
       hook -always -once buffer BufCloseFifo "" %{
         nop %sh{
-          unlink "$fifo"
+          unlink -- "$fifo"
         }
       }
 EOF

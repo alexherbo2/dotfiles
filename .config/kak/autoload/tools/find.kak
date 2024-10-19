@@ -21,7 +21,7 @@ define-command find -params .. %{
     } catch %{
       set-register dquote
     }
-    fifo -name '*find*' %opt{find_command} %opt{find_args} %arg{@}
+    fifo -name '*find*' -- %opt{find_command} %opt{find_args} %arg{@}
     execute-keys -buffer '*find*' 'P'
   }
 }

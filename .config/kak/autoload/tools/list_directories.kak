@@ -1,4 +1,4 @@
-# name: kakoune_list_directories
+# name: kakoune_ex
 # version: 0.1.0
 # description: This script provides the functionality to list directory contents.
 # authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
@@ -7,12 +7,12 @@
 # dependencies: ["fifo"]
 # doc: no
 # tests: no
-declare-option str ls_command ls
-declare-option str-list ls_args -a -p -L
-declare-option str ls_working_directory
+declare-option str ex_command ls
+declare-option str-list ex_args -a -p -L
+declare-option str ex_working_directory
 
-define-command ls -params 0..1 %{
-  ls_impl %sh{
+define-command ex -params 0..1 %{
+  ex_impl %sh{
     if [ "$#" -eq 0 ]
     then
       dirname "$kak_bufname"
@@ -22,32 +22,32 @@ define-command ls -params 0..1 %{
   }
 }
 
-define-command -hidden ls_impl -params 1 %{
+define-command -hidden ex_impl -params 1 %{
   evaluate-commands -save-regs '"' %{
     try %{
-      delete-buffer '*ls*'
+      delete-buffer '*ex*'
     }
-    fifo %opt{ls_command} %opt{ls_args} %arg{1}
-    rename-buffer '*ls*'
-    set-option buffer filetype ls
-    set-option buffer ls_working_directory %sh{
+    fifo %opt{ex_command} %opt{ex_args} %arg{1}
+    rename-buffer '*ex*'
+    set-option buffer filetype ex
+    set-option buffer ex_working_directory %sh{
       realpath -- "$1"
     }
   }
 }
 
-complete-command ls file
+complete-command ex file
 
-add-highlighter shared/ls regex '^[^\n]*/$' 0:value
+add-highlighter shared/ex regex '^[^\n]*/$' 0:value
 
-hook global BufCreate '\*ls\*' %{
-  set-option buffer filetype ls
+hook global BufCreate '\*ex\*' %{
+  set-option buffer filetype ex
 }
 
-hook global BufSetOption filetype=ls %{
-  add-highlighter buffer/ls ref ls
+hook global BufSetOption filetype=ex %{
+  add-highlighter buffer/ex ref ex
   map -docstring 'jump to files or directories' buffer normal <ret> ':jump_to_files_or_directories<ret>'
-  map -docstring 'jump to files or directories and close ls buffer' buffer normal <s-ret> ':jump_to_files_or_directories_and_close_ls_buffer<ret>'
+  map -docstring 'jump to files or directories and close ex buffer' buffer normal <s-ret> ':jump_to_files_or_directories_and_close_ls_buffer<ret>'
 }
 
 define-command -hidden jump_to_files_or_directories %{
@@ -56,19 +56,19 @@ define-command -hidden jump_to_files_or_directories %{
     evaluate-commands -draft -verbatim try %{
       execute-keys '<a-,><a-K>/$<ret>'
       evaluate-commands -itersel %{
-        evaluate-commands -draft -verbatim edit -existing -- "%opt{ls_working_directory}/%val{selection}"
+        evaluate-commands -draft -verbatim edit -existing -- "%opt{ex_working_directory}/%val{selection}"
       }
     }
     evaluate-commands -draft -verbatim try %{
       execute-keys ',<a-K>/$<ret>'
-      evaluate-commands -client %val{client} -verbatim edit -existing -- "%opt{ls_working_directory}/%val{selection}"
+      evaluate-commands -client %val{client} -verbatim edit -existing -- "%opt{ex_working_directory}/%val{selection}"
     } catch %{
-      evaluate-commands -client %val{client} -verbatim ls_impl "%opt{ls_working_directory}/%val{selection}"
+      evaluate-commands -client %val{client} -verbatim ex_impl "%opt{ex_working_directory}/%val{selection}"
     }
   }
 }
 
 define-command -hidden jump_to_files_or_directories_and_close_ls_buffer %{
   jump_to_files_or_directories
-  delete-buffer '*ls*'
+  delete-buffer '*ex*'
 }

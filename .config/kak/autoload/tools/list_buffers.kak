@@ -1,4 +1,4 @@
-# name: kakoune_list_buffers
+# name: kakoune_ls
 # version: 0.1.0
 # description: This script provides the functionality to list buffers.
 # authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
@@ -7,13 +7,13 @@
 # dependencies: []
 # doc: no
 # tests: no
-define-command list_buffers %{
+define-command ls %{
   evaluate-commands -save-regs '"b' %{
     set-register b %val{bufname}
-    edit! -scratch '*buffers*'
+    edit! -scratch '*ls*'
     evaluate-commands -no-hooks -buffer '*' %{
       set-register dquote "%val{bufname}:readonly=%opt{readonly}:modified=%val{modified}"
-      execute-keys -buffer '*buffers*' 'gep'
+      execute-keys -buffer '*ls*' 'gep'
     }
     execute-keys 'd'
     try %{
@@ -40,27 +40,27 @@ define-command list_buffers %{
 }
 
 define-command rearrange_buffers %{
-  evaluate-commands -buffer '*buffers*' %{
+  evaluate-commands -buffer '*ls*' %{
     execute-keys '%<a-s><a-K>^\n<ret>H1s^(.+?)(?: \(.+?\))?$<ret>'
     arrange-buffers %val{selections}
   }
 }
 
-add-highlighter shared/buffer_list regions
-add-highlighter shared/buffer_list/text default-region fill string
-add-highlighter shared/buffer_list/property_list region '^(.+?) \K\(' '\)$' regions
-add-highlighter shared/buffer_list/property_list/text default-region group
-add-highlighter shared/buffer_list/property_list/text/ regex '\b\w+\b' 0:attribute
-add-highlighter shared/buffer_list/property_list/text/ regex '[(),]' 0:operator
+add-highlighter shared/ls regions
+add-highlighter shared/ls/text default-region fill string
+add-highlighter shared/ls/property_list region '^(.+?) \K\(' '\)$' regions
+add-highlighter shared/ls/property_list/text default-region group
+add-highlighter shared/ls/property_list/text/ regex '\b\w+\b' 0:attribute
+add-highlighter shared/ls/property_list/text/ regex '[(),]' 0:operator
 
-hook global BufCreate '\*buffers\*' %{
-  set-option buffer filetype buffer_list
+hook global BufCreate '\*ls\*' %{
+  set-option buffer filetype ls
 }
 
-hook global BufSetOption filetype=buffer_list %{
-  add-highlighter buffer/buffer_list ref buffer_list
+hook global BufSetOption filetype=ls %{
+  add-highlighter buffer/ls ref ls
   map -docstring 'jump to buffers' buffer normal <ret> ':jump_to_buffers<ret>'
-  map -docstring 'jump to buffers and close buffer_list buffer' buffer normal <s-ret> ':jump_to_buffers_and_close_buffer_list_buffer<ret>'
+  map -docstring 'jump to buffers and close ls buffer' buffer normal <s-ret> ':jump_to_buffers_and_close_ls_buffer<ret>'
 }
 
 define-command -hidden jump_to_buffers %{
@@ -72,10 +72,8 @@ define-command -hidden jump_to_buffers %{
   }
 }
 
-define-command -hidden jump_to_buffers_and_close_buffer_list_buffer %{
+define-command -hidden jump_to_buffers_and_close_ls_buffer %{
   jump_to_buffers
   rearrange_buffers
-  delete-buffer '*buffers*'
+  delete-buffer '*ls*'
 }
-
-# alias global ls list_buffers

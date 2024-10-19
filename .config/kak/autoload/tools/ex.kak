@@ -15,7 +15,7 @@ define-command ex -params 0..1 %{
   ex_impl %sh{
     if [ "$#" -eq 0 ]
     then
-      dirname "$kak_bufname"
+      dirname "$kak_buffile"
     else
       printf '.'
     fi

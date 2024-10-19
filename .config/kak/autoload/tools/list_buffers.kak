@@ -78,4 +78,4 @@ define-command -hidden jump_to_buffers_and_close_buffer_list_buffer %{
   delete-buffer '*buffers*'
 }
 
-alias global ls list_buffers
+# alias global ls list_buffers

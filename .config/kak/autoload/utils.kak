@@ -100,7 +100,7 @@ define-command show_definition_preview_hover %{
   lsp-hover
 }
 
-define-command itersel_impl -params 1 %{
+define-command -hidden itersel_impl -params 1 %{
   try %[ execute-keys z ]
   execute-keys %arg{1}
   try %[ execute-keys <a-z>a ]

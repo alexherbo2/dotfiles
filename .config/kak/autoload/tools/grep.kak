@@ -4,7 +4,7 @@
 # authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
 # kakoune: 2023-12-12
 # license: MIT
-# dependencies: ["create_buffer_from_command_output"]
+# dependencies: ["fifo"]
 # doc: yes
 # tests: no
 declare-option str grep_command grep
@@ -25,7 +25,9 @@ define-command grep -params .. %{
     } catch %{
       set-register dquote
     }
-    create_buffer_from_command_output '*grep*' %opt{grep_command} %opt{grep_args} %arg{@}
+    fifo %opt{grep_command} %opt{grep_args} %arg{@}
+    rename-buffer '*grep*'
+    set-option buffer filetype grep
     execute-keys -buffer '*grep*' 'P'
   }
 }

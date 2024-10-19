@@ -4,7 +4,7 @@
 # authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
 # kakoune: 2023-12-12
 # license: MIT
-# dependencies: ["create_buffer_from_command_output"]
+# dependencies: ["fifo"]
 # doc: yes
 # tests: no
 declare-option str find_command find
@@ -21,7 +21,9 @@ define-command find -params .. %{
     } catch %{
       set-register dquote
     }
-    create_buffer_from_command_output '*find*' %opt{find_command} %opt{find_args} %arg{@}
+    fifo %opt{find_command} %opt{find_args} %arg{@}
+    rename-buffer '*find*'
+    set-option buffer filetype find
     execute-keys -buffer '*find*' 'P'
   }
 }

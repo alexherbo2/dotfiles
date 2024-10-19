@@ -52,13 +52,13 @@ define-command -hidden jump_to_files_or_directories %{
   evaluate-commands -draft %{
     execute-keys 'x<a-s><a-K>^\n<ret>H'
     evaluate-commands -draft -verbatim try %{
-      execute-keys '<a-,><a-K>/$<ret>'
+      execute-keys '<a-,><a-K>/\z<ret>'
       evaluate-commands -itersel %{
         evaluate-commands -draft -verbatim edit -existing -- "%opt{ex_working_directory}/%val{selection}"
       }
     }
     evaluate-commands -draft -verbatim try %{
-      execute-keys ',<a-K>/$<ret>'
+      execute-keys ',<a-K>/\z<ret>'
       evaluate-commands -client %val{client} -verbatim edit -existing -- "%opt{ex_working_directory}/%val{selection}"
     } catch %{
       evaluate-commands -client %val{client} -verbatim ex_impl "%opt{ex_working_directory}/%val{selection}"

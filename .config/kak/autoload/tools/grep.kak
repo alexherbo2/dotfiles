@@ -10,14 +10,6 @@
 declare-option str grep_command grep
 declare-option str-list grep_args -R -H -n
 
-declare-option str grep_word_completion %{
-  kak_response_fifo=$(mktemp -u)
-  mkfifo "$kak_response_fifo"
-  echo "evaluate-commands -client $kak_client -verbatim write $kak_response_fifo" | kak -p "$kak_session"
-  grep -o -w '[[:alpha:]][[:alnum:]_-]\+' < "$kak_response_fifo" | sort -u
-  unlink "$kak_response_fifo"
-}
-
 define-command grep -params .. %{
   evaluate-commands -save-regs '"' %{
     try %{

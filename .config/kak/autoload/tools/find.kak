@@ -18,13 +18,10 @@ define-command find -params .. %{
   evaluate-commands -save-regs '"' %{
     try %{
       execute-keys -buffer '*find*' -save-regs '' '%y'
-      delete-buffer '*find*'
     } catch %{
       set-register dquote
     }
-    fifo %opt{find_command} %opt{find_args} %arg{@}
-    rename-buffer '*find*'
-    set-option buffer filetype find
+    fifo -name '*find*' %opt{find_command} %opt{find_args} %arg{@}
     execute-keys -buffer '*find*' 'P'
   }
 }

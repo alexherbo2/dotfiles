@@ -9,11 +9,33 @@
 # tests: no
 define-command fifo -params 1.. %{
   evaluate-commands %sh{
+    fifo_name='*fifo*'
+    fifo_flags=
+    while :
+    do
+      case "$1" in
+        -name)
+          fifo_name="$2"
+          shift 2
+          ;;
+        -scroll)
+          fifo_flags='-scroll'
+          shift
+          ;;
+        --)
+          shift
+          break
+          ;;
+        *)
+          break
+          ;;
+      esac
+    done
     fifo=$(mktemp -u)
     mkfifo "$fifo"
     { "$@" > "$fifo" 2>&1; } < /dev/null > /dev/null 2>&1 &
     cat <<EOF
-      edit! -fifo "$fifo" -- "$fifo"
+      edit! ${fifo_flags} -fifo "$fifo" -- "$fifo_name"
       hook -always -once buffer BufCloseFifo "" %{
         nop %sh{
           unlink "$fifo"

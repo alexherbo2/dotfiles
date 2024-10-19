@@ -20,7 +20,7 @@ define-command ex -params 0..1 %{
     then
       dirname "$kak_buffile"
     else
-      printf '.'
+      echo "$1"
     fi
   }
 }

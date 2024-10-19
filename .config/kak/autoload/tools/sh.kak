@@ -1,5 +1,5 @@
-define-command open_new_shell %{
-  terminal %val{client_env_SHELL}
+define-command sh -params .. %{
+  terminal %val{client_env_SHELL} %arg{@}
 }
 
-alias global sh open_new_shell
+complete-command sh shell

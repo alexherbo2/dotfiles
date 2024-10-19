@@ -1,3 +1,5 @@
+Click with your keyboard.
+
 Example configuration:
 
 ```

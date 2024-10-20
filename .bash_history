@@ -385,6 +385,7 @@ kitty -o allow_remote_control=yes
 kamux
 kamux .bash_history
 _ssh
+ggc
 cd -
 cd ~
 exit

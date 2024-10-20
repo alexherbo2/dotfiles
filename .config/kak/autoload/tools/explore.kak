@@ -5,7 +5,7 @@
 # kakoune: 2023-12-12
 # license: MIT
 # dependencies: ["ls"]
-# doc: no
+# doc: yes
 # tests: no
 define-command explore -params 0..1 %{
   evaluate-commands %sh{

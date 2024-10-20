@@ -5,3 +5,9 @@ Usage:
 ```
 ex
 ```
+
+Example configuration:
+
+```
+map global normal <c-e> ':ex<ret>'
+```

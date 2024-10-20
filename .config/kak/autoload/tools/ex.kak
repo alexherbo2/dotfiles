@@ -7,6 +7,19 @@
 # dependencies: ["ls"]
 # doc: no
 # tests: no
-define-command ex %{
-  ls %sh{dirname "$kak_buffile"}
+define-command ex -params 0..1 %{
+  evaluate-commands %sh{
+    case "$#" in
+      1)
+        echo "ls %arg{1}"
+        break
+        ;;
+      0)
+        echo 'ls %sh{dirname "$kak_buffile"}'
+        break
+        ;;
+    esac
+  }
 }
+
+complete-command ex file

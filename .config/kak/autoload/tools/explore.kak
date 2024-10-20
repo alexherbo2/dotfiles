@@ -1,4 +1,4 @@
-# name: kakoune_ex
+# name: kakoune_explore
 # version: 0.1.0
 # description: This script provides the functionality to explore directory of current file.
 # authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
@@ -7,7 +7,7 @@
 # dependencies: ["ls"]
 # doc: no
 # tests: no
-define-command ex -params 0..1 %{
+define-command explore -params 0..1 %{
   evaluate-commands %sh{
     case "$#" in
       1)
@@ -22,4 +22,6 @@ define-command ex -params 0..1 %{
   }
 }
 
-complete-command ex file
+complete-command explore file
+
+alias global ex explore

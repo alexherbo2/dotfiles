@@ -20,7 +20,7 @@ define-command ls -params 0..1 %{
       1)
         if [ -d "$1" ]
         then
-          echo "ls_impl %arg{1}"
+          echo 'ls_impl %arg{1}'
         else
           echo 'fail "error: “%arg{1}” is not a directory"'
           exit 1
@@ -28,7 +28,7 @@ define-command ls -params 0..1 %{
         break
         ;;
       0)
-        echo "ls_impl ."
+        echo 'ls_impl .'
         break
         ;;
     esac

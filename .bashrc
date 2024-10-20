@@ -243,7 +243,7 @@ xmv() {
 
 # meh
 # https://johnhawthorn.com/meh/
-alias meh='mpv --config-dir=~/.config/meh'
+alias meh='mpv --config-dir=$HOME/.config/meh'
 
 # ffmpeg
 # Reference: https://trac.ffmpeg.org/wiki/Encode/H.265

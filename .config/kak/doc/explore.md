@@ -3,11 +3,11 @@ This script provides the functionality to explore directory of current file.
 Usage:
 
 ```
-ex
+explore
 ```
 
 Example configuration:
 
 ```
-map global normal <c-e> ':ex<ret>'
+map global normal <c-e> ':explore<ret>'
 ```

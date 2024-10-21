@@ -16,15 +16,15 @@ define-command open_config -params 1 -docstring 'open config' %{
 }
 
 complete-command -menu open_config shell-script-candidates %{
-  find -L "$kak_config/autoload" "$kak_runtime/rc" -type f -name '*.kak'
+  find -L "$kak_config/autoload" "$kak_runtime/autoload" -type f -name '*.kak'
 }
 
 alias global config open_config
 
 define-command grep_config -params 1 -docstring 'grep config' %{
-  grep %arg{1} "%val{config}/autoload" "%val{runtime}/rc"
+  grep %arg{1} "%val{config}/autoload" "%val{runtime}/autoload"
 }
 
 complete-command grep_config shell-script-candidates %{
-  find -L "$kak_config/autoload" "$kak_runtime/rc" -type f -name '*.kak' -exec grep -o -h -w '[[:alpha:]][[:alnum:]_-]\+' -- {} + | sort -u
+  find -L "$kak_config/autoload" "$kak_runtime/autoload" -type f -name '*.kak' -exec grep -o -h -w '[[:alpha:]][[:alnum:]_-]\+' -- {} + | sort -u
 }

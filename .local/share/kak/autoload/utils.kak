@@ -166,22 +166,42 @@ complete-command send_current_buffer_to_session shell-script-candidates %opt{oth
 complete-command send_buffer_list_to_session shell-script-candidates %opt{other_sessions_completion}
 
 complete-command rename-session shell-script-candidates %{
-  cat "$kak_config/friendly_session_names.txt"
+  if [ -r "$kak_config/friendly_session_names.txt" ]
+  then
+    cat "$kak_config/friendly_session_names.txt"
+  else
+    cat "$kak_runtime/friendly_session_names.txt"
+  fi
 }
 
 define-command find_friendly_session_name %{
   rename-session %sh{
-    shuf -n 1 "$kak_config/friendly_session_names.txt"
+    if [ -r "$kak_config/friendly_session_names.txt" ]
+    then
+      shuf -n 1 "$kak_config/friendly_session_names.txt"
+    else
+      shuf -n 1 "$kak_runtime/friendly_session_names.txt"
+    fi
   }
 }
 
 complete-command rename-client shell-script-candidates %{
-  cat "$kak_config/friendly_client_names.txt"
+  if [ -r "$kak_config/friendly_client_names.txt" ]
+  then
+    cat "$kak_config/friendly_client_names.txt"
+  else
+    cat "$kak_runtime/friendly_client_names.txt"
+  fi
 }
 
 define-command find_friendly_client_name %{
   rename-client %sh{
-    shuf -n 1 "$kak_config/friendly_client_names.txt"
+    if [ -r "$kak_config/friendly_client_names.txt" ]
+    then
+      shuf -n 1 "$kak_config/friendly_client_names.txt"
+    else
+      shuf -n 1 "$kak_runtime/friendly_client_names.txt"
+    fi
   }
 }
 

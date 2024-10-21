@@ -71,8 +71,8 @@ define-command load_and_run_tests -params 1.. %{
 
 complete-command load_and_run_tests file
 
-define-command load_and_run_config_tests %{
-  load_tests "%val{config}/tests"
+define-command load_and_run_all_tests %{
+  load_tests "%val{config}/tests" "%val{runtime}/tests"
   run_tests
 }
 

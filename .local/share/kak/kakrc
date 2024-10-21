@@ -1,5 +1,11 @@
 evaluate-commands %sh{
-  find -L "$kak_config/autoload" -type f -name '*.kak' -exec printf 'source "%s";' {} +
+  find -L "$kak_runtime/autoload" -type f -name '*.kak' -exec printf 'source "%s";' {} +
+  if [ -d "$kak_config/autoload" ]
+  then
+    find -L "$kak_config/autoload" -type f -name '*.kak' -exec printf 'source "%s";' {} +
+  fi
+  if [ -r "$kak_config/kakrc" ]
+  then
+    echo 'source "%val{config}/kakrc"'
+  fi
 }
-
-source "%val{config}/kakrc"

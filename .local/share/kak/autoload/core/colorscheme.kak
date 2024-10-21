@@ -1,5 +1,16 @@
 define-command load_colorscheme -params 1 -docstring 'load color scheme' %{
-  source "%val{config}/colors/%arg{1}.kak"
+  evaluate-commands %sh{
+    if [ -r "$kak_config/colors/$1.kak" ]
+    then
+      echo 'source "%val{config}/colors/%arg{1}.kak"'
+    elif [ -r "$kak_runtime/colors/$1.kak" ]
+    then
+      echo 'source "%val{runtime}/colors/%arg{1}.kak"'
+    else
+      echo 'fail "No such color scheme: “%arg{1}”"'
+      exit 1
+    fi
+  }
 }
 
 complete-command -menu load_colorscheme shell-script-candidates %{

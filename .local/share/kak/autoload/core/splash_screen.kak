@@ -9,7 +9,7 @@ quit :quit
 save file :write
 open configuration :open_kakrc
   }
-  hook -always -once window NormalKey '.*' %{
+  hook -once window NormalKey '.*' %{
     info -style modal
     unset-face window Information
   }

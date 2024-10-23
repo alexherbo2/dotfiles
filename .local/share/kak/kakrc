@@ -9,6 +9,6 @@ evaluate-commands %sh{
     echo 'source "%val{config}/kakrc"'
   fi
 }
-hook -always -once global ClientCreate '.*' %{
+hook -once global ClientCreate '.*' %{
   show_splash_screen
 }

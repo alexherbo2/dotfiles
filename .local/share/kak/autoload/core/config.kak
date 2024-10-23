@@ -16,6 +16,7 @@ define-command open_config -params 1 -docstring 'open config' %{
 }
 
 complete-command -menu open_config shell-script-candidates %{
+  find -L "$kak_config/kakrc" "$kak_runtime/kakrc" -type f -name 'kakrc'
   find -L "$kak_config/autoload" "$kak_runtime/autoload" -type f -name '*.kak'
 }
 

@@ -139,15 +139,6 @@ map global insert <a-n> '<esc>:iterate_next_selection<ret>i'
 map global insert <a-p> '<esc>:iterate_previous_selection<ret>i'
 map global insert <backspace> '<a-;>:decrease_indent_or_erase_character_before_cursor<ret>'
 
-hook global InsertCompletionShow '.*' %{
-  map window insert <tab> <c-n>
-  map window insert <s-tab> <c-p>
-  hook -once window InsertCompletionHide '.*' %{
-    unmap window insert <tab>
-    unmap window insert <s-tab>
-  }
-}
-
 # User hooks -------------------------------------------------------------------
 
 hook global User 'InsertChars=.*kj' %{

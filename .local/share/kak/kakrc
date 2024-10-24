@@ -4,11 +4,17 @@ evaluate-commands %sh{
   then
     find -L "$kak_config/autoload" -type f -name '*.kak' -exec printf 'source "%s";' {} +
   fi
+  echo '
+    add_buffer_open_directory_user_hook global
+    hook -once global ClientCreate ".*" %{
+      try %{
+        evaluate-commands -buffer "*scratch*" ""
+        show_splash_screen
+      }
+    }
+  '
   if [ -r "$kak_config/kakrc" ]
   then
     echo 'source "%val{config}/kakrc"'
   fi
-}
-hook -once global ClientCreate '.*' %{
-  show_splash_screen
 }

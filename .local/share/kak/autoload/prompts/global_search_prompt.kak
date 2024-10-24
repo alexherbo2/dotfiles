@@ -1,7 +1,7 @@
 declare-option str global_search_word_completion %{
   kak_response_fifo=$(mktemp -u)
   mkfifo "$kak_response_fifo"
-  echo "evaluate-commands -client $kak_client -verbatim write $kak_response_fifo" | kak -p "$kak_session"
+  echo "evaluate-commands -client %val{client} -verbatim write $kak_response_fifo" | kak -p "$kak_session"
   grep -o -w '[[:alpha:]][[:alnum:]_-]\+' < "$kak_response_fifo" | sort -u
   unlink -- "$kak_response_fifo"
 }

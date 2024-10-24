@@ -132,23 +132,6 @@ map -docstring 'insert yanked text' global prompt <a-"> '<c-r>"'
 map -docstring 'insert selected text' global prompt <a-.> '<c-r>.'
 map -docstring 'insert buffer name' global prompt <a-%> '<c-r>%'
 
-hook global User 'SearchBegin=.*' %{
-  # Add search flags
-  map -docstring 'enable case-insensitive matching' window prompt <a-i> '<home>(?i)<end>'
-  map -docstring 'disable multiline matching' window prompt <a-m> '<home>(?S)<end>'
-  map -docstring 'disable regex matching' window prompt <a-f> '<home>\Q<end>'
-  # Jump through occurrences
-  map -docstring 'select next search match' window prompt <a-n> '<a-;>n<a-;>Z'
-  map -docstring 'select previous search match' window prompt <a-p> '<a-;><a-n><a-;>Z'
-  hook -once window User 'SearchEnd=.*' %{
-    unmap window prompt <a-i>
-    unmap window prompt <a-m>
-    unmap window prompt <a-f>
-    unmap window prompt <a-n>
-    unmap window prompt <a-p>
-  }
-}
-
 # Insert mode ------------------------------------------------------------------
 
 map -docstring 'enter digraphs mode' global insert <c-k> '<a-;>:enter_digraphs_mode<ret>'
@@ -173,9 +156,6 @@ hook global User 'InsertChars=.*kj' %{
   execute-keys -draft 'hHd'
   execute-keys <esc>
 }
-
-add_insert_chars_user_hook global
-add_search_user_hooks global
 
 # Language support -------------------------------------------------------------
 

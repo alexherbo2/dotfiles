@@ -8,26 +8,27 @@ define-command show_splash_screen -docstring 'show splash screen' %{
 ██║  ██╗██║  ██║██║  ██╗╚██████╔╝╚██████╔╝██║ ╚████║███████╗
 ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚══════╝
 {}
-Kakoune /kəˈkuːn/
-Version %val{version}
 
-Normal mode {string}Escape{}
-Insert mode {string}i{}
-Command mode {string}:{}
+{title}Kakoune /kəˈkuːn/{}
+{header}Version %val{version}{}
 
-Open file {string}:edit <filename>{}
-Save file {string}:write{}
-Quit {string}:quit{}
+Normal mode {mono}Escape{}
+Insert mode {mono}i{}
+Command mode {mono}:{}
 
-Open config {string}:open_kakrc{}
-Change theme {string}:colorscheme <theme_name>{}
+Open file {mono}:edit <filename>{}
+Save file {mono}:write{}
+Quit {mono}:quit{}
 
-Read help {string}:doc <subject>{}
+Open config {mono}:open_kakrc{}
+Change theme {mono}:colorscheme <theme_name>{}
 
-Releases: https://github.com/mawww/kakoune/releases
-Source Code: https://github.com/mawww/kakoune
-Wiki: https://github.com/mawww/kakoune/wiki
-Support Chat: https://web.libera.chat/gamja/#kakoune"
+Read help {mono}:doc <subject>{}
+
+Releases: {link}https://github.com/mawww/kakoune/releases{}
+Source Code: {link}https://github.com/mawww/kakoune{}
+Wiki: {link}https://github.com/mawww/kakoune/wiki{}
+Support Chat: {link}https://web.libera.chat/gamja/#kakoune{}"
   hook -once window NormalKey '.*' %{
     info -style modal
     unset-face window Information

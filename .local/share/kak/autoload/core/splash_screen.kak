@@ -1,6 +1,12 @@
 define-command show_splash_screen -docstring 'show splash screen' %{
   set-face window Information Default
-  info -markup -style modal "Kakoune Code Editor /kəˈkuːn/
+  info -markup -style modal "Kakoune /kəˈkuːn/
+██╗  ██╗ █████╗ ██╗  ██╗ ██████╗ ██╗   ██╗███╗   ██╗███████╗
+██║ ██╔╝██╔══██╗██║ ██╔╝██╔═══██╗██║   ██║████╗  ██║██╔════╝
+█████╔╝ ███████║█████╔╝ ██║   ██║██║   ██║██╔██╗ ██║█████╗
+██╔═██╗ ██╔══██║██╔═██╗ ██║   ██║██║   ██║██║╚██╗██║██╔══╝
+██║  ██╗██║  ██║██║  ██╗╚██████╔╝╚██████╔╝██║ ╚████║███████╗
+╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚══════╝
 Version %val{version}
 
 Normal mode {string}Escape{}

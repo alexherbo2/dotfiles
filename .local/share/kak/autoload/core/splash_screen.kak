@@ -1,6 +1,7 @@
 define-command show_splash_screen -docstring 'show splash screen' %{
   set-face window Information Default
-  info -markup -style modal "{string}
+  info -markup -style modal %exp{
+{string}
 ██╗  ██╗ █████╗ ██╗  ██╗ ██████╗ ██╗   ██╗███╗   ██╗███████╗
 ██║ ██╔╝██╔══██╗██║ ██╔╝██╔═══██╗██║   ██║████╗  ██║██╔════╝
 █████╔╝ ███████║█████╔╝ ██║   ██║██║   ██║██╔██╗ ██║█████╗
@@ -28,7 +29,8 @@ Read help {mono}:doc <subject>{}
 Releases: {link}https://github.com/mawww/kakoune/releases{}
 Source Code: {link}https://github.com/mawww/kakoune{}
 Wiki: {link}https://github.com/mawww/kakoune/wiki{}
-Support Chat: {link}https://web.libera.chat/gamja/#kakoune{}"
+Support Chat: {link}https://web.libera.chat/gamja/#kakoune{}
+}
   hook -once window NormalKey '.*' %{
     info -style modal
     unset-face window Information

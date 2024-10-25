@@ -273,9 +273,11 @@ cd ~/code/batch
 cd ~/code/pw
 cd ~/code/mpv-clip
 caffeinate -d
+tmux new-session caffeinate -d
 caffeinate-lid
 decaffeinate-lid
 nginx
+tmux new-session nginx
 rm -R .config/mpv/watch_later
 git clone https://github.com/helix-editor/helix.git ~/.local/share/github.com/helix-editor/helix
 git clone https://github.com/mawww/kakoune.git ~/.local/share/github.com/mawww/kakoune

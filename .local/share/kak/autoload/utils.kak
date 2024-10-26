@@ -100,20 +100,20 @@ define-command show_definition_preview_hover %{
   lsp-hover
 }
 
-define-command -hidden itersel_impl -params 1 %{
-  try %[ execute-keys z ]
-  execute-keys %arg{1}
-  try %[ execute-keys <a-z>a ]
-  execute-keys -save-regs '' Z
+define-command -hidden itersel_impl -params 3 %{
+  try %[ execute-keys "%arg{1}z" ]
+  execute-keys "%arg{2}%arg{3}"
+  try %[ execute-keys "%arg{1}<a-z>a" ]
+  execute-keys -save-regs '' "%arg{1}Z"
   execute-keys ','
 }
 
-define-command iterate_next_selection %{
-  itersel_impl ')'
+define-command -hidden iterate_next_selection -params 2 %{
+  itersel_impl %arg{1} %arg{2} ')'
 }
 
-define-command iterate_previous_selection %{
-  itersel_impl '('
+define-command -hidden iterate_previous_selection -params 2 %{
+  itersel_impl %arg{1} %arg{2} '('
 }
 
 define-command send_handshake_to_client -params 1 %{

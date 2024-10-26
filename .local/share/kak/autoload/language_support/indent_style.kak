@@ -1,9 +1,20 @@
 # Implementation reference:
 # https://github.com/helix-editor/helix/blob/master/helix-core/src/indent.rs
+define-command set_current_buffer_indent_style -params 1 %{
+  set-option buffer indentwidth %arg{1}
+}
+alias global set-indent-style set_current_buffer_indent_style
+
 define-command detect_current_buffer_indent_style %{
   detect_indent_style %val{bufname}
 }
 alias global detect-indent-style detect_current_buffer_indent_style
+
+define-command show_current_buffer_indent_style %{
+  echo -markup "{Information}indentwidth=%opt{indentwidth}"
+}
+
+alias global show-indent-style show_current_buffer_indent_style
 
 define-command detect_indent_style -params 1 %{
   analyze_indent_style %arg{1}

@@ -1,5 +1,5 @@
-bashrc example configuration:
+Installation:
 
 ```
-alias kamux='tmux -L kak -f ~/.local/share/kamux.conf new-session kak'
+install_kamux
 ```

@@ -101,10 +101,10 @@ define-command show_definition_preview_hover %{
 }
 
 define-command -hidden itersel_impl -params 3 %{
-  try %[ execute-keys "%arg{1}z" ]
+  try %[ execute-keys """%arg{1}z" ]
   execute-keys "%arg{2}%arg{3}"
-  try %[ execute-keys "%arg{1}<a-z>a" ]
-  execute-keys -save-regs '' "%arg{1}Z"
+  try %[ execute-keys """%arg{1}<a-z>a" ]
+  execute-keys -save-regs '' """%arg{1}Z"
   execute-keys ','
 }
 

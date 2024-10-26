@@ -1,6 +1,6 @@
 # name: kakoune_kamux
 # version: 0.1.0
-# description: TODO.
+# description: This script provides support for the kamux terminal multiplexer.
 # authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
 # kakoune: 2023-12-12
 # license: MIT

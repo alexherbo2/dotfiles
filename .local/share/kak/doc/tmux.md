@@ -1,3 +1,5 @@
+This script provides support for the tmux terminal multiplexer.
+
 Example configuration:
 
 ```

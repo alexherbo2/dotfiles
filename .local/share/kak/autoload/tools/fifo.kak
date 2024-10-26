@@ -33,7 +33,7 @@ define-command fifo -params 1.. %{
     done
     fifo=$(mktemp -u)
     mkfifo "$fifo"
-    { "$@" > "$fifo" 2>&1; } < /dev/null > /dev/null 2>&1 &
+    { { trap - INT QUIT; "$@"; } > "$fifo" 2>&1; } < /dev/null > /dev/null 2>&1 &
     cat <<EOF
       edit! ${fifo_flags} -fifo "$fifo" -- "$fifo_name"
       hook -always -once buffer BufCloseFifo "" %{

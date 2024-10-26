@@ -4,7 +4,7 @@
 # authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
 # kakoune: 2023-12-12
 # license: MIT
-# dependencies: []
+# dependencies: ["fifo"]
 # doc: yes
 # tests: no
 define-command make_kamux -params .. %{

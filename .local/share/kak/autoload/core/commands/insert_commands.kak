@@ -7,7 +7,10 @@ map -docstring 'move cursors to the start of the line' global insert <c-a> '<hom
 map -docstring 'move cursors to the end of the line' global insert <c-e> '<end>'
 map -docstring 'move cursors to the next character' global insert <c-f> '<right>'
 map -docstring 'move cursors to the previous character' global insert <c-b> '<left>'
-
+map -docstring 'enter digraphs mode' global insert <c-k> '<a-;>:enter_digraphs_mode<ret>'
+map global insert <a-n> '<esc>:iterate_next_selection %val{register} %val{count}<ret>i'
+map global insert <a-p> '<esc>:iterate_previous_selection %val{register} %val{count}<ret>i'
+map global insert <backspace> '<a-;>:decrease_indent_or_erase_character_before_cursor<ret>'
 hook global InsertCompletionShow '.*' %{
   map window insert <tab> <c-n>
   map window insert <s-tab> <c-p>

@@ -4,11 +4,11 @@
 # authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
 # kakoune: 2023-12-12
 # license: MIT
-# dependencies: ["fifo"]
+# dependencies: ["make"]
 # doc: yes
 # tests: no
 define-command make_kamux -params .. %{
-  fifo -name '*make*' -- make -C "%val{runtime}/assets" -f "%val{runtime}/assets/kamux.makefile" %arg{@}
+  make -C "%val{runtime}/assets" -f "%val{runtime}/assets/kamux.makefile" %arg{@}
 }
 
 define-command install_kamux -params .. %{

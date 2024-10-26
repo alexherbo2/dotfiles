@@ -62,6 +62,8 @@ map -docstring 'keep primary selection' global normal <esc> ',<esc>'
 map -docstring 'remove primary selection' global normal <del> '<a-,>'
 map -docstring 'collapse selections' global normal <backspace> ';'
 
+map -docstring 'goto last accessed buffer' global normal <c-l> 'ga'
+
 map -docstring 'recenter viewport' global normal V 'vt5vkvm'
 map global normal <c-e> ':explore<ret>'
 map global normal <c-space> ':sh<ret>'

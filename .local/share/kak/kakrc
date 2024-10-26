@@ -9,7 +9,7 @@ evaluate-commands %sh{
     add_buffer_open_directory_user_hook global
     hook global InsertChar ".*" indent_on_inserted_character_with_indentation_rules
     hook global BufOpenFile ".*" %{
-      hook -once buffer NormalKey ".*" %{
+      hook -once buffer NormalIdle ".*" %{
         detect-indent-style
       }
     }

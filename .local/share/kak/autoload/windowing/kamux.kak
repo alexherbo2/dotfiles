@@ -7,10 +7,14 @@
 # dependencies: []
 # doc: yes
 # tests: no
-define-command install_kamux %{
-  evaluate-commands %sh{
-    install -d ~/.local/bin ~/.local/share
-    install -m 0755 "$kak_runtime/assets/kamux.sh" ~/.local/bin/kamux
-    install -m 0644 "$kak_runtime/assets/kamux.conf" ~/.local/share/kamux.conf
-  }
+define-command make_kamux -params .. %{
+  fifo -name '*make*' -- make -C "%val{runtime}/assets" -f "%val{runtime}/assets/kamux.makefile" %arg{@}
+}
+
+define-command install_kamux -params .. %{
+  make_kamux install %arg{@}
+}
+
+define-command uninstall_kamux -params .. %{
+  make_kamux uninstall %arg{@}
 }

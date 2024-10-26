@@ -176,7 +176,6 @@ alias tc='tmux choose-tree -Zs'
 
 # Kakoune
 # https://kakoune.org
-alias kamux='tmux -L kak -f ~/.local/share/kamux.conf new-session kak'
 alias kak_test='kak -e "load_and_run_config_tests"'
 alias k=kamux
 alias kl='kak -l'

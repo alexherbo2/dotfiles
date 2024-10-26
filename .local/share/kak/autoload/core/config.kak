@@ -23,7 +23,7 @@ complete-command -menu open_config shell-script-candidates %{
 alias global config open_config
 
 define-command grep_config -params 1 -docstring 'grep config' %{
-  grep %arg{1} "%val{config}/autoload" "%val{runtime}/autoload"
+  grep %arg{1} "%val{config}/kakrc" "%val{runtime}/kakrc" "%val{config}/autoload" "%val{runtime}/autoload"
 }
 
 complete-command grep_config shell-script-candidates %{

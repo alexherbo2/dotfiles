@@ -25,6 +25,7 @@ Open config {mono}:open_kakrc{}
 Change theme {mono}:colorscheme <theme_name>{}
 
 Read help {mono}:doc <subject>{}
+Search for mappings {mono}:grep_config "^map\b"{}
 
 Releases: {link}https://github.com/mawww/kakoune/releases{}
 Source Code: {link}https://github.com/mawww/kakoune{}

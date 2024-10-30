@@ -361,6 +361,8 @@ git init
 git log --pretty='[%h][%s][%b]'
 git log --pretty='[%h][%s][%b]' | rg -F ''
 git rebase -i ''
+git rebase --continue
+git rebase --abort
 git add .
 git push
 git pull

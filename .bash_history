@@ -283,6 +283,7 @@ tmux new-session caffeinate -d
 caffeinate-lid
 decaffeinate-lid
 nginx
+ifconfig | grep 192.168
 tmux new-session sudo nginx -c /etc/nginx/nginx.conf
 rm -R .config/mpv/watch_later
 git clone https://github.com/helix-editor/helix.git ~/.local/share/github.com/helix-editor/helix

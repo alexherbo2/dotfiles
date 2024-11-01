@@ -200,6 +200,7 @@ yay-update
 yay-install
 yay-uninstall
 yay-clean
+sudo DS_Store
 DS_Store
 pbcopy < /dev/null
 wl-copy --clear

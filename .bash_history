@@ -343,6 +343,7 @@ rsync home shared /Volumes/USB
 rm -R /Volumes/Disk/.fseventsd
 rm -R /Volumes/USB/.fseventsd
 shutdown now
+reboot
 gh repo view --web
 gh repo fork
 rm -R Movies/TV

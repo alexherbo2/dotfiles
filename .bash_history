@@ -283,7 +283,7 @@ tmux new-session caffeinate -d
 caffeinate-lid
 decaffeinate-lid
 nginx
-tmux new-session nginx
+tmux new-session sudo nginx -c /etc/nginx/nginx.conf
 rm -R .config/mpv/watch_later
 git clone https://github.com/helix-editor/helix.git ~/.local/share/github.com/helix-editor/helix
 git clone https://github.com/mawww/kakoune.git ~/.local/share/github.com/mawww/kakoune

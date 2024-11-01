@@ -130,6 +130,11 @@ git clone https://github.com/lusakasa/saka-key.git ~/.local/share/github.com/lus
 git clone https://github.com/lusakasa/saka.git ~/.local/share/github.com/lusakasa/saka
 git clone https://github.com/jan-warchol/selenized.git ~/.local/share/github.com/jan-warchol/selenized
 git clone https://github.com/taupiqueur/chrome-shortcuts.git ~/.local/share/github.com/taupiqueur/chrome-shortcuts
+git clone https://github.com/taupiqueur/chrome-shell.git ~/.local/share/github.com/taupiqueur/chrome-shell
+git clone https://github.com/taupiqueur/chrome-dmenu.git ~/.local/share/github.com/taupiqueur/chrome-dmenu
+git clone https://github.com/taupiqueur/chrome-mpv.git ~/.local/share/github.com/taupiqueur/chrome-mpv
+git clone https://github.com/taupiqueur/chrome-nano.git ~/.local/share/github.com/taupiqueur/chrome-nano
+git clone https://github.com/taupiqueur/chrome-pandoc.git ~/.local/share/github.com/taupiqueur/chrome-pandoc
 git clone https://github.com/emersion/slurp.git ~/.local/share/github.com/emersion/slurp
 git clone https://github.com/starship/starship.git ~/.local/share/github.com/starship/starship
 git clone https://github.com/swaywm/sway.git ~/.local/share/github.com/swaywm/sway

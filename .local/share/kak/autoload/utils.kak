@@ -19,7 +19,7 @@ define-command build_regex_highlighter_from_selections %{
   execute-keys -save-regs '' 'y:edit -scratch<ret><a-R>a<ret><esc><a-_>|sort -u | awk ''{ print length, $0 }'' | sort -n -r | cut -d " " -f 2-<ret><a-s>H*'
 }
 
-define-command toggle_readonly_flag %{
+define-command -override toggle_readonly_flag %{
   set-option buffer readonly %sh{
     if [ "$kak_opt_readonly" = true ]
     then

@@ -12,7 +12,7 @@ define-command git_commit %{
   }
   hook buffer BufWritePost '.*' %{
     nop %sh{
-      git commit --file "$kak_hook_param" --cleanup=strip
+      git commit -F "$kak_hook_param" --cleanup=strip
     }
     delete-buffer
   }

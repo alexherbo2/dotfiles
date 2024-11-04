@@ -306,11 +306,11 @@ cargo build --release
 cargo install --locked --path helix-term
 install ~/.cargo/bin/hx /opt/homebrew/bin
 export GIT_SSH_COMMAND='ssh -i ~/.ssh/id_ed25519_alexherbo2'
-git config core.sshCommand 'ssh -i ~/.ssh/id_ed25519_alexherbo2'
-git config user.email alexherbo2@gmail.com
+git config set core.sshCommand 'ssh -i ~/.ssh/id_ed25519_alexherbo2'
+git config set user.email alexherbo2@gmail.com
 export GIT_SSH_COMMAND='ssh -i ~/.ssh/id_ed25519_mathieuablasou'
-git config core.sshCommand 'ssh -i ~/.ssh/id_ed25519_mathieuablasou'
-git config user.email mathieu.ablasou@cashbee.fr
+git config set core.sshCommand 'ssh -i ~/.ssh/id_ed25519_mathieuablasou'
+git config set user.email mathieu.ablasou@cashbee.fr
 export EDITOR='kak -n'
 unset GIT_SSH_COMMAND
 rm .git/COMMIT_EDITMSG
@@ -384,6 +384,21 @@ git remote add origin git@github.com:taupiqueur/taupiqueur.git
 git remote add origin git@github.com:alexherbo2/alexherbo2.git
 git remote add upstream git@github.com:taupiqueur/taupiqueur.git
 git remote add upstream git@github.com:alexherbo2/alexherbo2.git
+make release name=chrome-shell version=nightly target=aarch64-apple-darwin
+gh release upload nightly releases/chrome-shell-nightly-aarch64-apple-darwin.tar.xz
+docker build -t chrome-shell .
+docker run -v .:/app -w /app chrome-shell make static=yes release name=chrome-shell version=nightly target=aarch64-unknown-linux-musl
+gh release upload nightly releases/chrome-shell-nightly-aarch64-unknown-linux-musl.tar.xz
+make release name=batch version=nightly target=aarch64-apple-darwin
+gh release upload nightly releases/batch-nightly-aarch64-apple-darwin.tar.xz
+docker build -t batch .
+docker run -v .:/app -w /app batch make static=yes release name=batch version=nightly target=aarch64-unknown-linux-musl
+gh release upload nightly releases/batch-nightly-aarch64-unknown-linux-musl.tar.xz
+make release name=pw version=nightly target=aarch64-apple-darwin
+gh release upload nightly releases/pw-nightly-aarch64-apple-darwin.tar.xz
+docker build -t pw .
+docker run -v .:/app -w /app pw make static=yes release name=pw version=nightly target=aarch64-unknown-linux-musl
+gh release upload nightly releases/pw-nightly-aarch64-unknown-linux-musl.tar.xz
 git add .
 git tag -l
 git tag -d nightly

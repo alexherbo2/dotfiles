@@ -269,6 +269,15 @@ cd ~/tmp
 xattr -rc ~/code/chrome-shortcuts
 sudo xattr -rc ~/code/chrome-shortcuts
 find ~/code/chrome-shortcuts -name '*.DS_Store'
+xattr -rc ~/code/chrome-shell
+sudo xattr -rc ~/code/chrome-shell
+find ~/code/chrome-shell -name '*.DS_Store'
+xattr -rc ~/code/batch
+sudo xattr -rc ~/code/batch
+find ~/code/batch -name '*.DS_Store'
+xattr -rc ~/code/pw
+sudo xattr -rc ~/code/pw
+find ~/code/pw -name '*.DS_Store'
 cd ~/code/chrome-shortcuts
 cd ~/code/chrome-shell
 cd ~/code/chrome-dmenu

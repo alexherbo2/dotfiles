@@ -1,9 +1,9 @@
-# apple terminal
+# Apple Terminal
 hook global User 'TERM_PROGRAM=Apple_Terminal' %{
-  set-option global terminal_command exec
-  set-option global terminal_args osascript -e %{
+  set-option global terminal_command osascript
+  set-option global terminal_args -e %{
     on run argv
-      set command to ""
+      set command to " exec "
       repeat with arg in argv
         set command to command & quoted form of arg & " "
       end repeat

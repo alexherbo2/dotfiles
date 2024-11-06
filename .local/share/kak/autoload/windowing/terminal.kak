@@ -5,6 +5,10 @@ hook global ClientCreate .* %{
   trigger-user-hook "TERM=%val{client_env_TERM}"
 }
 
+hook global ClientCreate .* %{
+  trigger-user-hook "TERM_PROGRAM=%val{client_env_TERM_PROGRAM}"
+}
+
 define-command open_terminal -params 1.. %{
   open_terminal_with_args %opt{terminal_command} %opt{terminal_args} %arg{@}
 }

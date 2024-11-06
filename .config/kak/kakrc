@@ -17,6 +17,10 @@ evaluate-commands %sh{
 
 colorscheme macos_light_low_contrast
 
+hook global User 'TERM_PROGRAM=Apple_Terminal' %{
+  colorscheme macos_light_ansi
+}
+
 set-face global Tab WhitespaceDiagnosticError
 set-face global Newline Whitespace
 set-face global NonBreakingSpace WhitespaceDiagnosticError

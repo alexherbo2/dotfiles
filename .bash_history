@@ -416,6 +416,7 @@ git pull
 git pull upstream master
 date "+%F %T" | git commit -F -
 git commit --amend --no-edit
+git commit --amend --no-edit --author='Mathieu Ablasou <alexherbo2@gmail.com>'
 git commit --amend
 git commit -m 'Initial commit'
 git commit -m 'Bump version to 0.1.0'

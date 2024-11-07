@@ -352,6 +352,7 @@ xattr -rc ~/shorts
 sudo xattr -rc ~/shorts
 find ~/shorts -name '*.DS_Store'
 scp -r ~/storage/shorts phaazon:
+rsync --exclude=.git/ ~/storage/shorts phaazon:
 git remote add origin git@phaazon:shorts.git
 mkdir bin
 install ffmpeg-git-20240629-amd64-static/ffmpeg bin
@@ -397,6 +398,7 @@ mpv --shuffle ~/shorts
 cd ~/shorts
 kamux ytdlp_list.sh
 sh ytdlp_list.sh
+du -sh ~/shorts
 sh ~/shorts/twitch.sh
 find -L ~/shorts -type f -name '*.mp4' -exec printf "file '%s'\\n" {} + | shuf > /tmp/shorts.ffconcat
 ffmpeg -f concat -safe 0 -i /tmp/shorts.ffconcat -c:v libx264 -f flv "rtmp://live.twitch.tv/app/$TWITCH_STREAM_KEY"
@@ -410,11 +412,11 @@ git add .
 git push
 git pull
 git pull upstream master
-date "+%F %T" | git commit --file=-
+date "+%F %T" | git commit -F -
 git commit --amend --no-edit
 git commit --amend
-git commit --message='Initial commit'
-git commit --message='Bump version to 0.1.0'
+git commit -m 'Initial commit'
+git commit -m 'Bump version to 0.1.0'
 git remote add origin git@github.com:taupiqueur/taupiqueur.git
 git remote add origin git@github.com:alexherbo2/alexherbo2.git
 git remote add upstream git@github.com:taupiqueur/taupiqueur.git

@@ -201,13 +201,13 @@ alias gF='git log -p -S'
 alias gE='git log -p -G'
 # Commit
 alias gci='git commit'
-alias gcm='git commit --message'
+alias gcm='git commit -m'
 alias greword='git commit --amend'
 alias gpick='git commit --amend --no-edit'
-alias gsnapshot='date "+%F %T" | git commit --file=-'
+alias gsnapshot='date "+%F %T" | git commit -F -'
 # Undo commit
-alias gu='git restore --staged'
-alias gd='git restore --staged --worktree'
+alias gu='git restore -S'
+alias gd='git restore -SW'
 alias gd.='gd .'
 alias gsquash='git reset --soft'
 alias gsquash^='git reset --soft HEAD^'
@@ -216,9 +216,9 @@ alias grb^='git reset --hard HEAD^'
 
 # eza
 # https://eza.rocks
-alias ls='eza --group-directories-first --all'
-alias ll='eza --group-directories-first --all --long --git'
-alias tree='eza --tree --all --ignore-glob .git'
+alias ls='eza --group-directories-first -a'
+alias ll='eza --group-directories-first -a -l --git'
+alias tree='eza -T -a -I .git'
 
 # batch
 # https://github.com/taupiqueur/batch

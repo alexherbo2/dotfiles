@@ -14,6 +14,8 @@ alacritty msg config "$(find -L ~/.local/share/github.com/alacritty/alacritty-th
 alacritty msg config "$(find -L ~/.local/share/github.com/alacritty/alacritty-theme -type f -name '*.toml' | fzy | xargs cat)"
 alacritty msg config -r
 alacritty msg config -r -w -1
+alacritty msg config "$(find -L ~/.config/alacritty/colors -type f -name '*.toml' | fzy | xargs cat)" -w -1
+alacritty msg config "$(find -L ~/.config/alacritty/colors -type f -name '*.toml' | fzy | xargs cat)"
 kak -s megumin -e 'rename-client chomusuke'
 kak -c megumin
 git clone https://github.com/zed-industries/zed.git ~/.local/share/github.com/zed-industries/zed
@@ -341,7 +343,19 @@ ssh host
 ssh guest
 ssh mawww
 ssh phaazon
+uname -a
+uname -m
+curl -O https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-amd64-static.tar.xz
+tar xvf ffmpeg-git-amd64-static.tar.xz
 ssh phaazon -t tmux attach-session
+xattr -rc ~/shorts
+sudo xattr -rc ~/shorts
+find ~/shorts -name '*.DS_Store'
+scp -r ~/storage/shorts phaazon:
+git remote add origin git@phaazon:shorts.git
+mkdir bin
+install ffmpeg-git-20240629-amd64-static/ffmpeg bin
+export PATH=~/bin:$PATH
 rsync home guest:
 sshfs host: shared/kanto
 ngrok tcp 22

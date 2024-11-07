@@ -3,11 +3,11 @@
 # https://developer.apple.com/design/human-interface-guidelines/foundations/color#specifications
 
 # Terminal colors
-declare-option str text_background_color 'ffffff'
-declare-option str text_color '000000'
-declare-option str selection_color 'a5cdff'
+declare-option str text_background_color '171717'
+declare-option str text_color 'ffffff'
+declare-option str selection_color '314f78'
 
-declare-option str cursor_color '7f7f7f'
+declare-option str cursor_color '8b8b8b'
 
 # ANSI colors
 declare-option str black_color '000000'
@@ -33,15 +33,15 @@ declare-option str selection_opacity '80'
 declare-option str selection_low_opacity '20'
 
 # UI variants
-declare-option str dim_text_color '696969'
-declare-option str lighter_text_color '333333'
-declare-option str light_text_color '1a1a1a'
-declare-option str dim_text_background_color 'f5f5f5'
-declare-option str dark_text_background_color 'e6e6e6'
-declare-option str darker_text_background_color 'cccccc'
+declare-option str dim_text_color 'ffffff'
+declare-option str darker_text_color 'cccccc'
+declare-option str dark_text_color 'e6e6e6'
+declare-option str dim_text_background_color '171717'
+declare-option str light_text_background_color '303030'
+declare-option str lighter_text_background_color '4a4a4a'
 
 # Other
-declare-option str non_text_color "%opt{darker_text_background_color}"
+declare-option str non_text_color "%opt{lighter_text_background_color}"
 
 # Template
 # https://github.com/mawww/kakoune/blob/master/colors/default.kak
@@ -54,7 +54,7 @@ set-face global module "rgb:%opt{green_color}" # C++ ⇒ #include [<stdio.h>]
 set-face global function "rgb:%opt{magenta_color}" # https://spec.draculatheme.com#FunctionNames
 set-face global string "rgb:%opt{green_color}" # https://spec.draculatheme.com#String
 set-face global keyword "rgb:%opt{blue_color}" # https://spec.draculatheme.com#Keyword
-set-face global operator "rgb:%opt{lighter_text_color}" # Shell ⇒ true [&&] false
+set-face global operator "rgb:%opt{darker_text_color}" # Shell ⇒ true [&&] false
 set-face global attribute "rgb:%opt{green_color}" # C++ ⇒ [enum] Color { ... };
 set-face global comment "rgb:%opt{white_color}" # https://spec.draculatheme.com#Comment
 set-face global documentation comment # Rust ⇒ /// Returns `true`.
@@ -85,17 +85,17 @@ set-face global SecondaryCursor "default,rgba:%opt{selection_color}%opt{cursor_o
 set-face global PrimaryCursorEol "default,rgb:%opt{cursor_color}+fg" # White (full block)
 set-face global SecondaryCursorEol "default,rgb:%opt{selection_color}+fg" # White (full block)
 set-face global MenuForeground "rgb:%opt{text_color},rgb:%opt{selection_color}" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorSuggestWidget.selectedBackground
-set-face global MenuBackground "rgb:%opt{text_color},rgb:%opt{dark_text_background_color}" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorSuggestWidget.background
+set-face global MenuBackground "rgb:%opt{text_color},rgb:%opt{light_text_background_color}" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorSuggestWidget.background
 set-face global MenuInfo "rgb:%opt{white_color}" # IntelliSense suggestions
-set-face global Information "rgb:%opt{text_color},rgb:%opt{dark_text_background_color}" # Contextual help blends with the editor background.
-set-face global Error "rgb:%opt{red_color},rgb:%opt{dark_text_background_color}" # https://spec.draculatheme.com#Invalid
+set-face global Information "rgb:%opt{text_color},rgb:%opt{light_text_background_color}" # Contextual help blends with the editor background.
+set-face global Error "rgb:%opt{red_color},rgb:%opt{light_text_background_color}" # https://spec.draculatheme.com#Invalid
 set-face global DiagnosticError ",,rgb:%opt{red_color}+ca" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorError.foreground
 set-face global DiagnosticWarning ",,rgb:%opt{yellow_color}+ca" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorWarning.foreground
 set-face global DiagnosticInfo ",,rgb:%opt{blue_color}+ca" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorWarning.foreground
 set-face global DiagnosticHint ",,rgb:%opt{green_color}+ua" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorWarning.foreground
 set-face global DiagnosticTagUnnecessary +d
 set-face global DiagnosticTagDeprecated +s
-set-face global StatusLine "rgb:%opt{text_color},rgb:%opt{dark_text_background_color}" # Prefer background dark here — https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=statusBar.background
+set-face global StatusLine "rgb:%opt{text_color},rgb:%opt{light_text_background_color}" # Prefer background dark here — https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=statusBar.background
 set-face global StatusLineMode "rgb:%opt{yellow_color}" # [insert]
 set-face global StatusLineInfo "rgb:%opt{blue_color}" # 1 sel
 set-face global StatusLineValue "rgb:%opt{green_color}" # 1 sel param=[42] reg=[y]

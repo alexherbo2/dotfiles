@@ -60,15 +60,15 @@ set-face global StatusLineInfo "blue" # 1 sel
 set-face global StatusLineValue "green" # 1 sel param=[42] reg=[y]
 set-face global StatusCursor "default,bright-black" # Cursor in command mode
 set-face global Prompt StatusLine # Same as the status line, since they live at the same place.
-set-face global BufferPadding "default" # Kakoune ⇒ set-option global ui_options terminal_padding_fill=yes
+set-face global BufferPadding "white" # Kakoune ⇒ set-option global ui_options terminal_padding_fill=yes
 
 # Builtin highlighter faces
-set-face global LineNumbers "default" # Kakoune ⇒ add-highlighter -override global/number-lines number-lines — Prefer non-text here — https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorLineNumber
-set-face global LineNumberCursor "+r" # Kakoune ⇒ add-highlighter -override global/number-lines number-lines -hlcursor
-set-face global LineNumbersWrapped "+d" # Kakoune ⇒ add-highlighter -override global/number-lines number-lines; add-highlighter -override global/wrap wrap
+set-face global LineNumbers "white" # Kakoune ⇒ add-highlighter -override global/number-lines number-lines — Prefer non-text here — https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorLineNumber
+set-face global LineNumberCursor "default" # Kakoune ⇒ add-highlighter -override global/number-lines number-lines -hlcursor
+set-face global LineNumbersWrapped "bright-white" # Kakoune ⇒ add-highlighter -override global/number-lines number-lines; add-highlighter -override global/wrap wrap
 set-face global MatchingChar "default,default+b" # Kakoune ⇒ add-highlighter -override global/show-matching show-matching — https://github.com/dracula/vim/blob/master/colors/dracula.vim#:~:text=MatchParen
-set-face global Whitespace "default+fa" # Kakoune ⇒ add-highlighter -override global/show-whitespaces show-whitespaces
-set-face global WrapMarker "default" # Kakoune ⇒ add-highlighter -override global/wrap wrap -marker '↪'
+set-face global Whitespace "white+fa" # Kakoune ⇒ add-highlighter -override global/show-whitespaces show-whitespaces
+set-face global WrapMarker "white" # Kakoune ⇒ add-highlighter -override global/wrap wrap -marker '↪'
 
 # Custom faces
 set-face global Search "black,bright-yellow"

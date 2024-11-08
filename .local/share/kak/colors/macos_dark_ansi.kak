@@ -43,40 +43,40 @@ set-face global PrimaryCursor "black,bright-black" # Pink (alpha-blended)
 set-face global SecondaryCursor "black,bright-blue" # Purple (alpha-blended)
 set-face global PrimaryCursorEol "default,bright-black+fg" # White (full block)
 set-face global SecondaryCursorEol "default,bright-blue+fg" # White (full block)
-set-face global MenuForeground "default,bright-blue" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorSuggestWidget.selectedBackground
-set-face global MenuBackground "default,bright-white" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorSuggestWidget.background
+set-face global MenuForeground "bright-white,bright-blue" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorSuggestWidget.selectedBackground
+set-face global MenuBackground "bright-white,bright-black" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorSuggestWidget.background
 set-face global MenuInfo "white" # IntelliSense suggestions
-set-face global Information "default,bright-white" # Contextual help blends with the editor background.
-set-face global Error "red,bright-white" # https://spec.draculatheme.com#Invalid
+set-face global Information "bright-white,bright-black" # Contextual help blends with the editor background.
+set-face global Error "red,bright-black" # https://spec.draculatheme.com#Invalid
 set-face global DiagnosticError ",,red+ca" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorError.foreground
 set-face global DiagnosticWarning ",,yellow+ca" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorWarning.foreground
 set-face global DiagnosticInfo ",,blue+ca" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorWarning.foreground
 set-face global DiagnosticHint ",,green+ua" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorWarning.foreground
 set-face global DiagnosticTagUnnecessary +d
 set-face global DiagnosticTagDeprecated +s
-set-face global StatusLine "default,bright-white" # Prefer background dark here — https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=statusBar.background
+set-face global StatusLine "bright-white,bright-black" # Prefer background dark here — https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=statusBar.background
 set-face global StatusLineMode "yellow" # [insert]
 set-face global StatusLineInfo "blue" # 1 sel
 set-face global StatusLineValue "green" # 1 sel param=[42] reg=[y]
-set-face global StatusCursor "default,bright-black" # Cursor in command mode
+set-face global StatusCursor "default,white" # Cursor in command mode
 set-face global Prompt StatusLine # Same as the status line, since they live at the same place.
 set-face global BufferPadding "default" # Kakoune ⇒ set-option global ui_options terminal_padding_fill=yes
 
 # Builtin highlighter faces
-set-face global LineNumbers "default" # Kakoune ⇒ add-highlighter -override global/number-lines number-lines — Prefer non-text here — https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorLineNumber
-set-face global LineNumberCursor "+r" # Kakoune ⇒ add-highlighter -override global/number-lines number-lines -hlcursor
-set-face global LineNumbersWrapped "+d" # Kakoune ⇒ add-highlighter -override global/number-lines number-lines; add-highlighter -override global/wrap wrap
+set-face global LineNumbers "bright-black" # Kakoune ⇒ add-highlighter -override global/number-lines number-lines — Prefer non-text here — https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorLineNumber
+set-face global LineNumberCursor "default" # Kakoune ⇒ add-highlighter -override global/number-lines number-lines -hlcursor
+set-face global LineNumbersWrapped "bright-black+d" # Kakoune ⇒ add-highlighter -override global/number-lines number-lines; add-highlighter -override global/wrap wrap
 set-face global MatchingChar "default,default+b" # Kakoune ⇒ add-highlighter -override global/show-matching show-matching — https://github.com/dracula/vim/blob/master/colors/dracula.vim#:~:text=MatchParen
-set-face global Whitespace "default+fa" # Kakoune ⇒ add-highlighter -override global/show-whitespaces show-whitespaces
-set-face global WrapMarker "default" # Kakoune ⇒ add-highlighter -override global/wrap wrap -marker '↪'
+set-face global Whitespace "bright-black+fa" # Kakoune ⇒ add-highlighter -override global/show-whitespaces show-whitespaces
+set-face global WrapMarker "bright-black" # Kakoune ⇒ add-highlighter -override global/wrap wrap -marker '↪'
 
 # Custom faces
 set-face global Search "black,bright-yellow"
 set-face global SelectedText "default,default"
 set-face global StatusLineInactive "+d"
-set-face global StatusLineNormal "bright-white,bright-blue"
-set-face global StatusLineInsert "bright-white,green"
-set-face global StatusLineExtend "bright-white,magenta"
+set-face global StatusLineNormal "bright-black,bright-blue"
+set-face global StatusLineInsert "bright-black,green"
+set-face global StatusLineExtend "bright-black,magenta"
 set-face global JumpLabel "black,bright-yellow+F"
 
 # Infobox faces

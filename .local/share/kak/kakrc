@@ -8,7 +8,6 @@ evaluate-commands %sh{
     source "%val{runtime}/colors/default.kak"
     source "%val{runtime}/colors/macos_light.kak"
     add_inactive_client_indicators
-    enable_left_status_line
     add_insert_chars_user_hook global
     add_buffer_open_directory_user_hook global
     hook global InsertChar ".*" indent_on_inserted_character_with_indentation_rules

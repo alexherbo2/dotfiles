@@ -8,3 +8,4 @@ set-face global PrimaryCursor '@Cursor'
 set-face global SecondaryCursor '@SecondarySelection'
 set-face global PrimaryCursorEol '@PrimaryCursor'
 set-face global SecondaryCursorEol '@CursorEol'
+set-face global constant "@value" # C++ ⇒ int number = [42];

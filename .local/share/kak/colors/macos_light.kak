@@ -88,9 +88,12 @@ set-face global list default # AsciiDoc ⇒ - [item]
 
 # Builtin faces
 set-face global Default "rgb:%opt{text_color},rgb:%opt{text_background_color}" # Editor background
-set-face global Selection "default,rgba:%opt{selection_color}%opt{selection_opacity}" # Pink (alpha-blended)
-set-face global Cursor "default,rgba:%opt{cursor_color}%opt{cursor_opacity}" # Pink (alpha-blended)
-set-face global CursorEol "default,rgb:%opt{selection_color}+fg"
+set-face global PrimarySelection "default,rgba:%opt{selection_color}%opt{selection_opacity}" # Pink (alpha-blended)
+set-face global SecondarySelection "default,rgba:%opt{selection_color}%opt{selection_opacity}" # Purple (alpha-blended)
+set-face global PrimaryCursor "default,rgba:%opt{cursor_color}%opt{cursor_opacity}" # Pink (alpha-blended)
+set-face global SecondaryCursor "default,rgba:%opt{selection_color}%opt{cursor_opacity}" # Purple (alpha-blended)
+set-face global PrimaryCursorEol "default,rgb:%opt{cursor_color}+fg" # White (full block)
+set-face global SecondaryCursorEol "default,rgb:%opt{selection_color}+fg" # White (full block)
 set-face global MenuForeground "rgb:%opt{text_color},rgb:%opt{selection_color}" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorSuggestWidget.selectedBackground
 set-face global MenuBackground "rgb:%opt{text_color},rgb:%opt{dark_text_background_color}" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorSuggestWidget.background
 set-face global MenuInfo "rgb:%opt{white_color}" # IntelliSense suggestions

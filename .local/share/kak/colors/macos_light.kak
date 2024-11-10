@@ -51,12 +51,12 @@ declare-option str non_text_color "%opt{darker_text_background_color}"
 # TODO: comment
 # TODO: string
 # TODO: heading
-# TODO: constant
 # TODO: italic
 # TODO: bold
 # TODO: raw
 # TODO: link
 # TODO: variable
+# TODO: keyword
 set-face global value "rgb:%opt{red_color}" # C++ ⇒ int number = [42];
 set-face global type "rgb:%opt{yellow_color}" # C++ ⇒ [int] main() { ... }
 set-face global variable "rgb:%opt{cyan_color}" # Makefile ⇒ [install]:

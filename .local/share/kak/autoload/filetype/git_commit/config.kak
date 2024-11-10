@@ -58,11 +58,11 @@ add-highlighter shared/git/commit/diffs/regions ref diff
 # Rebase ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 # https://git-scm.com/docs/git-rebase
-add-highlighter shared/git/rebase regions
-add-highlighter shared/git/rebase/comments region '^#' '$' group
-add-highlighter shared/git/rebase/comments/region fill comment
-add-highlighter shared/git/rebase/commands region '^\w' '$' group
-add-highlighter shared/git/rebase/commands/region regex '^(p|pick|r|reword|e|edit|s|squash|f|fixup|x|exec|b|break|d|drop|l|label|t|reset|m|merge)\h+(\w+)\h+(.+)$' 1:keyword 2:value 3:default
+# add-highlighter shared/git/rebase regions
+# add-highlighter shared/git/rebase/comments region '^#' '$' group
+# add-highlighter shared/git/rebase/comments/region fill comment
+# add-highlighter shared/git/rebase/commands region '^\w' '$' group
+# add-highlighter shared/git/rebase/commands/region regex '^(p|pick|r|reword|e|edit|s|squash|f|fixup|x|exec|b|break|d|drop|l|label|t|reset|m|merge)\h+(\w+)\h+(.+)$' 1:keyword 2:value 3:default
 
 # Detection ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -86,10 +86,10 @@ hook -group git-commit global WinSetOption filetype=git-commit %{
 
 # Files
 # https://git-scm.com/docs/git-rebase
-remove-hooks global git-rebase
-hook -group git-rebase global BufOpenFile '.*/\.git/rebase-merge/git-rebase-todo' %{
-  set-option buffer filetype git-rebase
-}
+# remove-hooks global git-rebase
+# hook -group git-rebase global BufOpenFile '.*/\.git/rebase-merge/git-rebase-todo' %{
+  # set-option buffer filetype git-rebase
+# }
 
 hook -group git-rebase global WinSetOption filetype=git-rebase %{
   add-highlighter window/git-rebase ref git/rebase

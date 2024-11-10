@@ -37,9 +37,12 @@ set-face global list default # AsciiDoc ⇒ - [item]
 
 # Builtin faces
 set-face global Default "default,default" # Editor background
-set-face global Selection "white,bright-blue"
-set-face global Cursor "black,bright-black"
-set-face global CursorEol "white,blue"
+set-face global PrimarySelection "white,bright-blue" # Pink (alpha-blended)
+set-face global SecondarySelection "white,bright-blue" # Purple (alpha-blended)
+set-face global PrimaryCursor "black,bright-black" # Pink (alpha-blended)
+set-face global SecondaryCursor "black,bright-blue" # Purple (alpha-blended)
+set-face global PrimaryCursorEol "black,black" # White (full block)
+set-face global SecondaryCursorEol "black,blue" # White (full block)
 set-face global MenuForeground "bright-white,bright-blue" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorSuggestWidget.selectedBackground
 set-face global MenuBackground "bright-white,bright-black" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorSuggestWidget.background
 set-face global MenuInfo "white" # IntelliSense suggestions

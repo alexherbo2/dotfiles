@@ -47,7 +47,8 @@ declare-option str non_text_color "%opt{darker_text_background_color}"
 # https://github.com/mawww/kakoune/blob/master/colors/default.kak
 
 # For code
-# TODO: constant
+# TODO: punctuation
+# TODO: symbol
 # TODO: comment
 # TODO: string
 # TODO: heading
@@ -123,6 +124,8 @@ set-face global Whitespace "rgb:%opt{non_text_color}+fa" # Kakoune ⇒ add-highl
 set-face global WrapMarker "rgb:%opt{non_text_color}" # Kakoune ⇒ add-highlighter -override global/wrap wrap -marker '↪'
 
 # Custom faces
+set-face global PrimaryCursorInsertMode "rgb:%opt{text_background_color},rgb:%opt{text_color}+fg"
+set-face global PrimaryCursorPendingMode ",,rgb:%opt{text_color}+ua@PrimarySelection"
 set-face global Search "default,rgba:%opt{bright_yellow_color}%opt{selection_low_opacity}"
 set-face global SelectedText "default,rgba:%opt{selection_color}%opt{selection_low_opacity}"
 set-face global StatusLineInactive "rgb:%opt{dim_text_color},rgb:%opt{dim_text_background_color}"

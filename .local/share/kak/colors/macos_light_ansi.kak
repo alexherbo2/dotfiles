@@ -41,7 +41,7 @@ set-face global PrimarySelection "white,bright-blue" # Pink (alpha-blended)
 set-face global SecondarySelection "white,bright-blue" # Purple (alpha-blended)
 set-face global PrimaryCursor "black,bright-black" # Pink (alpha-blended)
 set-face global SecondaryCursor "black,bright-blue" # Purple (alpha-blended)
-set-face global PrimaryCursorEol "black,black" # White (full block)
+set-face global PrimaryCursorEol "white,black" # White (full block)
 set-face global SecondaryCursorEol "black,blue" # White (full block)
 set-face global MenuForeground "default,bright-blue" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorSuggestWidget.selectedBackground
 set-face global MenuBackground "default,bright-white" # https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorSuggestWidget.background
@@ -71,6 +71,8 @@ set-face global Whitespace "white+fa" # Kakoune ⇒ add-highlighter -override gl
 set-face global WrapMarker "white" # Kakoune ⇒ add-highlighter -override global/wrap wrap -marker '↪'
 
 # Custom faces
+set-face global PrimaryCursorInsertMode "white,black+fg"
+set-face global PrimaryCursorPendingMode "+ua@PrimarySelection"
 set-face global Search "black,bright-yellow"
 set-face global SelectedText "default,default"
 set-face global StatusLineInactive "+d"

@@ -47,6 +47,7 @@ declare-option str non_text_color "%opt{darker_text_background_color}"
 # https://github.com/mawww/kakoune/blob/master/colors/default.kak
 
 # For code
+# TODO: constant
 # TODO: punctuation
 # TODO: symbol
 # TODO: comment

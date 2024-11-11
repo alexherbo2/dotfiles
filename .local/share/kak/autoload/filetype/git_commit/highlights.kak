@@ -18,6 +18,7 @@ add-highlighter shared/git_commit/comments/renamed_files regex '(renamed):\h+(.+
 add-highlighter shared/git_commit/comments/scissors regex '# ------------------------ >8 ------------------------' 0:symbol
 
 # diffs
-add-highlighter shared/git_commit/diffs region '^diff --git' '^(?=diff --git)' group
-add-highlighter shared/git_commit/diffs/information regex '^\w.+$' 0:keyword
-add-highlighter shared/git_commit/diffs/regions ref diff
+add-highlighter shared/git_commit/diffs region '^diff --git' '^(?=diff --git)' regions
+add-highlighter shared/git_commit/diffs/ region '^diff --git' '$' fill keyword
+add-highlighter shared/git_commit/diffs/ region '^index' '$' regex '(\w{7})\.\.(\w{7})' 1:constant 2:constant
+add-highlighter shared/git_commit/diffs/ region '^---' '^(?=diff --git)' ref diff

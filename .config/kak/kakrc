@@ -35,6 +35,28 @@ set-option global matching_pairs ( ) { } [ ] < > “ ” « » ‹ ›
 # set-option global scrolloff 5,1
 add-highlighter global/match_brackets show-matching
 add-highlighter global/line_numbers number-lines -hlcursor -separator '  '
+add-highlighter global/rulers group
+add-highlighter global/rulers/ column 81 Ruler
+add-highlighter global/rulers/ column 82 Ruler
+add-highlighter global/rulers/ column 83 Ruler
+add-highlighter global/rulers/ column 84 Ruler
+add-highlighter global/rulers/ column 85 Ruler
+add-highlighter global/rulers/ column 86 Ruler
+add-highlighter global/rulers/ column 87 Ruler
+add-highlighter global/rulers/ column 88 Ruler
+add-highlighter global/rulers/ column 89 Ruler
+add-highlighter global/rulers/ column 90 Ruler
+add-highlighter global/rulers/ column 91 Ruler
+add-highlighter global/rulers/ column 92 Ruler
+add-highlighter global/rulers/ column 93 Ruler
+add-highlighter global/rulers/ column 94 Ruler
+add-highlighter global/rulers/ column 95 Ruler
+add-highlighter global/rulers/ column 96 Ruler
+add-highlighter global/rulers/ column 97 Ruler
+add-highlighter global/rulers/ column 98 Ruler
+add-highlighter global/rulers/ column 99 Ruler
+add-highlighter global/rulers/ column 100 Ruler
+add-highlighter global/rulers/ column 101 Ruler
 add-highlighter global/search ref search
 add-highlighter global/selected_text ref selected_text
 add-highlighter global/hex_color_code ref hex_color_code

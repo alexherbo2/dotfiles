@@ -1,3 +1,4 @@
+# https://git-scm.com/docs/git-commit
 hook global BufOpenFile '.*/\.git/COMMIT_EDITMSG' %{
   set-option buffer filetype git_commit
 }

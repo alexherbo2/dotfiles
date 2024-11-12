@@ -3,10 +3,10 @@ add-highlighter shared/git_commit/comments region '^#' '$' group
 add-highlighter shared/git_commit/comments/region fill comment
 
 # summary
-add-highlighter shared/git_commit/comments/branch_name regex 'on branch (.+)' 0:keyword 1:string
-add-highlighter shared/git_commit/comments/staged_changes regex 'changes to be committed' 0:keyword
-add-highlighter shared/git_commit/comments/unstaged_changes regex 'changes not staged for commit' 0:keyword
-add-highlighter shared/git_commit/comments/untracked_files regex 'untracked files' 0:keyword
+add-highlighter shared/git_commit/comments/branch_name regex 'On branch (.+)' 0:keyword 1:string
+add-highlighter shared/git_commit/comments/staged_changes regex 'Changes to be committed' 0:keyword
+add-highlighter shared/git_commit/comments/unstaged_changes regex 'Changes not staged for commit' 0:keyword
+add-highlighter shared/git_commit/comments/untracked_files regex 'Untracked files' 0:keyword
 
 # changed files
 add-highlighter shared/git_commit/comments/modified_files regex '(modified):\h+(.+)' 1:keyword 2:changed

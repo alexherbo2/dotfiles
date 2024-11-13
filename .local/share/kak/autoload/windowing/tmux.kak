@@ -180,6 +180,14 @@ define-command close_other_viewports_with_tmux %{
   tmux kill-pane -a
 }
 
+define-command close_window_with_tmux %{
+  tmux kill-window
+}
+
+define-command close_other_windows_with_tmux %{
+  tmux kill-window -a
+}
+
 define-command activate_view_with_tmux -params 1 %{
   evaluate-commands -client %arg{1} %{
     tmux switch-client -t %val{client_env_TMUX_PANE}
@@ -270,7 +278,7 @@ map -docstring 'move window left' global tmux P ':move_window_left_with_tmux<ret
 map -docstring 'move window right' global tmux N ':move_window_right_with_tmux<ret>'
 
 map -docstring 'close view' global tmux x ':close_view_with_tmux<ret>'
-map -docstring 'close other viewports' global tmux X ':close_other_viewports_with_tmux<ret>'
+map -docstring 'close window' global tmux X ':close_window_with_tmux<ret>'
 
 map -docstring 'search view' global tmux / ':search_view_with_tmux<ret>'
 map -docstring 'select view' global tmux q ':select_view_with_tmux<ret>'
@@ -299,6 +307,7 @@ map -docstring 'activate previous window' global tmux <c-p> ':activate_previous_
 
 map -docstring 'close view' global tmux <c-q> ':close_view_with_tmux<ret>'
 map -docstring 'close other viewports' global tmux <c-o> ':close_other_viewports_with_tmux<ret>'
+map -docstring 'close other windows' global tmux <c-x> ':close_other_windows_with_tmux<ret>'
 
 # map -docstring 'new split scratch buffer' global tmux <c-n> ':enter_tmux_new_split_scratch_buffer_mode<ret>'
 

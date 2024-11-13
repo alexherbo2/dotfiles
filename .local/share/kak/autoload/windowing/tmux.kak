@@ -279,8 +279,8 @@ map -docstring 'move window right' global tmux N ':move_window_right_with_tmux<r
 
 map -docstring 'close view' global tmux q ':close_view_with_tmux<ret>'
 map -docstring 'close window' global tmux Q ':close_window_with_tmux<ret>'
-map -docstring 'close view' global tmux x ':close_view_with_tmux<ret>'
-map -docstring 'close window' global tmux X ':close_window_with_tmux<ret>'
+map -docstring 'close other viewports' global tmux <a-q> ':close_other_viewports_with_tmux<ret>'
+map -docstring 'close other windows' global tmux <a-Q> ':close_other_windows_with_tmux<ret>'
 
 map -docstring 'search view' global tmux / ':search_view_with_tmux<ret>'
 map -docstring 'select view' global tmux g ':select_view_with_tmux<ret>'

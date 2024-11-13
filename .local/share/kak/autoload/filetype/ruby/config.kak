@@ -1,4 +1,5 @@
 # This script provides support for the Ruby programming language.
+# https://rubyonrails.org
 # https://ruby-lang.org
 
 # Sets Ruby filetype when opening `.rb` files.

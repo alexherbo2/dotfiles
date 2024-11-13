@@ -277,11 +277,13 @@ map -docstring 'activate last window' global tmux 9 ':activate_last_window_with_
 map -docstring 'move window left' global tmux P ':move_window_left_with_tmux<ret>'
 map -docstring 'move window right' global tmux N ':move_window_right_with_tmux<ret>'
 
+map -docstring 'close view' global tmux q ':close_view_with_tmux<ret>'
+map -docstring 'close window' global tmux Q ':close_window_with_tmux<ret>'
 map -docstring 'close view' global tmux x ':close_view_with_tmux<ret>'
 map -docstring 'close window' global tmux X ':close_window_with_tmux<ret>'
 
 map -docstring 'search view' global tmux / ':search_view_with_tmux<ret>'
-map -docstring 'select view' global tmux q ':select_view_with_tmux<ret>'
+map -docstring 'select view' global tmux g ':select_view_with_tmux<ret>'
 map -docstring 'select window' global tmux s ':select_window_with_tmux<ret>'
 map -docstring 'move view to window' global tmux m ':move_view_to_window_with_tmux_window_select<ret>'
 

@@ -28,6 +28,7 @@ git clone https://github.com/possatti/pokemonsay.git ~/.local/share/github.com/p
 git clone https://github.com/watzon/arg_parser.git ~/.local/share/github.com/watzon/arg_parser
 git clone https://github.com/phaazon/kak-tree-sitter.git ~/.local/share/github.com/phaazon/kak-tree-sitter
 git clone https://git.sr.ht/~hadronized/kak-tree-sitter ~/.local/share/git.sr.ht/~hadronized/kak-tree-sitter
+git clone https://git.sr.ht/~hadronized/config ~/.local/share/git.sr.ht/~hadronized/config
 cd ~/.local/share/git.sr.ht/~hadronized/kak-tree-sitter
 cd ~/.local/share/git.sr.ht/~hadronized/kak-tree-sitter/kak-tree-sitter
 cd ~/.local/share/git.sr.ht/~hadronized/kak-tree-sitter/ktsctl

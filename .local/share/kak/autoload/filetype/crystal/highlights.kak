@@ -67,8 +67,7 @@ add-highlighter shared/crystal.string_with_interpolation/ region -recurse '\{' '
 add-highlighter shared/crystal.string_with_escape_sequences_and_interpolation regions
 add-highlighter shared/crystal.string_with_escape_sequences_and_interpolation/content default-region group
 add-highlighter shared/crystal.string_with_escape_sequences_and_interpolation/content/ fill string
-add-highlighter shared/crystal.string_with_escape_sequences_and_interpolation/content/ ref crystal.escape_sequence
-add-highlighter shared/crystal.string_with_escape_sequences_and_interpolation/content/ regex '\\#' 0:value
+add-highlighter shared/crystal.string_with_escape_sequences_and_interpolation/content/ regex '\\#|\\[\\abefnrtv]|\\[0-7]{1,3}|\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|u\{[0-9a-fA-F]+\})' 0:value
 add-highlighter shared/crystal.string_with_escape_sequences_and_interpolation/ region -recurse '\{' '(?<!\\)(?:\\\\)*#\{\K' '(?=\})' ref crystal
 
 # Single quoted strings
@@ -83,8 +82,7 @@ add-highlighter shared/crystal/single_quoted_string/ regex "\\'" 0:value
 add-highlighter shared/crystal/double_quoted_string region '"' '(?<!\\)(?:\\\\)*"' regions
 add-highlighter shared/crystal/double_quoted_string/content default-region group
 add-highlighter shared/crystal/double_quoted_string/content/ fill string
-add-highlighter shared/crystal/double_quoted_string/content/ ref crystal.escape_sequence
-add-highlighter shared/crystal/double_quoted_string/content/ regex '\\["#]' 0:value
+add-highlighter shared/crystal/double_quoted_string/content/ regex '\\["#]|\\[\\abefnrtv]|\\[0-7]{1,3}|\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|u\{[0-9a-fA-F]+\})' 0:value
 add-highlighter shared/crystal/double_quoted_string/ region -recurse '\{' '(?<!\\)(?:\\\\)*#\{\K' '(?=\})' ref crystal
 
 # Percent string literals

@@ -14,8 +14,8 @@
 # - Comment toggling
 # - Indentation rules
 
-# Sets Crystal filetype when opening `.cr` files.
-hook global BufCreate '.+\.cr' %{
+# Sets Crystal filetype when opening `.ex` files.
+hook global BufCreate '.+\.ex' %{
   set-option buffer filetype elixir
 }
 

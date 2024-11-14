@@ -7,10 +7,24 @@
 hook global ClientCreate .* %{
   find_friendly_client_name
 }
+
 find_friendly_session_name
-evaluate-commands %sh{
-  kak-lsp --kakoune --session "$kak_session"
-  kak-tree-sitter -dks --init "$kak_session"
+
+declare-option str lsp_modeline_code_actions
+declare-option str lsp_modeline_progress
+declare-option str lsp_modeline_message_requests
+
+define-command lsp %{
+  evaluate-commands %sh{
+    kak-lsp --kakoune --session "$kak_session"
+  }
+  lsp-enable
+}
+
+define-command ts %{
+  evaluate-commands %sh{
+    kak-tree-sitter -dks --init "$kak_session"
+  }
 }
 
 # Appearance -------------------------------------------------------------------

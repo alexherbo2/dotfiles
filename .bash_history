@@ -457,4 +457,5 @@ _ssh
 ggc
 cd -
 cd ~
+pwd
 exit

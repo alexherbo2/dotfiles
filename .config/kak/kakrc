@@ -65,6 +65,10 @@ set-option global grep_command rg
 set-option global grep_args --vimgrep --hidden
 set-option global find_command fd
 set-option global find_args --hidden --type=file
+set-option global lsp_command kak-lsp
+set-option global lsp_args --kakoune --session %val{session}
+set-option global tree_sitter_command kak-tree-sitter
+set-option global tree_sitter_args -dks --init %val{session}
 
 # Status line
 set-option global modelinefmt '%opt{lsp_modeline_code_actions}%opt{lsp_modeline_progress}%opt{lsp_modeline_message_requests} %val{bufname} %val{cursor_line}:%val{cursor_char_column} {{context_info}} {{mode_info}} %val{client}@%val{session}'

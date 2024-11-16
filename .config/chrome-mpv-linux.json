@@ -1,0 +1,10 @@
+{
+  "mpv": {
+    "command": "sh",
+    "args": [
+      "-c",
+      "jq -nc '$ARGS.positional[] | { command: [\"loadfile\", .] }' --args -- \"$@\" | socat - UNIX-CONNECT:/tmp/mpv.sock || mpv --input-ipc-server=/tmp/mpv.sock --ytdl-raw-options=cookies-from-browser=chromium --player-operation-mode=pseudo-gui --force-window=immediate --geometry=30%+50%+50% -- \"$@\"",
+      "--"
+    ]
+  }
+}

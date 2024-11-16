@@ -1,9 +1,0 @@
-{
-  "converters": [
-    {
-      "name": "Markdown",
-      "command": "pandoc",
-      "args": ["-f", "html", "-t", "markdown"]
-    }
-  ]
-}

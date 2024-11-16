@@ -17,6 +17,7 @@ define-command add_inactive_client_indicators %{
     unset-face window LineNumberCursor
     unset-face window MatchingChar
     unset-face window Whitespace
+    unset-face window Ruler
     unset-face window Search
     unset-face window SelectedText
     unset-face window StatusLineNormal
@@ -40,6 +41,7 @@ define-command add_inactive_client_indicators %{
     set-face window LineNumberCursor LineNumbers
     set-face window MatchingChar ''
     set-face window Whitespace ''
+    set-face window Ruler ''
     set-face window Search ''
     set-face window SelectedText ''
     set-face window StatusLineNormal StatusLineInactive

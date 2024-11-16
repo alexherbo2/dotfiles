@@ -18,7 +18,7 @@ define-command enter_sticky_unimpaired_right_mode %{
 }
 
 define-command show_line_numbers %{
-  add-highlighter global/line_numbers number-lines -hlcursor
+  add-highlighter global/line_numbers number-lines -hlcursor -separator '  '
 }
 
 define-command enable_readonly_mode %{

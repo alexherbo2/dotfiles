@@ -1,6 +1,6 @@
 define-command open_buffer_picker %{
   open_preview
-  prompt open: -menu -shell-script-candidates %opt{other_buffers_completion} %{
+  prompt open: -menu -buffer-completion %{
     close_preview
     buffer -- %val{text}
   } -on-change %{

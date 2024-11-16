@@ -182,7 +182,7 @@ define-command kamux_activate_view -params 1 %{
 }
 
 define-command kamux_search_view %{
-  prompt -menu client_picker: -shell-script-candidates %opt{other_clients_completion} %{
+  prompt -menu client_picker: -shell-script-candidates -client-completion %{
     kamux_activate_view %val{text}
   }
 }
@@ -219,4 +219,4 @@ complete-command kamux_split_view_down command
 complete-command kamux_split_view_right command
 complete-command kamux_create_view_in_new_window command
 complete-command kamux_create_view_in_new_window_right command
-complete-command kamux_activate_view shell-script-candidates %opt{other_clients_completion}
+complete-command kamux_activate_view client

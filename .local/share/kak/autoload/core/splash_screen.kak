@@ -22,7 +22,7 @@ Save file {mono}:write{}
 Quit {mono}:quit{}
 
 Open config {mono}:open_kakrc{}
-Change theme {mono}:colorscheme <theme_name>{}
+Change theme {mono}:theme <theme_name>{}
 
 Read help {mono}:doc <subject>{}
 Search for mappings {mono}:grep_config "^map\b"{}

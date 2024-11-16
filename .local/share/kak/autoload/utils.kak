@@ -11,6 +11,14 @@ declare-option str other_buffers_completion %{
   printf '%s\n' "$@" | grep -Fxv "$kak_bufname"
 }
 
+declare-option str word_completion %{
+  kak_response_fifo=$(mktemp -u)
+  mkfifo "$kak_response_fifo"
+  echo "evaluate-commands -no-hooks -buffer '*' -verbatim write $kak_response_fifo" | kak -p "$kak_session"
+  grep -o -w '[[:alpha:]][[:alnum:]_-]\+' < "$kak_response_fifo" | sort -u
+  unlink -- "$kak_response_fifo"
+}
+
 define-command build_static_words_from_selections %{
   execute-keys -save-regs '' 'y:edit -scratch<ret><a-R>a<ret><esc><a-_>|sort -u<ret><a-s>H'
 }

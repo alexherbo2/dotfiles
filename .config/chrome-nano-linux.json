@@ -1,0 +1,6 @@
+{
+  "nano": {
+    "command": "footclient",
+    "args": ["--app-id=popup", "kak", "--"]
+  }
+}

@@ -4,7 +4,7 @@
 # authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
 # kakoune: 2023-12-12
 # license: MIT
-# dependencies: ["grab_buffer_in_viewport"]
+# dependencies: ["nohup", "grab_buffer_in_viewport"]
 # doc: yes
 # tests: no
 declare-user-mode tmux
@@ -19,9 +19,7 @@ define-command enter_tmux_new_split_scratch_buffer_mode %{
 }
 
 define-command tmux -params 1.. %{
-  nop %sh{
-    TMUX=$kak_client_env_TMUX TMUX_PANE=$kak_client_env_TMUX_PANE nohup tmux "$@" < /dev/null > /dev/null 2>&1 &
-  }
+  nohup env "TMUX=%val{client_env_TMUX}" "TMUX_PANE=%val{client_env_TMUX_PANE}" tmux %arg{@}
 }
 
 define-command jump_view_left_with_tmux %{

@@ -73,9 +73,9 @@ set-face global WrapMarker "bright-black" # Kakoune ⇒ add-highlighter -overrid
 # Custom faces
 set-face global PrimaryCursorInsertMode "black,white+fg"
 set-face global PrimaryCursorPendingMode "+ua@PrimarySelection"
-set-face global Ruler "white,cyan"
+set-face global Ruler ""
 set-face global Search "black,bright-yellow"
-set-face global SelectedText "default,default"
+set-face global SelectedText ""
 set-face global StatusLineInactive "+d"
 set-face global StatusLineNormal "bright-black,bright-blue"
 set-face global StatusLineInsert "bright-black,green"

@@ -8,7 +8,7 @@
 # doc: yes
 # tests: no
 define-command make_kamux -params .. %{
-  make -C "%val{runtime}/assets" -f "%val{runtime}/assets/kamux.makefile" %arg{@}
+  make -C "%val{runtime}/assets/kamux" -f "%val{runtime}/assets/kamux/Makefile" %arg{@}
 }
 
 define-command install_kamux -params .. %{

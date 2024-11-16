@@ -5,8 +5,8 @@ evaluate-commands %sh{
     find -L "$kak_config/autoload" -type f -name '*.kak' -exec printf 'source "%s";' {} +
   fi
   echo '
-    source "%val{runtime}/colors/default.kak"
-    source "%val{runtime}/colors/macos_light.kak"
+    source "%val{runtime}/themes/default.kak"
+    source "%val{runtime}/themes/macos_light.kak"
     add_inactive_client_indicators
     add_insert_chars_user_hook global
     add_buffer_open_directory_user_hook global

@@ -37,10 +37,6 @@ define-command convert_selected_dates_to_iso_8601 %{
   execute-keys '|date -I -d "$kak_selection"<ret>'
 }
 
-define-command enter_lsp_mode %{
-  enter-user-mode lsp
-}
-
 define-command insert_buffer_contents -params 1 %{
   evaluate-commands -save-regs '"' %{
     evaluate-commands -buffer %arg{1} %{

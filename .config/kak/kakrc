@@ -25,40 +25,6 @@ set-face global Indent Whitespace
 
 # Options ----------------------------------------------------------------------
 
-# UI options
-set-option global startup_info_version 20241231
-set-option global ui_options terminal_set_title=no terminal_assistant=none
-set-option global matching_pairs ( ) { } [ ] < > “ ” « » ‹ ›
-# set-option global scrolloff 5,1
-add-highlighter global/match_brackets show-matching
-add-highlighter global/line_numbers number-lines -hlcursor -separator '  '
-add-highlighter global/rulers group
-add-highlighter global/rulers/ column 81 Ruler
-add-highlighter global/rulers/ column 82 Ruler
-add-highlighter global/rulers/ column 83 Ruler
-add-highlighter global/rulers/ column 84 Ruler
-add-highlighter global/rulers/ column 85 Ruler
-add-highlighter global/rulers/ column 86 Ruler
-add-highlighter global/rulers/ column 87 Ruler
-add-highlighter global/rulers/ column 88 Ruler
-add-highlighter global/rulers/ column 89 Ruler
-add-highlighter global/rulers/ column 90 Ruler
-add-highlighter global/rulers/ column 91 Ruler
-add-highlighter global/rulers/ column 92 Ruler
-add-highlighter global/rulers/ column 93 Ruler
-add-highlighter global/rulers/ column 94 Ruler
-add-highlighter global/rulers/ column 95 Ruler
-add-highlighter global/rulers/ column 96 Ruler
-add-highlighter global/rulers/ column 97 Ruler
-add-highlighter global/rulers/ column 98 Ruler
-add-highlighter global/rulers/ column 99 Ruler
-add-highlighter global/rulers/ column 100 Ruler
-add-highlighter global/rulers/ column 101 Ruler
-add-highlighter global/search ref search
-add-highlighter global/selected_text ref selected_text
-add-highlighter global/hex_color_code ref hex_color_code
-add-highlighter global/whitespace ref whitespace
-
 set-option global terminal_command alacritty
 set-option global terminal_args msg create-window -e
 set-option global grep_command rg

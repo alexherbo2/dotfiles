@@ -1,22 +1,5 @@
-declare-option str other_sessions_completion %{
-  kak -l | grep -xv -Fe "$kak_session" -Ee '^.+\s\(dead\)$'
-}
-
-declare-option str other_clients_completion %{
-  echo "$kak_client_list" | tr ' ' '\n' | grep -Fxv "$kak_client"
-}
-
-declare-option str other_buffers_completion %{
-  eval set -- "$kak_quoted_buflist"
-  printf '%s\n' "$@" | grep -Fxv "$kak_bufname"
-}
-
-declare-option str word_completion %{
-  kak_response_fifo=$(mktemp -u)
-  mkfifo "$kak_response_fifo"
-  echo "evaluate-commands -no-hooks -buffer '*' -verbatim write $kak_response_fifo" | kak -p "$kak_session"
-  grep -o -w '[[:alpha:]][[:alnum:]_-]\+' < "$kak_response_fifo" | sort -u
-  unlink -- "$kak_response_fifo"
+declare-option str session_completion %{
+  kak -l | grep -v '^.\+\s(dead)$'
 }
 
 define-command build_static_words_from_selections %{
@@ -116,7 +99,7 @@ define-command send_handshake_to_client -params 1 %{
   }
 }
 
-complete-command send_handshake_to_client shell-script-candidates %opt{other_clients_completion}
+complete-command send_handshake_to_client client
 
 define-command send_handshake_to_session -params 1 %{
   evaluate-commands %sh{
@@ -152,10 +135,10 @@ alias global @search send_search_register_to_session
 alias global @buffile send_current_buffer_to_session
 alias global @buflist send_buffer_list_to_session
 
-complete-command send_handshake_to_session shell-script-candidates %opt{other_sessions_completion}
-complete-command send_selected_text_to_session shell-script-candidates %opt{other_sessions_completion}
-complete-command send_current_buffer_to_session shell-script-candidates %opt{other_sessions_completion}
-complete-command send_buffer_list_to_session shell-script-candidates %opt{other_sessions_completion}
+complete-command send_handshake_to_session shell-script-candidates %opt{session_completion}
+complete-command send_selected_text_to_session shell-script-candidates %opt{session_completion}
+complete-command send_current_buffer_to_session shell-script-candidates %opt{session_completion}
+complete-command send_buffer_list_to_session shell-script-candidates %opt{session_completion}
 
 complete-command rename-session shell-script-candidates %{
   if [ -r "$kak_config/friendly_session_names.txt" ]
@@ -222,8 +205,8 @@ define-command grab_buffer_in_viewport -params 1 %{
   }
 }
 
-complete-command -menu swap_buffer_in_viewport shell-script-candidates %opt{other_clients_completion}
-complete-command -menu grab_buffer_in_viewport shell-script-candidates %opt{other_clients_completion}
+complete-command -menu swap_buffer_in_viewport client
+complete-command -menu grab_buffer_in_viewport client
 
 define-command edit_scratch -params .. %{
   edit -scratch -- %arg{@}

@@ -92,7 +92,7 @@ map -docstring 'recenter viewport' global normal V 'vt5vkvm'
 map global normal <c-e> ':explore<ret>'
 map global normal <c-space> ':sh<ret>'
 
-map -docstring 'enter window mode' global normal <c-w> ':enter_tmux_mode<ret>'
+map -docstring 'enter window mode' global normal <c-w> ':enter_kamux_mode<ret>'
 
 map -docstring 'select next word' global normal t '"_/\w<ret><a-i>w'
 
@@ -102,7 +102,7 @@ map -docstring 'enter command mode' global user <space> :
 map -docstring 'convert selected dates to ISO 8601' global user d ':convert_selected_dates_to_iso_8601<ret>'
 map -docstring 'convert selected text to ASCII' global user @ ':convert_selected_text_to_ascii<ret>'
 map -docstring 'get character info' global user u ':get_character_info<ret>'
-map -docstring 'enter window mode' global user w ':enter_tmux_mode<ret>'
+map -docstring 'enter window mode' global user w ':enter_kamux_mode<ret>'
 map -docstring 'open file picker' global user f ':open_file_picker<ret>'
 map -docstring 'open buffer picker' global user b ':open_buffer_picker<ret>'
 map -docstring 'open global search prompt' global user / ':open_global_search_prompt<ret>'

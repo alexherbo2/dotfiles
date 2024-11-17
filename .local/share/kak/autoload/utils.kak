@@ -80,8 +80,15 @@ define-command reload_selected_commands %{
 alias global == reload_selected_commands
 
 define-command show_character_info %{
-  echo -markup %sh{printf '{Information}U+%04x' "$kak_cursor_char_value"}
+  evaluate-commands -draft %{
+    execute-keys ',;'
+    evaluate-commands -client %val{client} -verbatim echo -markup %sh{
+      printf '{Information}"%s" (U+%04x) Dec %d Hex %02x\n' "$kak_selection" "$kak_cursor_char_value" "$kak_cursor_char_value" "$kak_cursor_char_value"
+    }
+  }
 }
+
+alias global char show_character_info
 
 define-command show_definition_preview_hover %{
   lsp-hover

@@ -6,15 +6,16 @@ define-command git_write %{
 }
 
 define-command git_commit %{
-  edit -existing %sh{
-    git -c core.editor= commit
-    git rev-parse --git-path COMMIT_EDITMSG
-  }
-  hook buffer BufWritePost '.*' %{
-    nop %sh{
-      git commit -F "$kak_hook_param" --cleanup=strip
-    }
-    delete-buffer
+  evaluate-commands %sh{
+    git_commit_file=$(git rev-parse --git-path COMMIT_EDITMSG)
+    unlink -- "$git_commit_file" || :
+    mkfifo -- "$git_commit_file"
+    printf 'edit -existing -- "%s"' "$git_commit_file"
+    {
+      git commit -F "$git_commit_file"
+      printf 'evaluate-commands -buffer "%s" unlink' "$git_commit_file" |
+      kak -p "$kak_session"
+    } < /dev/null > /dev/null 2>&1 &
   }
 }
 

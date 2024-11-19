@@ -7,7 +7,7 @@ general.import = [
 
 # Appearance -------------------------------------------------------------------
 
-font.normal.family = 'IBM Plex Mono'
+font.normal.family = 'SF Mono Regular'
 font.size = 11.25
 
 selection.save_to_clipboard = true

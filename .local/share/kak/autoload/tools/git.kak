@@ -12,7 +12,7 @@ define-command git_commit %{
   }
   hook buffer BufWritePost '.*' %{
     evaluate-commands %sh{
-      if git commit -F "$kak_hook_param" --cleanup=strip
+      if git commit -F "$kak_hook_param" --cleanup=strip > /dev/null
       then
         echo "echo -markup '{Information}$(git show --pretty= --shortstat HEAD^)'; delete-buffer"
       else

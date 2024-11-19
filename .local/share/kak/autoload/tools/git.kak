@@ -11,7 +11,7 @@ define-command git_commit %{
     git rev-parse --git-path COMMIT_EDITMSG
   }
   hook buffer BufWritePost '.*' %{
-    nop %sh{
+    evaluate-commands %sh{
       if git commit -F "$kak_hook_param" --cleanup=strip
       then
         echo "echo -markup '{Information}$(git show --pretty= --shortstat HEAD^)'; delete-buffer"

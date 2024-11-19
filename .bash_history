@@ -189,6 +189,7 @@ brew link --force ncurses
 alacritty msg create-window
 rsync 'host:Library/Application Support/Google/Chrome/.' .config/chromium
 open .
+open /System/Applications/Utilities/Terminal.app/Contents/Resources/Fonts
 open target/release
 npm update
 npm update -g

@@ -12,9 +12,13 @@ define-command git_commit %{
   }
   hook buffer BufWritePost '.*' %{
     nop %sh{
-      git commit -F "$kak_hook_param" --cleanup=strip
+      if git commit -F "$kak_hook_param" --cleanup=strip
+      then
+        echo "echo -markup '{Information}$(git show --pretty= --shortstat HEAD^)'; delete-buffer"
+      else
+        echo 'fail commit failed'
+      fi
     }
-    delete-buffer
   }
 }
 

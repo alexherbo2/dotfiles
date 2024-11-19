@@ -16,7 +16,7 @@ define-command git_commit %{
       then
         echo "echo -markup '{Information}$(git show --pretty= --shortstat HEAD^)'; delete-buffer"
       else
-        echo 'fail commit failed'
+        echo "echo -markup '{Error}git commit failed'"
       fi
     }
   }

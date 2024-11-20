@@ -400,6 +400,7 @@ mpv --shuffle ~/shorts
 cd ~/shorts
 kamux ytdlp_list.sh
 sh ytdlp_list.sh
+sh <(curl -L https://nixos.org/nix/install)
 du -sh ~/shorts
 sh ~/shorts/twitch.sh
 find -L ~/shorts -type f -name '*.mp4' -exec printf "file '%s'\\n" {} + | shuf > /tmp/shorts.ffconcat

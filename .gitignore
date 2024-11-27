@@ -1,6 +1,7 @@
 .config/env
 .config/kak-tree-sitter/grammars
 .config/kak-tree-sitter/queries
+.config/google-chrome
 .config/chromium
 .config/mozilla
 .config/gh/config.yml

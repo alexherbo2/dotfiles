@@ -1,5 +1,5 @@
 # bat
 # https://github.com/sharkdp/bat
 
---style=plain
---theme=base16
+--style="plain"
+--theme="base16"

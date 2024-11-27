@@ -460,4 +460,5 @@ ggc
 cd -
 cd ~
 pwd
+nmtui
 exit

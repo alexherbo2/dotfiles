@@ -193,6 +193,7 @@ alias gl='git log'
 alias gL='git log -p'
 alias gk='git push'
 alias gj='git pull'
+alias ggc='git gc --aggressive'
 # Stash
 alias gZ='git stash'
 alias gz='git stash pop'

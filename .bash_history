@@ -364,6 +364,7 @@ sshfs host: shared/kanto
 ngrok tcp 22
 ssh taupiqueur@7.tcp.eu.ngrok.io -p 14378
 swaymsg reload
+swaymsg output eDP-1 disable
 chown -R taupiqueur:users home storage shared
 chown -R taupiqueur:staff home storage shared
 xattr -rc home storage shared

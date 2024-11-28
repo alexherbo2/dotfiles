@@ -7,7 +7,11 @@ git clone https://github.com/natecraddock/zf.git ~/.local/share/github.com/natec
 git clone https://github.com/ajeetdsouza/zoxide.git ~/.local/share/github.com/ajeetdsouza/zoxide
 git clone https://github.com/jdx/rtx.git ~/.local/share/github.com/jdx/rtx
 foot --config=/dev/null -o colors.alpha=0.9
+pastel lighten 0.3 | pastel format hex
+pastel lighten 0.1 | pastel format hex
+pastel darken 0.1 | pastel format hex
 alacritty --config-file=/dev/null -o 'window.option_as_alt="Both"' -o 'window.opacity=0.9'
+alacritty msg config "$(cat ~/.config/alacritty/colors/macos_dark.toml)" -w -1
 alacritty msg config 'window.opacity=0.9'
 alacritty msg config 'window.option_as_alt="Both"'
 alacritty msg config "$(find -L ~/.local/share/github.com/alacritty/alacritty-theme -type f -name '*.toml' | fzy | xargs cat)" -w -1

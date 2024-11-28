@@ -33,10 +33,8 @@ declare-option str selection_opacity '80'
 declare-option str selection_low_opacity '20'
 
 # UI variants
-declare-option str dim_text_color 'ffffff'
 declare-option str darker_text_color 'cccccc'
 declare-option str dark_text_color 'e6e6e6'
-declare-option str dim_text_background_color '171717'
 declare-option str light_text_background_color '303030'
 declare-option str lighter_text_background_color '4a4a4a'
 
@@ -117,7 +115,7 @@ set-face global PrimaryCursorPendingMode ",,rgb:%opt{text_color}+ua@PrimarySelec
 set-face global Ruler "default,rgba:%opt{selection_color}%opt{selection_low_opacity}"
 set-face global Search "default,rgba:%opt{bright_yellow_color}%opt{selection_low_opacity}"
 set-face global SelectedText "default,rgba:%opt{selection_color}%opt{selection_low_opacity}"
-set-face global StatusLineInactive "rgb:%opt{dim_text_color},rgb:%opt{dim_text_background_color}"
+set-face global StatusLineInactive "rgb:%opt{text_color},rgb:%opt{text_background_color}+d"
 set-face global StatusLineNormal "rgb:%opt{bright_white_color},rgb:%opt{bright_blue_color}"
 set-face global StatusLineInsert "rgb:%opt{bright_white_color},rgb:%opt{green_color}"
 set-face global StatusLineExtend "rgb:%opt{bright_white_color},rgb:%opt{magenta_color}"

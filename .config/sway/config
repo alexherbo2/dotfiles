@@ -85,6 +85,7 @@ bar {
 
 # Open a terminal.
 bindsym Mod4+Return exec footclient
+bindsym Mod4+Shift+Return exec footclient -o include=~/.config/foot/colors/macos_dark.ini -o colors.alpha=0.9
 
 # Open a launcher.
 bindsym Mod4+p exec dmenu_path | dmenu | xargs swaymsg exec

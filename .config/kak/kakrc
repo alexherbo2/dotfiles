@@ -12,7 +12,7 @@ find_friendly_session_name
 
 # Appearance -------------------------------------------------------------------
 
-theme macos_light_low_contrast
+theme macos_light
 
 hook global User 'TERM_PROGRAM=Apple_Terminal' %{
   theme macos_light_ansi

@@ -2,7 +2,7 @@
 # https://alacritty.org
 
 general.import = [
-  '~/.config/alacritty/colors/macos_light_low_contrast.toml'
+  '~/.config/alacritty/colors/macos_light.toml'
 ]
 
 # Appearance -------------------------------------------------------------------

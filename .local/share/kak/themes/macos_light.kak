@@ -4,7 +4,7 @@
 
 # Terminal colors
 declare-option str text_background_color 'f5f5f5'
-declare-option str text_color '000000'
+declare-option str text_color '171717'
 declare-option str selection_color 'a5cdff'
 
 declare-option str cursor_color '7f7f7f'

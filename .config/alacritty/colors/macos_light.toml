@@ -1,6 +1,6 @@
 [colors.primary]
 background = '#f5f5f5'
-foreground = '#000000'
+foreground = '#171717'
 
 [colors.cursor]
 text = 'CellForeground'

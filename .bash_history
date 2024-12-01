@@ -13,7 +13,9 @@ pastel darken 0.1 | pastel format hex
 alacritty --config-file=/dev/null -o 'window.option_as_alt="Both"' -o 'window.opacity=0.9'
 alacritty msg config "$(cat ~/.config/alacritty/colors/macos_dark.toml)" -w -1
 alacritty msg config 'window.opacity=0.9'
+alacritty msg config 'window.opacity=0.9' -w -1
 alacritty msg config 'window.option_as_alt="Both"'
+alacritty msg config 'window.option_as_alt="Both"' -w -1
 alacritty msg config "$(find -L ~/.local/share/github.com/alacritty/alacritty-theme -type f -name '*.toml' | fzy | xargs cat)" -w -1
 alacritty msg config "$(find -L ~/.local/share/github.com/alacritty/alacritty-theme -type f -name '*.toml' | fzy | xargs cat)"
 alacritty msg config -r

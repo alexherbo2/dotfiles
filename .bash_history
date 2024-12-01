@@ -167,6 +167,22 @@ git clone https://github.com/asterite/adventofcode2019.git ~/.local/share/github
 git clone https://github.com/asterite/adventofcode2020.git ~/.local/share/github.com/asterite/adventofcode2020
 git clone https://github.com/asterite/adventofcode2021.git ~/.local/share/github.com/asterite/adventofcode2021
 git clone https://github.com/asterite/adventofcode2022.git ~/.local/share/github.com/asterite/adventofcode2022
+git push git@github.com:alexherbo2/chrome-shortcuts.git
+git push git@github.com:alexherbo2/chrome-shortcuts.git -f
+git push git@github.com:alexherbo2/chrome-shell.git
+git push git@github.com:alexherbo2/chrome-shell.git -f
+git push git@github.com:alexherbo2/chrome-dmenu.git
+git push git@github.com:alexherbo2/chrome-dmenu.git -f
+git push git@github.com:alexherbo2/chrome-mpv.git
+git push git@github.com:alexherbo2/chrome-mpv.git -f
+git push git@github.com:alexherbo2/chrome-nano.git
+git push git@github.com:alexherbo2/chrome-nano.git -f
+git push git@github.com:alexherbo2/chrome-pandoc.git
+git push git@github.com:alexherbo2/chrome-pandoc.git -f
+git push git@github.com:alexherbo2/pw.git
+git push git@github.com:alexherbo2/pw.git -f
+git push git@github.com:alexherbo2/batch.git
+git push git@github.com:alexherbo2/batch.git -f
 kak
 hx
 sway

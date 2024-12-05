@@ -325,6 +325,14 @@ cd ~/code/chrome-pandoc
 cd ~/code/batch
 cd ~/code/pw
 cd ~/code/mpv-clip
+cd ~/code/chrome-shortcuts.website
+cd ~/code/chrome-shell.website
+cd ~/code/chrome-dmenu.website
+cd ~/code/chrome-mpv.website
+cd ~/code/chrome-nano.website
+cd ~/code/chrome-pandoc.website
+cd ~/code/batch.website
+cd ~/code/pw.website
 caffeinate -d
 tmux new-session caffeinate -d
 caffeinate-lid
@@ -431,14 +439,23 @@ find -L ~/shorts -type f -name '*.mp4' -exec printf "file '%s'\\n" {} + | shuf >
 kak -n -e "set-option global indentwidth 2; map global normal <ret> :; map global normal <c-a> ga; map global normal <c-s> :write<ret>" /tmp/shorts.ffconcat
 vim /tmp/shorts.ffconcat
 ffmpeg -f concat -safe 0 -i /tmp/shorts.ffconcat -c:v libx264 -f flv "rtmp://live.twitch.tv/app/$TWITCH_STREAM_KEY"
+git switch --orphan website
+git switch website
+git switch master
 git init
 git log --pretty='[%h][%s][%b]'
 git log --pretty='[%h][%s][%b]' | rg -F ''
+git log --pretty='[%h][%s][%b]' --author='taupiqueur.kanto@gmail.com'
+git clone https://github.com/raiguard/kak-mark.git ~/.local/share/github.com/raiguard/kak-mark
+cd ~/.local/share/github.com/raiguard/kak-mark
+git rebase -i 'c879d5592e5aba983cb1e2a9ca804d26c5fefe68^'
 git rebase -i ''
 git rebase --continue
 git rebase --abort
 git add .
 git push
+git push -u origin master
+git push -u origin website
 git pull
 git pull upstream master
 date "+%F %T" | git commit -F -

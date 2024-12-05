@@ -17,22 +17,6 @@ define-command enter_sticky_unimpaired_right_mode %{
   enter-user-mode -lock unimpaired_right
 }
 
-define-command show_line_numbers %{
-  add-highlighter global/line_numbers number-lines -hlcursor -separator '  '
-}
-
-define-command enable_readonly_mode %{
-  set-option buffer readonly yes
-}
-
-define-command show_whitespace %{
-  add-highlighter global/whitespace show-whitespaces
-}
-
-define-command enable_soft_wrap %{
-  add-highlighter global/soft_wrap wrap -indent -marker '↪'
-}
-
 map -docstring 'show line numbers' global unimpaired_right l ':show_line_numbers<ret>'
 map -docstring 'show whitespace' global unimpaired_right w ':show_whitespace<ret>'
 map -docstring 'enable soft-wrap mode' global unimpaired_right <tab> ':enable_soft_wrap<ret>'

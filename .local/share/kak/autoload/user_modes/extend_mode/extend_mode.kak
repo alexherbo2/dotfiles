@@ -13,37 +13,6 @@ define-command enter_extend_mode %{
   enter-user-mode extend
 }
 
-hook -always global ModeChange '\Qpush:normal:next-key[user.extend]\E' %{
-  set-option window autoinfo ''
-  hook -always -once window ModeChange '\Qpop:next-key[user.extend]:normal\E' %{
-    unset-option window autoinfo
-  }
-}
-
-define-command reenter_extend_mode_after_key -params 1 %{
-  execute-keys -with-hooks %arg{1}
-  enter_extend_mode
-}
-
-define-command reenter_extend_mode_after_to_char_key -params 1 %{
-  reenter_extend_mode_after_mode_change 'next-key[to-char]' %arg{1}
-}
-
-define-command reenter_extend_mode_after_prompt_key -params 1 %{
-  reenter_extend_mode_after_mode_change 'prompt' %arg{1}
-}
-
-define-command reenter_extend_mode_after_goto_key -params 1 %{
-  reenter_extend_mode_after_mode_change 'next-key[goto]' %arg{1}
-}
-
-define-command reenter_extend_mode_after_mode_change -params 2 %{
-  hook -once window ModeChange "\Qpop:%arg{1}:normal\E" %{
-    enter_extend_mode
-  }
-  execute-keys -with-hooks %arg{2}
-}
-
 map -docstring 'enter insert mode' global extend i i
 map -docstring 'enter insert “append” mode' global extend a a
 map -docstring 'yank selected text' global extend y y

@@ -46,23 +46,6 @@ define-command rearrange_buffers %{
   }
 }
 
-add-highlighter shared/buffer_list regions
-add-highlighter shared/buffer_list/text default-region fill string
-add-highlighter shared/buffer_list/property_list region '^(.+?) \K\(' '\)$' regions
-add-highlighter shared/buffer_list/property_list/text default-region group
-add-highlighter shared/buffer_list/property_list/text/ regex '\b\w+\b' 0:attribute
-add-highlighter shared/buffer_list/property_list/text/ regex '[(),]' 0:operator
-
-hook global BufCreate '\*buffers\*' %{
-  set-option buffer filetype buffer_list
-}
-
-hook global BufSetOption filetype=buffer_list %{
-  add-highlighter buffer/buffer_list ref buffer_list
-  map -docstring 'jump to buffers' buffer normal <ret> ':jump_to_buffers<ret>'
-  map -docstring 'jump to buffers and close buffer_list buffer' buffer normal <s-ret> ':jump_to_buffers_and_close_buffer_list_buffer<ret>'
-}
-
 define-command -hidden jump_to_buffers %{
   evaluate-commands -draft %{
     execute-keys 'x<a-s><a-K>^\n<ret>H1s^(.+?)(?: \(.+?\))?$<ret>'

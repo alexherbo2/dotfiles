@@ -28,18 +28,6 @@ define-command find -params .. %{
 
 complete-command find file
 
-add-highlighter shared/find regex '^(.+?)$' 0:value
-
-hook global BufCreate '\*find\*' %{
-  set-option buffer filetype find
-}
-
-hook global BufSetOption filetype=find %{
-  add-highlighter buffer/find ref find
-  map -docstring 'jump to files' buffer normal <ret> ':jump_to_files<ret>'
-  map -docstring 'jump to files and close find buffer' buffer normal <s-ret> ':jump_to_files_and_close_find_buffer<ret>'
-}
-
 define-command -hidden jump_to_files %{
   evaluate-commands -draft %{
     execute-keys 'x<a-s><a-K>^\n<ret>H'

@@ -9,19 +9,6 @@ define-command enter_digraphs_mode %{
   enter-user-mode digraphs
 }
 
-define-command insert_text -params 1 %{
-  evaluate-commands -save-regs '"' %{
-    set-register '"' %arg{1}
-    execute-keys -draft ';P'
-  }
-}
-
-define-command open_insert_unicode_character_prompt %{
-  prompt unicode_code_point: %{
-    insert_text %sh{bash -c 'printf "\u$kak_text"'}
-  }
-}
-
 map -docstring 'insert unicode character' global digraphs '=' ':open_insert_unicode_character_prompt<ret>'
 map -docstring 'â' global digraphs 'q' ':insert_text â<ret>'
 map -docstring 'é' global digraphs 'w' ':insert_text é<ret>'

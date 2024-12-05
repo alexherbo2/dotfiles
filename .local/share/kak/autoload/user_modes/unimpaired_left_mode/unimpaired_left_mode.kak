@@ -17,22 +17,6 @@ define-command enter_sticky_unimpaired_left_mode %{
   enter-user-mode -lock unimpaired_left
 }
 
-define-command hide_line_numbers %{
-  add-highlighter global/line_numbers number-lines -hlcursor
-}
-
-define-command disable_readonly_mode %{
-  set-option buffer readonly no
-}
-
-define-command hide_whitespace %{
-  remove-highlighter global/whitespace
-}
-
-define-command disable_soft_wrap %{
-  remove-highlighter global/soft_wrap
-}
-
 map -docstring 'hide line numbers' global unimpaired_left l ':hide_line_numbers<ret>'
 map -docstring 'hide whitespace' global unimpaired_left w ':hide_whitespace<ret>'
 map -docstring 'disable read-only mode' global unimpaired_left r ':disable_readonly_mode<ret>'

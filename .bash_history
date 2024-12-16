@@ -7,6 +7,7 @@ git clone https://github.com/natecraddock/zf.git ~/.local/share/github.com/natec
 git clone https://github.com/ajeetdsouza/zoxide.git ~/.local/share/github.com/ajeetdsouza/zoxide
 git clone https://github.com/jdx/rtx.git ~/.local/share/github.com/jdx/rtx
 foot --config=/dev/null -o colors.alpha=0.9
+batch -e 'kak' -f 'iconv -f "UTF-8" -t "ASCII//TRANSLIT//IGNORE"' -f 'tr -s " '"'"'" "-"' -f 'tr -d "!,?"' -p ':' -M 'mkdir -vp -- "$(dirname -- "$2")" && mv -vi -- "$1" "$2"' -d 'rm -vi --'
 pastel lighten 0.3 | pastel format hex
 pastel lighten 0.1 | pastel format hex
 pastel darken 0.1 | pastel format hex

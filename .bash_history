@@ -394,6 +394,7 @@ export PATH=~/bin:$PATH
 rsync home guest:
 sshfs host: shared/kanto
 ngrok tcp 22
+ngrok http 80
 ssh taupiqueur@7.tcp.eu.ngrok.io -p 14378
 swaymsg reload
 swaymsg output eDP-1 disable

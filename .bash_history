@@ -145,6 +145,8 @@ git clone https://github.com/taupiqueur/chrome-dmenu.git ~/.local/share/github.c
 git clone https://github.com/taupiqueur/chrome-mpv.git ~/.local/share/github.com/taupiqueur/chrome-mpv
 git clone https://github.com/taupiqueur/chrome-nano.git ~/.local/share/github.com/taupiqueur/chrome-nano
 git clone https://github.com/taupiqueur/chrome-pandoc.git ~/.local/share/github.com/taupiqueur/chrome-pandoc
+git clone https://github.com/taupiqueur/taupiqueur-notes.git ~/.local/share/github.com/taupiqueur/taupiqueur-notes
+git clone https://github.com/taupiqueur/taupiqueur-shorts.git ~/.local/share/github.com/taupiqueur/taupiqueur-shorts
 git clone https://github.com/emersion/slurp.git ~/.local/share/github.com/emersion/slurp
 git clone https://github.com/starship/starship.git ~/.local/share/github.com/starship/starship
 git clone https://github.com/swaywm/sway.git ~/.local/share/github.com/swaywm/sway
@@ -184,6 +186,8 @@ git push git@github.com:alexherbo2/pw.git
 git push git@github.com:alexherbo2/pw.git -f
 git push git@github.com:alexherbo2/batch.git
 git push git@github.com:alexherbo2/batch.git -f
+git push git@github.com:alexherbo2/taupiqueur-notes.git
+git push git@github.com:alexherbo2/taupiqueur-shorts.git
 kak
 hx
 sway

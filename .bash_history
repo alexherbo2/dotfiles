@@ -324,6 +324,7 @@ find ~/code/batch -name '*.DS_Store'
 xattr -rc ~/code/pw
 sudo xattr -rc ~/code/pw
 find ~/code/pw -name '*.DS_Store'
+cd ~/code/taupiqueur.github.io
 cd ~/code/chrome-shortcuts
 cd ~/code/chrome-shell
 cd ~/code/chrome-dmenu

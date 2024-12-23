@@ -528,6 +528,7 @@ kamux
 kamux .bash_history
 _ssh
 ggc
+br
 broot
 cd -
 cd ~

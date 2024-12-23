@@ -99,6 +99,7 @@ alias hc='history -cr ~/.bash_history~ && history -w'
 
 # Navigation
 alias n=nnn
+alias br=broot
 alias ..='cd ..'
 alias -- -='cd -'
 

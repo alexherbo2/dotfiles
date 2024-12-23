@@ -508,6 +508,7 @@ kamux
 kamux .bash_history
 _ssh
 ggc
+broot
 cd -
 cd ~
 pwd

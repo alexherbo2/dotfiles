@@ -171,6 +171,16 @@ git clone https://github.com/asterite/adventofcode2019.git ~/.local/share/github
 git clone https://github.com/asterite/adventofcode2020.git ~/.local/share/github.com/asterite/adventofcode2020
 git clone https://github.com/asterite/adventofcode2021.git ~/.local/share/github.com/asterite/adventofcode2021
 git clone https://github.com/asterite/adventofcode2022.git ~/.local/share/github.com/asterite/adventofcode2022
+git remote add origin git@github.com:taupiqueur/chrome-shortcuts.git
+git remote add origin git@github.com:taupiqueur/chrome-shell.git
+git remote add origin git@github.com:taupiqueur/chrome-dmenu.git
+git remote add origin git@github.com:taupiqueur/chrome-mpv.git
+git remote add origin git@github.com:taupiqueur/chrome-nano.git
+git remote add origin git@github.com:taupiqueur/chrome-pandoc.git
+git remote add origin git@github.com:taupiqueur/taupiqueur.github.io.git
+git remote add origin git@github.com:taupiqueur/taupiqueur-notes.git
+git remote add origin git@github.com:taupiqueur/taupiqueur-shorts.git
+git remote add origin git@github.com:taupiqueur/mpv-clip.git
 git clone git@github.com:taupiqueur/chrome-shortcuts.git
 git clone git@github.com:taupiqueur/chrome-shell.git
 git clone git@github.com:taupiqueur/chrome-dmenu.git

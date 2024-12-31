@@ -301,6 +301,7 @@ kak ~/youtube/videos/info.txt
 kak ~/youtube/channels/joueur-du-grenier/list.txt
 kak ~/youtube/channels/bazar-du-grenier/list.txt
 kak
+kak -n
 nnn
 cd ~/docs/notes
 cd ~/Downloads

@@ -429,6 +429,8 @@ swaymsg reload
 swaymsg output eDP-1 disable
 chown -R taupiqueur:users home storage shared
 chown -R taupiqueur:staff home storage shared
+sudo chown -R taupiqueur:users home storage shared
+sudo chown -R taupiqueur:staff home storage shared
 xattr -rc home storage shared
 sudo xattr -rc home storage shared
 mkdir -p mnt/Disk

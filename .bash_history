@@ -211,7 +211,6 @@ git push git@github.com:alexherbo2/batch.git
 git push git@github.com:alexherbo2/batch.git -f
 git push git@github.com:alexherbo2/taupiqueur-notes.git
 git push git@github.com:alexherbo2/taupiqueur-shorts.git
-kak
 hx
 sway
 brew install kakoune-lsp/kakoune-lsp/kakoune-lsp

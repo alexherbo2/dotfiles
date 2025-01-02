@@ -1,8 +1,11 @@
+map -docstring 'select next search match' global extend n '/<ret>'
+map -docstring 'select previous search match' global extend N '<a-/><ret>'
+map -docstring 'extend selected text to next search match' global extend n '?<ret>'
+map -docstring 'extend selected text to previous search match' global extend N '<a-?><ret>'
 map -docstring 'extend selected text to line begin' global normal <a-h> '<a-:><a-h>'
 map -docstring 'extend selected text to line end' global normal <a-l> '<a-:><a-;><a-l>'
 map -docstring 'extend selected text to line begin' global normal <home> '<a-:><a-h>'
 map -docstring 'extend selected text to line end' global normal <end> '<a-:><a-;><a-l>'
-map -docstring 'select previous match' global normal N <a-n>
 map -docstring 'search backward for regex pattern' global normal ? '<a-/>'
 map -docstring 'search backward ’til {char}' global normal T <a-t>
 map -docstring 'select whole lines' global normal X x
@@ -28,6 +31,7 @@ map -docstring 'iterate next selection' global normal <c-n> ':iterate_next_selec
 map -docstring 'iterate previous selection' global normal <c-p> ':iterate_previous_selection %val{register} %val{count}<ret>'
 map global normal '#' ':toggle_comments_with_config<ret>'
 map global normal x ':select_whole_lines_or_extend_lines_down<ret>'
+map -docstring 'quit current client' global normal <c-q> ':quit<ret>'
 map -docstring 'delete current buffer' global normal <c-w> ':delete-buffer<ret>'
 map -docstring 'save current buffer to its file' global normal <c-s> ':write<ret>'
 map -docstring 'toggle read-only flag' global normal <c-r> ':toggle_readonly_flag<ret>'

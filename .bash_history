@@ -426,6 +426,7 @@ ngrok http 80
 ssh taupiqueur@7.tcp.eu.ngrok.io -p 14378
 swaymsg reload
 swaymsg output eDP-1 disable
+chmod go= ~/.ssh/id_ed25519
 chown -R taupiqueur:users home storage shared
 chown -R taupiqueur:staff home storage shared
 sudo chown -R taupiqueur:users home storage shared

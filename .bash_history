@@ -472,6 +472,9 @@ find -L ~/shorts -type f -name '*.mp4' -exec printf "file '%s'\\n" {} + | shuf >
 kak -n -e "set-option global indentwidth 2; map global normal <ret> :; map global normal <c-a> ga; map global normal <c-s> :write<ret>" /tmp/shorts.ffconcat
 vim /tmp/shorts.ffconcat
 ffmpeg -stream_loop -1 -f concat -safe 0 -i /tmp/shorts.ffconcat -c:v libx264 -f flv "rtmp://live.twitch.tv/app/$TWITCH_STREAM_KEY"
+git stash
+git stash pop
+git stash list
 git switch --orphan website
 git switch website
 git switch master

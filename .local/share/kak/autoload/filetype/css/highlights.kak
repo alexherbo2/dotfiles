@@ -54,6 +54,8 @@ add-highlighter shared/css.attribute_selector/attribute_selector/tag_name regex 
 # At rules
 add-highlighter shared/css/code/at_rule regex '@[\w-]+' 0:keyword
 
+add-highlighter shared/css/code/important regex '!important' 0:keyword
+
 # Operators
 add-highlighter shared/css/code/operator regex '[-+*/%^&!?@|<>=:(){}[\];:,.]' 0:operator
 

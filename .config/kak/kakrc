@@ -48,7 +48,6 @@ add-highlighter global/characters regex '[–—−×]' '0:cyan+f'
 # Key remapping
 # The following key bindings expand to:
 map -docstring 'enter command mode' global normal <ret> :
-map -docstring 'keep primary selection and collapse selections' global normal <esc> ',;<esc>'
 map -docstring 'remove primary selection' global normal <del> '<a-,>'
 map -docstring 'collapse selections' global normal <backspace> ';'
 

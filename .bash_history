@@ -541,4 +541,6 @@ cd -
 cd ~
 pwd
 nmtui
+exit 0
+exit 1
 exit

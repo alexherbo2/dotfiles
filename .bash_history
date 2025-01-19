@@ -449,6 +449,7 @@ rm -R /Volumes/Disk/.fseventsd
 rm -R /Volumes/USB/.fseventsd
 shutdown now
 poweroff
+su
 setup-alpine
 setup-desktop
 apk update

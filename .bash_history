@@ -448,6 +448,11 @@ rsync home shared /Volumes/USB
 rm -R /Volumes/Disk/.fseventsd
 rm -R /Volumes/USB/.fseventsd
 shutdown now
+poweroff
+setup-alpine
+setup-desktop
+apk update
+apk upgrade
 reboot
 gh repo view --web
 gh repo fork

@@ -1,5 +1,4 @@
-map -docstring 'select next search match' global normal n '/<ret>'
-map -docstring 'select previous search match' global normal N '<a-/><ret>'
+map -docstring 'select previous search match' global normal N '<a-n>'
 map -docstring 'extend selected text to line begin' global normal <a-h> '<a-:><a-h>'
 map -docstring 'extend selected text to line end' global normal <a-l> '<a-:><a-;><a-l>'
 map -docstring 'extend selected text to line begin' global normal <home> '<a-:><a-h>'

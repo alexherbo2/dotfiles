@@ -397,6 +397,7 @@ export GIT_SSH_COMMAND='ssh -i ~/.ssh/id_ed25519_mathieuablasou'
 git config set core.sshCommand 'ssh -i ~/.ssh/id_ed25519_mathieuablasou'
 git config set user.email mathieu.ablasou@cashbee.fr
 export EDITOR='kak -n'
+export TERM='xterm-256color'
 unset GIT_SSH_COMMAND
 rm .git/COMMIT_EDITMSG
 sudo kak /private/var/db/dhcpd_leases

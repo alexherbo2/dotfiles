@@ -2,8 +2,6 @@
 # https://kakoune.org
 # https://github.com/mawww/kakoune
 
-# Preamble ---------------------------------------------------------------------
-
 hook global ClientCreate .* %{
   find_friendly_client_name
 }
@@ -36,64 +34,17 @@ set-option global lsp_args --kakoune --session %val{session}
 set-option global tree_sitter_command kak-tree-sitter
 set-option global tree_sitter_args -dks --init %val{session}
 
-# Status line
-set-option global modelinefmt '{{mode_info}} {{context_info}} %val{bufname}:%val{cursor_line}:%val{cursor_char_column} %val{client}@%val{session}'
-
 # Highlight various characters
 add-highlighter global/characters regex '[–—−×]' '0:cyan+f'
 
 # Key bindings -----------------------------------------------------------------
-# Normal mode ------------------------------------------------------------------
-
-# Key remapping
-# The following key bindings expand to:
-map -docstring 'remove primary selection' global normal <del> '<a-,>'
-map -docstring 'collapse selections' global normal <backspace> ';'
 
 map -docstring 'goto last accessed buffer' global normal <c-a> 'ga'
-
 map -docstring 'recenter viewport' global normal V 'vt5vkvm'
-
-map global normal <c-e> ':explore<ret>'
-map global normal <c-space> ':sh<ret>'
-
-map -docstring 'enter window mode' global normal <c-w> ':enter_kamux_mode<ret>'
-
 map -docstring 'select next word' global normal t '"_/\w<ret><a-i>w'
-
-# User mode --------------------------------------------------------------------
-
-map -docstring 'enter command mode' global user <space> :
-map -docstring 'convert selected dates to ISO 8601' global user d ':convert_selected_dates_to_iso_8601<ret>'
-map -docstring 'convert selected text to ASCII' global user @ ':convert_selected_text_to_ascii<ret>'
-map -docstring 'get character info' global user u ':get_character_info<ret>'
-map -docstring 'enter window mode' global user w ':enter_kamux_mode<ret>'
-map -docstring 'open file picker' global user f ':open_file_picker<ret>'
-map -docstring 'open buffer picker' global user b ':open_buffer_picker<ret>'
-map -docstring 'open global search prompt' global user / ':open_global_search_prompt<ret>'
-map -docstring 'open buffer search prompt' global user ? ':open_buffer_search_prompt<ret>'
-map -docstring 'open file finder' global user . ':open_file_finder_prompt<ret>'
-map -docstring 'open buffer finder' global user , ':open_buffer_finder_prompt<ret>'
-map -docstring 'open document symbol picker' global user s ':open_document_symbol_picker<ret>'
-map -docstring 'open workspace symbol picker' global user S ':open_workspace_symbol_picker<ret>'
-map -docstring 'show definition preview hover' global user k ':show_definition_preview_hover<ret>'
-map -docstring 'enter lsp mode' global user l ':enter_lsp_mode<ret>'
-map -docstring 'yank selected text to the terminal clipboard' global user y ':yank_selected_text_to_terminal_clipboard<ret>'
-map -docstring 'open goto line prompt' global user g ':open_goto_line_prompt<ret>'
-map -docstring 'open text highlighter prompt' global user '*' ':open_text_highlighter_prompt<ret>'
-
-# Insert mode ------------------------------------------------------------------
-
-# User hooks -------------------------------------------------------------------
-
-hook global User 'InsertChars=.*kj' %{
-  execute-keys -draft 'hHd'
-  execute-keys <esc>
-}
 
 # Language support -------------------------------------------------------------
 
-# Indentation
 set-option global tabstop 4
 set-option global indentwidth 2
 

@@ -19,3 +19,7 @@ hook global InsertCompletionShow '.*' %{
     unmap window insert <s-tab>
   }
 }
+hook global User 'InsertChars=.*jj' %{
+  execute-keys -draft 'hHd'
+  execute-keys <esc>
+}

@@ -9,5 +9,6 @@ explore
 Example configuration:
 
 ```
-map global normal <c-e> ':explore<ret>'
+map -docstring 'open file explorer' global normal <c-e> ':explore<ret>'
+map -docstring 'open file explorer' global user e ':explore<ret>'
 ```

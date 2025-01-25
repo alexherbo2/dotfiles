@@ -253,6 +253,10 @@ yay-update
 yay-install
 yay-uninstall
 yay-clean
+apk-update
+apk-install
+apk-uninstall
+apk-clean
 sudo DS_Store
 DS_Store
 pbcopy < /dev/null

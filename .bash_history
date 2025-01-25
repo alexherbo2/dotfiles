@@ -449,7 +449,16 @@ rm -R /Volumes/Disk/.fseventsd
 rm -R /Volumes/USB/.fseventsd
 shutdown now
 poweroff
-chsh -s /bin/bash taupiqueur
+doas modprobe fuse
+doas rc-service sshd start
+doas rc-service sshd stop
+rc-service sshd status
+doas rc-update add sshd
+doas rc-update delete sshd
+rc-update show
+rc-status
+rc-status -s
+chsh -s /bin/bash
 su
 setup-alpine
 setup-desktop

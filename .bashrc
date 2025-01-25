@@ -274,8 +274,8 @@ alias yay-clean='paru -Sc'
 
 # Alpine Linux
 alias apk-update='doas apk update && doas apk upgrade'
-alias apk-install='apk search | fzy | xargs -o doas apk add'
-alias apk-uninstall='apk list | fzy | xargs -o doas apk del'
+alias apk-install='apk list -aq | fzy | xargs doas apk add'
+alias apk-uninstall='apk list -Iq | fzy | xargs doas apk del'
 alias apk-clean='doas apk cache clean'
 
 # macOS ------------------------------------------------------------------------

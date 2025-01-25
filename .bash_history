@@ -448,7 +448,7 @@ rsync home shared /Volumes/USB
 rm -R /Volumes/Disk/.fseventsd
 rm -R /Volumes/USB/.fseventsd
 shutdown now
-poweroff
+doas poweroff
 doas modprobe fuse
 doas rc-service sshd start
 doas rc-service sshd stop

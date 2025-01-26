@@ -18,6 +18,8 @@ define-command enter_sticky_unimpaired_right_mode %{
 }
 
 map -docstring 'show line numbers' global unimpaired_right l ':show_line_numbers<ret>'
+map -docstring 'show non ascii character highlights' global unimpaired_right C ':show_non_ascii_character_highlights<ret>'
+map -docstring 'show whitespace highlights' global unimpaired_right W ':show_whitespace_highlights<ret>'
 map -docstring 'show whitespace' global unimpaired_right w ':show_whitespace<ret>'
 map -docstring 'enable soft-wrap mode' global unimpaired_right <tab> ':enable_soft_wrap<ret>'
 map -docstring 'enable read-only mode' global unimpaired_right r ':enable_readonly_mode<ret>'

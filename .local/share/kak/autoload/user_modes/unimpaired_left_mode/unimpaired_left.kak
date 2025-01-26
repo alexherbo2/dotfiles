@@ -15,6 +15,14 @@ define-command disable_readonly_mode %{
   set-option buffer readonly no
 }
 
+define-command hide_non_ascii_character_highlights %{
+  remove-highlighter global/non_ascii_character_highlights
+}
+
+define-command hide_whitespace_highlights %{
+  remove-highlighter global/whitespace_highlights
+}
+
 define-command hide_whitespace %{
   remove-highlighter global/whitespace
 }

@@ -34,9 +34,6 @@ set-option global lsp_args --kakoune --session %val{session}
 set-option global tree_sitter_command kak-tree-sitter
 set-option global tree_sitter_args -dks --init %val{session}
 
-# Highlight various characters
-add-highlighter global/characters regex '[–—−×]' '0:cyan+f'
-
 # Key bindings -----------------------------------------------------------------
 
 map -docstring 'goto last accessed buffer' global normal <c-a> 'ga'

@@ -18,6 +18,8 @@ define-command enter_sticky_unimpaired_left_mode %{
 }
 
 map -docstring 'hide line numbers' global unimpaired_left l ':hide_line_numbers<ret>'
+map -docstring 'hide non ascii character highlights' global unimpaired_left C ':hide_non_ascii_character_highlights<ret>'
+map -docstring 'hide whitespace highlights' global unimpaired_left W ':hide_whitespace_highlights<ret>'
 map -docstring 'hide whitespace' global unimpaired_left w ':hide_whitespace<ret>'
 map -docstring 'disable read-only mode' global unimpaired_left r ':disable_readonly_mode<ret>'
 map -docstring 'disable soft-wrap' global unimpaired_left <tab> ':disable_soft_wrap<ret>'

@@ -36,7 +36,7 @@ evaluate-commands %sh{
     add-highlighter global/search ref search
     add-highlighter global/selected_text ref selected_text
     add-highlighter global/hex_color_code ref hex_color_code
-    add-highlighter global/whitespace ref whitespace
+    add-highlighter global/whitespace_highlights ref whitespace
     source "%val{runtime}/themes/default.kak"
     source "%val{runtime}/themes/macos_light.kak"
     add_inactive_client_indicators

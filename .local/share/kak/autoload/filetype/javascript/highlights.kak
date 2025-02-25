@@ -48,7 +48,7 @@ add-highlighter shared/javascript/code/keyword regex '\bfrom\b|\bof\b|\bin\b|\ba
 add-highlighter shared/javascript/code/operator regex '[-+*/%^&!?@|<>=:(){}[\];:,.]' 0:operator
 
 # Literals
-add-highlighter shared/javascript/code/literal regex '\bthis\b|\bundefined\b|\bdocument\b|\bwindow\b|\bfalse\b|\btrue\b|\bnull\b|\b_G\b|\b_ENV\b|\d[\d_]*\.\w[\w]*|\d[\w]*|\b[A-Z]\w*\b' 0:value
+add-highlighter shared/javascript/code/literal regex '\bthis\b|\bundefined\b|\bdocument\b|\bwindow\b|\bfalse\b|\btrue\b|\bnull\b|\b_G\b|\b_ENV\b|\d[\d_]*\.\w[\w]*|\b\d[\w]*|\b[A-Z]\w*\b' 0:value
 
 # Comments
 add-highlighter shared/javascript/line_comment region '//' '$' fill comment

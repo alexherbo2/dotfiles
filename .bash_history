@@ -490,7 +490,8 @@ cd ~/shorts
 kamux ytdlp_list.sh
 sh ytdlp_list.sh
 sh <(curl -L https://nixos.org/nix/install)
-du -sh ~/shorts
+du -sh ~/storage/shorts
+xattr -rc ~/storage/manga
 sh ~/shorts/twitch.sh
 find -L ~/shorts -type f -name '*.mp4' -exec printf "file '%s'\\n" {} + | shuf > /tmp/shorts.ffconcat
 kak -n -e "set-option global indentwidth 2; map global normal <ret> :; map global normal <c-a> ga; map global normal <c-s> :write<ret>" /tmp/shorts.ffconcat

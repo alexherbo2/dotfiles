@@ -26,7 +26,7 @@ complete-command git_status file
 
 define-command -hidden git_status_jump_to_files %{
   evaluate-commands -draft %{
-    execute-keys 'x<a-s><a-K>^\n<ret>Hs^.. \K.+$<ret>'
+    execute-keys 'x<a-s><a-K>^\n<ret>Hs^.. .+? -> \K.+$|^.. \K.+$<ret>'
     evaluate-commands -draft -verbatim try %{
       execute-keys '<a-,><a-K>/\z<ret>'
       evaluate-commands -itersel %{

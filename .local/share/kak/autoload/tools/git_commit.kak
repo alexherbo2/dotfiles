@@ -1,10 +1,3 @@
-define-command git_write %{
-  write
-  nop %sh{
-    git add "$kak_buffile"
-  }
-}
-
 define-command git_commit %{
   edit -existing %sh{
     git -c core.editor= commit
@@ -22,5 +15,4 @@ define-command git_commit %{
   }
 }
 
-alias global gw git_write
 alias global gc git_commit

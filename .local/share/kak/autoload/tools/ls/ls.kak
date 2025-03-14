@@ -36,11 +36,9 @@ define-command ls -params 0..1 %{
 }
 
 define-command -hidden ls_impl -params 1 %{
-  evaluate-commands -save-regs '"' %{
-    fifo -name '*ls*' -- %opt{ls_command} %opt{ls_args} -- %arg{1}
-    set-option buffer ls_working_directory %sh{
-      realpath -- "$1"
-    }
+  fifo -name '*ls*' -- %opt{ls_command} %opt{ls_args} -- %arg{1}
+  set-option buffer ls_working_directory %sh{
+    realpath -- "$1"
   }
 }
 
@@ -56,10 +54,10 @@ define-command -hidden jump_to_files_or_directories %{
       }
     }
     evaluate-commands -draft -verbatim try %{
-      execute-keys ',<a-K>/\z<ret>'
-      evaluate-commands -client %val{client} -verbatim edit -existing -- "%opt{ls_working_directory}/%val{selection}"
-    } catch %{
+      execute-keys ',<a-k>/\z<ret>'
       evaluate-commands -client %val{client} -verbatim ls_impl "%opt{ls_working_directory}/%val{selection}"
+    } catch %{
+      evaluate-commands -client %val{client} -verbatim edit -existing -- "%opt{ls_working_directory}/%val{selection}"
     }
   }
 }

@@ -7,26 +7,21 @@
 # dependencies: ["fifo"]
 # doc: yes
 # tests: no
-declare-option str git_status_command git
-declare-option str-list git_status_args status --porcelain
+declare-option str git_status_command sh
+declare-option str-list git_status_args -c %{
+  git status -z --no-renames -- "$@" |
+  tr '\0' '\n'
+}
 
 define-command git_status -params .. %{
-  evaluate-commands -save-regs '"' %{
-    try %{
-      execute-keys -buffer '*git_status*' -save-regs '' '%y'
-    } catch %{
-      set-register dquote
-    }
-    fifo -name '*git_status*' -- %opt{git_status_command} %opt{git_status_args} %arg{@}
-    execute-keys -buffer '*git_status*' 'P'
-  }
+  fifo -name '*git_status*' -- %opt{git_status_command} %opt{git_status_args} -- %arg{@}
 }
 
 complete-command git_status file
 
 define-command -hidden git_status_jump_to_files %{
   evaluate-commands -draft %{
-    execute-keys 'x<a-s><a-K>^\n<ret>Hs^.. .+? -> \K.+$|^.. \K.+$<ret>'
+    execute-keys 'x<a-s><a-K>^\n<ret>Hs^.. \K.+$<ret>'
     evaluate-commands -draft -verbatim try %{
       execute-keys '<a-,><a-K>/\z<ret>'
       evaluate-commands -itersel %{
@@ -34,15 +29,10 @@ define-command -hidden git_status_jump_to_files %{
       }
     }
     evaluate-commands -draft -verbatim try %{
-      execute-keys ',<a-K>/\z<ret>'
-      evaluate-commands -client %val{client} -verbatim edit -existing -- "%val{selection}"
+      execute-keys ',<a-k>/\z<ret>'
+      evaluate-commands -client %val{client} -verbatim ls %val{selection}
     } catch %{
-      evaluate-commands -client %val{client} -verbatim ls "%val{selection}"
+      evaluate-commands -client %val{client} -verbatim edit -existing -- %val{selection}
     }
   }
-}
-
-define-command -hidden git_status_jump_to_files_and_close_git_status_buffer %{
-  git_status_jump_to_files
-  delete-buffer '*git_status*'
 }

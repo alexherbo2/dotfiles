@@ -4,8 +4,8 @@
 # authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
 # kakoune: 2023-12-12
 # license: MIT
-# dependencies: ["fifo"]
-# doc: yes
+# dependencies: ["fifo", "ls"]
+# doc: no
 # tests: no
 declare-option str git_status_command sh
 declare-option str-list git_status_args -c %{

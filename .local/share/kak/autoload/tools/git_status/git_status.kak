@@ -25,7 +25,7 @@ define-command -hidden git_status_jump_to_files %{
     evaluate-commands -draft -verbatim try %{
       execute-keys '<a-,><a-K>/\z<ret>'
       evaluate-commands -itersel %{
-        evaluate-commands -draft -verbatim edit -existing -- "%val{selection}"
+        evaluate-commands -draft -verbatim edit -existing -- %val{selection}
       }
     }
     evaluate-commands -draft -verbatim try %{

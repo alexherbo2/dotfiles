@@ -23,7 +23,7 @@ define-command -hidden git_blame_show_patches %{
   evaluate-commands -draft %{
     execute-keys 'x<a-s><a-K>^\n<ret>Hs^[0-9a-f]{7,40}<ret>'
     evaluate-commands -itersel %{
-      evaluate-commands -client %val{client} -verbatim fifo -name "%val{selection}.patch" -- %opt{git_blame_show_patch_command} %opt{git_blame_show_patch_args} -p -- %val{selection}
+      evaluate-commands -client %val{client} -verbatim fifo -name "%val{selection}.patch" -- %opt{git_blame_show_patch_command} %opt{git_blame_show_patch_args} -p %val{selection}
     }
   }
 }

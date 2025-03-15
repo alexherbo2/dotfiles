@@ -13,8 +13,14 @@ declare-option str-list git_blame_args log
 declare-option str git_blame_show_patch_command git
 declare-option str-list git_blame_show_patch_args show
 
-define-command git_blame -params .. %{
-  fifo -name '*git_blame*' -- %opt{git_blame_command} %opt{git_blame_args} -s '--pretty=tformat:%h %as “%an” %s' -L "%val{cursor_line},%val{cursor_line}:%val{buffile}"
+define-command git_blame %{
+  evaluate-commands -save-regs 'ab' %{
+    set-register a %val{cursor_line}
+    execute-keys '<a-;>'
+    set-register b %val{cursor_line}
+    execute-keys '<a-;>'
+    fifo -name '*git_blame*' -- %opt{git_blame_command} %opt{git_blame_args} -s '--pretty=tformat:%h %as “%an” %s' -L "%reg{a},%reg{b}:%val{buffile}"
+  }
 }
 
 complete-command git_blame file

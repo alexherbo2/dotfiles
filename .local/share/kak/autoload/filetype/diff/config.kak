@@ -1,5 +1,5 @@
 # https://en.wikipedia.org/wiki/Diff#Unified_format
-hook global BufCreate '.+\.diff' %{
+hook global BufCreate '.+\.diff|.+\.patch' %{
   set-option buffer filetype diff
 }
 

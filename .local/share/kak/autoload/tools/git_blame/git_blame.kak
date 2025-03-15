@@ -15,10 +15,12 @@ declare-option str-list git_blame_show_patch_args show
 
 define-command git_blame %{
   evaluate-commands -save-regs 'ab' %{
-    set-register a %val{cursor_line}
-    execute-keys '<a-;>'
-    set-register b %val{cursor_line}
-    execute-keys '<a-;>'
+    evaluate-commands -draft %{
+      execute-keys '<a-:><a-;>'
+      set-register a %val{cursor_line}
+      execute-keys '<a-:>'
+      set-register b %val{cursor_line}
+    }
     fifo -name '*git_blame*' -- %opt{git_blame_command} %opt{git_blame_args} -s '--pretty=tformat:%h %as “%an” %s' -L "%reg{a},%reg{b}:%val{buffile}"
   }
 }

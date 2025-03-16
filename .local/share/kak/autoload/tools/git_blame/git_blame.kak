@@ -21,7 +21,7 @@ define-command git_blame %{
       evaluate-commands -itersel %{
         evaluate-commands %exp{
           execute-keys '<a-;>'
-          set-register a %reg{a} -L "%%val{cursor_line},%val{cursor_line}:%%val{buffile}"
+          set-register a %%reg{a} -L "%%val{cursor_line},%val{cursor_line}:%%val{buffile}"
         }
       }
     }

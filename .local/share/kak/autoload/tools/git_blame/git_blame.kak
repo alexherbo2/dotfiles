@@ -1,6 +1,6 @@
 # name: kakoune_git_blame
 # version: 0.1.0
-# description: This script provides support for the "git blame" command-line utility.
+# description: This script provides support for the “git blame” command-line utility.
 # authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
 # kakoune: 2023-12-12
 # license: MIT

@@ -21,11 +21,11 @@ define-command git_blame %{
       evaluate-commands -itersel %{
         evaluate-commands %exp{
           execute-keys '<a-;>'
-          set-register a -L "%%val{cursor_line},%val{cursor_line}:%%val{buffile}"
+          set-register a %reg{a} -L "%%val{cursor_line},%val{cursor_line}:%%val{buffile}"
         }
       }
     }
-    fifo -name '*git_blame*' -- %opt{git_blame_command} %opt{git_blame_args} %reg{a}
+    echo fifo -name '*git_blame*' -- %opt{git_blame_command} %opt{git_blame_args} %reg{a}
   }
 }
 

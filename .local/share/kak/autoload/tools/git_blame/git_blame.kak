@@ -25,7 +25,7 @@ def git_blame %{
         }
       }
     }
-    echo fifo -name '*git_blame*' -- %opt{git_blame_command} %opt{git_blame_args} %reg{a}
+    fifo -name '*git_blame*' -- %opt{git_blame_command} %opt{git_blame_args} %reg{a}
   }
 }
 

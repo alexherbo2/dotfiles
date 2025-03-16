@@ -16,8 +16,8 @@ declare-option str-list git_blame_show_patch_args show
 define-command git_blame %{
   evaluate-commands -draft -save-regs 'al' %{
     set-register a -s '--pretty=tformat:%h %as “%an” %s'
-    execute-keys 'x<a-_>'
-    execute-keys -itersel '<a-:><a-;>:reg l %val{cursor_line}<ret><a-:>:reg a %reg{a} -L "%reg{l},%val{cursor_line}:%val{buffile}"<ret>'
+    execute-keys 'x<a-_><a-:><a-;>'
+    execute-keys -itersel ':reg l %val{cursor_line}<ret><a-:>:reg a %reg{a} -L "%reg{l},%val{cursor_line}:%val{buffile}"<ret>'
     evaluate-commands -client %val{client} -verbatim fifo -name '*git_blame*' -- %opt{git_blame_command} %opt{git_blame_args} %reg{a}
   }
 }

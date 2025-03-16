@@ -1,7 +1,8 @@
 define-command git_write %{
   write
-  nop %sh{
-    git add "$kak_buffile"
+  evaluate-commands %sh{
+    git add -- "$kak_buffile" ||
+    printf "fail 'ERROR: git add exited with: %d.'" "$?"
   }
 }
 

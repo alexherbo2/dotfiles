@@ -5,7 +5,7 @@
 # kakoune: 2023-12-12
 # license: MIT
 # dependencies: ["fifo"]
-# doc: no
+# doc: yes
 # tests: no
 declare-option str git_blame_command git
 declare-option str-list git_blame_args log

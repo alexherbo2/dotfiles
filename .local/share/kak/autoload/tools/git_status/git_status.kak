@@ -13,6 +13,10 @@ declare-option str-list git_status_args -c %{
   tr '\0' '\n'
 }
 
+declare-option str git_status_completion %{
+  eval "$kak_quoted_opt_git_status_command" "$kak_quoted_opt_git_status_args"
+}
+
 define-command git_status -params .. %{
   fifo -name '*git_status*' -- %opt{git_status_command} %opt{git_status_args} -- %arg{@}
 }

@@ -7,11 +7,11 @@
 # dependencies: ["fifo"]
 # doc: yes
 # tests: no
-declare-option str git_blame_command git
-declare-option str-list git_blame_args log
+decl str git_blame_command git
+decl str-list git_blame_args log
 
-declare-option str git_blame_show_patch_command git
-declare-option str-list git_blame_show_patch_args show
+decl str git_blame_show_patch_command git
+decl str-list git_blame_show_patch_args show
 
 def git_blame %{
   eval -save-regs 'a' %{
@@ -29,13 +29,13 @@ def git_blame %{
   }
 }
 
-complete-command git_blame file
+compl git_blame file
 
-define-command -hidden git_blame_show_patches %{
-  evaluate-commands -draft %{
-    execute-keys 'x<a-s><a-K>^\n<ret>Hs^[0-9a-f]{7,40}<ret>'
-    evaluate-commands -itersel %{
-      evaluate-commands -client %val{client} -verbatim fifo -name "%val{selection}.patch" -- %opt{git_blame_show_patch_command} %opt{git_blame_show_patch_args} -p %val{selection}
+def -hidden git_blame_show_patches %{
+  eval -draft %{
+    exec 'x<a-s><a-K>^\n<ret>Hs^[0-9a-f]{7,40}<ret>'
+    eval -itersel %{
+      eval -client %val{client} -verbatim fifo -name "%val{selection}.patch" -- %opt{git_blame_show_patch_command} %opt{git_blame_show_patch_args} -p %val{selection}
     }
   }
 }

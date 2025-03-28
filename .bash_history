@@ -273,6 +273,7 @@ export WLR_NO_HARDWARE_CURSORS=1
 eval "$(starship init bash)"
 rm ~/docs/bookmarks_*_*_*.html
 mv ~/Documents/bookmarks_*_*_*.html ~/docs
+ln ~/docs/chrome_extensions/*.png ~/code/chrome-shortcuts.assets
 weechat
 rm -R .config/weechat .local/share/weechat .cache/weechat
 pw --length=10 strongly-typed-thoughts.net taupiqueur

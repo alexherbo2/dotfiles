@@ -360,6 +360,7 @@ cd ~/code/chrome-pandoc
 cd ~/code/batch
 cd ~/code/pw
 cd ~/code/mpv-clip
+cd ~/code/chrome-shortcuts.assets
 cd ~/code/chrome-shortcuts.website
 cd ~/code/chrome-shell.website
 cd ~/code/chrome-dmenu.website
@@ -501,6 +502,8 @@ ffmpeg -stream_loop -1 -f concat -safe 0 -i /tmp/shorts.ffconcat -c:v libx264 -f
 git stash
 git stash pop
 git stash list
+git switch --orphan assets
+git switch assets
 git switch --orphan website
 git switch website
 git switch master
@@ -518,6 +521,7 @@ git add .
 git push
 git push -u origin master
 git push -u origin website
+git push -u origin assets
 git pull
 git pull upstream master
 date "+%F %T" | git commit -F -

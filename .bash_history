@@ -257,6 +257,7 @@ apk-update
 apk-install
 apk-uninstall
 apk-clean
+rm .DS_Store
 sudo DS_Store
 DS_Store
 pbcopy < /dev/null

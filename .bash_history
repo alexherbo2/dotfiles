@@ -274,6 +274,8 @@ eval "$(starship init bash)"
 rm ~/docs/bookmarks_*_*_*.html
 mv ~/Documents/bookmarks_*_*_*.html ~/docs
 ln ~/docs/chrome_extensions/*.png ~/code/chrome-shortcuts.assets
+fd '\Ascreenshot_\d{4}-\d{2}-\d{2}_\d{2}:\d{2}:\d{2}\.png\z' ~/docs/chrome_extensions
+fd '\Ascreenshot_\d{4}-\d{2}-\d{2}_\d{2}:\d{2}:\d{2}\.png\z' ~/code/chrome-shortcuts.assets
 weechat
 rm -R .config/weechat .local/share/weechat .cache/weechat
 pw --length=10 strongly-typed-thoughts.net taupiqueur
@@ -361,6 +363,7 @@ cd ~/code/chrome-pandoc
 cd ~/code/batch
 cd ~/code/pw
 cd ~/code/mpv-clip
+cd ~/docs/chrome_extensions
 cd ~/code/chrome-shortcuts.assets
 cd ~/code/chrome-shortcuts.website
 cd ~/code/chrome-shell.website

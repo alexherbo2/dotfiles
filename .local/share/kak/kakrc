@@ -10,7 +10,7 @@ evaluate-commands %sh{
     set-option global matching_pairs ( ) { } [ ] < > “ ” « » ‹ ›
     set-option global modelinefmt "{{mode_info}} {{context_info}} %%val{bufname}:%%val{cursor_line}:%%val{cursor_char_column} %%val{client}@%%val{session}"
     add-highlighter global/match_brackets show-matching
-    add-highlighter global/line_numbers number-lines -hlcursor -separator "  " -min-digits 6
+    add-highlighter global/line_numbers number-lines -hlcursor -separator "  " -min-digits 5
     add-highlighter global/rulers group
     add-highlighter global/rulers/ column 81 Ruler
     add-highlighter global/rulers/ column 82 Ruler

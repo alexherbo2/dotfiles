@@ -195,6 +195,22 @@ git clone git@github.com:taupiqueur/mpv-clip.git
 git clone git@github.com:taupiqueur/taupiqueur.github.io.git
 git clone git@github.com:taupiqueur/taupiqueur-notes.git
 git clone git@github.com:taupiqueur/taupiqueur-shorts.git
+git clone git@github.com:taupiqueur/chrome-shortcuts.git chrome-shortcuts.website
+git clone git@github.com:taupiqueur/chrome-shell.git chrome-shell.website
+git clone git@github.com:taupiqueur/chrome-dmenu.git chrome-dmenu.website
+git clone git@github.com:taupiqueur/chrome-mpv.git chrome-mpv.website
+git clone git@github.com:taupiqueur/chrome-nano.git chrome-nano.website
+git clone git@github.com:taupiqueur/chrome-pandoc.git chrome-pandoc.website
+git clone git@github.com:taupiqueur/batch.git batch.website
+git clone git@github.com:taupiqueur/pw.git pw.website
+git clone git@github.com:taupiqueur/chrome-shortcuts.git chrome-shortcuts.assets
+git clone git@github.com:taupiqueur/chrome-shell.git chrome-shell.assets
+git clone git@github.com:taupiqueur/chrome-dmenu.git chrome-dmenu.assets
+git clone git@github.com:taupiqueur/chrome-mpv.git chrome-mpv.assets
+git clone git@github.com:taupiqueur/chrome-nano.git chrome-nano.assets
+git clone git@github.com:taupiqueur/chrome-pandoc.git chrome-pandoc.assets
+git clone git@github.com:taupiqueur/batch.git batch.assets
+git clone git@github.com:taupiqueur/pw.git pw.assets
 git push git@github.com:alexherbo2/taupiqueur.github.io.git
 git push git@github.com:alexherbo2/taupiqueur.github.io.git -f
 git push git@github.com:alexherbo2/chrome-shortcuts.git
@@ -332,6 +348,7 @@ nnn ~/.local/share/github.com
 nnn ~/.local/share/codeberg.org
 nnn ~/.local/share/gitlab.com
 nnn ~/.local/share/hg.stevelosh.com
+cd ~/code
 cd ~/config
 cd ~/data
 cd ~/tmp

@@ -189,6 +189,8 @@ git clone git@github.com:taupiqueur/chrome-dmenu.git
 git clone git@github.com:taupiqueur/chrome-mpv.git
 git clone git@github.com:taupiqueur/chrome-nano.git
 git clone git@github.com:taupiqueur/chrome-pandoc.git
+git clone git@github.com:taupiqueur/batch.git
+git clone git@github.com:taupiqueur/pw.git
 git clone git@github.com:taupiqueur/mpv-clip.git
 git clone git@github.com:taupiqueur/taupiqueur.github.io.git
 git clone git@github.com:taupiqueur/taupiqueur-notes.git

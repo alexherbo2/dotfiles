@@ -177,6 +177,8 @@ git remote add origin git@github.com:taupiqueur/chrome-dmenu.git
 git remote add origin git@github.com:taupiqueur/chrome-mpv.git
 git remote add origin git@github.com:taupiqueur/chrome-nano.git
 git remote add origin git@github.com:taupiqueur/chrome-pandoc.git
+git remote add origin git@github.com:taupiqueur/batch.git
+git remote add origin git@github.com:taupiqueur/pw.git
 git remote add origin git@github.com:taupiqueur/taupiqueur.github.io.git
 git remote add origin git@github.com:taupiqueur/taupiqueur-notes.git
 git remote add origin git@github.com:taupiqueur/taupiqueur-shorts.git

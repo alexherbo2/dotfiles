@@ -154,11 +154,16 @@ complete-command rename-session shell-script-candidates %{
 
 define-command find_friendly_session_name %{
   rename-session %sh{
+    session_list_file=$(mktemp)
+    trap 'rm -f "$session_list_file"' EXIT
+    kak -l | grep -v '^.\+\s(dead)$' > "$session_list_file"
     if [ -r "$kak_config/friendly_session_names.txt" ]
     then
-      shuf -n 1 "$kak_config/friendly_session_names.txt"
+      grep -Fxv -f "$session_list_file" "$kak_config/friendly_session_names.txt" |
+      shuf -n 1
     else
-      shuf -n 1 "$kak_runtime/friendly_session_names.txt"
+      grep -Fxv -f "$session_list_file" "$kak_runtime/friendly_session_names.txt" |
+      shuf -n 1
     fi
   }
 }
@@ -174,11 +179,16 @@ complete-command rename-client shell-script-candidates %{
 
 define-command find_friendly_client_name %{
   rename-client %sh{
+    client_list_file=$(mktemp)
+    trap 'rm -f "$client_list_file"' EXIT
+    echo "$kak_client_list" | tr ' ' '\n' > "$client_list_file"
     if [ -r "$kak_config/friendly_client_names.txt" ]
     then
-      shuf -n 1 "$kak_config/friendly_client_names.txt"
+      grep -Fxv -f "$client_list_file" "$kak_config/friendly_client_names.txt" |
+      shuf -n 1
     else
-      shuf -n 1 "$kak_runtime/friendly_client_names.txt"
+      grep -Fxv -f "$client_list_file" "$kak_runtime/friendly_client_names.txt" |
+      shuf -n 1
     fi
   }
 }

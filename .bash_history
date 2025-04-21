@@ -439,6 +439,7 @@ export TERM='xterm-256color'
 unset TERM
 unset GIT_SSH_COMMAND
 rm .git/COMMIT_EDITMSG
+rm .git/gitui
 sudo kak /private/var/db/dhcpd_leases
 find /private/var/folders -name '*icon*' -print -exec rm -Ri -- {} +
 ssh host

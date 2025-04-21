@@ -1,7 +1,7 @@
 # This script provides support for POSIX shells.
 # https://gnu.org/software/bash/manual/bash.html
 
-hook global BufCreate '.+\.bash|.+\.bash_profile|.+\.bashrc|.+\.bash_login|.+\.bash_logout' %{
+hook global BufCreate '.+\.bash|.+\.bash_profile|.+\.bash_history|.+\.bashrc|.+\.bash_login|.+\.bash_logout' %{
   set-option buffer filetype bash
 }
 

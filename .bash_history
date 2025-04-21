@@ -533,6 +533,7 @@ ffmpeg -stream_loop -1 -f concat -safe 0 -i /tmp/shorts.ffconcat -c:v libx264 -f
 git stash
 git stash pop
 git stash list
+git branch
 git branch -d master
 git branch -d assets
 git branch -d website

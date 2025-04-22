@@ -231,6 +231,35 @@ git push git@github.com:alexherbo2/batch.git
 git push git@github.com:alexherbo2/batch.git -f
 git push git@github.com:alexherbo2/taupiqueur-notes.git
 git push git@github.com:alexherbo2/taupiqueur-shorts.git
+cp ~/code/chrome-shortcuts/src/manual/manual.css ~/code/chrome-shortcuts.website/manual.css
+cp ~/code/chrome-shortcuts/extra/website/style.css ~/code/chrome-shortcuts.website/style.css
+cp ~/code/chrome-shortcuts/src/manual/manual.css ~/code/chrome-dmenu/src/manual/manual.css
+cp ~/code/chrome-shortcuts/src/options/options.css ~/code/chrome-dmenu/src/options/options.css
+cp ~/code/chrome-shortcuts/extra/website/style.css ~/code/chrome-dmenu/extra/website/style.css
+cp ~/code/chrome-shortcuts/src/manual/manual.css ~/code/chrome-dmenu.website/manual.css
+cp ~/code/chrome-shortcuts/extra/website/style.css ~/code/chrome-dmenu.website/style.css
+cp ~/code/chrome-shortcuts/src/manual/manual.css ~/code/chrome-mpv/src/manual/manual.css
+cp ~/code/chrome-shortcuts/src/options/options.css ~/code/chrome-mpv/src/options/options.css
+cp ~/code/chrome-shortcuts/extra/website/style.css ~/code/chrome-mpv/extra/website/style.css
+cp ~/code/chrome-shortcuts/src/manual/manual.css ~/code/chrome-mpv.website/manual.css
+cp ~/code/chrome-shortcuts/extra/website/style.css ~/code/chrome-mpv.website/style.css
+cp ~/code/chrome-shortcuts/src/manual/manual.css ~/code/chrome-nano/src/manual/manual.css
+cp ~/code/chrome-shortcuts/src/options/options.css ~/code/chrome-nano/src/options/options.css
+cp ~/code/chrome-shortcuts/extra/website/style.css ~/code/chrome-nano/extra/website/style.css
+cp ~/code/chrome-shortcuts/src/manual/manual.css ~/code/chrome-nano.website/manual.css
+cp ~/code/chrome-shortcuts/extra/website/style.css ~/code/chrome-nano.website/style.css
+cp ~/code/chrome-shortcuts/src/manual/manual.css ~/code/chrome-pandoc/src/manual/manual.css
+cp ~/code/chrome-shortcuts/src/options/options.css ~/code/chrome-pandoc/src/options/options.css
+cp ~/code/chrome-shortcuts/extra/website/style.css ~/code/chrome-pandoc/extra/website/style.css
+cp ~/code/chrome-shortcuts/src/manual/manual.css ~/code/chrome-pandoc.website/manual.css
+cp ~/code/chrome-shortcuts/extra/website/style.css ~/code/chrome-pandoc.website/style.css
+cp ~/code/chrome-shortcuts/extra/website/style.css ~/code/chrome-shell/extra/website/chrome-shell.css
+cp ~/code/chrome-shortcuts/extra/website/style.css ~/code/chrome-shell.website/chrome-shell.css
+cp ~/code/chrome-shortcuts/extra/website/style.css ~/code/batch/extra/website/batch.css
+cp ~/code/chrome-shortcuts/extra/website/style.css ~/code/batch.website/batch.css
+cp ~/code/chrome-shortcuts/extra/website/style.css ~/code/pw/extra/website/pw.css
+cp ~/code/chrome-shortcuts/extra/website/style.css ~/code/pw.website/pw.css
+for dir in ~/code/chrome-shortcuts ~/code/chrome-shell ~/code/chrome-dmenu ~/code/chrome-mpv ~/code/chrome-nano ~/code/chrome-pandoc ~/code/batch ~/code/pw ~/code/chrome-shortcuts.website ~/code/chrome-shell.website ~/code/chrome-dmenu.website ~/code/chrome-mpv.website ~/code/chrome-nano.website ~/code/chrome-pandoc.website ~/code/batch.website ~/code/pw.website; do git add . && git commit -m ''; done
 hx
 sway
 brew install kakoune-lsp/kakoune-lsp/kakoune-lsp

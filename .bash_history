@@ -378,6 +378,7 @@ nnn ~/.local/share/github.com
 nnn ~/.local/share/codeberg.org
 nnn ~/.local/share/gitlab.com
 nnn ~/.local/share/hg.stevelosh.com
+ls ~/code
 cd ~/code
 cd ~/config
 cd ~/data

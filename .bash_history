@@ -633,6 +633,8 @@ _ssh
 ggc
 br
 broot
+gitui
+cd
 cd -
 cd ~
 pwd

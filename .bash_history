@@ -259,7 +259,7 @@ cp ~/code/chrome-shortcuts/extra/website/style.css ~/code/batch/extra/website/ba
 cp ~/code/chrome-shortcuts/extra/website/style.css ~/code/batch.website/batch.css
 cp ~/code/chrome-shortcuts/extra/website/style.css ~/code/pw/extra/website/pw.css
 cp ~/code/chrome-shortcuts/extra/website/style.css ~/code/pw.website/pw.css
-for dir in ~/code/chrome-shortcuts ~/code/chrome-shell ~/code/chrome-dmenu ~/code/chrome-mpv ~/code/chrome-nano ~/code/chrome-pandoc ~/code/batch ~/code/pw ~/code/chrome-shortcuts.website ~/code/chrome-shell.website ~/code/chrome-dmenu.website ~/code/chrome-mpv.website ~/code/chrome-nano.website ~/code/chrome-pandoc.website ~/code/batch.website ~/code/pw.website; do git add . && git commit -m 'Update shared styles'; done
+for dir in ~/code/chrome-shortcuts ~/code/chrome-shell ~/code/chrome-dmenu ~/code/chrome-mpv ~/code/chrome-nano ~/code/chrome-pandoc ~/code/batch ~/code/pw ~/code/chrome-shortcuts.website ~/code/chrome-shell.website ~/code/chrome-dmenu.website ~/code/chrome-mpv.website ~/code/chrome-nano.website ~/code/chrome-pandoc.website ~/code/batch.website ~/code/pw.website; do cd "$dir" && git add . && git commit -m 'Update shared styles'; done && cd
 hx
 sway
 brew install kakoune-lsp/kakoune-lsp/kakoune-lsp

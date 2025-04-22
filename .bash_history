@@ -635,6 +635,7 @@ ggc
 br
 broot
 gitui
+ls
 cd
 cd -
 cd ~

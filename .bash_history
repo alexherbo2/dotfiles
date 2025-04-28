@@ -263,6 +263,8 @@ for dir in ~/code/chrome-shortcuts ~/code/chrome-shell ~/code/chrome-dmenu ~/cod
 cp ~/code/chrome-shortcuts/src/recent_tabs_manager.js ~/code/chrome-dmenu/src/recent_tabs_manager.js
 cp ~/code/chrome-shortcuts/src/lib/mru.js ~/code/chrome-dmenu/src/lib/mru.js
 cp ~/code/chrome-shortcuts/src/lib/linked_list.js ~/code/chrome-dmenu/src/lib/linked_list.js
+cp ~/code/chrome-shortcuts/src/suggestion_engine/suggestion_engine.js ~/code/chrome-dmenu/src/suggestion_engine/suggestion_engine.js
+cp ~/code/chrome-shortcuts/src/suggestion_engine/suggestion_providers.js ~/code/chrome-dmenu/src/suggestion_engine/suggestion_providers.js
 hx
 sway
 brew install kakoune-lsp/kakoune-lsp/kakoune-lsp

@@ -260,6 +260,9 @@ cp ~/code/chrome-shortcuts/extra/website/style.css ~/code/batch.website/batch.cs
 cp ~/code/chrome-shortcuts/extra/website/style.css ~/code/pw/extra/website/pw.css
 cp ~/code/chrome-shortcuts/extra/website/style.css ~/code/pw.website/pw.css
 for dir in ~/code/chrome-shortcuts ~/code/chrome-shell ~/code/chrome-dmenu ~/code/chrome-mpv ~/code/chrome-nano ~/code/chrome-pandoc ~/code/batch ~/code/pw ~/code/chrome-shortcuts.website ~/code/chrome-shell.website ~/code/chrome-dmenu.website ~/code/chrome-mpv.website ~/code/chrome-nano.website ~/code/chrome-pandoc.website ~/code/batch.website ~/code/pw.website; do cd "$dir" && git add . && git commit -m 'Update shared styles'; done && cd
+cp ~/code/chrome-shortcuts/src/recent_tabs_manager.js ~/code/chrome-dmenu/src/recent_tabs_manager.js
+cp ~/code/chrome-shortcuts/src/lib/mru.js ~/code/chrome-dmenu/src/lib/mru.js
+cp ~/code/chrome-shortcuts/src/lib/linked_list.js ~/code/chrome-dmenu/src/lib/linked_list.js
 hx
 sway
 brew install kakoune-lsp/kakoune-lsp/kakoune-lsp

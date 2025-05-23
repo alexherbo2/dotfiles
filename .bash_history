@@ -233,6 +233,16 @@ git push git@github.com:alexherbo2/taupiqueur-notes.git
 git push git@github.com:alexherbo2/taupiqueur-shorts.git
 cp ~/code/chrome-shortcuts/src/manual/manual.css ~/code/chrome-shortcuts.website/manual.css
 cp ~/code/chrome-shortcuts/extra/website/style.css ~/code/chrome-shortcuts.website/style.css
+cp ~/code/chrome-shortcuts/extra/website/card.html ~/code/chrome-shortcuts.website/card.html
+ln -s ../comments.html
+ln -s ../favicon.svg
+ln -s ../manual.css
+ln -s ../manual.js
+ln -s ../messages.js
+ln -s ../card.css
+ln -s ../style.css
+cp ~/code/chrome-shortcuts/extra/website/card.fr.html ~/code/chrome-shortcuts.website/fr/card.html
+cp ~/code/chrome-shortcuts/extra/website/card.css ~/code/chrome-shortcuts.website/card.css
 cp ~/code/chrome-shortcuts/src/manual/manual.css ~/code/chrome-dmenu/src/manual/manual.css
 cp ~/code/chrome-shortcuts/src/options/options.css ~/code/chrome-dmenu/src/options/options.css
 cp ~/code/chrome-shortcuts/extra/website/style.css ~/code/chrome-dmenu/extra/website/style.css

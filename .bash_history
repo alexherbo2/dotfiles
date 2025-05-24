@@ -241,6 +241,10 @@ ln -s ../manual.js
 ln -s ../messages.js
 ln -s ../card.css
 ln -s ../style.css
+ln -s ../sitemap.html
+cd ./fr/
+cp ~/code/chrome-shortcuts/extra/website/comments.html ~/code/chrome-shortcuts.website/comments.html
+cp ~/code/chrome-shortcuts/extra/website/sitemap.html ~/code/chrome-shortcuts.website/sitemap.html
 cp ~/code/chrome-shortcuts/extra/website/card.fr.html ~/code/chrome-shortcuts.website/fr/card.html
 cp ~/code/chrome-shortcuts/extra/website/card.css ~/code/chrome-shortcuts.website/card.css
 cp ~/code/chrome-shortcuts/src/manual/manual.css ~/code/chrome-dmenu/src/manual/manual.css
@@ -276,6 +280,15 @@ cp ~/code/chrome-shortcuts/src/lib/linked_list.js ~/code/chrome-dmenu/src/lib/li
 cp ~/code/chrome-shortcuts/src/suggestion_engine/suggestion_engine.js ~/code/chrome-dmenu/src/suggestion_engine/suggestion_engine.js
 cp ~/code/chrome-shortcuts/src/suggestion_engine/suggestion_providers.js ~/code/chrome-dmenu/src/suggestion_engine/suggestion_providers.js
 hx
+cp ~/code/chrome-shortcuts/extra/website/index.html ~/code/chrome-shortcuts.website/index.html
+cp ~/code/chrome-shortcuts/extra/website/index.fr.html ~/code/chrome-shortcuts.website/fr/index.html
+cp ~/code/chrome-dmenu/extra/website/index.html ~/code/chrome-dmenu.website/index.html
+cp ~/code/chrome-mpv/extra/website/index.html ~/code/chrome-mpv.website/index.html
+cp ~/code/chrome-nano/extra/website/index.html ~/code/chrome-nano.website/index.html
+cp ~/code/chrome-pandoc/extra/website/index.html ~/code/chrome-pandoc.website/index.html
+cp ~/code/chrome-shell/extra/website/chrome-shell.html ~/code/chrome-shell.website/chrome-shell.html
+cp ~/code/batch/extra/website/batch.html ~/code/batch.website/batch.html
+cp ~/code/pw/extra/website/pw.html ~/code/pw.website/pw.html
 sway
 brew install kakoune-lsp/kakoune-lsp/kakoune-lsp
 brew install possatti/possatti/pokemonsay

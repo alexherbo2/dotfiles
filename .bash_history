@@ -667,6 +667,8 @@ ls
 cd
 cd -
 cd ~
+vim
+vi
 pwd
 nmtui
 exit 0

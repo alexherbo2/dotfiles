@@ -280,6 +280,7 @@ cp ~/code/chrome-shortcuts/package.json ~/code/chrome-nano/package.json
 cp ~/code/chrome-shortcuts/package.json ~/code/chrome-pandoc/package.json
 for dir in ~/code/chrome-shortcuts ~/code/chrome-dmenu ~/code/chrome-mpv ~/code/chrome-nano ~/code/chrome-pandoc; do cd "$dir" && git add . && git commit -m 'Bump all dependencies'; done && cd
 for dir in ~/code/chrome-shortcuts ~/code/chrome-dmenu ~/code/chrome-mpv ~/code/chrome-nano ~/code/chrome-pandoc; do cd "$dir" && git push; done && cd
+for dir in ~/code/chrome-shortcuts ~/code/chrome-shortcuts.website; do cd "$dir" && git push; done && cd
 cp ~/code/chrome-shortcuts/src/recent_tabs_manager.js ~/code/chrome-dmenu/src/recent_tabs_manager.js
 cp ~/code/chrome-shortcuts/src/lib/mru.js ~/code/chrome-dmenu/src/lib/mru.js
 cp ~/code/chrome-shortcuts/src/lib/linked_list.js ~/code/chrome-dmenu/src/lib/linked_list.js

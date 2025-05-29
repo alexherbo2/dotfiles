@@ -274,6 +274,11 @@ cp ~/code/chrome-shortcuts/extra/website/style.css ~/code/batch.website/batch.cs
 cp ~/code/chrome-shortcuts/extra/website/style.css ~/code/pw/extra/website/pw.css
 cp ~/code/chrome-shortcuts/extra/website/style.css ~/code/pw.website/pw.css
 for dir in ~/code/chrome-shortcuts ~/code/chrome-shell ~/code/chrome-dmenu ~/code/chrome-mpv ~/code/chrome-nano ~/code/chrome-pandoc ~/code/batch ~/code/pw ~/code/chrome-shortcuts.website ~/code/chrome-shell.website ~/code/chrome-dmenu.website ~/code/chrome-mpv.website ~/code/chrome-nano.website ~/code/chrome-pandoc.website ~/code/batch.website ~/code/pw.website; do cd "$dir" && git add . && git commit -m 'Update shared styles'; done && cd
+cp ~/code/chrome-shortcuts/package.json ~/code/chrome-dmenu/package.json
+cp ~/code/chrome-shortcuts/package.json ~/code/chrome-mpv/package.json
+cp ~/code/chrome-shortcuts/package.json ~/code/chrome-nano/package.json
+cp ~/code/chrome-shortcuts/package.json ~/code/chrome-pandoc/package.json
+for dir in ~/code/chrome-shortcuts ~/code/chrome-dmenu ~/code/chrome-mpv ~/code/chrome-nano ~/code/chrome-pandoc; do cd "$dir" && git add . && git commit -m 'Bump all dependencies'; done && cd
 cp ~/code/chrome-shortcuts/src/recent_tabs_manager.js ~/code/chrome-dmenu/src/recent_tabs_manager.js
 cp ~/code/chrome-shortcuts/src/lib/mru.js ~/code/chrome-dmenu/src/lib/mru.js
 cp ~/code/chrome-shortcuts/src/lib/linked_list.js ~/code/chrome-dmenu/src/lib/linked_list.js
@@ -627,6 +632,7 @@ git rebase --root --autostash -x 'git commit --amend --author="Mathieu Ablasou <
 git commit --amend
 git commit -m 'Initial commit'
 git commit -m 'Bump version to 0.1.0'
+git commit -m 'Bump all dependencies'
 git remote add origin git@github.com:taupiqueur/taupiqueur.git
 git remote add origin git@github.com:alexherbo2/alexherbo2.git
 git remote add upstream git@github.com:taupiqueur/taupiqueur.git

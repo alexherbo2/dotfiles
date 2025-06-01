@@ -422,6 +422,10 @@ xattr -rc ~/docs/chrome_extensions
 sudo xattr -rc ~/docs/chrome_extensions
 xattr -rc ~/code/chrome-shortcuts.assets
 sudo xattr -rc ~/code/chrome-shortcuts.assets
+find ~/code/chrome-shortcuts.assets -name '*.DS_Store'
+xattr -rc ~/code/chrome-shortcuts.website
+sudo xattr -rc ~/code/chrome-shortcuts.website
+find ~/code/chrome-shortcuts.website -name '*.DS_Store'
 xattr -rc ~/code/chrome-shortcuts
 sudo xattr -rc ~/code/chrome-shortcuts
 find ~/code/chrome-shortcuts -name '*.DS_Store'

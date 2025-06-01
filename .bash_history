@@ -676,6 +676,7 @@ br
 broot
 gitui
 ls
+ls -a
 cd
 cd -
 cd ~

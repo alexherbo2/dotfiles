@@ -697,7 +697,9 @@ doas mkfs.ext4 /dev/sdb
 doas wipefs -a /dev/sdb
 doas dd if=alpine-standard-3.21.2-aarch64.iso of=/dev/sdb
 ls
+ls -l
 ls -a
+ls -la
 cd
 cd -
 cd ~

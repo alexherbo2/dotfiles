@@ -690,6 +690,12 @@ sudo dd if=alpine-standard-3.21.2-aarch64.iso of=/dev/sda
 sudo mkfs.ext4 /dev/sdb
 sudo wipefs -a /dev/sdb
 sudo dd if=alpine-standard-3.21.2-aarch64.iso of=/dev/sdb
+doas mkfs.ext4 /dev/sda
+doas wipefs -a /dev/sda
+doas dd if=alpine-standard-3.21.2-aarch64.iso of=/dev/sda
+doas mkfs.ext4 /dev/sdb
+doas wipefs -a /dev/sdb
+doas dd if=alpine-standard-3.21.2-aarch64.iso of=/dev/sdb
 ls
 ls -a
 cd

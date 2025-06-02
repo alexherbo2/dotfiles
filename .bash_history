@@ -317,6 +317,7 @@ brew services start borders
 git clone https://github.com/koekeishiya/yabai.git ~/.local/share/github.com/koekeishiya/yabai
 git clone https://github.com/koekeishiya/skhd.git ~/.local/share/github.com/koekeishiya/skhd
 git clone https://github.com/koekeishiya/dotfiles.git ~/.local/share/github.com/koekeishiya/dotfiles
+brew link --overwrite node
 brew link --force curl
 brew link --force ncurses
 alacritty msg create-window

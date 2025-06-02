@@ -543,6 +543,7 @@ chown -R taupiqueur:users home storage shared
 chown -R taupiqueur:staff home storage shared
 sudo chown -R taupiqueur:users home storage shared
 sudo chown -R taupiqueur:staff home storage shared
+doas chown -R taupiqueur:taupiqueur /home/taupiqueur
 xattr -rc home storage shared
 sudo xattr -rc home storage shared
 mkdir -p mnt/Disk
@@ -551,6 +552,10 @@ sudo mount /dev/disk/by-label/Disk mnt/Disk
 sudo mount /dev/disk/by-label/USB mnt/USB
 sudo umount /dev/disk/by-label/Disk
 sudo umount /dev/disk/by-label/USB
+doas mount /dev/disk/by-label/Disk mnt/Disk
+doas mount /dev/disk/by-label/USB mnt/USB
+doas umount mnt/Disk
+doas umount mnt/USB
 rsync home storage shared guest:mnt/Disk
 rsync home shared guest:mnt/USB
 rsync home storage shared /Volumes/Disk
@@ -676,6 +681,15 @@ ggc
 br
 broot
 gitui
+xattr -c alpine-standard-3.21.2-aarch64.iso
+shasum -a 256 alpine-standard-3.21.2-aarch64.iso
+echo alpine-standard-3.21.2-aarch64.iso 8aaf23ac55a0b2576c54d3bb8ad48fe81bd14bdc4def2da2f2d9a8113c66328e
+sudo mkfs.ext4 /dev/sda
+sudo wipefs -a /dev/sda
+sudo dd if=alpine-standard-3.21.2-aarch64.iso of=/dev/sda
+sudo mkfs.ext4 /dev/sdb
+sudo wipefs -a /dev/sdb
+sudo dd if=alpine-standard-3.21.2-aarch64.iso of=/dev/sdb
 ls
 ls -a
 cd

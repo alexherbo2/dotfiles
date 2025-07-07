@@ -526,6 +526,8 @@ xattr -rc ~/shorts
 sudo xattr -rc ~/shorts
 find ~/shorts -name '*.DS_Store'
 scp -r ~/storage/shorts phaazon:
+mkdir docs
+scp ~/docs/notes.txt phaazon:docs
 rsync --exclude=.git/ ~/storage/shorts phaazon:
 git remote add origin git@phaazon:shorts.git
 mkdir bin

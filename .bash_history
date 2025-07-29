@@ -297,6 +297,9 @@ cp ~/code/chrome-shell/extra/website/chrome-shell.html ~/code/chrome-shell.websi
 cp ~/code/batch/extra/website/batch.html ~/code/batch.website/batch.html
 cp ~/code/pw/extra/website/pw.html ~/code/pw.website/pw.html
 sway
+cp ~/code/chrome-dmenu/src/manual/manual.js ~/code/chrome-mpv/src/manual/manual.js
+cp ~/code/chrome-dmenu/src/manual/manual.js ~/code/chrome-nano/src/manual/manual.js
+cp ~/code/chrome-dmenu/src/manual/manual.js ~/code/chrome-pandoc/src/manual/manual.js
 brew install kakoune-lsp/kakoune-lsp/kakoune-lsp
 brew install possatti/possatti/pokemonsay
 brew install koekeishiya/formulae/yabai

@@ -404,6 +404,8 @@ kak -l
 nnn
 cd ~/docs/notes
 cd ~/Downloads
+cd ~/storage/photos
+cd ~/storage/pictures
 cd ~/storage/downloads
 nnn ~/Downloads
 nnn ~/storage/downloads

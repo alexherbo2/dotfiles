@@ -510,6 +510,9 @@ git clone https://github.com/elbywan/crystalline.git ~/.local/share/github.com/e
 cd ~/.local/share/github.com/elbywan/crystalline
 brew link --force llvm
 shards install
+cd ~/home
+cd ~/storage
+mkdir fonts
 mkdir bin
 crystal build src/crystalline.cr -o bin/crystalline --release --no-debug --progress -Dpreview_mt
 install bin/crystalline ~/.local/bin

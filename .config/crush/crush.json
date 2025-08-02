@@ -1,0 +1,85 @@
+{
+  "$schema": "https://charm.land/crush.json",
+  "lsp": {
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"]
+    },
+    "sh": {
+      "command": "bash-language-server",
+      "args": ["start"]
+    },
+    "shellscript": {
+      "command": "bash-language-server",
+      "args": ["start"]
+    },
+    "elixir": {
+      "command": "elixir-ls",
+      "args": []
+    },
+    "go": {
+      "command": "gopls",
+      "args": []
+    },
+    "crystal": {
+      "command": "crystalline",
+      "args": ["--stdio"]
+    },
+    "javascript": {
+      "command": "typescript-language-server",
+      "args": ["--stdio"]
+    },
+    "typescript": {
+      "command": "typescript-language-server",
+      "args": ["--stdio"]
+    },
+    "kotlin": {
+      "command": "kotlin-language-server",
+      "args": []
+    },
+    "ruby": {
+      "command": "solargraph",
+      "args": ["stdio"]
+    },
+    "rust": {
+      "command": "rust-analyzer",
+      "args": []
+    },
+    "toml": {
+      "command": "taplo",
+      "args": ["lsp", "stdio"]
+    },
+    "yaml": {
+      "command": "yaml-language-server",
+      "args": ["--stdio"]
+    },
+    "json": {
+      "command": "vscode-json-language-server",
+      "args": ["--stdio"]
+    },
+    "html": {
+      "command": "vscode-html-language-server",
+      "args": ["--stdio"]
+    },
+    "css": {
+      "command": "vscode-css-language-server",
+      "args": ["--stdio"]
+    },
+    "lua": {
+      "command": "lua-language-server",
+      "args": []
+    },
+    "markdown": {
+      "command": "marksman",
+      "args": ["server"]
+    },
+    "zig": {
+      "command": "zls",
+      "args": []
+    },
+    "nix": {
+      "command": "nil",
+      "args": []
+    }
+  }
+}

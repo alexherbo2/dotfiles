@@ -52,6 +52,10 @@ name = 'elixir'
 language-servers = ['elixir-ls', 'typos-lsp']
 
 [[language]]
+name = 'go'
+language-servers = ['gopls', 'typos-lsp']
+
+[[language]]
 name = 'bash'
 language-servers = ['bash-language-server', 'typos-lsp']
 

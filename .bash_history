@@ -513,6 +513,7 @@ cd ~/home
 cd ~/storage
 mkdir fonts
 cd ~/home/fonts
+ls ~/home/fonts
 mkdir ~/.local/share/fonts
 ls ~/.local/share/fonts
 cd ~/.local/share/fonts

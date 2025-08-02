@@ -234,6 +234,17 @@ git push git@github.com:alexherbo2/taupiqueur-shorts.git
 cp ~/code/chrome-shortcuts/src/manual/manual.css ~/code/chrome-shortcuts.website/manual.css
 cp ~/code/chrome-shortcuts/extra/website/style.css ~/code/chrome-shortcuts.website/style.css
 cp ~/code/chrome-shortcuts/extra/website/card.html ~/code/chrome-shortcuts.website/card.html
+ln -s ~/dotfiles~/.ssh ~
+ln -s ~/dotfiles~/.hushlogin ~
+ln -s ~/dotfiles~/.hushlogin ~
+ln -s ~/dotfiles~/.bash_profile ~
+ln -s ~/dotfiles~/.inputrc ~
+ln -s ~/dotfiles~/.bash_history ~/.bash_history~
+ln -s ~/dotfiles~/.bashrc ~
+ln -s ~/dotfiles~/Applications/* ~/Applications
+ln -s ~/dotfiles~/.config/* ~/.config
+ln -s ~/dotfiles~/.local/bin/* ~/.local/bin
+ln -s ~/dotfiles~/.local/share/* ~/.local/share
 ln -s ../comments.html
 ln -s ../favicon.svg
 ln -s ../manual.css

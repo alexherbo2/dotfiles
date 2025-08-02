@@ -514,6 +514,7 @@ cd ~/storage
 mkdir fonts
 cd ~/home/fonts
 mkdir ~/.local/share/fonts
+ls ~/.local/share/fonts
 cd ~/.local/share/fonts
 unzip ~/shared/kanto/home/fonts/IBM_Plex_Sans.zip
 unzip ~/shared/kanto/home/fonts/IBM_Plex_Mono.zip

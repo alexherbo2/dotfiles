@@ -513,6 +513,10 @@ shards install
 cd ~/home
 cd ~/storage
 mkdir fonts
+cd ~/home/fonts
+unzip ~/shared/kanto/home/fonts/IBM_Plex_Sans.zip
+unzip ~/shared/kanto/home/fonts/IBM_Plex_Mono.zip
+unzip ~/shared/kanto/home/fonts/Galdeano.zip
 mkdir bin
 crystal build src/crystalline.cr -o bin/crystalline --release --no-debug --progress -Dpreview_mt
 install bin/crystalline ~/.local/bin

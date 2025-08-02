@@ -246,7 +246,6 @@ ln -s ~/dotfiles~/Applications/* ~/Applications
 ln -s ~/dotfiles~/.config/* ~/.config
 ln -s ~/dotfiles~/.local/bin/* ~/.local/bin
 ln -s ~/dotfiles~/.local/share/* ~/.local/share
-ls -l ~
 ls -l ~/Applications
 ls -l ~/.config
 ls -l ~/.local

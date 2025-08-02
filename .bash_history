@@ -518,6 +518,7 @@ cd ~/.local/share/fonts
 unzip ~/shared/kanto/home/fonts/IBM_Plex_Sans.zip
 unzip ~/shared/kanto/home/fonts/IBM_Plex_Mono.zip
 unzip ~/shared/kanto/home/fonts/Galdeano.zip
+fc-cache
 mkdir bin
 crystal build src/crystalline.cr -o bin/crystalline --release --no-debug --progress -Dpreview_mt
 install bin/crystalline ~/.local/bin

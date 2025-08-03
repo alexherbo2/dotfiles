@@ -42,8 +42,6 @@ export CDPATH=.:~:~/code:$CDPATH
 
 # Locales
 export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-export LC_CTYPE=en_US.UTF-8
 
 # Desktop environment
 # https://wiki.archlinux.org/title/Qt

@@ -38,7 +38,6 @@ export HISTSIZE=-1
 
 # Paths
 export PATH=~/Applications:~/.local/bin:~/.cargo/bin:$PATH
-export CDPATH=.:~:~/code:$CDPATH
 
 # Locales
 export LANG=en_US.UTF-8

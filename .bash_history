@@ -735,6 +735,10 @@ doas wipefs -a /dev/sdb
 doas dd if=alpine-standard-3.21.2-aarch64.iso of=/dev/sdb
 exa
 eza
+ls /dev/sd*
+ls -l mnt
+ls -l mnt/Disk
+ls -l mnt/USB
 ls
 ls -l
 ls -a

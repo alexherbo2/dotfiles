@@ -51,8 +51,7 @@ exec foot --server # Terminal emulator
 font pango:IBM Plex Mono 11
 
 # Cursor theme
-# seat seat0 xcursor_theme Vanilla-DMZ 24
-seat seat0 xcursor_theme Vanilla-DMZ 32
+seat seat0 xcursor_theme Vanilla-DMZ 24
 
 # Color scheme
 # client.<class> <border> <background> <text> <indicator> <child_border>

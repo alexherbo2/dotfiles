@@ -573,6 +573,7 @@ sshfs host: shared/kanto
 ngrok tcp 22
 ngrok http 80
 ssh taupiqueur@7.tcp.eu.ngrok.io -p 14378
+swaymsg exit
 swaymsg reload
 swaymsg output eDP-1 disable
 chmod go= ~/.ssh/id_ed25519

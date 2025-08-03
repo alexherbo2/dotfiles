@@ -317,6 +317,8 @@ sway
 cp ~/code/chrome-dmenu/src/manual/manual.js ~/code/chrome-mpv/src/manual/manual.js
 cp ~/code/chrome-dmenu/src/manual/manual.js ~/code/chrome-nano/src/manual/manual.js
 cp ~/code/chrome-dmenu/src/manual/manual.js ~/code/chrome-pandoc/src/manual/manual.js
+cp ~/.config/crush/crush.json crush.json
+cp ~/dotfiles~/.config/crush/crush.json ~/.config/crush/crush.json
 brew install kakoune-lsp/kakoune-lsp/kakoune-lsp
 brew install possatti/possatti/pokemonsay
 brew install koekeishiya/formulae/yabai

@@ -683,6 +683,7 @@ git commit --amend --author='Mathieu Ablasou <alexherbo2@gmail.com>' --no-edit
 git rebase --root --autostash -x 'git commit --amend --author="Mathieu Ablasou <alexherbo2@gmail.com>" --no-edit'
 git commit --amend
 git commit -m 'Initial commit'
+sed -i 's/0.1.0/0.1.0/' manifest.json
 git commit -m 'Bump version to 0.1.0'
 git commit -m 'Bump all dependencies'
 git remote add origin git@github.com:taupiqueur/taupiqueur.git

@@ -40,6 +40,8 @@ git clone https://git.sr.ht/~hadronized/config ~/.local/share/git.sr.ht/~hadroni
 cd ~/.local/share/git.sr.ht/~hadronized/kak-tree-sitter
 cd ~/.local/share/git.sr.ht/~hadronized/kak-tree-sitter/kak-tree-sitter
 cd ~/.local/share/git.sr.ht/~hadronized/kak-tree-sitter/ktsctl
+cargo install --path kak-tree-sitter
+cargo install --path ktsctl
 git clone https://github.com/phaazon/kak-tree-sitter.git ~/.local/share/github.com/phaazon/kak-tree-sitter
 cd ~/.local/share/github.com/phaazon/kak-tree-sitter/kak-tree-sitter
 ktsctl fetch -a
@@ -94,6 +96,7 @@ git clone https://gitlab.com/vbauerster/dotfiles.git ~/.local/share/gitlab.com/v
 git clone https://github.com/tekumara/typos-lsp.git ~/.local/share/github.com/tekumara/typos-lsp
 cd ~/.local/share/github.com/tekumara/typos-lsp
 cd ~/.local/share/github.com/tekumara/typos-lsp/crates/typos-lsp
+cargo install --path crates/typos-lsp
 git clone https://github.com/mawww/config.git ~/.local/share/github.com/mawww/config
 git clone https://github.com/occivink/config.git ~/.local/share/github.com/occivink/config
 git clone https://github.com/phaazon/config.git ~/.local/share/github.com/phaazon/config
@@ -534,6 +537,9 @@ mpv https://twitch.tv/randomwatchertv
 mpv https://twitch.tv/kayanetv
 cd ~/.local/share/github.com/helix-editor/helix
 cargo build --release
+cargo install --path .
+make
+make build
 cargo install --locked --path helix-term
 install ~/.cargo/bin/hx /opt/homebrew/bin
 export GIT_SSH_COMMAND='ssh -i ~/.ssh/id_ed25519_alexherbo2'

@@ -423,6 +423,8 @@ kak ~/youtube/channels/bazar-du-grenier/list.txt
 kak
 kak -n
 kak -l
+kak -ro
+kak -clear
 nnn
 cd ~/docs/notes
 cd ~/Downloads

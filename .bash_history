@@ -347,6 +347,7 @@ brew link --force curl
 brew link --force ncurses
 alacritty msg create-window
 rsync 'host:Library/Application Support/Google/Chrome/.' .config/chromium
+rm -Rf .config/chromium
 open .
 open /System/Applications/Utilities/Terminal.app/Contents/Resources/Fonts
 open target/release

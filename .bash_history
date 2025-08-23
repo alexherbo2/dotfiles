@@ -23,6 +23,7 @@ alacritty msg config -r
 alacritty msg config -r -w -1
 alacritty msg config "$(find -L ~/.config/alacritty/colors -type f -name '*.toml' | fzy | xargs cat)" -w -1
 alacritty msg config "$(find -L ~/.config/alacritty/colors -type f -name '*.toml' | fzy | xargs cat)"
+sudo launchctl stop com.apple.rcd
 kak -s megumin -e 'rename-client chomusuke'
 kak -c megumin
 git clone https://github.com/zed-industries/zed.git ~/.local/share/github.com/zed-industries/zed

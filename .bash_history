@@ -25,6 +25,7 @@ alacritty msg config "$(find -L ~/.config/alacritty/colors -type f -name '*.toml
 alacritty msg config "$(find -L ~/.config/alacritty/colors -type f -name '*.toml' | fzy | xargs cat)"
 sudo launchctl stop com.apple.rcd
 sudo launchctl disable "gui/$(id -u)/com.apple.rcd"
+sudo launchctl print-disabled "gui/$(id -u)"
 kak -s megumin -e 'rename-client chomusuke'
 kak -c megumin
 git clone https://github.com/zed-industries/zed.git ~/.local/share/github.com/zed-industries/zed

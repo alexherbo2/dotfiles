@@ -7,15 +7,15 @@
 # dependencies: ["fifo"]
 # doc: yes
 # tests: no
-declare-option str ls_command sh
-declare-option str-list ls_args -c %{
+decl str ls_command sh
+decl str-list ls_args -c %{
   echo ../
   ls -A -p -L -- "$1"
 }
-declare-option str ls_working_directory
+decl str ls_working_directory
 
-define-command ls -params 0..1 %{
-  evaluate-commands %sh{
+def ls -params 0..1 %{
+  eval %sh{
     case "$#" in
       1)
         if [ -d "$1" ]
@@ -35,34 +35,34 @@ define-command ls -params 0..1 %{
   }
 }
 
-define-command -hidden ls_impl -params 1 %{
+def -hidden ls_impl -params 1 %{
   fifo -name '*ls*' -- %opt{ls_command} %opt{ls_args} -- %arg{1}
-  set-option buffer ls_working_directory %sh{
+  set buffer ls_working_directory %sh{
     realpath -- "$1"
   }
 }
 
 complete-command ls file
 
-define-command -hidden jump_to_files_or_directories %{
-  evaluate-commands -draft %{
-    execute-keys 'x<a-s><a-K>^\n<ret>H'
-    evaluate-commands -draft -verbatim try %{
-      execute-keys '<a-,><a-K>/\z<ret>'
-      evaluate-commands -itersel %{
-        evaluate-commands -draft -verbatim edit -existing -- "%opt{ls_working_directory}/%val{selection}"
+def -hidden jump_to_files_or_directories %{
+  eval -draft %{
+    exec 'x<a-s><a-K>^\n<ret>H'
+    eval -draft -verbatim try %{
+      exec '<a-,><a-K>/\z<ret>'
+      eval -itersel %{
+        eval -draft -verbatim edit -existing -- "%opt{ls_working_directory}/%val{selection}"
       }
     }
-    evaluate-commands -draft -verbatim try %{
-      execute-keys ',<a-k>/\z<ret>'
-      evaluate-commands -client %val{client} -verbatim ls_impl "%opt{ls_working_directory}/%val{selection}"
+    eval -draft -verbatim try %{
+      exec ',<a-k>/\z<ret>'
+      eval -client %val{client} -verbatim ls_impl "%opt{ls_working_directory}/%val{selection}"
     } catch %{
-      evaluate-commands -client %val{client} -verbatim edit -existing -- "%opt{ls_working_directory}/%val{selection}"
+      eval -client %val{client} -verbatim edit -existing -- "%opt{ls_working_directory}/%val{selection}"
     }
   }
 }
 
-define-command -hidden jump_to_files_or_directories_and_close_ls_buffer %{
+def -hidden jump_to_files_or_directories_and_close_ls_buffer %{
   jump_to_files_or_directories
   delete-buffer '*ls*'
 }

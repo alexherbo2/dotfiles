@@ -7,8 +7,8 @@
 # dependencies: ["ls"]
 # doc: yes
 # tests: no
-define-command explore -params 0..1 %{
-  evaluate-commands %sh{
+def explore -params 0..1 %{
+  eval %sh{
     case "$#" in
       1)
         echo 'ls %arg{1}'

@@ -7,10 +7,10 @@
 # dependencies: []
 # doc: yes
 # tests: no
-declare-option range-specs jump_ranges
-declare-option str-to-str-map jump_label_selection_map
-declare-option str-list jump_selections
-declare-option str-list jump_labels \
+decl range-specs jump_ranges
+decl str-to-str-map jump_label_selection_map
+decl str-list jump_selections
+decl str-list jump_labels \
   'aa' 'ab' 'ac' 'ad' 'ae' 'af' 'ag' 'ah' 'ai' 'aj' 'ak' 'al' 'am' 'an' 'ao' 'ap' 'aq' 'ar' 'as' 'at' 'au' 'av' 'aw' 'ax' 'ay' 'az' \
   'ba' 'bb' 'bc' 'bd' 'be' 'bf' 'bg' 'bh' 'bi' 'bj' 'bk' 'bl' 'bm' 'bn' 'bo' 'bp' 'bq' 'br' 'bs' 'bt' 'bu' 'bv' 'bw' 'bx' 'by' 'bz' \
   'ca' 'cb' 'cc' 'cd' 'ce' 'cf' 'cg' 'ch' 'ci' 'cj' 'ck' 'cl' 'cm' 'cn' 'co' 'cp' 'cq' 'cr' 'cs' 'ct' 'cu' 'cv' 'cw' 'cx' 'cy' 'cz' \
@@ -40,50 +40,50 @@ declare-option str-list jump_labels \
 
 set-face global JumpLabel 'black,bright-yellow+F'
 
-define-command enter_jump_mode_with_replace_select_mode %{
+def enter_jump_mode_with_replace_select_mode %{
   enter_jump_mode 'jump (replace):' %{
     try %{
-      execute-keys -save-regs 's' '<esc><a-,>"sZz"s<a-z>a<esc>'
+      exec -save-regs 's' '<esc><a-,>"sZz"s<a-z>a<esc>'
     } catch %{
-      execute-keys '<esc>z<esc>'
+      exec '<esc>z<esc>'
     }
   }
 }
 
-define-command enter_jump_mode_with_extend_select_mode %{
+def enter_jump_mode_with_extend_select_mode %{
   enter_jump_mode 'jump (extend):' %{
-    execute-keys -save-regs 's' '<esc>"sZ,<a-z>u"s<a-z>a<esc>'
+    exec -save-regs 's' '<esc>"sZ,<a-z>u"s<a-z>a<esc>'
   }
 }
 
-define-command enter_jump_mode_with_append_select_mode %{
+def enter_jump_mode_with_append_select_mode %{
   enter_jump_mode 'jump (append):' %{
-    execute-keys -save-regs 's' '<esc>"sZz"s<a-z>a<esc>'
+    exec -save-regs 's' '<esc>"sZz"s<a-z>a<esc>'
   }
 }
 
-define-command enter_jump_mode -params 2 %{
+def enter_jump_mode -params 2 %{
   create_jump_state_from_words_in_viewport
   create_jump_label_selection_map_option_buffer
-  execute-keys 'ga'
+  exec 'ga'
   render_jump_labels
   open_jump_prompt %arg{1} %arg{2}
 }
 
-define-command exit_jump_mode %{
+def exit_jump_mode %{
   unrender_jump_labels
   close_jump_label_selection_map_option_buffer
 }
 
-define-command render_jump_labels %{
+def render_jump_labels %{
   add-highlighter window/jump_ranges replace-ranges jump_ranges
 }
 
-define-command unrender_jump_labels %{
+def unrender_jump_labels %{
   remove-highlighter window/jump_ranges
 }
 
-define-command open_jump_prompt -params 2 %{
+def open_jump_prompt -params 2 %{
   prompt %arg{1} %{
     exit_jump_mode
   } -on-change %{
@@ -93,72 +93,72 @@ define-command open_jump_prompt -params 2 %{
   }
 }
 
-define-command handle_jump_input -params 2 %{
-  evaluate-commands -save-regs '^/' -draft -verbatim try %{
+def handle_jump_input -params 2 %{
+  eval -save-regs '^/' -draft -verbatim try %{
     open_jump_label_selection_map_option_buffer
-    set-register / "\A\Q%arg{1}\E=(\d+\.\d+,\d+\.\d+)\z"
-    execute-keys 's<ret>'
-    evaluate-commands -draft -client %val{client} %exp{
+    reg / "\A\Q%arg{1}\E=(\d+\.\d+,\d+\.\d+)\z"
+    exec 's<ret>'
+    eval -draft -client %val{client} %exp{
       select %reg{1}
-      execute-keys -save-regs '' 'Z'
+      exec -save-regs '' 'Z'
     }
-    evaluate-commands -client %val{client} %arg{2}
+    eval -client %val{client} %arg{2}
   }
 }
 
-define-command create_jump_state_from_words_in_viewport %{
+def create_jump_state_from_words_in_viewport %{
   create_jump_state_from_selections_in_viewport %{
-    execute-keys 's\w+<ret><a-i>w'
+    exec 's\w+<ret><a-i>w'
   }
 }
 
-define-command create_jump_state_from_selections_in_viewport -params 1 %{
-  evaluate-commands -draft %{
-    execute-keys 'gtGbx'
-    evaluate-commands %arg{1}
-    execute-keys '<a-k>\A.{2,}\z<ret>)'
-    evaluate-commands -client %val{client} -verbatim create_jump_state %val{selections_desc}
+def create_jump_state_from_selections_in_viewport -params 1 %{
+  eval -draft %{
+    exec 'gtGbx'
+    eval %arg{1}
+    exec '<a-k>\A.{2,}\z<ret>)'
+    eval -client %val{client} -verbatim create_jump_state %val{selections_desc}
   }
 }
 
-define-command create_jump_state -params .. %{
-  evaluate-commands -save-regs '"ab' %{
-    set-register a %arg{@}
-    set-register b %opt{jump_labels}
-    evaluate-commands -draft %{
+def create_jump_state -params .. %{
+  eval -save-regs '"ab' %{
+    reg a %arg{@}
+    reg b %opt{jump_labels}
+    eval -draft %{
       edit -scratch
-      execute-keys '"a<a-P>a<space><c-r>b<esc>'
-      evaluate-commands -itersel %{
-        execute-keys 's\A(\d+)\.(\d+),(\d+)\.(\d+) (.{2})\z<ret>'
-        set-register dquote %exp{
-          set-option -add window jump_ranges "%reg{1}.%reg{2}+2|{JumpLabel}%reg{5}"
-          set-option -add window jump_label_selection_map "%reg{5}=%reg{1}.%reg{2},%reg{3}.%reg{4}"
+      exec '"a<a-P>a<space><c-r>b<esc>'
+      eval -itersel %{
+        exec 's\A(\d+)\.(\d+),(\d+)\.(\d+) (.{2})\z<ret>'
+        reg dquote %exp{
+          set -add window jump_ranges "%reg{1}.%reg{2}+2|{JumpLabel}%reg{5}"
+          set -add window jump_label_selection_map "%reg{5}=%reg{1}.%reg{2},%reg{3}.%reg{4}"
         }
-        execute-keys 'R'
+        exec 'R'
       }
-      execute-keys -save-regs '' '%y'
+      exec -save-regs '' '%y'
       delete-buffer
     }
-    set-option window jump_ranges %val{timestamp}
-    set-option window jump_label_selection_map
-    evaluate-commands %reg{dquote}
+    set window jump_ranges %val{timestamp}
+    set window jump_label_selection_map
+    eval %reg{dquote}
   }
 }
 
-define-command create_jump_label_selection_map_option_buffer %{
-  evaluate-commands -save-regs '"' %{
-    set-register dquote %opt{jump_label_selection_map}
+def create_jump_label_selection_map_option_buffer %{
+  eval -save-regs '"' %{
+    reg dquote %opt{jump_label_selection_map}
     edit -scratch "jump_label_selection_map@%val{client}.option"
-    execute-keys '<a-P>'
-    set-option buffer jump_selections %val{selections_desc}
+    exec '<a-P>'
+    set buffer jump_selections %val{selections_desc}
   }
 }
 
-define-command open_jump_label_selection_map_option_buffer %{
+def open_jump_label_selection_map_option_buffer %{
   edit -scratch "jump_label_selection_map@%val{client}.option"
   select %opt{jump_selections}
 }
 
-define-command close_jump_label_selection_map_option_buffer %{
+def close_jump_label_selection_map_option_buffer %{
   delete-buffer "jump_label_selection_map@%val{client}.option"
 }

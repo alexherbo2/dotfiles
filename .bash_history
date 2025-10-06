@@ -257,6 +257,9 @@ ls -l ~/.config
 ls -l ~/.local
 ls -l ~/.local/bin
 ls -l ~/.local/share
+ln -s ../basic_theme.json
+ln -s ../classic_theme.json
+ln -s ../themes.js
 ln -s ../comments.html
 ln -s ../favicon.svg
 ln -s ../manual.css
@@ -310,6 +313,11 @@ cp ~/code/chrome-shortcuts/src/lib/linked_list.js ~/code/chrome-dmenu/src/lib/li
 cp ~/code/chrome-shortcuts/src/suggestion_engine/suggestion_engine.js ~/code/chrome-dmenu/src/suggestion_engine/suggestion_engine.js
 cp ~/code/chrome-shortcuts/src/suggestion_engine/suggestion_providers.js ~/code/chrome-dmenu/src/suggestion_engine/suggestion_providers.js
 hx
+cp ~/code/chrome-shortcuts/extra/website/themes.html ~/code/chrome-shortcuts.website/themes.html
+cp ~/code/chrome-shortcuts/extra/website/themes.fr.html ~/code/chrome-shortcuts.website/fr/themes.html
+cp ~/code/chrome-shortcuts/extra/website/basic_theme.json ~/code/chrome-shortcuts.website/basic_theme.json
+cp ~/code/chrome-shortcuts/extra/website/classic_theme.json ~/code/chrome-shortcuts.website/classic_theme.json
+cp ~/code/chrome-shortcuts/extra/website/themes.js ~/code/chrome-shortcuts.website/themes.js
 cp ~/code/chrome-shortcuts/extra/website/index.html ~/code/chrome-shortcuts.website/index.html
 cp ~/code/chrome-shortcuts/extra/website/index.fr.html ~/code/chrome-shortcuts.website/fr/index.html
 cp ~/code/chrome-dmenu/extra/website/index.html ~/code/chrome-dmenu.website/index.html

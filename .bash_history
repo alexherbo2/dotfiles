@@ -694,6 +694,7 @@ git rebase -i 'c879d5592e5aba983cb1e2a9ca804d26c5fefe68^'
 git rebase -i ''
 git rebase --continue
 git rebase --abort
+git diff
 git add .
 git push
 git push -u origin master

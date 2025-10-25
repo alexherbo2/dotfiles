@@ -260,6 +260,7 @@ ls -l ~/.local/share
 ln -s ../basic_theme.json
 ln -s ../classic_theme.json
 ln -s ../the_world_theme.json
+ln -s ../the_world_theme.css
 ln -s ../themes.js
 ln -s ../comments.html
 ln -s ../favicon.svg
@@ -319,6 +320,7 @@ cp ~/code/chrome-shortcuts/extra/website/themes.fr.html ~/code/chrome-shortcuts.
 cp ~/code/chrome-shortcuts/extra/website/basic_theme.json ~/code/chrome-shortcuts.website/basic_theme.json
 cp ~/code/chrome-shortcuts/extra/website/classic_theme.json ~/code/chrome-shortcuts.website/classic_theme.json
 cp ~/code/chrome-shortcuts/extra/website/the_world_theme.json ~/code/chrome-shortcuts.website/the_world_theme.json
+cp ~/code/chrome-shortcuts/extra/website/the_world_theme.css ~/code/chrome-shortcuts.website/the_world_theme.css
 cp ~/code/chrome-shortcuts/extra/website/themes.js ~/code/chrome-shortcuts.website/themes.js
 cp ~/code/chrome-shortcuts/extra/website/index.html ~/code/chrome-shortcuts.website/index.html
 cp ~/code/chrome-shortcuts/extra/website/index.fr.html ~/code/chrome-shortcuts.website/fr/index.html

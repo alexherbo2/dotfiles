@@ -402,6 +402,7 @@ rm ~/docs/bookmarks_*_*_*.html
 mv ~/Documents/bookmarks_*_*_*.html ~/docs
 ln ~/docs/chrome_extensions/*.png ~/code/chrome-shortcuts.assets
 ln ~/storage/pictures/the-world-by-akhts.png ~/code/chrome-shortcuts.assets
+ln ~/storage/pictures/the-world-by-akhts.webp ~/code/chrome-shortcuts.assets
 fd '\Ascreenshot_\d{4}-\d{2}-\d{2}_\d{2}:\d{2}:\d{2}(@\d{4}x\d{3}px)?\.png\z'
 fd '\Ascreenshot_\d{4}-\d{2}-\d{2}_\d{2}:\d{2}:\d{2}(@\d{4}x\d{3}px)?\.png\z' ~/docs/chrome_extensions
 fd '\Ascreenshot_\d{4}-\d{2}-\d{2}_\d{2}:\d{2}:\d{2}(@\d{4}x\d{3}px)?\.png\z' ~/code/chrome-shortcuts.assets

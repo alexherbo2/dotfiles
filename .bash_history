@@ -784,6 +784,8 @@ ls -la
 cd
 cd -
 cd ~
+cd ..
+cd ../..
 vi
 vim
 pwd

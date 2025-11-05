@@ -25,3 +25,6 @@ map -docstring 'enable soft-wrap mode' global unimpaired_right <tab> ':enable_so
 map -docstring 'enable read-only mode' global unimpaired_right r ':enable_readonly_mode<ret>'
 map -docstring 'add new line below' global unimpaired_right <space> <a-o>
 map -docstring 'jump to next buffer' global unimpaired_right b ':buffer-next<ret>'
+map -docstring 'jump to next file in same directory' global unimpaired_right n ':jump_to_next_file_or_directory<ret>'
+map -docstring 'jump to next reference' global unimpaired_right g ':jump_to_next_reference<ret>'
+map -docstring 'jump to next file' global unimpaired_right f ':jump_to_next_file<ret>'

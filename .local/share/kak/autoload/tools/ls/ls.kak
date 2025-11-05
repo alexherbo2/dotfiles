@@ -66,3 +66,17 @@ def -hidden jump_to_files_or_directories_and_close_ls_buffer %{
   jump_to_files_or_directories
   delete-buffer '*ls*'
 }
+
+def -hidden open_ls_buffer_and_jump_to_files_or_directories -params 1 %{
+  buffer '*ls*'
+  exec ",;%arg{1}gh"
+  jump_to_files_or_directories
+}
+
+def jump_to_next_file_or_directory %{
+  open_ls_buffer_and_jump_to_files_or_directories 'j'
+}
+
+def jump_to_previous_file_or_directory %{
+  open_ls_buffer_and_jump_to_files_or_directories 'k'
+}

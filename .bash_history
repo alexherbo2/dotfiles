@@ -617,8 +617,15 @@ chown -R taupiqueur:staff home storage shared
 sudo chown -R taupiqueur:users home storage shared
 sudo chown -R taupiqueur:staff home storage shared
 doas chown -R taupiqueur:taupiqueur /home/taupiqueur
+sudo chown -R taupiqueur:users .
+sudo chown -R taupiqueur:staff .
+doas chown -R taupiqueur:taupiqueur .
 xattr -rc home storage shared
 sudo xattr -rc home storage shared
+xattr -rc .
+sudo xattr -rc .
+find . -name '*.DS_Store'
+sudo find . -name '*.DS_Store'
 mkdir -p mnt/Disk
 mkdir -p mnt/USB
 sudo mount /dev/disk/by-label/Disk mnt/Disk

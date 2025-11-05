@@ -38,13 +38,9 @@ def jump_to_previous_file_or_directory %{
 }
 
 def jump_to_previous_file %{
-  try %{
-    buffer '*find*'
-    exec ',;kgh'
-    jump_to_files
-  } catch %{
-    explore
-  }
+  buffer '*find*'
+  exec ',;kgh'
+  jump_to_files
 }
 
 def jump_to_previous_reference %{

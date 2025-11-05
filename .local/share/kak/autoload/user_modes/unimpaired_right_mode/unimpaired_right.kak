@@ -32,13 +32,9 @@ def enable_soft_wrap %{
 }
 
 def jump_to_next_file_or_directory %{
-  try %{
-    buffer '*find*'
-    exec ',;jgh'
-    jump_to_files
-  } catch %{
-    explore
-  }
+  buffer '*ls*'
+  exec ',;jgh'
+  jump_to_files_or_directories
 }
 
 def jump_to_next_file %{

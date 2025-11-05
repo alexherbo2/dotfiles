@@ -7,26 +7,48 @@
 # dependencies: []
 # doc: yes
 # tests: no
-define-command show_line_numbers %{
+def show_line_numbers %{
   add-highlighter global/line_numbers number-lines -hlcursor -separator '  '
 }
 
-define-command enable_readonly_mode %{
+def enable_readonly_mode %{
   set-option buffer readonly yes
 }
 
-define-command show_non_ascii_character_highlights %{
+def show_non_ascii_character_highlights %{
   add-highlighter global/non_ascii_character_highlights ref non_ascii_characters
 }
 
-define-command show_whitespace_highlights %{
+def show_whitespace_highlights %{
   add-highlighter global/whitespace_highlights ref whitespace
 }
 
-define-command show_whitespace %{
+def show_whitespace %{
   add-highlighter global/whitespace show-whitespaces
 }
 
-define-command enable_soft_wrap %{
+def enable_soft_wrap %{
   add-highlighter global/soft_wrap wrap -indent -marker '↪'
+}
+
+def jump_to_next_file_or_directory %{
+  try %{
+    buffer '*find*'
+    exec ',;jgh'
+    jump_to_files
+  } catch %{
+    explore
+  }
+}
+
+def jump_to_next_file %{
+  buffer '*find*'
+  exec ',;jgh'
+  jump_to_files
+}
+
+def jump_to_next_reference %{
+  buffer '*grep*'
+  exec ',;jgh'
+  jump_to_references
 }

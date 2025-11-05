@@ -15,7 +15,13 @@ def explore -params 0..1 %{
         break
         ;;
       0)
-        echo 'ls %sh{dirname "$kak_buffile"}'
+        echo '
+          eval -save-regs "/" %{
+            reg / %exp{^\Q%sh{basename -- "$kak_buffile"}\E\n}
+            ls %sh{dirname "$kak_buffile"}
+            exec "genvv"
+          }
+        '
         break
         ;;
     esac

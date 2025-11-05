@@ -32,25 +32,3 @@ define-command -hidden jump_to_references %{
     }
   }
 }
-
-define-command -hidden jump_to_references_and_close_grep_buffer %{
-  jump_to_references
-  delete-buffer '*grep*'
-}
-
-define-command -hidden open_grep_buffer_and_jump_to_references -params 1 %{
-  buffer '*grep*'
-  execute-keys ",;%arg{1}gh"
-  jump_to_references
-}
-
-define-command jump_to_next_reference %{
-  open_grep_buffer_and_jump_to_references 'j'
-}
-
-define-command jump_to_previous_reference %{
-  open_grep_buffer_and_jump_to_references 'k'
-}
-
-alias global gn jump_to_next_reference
-alias global gp jump_to_previous_reference

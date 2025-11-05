@@ -54,8 +54,3 @@ define-command -hidden jump_to_buffers %{
     }
   }
 }
-
-define-command -hidden jump_to_buffers_and_close_buffer_list_buffer %{
-  jump_to_buffers
-  delete-buffer '*buffers*'
-}

@@ -37,7 +37,7 @@ def jump_to_next_file_or_directory %{
   jump_to_files_or_directories
 }
 
-def jump_to_next_file %{
+def jump_to_next_file_match %{
   buffer '*find*'
   exec ',;jgh'
   jump_to_files

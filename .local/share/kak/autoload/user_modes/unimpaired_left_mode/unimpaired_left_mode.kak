@@ -25,6 +25,6 @@ map -docstring 'disable read-only mode' global unimpaired_left r ':disable_reado
 map -docstring 'disable soft-wrap' global unimpaired_left <tab> ':disable_soft_wrap<ret>'
 map -docstring 'add new line above' global unimpaired_left <space> <a-O>
 map -docstring 'jump to previous buffer' global unimpaired_left b ':buffer-previous<ret>'
-map -docstring 'jump to previous file in same directory' global unimpaired_left n ':jump_to_previous_file_or_directory<ret>'
+map -docstring 'jump to previous file in directory' global unimpaired_left n ':jump_to_previous_file_or_directory<ret>'
 map -docstring 'jump to previous reference' global unimpaired_left g ':jump_to_previous_reference<ret>'
-map -docstring 'jump to previous file' global unimpaired_left f ':jump_to_previous_file<ret>'
+map -docstring 'jump to previous file match' global unimpaired_left f ':jump_to_previous_file_match<ret>'

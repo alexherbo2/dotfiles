@@ -8,6 +8,6 @@ def open_line_picker %{
     unlink "$fifo"
   } %{
     reg / "^\Q%val{text}\E\n"
-    exec 'genvv'
+    exec 'genvv<esc>'
   }
 }

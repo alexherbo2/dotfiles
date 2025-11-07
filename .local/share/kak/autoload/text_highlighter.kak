@@ -24,10 +24,6 @@ set-face global BrightMagentaHighlighter 'black,bright-magenta'
 set-face global BrightCyanHighlighter 'black,bright-cyan'
 set-face global BrightWhiteHighlighter 'black,bright-white'
 
-declare-option str color_completion %{
-  printf '%s\n' none black red green yellow blue magenta cyan white bright_black bright_red bright_green bright_yellow bright_blue bright_magenta bright_cyan bright_white
-}
-
 define-command highlight_selected_text -params 1 %{
   search_selected_text_with_auto_named_highlighter %exp{
     add-highlighter "buffer/%%reg{n}" regex "%%reg{/}" "0:%arg{1}"

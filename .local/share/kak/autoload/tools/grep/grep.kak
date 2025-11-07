@@ -7,28 +7,28 @@
 # dependencies: ["fifo"]
 # doc: yes
 # tests: no
-declare-option str grep_command grep
-declare-option str-list grep_args -R -H -n
+decl str grep_command grep
+decl str-list grep_args -R -H -n
 
-define-command grep -params .. %{
-  evaluate-commands -save-regs '"' %{
+def grep -params .. %{
+  eval -save-regs '"' %{
     try %{
-      execute-keys -buffer '*grep*' -save-regs '' '%y'
+      exec -buffer '*grep*' -save-regs '' '%y'
     } catch %{
-      set-register dquote
+      reg dquote
     }
     fifo -name '*grep*' -- %opt{grep_command} %opt{grep_args} %arg{@}
-    execute-keys -buffer '*grep*' 'P'
+    exec -buffer '*grep*' 'P'
   }
 }
 
 complete-command grep file
 
-define-command -hidden jump_to_references %{
-  evaluate-commands -draft %{
-    execute-keys 'x<a-s><a-K>^\n<ret>Hs^(.+?):(\d+):(\d+):(.+?)$<ret>'
-    evaluate-commands -itersel %{
-      evaluate-commands -client %val{client} -verbatim edit -existing -- %reg{1} %reg{2} %reg{3}
+def -hidden jump_to_references %{
+  eval -draft %{
+    exec 'x<a-s><a-K>^\n<ret>Hs^(.+?):(\d+):(\d+):(.+?)$<ret>'
+    eval -itersel %{
+      eval -client %val{client} -verbatim edit -existing -- %reg{1} %reg{2} %reg{3}
     }
   }
 }

@@ -38,7 +38,7 @@ map -docstring 'enter jump mode (select mode: replace)' global normal f ':enter_
 map -docstring 'enter jump mode (select mode: extend)' global normal F ':enter_jump_mode_with_extend_select_mode<ret>'
 map -docstring 'enter jump mode (select mode: append)' global normal <a-f> ':enter_jump_mode_with_append_select_mode<ret>'
 map -docstring 'enter command mode' global normal <ret> :
-map -docstring 'open file explorer' global normal <c-e> ':explore<ret>'
+map -docstring 'open file explorer' global normal <c-e> ':explore_file_directory<ret>'
 map -docstring 'open a new shell' global normal <c-space> ':sh<ret>'
 map -docstring 'show character info' global normal <c-v> ':show_character_info<ret>'
 map -docstring 'enter window mode' global normal <c-w> ':enter_kamux_mode<ret>'

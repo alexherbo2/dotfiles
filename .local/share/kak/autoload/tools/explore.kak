@@ -7,21 +7,13 @@
 # dependencies: ["ls"]
 # doc: yes
 # tests: no
-def explore -params 0..1 %{
-  eval %sh{
-    case "$#" in
-      1)
-        echo 'ls %arg{1}'
-        break
-        ;;
-      0)
-        echo 'ls %sh{dirname "$kak_buffile"}'
-        break
-        ;;
-    esac
+def explore_file_directory %{
+  ls %sh{dirname "$kak_buffile"}
+  hook -always -once buffer BufCloseFifo '' %exp{
+    eval -client %val{client} -save-regs '/' %%{
+      exec 'ga'
+      reg / "^\Q%%sh{basename -- ""$kak_buffile""}\E\n"
+      exec 'gagenvv'
+    }
   }
 }
-
-complete-command explore file
-
-alias global ex explore

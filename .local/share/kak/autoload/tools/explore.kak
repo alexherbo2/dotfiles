@@ -13,7 +13,7 @@ def explore_file_directory %{
     eval -client %val{client} -save-regs '/' %%{
       exec 'ga'
       reg / "^\Q%%sh{basename -- ""$kak_buffile""}\E\n"
-      exec 'gagenvv'
+      exec 'gagenvv<esc>'
     }
   }
 }

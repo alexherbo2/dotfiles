@@ -7,50 +7,50 @@
 # dependencies: []
 # doc: yes
 # tests: no
-define-command list_buffers %{
-  evaluate-commands -save-regs '"b' %{
+def list_buffers %{
+  eval -save-regs '"b' %{
     set-register b %val{bufname}
     edit! -scratch '*buffers*'
-    evaluate-commands -no-hooks -buffer '*' %{
+    eval -no-hooks -buffer '*' %{
       set-register dquote "%val{bufname}:readonly=%opt{readonly}:modified=%val{modified}"
-      execute-keys -buffer '*buffers*' 'gep'
+      exec -buffer '*buffers*' 'gep'
     }
-    execute-keys 'd'
+    exec 'd'
     try %{
-      execute-keys '%<a-s>2<a-F>:H<a-k>\A\Q<c-r>b\E\z<ret>gh'
+      exec '%<a-s>2<a-F>:H<a-k>\A\Q<c-r>b\E\z<ret>gh'
     } catch %{
-      execute-keys 'gg'
+      exec 'gg'
     }
-    evaluate-commands -draft %{
-      execute-keys '%<a-s>H2<a-f>:'
+    eval -draft %{
+      exec '%<a-s>H2<a-f>:'
       try %{
-        execute-keys -draft 's\A:readonly=false:modified=false\z<ret>d'
+        exec -draft 's\A:readonly=false:modified=false\z<ret>d'
       }
       try %{
-        execute-keys -draft 's\A:readonly=true:modified=true\z<ret>c (readonly, modified)<esc>'
+        exec -draft 's\A:readonly=true:modified=true\z<ret>c (readonly, modified)<esc>'
       }
       try %{
-        execute-keys -draft 's\A:readonly=true:modified=false\z<ret>c (readonly)<esc>'
+        exec -draft 's\A:readonly=true:modified=false\z<ret>c (readonly)<esc>'
       }
       try %{
-        execute-keys -draft 's\A:readonly=false:modified=true\z<ret>c (modified)<esc>'
+        exec -draft 's\A:readonly=false:modified=true\z<ret>c (modified)<esc>'
       }
     }
   }
 }
 
-define-command rearrange_buffers %{
-  evaluate-commands -buffer '*buffers*' %{
-    execute-keys '%<a-s><a-K>^\n<ret>H1s^(.+?)(?: \(.+?\))?$<ret>'
+def rearrange_buffers %{
+  eval -buffer '*buffers*' %{
+    exec '%<a-s><a-K>^\n<ret>H1s^(.+?)(?: \(.+?\))?$<ret>'
     arrange-buffers %val{selections}
   }
 }
 
-define-command -hidden jump_to_buffers %{
-  evaluate-commands -draft %{
-    execute-keys 'x<a-s><a-K>^\n<ret>H1s^(.+?)(?: \(.+?\))?$<ret>'
-    evaluate-commands -itersel %{
-      evaluate-commands -client %val{client} -verbatim buffer -- %val{selection}
+def -hidden jump_to_buffers %{
+  eval -draft %{
+    exec 'x<a-s><a-K>^\n<ret>H1s^(.+?)(?: \(.+?\))?$<ret>'
+    eval -itersel %{
+      eval -client %val{client} -verbatim buffer -- %val{selection}
     }
   }
 }

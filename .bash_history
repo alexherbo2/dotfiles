@@ -549,6 +549,10 @@ unzip ~/shared/kanto/home/fonts/IBM_Plex_Sans.zip
 unzip ~/shared/kanto/home/fonts/IBM_Plex_Mono.zip
 unzip ~/shared/kanto/home/fonts/Galdeano.zip
 fc-cache
+fc-cache -vf
+sudo fc-cache -vf
+npx playwright install
+mv assets/*.png extra/chrome-web-store/assets/*.png ~/docs/chrome_extensions
 mkdir bin
 crystal build src/crystalline.cr -o bin/crystalline --release --no-debug --progress -Dpreview_mt
 install bin/crystalline ~/.local/bin

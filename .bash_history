@@ -551,6 +551,7 @@ unzip ~/shared/kanto/home/fonts/Galdeano.zip
 fc-cache
 fc-cache -vf
 sudo fc-cache -vf
+cd ~/code/chrome-shortcuts/svg-converter
 npx playwright install
 npx playwright uninstall --all
 mv assets/*.png extra/chrome-web-store/assets/*.png ~/docs/chrome_extensions

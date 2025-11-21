@@ -605,6 +605,8 @@ find ~/shorts -name '*.DS_Store'
 scp -r ~/storage/shorts phaazon:
 mkdir docs
 scp ~/docs/notes.txt phaazon:docs
+scp phaazon:docs/notes.txt ~/storage/downloads/notes.txt
+scp phaazon:docs/notes.txt ~/Downloads/notes.txt
 rsync --exclude=.git/ ~/storage/shorts phaazon:
 git remote add origin git@phaazon:shorts.git
 mkdir bin

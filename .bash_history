@@ -552,6 +552,7 @@ fc-cache
 fc-cache -vf
 sudo fc-cache -vf
 npx playwright install
+npx playwright uninstall --all
 mv assets/*.png extra/chrome-web-store/assets/*.png ~/docs/chrome_extensions
 mkdir bin
 crystal build src/crystalline.cr -o bin/crystalline --release --no-debug --progress -Dpreview_mt

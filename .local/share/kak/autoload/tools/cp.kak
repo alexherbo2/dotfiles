@@ -1,9 +1,9 @@
-define-command cp -params 1 %{
+def cp -params 1 %{
   write -- %arg{1}
   edit -- %arg{1}
 }
 
-define-command cp_f -params 1 %{
+def cp_f -params 1 %{
   write! -- %arg{1}
   edit! -- %arg{1}
 }

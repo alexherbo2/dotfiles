@@ -555,6 +555,11 @@ cd ~/code/chrome-shortcuts/svg-converter
 npx playwright install
 npx playwright uninstall --all
 mv assets/*.png extra/chrome-web-store/assets/*.png ~/docs/chrome_extensions
+cp assets/*.png extra/chrome-web-store/assets/*.png ~/docs/chrome_extensions
+cp assets/*.png extra/chrome-web-store/assets/*.png ~/docs/chrome_extensions/2025-11-21
+cp assets/*.png extra/chrome-web-store/assets/*.png ~/docs/chrome_extensions/2025-11-27
+mkdir ~/docs/chrome_extensions/2025-11-21
+mkdir ~/docs/chrome_extensions/2025-11-27
 mkdir bin
 crystal build src/crystalline.cr -o bin/crystalline --release --no-debug --progress -Dpreview_mt
 install bin/crystalline ~/.local/bin

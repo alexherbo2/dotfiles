@@ -7,8 +7,8 @@
 # dependencies: []
 # doc: no
 # tests: no
-define-command fifo -params 1.. %{
-  evaluate-commands %sh{
+def fifo -params 1.. %{
+  eval %sh{
     fifo_name='*fifo*'
     fifo_flags=
     while :

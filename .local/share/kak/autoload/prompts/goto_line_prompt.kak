@@ -1,4 +1,4 @@
-define-command open_goto_line_prompt %{
+def open_goto_line_prompt %{
   prompt goto_line: %{
     goto_lines_from_text %val{text}
   } -on-change %exp{
@@ -12,8 +12,8 @@ define-command open_goto_line_prompt %{
   }
 }
 
-define-command goto_lines_from_text -params 1 %{
-  evaluate-commands %sh{
+def goto_lines_from_text -params 1 %{
+  eval %sh{
     selections_desc=
     IFS=','
     for cursor_line in $1

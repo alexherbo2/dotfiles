@@ -1,5 +1,5 @@
-define-command git_mv -params 1 %{
-  evaluate-commands %sh{
+def git_mv -params 1 %{
+  eval %sh{
     git mv -- "$kak_buffile" "$1" ||
     printf "fail 'ERROR: git mv exited with: %d.'" "$?"
   }

@@ -1,5 +1,5 @@
-define-command rm %{
-  evaluate-commands %sh{
+def rm %{
+  eval %sh{
     rm -- "$kak_buffile" ||
     printf "fail 'ERROR: rm exited with: %d.'" "$?"
   }

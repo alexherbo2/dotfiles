@@ -10,15 +10,15 @@
 declare-option str make_command make
 declare-option str-list make_args
 
-define-command make -params .. %{
-  evaluate-commands -save-regs '"' %{
+def make -params .. %{
+  eval -save-regs '"' %{
     try %{
-      execute-keys -buffer '*make*' -save-regs '' '%y'
+      exec -buffer '*make*' -save-regs '' '%y'
     } catch %{
-      set-register dquote
+      reg dquote
     }
     fifo -name '*make*' -- %opt{make_command} %opt{make_args} %arg{@}
-    execute-keys -buffer '*make*' 'P'
+    exec -buffer '*make*' 'P'
   }
 }
 

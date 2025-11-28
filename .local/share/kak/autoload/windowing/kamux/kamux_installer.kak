@@ -7,14 +7,14 @@
 # dependencies: ["make"]
 # doc: yes
 # tests: no
-define-command make_kamux -params .. %{
+def make_kamux -params .. %{
   make -C "%val{runtime}/assets/kamux" -f "%val{runtime}/assets/kamux/Makefile" %arg{@}
 }
 
-define-command install_kamux -params .. %{
+def install_kamux -params .. %{
   make_kamux install %arg{@}
 }
 
-define-command uninstall_kamux -params .. %{
+def uninstall_kamux -params .. %{
   make_kamux uninstall %arg{@}
 }

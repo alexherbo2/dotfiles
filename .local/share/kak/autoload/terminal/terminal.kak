@@ -1,7 +1,7 @@
-declare-option str terminal_command xterm
-declare-option str-list terminal_args -e
+decl str terminal_command xterm
+decl str-list terminal_args -e
 
-define-command open_terminal -params 1.. %{
+def open_terminal -params 1.. %{
   nohup %opt{terminal_command} %opt{terminal_args} %arg{@}
 }
 

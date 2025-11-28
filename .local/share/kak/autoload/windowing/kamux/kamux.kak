@@ -215,8 +215,8 @@ def kamux_activate_window_select -params .. %{
   }
 }
 
-complete-command kamux_split_view_down command
-complete-command kamux_split_view_right command
-complete-command kamux_create_view_in_new_window command
-complete-command kamux_create_view_in_new_window_right command
-complete-command kamux_activate_view client
+compl kamux_split_view_down command
+compl kamux_split_view_right command
+compl kamux_create_view_in_new_window command
+compl kamux_create_view_in_new_window_right command
+compl kamux_activate_view client

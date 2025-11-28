@@ -1,11 +1,11 @@
 declare-user-mode kamux
 declare-user-mode kamux_new_split_scratch_buffer
 
-define-command enter_kamux_mode %{
+def enter_kamux_mode %{
   enter-user-mode kamux
 }
 
-define-command enter_kamux_new_split_scratch_buffer_mode %{
+def enter_kamux_new_split_scratch_buffer_mode %{
   enter-user-mode kamux_new_split_scratch_buffer
 }
 

@@ -5,6 +5,6 @@ def open_terminal -params 1.. %{
   nohup %opt{terminal_command} %opt{terminal_args} %arg{@}
 }
 
-complete-command open_terminal shell
+compl open_terminal shell
 
 alias global terminal open_terminal

@@ -401,6 +401,7 @@ export WLR_NO_HARDWARE_CURSORS=1
 eval "$(starship init bash)"
 rm ~/docs/bookmarks_*_*_*.html
 mv ~/Documents/bookmarks_*_*_*.html ~/docs
+ln ~/docs/chrome_extensions/shortcuts_listing_page.md ~/code/chrome-shortcuts/extra/chrome-web-store
 ln ~/docs/chrome_extensions/*.png ~/code/chrome-shortcuts.assets
 ln ~/storage/pictures/the-world-by-akhts.png ~/code/chrome-shortcuts.assets
 ln ~/storage/pictures/the-world-by-akhts.webp ~/code/chrome-shortcuts.assets

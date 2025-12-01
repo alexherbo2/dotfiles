@@ -91,6 +91,6 @@ map -docstring 'close other windows' global kamux <c-x> ':kamux_close_other_wind
 map -docstring 'split view down with new scratch buffer' global kamux_new_split_scratch_buffer <c-s> ':kamux_split_view_down edit -scratch<ret>'
 map -docstring 'split view right with new scratch buffer' global kamux_new_split_scratch_buffer <c-v> ':kamux_split_view_right edit -scratch<ret>'
 
-map -docstring 'open a new shell' global normal <space> ':kamux_open_terminal<ret>'
+map -docstring 'open a new shell' global kamux <space> ':kamux_open_terminal<ret>'
 
 map -docstring 'enable multi buffer mode' global kamux '%' ':kamux_enable_multi_buffer_mode<ret>'

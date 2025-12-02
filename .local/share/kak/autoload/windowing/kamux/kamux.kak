@@ -215,13 +215,8 @@ def kamux_activate_window_select -params .. %{
   }
 }
 
-def kamux_open_terminal -params .. %{
-  kamux display-popup -w '90%' -h '90%' -d '#{pane_current_path}' -E kamux-terminal -s %val{session} -- %arg{@}
-}
-
 compl kamux_split_view_down command
 compl kamux_split_view_right command
 compl kamux_create_view_in_new_window command
 compl kamux_create_view_in_new_window_right command
 compl kamux_activate_view client
-compl kamux_open_terminal shell

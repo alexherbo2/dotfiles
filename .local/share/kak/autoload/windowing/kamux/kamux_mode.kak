@@ -67,8 +67,6 @@ map -docstring 'move view to window' global kamux m ':kamux_move_view_to_window_
 map -docstring 'split view down with new scratch buffer' global kamux_new_split_scratch_buffer o ':kamux_split_view_down edit -scratch<ret>'
 map -docstring 'split view right with new scratch buffer' global kamux_new_split_scratch_buffer O ':kamux_split_view_right edit -scratch<ret>'
 
-map -docstring 'open a new shell' global kamux <space> ':kamux_open_terminal<ret>'
-
 map -docstring 'jump view left' global kamux <c-h> ':kamux_jump_view_left<ret>'
 map -docstring 'jump view down' global kamux <c-j> ':kamux_jump_view_down<ret>'
 map -docstring 'jump view up' global kamux <c-k> ':kamux_jump_view_up<ret>'
@@ -92,7 +90,5 @@ map -docstring 'close other windows' global kamux <c-x> ':kamux_close_other_wind
 
 map -docstring 'split view down with new scratch buffer' global kamux_new_split_scratch_buffer <c-s> ':kamux_split_view_down edit -scratch<ret>'
 map -docstring 'split view right with new scratch buffer' global kamux_new_split_scratch_buffer <c-v> ':kamux_split_view_right edit -scratch<ret>'
-
-map -docstring 'open a new shell' global kamux <c-space> ':kamux_open_terminal<ret>'
 
 map -docstring 'enable multi buffer mode' global kamux '%' ':kamux_enable_multi_buffer_mode<ret>'

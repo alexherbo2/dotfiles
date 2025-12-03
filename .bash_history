@@ -389,6 +389,12 @@ sudo DS_Store
 DS_Store
 pbcopy < /dev/null
 wl-copy --clear
+git diff -p | pbcopy
+git show -p | pbcopy
+git show -p '' | pbcopy
+git diff -p | wl-copy
+git show -p | wl-copy
+git show -p '' | wl-copy
 tldr -u
 rustup update
 rustup toolchain list

@@ -1,0 +1,12 @@
+#!/bin/sh
+# name: Google Chrome
+# version: 0.1.0
+# description: TODO.
+# authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
+# license: MIT
+# dependencies: ["Google Chrome"]
+# macos_install: brew install google-chrome
+# docs: no
+# tests: no
+set -e
+open -a 'Google Chrome' --args --disable-features='ExtensionManifestV2Unsupported,ExtensionManifestV2Disabled'

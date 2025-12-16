@@ -233,10 +233,6 @@ xmv() {
   nnn -p - | imv "$@"
 }
 
-# meh
-# https://johnhawthorn.com/meh/
-alias meh='mpv --config-dir="$HOME/.config/meh"'
-
 # ffmpeg
 # Reference: https://trac.ffmpeg.org/wiki/Encode/H.265
 ffmpeg_x265() {

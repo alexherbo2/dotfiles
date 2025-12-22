@@ -460,6 +460,7 @@ cd ~/storage/downloads
 nnn ~/Downloads
 nnn ~/storage/downloads
 nnn ~/Documents
+ls ~/Documents
 ls ~/docs
 nnn ~/docs
 nnn ~/tmp

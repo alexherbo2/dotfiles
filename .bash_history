@@ -395,6 +395,18 @@ git show -p '' | pbcopy
 git diff -p | wl-copy
 git show -p | wl-copy
 git show -p '' | wl-copy
+git diff -p > ~/Desktop/a.diff
+git show -p > ~/Desktop/a.patch
+git show -p '' > ~/Desktop/a.patch
+git diff -p > ~/Desktop/b.diff
+git show -p > ~/Desktop/b.patch
+git show -p '' > ~/Desktop/b.patch
+diff -u ~/Desktop/a.txt ~/Desktop/b.txt
+kak ~/Desktop/a.txt ~/Desktop/b.txt
+diff -u ~/Desktop/a.diff ~/Desktop/b.diff
+kak ~/Desktop/a.diff ~/Desktop/b.diff
+diff -u ~/Desktop/a.patch ~/Desktop/b.patch
+kak ~/Desktop/a.patch ~/Desktop/b.patch
 tldr -u
 rustup update
 rustup toolchain list
@@ -454,18 +466,22 @@ kak -clear
 nnn
 cd ~/docs/notes
 cd ~/Downloads
+cd ~/Desktop
+cd ~/Documents
 cd ~/storage/photos
 cd ~/storage/pictures
 cd ~/storage/downloads
 nnn ~/Downloads
-nnn ~/storage/downloads
+nnn ~/Desktop
 nnn ~/Documents
+nnn ~/storage/downloads
+ls ~/Downloads
+ls ~/Desktop
 ls ~/Documents
 ls ~/docs
 nnn ~/docs
 nnn ~/tmp
 nnn ~/data
-nnn ~/Desktop
 nnn ~/.local/share/git.sr.ht
 nnn ~/.local/share/github.com
 nnn ~/.local/share/codeberg.org

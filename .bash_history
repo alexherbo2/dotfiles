@@ -809,6 +809,10 @@ ls /dev/sd*
 ls -l mnt
 ls -l mnt/Disk
 ls -l mnt/USB
+ln -s mnt/Disk/cloud
+unlink cloud
+nnn ~/cloud
+ls ~/cloud
 ls
 ls -l
 ls -a

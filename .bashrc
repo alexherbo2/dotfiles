@@ -37,7 +37,7 @@ p() {
 export HISTSIZE=-1
 
 # Paths
-export PATH=~/Applications:~/.local/bin:~/.cargo/bin:$PATH
+export PATH=~/Applications:~/.local/bin:~/.cargo/bin:~/.bun/bin:$PATH
 
 # Locales
 export LANG=en_US.UTF-8

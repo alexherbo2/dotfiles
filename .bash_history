@@ -582,6 +582,7 @@ sudo fc-cache -vf
 cd ~/code/chrome-shortcuts/svg-converter
 npx playwright install
 npx playwright uninstall --all
+curl -fsSL https://bun.sh/install | bash
 curl -fsSL https://bun.com/install | bash
 bunx playwright install
 bunx playwright uninstall --all
@@ -591,6 +592,9 @@ bun init
 bun update
 bun update --latest
 bun update -g
+ln -s ~/.bun/bin/bun ~/.local/bin/node
+ln -s ~/.bun/bin/bun ~/.local/bin/npm
+ln -s ~/.bun/bin/bunx ~/.local/bin/npx
 mkdir ~/docs/chrome_extensions/2025-11-21
 cp assets/*.png extra/chrome-web-store/assets/*.png ~/docs/chrome_extensions/2025-11-21
 mkdir ~/docs/chrome_extensions/2025-11-27

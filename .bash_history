@@ -367,6 +367,9 @@ open -a 'Google Chrome' --args --disable-features='ExtensionManifestV2Unsupporte
 open 'Applications/Google Chrome'
 open 'Applications/Converter'
 open 'Applications/YouTube DL'
+sh 'Applications/Google Chrome'
+sh 'Applications/Converter'
+sh 'Applications/YouTube DL'
 open .
 open /System/Applications/Utilities/Terminal.app/Contents/Resources/Fonts
 open target/release

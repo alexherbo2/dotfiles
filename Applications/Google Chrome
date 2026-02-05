@@ -9,4 +9,4 @@
 # docs: no
 # tests: no
 set -e
-open -a 'Google Chrome' --args --disable-features='ExtensionManifestV2Unsupported,ExtensionManifestV2Disabled'
+open -a 'Google Chrome' --args --disable-features='ExtensionManifestV2Unsupported,ExtensionManifestV2Disabled' --silent-debugger-extension-api

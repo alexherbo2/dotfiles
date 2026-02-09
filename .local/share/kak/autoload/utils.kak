@@ -234,3 +234,8 @@ def edit_readonly -params .. %{
 
 alias global ro edit_readonly
 compl edit_readonly file
+define-command show_session_info %{
+  echo -markup "{Information}%val{client}@%val{session}"
+}
+
+alias global info show_session_info

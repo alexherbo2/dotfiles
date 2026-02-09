@@ -8,7 +8,7 @@ evaluate-commands %sh{
     set-option global startup_info_version 20241231
     set-option global ui_options terminal_set_title=no terminal_assistant=none
     set-option global matching_pairs ( ) { } [ ] < > “ ” « » ‹ ›
-    set-option global modelinefmt "{{mode_info}} {{context_info}} %%val{timestamp} %%val{bufname}:%%val{cursor_line}:%%val{cursor_char_column} %%val{buf_line_count}L %%val{client}@%%val{session}"
+    set-option global modelinefmt "{{mode_info}} {{context_info}} %%val{timestamp} %%val{bufname}:%%val{cursor_line}:%%val{cursor_char_column} %%val{buf_line_count}L"
     add-highlighter global/match_brackets show-matching
     add-highlighter global/line_numbers number-lines -hlcursor -separator "  " -min-digits 5
     add-highlighter global/rulers group

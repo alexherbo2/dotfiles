@@ -5,7 +5,7 @@ evaluate-commands %sh{
     find -L "$kak_config/autoload" -type f -name '*.kak' -exec printf 'source "%s";' {} +
   fi
   echo '
-    set-option global startup_info_version 20241231
+    set-option global startup_info_version 20261231
     set-option global ui_options terminal_set_title=no terminal_assistant=none
     set-option global matching_pairs ( ) { } [ ] < > “ ” « » ‹ ›
     set-option global modelinefmt "{{mode_info}} {{context_info}} %%val{timestamp} %%val{bufname}:%%val{cursor_line}:%%val{cursor_char_column} %%val{buf_line_count}L"

@@ -861,6 +861,8 @@ vi
 vim
 pwd
 nmtui
+fg
+bg
 exit 0
 exit 1
 exit

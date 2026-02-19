@@ -413,6 +413,8 @@ diff -u ~/Desktop/a.diff ~/Desktop/b.diff
 kak ~/Desktop/a.diff ~/Desktop/b.diff
 diff -u ~/Desktop/a.patch ~/Desktop/b.patch
 kak ~/Desktop/a.patch ~/Desktop/b.patch
+rm ~/Desktop/a.diff ~/Desktop/b.diff
+rm ~/Desktop/a.patch ~/Desktop/b.patch
 tldr -u
 rustup update
 rustup toolchain list

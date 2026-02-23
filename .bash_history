@@ -840,6 +840,8 @@ doas dd if=alpine-standard-3.21.2-aarch64.iso of=/dev/sda
 doas mkfs.ext4 /dev/sdb
 doas wipefs -a /dev/sdb
 doas dd if=alpine-standard-3.21.2-aarch64.iso of=/dev/sdb
+defaults write -g AppleFontSmoothing -int 0
+sudo defaults write -g AppleFontSmoothing -int 0
 defaults write -g AppleLocale en_US
 sudo defaults write -g AppleLocale en_US
 exa

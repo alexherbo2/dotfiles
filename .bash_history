@@ -844,6 +844,10 @@ defaults write -g AppleFontSmoothing -int 0
 sudo defaults write -g AppleFontSmoothing -int 0
 defaults write -g AppleLocale en_US
 sudo defaults write -g AppleLocale en_US
+defaults read -g AppleFontSmoothing
+sudo defaults read -g AppleFontSmoothing
+defaults read -g AppleLocale
+sudo defaults read -g AppleLocale
 exa
 eza
 ls /dev/sd*

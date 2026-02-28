@@ -722,6 +722,7 @@ setup-desktop
 apk update
 apk upgrade
 reboot
+gh auth login
 gh repo view --web
 gh repo fork
 rm -R Movies/TV

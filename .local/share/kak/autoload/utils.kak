@@ -113,12 +113,12 @@ def send_handshake_to_session -params 1 %{
 
 def send_selected_text_to_session -params 1 %{
   send_handshake_to_session %arg{1}
-  echo -quoting kakoune -to-shell-script "kak -p %arg{1}" set-register '"' %val{selections}
+  echo -quoting kakoune -to-shell-script "kak -p %arg{1}" reg '"' %val{selections}
 }
 
 def send_search_register_to_session -params 1 %{
   send_handshake_to_session %arg{1}
-  echo -quoting kakoune -to-shell-script "kak -p %arg{1}" set-register '/' %reg{/}
+  echo -quoting kakoune -to-shell-script "kak -p %arg{1}" reg '/' %reg{/}
 }
 
 def send_current_buffer_to_session -params 1 %{

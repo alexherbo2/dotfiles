@@ -629,6 +629,7 @@ DESTDIR= PREFIX=~/.local make install
 DESTDIR= PREFIX=~/.local make uninstall
 cargo install --locked --path helix-term
 cargo +stable install --path helix-term
+cargo +stable clean
 install ~/.cargo/bin/hx /opt/homebrew/bin
 export GIT_SSH_COMMAND='ssh -i ~/.ssh/id_ed25519_alexherbo2'
 git config set core.sshCommand 'ssh -i ~/.ssh/id_ed25519_alexherbo2'

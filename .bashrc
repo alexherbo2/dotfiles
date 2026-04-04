@@ -276,6 +276,9 @@ alias apk-clean='doas apk cache clean'
 
 # macOS ------------------------------------------------------------------------
 
+# macOS POSIX shell
+[ -x /opt/homebrew/bin/dash ] && export KAKOUNE_POSIX_SHELL=/opt/homebrew/bin/dash
+
 # Keep MacBook awake with lid closed
 # https://caffeinated.app/keep-macbook-awake-with-lid-closed/
 alias caffeinate-lid='sudo pmset -b sleep 0; sudo pmset -b disablesleep 1'

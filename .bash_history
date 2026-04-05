@@ -829,6 +829,7 @@ _ssh
 ggc
 br
 broot
+broot -w
 gitui
 xattr -c alpine-standard-3.21.2-aarch64.iso
 shasum -a 256 alpine-standard-3.21.2-aarch64.iso

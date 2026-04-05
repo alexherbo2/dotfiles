@@ -862,6 +862,9 @@ ls -l mnt/USB
 ln -s mnt/Disk/cloud
 unlink cloud
 nnn ~/cloud
+dua i
+crystal i
+irb
 ls ~/cloud
 ls
 ls -l

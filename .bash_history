@@ -33,6 +33,8 @@ git clone https://github.com/maaslalani/slides.git ~/.local/share/github.com/maa
 git clone https://github.com/charmbracelet/glow.git ~/.local/share/github.com/charmbracelet/glow
 go install github.com/charmbracelet/crush@latest
 crush
+zed
+code
 git clone https://github.com/charmbracelet/gum.git ~/.local/share/github.com/charmbracelet/gum
 git clone https://github.com/charmbracelet/mods.git ~/.local/share/github.com/charmbracelet/mods
 git clone https://github.com/fish-shell/fish-shell.git ~/.local/share/github.com/fish-shell/fish-shell

@@ -852,6 +852,42 @@ doas dd if=alpine-standard-3.21.2-aarch64.iso of=/dev/sda
 doas mkfs.ext4 /dev/sdb
 doas wipefs -a /dev/sdb
 doas dd if=alpine-standard-3.21.2-aarch64.iso of=/dev/sdb
+sudo mkfs.ext4 /dev/sda
+sudo wipefs -a /dev/sda
+sudo parted /dev/sda -- mklabel gpt
+sudo parted /dev/sda -- mkpart Disk 0% 100%
+sudo parted /dev/sda -- mkpart USB 0% 100%
+sudo parted /dev/sda -- print
+sudo wipefs -a /dev/sda1
+sudo mkfs.ext4 -L Disk /dev/sda1
+sudo mkfs.ext4 -L USB /dev/sda1
+sudo mkfs.ext4 /dev/sdb
+sudo wipefs -a /dev/sdb
+sudo parted /dev/sdb -- mklabel gpt
+sudo parted /dev/sdb -- mkpart Disk 0% 100%
+sudo parted /dev/sdb -- mkpart USB 0% 100%
+sudo parted /dev/sdb -- print
+sudo wipefs -a /dev/sdb1
+sudo mkfs.ext4 -L Disk /dev/sdb1
+sudo mkfs.ext4 -L USB /dev/sdb1
+doas mkfs.ext4 /dev/sda
+doas wipefs -a /dev/sda
+doas parted /dev/sda -- mklabel gpt
+doas parted /dev/sda -- mkpart Disk 0% 100%
+doas parted /dev/sda -- mkpart USB 0% 100%
+doas parted /dev/sda -- print
+doas wipefs -a /dev/sda1
+doas mkfs.ext4 -L Disk /dev/sda1
+doas mkfs.ext4 -L USB /dev/sda1
+doas mkfs.ext4 /dev/sdb
+doas wipefs -a /dev/sdb
+doas parted /dev/sdb -- mklabel gpt
+doas parted /dev/sdb -- mkpart Disk 0% 100%
+doas parted /dev/sdb -- mkpart USB 0% 100%
+doas parted /dev/sdb -- print
+doas wipefs -a /dev/sdb1
+doas mkfs.ext4 -L Disk /dev/sdb1
+doas mkfs.ext4 -L USB /dev/sdb1
 defaults write -g AppleFontSmoothing -int 0
 sudo defaults write -g AppleFontSmoothing -int 0
 defaults write -g AppleLocale en_US

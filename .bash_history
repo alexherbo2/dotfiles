@@ -748,6 +748,7 @@ mpv ~/series/stargate/stargate-sg-1/french/01
 mpv ~/anime/nicky-larson/01
 mpv ~/sounds/waves.opus
 mpv --shuffle ~/shorts
+mpv --shuffle ~/youtube/music
 cd ~/shorts
 kamux ytdlp_list.sh
 sh ytdlp_list.sh
@@ -767,6 +768,8 @@ git branch
 git branch -d master
 git branch -d assets
 git branch -d website
+git clone ''
+git switch -c ''
 git switch --orphan assets
 git switch assets
 git switch --orphan website

@@ -735,6 +735,7 @@ reboot
 gh auth login
 gh repo view --web
 gh repo fork
+gh repo fork ''
 rm -R Movies/TV
 rm -R Music/Music
 nnn ~/anime

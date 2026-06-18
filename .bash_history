@@ -32,6 +32,7 @@ git clone https://github.com/zed-industries/zed.git ~/.local/share/github.com/ze
 git clone https://github.com/maaslalani/slides.git ~/.local/share/github.com/maaslalani/slides
 git clone https://github.com/charmbracelet/glow.git ~/.local/share/github.com/charmbracelet/glow
 go install github.com/charmbracelet/crush@latest
+brew install charmbracelet/tap/crush
 crush
 zed
 code

@@ -38,6 +38,7 @@ zed
 code
 codex
 gemini
+agy
 claude
 git clone https://github.com/charmbracelet/gum.git ~/.local/share/github.com/charmbracelet/gum
 git clone https://github.com/charmbracelet/mods.git ~/.local/share/github.com/charmbracelet/mods

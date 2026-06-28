@@ -8,8 +8,8 @@ map -docstring 'search backward ’til {char}' global normal T <a-t>
 map -docstring 'select whole lines' global normal X x
 map -docstring 'select inner words' global normal w '<a-i>w'
 map -docstring 'select inner long words' global normal W '<a-i><a-w>'
-map global normal <c-j> ':copy_selected_lines_down<ret>'
-map global normal <c-k> ':copy_selected_lines_up<ret>'
+map global normal <c-j> ':copy_selected_lines_down %val{count}<ret>'
+map global normal <c-k> ':copy_selected_lines_up %val{count}<ret>'
 map -docstring 'enter letter case mode' global normal ` ':enter_letter_case_mode<ret>'
 map -docstring 'enter extend mode' global normal v ':enter_extend_mode<ret>'
 map -docstring 'enter match mode' global normal m ':enter_match_mode<ret>'

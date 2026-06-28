@@ -7,10 +7,10 @@
 # dependencies: []
 # doc: yes
 # tests: no
-define-command -hidden iterate_next_selection -params 2 %{
-  execute-keys -save-regs '' """%arg{1}z%arg{2})""%arg{1}Z,"
+def -hidden iterate_next_selection -params 2 %{
+  exec -save-regs '' """%arg{1}z%arg{2})""%arg{1}Z,"
 }
 
-define-command -hidden iterate_previous_selection -params 2 %{
-  execute-keys -save-regs '' """%arg{1}z%arg{2}(""%arg{1}Z,"
+def -hidden iterate_previous_selection -params 2 %{
+  exec -save-regs '' """%arg{1}z%arg{2}(""%arg{1}Z,"
 }

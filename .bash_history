@@ -933,6 +933,7 @@ pwd
 nmtui
 fg
 bg
+set -e
 exit 0
 exit 1
 exit

@@ -738,6 +738,22 @@ gh auth login
 gh repo view --web
 gh repo fork
 gh repo fork ''
+mkdir -p ~/code/forks/github.com/refined-github
+mv refined-github ~/code/forks/github.com/refined-github/refined-github
+git clone https://github.com/refined-github/refined-github.git
+git remote
+git remote -v
+git switch -c 'remove-unused-alarms-permission'
+git add .
+git commit -m 'Remove unused `"alarms"` permission'
+git push
+git push -u origin 'remove-unused-alarms-permission'
+cd
+cd ~
+cd refined-github
+gh repo fork
+gh repo view --web
+git clone https://github.com/taupiqueur/chrome-shortcuts.git
 rm -R Movies/TV
 rm -R Music/Music
 nnn ~/anime

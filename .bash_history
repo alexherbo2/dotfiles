@@ -445,24 +445,24 @@ fd '\Ascreenshot_\d{4}-\d{2}-\d{2}_\d{2}:\d{2}:\d{2}(@\d{4}x\d{3}px)?\.png\z' ~/
 fd '\Ascreenshot_\d{4}-\d{2}-\d{2}_\d{2}:\d{2}:\d{2}(@\d{4}x\d{3}px)?\.png\z' ~/code/chrome-shortcuts.assets
 weechat
 rm -R .config/weechat .local/share/weechat .cache/weechat
-pw --length=10 strongly-typed-thoughts.net taupiqueur
+pw -l 10 strongly-typed-thoughts.net taupiqueur
 passwd taupiqueur
 tmux
 tmux attach-session
-pw --length=10 kanto taupiqueur
-pw --length=10 google.com taupiqueur.kanto
-pw --length=10 github.com taupiqueur
-pw --length=10 stripe.com taupiqueur.kanto@gmail.com
-pw --length=10 apple.com taupiqueur.kanto@gmail.com
-pw --length=10 kobo.com taupiqueur.kanto@gmail.com
-pw --length=10 lichess.org taupiqueur
-pw --length=10 news.ycombinator.com taupiqueur
-pw --length=10 lobste.rs taupiqueur
-pw --length=10 paragon-software.com taupiqueur.kanto@gmail.com
-pw --length=10 paypal.com taupiqueur.kanto@gmail.com
-pw --length=10 libera.chat taupiqueur
-pw --length=10 amazon.com taupiqueur.kanto@gmail.com
-pw --length=10 reddit.com taupiqueur_kanto
+pw -l 10 kanto taupiqueur
+pw -l 10 google.com taupiqueur.kanto
+pw -l 10 github.com taupiqueur
+pw -l 10 stripe.com taupiqueur.kanto@gmail.com
+pw -l 10 apple.com taupiqueur.kanto@gmail.com
+pw -l 10 kobo.com taupiqueur.kanto@gmail.com
+pw -l 10 lichess.org taupiqueur
+pw -l 10 news.ycombinator.com taupiqueur
+pw -l 10 lobste.rs taupiqueur
+pw -l 10 paragon-software.com taupiqueur.kanto@gmail.com
+pw -l 10 paypal.com taupiqueur.kanto@gmail.com
+pw -l 10 libera.chat taupiqueur
+pw -l 10 amazon.com taupiqueur.kanto@gmail.com
+pw -l 10 reddit.com taupiqueur_kanto
 kak ~/docs/todo.txt
 cat ~/docs/todo.txt
 kak ~/docs/notes.txt

@@ -26,9 +26,20 @@ complete-command grep file
 
 def -hidden jump_to_references %{
   eval -draft %{
-    exec 'x<a-s><a-K>^\n<ret>Hs^(.+?):(\d+):(\d+):(.+?)$<ret>'
+    exec 'x<a-s><a-K>^\n<ret>Hs^(.+?):(\d+):(\d+):(?:.*?)$<ret>'
     eval -itersel %{
       eval -client %val{client} -verbatim edit -existing -- %reg{1} %reg{2} %reg{3}
+    }
+  }
+}
+
+def -hidden apply_changes_from_references %{
+  eval -no-hooks -draft %{
+    exec 'x<a-s>s\A(.+?):(\d+):(\d+):(.*?\n)\z<ret>'
+    eval -itersel -save-regs '"' %{
+      eval -client %val{client} -verbatim edit -existing -- %reg{1} %reg{2} %reg{3}
+      reg '"' %reg{4}
+      exec -client %val{client} 'xR'
     }
   }
 }

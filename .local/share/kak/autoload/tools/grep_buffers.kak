@@ -7,24 +7,24 @@
 # dependencies: []
 # doc: no
 # tests: no
-define-command grep_buffers -params 1 %{
-  evaluate-commands -save-regs '"' %{
+def grep_buffers -params 1 %{
+  eval -save-regs '"' %{
     try %{
-      execute-keys -buffer '*grep*' -save-regs '' '%y'
+      exec -buffer '*grep*' -save-regs '' '%y'
     } catch %{
-      set-register dquote
+      reg dquote
     }
     edit! -scratch -- '*grep*'
     edit! -scratch -debug -- '*grep_tmp*'
-    evaluate-commands -no-hooks -buffer '*' -verbatim -- try %{
-      execute-keys '%s<ret><a-;>'
-      evaluate-commands -itersel -save-regs 'ab' %{
-        set-register a "%val{bufname}:%val{cursor_line}:%val{cursor_column}:"
-        execute-keys 'x<a-:>H"by'
-        execute-keys -buffer '*grep_tmp*' 'ge"apH"bp<a-j>'
+    eval -no-hooks -buffer '*' -verbatim -- try %{
+      exec '%s<ret><a-;>'
+      eval -itersel -save-regs 'ab' %{
+        reg a "%val{bufname}:%val{cursor_line}:%val{cursor_column}:"
+        exec 'x<a-:>H"by'
+        exec -buffer '*grep_tmp*' 'ge"apH"bp<a-j>'
       }
     }
-    execute-keys 'd%y:delete-buffer<ret>Rgg'
-    execute-keys -buffer '*grep*' 'P'
+    exec 'd%y:db<ret>Rgg'
+    exec -buffer '*grep*' 'P'
   }
 }

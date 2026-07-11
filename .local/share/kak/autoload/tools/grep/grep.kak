@@ -7,8 +7,11 @@
 # dependencies: ["fifo"]
 # doc: yes
 # tests: no
-decl str grep_command grep
-decl str-list grep_args -R -H -n
+decl str grep_command sh
+decl str-list grep_args -c %{
+  grep -R -H -n "$@" |
+  sed -E 's/^([^:]+):([0-9]+):(.*)$/\1:\2:1:\3/'
+}
 
 def grep -params .. %{
   eval -save-regs '"' %{
@@ -29,17 +32,6 @@ def -hidden jump_to_references %{
     exec 'x<a-s><a-K>^\n<ret>Hs^(.+?):(\d+):(\d+):(?:.*?)$<ret>'
     eval -itersel %{
       eval -client %val{client} -verbatim edit -existing -- %reg{1} %reg{2} %reg{3}
-    }
-  }
-}
-
-def -hidden apply_changes_from_references %{
-  eval -no-hooks -draft %{
-    exec 'x<a-s>s\A(.+?):(\d+):(\d+):(.*?\n)\z<ret>'
-    eval -itersel -save-regs '"' %{
-      eval -client %val{client} -verbatim edit -existing -- %reg{1} %reg{2} %reg{3}
-      reg '"' %reg{4}
-      exec -client %val{client} 'xR'
     }
   }
 }

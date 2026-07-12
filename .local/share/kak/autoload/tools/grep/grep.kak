@@ -29,6 +29,6 @@ def -hidden jump_to_references %{
   }
 }
 
-def -hidden select_references %{
-  exec -save-regs '' 'x<a-s>s\A(.+?):(\d+):(.*?\n)\z<ret>'
+def -hidden select_references -params 1 %{
+  exec "x<a-s>%arg{1}s\A(.+?):(\d+):(.*?\n)\z<ret>"
 }

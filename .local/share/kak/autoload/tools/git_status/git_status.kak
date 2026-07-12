@@ -36,3 +36,7 @@ def -hidden git_status_jump_to_files %{
     }
   }
 }
+
+def -hidden select_statusspecs -params 1 %{
+  exec "x<a-s>%arg{1}s\A(..) (.+?)\n\z<ret>"
+}

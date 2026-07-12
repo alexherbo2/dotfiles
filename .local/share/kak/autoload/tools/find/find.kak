@@ -32,3 +32,7 @@ def -hidden jump_to_files %{
     }
   }
 }
+
+def -hidden select_filespecs -params 1 %{
+  exec "x<a-s>%arg{1}s\A(.+?)\n\z<ret>"
+}

@@ -7,21 +7,20 @@
 # dependencies: []
 # doc: no
 # tests: no
-def grep_buffers -params 1 %{
+def -hidden grep_buffers -params 1 %{
   eval -save-regs '"' %{
     try %{
       exec -buffer '*grep*' -save-regs '' '%y'
     } catch %{
-      reg dquote
+      reg '"'
     }
     edit! -scratch -- '*grep*'
     edit! -scratch -debug -- '*grep_tmp*'
     eval -no-hooks -buffer '*' -verbatim -- try %{
-      exec '%s<ret><a-;>'
-      eval -itersel -save-regs 'ab' %{
-        reg a "%val{bufname}:%val{cursor_line}:%val{cursor_column}:"
-        exec 'x<a-:>H"by'
-        exec -buffer '*grep_tmp*' 'ge"apH"bp<a-j>'
+      exec '%s<ret>x<a-s>'
+      eval -itersel -save-regs '"' %{
+        reg '"' "%val{bufname}:%val{cursor_line}:%reg{.}"
+        exec -buffer '*grep_tmp*' 'gep'
       }
     }
     exec 'd%y:db<ret>Rgg'

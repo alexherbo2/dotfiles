@@ -7,31 +7,24 @@
 # dependencies: ["fifo"]
 # doc: yes
 # tests: no
-decl str grep_command sh
-decl str-list grep_args -c %{
-  grep -R -H -n "$@" |
-  sed -E 's/^([^:]+):([0-9]+):(.*)$/\1:\2:1:\3/'
-}
-
-def grep -params .. %{
+def -hidden grep_impl -params .. %{
   eval -save-regs '"' %{
     try %{
       exec -buffer '*grep*' -save-regs '' '%y'
     } catch %{
-      reg dquote
+      reg '"'
     }
     fifo -name '*grep*' -- %opt{grep_command} %opt{grep_args} %arg{@}
     exec -buffer '*grep*' 'P'
   }
 }
 
-complete-command grep file
-
 def -hidden jump_to_references %{
-  eval -draft %{
-    exec 'x<a-s><a-K>^\n<ret>Hs^(.+?):(\d+):(\d+):(?:.*?)$<ret>'
+  eval -no-hooks -draft %{
+    exec 'x<a-s>s\A(.+?):(\d+):(?:.*?\n)\z<ret>'
     eval -itersel %{
-      eval -client %val{client} -verbatim edit -existing -- %reg{1} %reg{2} %reg{3}
+      eval -client %val{client} -verbatim edit -existing -- %reg{1} %reg{2}
+      exec -client %val{client} 'x'
     }
   }
 }

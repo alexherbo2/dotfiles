@@ -26,7 +26,7 @@ set-face global Indent Whitespace
 set-option global terminal_command alacritty
 set-option global terminal_args msg create-window -e
 set-option global grep_command rg
-set-option global grep_args --vimgrep --hidden
+set-option global grep_args -. -H -n
 set-option global find_command fd
 set-option global find_args --hidden --type=file
 set-option global lsp_command kak-lsp

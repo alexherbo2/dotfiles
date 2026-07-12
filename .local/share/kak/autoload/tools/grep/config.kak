@@ -3,8 +3,8 @@ grep_command = "grep"
 ' str grep_command 'grep'
 
 decl -docstring '
-grep_args = ["-R", "-H", "-n"]
-' str-list grep_args '-R' '-H' '-n'
+grep_args = ["-R", "-I", "-H", "-n"]
+' str-list grep_args '-R' '-I' '-H' '-n'
 
 def -docstring '
 command: grep [options] [pattern] [paths]

@@ -238,4 +238,4 @@ define-command show_session_info %{
   echo -markup "{Information}%val{client}@%val{session}"
 }
 
-alias global info show_session_info
+alias global info-session show_session_info

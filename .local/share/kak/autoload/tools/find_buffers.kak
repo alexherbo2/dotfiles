@@ -7,25 +7,25 @@
 # dependencies: []
 # doc: no
 # tests: no
-define-command find_buffers -params 1 %{
-  evaluate-commands -save-regs '"' %{
+def -hidden find_buffers -params 1 %{
+  eval -save-regs '"' %{
     try %{
-      execute-keys -buffer '*find*' -save-regs '' '%y'
+      exec -buffer '*find*' -save-regs '' '%y'
     } catch %{
-      set-register dquote
+      reg '"'
     }
     edit! -scratch '*find*'
-    evaluate-commands -save-regs '"/' %{
-      set-register dquote %val{buflist}
-      execute-keys '<a-R>a<ret><esc>'
+    eval -save-regs '"/' %{
+      reg '"' %val{buflist}
+      exec '<a-R>a<ret><esc>'
       try %{
-        set-register / %arg{1}
-        execute-keys '<a-k><ret>y%<a-R>gg'
+        reg / %arg{1}
+        exec '<a-k><ret>y%<a-R>gg'
       } catch %{
-        execute-keys '%d'
+        exec '%d'
       }
     }
-    execute-keys -buffer '*find*' 'P'
+    exec -buffer '*find*' 'P'
   }
 }
 

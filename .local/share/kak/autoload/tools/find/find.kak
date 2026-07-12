@@ -15,7 +15,7 @@ def find -params .. %{
     try %{
       exec -buffer '*find*' -save-regs '' '%y'
     } catch %{
-      reg dquote
+      reg '"'
     }
     fifo -name '*find*' -- %opt{find_command} %opt{find_args} %arg{@}
     exec -buffer '*find*' 'P'
@@ -33,6 +33,6 @@ def -hidden jump_to_files %{
   }
 }
 
-def -hidden select_filespecs -params 1 %{
+def -hidden select_find_entries -params 1 %{
   exec "x<a-s>%arg{1}s\A(.+?)\n\z<ret>"
 }

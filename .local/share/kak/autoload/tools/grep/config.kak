@@ -22,5 +22,5 @@ hook global BufCreate '\*grep\*' %{
 hook global BufSetOption 'filetype=grep' %{
   add-highlighter buffer/grep ref grep
   map -docstring 'jump to references' buffer normal <ret> ':jump_to_references<ret>'
-  map -docstring 'select references' buffer normal <c-ret> ':select_references %val{count}<ret>'
+  map -docstring 'select entries' buffer normal <c-ret> ':select_grep_entries %val{count}<ret>'
 }

@@ -60,6 +60,6 @@ def -hidden jump_to_files_or_directories %{
   }
 }
 
-def -hidden select_pathspecs -params 1 %{
+def -hidden select_ls_entries -params 1 %{
   exec "x<a-s>%arg{1}s\A(.+?)\n\z<ret>"
 }

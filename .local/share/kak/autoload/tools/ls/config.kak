@@ -14,5 +14,5 @@ hook global BufCreate '\*ls\*' %{
 hook global BufSetOption 'filetype=ls' %{
   add-highlighter buffer/ls ref ls
   map -docstring 'jump to files or directories' buffer normal <ret> ':jump_to_files_or_directories<ret>'
-  map -docstring 'select pathspecs' buffer normal <c-ret> ':select_pathspecs %val{count}<ret>'
+  map -docstring 'select entries' buffer normal <c-ret> ':select_ls_entries %val{count}<ret>'
 }

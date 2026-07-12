@@ -21,7 +21,7 @@ complete-command git_status file
 
 def -hidden git_status_jump_to_files %{
   eval -draft %{
-    exec 'x<a-s><a-K>^\n<ret>Hs^.. \K.+$<ret>'
+    exec 'x<a-s><a-K>^\n<ret>Hs^(?:(?:[ ACDMRTU])(?:[ ACDMRTU])|\?\?|!!) \K.+$<ret>'
     eval -draft -verbatim try %{
       exec '<a-,><a-K>/\z<ret>'
       eval -itersel %{
@@ -37,6 +37,6 @@ def -hidden git_status_jump_to_files %{
   }
 }
 
-def -hidden select_statusspecs -params 1 %{
-  exec "x<a-s>%arg{1}s\A(..) (.+?)\n\z<ret>"
+def -hidden select_git_status_entries -params 1 %{
+  exec "x<a-s>%arg{1}s\A((?:[ ACDMRTU])(?:[ ACDMRTU])|\?\?|!!) (.+?)\n\z<ret>"
 }

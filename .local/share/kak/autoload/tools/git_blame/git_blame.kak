@@ -40,6 +40,6 @@ def -hidden git_blame_show_patches %{
   }
 }
 
-def -hidden select_logspecs -params 1 %{
+def -hidden select_git_blame_entries -params 1 %{
   exec "x<a-s>%arg{1}s\A([0-9a-f]{7,40}) (\d{4}-\d{2}-\d{2}) (“.+?”) (.+?\n)\z<ret>"
 }

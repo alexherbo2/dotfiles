@@ -7,7 +7,7 @@
 # dependencies: []
 # doc: yes
 # tests: no
-def list_buffers %{
+def -hidden list_buffers %{
   eval -save-regs '"b' %{
     set-register b %val{bufname}
     edit! -scratch '*buffers*'
@@ -55,6 +55,6 @@ def -hidden jump_to_buffers %{
   }
 }
 
-def -hidden select_bufspecs -params 1 %{
+def -hidden select_buffer_list_entries -params 1 %{
   exec "x<a-s>%arg{1}s\A(.+?)( \(.+?\))?\n\z<ret>"
 }

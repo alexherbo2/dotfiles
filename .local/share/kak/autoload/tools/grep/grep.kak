@@ -29,6 +29,6 @@ def -hidden jump_to_references %{
   }
 }
 
-def -hidden select_references -params 1 %{
+def -hidden select_grep_entries -params 1 %{
   exec "x<a-s>%arg{1}s\A(.+?):(\d+):(.*?\n)\z<ret>"
 }

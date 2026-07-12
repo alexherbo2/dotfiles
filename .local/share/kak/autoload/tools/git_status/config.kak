@@ -2,8 +2,8 @@ hook global BufCreate '\*git_status\*' %{
   set-option buffer filetype git_status
 }
 
-hook global BufSetOption filetype=git_status %{
+hook global BufSetOption 'filetype=git_status' %{
   add-highlighter buffer/git_status ref git_status
   map -docstring 'jump to files' buffer normal <ret> ':git_status_jump_to_files<ret>'
-  map -docstring 'select statusspecs' buffer normal <c-ret> ':select_statusspecs %val{count}<ret>'
+  map -docstring 'select entries' buffer normal <c-ret> ':select_git_status_entries %val{count}<ret>'
 }

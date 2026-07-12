@@ -54,3 +54,7 @@ def -hidden jump_to_buffers %{
     }
   }
 }
+
+def -hidden select_bufspecs -params 1 %{
+  exec "x<a-s>%arg{1}s^(.+?)( \(.+?\))?$<ret>"
+}

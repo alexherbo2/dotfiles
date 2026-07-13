@@ -1,6 +1,6 @@
 def open_global_search_prompt %{
   prompt global_search: -init "%reg{/}" %{
-    set-register / %val{text}
+    reg / %val{text}
     grep -- %val{text}
   }
 }

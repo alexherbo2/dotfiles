@@ -7,8 +7,8 @@
 # dependencies: ["fifo"]
 # doc: yes
 # tests: no
-decl str find_command find
-decl str-list find_args -type f
+decl str find_command 'find'
+decl str-list find_args '.' '-type' 'f'
 
 def find -params .. %{
   eval -save-regs '"' %{

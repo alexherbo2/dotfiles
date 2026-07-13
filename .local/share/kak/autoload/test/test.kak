@@ -18,7 +18,7 @@ alias global test add_test
 def load_tests -params 1.. %{
   clear_tests
   eval %sh{
-    find -L "$@" -type f -name '*_test.kak' -exec printf 'source "%s";' {} +
+    find -L -- "$@" -type f -name '*_test.kak' -exec printf 'source "%s";' {} +
   }
 }
 

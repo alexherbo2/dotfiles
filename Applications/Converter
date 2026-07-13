@@ -30,25 +30,25 @@ do
     do
       case "$input_format" in
         jpg)
-          find -L "$SOURCE_DIRECTORY" -type f "(" -iname "*.jpg" -or -iname "*.jpeg" ")"
+          find -L -- "$SOURCE_DIRECTORY" -type f "(" -iname "*.jpg" -or -iname "*.jpeg" ")"
           ;;
         mkv)
-          find -L "$SOURCE_DIRECTORY" -type f -iname "*.mkv"
+          find -L -- "$SOURCE_DIRECTORY" -type f -iname "*.mkv"
           ;;
         mp3)
-          find -L "$SOURCE_DIRECTORY" -type f -iname "*.mp3"
+          find -L -- "$SOURCE_DIRECTORY" -type f -iname "*.mp3"
           ;;
         mp4)
-          find -L "$SOURCE_DIRECTORY" -type f -iname "*.mp4"
+          find -L -- "$SOURCE_DIRECTORY" -type f -iname "*.mp4"
           ;;
         png)
-          find -L "$SOURCE_DIRECTORY" -type f -iname "*.png"
+          find -L -- "$SOURCE_DIRECTORY" -type f -iname "*.png"
           ;;
         webm)
-          find -L "$SOURCE_DIRECTORY" -type f -iname "*.webm"
+          find -L -- "$SOURCE_DIRECTORY" -type f -iname "*.webm"
           ;;
         webp)
-          find -L "$SOURCE_DIRECTORY" -type f -iname "*.webp"
+          find -L -- "$SOURCE_DIRECTORY" -type f -iname "*.webp"
           ;;
       esac
     done

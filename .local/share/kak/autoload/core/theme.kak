@@ -14,7 +14,7 @@ define-command load_theme -params 1 -docstring 'load theme' %{
 }
 
 complete-command -menu load_theme shell-script-candidates %{
-  find -L "$kak_config/themes" "$kak_runtime/themes" -type f -name '*.kak' -exec basename -a -s '.kak' -- {} +
+  find -L -- "$kak_config/themes" "$kak_runtime/themes" -type f -name '*.kak' -exec basename -a -s '.kak' -- {} +
 }
 
 alias global theme load_theme
@@ -24,5 +24,5 @@ define-command open_theme -params 1 -docstring 'open theme' %{
 }
 
 complete-command -menu open_theme shell-script-candidates %{
-  find -L "$kak_config/themes" "$kak_runtime/themes" -type f -name '*.kak'
+  find -L -- "$kak_config/themes" "$kak_runtime/themes" -type f -name '*.kak'
 }

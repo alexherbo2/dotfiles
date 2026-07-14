@@ -16,7 +16,7 @@ find_args = [".", "-type", "f"]
 ' str-list find_args '.' '-type' 'f'
 
 def -docstring '
-command: find [options] [paths] [expression]
+usage: find [options] [paths] [expression]
 kakoune_options: ["find_command", "find_args"]
 ' find -params .. %{
   eval -save-regs '"' %{

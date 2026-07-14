@@ -16,7 +16,7 @@ grep_args = ["-R", "-I", "-H", "-n"]
 ' str-list grep_args '-R' '-I' '-H' '-n'
 
 def -docstring '
-command: grep [options] [pattern] [paths]
+usage: grep [options] [pattern] [paths]
 kakoune_options: ["grep_command", "grep_args"]
 ' grep -params .. %{
   eval -save-regs '"' %{

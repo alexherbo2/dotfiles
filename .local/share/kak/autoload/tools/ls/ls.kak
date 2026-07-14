@@ -15,7 +15,7 @@ decl -hidden str-list ls_args -c %{
 decl -hidden str ls_working_directory
 
 def -docstring '
-command: ls [dir]
+usage: ls [dir]
 kakoune_options: []
 ' ls -params 0..1 %{
   eval %sh{

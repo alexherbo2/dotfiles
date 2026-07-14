@@ -10,8 +10,8 @@
 decl -hidden str ls_command sh
 decl -hidden str-list ls_args -c %{
   echo ../
-  ls -A -p -L -- "$1"
-}
+  ls -A -p -L "$@"
+} --
 decl -hidden str ls_working_directory
 
 def -hidden ls_impl -params 0..1 %{

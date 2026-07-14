@@ -7,10 +7,18 @@
 # dependencies: ["fifo"]
 # doc: yes
 # tests: no
-decl str find_command 'find'
-decl str-list find_args '.' '-type' 'f'
+decl -docstring '
+find_command = "find"
+' str find_command 'find'
 
-def find -params .. %{
+decl -docstring '
+find_args = [".", "-type", "f"]
+' str-list find_args '.' '-type' 'f'
+
+def -docstring '
+command: find [options] [paths] [expression]
+kakoune_options: ["find_command", "find_args"]
+' find -params .. %{
   eval -save-regs '"' %{
     try %{
       exec -buffer '*find*' -save-regs '' '%y'

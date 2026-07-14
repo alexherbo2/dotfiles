@@ -14,13 +14,16 @@ decl -hidden str-list ls_args -c %{
 } --
 decl -hidden str ls_working_directory
 
-def -hidden ls_impl -params 0..1 %{
+def -docstring '
+command: ls [dir]
+kakoune_options: []
+' ls -params 0..1 %{
   eval %sh{
     case "$#" in
       1)
         if [ -d "$1" ]
         then
-          echo 'ls_dir %arg{1}'
+          echo 'ls_impl %arg{1}'
         else
           echo 'fail "error: “%arg{1}” is not a directory"'
           exit 1
@@ -28,19 +31,21 @@ def -hidden ls_impl -params 0..1 %{
         break
         ;;
       0)
-        echo 'ls_dir .'
+        echo 'ls_impl .'
         break
         ;;
     esac
   }
 }
 
-def -hidden ls_dir -params 1 %{
+def -hidden ls_impl -params 1 %{
   fifo -name '*ls*' -- %opt{ls_command} %opt{ls_args} -- %arg{1}
   set buffer ls_working_directory %sh{
     realpath -- "$1"
   }
 }
+
+complete-command ls file
 
 def -hidden jump_to_files_or_directories %{
   eval -draft %{
@@ -53,7 +58,7 @@ def -hidden jump_to_files_or_directories %{
     }
     eval -draft -verbatim try %{
       exec ',<a-k>/\z<ret>'
-      eval -client %val{client} -verbatim ls_dir "%opt{ls_working_directory}/%val{selection}"
+      eval -client %val{client} -verbatim ls_impl "%opt{ls_working_directory}/%val{selection}"
     } catch %{
       eval -client %val{client} -verbatim edit -existing -- "%opt{ls_working_directory}/%val{selection}"
     }

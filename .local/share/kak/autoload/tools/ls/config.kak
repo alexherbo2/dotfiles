@@ -1,12 +1,3 @@
-def -docstring '
-command: ls [dir]
-kakoune_options: []
-' ls -params 0..1 %{
-  ls_impl %arg{@}
-}
-
-complete-command ls file
-
 hook global BufCreate '\*ls\*' %{
   set-option buffer filetype ls
 }

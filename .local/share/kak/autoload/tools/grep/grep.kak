@@ -7,7 +7,18 @@
 # dependencies: ["fifo"]
 # doc: yes
 # tests: no
-def -hidden grep_impl -params .. %{
+decl -docstring '
+grep_command = "grep"
+' str grep_command 'grep'
+
+decl -docstring '
+grep_args = ["-R", "-I", "-H", "-n"]
+' str-list grep_args '-R' '-I' '-H' '-n'
+
+def -docstring '
+command: grep [options] [pattern] [paths]
+kakoune_options: ["grep_command", "grep_args"]
+' grep -params .. %{
   eval -save-regs '"' %{
     try %{
       exec -buffer '*grep*' -save-regs '' '%y'
@@ -18,6 +29,8 @@ def -hidden grep_impl -params .. %{
     exec -buffer '*grep*' 'P'
   }
 }
+
+complete-command grep file
 
 def -hidden jump_to_references %{
   eval -no-hooks -draft %{

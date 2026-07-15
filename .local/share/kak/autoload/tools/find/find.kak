@@ -14,7 +14,7 @@ decl -docstring '
 find_args = ["-c", "find...", "--"]
 ' str-list find_args -c %{
   find_flags=
-  while getopts 'HL' opt
+  while getopts ':HL' opt
   do
     case "$opt" in
       'H')
@@ -39,18 +39,18 @@ find_args = ["-c", "find...", "--"]
   shift $((OPTIND - 1))
   case "$#" in
     2)
-      find "$find_flags" -- "$2" -type 'f' -name "$1"
+      find $find_flags -- "$2" -type 'f' -name "$1"
       ;;
     1)
-      find "$find_flags" . -type 'f' -name "$1"
+      find $find_flags . -type 'f' -name "$1"
       ;;
     0)
-      find "$find_flags" . -type 'f'
+      find $find_flags . -type 'f'
       ;;
     *)
       find_name="$1"
       shift
-      find "$find_flags" -- "$@" -type 'f' -name "$find_name"
+      find $find_flags -- "$@" -type 'f' -name "$find_name"
       ;;
   esac
 } --

@@ -146,23 +146,23 @@ compl send_buffer_list_to_session shell-script-candidates %opt{session_completio
 compl rename-session shell-script-candidates %{
   if [ -r "$kak_config/friendly_session_names.txt" ]
   then
-    cat "$kak_config/friendly_session_names.txt"
+    cat -- "$kak_config/friendly_session_names.txt"
   else
-    cat "$kak_runtime/friendly_session_names.txt"
+    cat -- "$kak_runtime/friendly_session_names.txt"
   fi
 }
 
 def find_friendly_session_name %{
   rename-session %sh{
     session_list_file=$(mktemp)
-    trap 'rm -f "$session_list_file"' EXIT
+    trap 'rm -f -- "$session_list_file"' EXIT
     kak -l | grep -v '^.\+\s(dead)$' > "$session_list_file"
     if [ -r "$kak_config/friendly_session_names.txt" ]
     then
-      grep -Fxv -f "$session_list_file" "$kak_config/friendly_session_names.txt" |
+      grep -Fxv -f "$session_list_file" -- "$kak_config/friendly_session_names.txt" |
       shuf -n 1
     else
-      grep -Fxv -f "$session_list_file" "$kak_runtime/friendly_session_names.txt" |
+      grep -Fxv -f "$session_list_file" -- "$kak_runtime/friendly_session_names.txt" |
       shuf -n 1
     fi
   }
@@ -171,23 +171,23 @@ def find_friendly_session_name %{
 compl rename-client shell-script-candidates %{
   if [ -r "$kak_config/friendly_client_names.txt" ]
   then
-    cat "$kak_config/friendly_client_names.txt"
+    cat -- "$kak_config/friendly_client_names.txt"
   else
-    cat "$kak_runtime/friendly_client_names.txt"
+    cat -- "$kak_runtime/friendly_client_names.txt"
   fi
 }
 
 def find_friendly_client_name %{
   rename-client %sh{
     client_list_file=$(mktemp)
-    trap 'rm -f "$client_list_file"' EXIT
+    trap 'rm -f -- "$client_list_file"' EXIT
     echo "$kak_client_list" | tr ' ' '\n' > "$client_list_file"
     if [ -r "$kak_config/friendly_client_names.txt" ]
     then
-      grep -Fxv -f "$client_list_file" "$kak_config/friendly_client_names.txt" |
+      grep -Fxv -f "$client_list_file" -- "$kak_config/friendly_client_names.txt" |
       shuf -n 1
     else
-      grep -Fxv -f "$client_list_file" "$kak_runtime/friendly_client_names.txt" |
+      grep -Fxv -f "$client_list_file" -- "$kak_runtime/friendly_client_names.txt" |
       shuf -n 1
     fi
   }
@@ -195,7 +195,7 @@ def find_friendly_client_name %{
 
 def quit_other_clients %{
   eval %sh{
-    echo "$kak_client_list" | tr ' ' '\n' | grep -Fxv "$kak_client" |
+    echo "$kak_client_list" | tr ' ' '\n' | grep -Fxv -- "$kak_client" |
     while read kak_client
     do echo "eval -client '$kak_client' quit"
     done

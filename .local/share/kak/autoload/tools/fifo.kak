@@ -11,23 +11,26 @@ def fifo -params 1.. %{
   eval %sh{
     fifo_name='*fifo*'
     fifo_flags=
+    arg_position=1
     while :
     do
       case "$1" in
-        -name)
+        '-name')
           fifo_name="$2"
           shift 2
+          arg_position=$((arg_position + 2))
           ;;
-        -scroll)
+        '-scroll')
           fifo_flags='-scroll'
           shift
+          arg_position=$((arg_position + 1))
           ;;
-        --)
+        '--')
           shift
           break
           ;;
-        -*)
-          echo 'fail "ERROR: invalid option"'
+        '-'*)
+          printf 'fail "ERROR: %arg{%d} is not a valid option."\n' "$arg_position"
           exit 1
           ;;
         *)

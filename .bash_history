@@ -89,6 +89,10 @@ git clone https://git.sr.ht/~chambln/dots ~/.local/share/git.sr.ht/~chambln/dots
 git clone https://git.sr.ht/~emersion/dotfiles ~/.local/share/git.sr.ht/~emersion/dotfiles
 git clone https://git.sr.ht/~lessa/pepper ~/.local/share/git.sr.ht/~lessa/pepper
 cd ~/.local/share/git.sr.ht/~lessa/pepper
+git clone https://git.sr.ht/~lessa/peppito ~/.local/share/git.sr.ht/~lessa/peppito
+cd ~/.local/share/git.sr.ht/~lessa/peppito
+git clone https://git.sr.ht/~lessa/lsp ~/.local/share/git.sr.ht/~lessa/lsp
+cd ~/.local/share/git.sr.ht/~lessa/lsp
 git clone https://git.sr.ht/~krobelus/dotfiles ~/.local/share/git.sr.ht/~krobelus/dotfiles
 git clone https://git.sr.ht/~sircmpwn/dotfiles ~/.local/share/git.sr.ht/~sircmpwn/dotfiles
 git clone https://github.com/71/dotfiles.git ~/.local/share/github.com/71/dotfiles

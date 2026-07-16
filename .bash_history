@@ -93,6 +93,8 @@ git clone https://git.sr.ht/~lessa/peppito ~/.local/share/git.sr.ht/~lessa/peppi
 cd ~/.local/share/git.sr.ht/~lessa/peppito
 git clone https://git.sr.ht/~lessa/lsp ~/.local/share/git.sr.ht/~lessa/lsp
 cd ~/.local/share/git.sr.ht/~lessa/lsp
+git clone https://git.sr.ht/~lessa/config ~/.local/share/git.sr.ht/~lessa/config
+cd ~/.local/share/git.sr.ht/~lessa/config
 git clone https://git.sr.ht/~krobelus/dotfiles ~/.local/share/git.sr.ht/~krobelus/dotfiles
 git clone https://git.sr.ht/~sircmpwn/dotfiles ~/.local/share/git.sr.ht/~sircmpwn/dotfiles
 git clone https://github.com/71/dotfiles.git ~/.local/share/github.com/71/dotfiles

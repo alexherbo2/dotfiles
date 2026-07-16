@@ -40,7 +40,7 @@ bash_language_server = { filetypes = ['sh'], roots = ['.git'], command = 'bash-l
 elixir_ls = { filetypes = ['elixir'], roots = ['mix.exs'], command = 'elixir-ls' }
 gopls = { filetypes = ['go'], roots = ['go.mod', 'go.work'], command = 'gopls' }
 crystalline = { filetypes = ['crystal'], roots = ['shard.yml'], command = 'crystalline', args = ['--stdio'] }
-typescript_language_server = { filetypes = ['javascript', 'typescript'], roots = ['.git'], command = 'typescript-language-server', args = ['--stdio'] }
+tsc = { filetypes = ['javascript', 'typescript'], roots = ['.git'], command = 'tsc', args = ['--lsp', '--stdio'] }
 kotlin_language_server = { filetypes = ['kotlin'], roots = ['.git'], command = 'kotlin-language-server' }
 solargraph = { filetypes = ['ruby'], roots = ['Gemfile'], command = 'solargraph', args = ['stdio'] }
 rust_analyzer = { filetypes = ['rust'], roots = ['Cargo.toml'], command = 'rust-analyzer' }

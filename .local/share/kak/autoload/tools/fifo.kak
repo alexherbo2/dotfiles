@@ -26,6 +26,10 @@ def fifo -params 1.. %{
           shift
           break
           ;;
+        -*)
+          echo 'fail "ERROR: invalid option"'
+          exit 1
+          ;;
         *)
           break
           ;;

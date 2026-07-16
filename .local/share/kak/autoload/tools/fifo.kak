@@ -30,7 +30,7 @@ def fifo -params 1.. %{
           break
           ;;
         '-'*)
-          printf 'fail "ERROR: %arg{%d} is not a valid option."\n' "$arg_position"
+          printf 'fail "ERROR: %%arg{%d} is not a valid option."\n' "$arg_position"
           exit 1
           ;;
         *)

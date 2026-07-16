@@ -8,16 +8,16 @@
 # doc: yes
 # tests: no
 decl -docstring '
-grep_command = "grep"
+grep_command: "grep"
 ' str grep_command 'grep'
 
 decl -docstring '
-grep_args = ["-R", "-I", "-H", "-n"]
+grep_args: ["-R", "-I", "-H", "-n"]
 ' str-list grep_args '-R' '-I' '-H' '-n'
 
 def -docstring '
 usage: grep [options] [pattern] [paths]
-kakoune_options: ["grep_command", "grep_args"]
+config_options: ["grep_command", "grep_args"]
 ' grep -params .. %{
   eval -save-regs '"' %{
     try %{

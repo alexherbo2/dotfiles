@@ -8,10 +8,10 @@
 # doc: yes
 # tests: no
 decl -docstring '
-find_command = "sh"
+find_command: "sh"
 ' str find_command 'sh'
 decl -docstring '
-find_args = ["-c", "find...", "--"]
+find_args: ["-c", "find...", "--"]
 ' str-list find_args -c %{
   find_flags=
   while getopts ':HL' opt
@@ -57,7 +57,7 @@ find_args = ["-c", "find...", "--"]
 
 def -docstring '
 usage: find [options] [pattern] [paths]
-kakoune_options: ["find_command", "find_args"]
+config_options: ["find_command", "find_args"]
 ' find -params .. %{
   eval -save-regs '"' %{
     try %{

@@ -7,8 +7,12 @@
 # dependencies: ["fifo"]
 # doc: yes
 # tests: no
-decl -hidden str ls_command sh
-decl -hidden str-list ls_args -c %{
+decl -docstring '
+ls_command: "sh"
+' str ls_command 'sh'
+decl -docstring '
+ls_args: ["-c", "ls...", "--"]
+' str-list ls_args -c %{
   echo ../
   ls -A -p -L "$@"
 } --
@@ -16,7 +20,7 @@ decl -hidden str ls_working_directory
 
 def -docstring '
 usage: ls [dir]
-kakoune_options: []
+config_options: ["ls_command", "ls_args"]
 ' ls -params 0..1 %{
   eval %sh{
     case "$#" in

@@ -8,7 +8,9 @@ hook global User 'TERM_PROGRAM=Apple_Terminal' %{
         set command to command & quoted form of arg & " "
       end repeat
       tell application "Terminal"
-        do script command
+        set currentSettings to current settings of front window
+        set newTab to do script command
+        set current settings of newTab to currentSettings
       end tell
     end run
   } --

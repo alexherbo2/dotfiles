@@ -1,4 +1,4 @@
-define-command show_working_directory %{
+def show_working_directory %{
   echo -markup "{Information}%sh{pwd}"
 }
 

@@ -3,13 +3,13 @@ hook global User 'TERM_PROGRAM=Apple_Terminal' %{
   set global terminal_command 'osascript'
   set global terminal_args '-e' %{
     on run argv
-      set command to " exec "
+      set commandLine to " exec "
       repeat with arg in argv
-        set command to command & quoted form of arg & " "
+        set commandLine to commandLine & quoted form of arg & " "
       end repeat
       tell application "Terminal"
         set currentSettings to current settings of front window
-        set newTab to do script command
+        set newTab to do script commandLine
         set current settings of newTab to currentSettings
       end tell
     end run

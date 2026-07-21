@@ -9,7 +9,5 @@ hook global User 'TERM=screen' %{
     shift -- "$arg_count"
     exec -- "$@"
   } '--' 'screen' '-S' "%val{client_env_STY}" '-X' 'screen' 'sh' '-c' 'cd -- "$1" && shift && exec "$@"' '--' "%val{client_env_PWD}"
-  set global terminal_tty %sh{
-    tmux display-message -p '#{client_tty}'
-  }
+  set global terminal_tty '/dev/tty'
 }

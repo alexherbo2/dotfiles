@@ -12,7 +12,7 @@ find_command: "sh"
 ' str find_command 'sh'
 decl -docstring '
 find_args: ["-c", "find...", "--"]
-' str-list find_args -c %{
+' str-list find_args '-c' %{
   find_flags=
   while getopts ':HL' opt
   do
@@ -36,7 +36,7 @@ find_args: ["-c", "find...", "--"]
         ;;
     esac
   done
-  shift $((OPTIND - 1))
+  shift -- $((OPTIND - 1))
   case "$#" in
     2)
       find $find_flags -- "$2" -type 'f' -name "$1"
@@ -53,7 +53,7 @@ find_args: ["-c", "find...", "--"]
       find $find_flags -- "$@" -type 'f' -name "$find_name"
       ;;
   esac
-} --
+} '--'
 
 def -docstring '
 usage: find [options] [pattern] [paths]

@@ -12,10 +12,10 @@ ls_command: "sh"
 ' str ls_command 'sh'
 decl -docstring '
 ls_args: ["-c", "ls...", "--"]
-' str-list ls_args -c %{
+' str-list ls_args '-c' %{
   echo ../
   ls -A -p -L "$@"
-} --
+} '--'
 decl -hidden str ls_working_directory
 
 def -docstring '

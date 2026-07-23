@@ -1,6 +1,6 @@
 # iTerm2
 hook global User 'TERM_PROGRAM=iTerm.app' %{
-  set global terminal_tty %sh{
+  set window terminal_tty %sh{
     printf '/dev/'
     ps -o 'tty=' -p "$kak_client_pid" |
     awk '
@@ -9,8 +9,8 @@ hook global User 'TERM_PROGRAM=iTerm.app' %{
       }
     '
   }
-  set global terminal_command 'env'
-  set global terminal_args "kak_client_tty=%opt{terminal_tty}" 'osascript' '-e' %{
+  set window terminal_command 'env'
+  set window terminal_args "kak_client_tty=%opt{terminal_tty}" 'osascript' '-e' %{
     on run argv
       set kak_client_tty to system attribute "kak_client_tty"
       set commandLine to ""

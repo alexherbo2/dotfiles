@@ -1,7 +1,7 @@
 # foot
 # https://codeberg.org/dnkl/foot
 hook global User 'TERM=foot' %{
-  set global terminal_command 'footclient'
-  set global terminal_args '-D' '.' '--'
-  set global terminal_tty '/dev/tty'
+  set window terminal_command 'footclient'
+  set window terminal_args '-D' '.' '--'
+  set window terminal_tty '/dev/tty'
 }

@@ -1,9 +1,9 @@
 # tmux
 # https://github.com/tmux/tmux
 hook global User 'TERM=tmux' %{
-  set global terminal_command 'env'
-  set global terminal_args "TMUX=%val{client_env_TMUX}" "TMUX_PANE=%val{client_env_TMUX_PANE}" 'tmux' 'display-popup' '-w' '90%' '-h' '90%' '-d' '#{pane_current_path}' '-E' 'tmux' 'new-session' '-A' '-s' "%val{session}" '--'
-  set global terminal_tty %sh{
+  set window terminal_command 'env'
+  set window terminal_args "TMUX=%val{client_env_TMUX}" "TMUX_PANE=%val{client_env_TMUX_PANE}" 'tmux' 'display-popup' '-w' '90%' '-h' '90%' '-d' '#{pane_current_path}' '-E' 'tmux' 'new-session' '-A' '-s' "%val{session}" '--'
+  set window terminal_tty %sh{
     TMUX="$kak_client_env_TMUX" TMUX_PANE="$kak_client_env_TMUX_PANE" tmux display-message -p '#{client_tty}'
   }
 }

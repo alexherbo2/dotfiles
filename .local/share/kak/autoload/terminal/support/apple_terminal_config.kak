@@ -2,7 +2,7 @@
 hook global User 'TERM_PROGRAM=Apple_Terminal' %{
   set global terminal_tty %sh{
     printf '/dev/'
-    ps -o 'pid=' -p "$kak_client_pid" |
+    ps -o 'tty=' -p "$kak_client_pid" |
     awk '
       {
         print $1

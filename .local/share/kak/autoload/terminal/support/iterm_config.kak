@@ -18,16 +18,7 @@ hook global User 'TERM_PROGRAM=iTerm.app' %{
         set commandLine to commandLine & quoted form of arg & " "
       end repeat
       tell application "iTerm"
-        set profileName to profile name of current session of current window
-        repeat with w in windows
-          repeat with t in tabs of w
-            repeat with s in sessions of t
-              if tty of s is kak_client_tty then
-                set profileName to profile name of s
-              end if
-            end repeat
-          end repeat
-        end repeat
+        set profileName to profile name of first item of (every session of every tab of every window whose tty is kak_client_tty)
         create window with profile profileName command commandLine
       end tell
     end run

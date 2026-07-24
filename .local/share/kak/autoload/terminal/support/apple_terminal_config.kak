@@ -18,14 +18,7 @@ hook global User 'TERM_PROGRAM=Apple_Terminal' %{
         set commandLine to commandLine & quoted form of arg & " "
       end repeat
       tell application "Terminal"
-        set currentSettings to current settings of front window
-        repeat with w in windows
-          repeat with t in tabs of w
-            if tty of t is kak_client_tty then
-              set currentSettings to current settings of t
-            end if
-          end repeat
-        end repeat
+        set currentSettings to current settings of first item of (every tab of every window whose tty is kak_client_tty)
         set newTab to do script commandLine
         set current settings of newTab to currentSettings
       end tell

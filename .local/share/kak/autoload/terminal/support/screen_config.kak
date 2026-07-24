@@ -8,7 +8,7 @@ hook global User 'TERM=(screen|screen\..+)' %{
     done
     shift -- "$arg_count"
     exec -- "$@"
-  } '--' 'screen' '-S' "%val{client_env_STY}" '-X' 'screen' 'sh' '-c' 'cd -- "$1" && shift && exec "$@"' '--' "%val{client_env_PWD}"
+  } '--' 'screen' '-S' "%val{client_env_STY}" '-p' "%val{client_env_WINDOW}" '-X' 'screen' 'sh' '-c' 'cd -- "$1" && shift && exec "$@"' '--' "%val{client_env_PWD}"
   set window terminal_tty %sh{
     printf '/dev/'
     ps -o 'tty=' -p "$kak_client_pid" |

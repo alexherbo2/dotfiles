@@ -1,18 +1,9 @@
 # Apple Terminal
 hook global User 'TERM_PROGRAM=Apple_Terminal' %{
-  set window terminal_tty %sh{
-    printf '/dev/'
-    ps -o 'tty=' -p "$kak_client_pid" |
-    awk '
-      {
-        print $1
-      }
-    '
-  }
-  set window terminal_command 'env'
-  set window terminal_args "kak_client_tty=%opt{terminal_tty}" 'osascript' '-e' %{
+  set window terminal_command 'osascript'
+  set window terminal_args '-e' %{
     on run argv
-      set kak_client_tty to system attribute "kak_client_tty"
+      set kak_client_tty to system attribute "kak_opt_terminal_tty"
       set commandLine to " exec "
       repeat with arg in argv
         set commandLine to commandLine & quoted form of arg & " "
@@ -24,4 +15,8 @@ hook global User 'TERM_PROGRAM=Apple_Terminal' %{
       end tell
     end run
   } '--' 'sh' '-c' 'cd -- "$1" && shift && exec "$@"' '--' "%val{client_env_PWD}"
+  set window terminal_tty %sh{
+    ps -o 'tty=' -p "$kak_client_pid" |
+    xargs printf '/dev/%s\n'
+  }
 }

@@ -12,10 +12,6 @@ find_friendly_session_name
 
 theme macos_light
 
-hook global User 'TERM_PROGRAM=Apple_Terminal' %{
-  theme macos_light_ansi
-}
-
 set-face global Tab WhitespaceDiagnosticError
 set-face global Newline Whitespace
 set-face global NonBreakingSpace WhitespaceDiagnosticError

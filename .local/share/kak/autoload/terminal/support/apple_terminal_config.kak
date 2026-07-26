@@ -4,9 +4,9 @@ hook global User 'TERM_PROGRAM=Apple_Terminal' %{
   set window terminal_args '-e' %{
     on run argv
       set kak_client_tty to system attribute "kak_opt_terminal_tty"
-      set PWD to system attribute "PWD"
+      set kak_session_env_PWD to system attribute "PWD"
       set commandLine to " exec "
-      repeat with arg in {"sh", "-c", "cd -- \"$1\" && shift && exec \"$@\"", "--", PWD} & argv
+      repeat with arg in {"sh", "-c", "cd -- \"$1\" && shift && exec \"$@\"", "--", kak_session_env_PWD} & argv
         set commandLine to commandLine & quoted form of arg & " "
       end repeat
       tell application "Terminal"

@@ -441,6 +441,7 @@ export WLR_RENDERER=pixman
 export WLR_NO_HARDWARE_CURSORS=1
 eval "$(starship init bash)"
 rm ~/docs/bookmarks_*_*_*.html
+mv ~/.local/share/weechat/logs ~/docs~/weechat-logs-2026-07-26
 mv ~/Documents/bookmarks_*_*_*.html ~/docs
 ln ~/docs/chrome_extensions/shortcuts_listing_page.md ~/code/chrome-shortcuts/extra/chrome-web-store
 ln ~/docs/chrome_extensions/*.png ~/code/chrome-shortcuts.assets

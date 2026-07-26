@@ -7,8 +7,8 @@
 # dependencies: []
 # doc: yes
 # tests: no
-define-command nohup -params 1.. %{
+def nohup -params 1.. %{
   nop %sh{
-    nohup -- "$@" < /dev/null > /dev/null 2>&1 &
+    exec nohup -- "$@" < /dev/null > /dev/null 2>&1 &
   }
 }

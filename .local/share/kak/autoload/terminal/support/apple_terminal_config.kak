@@ -4,8 +4,9 @@ hook global User 'TERM_PROGRAM=Apple_Terminal' %{
   set window terminal_args '-e' %{
     on run argv
       set kak_client_tty to system attribute "kak_opt_terminal_tty"
+      set PWD to system attribute "PWD"
       set commandLine to " exec "
-      repeat with arg in argv
+      repeat with arg in {"sh", "-c", "cd -- \"$1\" && shift && exec \"$@\"", "--", PWD} & argv
         set commandLine to commandLine & quoted form of arg & " "
       end repeat
       tell application "Terminal"
@@ -14,7 +15,7 @@ hook global User 'TERM_PROGRAM=Apple_Terminal' %{
         set current settings of newTab to currentSettings
       end tell
     end run
-  } '--' 'sh' '-c' 'cd -- "$1" && shift && exec "$@"' '--' "%val{client_env_PWD}"
+  } '--'
   set window terminal_tty %sh{
     ps -o 'tty=' -p "$kak_client_pid" |
     xargs printf '/dev/%s\n'

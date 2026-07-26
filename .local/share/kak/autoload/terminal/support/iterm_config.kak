@@ -4,8 +4,10 @@ hook global User 'TERM_PROGRAM=iTerm.app' %{
   set window terminal_args '-e' %{
     on run argv
       set kak_client_tty to system attribute "kak_opt_terminal_tty"
+      set PATH to system attribute "PATH"
+      set PWD to system attribute "PWD"
       set commandLine to ""
-      repeat with arg in argv
+      repeat with arg in {"env", "PATH=" & PATH, "sh", "-c", "cd -- \"$1\" && shift && exec \"$@\"", "--", PWD} & argv
         set commandLine to commandLine & quoted form of arg & " "
       end repeat
       tell application "iTerm"
@@ -13,7 +15,7 @@ hook global User 'TERM_PROGRAM=iTerm.app' %{
         create window with profile profileName command commandLine
       end tell
     end run
-  } '--' 'env' "PATH=%val{client_env_PATH}" 'sh' '-c' 'cd -- "$1" && shift && exec "$@"' '--' "%val{client_env_PWD}"
+  } '--'
   set window terminal_tty %sh{
     ps -o 'tty=' -p "$kak_client_pid" |
     xargs printf '/dev/%s\n'

@@ -627,6 +627,7 @@ cp assets/*.png extra/chrome-web-store/assets/*.png ~/docs/chrome_extensions/202
 mkdir setup-kakoune
 cd setup-kakoune
 cd ~/code/setup-kakoune
+kak ~/code/setup-kakoune/setup-kakoune.sh
 kak setup-kakoune.sh
 install -m 0755 setup-kakoune.sh ~/.local/bin
 setup-kakoune

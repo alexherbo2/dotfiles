@@ -624,6 +624,13 @@ mkdir ~/docs/chrome_extensions/2025-11-21
 cp assets/*.png extra/chrome-web-store/assets/*.png ~/docs/chrome_extensions/2025-11-21
 mkdir ~/docs/chrome_extensions/2025-11-27
 cp assets/*.png extra/chrome-web-store/assets/*.png ~/docs/chrome_extensions/2025-11-27
+mkdir setup-kakoune
+cd setup-kakoune
+cd ~/code/setup-kakoune
+kak setup-kakoune.sh
+install -m 0755 setup-kakoune.sh ~/.local/bin
+setup-kakoune
+git clone https://github.com/taupiqueur/chrome-shell.git
 mkdir bin
 crystal build src/crystalline.cr -o bin/crystalline --release --no-debug --progress -Dpreview_mt
 install bin/crystalline ~/.local/bin

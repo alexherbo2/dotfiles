@@ -4,17 +4,12 @@
 .config/google-chrome
 .config/chromium
 .config/mozilla
-.config/gh/config.yml
-.config/gh/hosts.yml
 .config/mpv/watch_later
 .ssh/id_ed25519
 .ssh/id_ed25519_*
 .ssh/known_hosts
 .ssh/known_hosts.old
 .ssh/control_masters
-.config/weechat
-.local/share/weechat
-.cache/weechat
 Library/Application Support/McFly
 Library/Application Support/zoxide
 Library/Application Support/Google/Chrome

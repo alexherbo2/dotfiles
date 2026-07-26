@@ -26,12 +26,12 @@
       "args": ["--stdio"]
     },
     "javascript": {
-      "command": "typescript-language-server",
-      "args": ["--stdio"]
+      "command": "tsc",
+      "args": ["--lsp", "--stdio"]
     },
     "typescript": {
-      "command": "typescript-language-server",
-      "args": ["--stdio"]
+      "command": "tsc",
+      "args": ["--lsp", "--stdio"]
     },
     "kotlin": {
       "command": "kotlin-language-server",

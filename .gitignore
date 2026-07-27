@@ -10,8 +10,6 @@
 .ssh/known_hosts
 .ssh/known_hosts.old
 .ssh/control_masters
-Library/Application Support/McFly
-Library/Application Support/zoxide
 Library/Application Support/Google/Chrome
 Library/Application Support/Firefox
 Library/Application Support/Mozilla

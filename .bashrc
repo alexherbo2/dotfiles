@@ -4,14 +4,23 @@
 
 # Homebrew
 # https://brew.sh
-[ -x /opt/homebrew/bin/brew ] && eval "$(brew shellenv)"
+if [ -x /opt/homebrew/bin/brew ]
+then
+  eval "$(brew shellenv)"
+fi
 
 # Enable Bash completion on macOS.
-[ -r /opt/homebrew/etc/profile.d/bash_completion.sh ] && . /opt/homebrew/etc/profile.d/bash_completion.sh
+if [ -r /opt/homebrew/etc/profile.d/bash_completion.sh ]
+then
+  . /opt/homebrew/etc/profile.d/bash_completion.sh
+fi
 
 # Nix
 # https://nixos.org
-[ -r /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ] && . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+if [ -r /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]
+then
+  . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+fi
 
 # Prompt -----------------------------------------------------------------------
 
@@ -49,6 +58,8 @@ export QT_QPA_PLATFORMTHEME=kde
 # Applications
 export EDITOR=kak
 export KAKOUNE_POSIX_SHELL=/bin/dash
+export KAKOUNE_RUNTIME=~/.local/share/kak
+export KAKOUNE_CONFIG_DIR=~/.config/kak
 
 # Local environment variables
 . ~/.config/env
@@ -277,7 +288,10 @@ alias apk-clean='doas apk cache clean'
 # macOS ------------------------------------------------------------------------
 
 # macOS POSIX shell
-[ -x /opt/homebrew/bin/dash ] && export KAKOUNE_POSIX_SHELL=/opt/homebrew/bin/dash
+if [ -x /opt/homebrew/bin/dash ]
+then
+  export KAKOUNE_POSIX_SHELL=/opt/homebrew/bin/dash
+fi
 
 # Keep MacBook awake with lid closed
 # https://caffeinated.app/keep-macbook-awake-with-lid-closed/

@@ -113,7 +113,7 @@ alias sudo='sudo '
 
 # Application launcher
 # Note: Runs command with aliases.
-alias @='swaymsg exec -- '
+alias '@=swaymsg -- exec '
 
 # Make
 alias m=make

@@ -36,7 +36,7 @@ find_args: ["-c", "find...", "--"]
         ;;
     esac
   done
-  shift -- $((OPTIND - 1))
+  shift $((OPTIND - 1))
   case "$#" in
     2)
       find $find_flags -- "$2" -type 'f' -name "$1"

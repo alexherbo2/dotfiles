@@ -1,5 +1,3 @@
-def show_working_directory %{
+def pwd %{
   echo -- %sh{pwd}
 }
-
-alias global pwd show_working_directory

@@ -17,7 +17,9 @@ hook global User 'GHOSTTY_PLATFORM=Darwin' %{
     end run
   } '--'
   set window terminal_tty %sh{
-    ps -o 'tty=' -p "$kak_client_pid" |
-    xargs printf '/dev/%s\n'
+    osascript -e '
+      set kak_client_pid to system attribute "kak_client_pid"
+      tell application "Ghostty" to get tty of first terminal whose pid is kak_client_pid
+    '
   }
 }

@@ -7,7 +7,7 @@
 # dependencies: ["ls"]
 # doc: yes
 # tests: no
-def explore_file_directory %{
+def -hidden explore_file_directory %{
   ls %sh{dirname "$kak_buffile"}
   hook -always -once buffer BufCloseFifo '' %exp{
     eval -client %val{client} -save-regs '/' %%{

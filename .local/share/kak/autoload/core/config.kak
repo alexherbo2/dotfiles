@@ -1,13 +1,13 @@
-define-command open_kakrc %{
+def open_kakrc %{
   edit "%val{config}/kakrc"
 }
 
-define-command open_shared_kakrc %{
+def open_shared_kakrc %{
   edit "%val{runtime}/kakrc"
 }
 
-define-command load_local_kakrc %{
-  evaluate-commands %sh{
+def load_local_kakrc %{
+  eval %sh{
     if [ -f '.kakrc' -a -r '.kakrc' ]
     then
       echo "source '.kakrc'"
@@ -15,22 +15,22 @@ define-command load_local_kakrc %{
   }
 }
 
-define-command open_config -params 1 -docstring 'open config' %{
+def open_config -params 1 -docstring 'open config' %{
   edit -existing -readonly %arg{1}
 }
 
-complete-command -menu open_config shell-script-candidates %{
+compl -menu open_config shell-script-candidates %{
   find -L -- "$kak_config/kakrc" "$kak_runtime/kakrc" -type f -name 'kakrc'
   find -L -- "$kak_config/autoload" "$kak_runtime/autoload" -type f -name '*.kak'
 }
 
 alias global config open_config
 
-define-command grep_config -params 1 -docstring 'grep config' %{
+def grep_config -params 1 -docstring 'grep config' %{
   grep %arg{1} "%val{config}/kakrc" "%val{runtime}/kakrc" "%val{config}/autoload" "%val{runtime}/autoload"
 }
 
-complete-command grep_config shell-script-candidates %{
+compl grep_config shell-script-candidates %{
   {
     find -L -- "$kak_config/kakrc" "$kak_runtime/kakrc" -type f -name 'kakrc'
     find -L -- "$kak_config/autoload" "$kak_runtime/autoload" -type f -name '*.kak'
@@ -39,10 +39,10 @@ complete-command grep_config shell-script-candidates %{
   sort -u
 }
 
-define-command explore_config %{
-  explore %val{config}
+def explore_config %{
+  ls %val{config}
 }
 
-define-command explore_shared_config %{
-  explore %val{runtime}
+def explore_shared_config %{
+  ls %val{runtime}
 }

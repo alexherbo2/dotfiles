@@ -1,14 +1,14 @@
-evaluate-commands %sh{
+eval %sh{
   find -L -- "$kak_runtime/autoload" -type f -name '*.kak' -exec printf 'source "%s";' {} +
   if [ -d "$kak_config/autoload" ]
   then
     find -L -- "$kak_config/autoload" -type f -name '*.kak' -exec printf 'source "%s";' {} +
   fi
   echo '
-    set-option global startup_info_version 20261231
-    set-option global ui_options terminal_set_title=no terminal_assistant=none
-    set-option global matching_pairs ( ) { } [ ] < > “ ” « » ‹ ›
-    set-option global modelinefmt "{{mode_info}} {{context_info}} %%val{timestamp} %%val{bufname}:%%val{cursor_line}:%%val{cursor_char_column} %%val{buf_line_count}L"
+    set global startup_info_version 20261231
+    set global ui_options terminal_set_title=no terminal_assistant=none
+    set global matching_pairs ( ) { } [ ] < > “ ” « » ‹ ›
+    set global modelinefmt "{{mode_info}} {{context_info}} %%val{timestamp} %%val{bufname}:%%val{cursor_line}:%%val{cursor_char_column} %%val{buf_line_count}L"
     add-highlighter global/match_brackets show-matching
     add-highlighter global/line_numbers number-lines -hlcursor -separator "  " -min-digits 5
     add-highlighter global/rulers group
@@ -50,7 +50,7 @@ evaluate-commands %sh{
     }
     hook -once global ClientCreate ".*" %{
       try %{
-        evaluate-commands -buffer "*scratch*" ""
+        eval -buffer "*scratch*" ""
         show_splash_screen
       }
     }

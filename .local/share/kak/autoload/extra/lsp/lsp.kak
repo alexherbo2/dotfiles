@@ -1,14 +1,16 @@
-declare-option str lsp_command kak-lsp
-declare-option str-list lsp_args --kakoune --session %val{session}
+decl str lsp_command kak-lsp
+decl str-list lsp_args --kakoune --session %val{session}
 
-declare-option -hidden str lsp_modeline_code_actions
-declare-option -hidden str lsp_modeline_progress
-declare-option -hidden str lsp_modeline_message_requests
+decl -hidden str lsp_modeline_code_actions
+decl -hidden str lsp_modeline_progress
+decl -hidden str lsp_modeline_message_requests
 
-define-command initialize_lsp %{
-  evaluate-commands %sh{
+decl str lsp_language_id
+
+def initialize_lsp %{
+  eval %sh{
     eval "$kak_quoted_opt_lsp_command" "$kak_quoted_opt_lsp_args"
   }
-  set-option global lsp_cmd %opt{lsp_command}
+  set global lsp_cmd %opt{lsp_command}
   lsp-enable
 }

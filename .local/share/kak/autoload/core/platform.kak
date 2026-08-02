@@ -1,1 +1,1 @@
-decl str platform_name %sh{uname}
+decl -hidden str platform_name

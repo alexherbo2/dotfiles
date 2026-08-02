@@ -1,0 +1,1 @@
+lsp add "tsc" --command "tsc" --args "--lsp" --args "--stdio"

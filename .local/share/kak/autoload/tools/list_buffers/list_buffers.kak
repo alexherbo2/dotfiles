@@ -17,7 +17,7 @@ def -hidden list_buffers %{
     }
     exec 'd'
     try %{
-      exec '%<a-s>2<a-F>:H<a-k>\A\Q<c-r>b\E\z<ret>gh'
+      exec '%<a-s>2<a-F>:H<a-k>\A\Q<c-r>b\E\z<ret>x'
     } catch %{
       exec 'gg'
     }

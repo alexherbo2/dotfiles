@@ -1,1 +1,3 @@
 lsp add "tsc" --command "tsc" --args "--lsp" --args "--stdio"
+lsp add "bash-language-server" --command "bash-language-server" --args "start"
+lsp add "crystalline" --command "crystalline" --args "--stdio"

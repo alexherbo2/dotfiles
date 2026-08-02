@@ -5,7 +5,9 @@ decl -hidden str lsp_modeline_code_actions
 decl -hidden str lsp_modeline_progress
 decl -hidden str lsp_modeline_message_requests
 
+decl str lsp_servers
 decl str lsp_language_id
+decl str lsp_semantic_tokens
 
 def initialize_lsp %{
   eval %sh{

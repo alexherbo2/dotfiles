@@ -1,4 +1,4 @@
-decl str file_completion %{
+decl -hidden str file_completion %{
   eval "$kak_quoted_opt_find_command" "$kak_quoted_opt_find_args"
 }
 

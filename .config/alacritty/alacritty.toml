@@ -28,6 +28,11 @@ args = ['-e', 'beep']
 
 # macOS
 [[keyboard.bindings]]
+key = 't'
+mods = 'Command'
+action = 'CreateNewTab'
+
+[[keyboard.bindings]]
 key = 'n'
 mods = 'Command'
 action = 'CreateNewWindow'

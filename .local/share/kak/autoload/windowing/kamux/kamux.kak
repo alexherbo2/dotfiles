@@ -182,7 +182,7 @@ def kamux_activate_view -params 1 %{
 }
 
 def kamux_search_view %{
-  prompt -menu client_picker: -shell-script-candidates -client-completion %{
+  prompt -menu client_picker: -client-completion %{
     kamux_activate_view %val{text}
   }
 }
@@ -211,7 +211,7 @@ def kamux_activate_pane_select -params .. %{
 
 def kamux_activate_window_select -params .. %{
   kamux run-shell %exp{
-    kamux choose-tree -Zw -f '##{==:##{session_name},#{session_name}}' "%arg{@}"
+    tmux choose-tree -Zw -f '##{==:##{session_name},#{session_name}}' "%arg{@}"
   }
 }
 

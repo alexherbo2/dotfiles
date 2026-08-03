@@ -12,16 +12,12 @@ def install_tree_sitter_grammars %{
   fifo -name '*tree_sitter*' -- %opt{tree_sitter_install_grammars_command} %opt{tree_sitter_install_grammars_args} %arg{@}
 }
 
-compl tree_sitter file
-
 decl str tree_sitter_list_grammars_command "ktsctl"
 decl str-list tree_sitter_list_grammars_args "query" "-a"
 
 def list_tree_sitter_grammars %{
   fifo -name '*tree_sitter*' -- %opt{tree_sitter_list_grammars_command} %opt{tree_sitter_list_grammars_args} %arg{@}
 }
-
-compl tree_sitter file
 
 def initialize_tree_sitter %{
   eval %sh{

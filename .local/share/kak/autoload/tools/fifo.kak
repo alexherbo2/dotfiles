@@ -9,19 +9,19 @@
 # tests: no
 def fifo -params 1.. %{
   eval %sh{
-    fifo_name='*fifo*'
-    fifo_flags=
+    buffer_name='unnamed'
+    edit_flags=
     arg_position=1
     while :
     do
       case "$1" in
         '-name')
-          fifo_name="$2"
+          buffer_name="$2"
           shift 2
           arg_position=$((arg_position + 2))
           ;;
         '-scroll')
-          fifo_flags='-scroll'
+          edit_flags='-scroll'
           shift
           arg_position=$((arg_position + 1))
           ;;
@@ -38,14 +38,15 @@ def fifo -params 1.. %{
           ;;
       esac
     done
-    fifo=$(mktemp -u)
-    mkfifo -- "$fifo"
-    { trap - INT QUIT; exec "$@" > "$fifo" 2>&1; } < /dev/null > /dev/null 2>&1 &
+    fifo_name=$(mktemp -u)
+    mkfifo -- "$fifo_name"
+    { trap - INT QUIT; exec "$@" > "$fifo_name" 2>&1; } < /dev/null > /dev/null 2>&1 &
     cat <<EOF
-      edit! ${fifo_flags} -fifo "$fifo" -- "$fifo_name"
+      edit! ${edit_flags} -fifo "$fifo_name" -- "kakoune://fifo/$buffer_name"
       hook -always -once buffer BufCloseFifo "" %{
+        rename-buffer "kakoune://scratch/$buffer_name"
         nop %sh{
-          unlink -- "$fifo"
+          unlink -- "$fifo_name"
         }
       }
 EOF

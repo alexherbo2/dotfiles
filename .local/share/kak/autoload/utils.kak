@@ -221,11 +221,16 @@ def grab_buffer_in_viewport -params 1 %{
 compl -menu swap_buffer_in_viewport client
 compl -menu grab_buffer_in_viewport client
 
-def open_scratch_buffer %{
+def -docstring '
+usage: open_new_scratch_buffer
+description: create a new scratch buffer.
+config_options: []
+aliases: ["n"]
+' open_new_scratch_buffer %{
   edit -scratch 'kakoune://scratch/unnamed'
 }
 
-alias global n open_scratch_buffer
+alias global n open_new_scratch_buffer
 
 def edit_readonly -params .. %{
   edit -readonly -- %arg{@}

@@ -10,10 +10,10 @@
 def -hidden list_buffers %{
   eval -save-regs '"b' %{
     set-register b %val{bufname}
-    edit! -scratch '*buffers*'
+    edit! -scratch 'kakoune://scratch/buffers'
     eval -no-hooks -buffer '*' %{
       set-register dquote "%val{bufname}:readonly=%opt{readonly}:modified=%val{modified}"
-      exec -buffer '*buffers*' 'gep'
+      exec -buffer 'kakoune://scratch/buffers' 'gep'
     }
     exec 'd'
     try %{
@@ -40,7 +40,7 @@ def -hidden list_buffers %{
 }
 
 def rearrange_buffers %{
-  eval -buffer '*buffers*' %{
+  eval -buffer 'kakoune://scratch/buffers' %{
     exec '%<a-s><a-K>^\n<ret>H1s^(.+?)(?: \(.+?\))?$<ret>'
     arrange-buffers %val{selections}
   }

@@ -21,12 +21,12 @@ config_options: ["grep_command", "grep_args"]
 ' grep -params .. %{
   eval -save-regs '"' %{
     try %{
-      exec -buffer '*grep*' -save-regs '' '%y'
+      exec -buffer 'kakoune://scratch/grep' -save-regs '' '%y'
     } catch %{
       reg '"'
     }
-    fifo -name '*grep*' -- %opt{grep_command} %opt{grep_args} %arg{@}
-    exec -buffer '*grep*' 'P'
+    fifo -name 'grep' -- %opt{grep_command} %opt{grep_args} %arg{@}
+    exec -buffer 'kakoune://scratch/grep' 'P'
   }
 }
 

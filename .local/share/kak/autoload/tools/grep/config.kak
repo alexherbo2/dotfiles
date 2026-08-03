@@ -1,4 +1,4 @@
-hook global BufCreate '\*grep\*' %{
+hook global BufCreate 'kakoune://scratch/grep' %{
   set-option buffer filetype grep
 }
 

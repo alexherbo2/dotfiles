@@ -14,7 +14,7 @@ decl str-list git_status_args -c %{
 } --
 
 def git_status -params .. %{
-  fifo -name '*git_status*' -- %opt{git_status_command} %opt{git_status_args} -- %arg{@}
+  fifo -name 'git_status' -- %opt{git_status_command} %opt{git_status_args} -- %arg{@}
 }
 
 complete-command git_status file

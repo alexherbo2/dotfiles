@@ -1,4 +1,4 @@
-hook global BufCreate '\*git_blame\*' %{
+hook global BufCreate 'kakoune://scratch/git_blame' %{
   set buffer filetype git_blame
 }
 

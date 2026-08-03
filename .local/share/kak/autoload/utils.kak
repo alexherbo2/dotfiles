@@ -221,12 +221,11 @@ def grab_buffer_in_viewport -params 1 %{
 compl -menu swap_buffer_in_viewport client
 compl -menu grab_buffer_in_viewport client
 
-def edit_scratch -params .. %{
-  edit -scratch -- %arg{@}
+def open_scratch_buffer %{
+  edit -scratch 'kakoune://scratch/unnamed'
 }
 
-alias global scratch edit_scratch
-alias global n edit_scratch
+alias global n open_scratch_buffer
 
 def edit_readonly -params .. %{
   edit -readonly -- %arg{@}

@@ -9,7 +9,7 @@
 # tests: no
 def fifo -params 1.. %{
   eval %sh{
-    buffer_name='unnamed'
+    buffer_name='fifo'
     edit_flags=
     arg_position=1
     while :
@@ -42,9 +42,8 @@ def fifo -params 1.. %{
     mkfifo -- "$fifo_name"
     { trap - INT QUIT; exec "$@" > "$fifo_name" 2>&1; } < /dev/null > /dev/null 2>&1 &
     cat <<EOF
-      edit! ${edit_flags} -fifo "$fifo_name" -- "kakoune://fifo/$buffer_name"
+      edit! ${edit_flags} -fifo "$fifo_name" "kakoune://scratch/$buffer_name"
       hook -always -once buffer BufCloseFifo "" %{
-        rename-buffer "kakoune://scratch/$buffer_name"
         nop %sh{
           unlink -- "$fifo_name"
         }

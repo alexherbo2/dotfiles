@@ -13,12 +13,12 @@ declare-option str-list make_args
 def make -params .. %{
   eval -save-regs '"' %{
     try %{
-      exec -buffer '*make*' -save-regs '' '%y'
+      exec -buffer 'kakoune://scratch/make' -save-regs '' '%y'
     } catch %{
       reg dquote
     }
-    fifo -name '*make*' -- %opt{make_command} %opt{make_args} %arg{@}
-    exec -buffer '*make*' 'P'
+    fifo -name 'make' -- %opt{make_command} %opt{make_args} %arg{@}
+    exec -buffer 'kakoune://scratch/make' 'P'
   }
 }
 

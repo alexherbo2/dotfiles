@@ -230,8 +230,8 @@ aliases: ["n", "new"]
   edit -scratch '*scratch*'
 }
 
-alias global n open_new_scratch_buffer
-alias global new open_new_scratch_buffer
+alias global n open_scratch_buffer
+alias global new-buffer open_scratch_buffer
 
 def edit_readonly -params .. %{
   edit -readonly -- %arg{@}

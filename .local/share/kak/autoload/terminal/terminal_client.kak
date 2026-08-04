@@ -7,4 +7,4 @@ def open_terminal_with_new_client -params .. %{
 
 compl open_terminal_with_new_client command
 
-alias global new open_terminal_with_new_client
+alias global new-client open_terminal_with_new_client

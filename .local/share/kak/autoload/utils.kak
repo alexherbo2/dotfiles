@@ -225,7 +225,7 @@ def -docstring '
 usage: open_scratch_buffer
 description: create a new scratch buffer.
 config_options: []
-aliases: ["n", "new"]
+aliases: ["n", "new-buffer"]
 ' open_scratch_buffer %{
   edit -scratch '*scratch*'
 }

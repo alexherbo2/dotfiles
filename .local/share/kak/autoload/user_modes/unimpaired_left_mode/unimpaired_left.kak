@@ -32,19 +32,19 @@ def disable_soft_wrap %{
 }
 
 def jump_to_previous_file_or_directory %{
-  buffer 'kakoune://scratch/ls'
+  buffer '*ls*'
   exec ',;kgh'
   jump_to_files_or_directories
 }
 
 def jump_to_previous_file_match %{
-  buffer 'kakoune://scratch/find'
+  buffer '*find*'
   exec ',;kgh'
   jump_to_files
 }
 
 def jump_to_previous_reference %{
-  buffer 'kakoune://scratch/grep'
+  buffer '*grep*'
   exec ',;kgh'
   jump_to_references
 }

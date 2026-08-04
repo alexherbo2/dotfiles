@@ -9,14 +9,14 @@ decl str tree_sitter_install_grammars_command "ktsctl"
 decl str-list tree_sitter_install_grammars_args "sync" "-a"
 
 def install_tree_sitter_grammars %{
-  fifo -name 'tree_sitter.log' -- %opt{tree_sitter_install_grammars_command} %opt{tree_sitter_install_grammars_args} %arg{@}
+  fifo -name '*tree_sitter*' -- %opt{tree_sitter_install_grammars_command} %opt{tree_sitter_install_grammars_args} %arg{@}
 }
 
 decl str tree_sitter_list_grammars_command "ktsctl"
 decl str-list tree_sitter_list_grammars_args "query" "-a"
 
 def list_tree_sitter_grammars %{
-  fifo -name 'tree_sitter.log' -- %opt{tree_sitter_list_grammars_command} %opt{tree_sitter_list_grammars_args} %arg{@}
+  fifo -name '*tree_sitter*' -- %opt{tree_sitter_list_grammars_command} %opt{tree_sitter_list_grammars_args} %arg{@}
 }
 
 def initialize_tree_sitter %{

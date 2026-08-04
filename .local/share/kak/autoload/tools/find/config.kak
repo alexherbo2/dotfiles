@@ -1,4 +1,4 @@
-hook global BufCreate 'kakoune://scratch/find' %{
+hook global BufCreate '\*find\*' %{
   set-option buffer filetype find
 }
 

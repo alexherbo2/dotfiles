@@ -61,12 +61,12 @@ config_options: ["find_command", "find_args"]
 ' find -params .. %{
   eval -save-regs '"' %{
     try %{
-      exec -buffer 'kakoune://scratch/find' -save-regs '' '%y'
+      exec -buffer '*find*' -save-regs '' '%y'
     } catch %{
       reg '"'
     }
-    fifo -name 'find' -- %opt{find_command} %opt{find_args} %arg{@}
-    exec -buffer 'kakoune://scratch/find' 'P'
+    fifo -name '*find*' -- %opt{find_command} %opt{find_args} %arg{@}
+    exec -buffer '*find*' 'P'
   }
 }
 

@@ -43,7 +43,7 @@ config_options: ["ls_command", "ls_args"]
 }
 
 def -hidden ls_impl -params 1 %{
-  fifo -name 'ls' -- %opt{ls_command} %opt{ls_args} -- %arg{1}
+  fifo -name '*ls*' -- %opt{ls_command} %opt{ls_args} -- %arg{1}
   set buffer ls_working_directory %sh{
     realpath -- "$1"
   }

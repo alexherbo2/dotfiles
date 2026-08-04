@@ -1,4 +1,4 @@
-hook global BufCreate 'kakoune://scratch/git_status' %{
+hook global BufCreate '\*git_status\*' %{
   set-option buffer filetype git_status
 }
 

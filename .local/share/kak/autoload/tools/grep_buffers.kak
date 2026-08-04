@@ -10,11 +10,11 @@
 def -hidden grep_buffers -params 1 %{
   eval -save-regs '"' %{
     try %{
-      exec -buffer 'kakoune://scratch/grep' -save-regs '' '%y'
+      exec -buffer '*grep*' -save-regs '' '%y'
     } catch %{
       reg '"'
     }
-    edit! -scratch 'kakoune://scratch/grep'
+    edit! -scratch '*grep*'
     edit! -scratch -debug 'kakoune://debug/grep'
     eval -no-hooks -buffer '*' -verbatim -- try %{
       exec '%s<ret>x<a-s>'
@@ -24,6 +24,6 @@ def -hidden grep_buffers -params 1 %{
       }
     }
     exec 'd%y:db<ret>Rgg'
-    exec -buffer 'kakoune://scratch/grep' 'P'
+    exec -buffer '*grep*' 'P'
   }
 }

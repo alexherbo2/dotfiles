@@ -1,4 +1,4 @@
-hook global BufCreate 'kakoune://scratch/ls' %{
+hook global BufCreate '\*ls\*' %{
   set-option buffer filetype ls
 }
 

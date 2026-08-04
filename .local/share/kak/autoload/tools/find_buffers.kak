@@ -10,11 +10,11 @@
 def -hidden find_buffers -params 1 %{
   eval -save-regs '"' %{
     try %{
-      exec -buffer 'kakoune://scratch/find' -save-regs '' '%y'
+      exec -buffer '*find*' -save-regs '' '%y'
     } catch %{
       reg '"'
     }
-    edit! -scratch 'kakoune://scratch/find'
+    edit! -scratch '*find*'
     eval -save-regs '"/' %{
       reg '"' %val{buflist}
       exec '<a-R>a<ret><esc>'
@@ -25,7 +25,7 @@ def -hidden find_buffers -params 1 %{
         exec '%d'
       }
     }
-    exec -buffer 'kakoune://scratch/find' 'P'
+    exec -buffer '*find*' 'P'
   }
 }
 

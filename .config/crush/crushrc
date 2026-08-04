@@ -1,4 +1,5 @@
 lsp add "tsc" --command "tsc" --args "--lsp" --args "--stdio"
+lsp add "docker-language-server" --command "docker-language-server" --args "start" --args "--stdio"
 lsp add "haskell-language-server" --command "haskell-language-server-wrapper" --args "--lsp"
 lsp add "gleam" --command "gleam" --args "lsp"
 lsp add "hare-lsp" --command "hare-lsp" --args "-S"

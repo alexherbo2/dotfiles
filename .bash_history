@@ -652,8 +652,8 @@ make build
 make test
 make clean
 make release
-DESTDIR= PREFIX=~/.local make install
-DESTDIR= PREFIX=~/.local make uninstall
+make DESTDIR= PREFIX=~/.local install
+make DESTDIR= PREFIX=~/.local uninstall
 cargo install --locked --path helix-term
 cargo +stable install --path helix-term
 cargo +stable clean

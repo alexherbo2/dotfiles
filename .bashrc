@@ -132,8 +132,8 @@ alias mb='make build'
 alias mt='make test'
 alias mc='make clean'
 alias mr='make release'
-alias mi='DESTDIR= PREFIX=~/.local make install'
-alias mu='DESTDIR= PREFIX=~/.local make uninstall'
+alias mi='make DESTDIR= PREFIX=~/.local install'
+alias mu='make DESTDIR= PREFIX=~/.local uninstall'
 
 # cargo
 alias cb='cargo build --release'

@@ -138,6 +138,7 @@ alias mu='make DESTDIR= PREFIX=~/.local uninstall'
 # cargo
 alias cb='cargo build --release'
 alias ci='cargo install --path .'
+alias cu='cargo uninstall'
 alias cc='cargo clean'
 
 # ifconfig.co

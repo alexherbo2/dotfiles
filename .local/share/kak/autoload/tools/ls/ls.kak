@@ -32,11 +32,9 @@ config_options: ["ls_command", "ls_args"]
           echo 'fail "error: “%arg{1}” is not a directory"'
           exit 1
         fi
-        break
         ;;
       0)
         echo 'ls_impl .'
-        break
         ;;
     esac
   }

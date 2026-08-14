@@ -48,5 +48,7 @@ def initialize_lsp %{
     eval "$kak_quoted_opt_lsp_command" "$kak_quoted_opt_lsp_args"
   }
   set global lsp_cmd %opt{lsp_command}
+  remove-hooks "lsp-filetype-.+|lsp-language-id"
+  source "%val{runtime}/assets/lsp/lsp.kak"
   lsp-enable
 }

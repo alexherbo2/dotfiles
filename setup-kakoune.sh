@@ -4,7 +4,7 @@
 # description: taupiqueur’s experiment for a better Kakoune stdlib.
 # authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
 # license: MIT
-# dependencies: ["gum", "curl", "git", "c++", "rustc", "cargo"]
+# dependencies: ["gum", "curl", "git", "cc", "c++", "rustc", "cargo"]
 # macos_install: brew install gum rust
 # docs: no
 # tests: no

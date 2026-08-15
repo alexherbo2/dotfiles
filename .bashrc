@@ -58,8 +58,8 @@ export QT_QPA_PLATFORMTHEME=kde
 # Applications
 export EDITOR=kak
 export KAKOUNE_POSIX_SHELL=/bin/dash
-export KAKOUNE_RUNTIME=~/.local/share/kak
-export KAKOUNE_CONFIG_DIR=~/.config/kak
+export KAKOUNE_RUNTIME=~/config/.local/share/kak
+export KAKOUNE_CONFIG_DIR=~/config/.config/kak
 
 # Local environment variables
 . ~/.config/env

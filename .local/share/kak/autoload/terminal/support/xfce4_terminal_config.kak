@@ -1,5 +1,5 @@
 # Xfce4 Terminal
-hook global User 'TERM=xterm-256color' %{
+hook global User 'KAKOUNE_TERM_PROGRAM=xfce4-terminal' %{
   set window terminal_command 'xfce4-terminal'
   set window terminal_args '--window' '-x'
   set window terminal_tty %sh{

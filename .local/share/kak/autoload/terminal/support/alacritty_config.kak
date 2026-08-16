@@ -1,5 +1,11 @@
 # Alacritty
-hook global User 'TERM=alacritty' %{
+hook global WinCreate ".*" %{
+  hook -always -once window WinDisplay ".*" %{
+    trigger-user-hook "ALACRITTY_SOCKET=%val{client_env_ALACRITTY_SOCKET}"
+  }
+}
+
+hook global User 'ALACRITTY_SOCKET=.+' %{
   set window terminal_command 'sh'
   set window terminal_args '-c' %{
     exec 'alacritty' 'msg' '-s' "$kak_client_env_ALACRITTY_SOCKET" 'create-window' "--working-directory=$PWD" '-e' "$@"

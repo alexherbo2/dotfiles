@@ -44,11 +44,13 @@ decl str lsp_semantic_tokens %{
 }
 
 def initialize_lsp %{
-  eval %sh{
-    eval "$kak_quoted_opt_lsp_command" "$kak_quoted_opt_lsp_args"
+  eval -no-hooks %{
+    eval %sh{
+      eval "$kak_quoted_opt_lsp_command" "$kak_quoted_opt_lsp_args"
+    }
+    set global lsp_cmd %opt{lsp_command}
+    remove-hooks global "lsp-filetype-.+|lsp-language-id"
+    source "%val{runtime}/assets/lsp/lsp.kak"
+    lsp-enable
   }
-  set global lsp_cmd %opt{lsp_command}
-  remove-hooks global "lsp-filetype-.+|lsp-language-id"
-  source "%val{runtime}/assets/lsp/lsp.kak"
-  lsp-enable
 }

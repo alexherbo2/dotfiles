@@ -1,15 +1,15 @@
-define-command open_sudo_write_prompt %{
+def open_sudo_write_prompt %{
   prompt -password password: %{
-    sudo_write %val{text}
+    echo -to-shell-script %{
+      if sudo -S -b dd "if=$kak_response_fifo" "of=$kak_buffile"
+      then
+        echo "write $kak_response_fifo; edit!" > "$kak_command_fifo"
+      else
+        echo "fail 'sudo write failed'"
+        exit 1
+      fi
+    } -- %val{text}
   }
 }
 
 alias global sudo-write open_sudo_write_prompt
-
-define-command sudo_write -params 1 %{
-  evaluate-commands %sh{
-    echo "$1" | sudo -S -b dd "if=$kak_response_fifo" "of=$kak_buffile" &&
-    echo "write $kak_quoted_response_fifo" > "$kak_command_fifo" ||
-    echo "fail 'sudo write failed'"
-  }
-}

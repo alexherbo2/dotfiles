@@ -52,9 +52,9 @@ add-highlighter shared/kakrc/string.quoted.double/escaped regex '""|%%' 0:value
 add-highlighter shared/kakrc/string.quoted.double/interpolated ref kakrc.string.interpolated
 
 # Command completion via shell scripts
-add-highlighter shared/kakrc/string.quoted.single.completion.shell region -recurse "(?<!')('')+(?!')" "(^|\h)\K(-shell-script-candidates|-shell-script-completion|shell-script-candidates|shell-script-completion)\h+'" "'(?!')" ref sh
-add-highlighter shared/kakrc/string.quoted.double.completion.shell region -recurse '(?<!")("")+(?!")' '(^|\h)\K(-shell-script-candidates|-shell-script-completion|shell-script-candidates|shell-script-completion)\h+"' '"(?!")' ref sh
-add-highlighter shared/kakrc/string.balanced.parenthesis.completion.shell region -recurse '\(' '(^|\h)\K(-shell-script-candidates|-shell-script-completion|shell-script-candidates|shell-script-completion)\h+%\(' '\)' ref sh
-add-highlighter shared/kakrc/string.balanced.bracket.completion.shell region -recurse '\[' '(^|\h)\K(-shell-script-candidates|-shell-script-completion|shell-script-candidates|shell-script-completion)\h+%\[' '\]' ref sh
-add-highlighter shared/kakrc/string.balanced.brace.completion.shell region -recurse '\{' '(^|\h)\K(-shell-script-candidates|-shell-script-completion|shell-script-candidates|shell-script-completion)\h+%\{' '\}' ref sh
-add-highlighter shared/kakrc/string.balanced.angle.completion.shell region -recurse '<' '(^|\h)\K(-shell-script-candidates|-shell-script-completion|shell-script-candidates|shell-script-completion)\h+%<' '>' ref sh
+add-highlighter shared/kakrc/string.quoted.single.completion.shell region -recurse "(?<!')('')+(?!')" "(^|\h)\K(-to-shell-script|-shell-script-candidates|-shell-script-completion|shell-script-candidates|shell-script-completion)\h+'" "'(?!')" ref sh
+add-highlighter shared/kakrc/string.quoted.double.completion.shell region -recurse '(?<!")("")+(?!")' '(^|\h)\K(-to-shell-script|-shell-script-candidates|-shell-script-completion|shell-script-candidates|shell-script-completion)\h+"' '"(?!")' ref sh
+add-highlighter shared/kakrc/string.balanced.parenthesis.completion.shell region -recurse '\(' '(^|\h)\K(-to-shell-script|-shell-script-candidates|-shell-script-completion|shell-script-candidates|shell-script-completion)\h+%\(' '\)' ref sh
+add-highlighter shared/kakrc/string.balanced.bracket.completion.shell region -recurse '\[' '(^|\h)\K(-to-shell-script|-shell-script-candidates|-shell-script-completion|shell-script-candidates|shell-script-completion)\h+%\[' '\]' ref sh
+add-highlighter shared/kakrc/string.balanced.brace.completion.shell region -recurse '\{' '(^|\h)\K(-to-shell-script|-shell-script-candidates|-shell-script-completion|shell-script-candidates|shell-script-completion)\h+%\{' '\}' ref sh
+add-highlighter shared/kakrc/string.balanced.angle.completion.shell region -recurse '<' '(^|\h)\K(-to-shell-script|-shell-script-candidates|-shell-script-completion|shell-script-candidates|shell-script-completion)\h+%<' '>' ref sh

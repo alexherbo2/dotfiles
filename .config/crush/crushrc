@@ -1,4 +1,6 @@
 lsp add "tsc" --command "tsc" --args "--lsp" --args "--stdio"
+lsp add "awk-language-server" --command "awk-language-server"
+lsp add "sourcekit-lsp" --command "sourcekit-lsp"
 lsp add "ty" --command "ty" --args "server"
 lsp add "docker-language-server" --command "docker-language-server" --args "start" --args "--stdio"
 lsp add "haskell-language-server" --command "haskell-language-server-wrapper" --args "--lsp"

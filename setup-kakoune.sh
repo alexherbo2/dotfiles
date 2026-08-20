@@ -10,6 +10,7 @@
 # tests: no
 set -e
 TREE_SITTER_LANGUAGES="
+awk
 bash
 c
 cpp

@@ -1,4 +1,4 @@
-# name: kakoune_explore
+# name: kakoune_explore_file_directory
 # version: 0.1.0
 # description: This script provides the functionality to explore directory of current file.
 # authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
@@ -7,7 +7,18 @@
 # dependencies: ["ls"]
 # doc: yes
 # tests: no
-def -hidden explore_file_directory %{
+def -docstring '
+usage: explore-file-directory
+description: open file explorer.
+config_options: []
+' explore-file-directory %{
+  eval %sh{
+    if [ -z "$kak_buffile" ]
+    then
+      echo "fail 'Can’t explore file directory with no path set!'"
+      exit 1
+    fi
+  }
   ls %sh{dirname "$kak_buffile"}
   hook -always -once buffer BufCloseFifo '' %exp{
     eval -client %val{client} -save-regs '/' %%{

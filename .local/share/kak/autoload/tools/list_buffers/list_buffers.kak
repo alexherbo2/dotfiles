@@ -7,7 +7,10 @@
 # dependencies: []
 # doc: yes
 # tests: no
-def -hidden list_buffers %{
+def -docstring '
+usage: list-buffers
+config_options: []
+' list-buffers %{
   eval -save-regs '"b' %{
     set-register b %val{bufname}
     edit! -scratch '*buffers*'

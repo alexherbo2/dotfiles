@@ -267,6 +267,10 @@ ln -s ~/dotfiles~/Applications/* ~/Applications
 ln -s ~/dotfiles~/.config/* ~/.config
 ln -s ~/dotfiles~/.local/bin/* ~/.local/bin
 ln -s ~/dotfiles~/.local/share/* ~/.local/share
+ln -s home/* ~
+ln -s storage/* ~
+ln -s shared/* ~
+ln -s storage/screenshots
 ls -l ~/Applications
 ls -l ~/.config
 ls -l ~/.local

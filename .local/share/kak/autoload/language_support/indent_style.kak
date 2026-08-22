@@ -17,9 +17,11 @@ define-command show_current_buffer_indent_style %{
 alias global show-indent-style show_current_buffer_indent_style
 
 define-command detect_indent_style -params 1 %{
-  analyze_indent_style %arg{1}
-  try_infer_indent_style %arg{1} %val{selections}
-  delete-buffer
+  eval -no-hooks -draft %{
+    analyze_indent_style %arg{1}
+    try_infer_indent_style %arg{1} %val{selections}
+    delete-buffer
+  }
 }
 
 define-command analyze_indent_style -params 1 %{

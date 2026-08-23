@@ -45,6 +45,13 @@ declare-option str non_text_color "%opt{darker_text_background_color}"
 # https://github.com/mawww/kakoune/blob/master/colors/default.kak
 
 # For code
+# TODO: https://neovim.io/doc/user/treesitter/#treesitter-highlight-groups
+# TODO: https://zed.dev/docs/extensions/languages#syntax-highlighting
+# TODO: https://docs.helix-editor.com/master/themes.html#syntax-highlighting
+# TODO: https://docs.helix-editor.com/themes.html#syntax-highlighting
+# TODO: https://www.sublimetext.com/docs/scope_naming.html
+# TODO: https://macromates.com/manual/en/language_grammars#naming_conventions
+# TODO: https://microsoft.github.io/language-server-protocol/specifications/lsp/3.18/specification/#textDocument_semanticTokens
 # TODO: constant
 # TODO: punctuation
 # TODO: symbol

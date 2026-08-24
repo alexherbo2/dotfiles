@@ -2,6 +2,18 @@
 
 taupiqueur’s experiment for a better Kakoune stdlib.
 
+## Features
+
+- Multiple selections.
+- Powerful code manipulation.
+- Language server support—Add `:initialize_lsp` to your kakrc.
+- Tree-sitter integration—Add `:initialize_tree_sitter` to your kakrc.
+- Support for common UNIX tools.
+- Terminal support.
+- File explorer—Press `ctrl-e` to explore directory of current file.
+- Surround mode—Press `m s "` to surround selected text with double quote string.
+- Jump mode—Press `g w` to jump to a two-character label.
+
 ## Installation
 
 Install Gum, curl, Git, a C/C++ compiler, and Rust with the cargo command.

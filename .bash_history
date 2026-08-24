@@ -271,6 +271,8 @@ ln -s home/* ~
 ln -s storage/* ~
 ln -s shared/* ~
 ln -s storage/screenshots
+mkdir storage/books
+ln -s storage/books
 ls -l ~/Applications
 ls -l ~/.config
 ls -l ~/.local

@@ -1,6 +1,7 @@
 # name: kakoune_kamux
 # version: 0.1.0
 # description: This script provides support for the kamux terminal multiplexer.
+# description: Kamux comes an integrated terminal emulator that uses tmux as its backend.
 # authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
 # kakoune: 2023-12-12
 # license: MIT

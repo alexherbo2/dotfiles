@@ -18,6 +18,7 @@ Simply select the lines you’d like to change and type `:write enter`.
 - Themes—To choose a theme, type `:theme <theme_name>`.
 - Surround mode—Press `m s "` to surround selected text with double quote string.
 - Jump mode—Press `g w` to jump to a two-character label.
+- Extend mode—Press `v n` to add next search matches, rather than replace them.
 
 ## Installation
 

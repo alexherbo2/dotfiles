@@ -1,6 +1,7 @@
 # name: kakoune_jump_mode
 # version: 0.1.0
 # description: Click with your keyboard.
+# description: This script provides the functionality to jump to a two-character label.
 # authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
 # kakoune: 2023-12-12
 # license: MIT

@@ -19,7 +19,11 @@ def list_tree_sitter_grammars %{
   fifo -name '*tree_sitter*' -- %opt{tree_sitter_list_grammars_command} %opt{tree_sitter_list_grammars_args} %arg{@}
 }
 
-def initialize_tree_sitter %{
+def -docstring '
+usage: initialize_tree_sitter
+description: Initialize Tree-sitter.
+config_options: []
+' initialize_tree_sitter %{
   eval %sh{
     eval "$kak_quoted_opt_tree_sitter_command" "$kak_quoted_opt_tree_sitter_args"
   }

@@ -43,7 +43,11 @@ decl str lsp_semantic_tokens %{
   ]
 }
 
-def initialize_lsp %{
+def -docstring '
+usage: initialize_lsp
+description: Initialize the LSP client.
+config_options: []
+' initialize_lsp %{
   eval -no-hooks %{
     eval %sh{
       eval "$kak_quoted_opt_lsp_command" "$kak_quoted_opt_lsp_args"

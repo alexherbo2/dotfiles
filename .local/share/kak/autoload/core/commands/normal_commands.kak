@@ -33,9 +33,6 @@ map -docstring 'save current buffer to its file' global normal <c-s> ':write<ret
 map -docstring 'toggle read-only flag' global normal <c-r> ':toggle_readonly_flag<ret>'
 map -docstring 'goto last accessed buffer' global normal <c-l> 'ga'
 map -docstring 'keep primary selection and collapse selections' global normal <esc> ',;<esc>'
-map -docstring 'enter jump mode (select mode: replace)' global normal f ':enter_jump_mode_with_replace_select_mode<ret>'
-map -docstring 'enter jump mode (select mode: extend)' global normal F ':enter_jump_mode_with_extend_select_mode<ret>'
-map -docstring 'enter jump mode (select mode: append)' global normal <a-f> ':enter_jump_mode_with_append_select_mode<ret>'
 map -docstring 'enter command mode' global normal <ret> :
 map -docstring 'open file explorer' global normal <c-e> ':explore-file-directory<ret>'
 map -docstring 'list buffers' global normal <c-E> ':list-buffers<ret>'

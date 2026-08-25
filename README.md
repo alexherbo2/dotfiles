@@ -9,7 +9,7 @@ taupiqueur’s experiment for a better Kakoune stdlib.
 - Language server support—Type `:initialize_lsp` to initialize the LSP client.
 - Tree-sitter integration—Type `:initialize_tree_sitter` to initialize Tree-sitter.
 - Extension to common UNIX tools—`:cp`, `:diff`, `:find`, `:git_add`, `:git_blame`, `:git_commit`, `:git_mv`, `:git_rm`, `:git_status`, `:grep`, `:ls`, `:make`, `:mkdir`, `:mv`, `:nohup`, `:printf`, `:pwd`, `:rm`, `:sh`, `:sort`, `:sudo-write`, `:tty`, `:uname`, `:unlink`.
-- Terminal client support—Alacritty, Apple Terminal, Console (kgx), foot, GNOME Terminal, GNU Screen, Ghostty, iTerm2, Kitty, Konsole, MATE Terminal, Ptyxis, QTerminal, tmux, WezTerm, Xfce4 Terminal, Zellij.
+- Terminal client support—Comes with a `:terminal` command that uses your terminal client program: Alacritty, Apple Terminal, Console (kgx), foot, GNOME Terminal, GNU Screen, Ghostty, iTerm2, Kitty, Konsole, MATE Terminal, Ptyxis, QTerminal, tmux, WezTerm, Xfce4 Terminal, Zellij.
 - File finder—Press `space f` to find files.
 - Multi-buffers—Uses a grep-like buffer interface to write changes to multiple buffers.
 Simply select the lines you’d like to change and type `:write enter`.

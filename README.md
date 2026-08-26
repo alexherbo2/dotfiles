@@ -9,7 +9,7 @@ taupiqueur’s experiment for a better Kakoune stdlib.
 - Language server support—Type `:initialize_lsp enter` to initialize the LSP client.
 - Tree-sitter integration—Type `:initialize_tree_sitter enter` to initialize Tree-sitter.
 - Extension to common UNIX tools—such as the `:cp`, `:mv` and `:rm` commands.
-- Integrated terminal—Kamux comes an integrated terminal emulator that uses tmux as its backend.
+- Integrated terminal—Kamux comes with an integrated terminal emulator that uses tmux as its backend.
 Press `ctrl-space` to open the terminal and `ctrl-z` to dismiss it.
 - File finder—Press `space f` to find files.
 - Multi-buffers—Uses a grep-like buffer interface to write changes to multiple buffers.

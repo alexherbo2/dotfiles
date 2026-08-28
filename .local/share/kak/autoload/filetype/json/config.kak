@@ -1,17 +1,15 @@
-# This script provides support for the JSON file format.
-# https://json.org
-
-hook global BufCreate '.+\.json' %{
-  set-option buffer filetype json
+hook global BufCreate ".+\.json" %{
+  set buffer filetype "json"
 }
 
-hook global BufSetOption filetype=json %{
+hook global BufSetOption "filetype=json" %{
   add-highlighter buffer/json ref json
-  set-option buffer increase_indent_pattern %opt{json_increase_indent_pattern}
-  set-option buffer decrease_indent_pattern %opt{json_decrease_indent_pattern}
-  set-option buffer ignore_indent_pattern %opt{json_ignore_indent_pattern}
-  set-option buffer line_comment_token %opt{json_line_comment_token}
-  hook -always -once buffer BufSetOption 'filetype=(?!json).*' %{
+  set buffer increase_indent_pattern %opt{increase_indent_pattern}
+  set buffer decrease_indent_pattern %opt{decrease_indent_pattern}
+  set buffer ignore_indent_pattern %opt{ignore_indent_pattern}
+  set buffer extra_word_chars %opt{extra_word_chars}
+  set buffer static_words %opt{static_words}
+  hook -always -once buffer BufSetOption "filetype=.*" %{
     remove-highlighter buffer/json
   }
 }

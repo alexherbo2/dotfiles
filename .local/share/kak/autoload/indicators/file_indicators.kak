@@ -3,5 +3,5 @@ hook global BufOpenFile '.*' %{
 }
 
 hook global BufWritePost '.*' %{
-  echo -markup "{Information}""%val{bufname}"" %val{buf_line_count}L written"
+  echo -markup "{Information}""%val{hook_param}"" %val{buf_line_count}L written"
 }

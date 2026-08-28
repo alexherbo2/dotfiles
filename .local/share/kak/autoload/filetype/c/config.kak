@@ -1,9 +1,9 @@
-hook global BufCreate ".+\.(c|h)" %{
+hook global BufCreate ".+\.(?:c|h)" %{
   set buffer filetype "c"
 }
 
 hook global BufSetOption "filetype=c" %{
-  add-highlighter buffer/c regions
+  add-highlighter buffer/c ref c
   set buffer increase_indent_pattern %opt{increase_indent_pattern}
   set buffer decrease_indent_pattern %opt{decrease_indent_pattern}
   set buffer ignore_indent_pattern %opt{ignore_indent_pattern}

@@ -3,7 +3,7 @@ hook global BufCreate ".+\.(awk|gawk|nawk|mawk)" %{
 }
 
 hook global BufSetOption "filetype=awk" %{
-  add-highlighter buffer/awk regions
+  add-highlighter buffer/awk ref awk
   set buffer increase_indent_pattern %opt{increase_indent_pattern}
   set buffer decrease_indent_pattern %opt{decrease_indent_pattern}
   set buffer ignore_indent_pattern %opt{ignore_indent_pattern}

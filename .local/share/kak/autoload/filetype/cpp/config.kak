@@ -1,9 +1,9 @@
-hook global BufCreate ".+\.(cc|hh)" %{
+hook global BufCreate ".+\.(?:cc|hh)" %{
   set buffer filetype "cpp"
 }
 
 hook global BufSetOption "filetype=cpp" %{
-  add-highlighter buffer/cpp regions
+  add-highlighter buffer/cpp ref cpp
   set buffer increase_indent_pattern %opt{increase_indent_pattern}
   set buffer decrease_indent_pattern %opt{decrease_indent_pattern}
   set buffer ignore_indent_pattern %opt{ignore_indent_pattern}

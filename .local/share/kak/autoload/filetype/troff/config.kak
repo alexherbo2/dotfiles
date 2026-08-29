@@ -1,18 +1,16 @@
-# This script provides support for POSIX shells.
-# https://gnu.org/software/bash/manual/bash.html
-
-hook global BufCreate '.+\.troff|.+\.[1-8]' %{
-  set-option buffer filetype troff
+hook global BufCreate ".+\.troff" %{
+  set buffer filetype "troff"
 }
 
-hook global BufSetOption filetype=troff %{
+hook global BufSetOption "filetype=troff" %{
   add-highlighter buffer/troff ref troff
-  set-option buffer increase_indent_pattern %opt{troff_increase_indent_pattern}
-  set-option buffer decrease_indent_pattern %opt{troff_decrease_indent_pattern}
-  set-option buffer ignore_indent_pattern %opt{troff_ignore_indent_pattern}
-  set-option buffer line_comment_token %opt{troff_line_comment_token}
-  set-option buffer static_words %opt{troff_static_words}
-  hook -always -once buffer BufSetOption 'filetype=(?!troff).*' %{
+  set buffer increase_indent_pattern %opt{increase_indent_pattern}
+  set buffer decrease_indent_pattern %opt{decrease_indent_pattern}
+  set buffer ignore_indent_pattern %opt{ignore_indent_pattern}
+  set buffer line_comment_token ".\"""
+  set buffer extra_word_chars %opt{extra_word_chars}
+  set buffer static_words %opt{static_words}
+  hook -always -once buffer BufSetOption "filetype=.*" %{
     remove-highlighter buffer/troff
   }
 }

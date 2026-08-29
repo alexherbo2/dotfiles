@@ -88,6 +88,9 @@ case "$(gum choose --show-help="no" --header="setup-kakoune:" "install" "uninsta
     gum format "PATH=~/.local/bin:\$PATH"
     gum format "PATH=~/.cargo/bin:\$PATH"
     gum format "KAKOUNE_RUNTIME=~/~kakoune/kakoune-config/.local/share/kak"
+    gum format "You may want to add the following environment variables from your shell profile:"
+    gum format "KAKOUNE_POSIX_SHELL=/bin/dash"
+    gum format "KAKOUNE_CONFIG_DIR=~/.config/kak"
     ;;
   "uninstall")
     if [ -d ~/~kakoune/kakoune-config ]
@@ -131,6 +134,8 @@ case "$(gum choose --show-help="no" --header="setup-kakoune:" "install" "uninsta
     gum format "You may want to remove the following environment variables from your shell profile:"
     gum format "PATH=~/.local/bin:\$PATH"
     gum format "PATH=~/.cargo/bin:\$PATH"
+    gum format "KAKOUNE_POSIX_SHELL=/bin/dash"
     gum format "KAKOUNE_RUNTIME=~/~kakoune/kakoune-config/.local/share/kak"
+    gum format "KAKOUNE_CONFIG_DIR=~/.config/kak"
     ;;
 esac

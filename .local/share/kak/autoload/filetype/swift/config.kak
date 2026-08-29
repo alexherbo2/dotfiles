@@ -3,7 +3,7 @@ hook global BufCreate ".+\.(swift|swiftinterface)" %{
 }
 
 hook global BufSetOption "filetype=swift" %{
-  add-highlighter buffer/swift regions
+  add-highlighter buffer/swift ref swift
   set buffer increase_indent_pattern %opt{increase_indent_pattern}
   set buffer decrease_indent_pattern %opt{decrease_indent_pattern}
   set buffer ignore_indent_pattern %opt{ignore_indent_pattern}

@@ -41,8 +41,8 @@ add-highlighter shared/javascript/code/literal regex '\bthis\b|\bundefined\b|\bd
 
 # Comments
 add-highlighter shared/javascript/line_comment region '//' '$' fill comment
-add-highlighter shared/javascript/block_comment region '/\*' '\*/' fill comment
-add-highlighter shared/javascript/doc_comment ref jsdoc
+add-highlighter shared/javascript/block_comment region '/\*(?!\*)' '\*/' fill comment
+add-highlighter shared/javascript/doc_comment region '/\*\*' '\*/' ref jsdoc
 
 # Single quoted strings
 add-highlighter shared/javascript/string.quoted.single region "'" "(?<!\\)(?:\\\\)*'" group

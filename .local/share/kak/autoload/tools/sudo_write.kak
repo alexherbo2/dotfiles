@@ -10,9 +10,9 @@ def open_sudo_write_prompt %{
     echo -to-shell-script %{
       if sudo -S -N -b dd "if=$kak_response_fifo" "of=$kak_buffile"
       then
-        echo "write $kak_response_fifo; edit!" > "$kak_command_fifo"
+        echo "write -- $kak_response_fifo; edit!" > "$kak_command_fifo"
       else
-        echo "fail 'sudo write failed'"
+        echo "fail 'sudo-write failed'"
         exit 1
       fi
     } -- %val{text}

@@ -7,8 +7,9 @@
 # dependencies: []
 # doc: no
 # tests: no
-def -hidden grep_buffers -params 1 %{
-  eval -save-regs '"' %{
+def grep_buffers -params 1 %{
+  eval -save-regs '/"' %{
+    reg / %arg{1}
     try %{
       exec -buffer '*grep*' -save-regs '' '%y'
     } catch %{

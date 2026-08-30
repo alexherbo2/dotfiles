@@ -28,7 +28,7 @@ def show_whitespace %{
 }
 
 def enable_soft_wrap %{
-  add-highlighter global/soft_wrap wrap -indent -marker '↪'
+  add-highlighter global/soft_wrap wrap -word -indent -marker '↪'
 }
 
 def jump_to_next_file_or_directory %{

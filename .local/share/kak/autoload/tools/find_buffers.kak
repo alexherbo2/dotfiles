@@ -7,7 +7,7 @@
 # dependencies: []
 # doc: no
 # tests: no
-def -hidden find_buffers -params 1 %{
+def find_buffers -params 1 %{
   eval -save-regs '"' %{
     try %{
       exec -buffer '*find*' -save-regs '' '%y'

@@ -8,9 +8,9 @@
 # dependencies: []
 # doc: yes
 # tests: no
-decl range-specs jump_ranges
-decl str-to-str-map jump_label_selection_map
-decl str-list jump_selections
+decl -hidden range-specs jump_ranges
+decl -hidden str-to-str-map jump_label_selection_map
+decl -hidden str-list jump_selections
 decl str-list jump_labels \
   'aa' 'ab' 'ac' 'ad' 'ae' 'af' 'ag' 'ah' 'ai' 'aj' 'ak' 'al' 'am' 'an' 'ao' 'ap' 'aq' 'ar' 'as' 'at' 'au' 'av' 'aw' 'ax' 'ay' 'az' \
   'ba' 'bb' 'bc' 'bd' 'be' 'bf' 'bg' 'bh' 'bi' 'bj' 'bk' 'bl' 'bm' 'bn' 'bo' 'bp' 'bq' 'br' 'bs' 'bt' 'bu' 'bv' 'bw' 'bx' 'by' 'bz' \
@@ -39,7 +39,7 @@ decl str-list jump_labels \
   'ya' 'yb' 'yc' 'yd' 'ye' 'yf' 'yg' 'yh' 'yi' 'yj' 'yk' 'yl' 'ym' 'yn' 'yo' 'yp' 'yq' 'yr' 'ys' 'yt' 'yu' 'yv' 'yw' 'yx' 'yy' 'yz' \
   'za' 'zb' 'zc' 'zd' 'ze' 'zf' 'zg' 'zh' 'zi' 'zj' 'zk' 'zl' 'zm' 'zn' 'zo' 'zp' 'zq' 'zr' 'zs' 'zt' 'zu' 'zv' 'zw' 'zx' 'zy' 'zz'
 
-set-face global JumpLabel 'black,bright-yellow+F'
+face global JumpLabel 'black,bright-yellow+F'
 
 def enter_jump_mode_with_replace_select_mode %{
   enter_jump_mode 'jump (replace):' %{
@@ -63,7 +63,7 @@ def enter_jump_mode_with_append_select_mode %{
   }
 }
 
-def enter_jump_mode -params 2 %{
+def -hidden enter_jump_mode -params 2 %{
   create_jump_state_from_words_in_viewport
   create_jump_label_selection_map_option_buffer
   exec 'ga'
@@ -71,20 +71,20 @@ def enter_jump_mode -params 2 %{
   open_jump_prompt %arg{1} %arg{2}
 }
 
-def exit_jump_mode %{
+def -hidden exit_jump_mode %{
   unrender_jump_labels
   close_jump_label_selection_map_option_buffer
 }
 
-def render_jump_labels %{
+def -hidden render_jump_labels %{
   add-highlighter window/jump_ranges replace-ranges jump_ranges
 }
 
-def unrender_jump_labels %{
+def -hidden unrender_jump_labels %{
   remove-highlighter window/jump_ranges
 }
 
-def open_jump_prompt -params 2 %{
+def -hidden open_jump_prompt -params 2 %{
   prompt %arg{1} %{
     exit_jump_mode
   } -on-change %{
@@ -94,7 +94,7 @@ def open_jump_prompt -params 2 %{
   }
 }
 
-def handle_jump_input -params 2 %{
+def -hidden handle_jump_input -params 2 %{
   eval -save-regs '^/' -draft -verbatim try %{
     open_jump_label_selection_map_option_buffer
     reg / "\A\Q%arg{1}\E=(\d+\.\d+,\d+\.\d+)\z"
@@ -107,13 +107,13 @@ def handle_jump_input -params 2 %{
   }
 }
 
-def create_jump_state_from_words_in_viewport %{
+def -hidden create_jump_state_from_words_in_viewport %{
   create_jump_state_from_selections_in_viewport %{
     exec 's\w+<ret><a-i>w'
   }
 }
 
-def create_jump_state_from_selections_in_viewport -params 1 %{
+def -hidden create_jump_state_from_selections_in_viewport -params 1 %{
   eval -draft %{
     exec 'gtGbx'
     eval %arg{1}
@@ -122,7 +122,7 @@ def create_jump_state_from_selections_in_viewport -params 1 %{
   }
 }
 
-def create_jump_state -params .. %{
+def -hidden create_jump_state -params .. %{
   eval -save-regs '"ab' %{
     reg a %arg{@}
     reg b %opt{jump_labels}
@@ -146,7 +146,7 @@ def create_jump_state -params .. %{
   }
 }
 
-def create_jump_label_selection_map_option_buffer %{
+def -hidden create_jump_label_selection_map_option_buffer %{
   eval -save-regs '"' %{
     reg dquote %opt{jump_label_selection_map}
     edit -scratch "jump_label_selection_map@%val{client}.option"
@@ -155,11 +155,11 @@ def create_jump_label_selection_map_option_buffer %{
   }
 }
 
-def open_jump_label_selection_map_option_buffer %{
+def -hidden open_jump_label_selection_map_option_buffer %{
   edit -scratch "jump_label_selection_map@%val{client}.option"
   select %opt{jump_selections}
 }
 
-def close_jump_label_selection_map_option_buffer %{
+def -hidden close_jump_label_selection_map_option_buffer %{
   delete-buffer "jump_label_selection_map@%val{client}.option"
 }

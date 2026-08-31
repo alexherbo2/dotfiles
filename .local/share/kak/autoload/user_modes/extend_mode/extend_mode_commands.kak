@@ -25,7 +25,7 @@ define-command reenter_extend_mode_after_goto_key -params 1 %{
 }
 
 define-command reenter_extend_mode_after_mode_change -params 2 %{
-  hook -once window ModeChange "\Qpop:%arg{1}:normal\E" %{
+  hook -always -once window ModeChange "\Qpop:%arg{1}:normal\E" %{
     enter_extend_mode
   }
   execute-keys -with-hooks %arg{2}

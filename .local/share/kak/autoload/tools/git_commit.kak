@@ -3,7 +3,7 @@ def git-commit %{
     git -c core.editor= commit
     git rev-parse --git-path COMMIT_EDITMSG
   }
-  hook buffer BufWritePost '.*' %{
+  hook buffer BufWritePost "\Q%val{buffile}\E" %{
     eval %sh{
       if git commit -F "$kak_hook_param" --cleanup=strip > /dev/null
       then

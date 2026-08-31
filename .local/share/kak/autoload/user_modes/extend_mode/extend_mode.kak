@@ -23,9 +23,11 @@ map -docstring 'delete selected text and enter insert mode' global extend c c
 map -docstring 'delete selected text without yanking and enter insert mode' global extend <a-c> <a-c>
 map -docstring 'replace selected text with yanked text' global extend R R
 map -docstring 'left' global extend h ':reenter_extend_mode_after_key H<ret>'
-map -docstring 'down' global extend j ':reenter_extend_mode_after_key J<ret>'
-map -docstring 'up' global extend k ':reenter_extend_mode_after_key K<ret>'
+map -docstring 'visual line down' global extend j ':reenter_extend_mode_after_key Gd<ret>'
+map -docstring 'visual line up' global extend k ':reenter_extend_mode_after_key Gu<ret>'
 map -docstring 'right' global extend l ':reenter_extend_mode_after_key L<ret>'
+map -docstring 'line down' global extend J ':reenter_extend_mode_after_key J<ret>'
+map -docstring 'line up' global extend K ':reenter_extend_mode_after_key K<ret>'
 map -docstring 'next word start' global extend w ':reenter_extend_mode_after_key W<ret>'
 map -docstring 'next word end' global extend e ':reenter_extend_mode_after_key E<ret>'
 map -docstring 'previous word start' global extend b ':reenter_extend_mode_after_key B<ret>'

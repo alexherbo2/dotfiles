@@ -15,6 +15,7 @@ Press `ctrl-space` to open the terminal and `ctrl-z` to dismiss it.
 - Multi-buffers—Uses a grep-like buffer interface to write changes to multiple buffers.
 Simply select the lines you’d like to change and type `:write enter`.
 - File explorer—Press `ctrl-e` to explore directory of current file.
+- Project-wide search—Press `space slash` to search your entire project.
 - Splitting panes—To split a pane, press `ctrl-w ctrl-h` for horizontal split or `ctrl-w ctrl-v` for vertical split. To cycle focus among different panes, press `ctrl-w ctrl-w` to cycle forwards.
 Note: These commands requires Kamux.
 - Themes—To choose a theme, type `:theme <theme_name> enter`.

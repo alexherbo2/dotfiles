@@ -1,6 +1,7 @@
 lsp add "tsc" --command "tsc" --args "--lsp" --args "--stdio"
 lsp add "expert" --command "expert" --args "--stdio"
 lsp add "awk-language-server" --command "awk-language-server"
+lsp add "pasls" --command "pasls"
 lsp add "texlab" --command "texlab"
 lsp add "jq-lsp" --command "jq-lsp"
 lsp add "cl-lsp" --command "cl-lsp"

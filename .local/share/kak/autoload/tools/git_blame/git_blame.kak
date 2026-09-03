@@ -23,7 +23,7 @@ def git-blame %{
   }
 }
 
-compl git_blame file
+compl git-blame file
 
 def -hidden git_blame_show_patches %{
   eval -draft %{

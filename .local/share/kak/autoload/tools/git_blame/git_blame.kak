@@ -7,13 +7,7 @@
 # dependencies: ["fifo"]
 # doc: yes
 # tests: no
-decl str git_blame_command git
-decl str-list git_blame_args log
-
-decl str git_blame_show_patch_command git
-decl str-list git_blame_show_patch_args show
-
-def git_blame %{
+def git-blame %{
   eval -save-regs 'a' %{
     reg a -s '--pretty=tformat:%h %as “%an” %s'
     eval -draft %{
@@ -25,7 +19,7 @@ def git_blame %{
         }
       }
     }
-    fifo -name '*git_blame*' -- %opt{git_blame_command} %opt{git_blame_args} %reg{a}
+    fifo -name '*git_blame*' -- git log %reg{a}
   }
 }
 
@@ -35,7 +29,7 @@ def -hidden git_blame_show_patches %{
   eval -draft %{
     exec 'x<a-s><a-K>^\n<ret>Hs^[0-9a-f]{7,40}<ret>'
     eval -itersel %{
-      eval -client %val{client} -verbatim fifo -name "%val{selection}.patch" -- %opt{git_blame_show_patch_command} %opt{git_blame_show_patch_args} -p %val{selection}
+      eval -client %val{client} -verbatim fifo -name "%val{selection}.patch" -- git show -p %val{selection}
     }
   }
 }

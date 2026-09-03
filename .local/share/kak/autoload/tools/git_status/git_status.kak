@@ -7,17 +7,16 @@
 # dependencies: ["fifo", "ls"]
 # doc: no
 # tests: no
-decl str git_status_command sh
-decl str-list git_status_args -c %{
-  git status -z --no-renames "$@" |
-  tr '\0' '\n'
-} --
-
-def git_status -params .. %{
-  fifo -name '*git_status*' -- %opt{git_status_command} %opt{git_status_args} -- %arg{@}
+def git-status -params .. %{
+  fifo -name '*git_status*' sh -c %{
+    git status -z --no-renames -- "$@" |
+    tr '\0' '\n'
+  } -- %arg{@}
 }
 
-complete-command git_status file
+compl git-status shell-script-candidates %{
+  git ls-files
+}
 
 def -hidden git_status_jump_to_files %{
   eval -draft %{

@@ -1,17 +1,15 @@
-def git_add %{
+def git-add %{
   eval %sh{
     git add -- "$kak_buffile" ||
     printf "fail 'ERROR: git add exited with: %d.'" "$?"
   }
 }
 
-alias global ga git_add
-
-def git_add_f %{
+def git-add-f %{
   eval %sh{
     git add -f -- "$kak_buffile" ||
     printf "fail 'ERROR: git add exited with: %d.'" "$?"
   }
 }
 
-alias global ga! git_add_f
+alias global git-add! git-add-f

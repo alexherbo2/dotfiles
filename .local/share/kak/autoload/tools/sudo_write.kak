@@ -1,4 +1,4 @@
-def open_sudo_write_prompt %{
+def sudo-write %{
   eval %sh{
     if [ -z "$kak_buffile" ]
     then
@@ -12,11 +12,8 @@ def open_sudo_write_prompt %{
       then
         echo "write -- $kak_response_fifo; edit!" > "$kak_command_fifo"
       else
-        echo "fail 'sudo-write failed'"
-        exit 1
+        echo "abort 'sudo-write' '$?'"
       fi
     } -- %val{text}
   }
 }
-
-alias global sudo-write open_sudo_write_prompt

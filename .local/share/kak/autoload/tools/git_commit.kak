@@ -7,9 +7,9 @@ def git-commit %{
     eval %sh{
       if git commit -F "$kak_hook_param" --cleanup=strip > /dev/null
       then
-        echo "echo -markup '{Information}$(git show --pretty= --shortstat)'; delete-buffer"
+        echo "echo %sh{git show --pretty= --shortstat}; delete-buffer!"
       else
-        echo "echo -markup '{Error}git-commit failed'"
+        echo "abort 'git-commit' '$?'"
       fi
     }
   }

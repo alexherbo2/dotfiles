@@ -1,6 +1,6 @@
 def cp -params 1 %{
   write -- %arg{1}
-  edit -- %arg{1}
+  edit! -- %arg{1}
 }
 
 def cp-f -params 1 %{

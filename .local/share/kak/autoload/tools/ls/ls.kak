@@ -38,7 +38,7 @@ config_options: []
 
 def -hidden ls_impl -params 1 %{
   fifo -name '*ls*' 'sh' '-c' %{
-    echo ../
+    printf '../\n./\n'
     ls -A -p -L -- "$1"
   } '--' %arg{1}
   set buffer ls_working_directory %sh{
@@ -61,7 +61,7 @@ def -hidden ls_file_impl -params 1 %{
   }
 }
 
-complete-command ls file
+compl ls file
 
 def -hidden jump_to_files_or_directories %{
   eval -draft %{

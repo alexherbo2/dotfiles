@@ -7,21 +7,13 @@
 # dependencies: ["fifo"]
 # doc: yes
 # tests: no
-decl -docstring '
-ls_command: "sh"
-' str ls_command 'sh'
-decl -docstring '
-ls_args: ["-c", "ls...", "--"]
-' str-list ls_args '-c' %{
-  echo ../
-  ls -A -p -L "$@"
-} '--'
 decl -hidden str ls_working_directory
 decl -hidden str ls_file_entry
 
 def -docstring '
-usage: ls [dir]
-config_options: ["ls_command", "ls_args"]
+usage: ls [path]
+description: list directory contents.
+config_options: []
 ' ls -params 0..1 %{
   eval %sh{
     case "$#" in
@@ -33,7 +25,7 @@ config_options: ["ls_command", "ls_args"]
         then
           echo 'ls_impl %arg{1}'
         else
-          echo 'fail "error: “%arg{1}” is not a directory"'
+          echo 'fail "error: “%arg{1}” is not a file or directory"'
           exit 1
         fi
         ;;
@@ -45,7 +37,10 @@ config_options: ["ls_command", "ls_args"]
 }
 
 def -hidden ls_impl -params 1 %{
-  fifo -name '*ls*' -- %opt{ls_command} %opt{ls_args} -- %arg{1}
+  fifo -name '*ls*' 'sh' '-c' %{
+    echo ../
+    ls -A -p -L -- "$1"
+  } '--' %arg{1}
   set buffer ls_working_directory %sh{
     realpath -- "$1"
   }

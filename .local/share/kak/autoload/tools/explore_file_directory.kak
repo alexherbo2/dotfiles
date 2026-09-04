@@ -19,12 +19,5 @@ config_options: []
       exit 1
     fi
   }
-  ls %sh{dirname "$kak_buffile"}
-  hook -always -once buffer BufCloseFifo '' %exp{
-    eval -client %val{client} -save-regs '/' %%{
-      exec 'ga'
-      reg / "^\Q%%sh{basename -- ""$kak_buffile""}\E\n"
-      exec 'gagenvv<esc>'
-    }
-  }
+  ls %val{buffile}
 }

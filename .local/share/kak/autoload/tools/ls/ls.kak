@@ -17,6 +17,7 @@ ls_args: ["-c", "ls...", "--"]
   ls -A -p -L "$@"
 } '--'
 decl -hidden str ls_working_directory
+decl -hidden str ls_file_entry
 
 def -docstring '
 usage: ls [dir]
@@ -25,7 +26,10 @@ config_options: ["ls_command", "ls_args"]
   eval %sh{
     case "$#" in
       1)
-        if [ -d "$1" ]
+        if [ -f "$1" ]
+        then
+          echo 'ls_file_impl %arg{1}'
+        elif [ -d "$1" ]
         then
           echo 'ls_impl %arg{1}'
         else
@@ -44,6 +48,21 @@ def -hidden ls_impl -params 1 %{
   fifo -name '*ls*' -- %opt{ls_command} %opt{ls_args} -- %arg{1}
   set buffer ls_working_directory %sh{
     realpath -- "$1"
+  }
+}
+
+def -hidden ls_file_impl -params 1 %{
+  ls_impl %sh{
+    dirname -- "$1"
+  }
+  set buffer ls_file_entry %sh{
+    basename -- "$1"
+  }
+  hook -always -once buffer NormalIdle '.*' %{
+    eval -save-regs '/' %{
+      reg / "^\Q%opt{ls_file_entry}\E\n"
+      exec 'genvv<esc>'
+    }
   }
 }
 

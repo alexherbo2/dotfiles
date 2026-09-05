@@ -12,7 +12,7 @@ def sudo-write %{
       then
         echo "write -- $kak_response_fifo; edit!" > "$kak_command_fifo"
       else
-        echo "abort 'sudo-write' '$?'"
+        echo "abort 'sudo-write' '$?'" > "$kak_command_fifo"
       fi
     } -- %val{text}
   }

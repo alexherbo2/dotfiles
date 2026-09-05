@@ -12,5 +12,5 @@ usage: abort [command_name] [exit_status]
 description: terminate command execution immediately.
 config_options: []
 ' abort -params 2 %{
-  fail 'ERROR: %arg{1} exited with: %arg{2}.'
+  fail "ERROR: %arg{1} exited with: %arg{2}."
 }

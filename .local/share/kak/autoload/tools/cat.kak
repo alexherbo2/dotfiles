@@ -14,7 +14,7 @@ config_options: []
 ' cat -params 1.. %{
   eval -save-regs "a" %{
     reg "a" %arg{@}
-    exec "A<esc><a-!>eval cat -- ""$kak_quoted_reg_a""<ret>"
+    exec "A<ret><esc>|eval cat -- ""$kak_quoted_reg_a""<ret>"
   }
 }
 

@@ -8,7 +8,7 @@
 # doc: yes
 # tests: no
 def -docstring '
-usage: cat
+usage: cat [files]
 description: concatenate and insert the content of files below selected text.
 config_options: []
 ' cat -params 1.. %{

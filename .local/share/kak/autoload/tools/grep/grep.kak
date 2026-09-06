@@ -34,7 +34,7 @@ complete-command grep file
 
 def -hidden jump_to_references %{
   eval -no-hooks -draft %{
-    exec 'x<a-s>s\A(.+?):(\d+):(?:.*?\n)\z<ret>'
+    select_grep_entries 0
     eval -itersel %{
       eval -client %val{client} -verbatim edit -existing -- %reg{1} %reg{2}
       exec -client %val{client} 'x'

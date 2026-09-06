@@ -20,7 +20,7 @@ compl git-status shell-script-candidates %{
 
 def -hidden git_status_jump_to_files %{
   eval -draft %{
-    exec 'x<a-s><a-K>^\n<ret>Hs^(?:(?:[ ACDMRTU])(?:[ ACDMRTU])|\?\?|!!) \K.+$<ret>'
+    select_git_status_entries 2
     eval -draft -verbatim try %{
       exec '<a-,><a-K>/\z<ret>'
       eval -itersel %{

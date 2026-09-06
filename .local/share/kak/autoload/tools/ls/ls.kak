@@ -65,7 +65,7 @@ compl ls file
 
 def -hidden jump_to_files_or_directories %{
   eval -draft %{
-    exec 'x<a-s><a-K>^\n<ret>H'
+    select_ls_entries 1
     eval -draft -verbatim try %{
       exec '<a-,><a-K>/\z<ret>'
       eval -itersel %{

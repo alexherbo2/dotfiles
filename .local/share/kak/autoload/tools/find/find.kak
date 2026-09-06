@@ -70,11 +70,11 @@ config_options: ["find_command", "find_args"]
   }
 }
 
-complete-command find file
+compl find file
 
 def -hidden jump_to_files %{
   eval -draft %{
-    exec 'x<a-s><a-K>^\n<ret>H'
+    select_find_entries 1
     eval -itersel %{
       eval -client %val{client} -verbatim edit -existing -- %val{selection}
     }

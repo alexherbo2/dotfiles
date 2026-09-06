@@ -27,7 +27,7 @@ compl git-blame file
 
 def -hidden git_blame_show_patches %{
   eval -draft %{
-    exec 'x<a-s><a-K>^\n<ret>Hs^[0-9a-f]{7,40}<ret>'
+    select_git_blame_entries 1
     eval -itersel %{
       eval -client %val{client} -verbatim fifo -name "%val{selection}.patch" -- git show -p %val{selection}
     }

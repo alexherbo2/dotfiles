@@ -28,30 +28,27 @@ config_options: []
       exec '%<a-s>H2<a-f>:'
       try %{
         exec -draft 's\A:readonly=false:modified=false\z<ret>d'
-      }
-      try %{
+      } catch %{
         exec -draft 's\A:readonly=true:modified=true\z<ret>c (readonly, modified)<esc>'
-      }
-      try %{
+      } catch %{
         exec -draft 's\A:readonly=true:modified=false\z<ret>c (readonly)<esc>'
-      }
-      try %{
+      } catch %{
         exec -draft 's\A:readonly=false:modified=true\z<ret>c (modified)<esc>'
       }
     }
   }
 }
 
-def rearrange_buffers %{
-  eval -buffer '*buffers*' %{
-    exec '%<a-s><a-K>^\n<ret>H1s^(.+?)(?: \(.+?\))?$<ret>'
-    arrange-buffers %val{selections}
-  }
+def -docstring '
+usage: rearrange-buffers
+config_options: []
+' rearrange-buffers %{
+  exec -buffer '*buffers*' '%:select_buffer_list_entries 1; arrange-buffers %val{selections}<ret>'
 }
 
 def -hidden jump_to_buffers %{
   eval -draft %{
-    exec 'x<a-s><a-K>^\n<ret>H1s^(.+?)(?: \(.+?\))?$<ret>'
+    select_buffer_list_entries 1
     eval -itersel %{
       eval -client %val{client} -verbatim buffer -- %val{selection}
     }

@@ -1,4 +1,4 @@
-# name: kakoune_search_highlighter
+# name: kakoune_search_highlights
 # version: 0.1.0
 # description: This script provides support for search highlighting.
 # authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
@@ -9,7 +9,7 @@
 # tests: no
 set-face global Search 'black,yellow+d'
 
-add-highlighter shared/search dynregex '%reg{/}' 0:SearchRegister
+add-highlighter shared/search_highlights dynregex '%reg{/}' 0:SearchRegister
 
 hook global NormalKey '/|<a-/>|\?|<a-\?>' %{
   set-face global SearchRegister Search

@@ -1,0 +1,22 @@
+add-highlighter shared/rulers group
+add-highlighter shared/rulers/ column 81 Ruler
+add-highlighter shared/rulers/ column 82 Ruler
+add-highlighter shared/rulers/ column 83 Ruler
+add-highlighter shared/rulers/ column 84 Ruler
+add-highlighter shared/rulers/ column 85 Ruler
+add-highlighter shared/rulers/ column 86 Ruler
+add-highlighter shared/rulers/ column 87 Ruler
+add-highlighter shared/rulers/ column 88 Ruler
+add-highlighter shared/rulers/ column 89 Ruler
+add-highlighter shared/rulers/ column 90 Ruler
+add-highlighter shared/rulers/ column 91 Ruler
+add-highlighter shared/rulers/ column 92 Ruler
+add-highlighter shared/rulers/ column 93 Ruler
+add-highlighter shared/rulers/ column 94 Ruler
+add-highlighter shared/rulers/ column 95 Ruler
+add-highlighter shared/rulers/ column 96 Ruler
+add-highlighter shared/rulers/ column 97 Ruler
+add-highlighter shared/rulers/ column 98 Ruler
+add-highlighter shared/rulers/ column 99 Ruler
+add-highlighter shared/rulers/ column 100 Ruler
+add-highlighter shared/rulers/ column 101 Ruler

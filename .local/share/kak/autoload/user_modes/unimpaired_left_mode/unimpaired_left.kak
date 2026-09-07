@@ -7,12 +7,24 @@
 # dependencies: []
 # doc: yes
 # tests: no
-def hide_line_numbers %{
-  add-highlighter global/line_numbers number-lines -hlcursor
+def hide_matching_brackets %{
+  remove-highlighter global/match_brackets
 }
 
-def disable_readonly_mode %{
-  set-option buffer readonly no
+def hide_line_numbers %{
+  remove-highlighter global/line_numbers
+}
+
+def hide_rulers %{
+  remove-highlighter global/rulers
+}
+
+def hide_search_highlights %{
+  remove-highlighter global/search_highlights
+}
+
+def hide_selected_text_highlights %{
+  remove-highlighter global/selected_text_highlights
 }
 
 def hide_non_ascii_character_highlights %{
@@ -23,8 +35,16 @@ def hide_whitespace_highlights %{
   remove-highlighter global/whitespace_highlights
 }
 
-def hide_whitespace %{
-  remove-highlighter global/whitespace
+def hide_hex_color_code_highlights %{
+  remove-highlighter global/hex_color_code_highlights
+}
+
+def hide_whitespace_characters %{
+  remove-highlighter global/whitespace_characters
+}
+
+def disable_readonly_mode %{
+  set-option buffer readonly no
 }
 
 def disable_soft_wrap %{

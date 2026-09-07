@@ -13,16 +13,16 @@ set-face global WhitespaceDiagnosticWarning DiagnosticWarning
 set-face global WhitespaceDiagnosticInfo DiagnosticInfo
 set-face global WhitespaceDiagnosticHint DiagnosticHint
 
-add-highlighter shared/whitespace group
-add-highlighter shared/whitespace/ regex '\t+' '0:Tab'
-add-highlighter shared/whitespace/ regex '\n+' '0:Newline'
-add-highlighter shared/whitespace/ regex ' +' '0:NonBreakingSpace'
-add-highlighter shared/whitespace/ regex '\h{2,}' '0:ConsecutiveWhitespace'
-add-highlighter shared/whitespace/ regex '^\h+' '0:Indent'
-add-highlighter shared/whitespace/ regex '\h+$' '0:TrailingWhitespace'
-add-highlighter shared/whitespace/ regex '^( {1}| {3}| {5}| {7}| {9}| {11}| {13}| {15}| {17}| {19})(?![*\s])' '0:OddIndent'
-add-highlighter shared/whitespace/ regex '^(\t+ | +\t)\h*' '0:MixedIndent'
-add-highlighter shared/whitespace/ regex '(?S)^.{79}\K\S$' '0:LineLength80'
+add-highlighter shared/whitespace_highlights group
+add-highlighter shared/whitespace_highlights/ regex '\t+' '0:Tab'
+add-highlighter shared/whitespace_highlights/ regex '\n+' '0:Newline'
+add-highlighter shared/whitespace_highlights/ regex ' +' '0:NonBreakingSpace'
+add-highlighter shared/whitespace_highlights/ regex '\h{2,}' '0:ConsecutiveWhitespace'
+add-highlighter shared/whitespace_highlights/ regex '^\h+' '0:Indent'
+add-highlighter shared/whitespace_highlights/ regex '\h+$' '0:TrailingWhitespace'
+add-highlighter shared/whitespace_highlights/ regex '^( {1}| {3}| {5}| {7}| {9}| {11}| {13}| {15}| {17}| {19})(?![*\s])' '0:OddIndent'
+add-highlighter shared/whitespace_highlights/ regex '^(\t+ | +\t)\h*' '0:MixedIndent'
+add-highlighter shared/whitespace_highlights/ regex '(?S)^.{79}\K\S$' '0:LineLength80'
 
 hook global ModeChange 'push:normal:insert' %{
   set-face window TrailingWhitespace Whitespace

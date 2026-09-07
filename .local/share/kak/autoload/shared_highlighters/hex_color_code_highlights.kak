@@ -1,4 +1,4 @@
-# name: kakoune_hex_color_code_highlighter
+# name: kakoune_hex_color_code_highlights
 # version: 0.1.0
 # description: This script provides support for hex color code highlighting.
 # authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
@@ -9,7 +9,7 @@
 # tests: no
 declare-option -hidden range-specs hex_color_code_ranges
 
-add-highlighter shared/hex_color_code ranges hex_color_code_ranges
+add-highlighter shared/hex_color_code_highlights ranges hex_color_code_ranges
 
 define-command update_hex_color_code_ranges %{
   set-option window hex_color_code_ranges %val{timestamp}

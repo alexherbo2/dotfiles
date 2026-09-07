@@ -1,0 +1,1 @@
+add-highlighter shared/whitespace_characters show-whitespaces

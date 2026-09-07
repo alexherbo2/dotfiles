@@ -7,28 +7,48 @@
 # dependencies: []
 # doc: yes
 # tests: no
+def show_matching_brackets %{
+  add-highlighter global/match_brackets ref match_brackets
+}
+
 def show_line_numbers %{
-  add-highlighter global/line_numbers number-lines -hlcursor -separator '  '
+  add-highlighter global/line_numbers ref -passes move line_numbers
+}
+
+def show_rulers %{
+  add-highlighter global/rulers ref rulers
+}
+
+def show_search_highlights %{
+  add-highlighter global/search_highlights ref search_highlights
+}
+
+def show_selected_text_highlights %{
+  add-highlighter global/selected_text_highlights ref selected_text_highlights
+}
+
+def show_non_ascii_character_highlights %{
+  add-highlighter global/non_ascii_character_highlights ref non_ascii_character_highlights
+}
+
+def show_whitespace_highlights %{
+  add-highlighter global/whitespace_highlights ref whitespace_highlights
+}
+
+def show_hex_color_code_highlights %{
+  add-highlighter global/hex_color_code_highlights ref hex_color_code_highlights
+}
+
+def show_whitespace_characters %{
+  add-highlighter global/whitespace_characters ref -passes replace whitespace_characters
 }
 
 def enable_readonly_mode %{
   set-option buffer readonly yes
 }
 
-def show_non_ascii_character_highlights %{
-  add-highlighter global/non_ascii_character_highlights ref non_ascii_characters
-}
-
-def show_whitespace_highlights %{
-  add-highlighter global/whitespace_highlights ref whitespace
-}
-
-def show_whitespace %{
-  add-highlighter global/whitespace show-whitespaces
-}
-
 def enable_soft_wrap %{
-  add-highlighter global/soft_wrap wrap -word -indent -marker '↪'
+  add-highlighter global/soft_wrap ref -passes wrap soft_wrap
 }
 
 def jump_to_next_file_or_directory %{

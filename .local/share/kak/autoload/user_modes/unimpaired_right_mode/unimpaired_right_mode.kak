@@ -17,12 +17,17 @@ define-command enter_sticky_unimpaired_right_mode %{
   enter-user-mode -lock unimpaired_right
 }
 
+map -docstring 'show matching brackets' global unimpaired_right m ':show_matching_brackets<ret>'
 map -docstring 'show line numbers' global unimpaired_right l ':show_line_numbers<ret>'
+map -docstring 'show rulers' global unimpaired_right R ':show_rulers<ret>'
+map -docstring 'show search highlights' global unimpaired_right / ':show_search_highlights<ret>'
+map -docstring 'show selected text highlights' global unimpaired_right s ':show_selected_text_highlights<ret>'
 map -docstring 'show non ascii character highlights' global unimpaired_right C ':show_non_ascii_character_highlights<ret>'
 map -docstring 'show whitespace highlights' global unimpaired_right W ':show_whitespace_highlights<ret>'
-map -docstring 'show whitespace' global unimpaired_right w ':show_whitespace<ret>'
-map -docstring 'enable soft-wrap mode' global unimpaired_right <tab> ':enable_soft_wrap<ret>'
+map -docstring 'show hex color code highlights' global unimpaired_right x ':show_hex_color_code_highlights<ret>'
+map -docstring 'show whitespace characters' global unimpaired_right w ':show_whitespace_characters<ret>'
 map -docstring 'enable read-only mode' global unimpaired_right r ':enable_readonly_mode<ret>'
+map -docstring 'enable soft-wrap mode' global unimpaired_right <tab> ':enable_soft_wrap<ret>'
 map -docstring 'add new line below' global unimpaired_right <space> <a-o>
 map -docstring 'jump to next buffer' global unimpaired_right b ':buffer-next<ret>'
 map -docstring 'jump to next file in directory' global unimpaired_right n ':jump_to_next_file_or_directory<ret>'

@@ -26,7 +26,7 @@ config_options: []
     }
     eval -draft %{
       exec '%<a-s>H2<a-f>:'
-      try %{
+      eval -draft -itersel -verbatim try %{
         exec -draft 's\A:readonly=false:modified=false\z<ret>d'
       } catch %{
         exec -draft 's\A:readonly=true:modified=true\z<ret>c (readonly, modified)<esc>'
@@ -37,13 +37,6 @@ config_options: []
       }
     }
   }
-}
-
-def -docstring '
-usage: rearrange-buffers
-config_options: []
-' rearrange-buffers %{
-  exec -buffer '*buffers*' '%:select_buffer_list_entries 1; arrange-buffers %val{selections}<ret>'
 }
 
 def -hidden jump_to_buffers %{

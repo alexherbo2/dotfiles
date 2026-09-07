@@ -1,4 +1,4 @@
-# name: kakoune_selected_text_highlighter
+# name: kakoune_selected_text_highlights
 # version: 0.1.0
 # description: This script provides support for selected text highlighting.
 # authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
@@ -26,7 +26,7 @@ define-command update_selected_text_ranges %{
   }
 }
 
-add-highlighter shared/selected_text ranges selected_text_ranges
+add-highlighter shared/selected_text_highlights ranges selected_text_ranges
 hook -always global NormalIdle '' update_selected_text_ranges
 hook -always global InsertIdle '' update_selected_text_ranges
 hook -always global PromptIdle '' update_selected_text_ranges

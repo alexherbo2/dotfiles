@@ -17,10 +17,15 @@ define-command enter_sticky_unimpaired_left_mode %{
   enter-user-mode -lock unimpaired_left
 }
 
+map -docstring 'hide matching brackets' global unimpaired_left m ':hide_matching_brackets<ret>'
 map -docstring 'hide line numbers' global unimpaired_left l ':hide_line_numbers<ret>'
+map -docstring 'hide rulers' global unimpaired_left R ':hide_rulers<ret>'
+map -docstring 'hide search highlights' global unimpaired_left / ':hide_search_highlights<ret>'
+map -docstring 'hide selected text highlights' global unimpaired_left s ':hide_selected_text_highlights<ret>'
 map -docstring 'hide non ascii character highlights' global unimpaired_left C ':hide_non_ascii_character_highlights<ret>'
 map -docstring 'hide whitespace highlights' global unimpaired_left W ':hide_whitespace_highlights<ret>'
-map -docstring 'hide whitespace' global unimpaired_left w ':hide_whitespace<ret>'
+map -docstring 'hide hex color code highlights' global unimpaired_left x ':hide_hex_color_code_highlights<ret>'
+map -docstring 'hide whitespace characters' global unimpaired_left w ':hide_whitespace_characters<ret>'
 map -docstring 'disable read-only mode' global unimpaired_left r ':disable_readonly_mode<ret>'
 map -docstring 'disable soft-wrap' global unimpaired_left <tab> ':disable_soft_wrap<ret>'
 map -docstring 'add new line above' global unimpaired_left <space> <a-O>

@@ -27,7 +27,7 @@ fi
 kak_client_init=
 if [ -z "$line_number" ]
 then kak_client_init="exec -client '$kak_client' 'gj'"
-elif [ "$cursor_line" -gt 0 ]
+elif [ "$line_number" -gt 0 ]
 then kak_client_init="exec -client '$kak_client' -- '${line_number}g'"
 fi
 realpath -- "$@" |

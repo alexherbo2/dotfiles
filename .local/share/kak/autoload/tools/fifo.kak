@@ -11,6 +11,7 @@ def fifo -params 1.. %{
   eval %sh{
     buffer_name='*fifo*'
     edit_flags=
+    append_mode=
     arg_position=1
     while :
     do
@@ -22,6 +23,11 @@ def fifo -params 1.. %{
           ;;
         '-scroll')
           edit_flags='-scroll'
+          shift
+          arg_position=$((arg_position + 1))
+          ;;
+        '-append')
+          append_mode=1
           shift
           arg_position=$((arg_position + 1))
           ;;
@@ -41,14 +47,34 @@ def fifo -params 1.. %{
     fifo_name=$(mktemp -u)
     mkfifo -- "$fifo_name"
     { trap - INT QUIT; exec "$@" > "$fifo_name" 2>&1; } < /dev/null > /dev/null 2>&1 &
-    cat <<EOF
-      edit! ${edit_flags} -fifo "$fifo_name" -- "$buffer_name"
-      hook -always -once buffer BufCloseFifo "" %{
-        nop %sh{
-          unlink -- "$fifo_name"
+    if [ -z "$append_mode" ]
+    then
+      cat <<EOF
+        edit! ${edit_flags} -fifo "$fifo_name" -- "$buffer_name"
+        hook -always -once buffer BufCloseFifo "" %{
+          nop %sh{
+            unlink -- "$fifo_name"
+          }
         }
-      }
 EOF
+    else
+      cat <<EOF
+        eval -save-regs '"' %{
+          try %{
+            exec -buffer "$buffer_name" -save-regs '' '%y'
+          } catch %{
+            reg '"'
+          }
+          edit! ${edit_flags} -fifo "$fifo_name" -- "$buffer_name"
+          exec -buffer "$buffer_name" 'P'
+        }
+        hook -always -once buffer BufCloseFifo "" %{
+          nop %sh{
+            unlink -- "$fifo_name"
+          }
+        }
+EOF
+    fi
   }
 }
 

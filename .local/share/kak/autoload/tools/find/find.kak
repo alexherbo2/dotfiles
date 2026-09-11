@@ -59,15 +59,7 @@ def -docstring '
 usage: find [options] [pattern] [paths]
 config_options: ["find_command", "find_args"]
 ' find -params .. %{
-  eval -save-regs '"' %{
-    try %{
-      exec -buffer '*find*' -save-regs '' '%y'
-    } catch %{
-      reg '"'
-    }
-    fifo -name '*find*' -- %opt{find_command} %opt{find_args} %arg{@}
-    exec -buffer '*find*' 'P'
-  }
+  fifo -append -name '*find*' -- %opt{find_command} %opt{find_args} %arg{@}
 }
 
 compl find file

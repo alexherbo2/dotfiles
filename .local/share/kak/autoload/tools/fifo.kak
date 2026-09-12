@@ -7,7 +7,12 @@
 # dependencies: []
 # doc: no
 # tests: no
-def fifo -params 1.. %{
+def -docstring '
+usage: fifo [options] [command] [args]
+description: create a new fifo buffer from command output.
+options: ["-name <buffer_name>", "-scroll", "-append"]
+config_options: []
+' fifo -params 1.. %{
   eval %sh{
     buffer_name='*fifo*'
     edit_flags=

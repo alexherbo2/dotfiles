@@ -14,6 +14,7 @@ awk
 bash
 c
 cpp
+csharp
 crystal
 css
 diff

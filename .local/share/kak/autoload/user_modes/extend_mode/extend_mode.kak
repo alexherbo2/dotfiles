@@ -13,6 +13,8 @@ define-command enter_extend_mode %{
   enter-user-mode extend
 }
 
+map -docstring 'increase indent' global extend <gt> <gt>
+map -docstring 'decrease indent' global extend <lt> <lt>
 map -docstring 'enter insert mode' global extend i i
 map -docstring 'enter insert “append” mode' global extend a a
 map -docstring 'yank selected text' global extend y y

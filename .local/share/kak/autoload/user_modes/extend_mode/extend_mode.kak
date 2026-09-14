@@ -45,7 +45,7 @@ map -docstring 'rotate selections backward' global extend ( ':reenter_extend_mod
 map -docstring 'rotate selections forward' global extend ) ':reenter_extend_mode_after_key )<ret>'
 map -docstring 'copy selections on next lines' global extend 'C' ':reenter_extend_mode_after_key C<ret>'
 map -docstring 'copy selections on previous lines' global extend '<a-C>' ':reenter_extend_mode_after_key <lt>a-C<gt><ret>'
-map -docstring 'goto location' global extend g ':reenter_extend_mode_after_goto_key G<ret>'
+map -docstring 'jump to location' global extend g ':reenter_extend_mode_after_goto_key G<ret>'
 map -docstring 'search forward for {pattern}' global extend / ':reenter_extend_mode_after_prompt_key ?<ret>'
 map -docstring 'search backward for {pattern}' global extend ? ':reenter_extend_mode_after_prompt_key <lt>a-?<gt><ret>'
 map -docstring 'search forward for {char}' global extend f ':reenter_extend_mode_after_to_char_key F<ret>'

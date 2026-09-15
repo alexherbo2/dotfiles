@@ -34,6 +34,7 @@ make
 markdown
 nix
 nu
+ocaml
 python
 ruby
 rust

@@ -7,6 +7,10 @@
 # dependencies: []
 # doc: yes
 # tests: no
+def enable_clippy %{
+  set global autoinfo 'command|onkey|normal'
+}
+
 def show_matching_brackets %{
   add-highlighter global/match_brackets ref match_brackets
 }

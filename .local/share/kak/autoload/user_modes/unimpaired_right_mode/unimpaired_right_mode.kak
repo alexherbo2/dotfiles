@@ -17,6 +17,7 @@ define-command enter_sticky_unimpaired_right_mode %{
   enter-user-mode -lock unimpaired_right
 }
 
+map -docstring 'enable clippy' global unimpaired_right @ ':enable_clippy<ret>'
 map -docstring 'show matching brackets' global unimpaired_right m ':show_matching_brackets<ret>'
 map -docstring 'show line numbers' global unimpaired_right l ':show_line_numbers<ret>'
 map -docstring 'show rulers' global unimpaired_right R ':show_rulers<ret>'

@@ -7,6 +7,10 @@
 # dependencies: []
 # doc: yes
 # tests: no
+def disable_clippy %{
+  set global autoinfo ''
+}
+
 def hide_matching_brackets %{
   remove-highlighter global/match_brackets
 }

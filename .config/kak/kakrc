@@ -33,7 +33,6 @@ set-option global tree_sitter_args -dks --init %val{session}
 # Key bindings -----------------------------------------------------------------
 
 map -docstring 'goto last accessed buffer' global normal <c-a> 'ga'
-map -docstring 'recenter viewport' global normal V 'vt5vkvm'
 map -docstring 'select next word' global normal t '"_/\w<ret><a-i>w'
 
 # Language support -------------------------------------------------------------

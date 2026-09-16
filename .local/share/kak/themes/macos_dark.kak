@@ -105,7 +105,7 @@ set-face global BufferPadding "rgb:%opt{non_text_color}" # Kakoune ⇒ set-optio
 set-face global LineNumbers "rgb:%opt{non_text_color}" # Kakoune ⇒ add-highlighter -override global/number-lines number-lines — Prefer non-text here — https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorLineNumber
 set-face global LineNumberCursor "rgb:%opt{text_color}" # Kakoune ⇒ add-highlighter -override global/number-lines number-lines -hlcursor
 set-face global LineNumbersWrapped "rgb:%opt{text_background_color}" # Kakoune ⇒ add-highlighter -override global/number-lines number-lines; add-highlighter -override global/wrap wrap
-set-face global MatchingChar "rgb:%opt{text_color},rgb:%opt{bright_cyan_color}" # Kakoune ⇒ add-highlighter -override global/show-matching show-matching — https://github.com/dracula/vim/blob/master/colors/dracula.vim#:~:text=MatchParen
+set-face global MatchingChar "rgb:%opt{text_color},rgb:%opt{cyan_color}" # Kakoune ⇒ add-highlighter -override global/show-matching show-matching — https://github.com/dracula/vim/blob/master/colors/dracula.vim#:~:text=MatchParen
 set-face global Whitespace "rgb:%opt{non_text_color}+fa" # Kakoune ⇒ add-highlighter -override global/show-whitespaces show-whitespaces
 set-face global WrapMarker "rgb:%opt{non_text_color}" # Kakoune ⇒ add-highlighter -override global/wrap wrap -marker '↪'
 
@@ -115,7 +115,7 @@ set-face global PrimaryCursorPendingMode ",,rgb:%opt{text_color}+ua@PrimarySelec
 set-face global Ruler "default,rgba:%opt{selection_color}%opt{selection_low_opacity}"
 set-face global Search "default,rgba:%opt{bright_yellow_color}%opt{selection_low_opacity}"
 set-face global SelectedText "default,rgba:%opt{selection_color}%opt{selection_low_opacity}"
-set-face global StatusLineInactive "rgb:%opt{text_color},rgb:%opt{text_background_color}+d"
+set-face global StatusLineInactive "rgb:%opt{text_color},rgb:%opt{text_background_color}"
 set-face global StatusLineNormal "rgb:%opt{bright_white_color},rgb:%opt{bright_blue_color}"
 set-face global StatusLineInsert "rgb:%opt{bright_white_color},rgb:%opt{green_color}"
 set-face global StatusLineExtend "rgb:%opt{bright_white_color},rgb:%opt{magenta_color}"

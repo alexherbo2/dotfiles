@@ -26,8 +26,8 @@ map -docstring 'grow viewport right and reenter kamux mode' global kamux <gt> ':
 
 map -docstring 'toggle fullscreen' global kamux f ':kamux_toggle_fullscreen<ret>'
 
-map -docstring 'split view down' global kamux o ':kamux_split_view_down<ret>'
-map -docstring 'split view right' global kamux O ':kamux_split_view_right<ret>'
+map -docstring 'split view down' global kamux s ':kamux_split_view_down<ret>'
+map -docstring 'split view right' global kamux v ':kamux_split_view_right<ret>'
 
 map -docstring 'create view in new window right' global kamux c ':kamux_create_view_in_new_window_right<ret>'
 map -docstring 'create view in new window' global kamux C ':kamux_create_view_in_new_window<ret>'
@@ -54,8 +54,8 @@ map -docstring 'move window right' global kamux N ':kamux_move_window_right<ret>
 
 map -docstring 'close view' global kamux q ':kamux_close_view<ret>'
 map -docstring 'close window' global kamux Q ':kamux_close_window<ret>'
-map -docstring 'close other viewports' global kamux <a-q> ':kamux_close_other_viewports<ret>'
-map -docstring 'close other windows' global kamux <a-Q> ':kamux_close_other_windows<ret>'
+map -docstring 'close other viewports' global kamux o ':kamux_close_other_viewports<ret>'
+map -docstring 'close other windows' global kamux O ':kamux_close_other_windows<ret>'
 
 map -docstring 'search view' global kamux / ':kamux_search_view<ret>'
 map -docstring 'select view' global kamux g ':kamux_select_view<ret>'
@@ -71,6 +71,8 @@ map -docstring 'jump view left' global kamux <c-h> ':kamux_jump_view_left<ret>'
 map -docstring 'jump view down' global kamux <c-j> ':kamux_jump_view_down<ret>'
 map -docstring 'jump view up' global kamux <c-k> ':kamux_jump_view_up<ret>'
 map -docstring 'jump view right' global kamux <c-l> ':kamux_jump_view_right<ret>'
+
+map -docstring 'toggle fullscreen' global kamux <c-f> ':kamux_toggle_fullscreen<ret>'
 
 map -docstring 'split view down' global kamux <c-s> ':kamux_split_view_down<ret>'
 map -docstring 'split view right' global kamux <c-v> ':kamux_split_view_right<ret>'

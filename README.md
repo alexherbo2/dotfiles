@@ -6,7 +6,6 @@ taupiqueur’s experiment for a better Kakoune stdlib.
 
 - Multiple selections—Core Kakoune feature.
 - Powerful code manipulation—Core Kakoune feature.
-- Clippy—Press `] @` to enable clippy.
 - Language server support—Type `:initialize_lsp enter` to initialize the LSP client.
 - Tree-sitter integration—Type `:initialize_tree_sitter enter` to initialize Tree-sitter.
 - Extension to common UNIX tools—such as the `:cp`, `:mv` and `:rm` commands.

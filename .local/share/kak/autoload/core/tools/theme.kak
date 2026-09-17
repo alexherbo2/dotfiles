@@ -2,10 +2,10 @@ define-command load_theme -params 1 -docstring 'load theme' %{
   evaluate-commands %sh{
     if [ -r "$kak_config/themes/$1.kak" ]
     then
-      echo 'source "%val{config}/themes/%arg{1}.kak"'
+      echo 'source "%val{config}/themes/%arg{1}.kak"; trigger-user-hook "ThemeChanged=%arg{1}"'
     elif [ -r "$kak_runtime/themes/$1.kak" ]
     then
-      echo 'source "%val{runtime}/themes/%arg{1}.kak"'
+      echo 'source "%val{runtime}/themes/%arg{1}.kak"; trigger-user-hook "ThemeChanged=%arg{1}"'
     else
       echo 'fail "No such theme: “%arg{1}”"'
       exit 1

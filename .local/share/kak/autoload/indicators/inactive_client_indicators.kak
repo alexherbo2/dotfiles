@@ -1,4 +1,4 @@
-set-face global StatusLineInactive StatusLine
+set-face global StatusLineInactive "+d@StatusLine"
 
 define-command add_inactive_client_indicators %{
   hook -group InactiveClientIndicators global FocusIn .* %{

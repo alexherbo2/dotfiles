@@ -3,7 +3,7 @@ map -docstring 'convert selected dates to ISO 8601' global user d ':convert_sele
 map -docstring 'convert selected text to ASCII' global user @ ':convert_selected_text_to_ascii<ret>'
 map -docstring 'get character info' global user u ':get_character_info<ret>'
 map -docstring 'open file explorer' global user e ':explore-file-directory<ret>'
-map -docstring 'enter window mode' global user w ':enter_kamux_mode<ret>'
+map -docstring 'enter window mode' global user w ':enter_window_mode<ret>'
 map -docstring 'open file picker' global user f ':open_file_picker<ret>'
 map -docstring 'open changed file picker' global user g ':open_changed_file_picker<ret>'
 map -docstring 'open buffer picker' global user b ':open_buffer_picker<ret>'

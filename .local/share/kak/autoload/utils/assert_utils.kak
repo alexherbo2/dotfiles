@@ -3,6 +3,20 @@
 # - https://github.com/crystal-lang/crystal/blob/master/src/spec/context.cr
 # - https://github.com/crystal-lang/crystal/blob/master/src/spec/expectations.cr
 
+def should_panic -params 2 -docstring "should_panic <expected_panic_message> <command>" %{
+  try %{
+    eval %arg{2}
+    fail "should panic but succeeds"
+  } catch %{
+    eval %sh{
+      if [ "$kak_error" != "$1" ]
+      then
+        echo 'fail ":should_panic expected panic message “%arg{1}” but got “%val{error}”"'
+      fi
+    }
+  }
+}
+
 # https://doc.rust-lang.org/std/macro.assert_eq.html
 def assert_eq -params 2 -docstring 'assert_eq <actual_value> <expected_value>' %{
   try %sh{

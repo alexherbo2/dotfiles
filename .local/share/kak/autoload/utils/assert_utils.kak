@@ -18,13 +18,12 @@ def should_panic -params 2 -docstring "should_panic <expected_panic_message> <co
 }
 
 # https://doc.rust-lang.org/std/macro.assert_eq.html
-def assert_eq -params 2 -docstring 'assert_eq <actual_value> <expected_value>' %{
-  try %sh{
-    [ "$1" = "$2" ] || echo fail
-  } catch %{
-    fail %sh{
-      printf '%s\n' "assert_eq '$1' '$2'" 'Expected:' "$2" 'Got:' "$1"
-    }
+def assert_eq -params 2 -docstring "assert_eq <actual_value> <expected_value>" %{
+  eval %sh{
+    if [ "$1" != "$2" ]
+    then
+      echo 'fail ":assert_eq expected “%arg{2}” but got “%arg{1}”"'
+    fi
   }
 }
 

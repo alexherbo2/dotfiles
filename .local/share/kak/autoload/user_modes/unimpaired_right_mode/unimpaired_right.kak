@@ -7,8 +7,10 @@
 # dependencies: []
 # doc: yes
 # tests: no
+decl str autoinfo_defaults %opt{autoinfo}
+
 def enable_clippy %{
-  set global autoinfo 'command|onkey|normal'
+  set global autoinfo %opt{autoinfo_defaults}
 }
 
 def enable_terminal_overrides %{

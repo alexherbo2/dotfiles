@@ -1,5 +1,6 @@
 lsp add "tsc" --command "tsc" --args "--lsp" --args "--stdio"
 lsp add "intelephense" --command "intelephense" --args "--lsp" --args "--stdio"
+lsp add "perlnavigator" --command "perlnavigator" --args "--stdio"
 lsp add "expert" --command "expert" --args "--stdio"
 lsp add "roslyn-language-server" --command "expert" --args "--stdio"
 lsp add "ocamllsp" --command "ocamllsp"

@@ -1,4 +1,4 @@
-hook global BufCreate ".+\.(?:zsh|zsh_profile|zsh_history|zshrc|zsh_login|zsh_logout|zsh|zsh|zsh)" %{
+hook global BufCreate ".+\.(?:zsh|zshenv|zsh_profile|zsh_history|zshrc|zsh_login|zsh_logout|zsh|zsh|zsh)" %{
   set buffer filetype "zsh"
 }
 

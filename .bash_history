@@ -480,6 +480,8 @@ kak ~/docs/todo.txt
 cat ~/docs/todo.txt
 kak ~/docs/notes.txt
 cat ~/docs/notes.txt
+kak ~/manga/list.txt
+kak ~/books/list.txt
 kak ~/anime/list.txt
 kak ~/series/list.txt
 kak ~/movies/list.txt
@@ -797,6 +799,8 @@ kamux ytdlp_list.sh
 sh ytdlp_list.sh
 sh <(curl -L https://nixos.org/nix/install)
 du -sh ~/shorts
+xattr -rc ~/books
+find ~/books -name '*.DS_Store'
 xattr -rc ~/manga
 find ~/manga -name '*.DS_Store'
 sh ~/shorts/twitch.sh

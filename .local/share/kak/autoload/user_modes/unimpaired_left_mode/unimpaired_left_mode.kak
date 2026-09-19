@@ -18,6 +18,7 @@ define-command enter_sticky_unimpaired_left_mode %{
 }
 
 map -docstring 'disable clippy' global unimpaired_left @ ':disable_clippy<ret>'
+map -docstring 'disable terminal overrides' global unimpaired_left $ ':disable_terminal_overrides<ret>'
 map -docstring 'hide matching brackets' global unimpaired_left m ':hide_matching_brackets<ret>'
 map -docstring 'hide line numbers' global unimpaired_left l ':hide_line_numbers<ret>'
 map -docstring 'hide rulers' global unimpaired_left R ':hide_rulers<ret>'

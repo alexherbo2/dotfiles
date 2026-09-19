@@ -11,6 +11,10 @@ def enable_clippy %{
   set global autoinfo 'command|onkey|normal'
 }
 
+def enable_terminal_overrides %{
+  alias global terminal yank_shell_command_to_terminal_clipboard
+}
+
 def show_matching_brackets %{
   add-highlighter global/match_brackets ref match_brackets
 }

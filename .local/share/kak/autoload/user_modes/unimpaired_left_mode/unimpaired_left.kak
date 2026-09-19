@@ -11,6 +11,10 @@ def disable_clippy %{
   set global autoinfo ''
 }
 
+def disable_terminal_overrides %{
+  unalias global terminal
+}
+
 def hide_matching_brackets %{
   remove-highlighter global/match_brackets
 }

@@ -1,5 +1,6 @@
 def "nu-complete kak session-names" [] {
-  kak -l
+  kak -l |
+  lines
 }
 
 # A tool for kak processing using your favorite text editor.

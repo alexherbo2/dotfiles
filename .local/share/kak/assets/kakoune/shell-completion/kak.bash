@@ -2,59 +2,44 @@ _kak() {
   local IFS='
 '
   local OPTION_WORDLIST=(
-    "-p "
-    "--pick-command="
-    "-m "
-    "--map-command="
-    "-d "
-    "--drop-command="
-    "-P "
-    "--pick-shell-script="
-    "-M "
-    "--map-shell-script="
-    "-D "
-    "--drop-shell-script="
+    "-c "
+    "-C "
     "-e "
-    "--editor="
-    "-f "
-    "--filter="
     "-E "
-    "--no-edit "
-    "--no-pick "
-    "--no-map "
-    "--no-drop "
-    "- "
-    "-h "
-    "--help "
-    "-V "
-    "--version "
+    "-n "
+    "-s "
+    "-d "
+    "-p "
+    "-f "
+    "-i "
+    "-q "
+    "-ui "
+    "-ro "
+    "-l "
+    "-clear "
+    "-debug "
+    "-help "
+    "-version "
+  )
+  local UI_TYPE_WORDLIST=(
+    "terminal "
+    "dummy "
+    "json "
   )
   COMPREPLY=(
     $(
       case "$3,$2" in
-        -p,*|--pick-command,*)
-          compgen -A command -- "$2"
+        -c,*)
+          compgen -W "$(kak -l)" -- "$2"
           ;;
-        -m,*|--map-command,*)
-          compgen -A command -- "$2"
+        -C,*)
+          compgen -W "$(kak -l)" -- "$2"
           ;;
-        -d,*|--drop-command,*)
-          compgen -A command -- "$2"
+        -p,*)
+          compgen -W "$(kak -l)" -- "$2"
           ;;
-        -P,*|--pick-shell-script,*)
-          compgen -A command -- "$2"
-          ;;
-        -M,*|--map-shell-script,*)
-          compgen -A command -- "$2"
-          ;;
-        -D,*|--drop-shell-script,*)
-          compgen -A command -- "$2"
-          ;;
-        -e,*|--editor,*)
-          compgen -A command -- "$2"
-          ;;
-        -f,*|--filter,*)
-          compgen -A command -- "$2"
+        -ui,*)
+          compgen -W "${UI_TYPE_WORDLIST[*]}" -- "$2"
           ;;
         *,-*)
           compgen -W "${OPTION_WORDLIST[*]}" -- "$2"

@@ -1,9 +1,5 @@
 def "nu-complete kak session-names" [] {
-  which -a |
-  where type == external |
-  get command |
-  sort |
-  uniq
+  kak -l
 }
 
 # A tool for kak processing using your favorite text editor.

@@ -1,94 +1,67 @@
-use path
-
-fn complete-external-commands { |arg|
-  find -L -- (each $path:abs~ $paths) -maxdepth 1 -type f -perm "-a=x" -name $arg"*" -exec basename -a -- "{}" + 2> /dev/null |
-  sort -u
+fn complete-session-names { |arg|
+  kak -l
 }
 
 set edit:completion:arg-completer["kak"] = { |command @args|
   edit:complete-getopt $args [
     [
-      &short="p"
-      &long="pick-command"
-      &desc="Specifies the command to run on unchanged items"
+      &short="c"
+      &desc="connect to session"
       &arg-required
-      &completer=$complete-external-commands~
+      &completer=$complete-session-names~
     ]
     [
-      &short="m"
-      &long="map-command"
-      &desc="Specifies the command to run on modified items"
+      &short="C"
+      &desc="connect or create session"
       &arg-required
-      &completer=$complete-external-commands~
-    ]
-    [
-      &short="d"
-      &long="drop-command"
-      &desc="Specifies the command to run on deleted items"
-      &arg-required
-      &completer=$complete-external-commands~
-    ]
-    [
-      &short="P"
-      &long="pick-shell-script"
-      &desc="Specifies the shell script to run on unchanged items"
-      &arg-required
-      &completer=$complete-external-commands~
-    ]
-    [
-      &short="M"
-      &long="map-shell-script"
-      &desc="Specifies the shell script to run on modified items"
-      &arg-required
-      &completer=$complete-external-commands~
-    ]
-    [
-      &short="D"
-      &long="drop-shell-script"
-      &desc="Specifies the shell script to run on deleted items"
-      &arg-required
-      &completer=$complete-external-commands~
+      &completer=$complete-session-names~
     ]
     [
       &short="e"
-      &long="editor"
-      &desc="Specifies the editor to use"
+      &desc="execute commands on client initialization"
       &arg-required
-      &completer=$complete-external-commands~
-    ]
-    [
-      &short="f"
-      &long="filter"
-      &desc="Adds a filter (repeatable)"
-      &arg-required
-      &completer=$complete-external-commands~
     ]
     [
       &short="E"
-      &long="no-edit"
-      &desc="Do not open editor"
+      &desc="execute commands on server initialization"
+      &arg-required
     ]
     [
-      &long="no-pick"
-      &desc="Do not pick items"
+      &short="n"
+      &desc="ignore kakrc"
     ]
     [
-      &long="no-map"
-      &desc="Do not map items"
+      &short="s"
+      &desc="set session name"
+      &arg-required
     ]
     [
-      &long="no-drop"
-      &desc="Do not drop items"
+      &short="d"
+      &desc="run in headless mode"
     ]
     [
-      &short="h"
-      &long="help"
-      &desc="Show this help"
+      &short="p"
+      &desc="send commands to session"
+      &arg-required
+      &completer=$complete-session-names~
     ]
     [
-      &short="V"
-      &long="version"
-      &desc="Show version"
+      &short="f"
+      &desc="run in filter mode"
+      &arg-required
+    ]
+    [
+      &short="i"
+      &desc="edit files in-place, saving backups with the specified extension"
+      &arg-required
+    ]
+    [
+      &short="q"
+      &desc="run in quiet mode"
+    ]
+    [
+      &short="l"
+      &desc="list sessions"
     ]
   ] [
     { |arg|

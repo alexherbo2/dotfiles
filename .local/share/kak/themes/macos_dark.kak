@@ -103,7 +103,7 @@ set-face global BufferPadding "rgb:%opt{non_text_color}" # Kakoune ⇒ set-optio
 
 # Builtin highlighter faces
 set-face global LineNumbers "rgb:%opt{non_text_color}" # Kakoune ⇒ add-highlighter -override global/number-lines number-lines — Prefer non-text here — https://github.com/dracula/visual-studio-code/blob/master/src/dracula.yml#:~:text=editorLineNumber
-set-face global LineNumberCursor "rgb:%opt{text_color}" # Kakoune ⇒ add-highlighter -override global/number-lines number-lines -hlcursor
+set-face global LineNumberCursor "@LineNumbers" # Kakoune ⇒ add-highlighter -override global/number-lines number-lines -hlcursor
 set-face global LineNumbersWrapped "rgb:%opt{text_background_color}" # Kakoune ⇒ add-highlighter -override global/number-lines number-lines; add-highlighter -override global/wrap wrap
 set-face global MatchingChar "rgb:%opt{text_color},rgb:%opt{cyan_color}" # Kakoune ⇒ add-highlighter -override global/show-matching show-matching — https://github.com/dracula/vim/blob/master/colors/dracula.vim#:~:text=MatchParen
 set-face global Whitespace "rgb:%opt{non_text_color}+fa" # Kakoune ⇒ add-highlighter -override global/show-whitespaces show-whitespaces

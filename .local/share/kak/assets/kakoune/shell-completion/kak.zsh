@@ -10,7 +10,7 @@ local OPTION_WORDLIST=(
   "-d[run in headless mode]"
   "-p[send commands to session]:session_name:_kak_session_names"
   "-f[run in filter mode]:keys:"
-  "-i[edit files in-place, saving backups with the specified extension]:keys:"
+  "-i[edit files in-place, saving backups with the specified extension]:file_extension:"
   "-q[run in quiet mode]"
   "-ui[set the type of user interface]:ui_type:_kak_ui_types"
   "-ro[run in read-only mode]"

@@ -5,7 +5,7 @@
 # authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
 # kakoune: 2023-12-12
 # license: MIT
-# dependencies: ["nohup", "grab_buffer_in_viewport"]
+# dependencies: ["nohup", "grab-buffer"]
 # doc: yes
 # tests: no
 def tmux -params 1.. %{
@@ -66,28 +66,28 @@ def tmux_toggle_fullscreen %{
 
 def tmux_split_view_down -params .. %{
   tmux split-window -v kak -c %val{session} -e %exp{
-    grab_buffer_in_viewport %val{client}
+    grab-buffer %val{client}
     %arg{@}
   }
 }
 
 def tmux_split_view_right -params .. %{
   tmux split-window -h kak -c %val{session} -e %exp{
-    grab_buffer_in_viewport %val{client}
+    grab-buffer %val{client}
     %arg{@}
   }
 }
 
 def tmux_create_view_in_new_window -params .. %{
   tmux new-window kak -c %val{session} -e %exp{
-    grab_buffer_in_viewport %val{client}
+    grab-buffer %val{client}
     %arg{@}
   }
 }
 
 def tmux_create_view_in_new_window_right -params .. %{
   tmux new-window -a kak -c %val{session} -e %exp{
-    grab_buffer_in_viewport %val{client}
+    grab-buffer %val{client}
     %arg{@}
   }
 }

@@ -190,7 +190,7 @@ def quit_other_clients %{
   }
 }
 
-def swap_buffer_in_viewport -params 1 %{
+def swap-buffer -params 1 %{
   eval -save-regs 'st' %{
     exec '"sZ'
     exec -client %arg{1} '"tZ'
@@ -199,27 +199,26 @@ def swap_buffer_in_viewport -params 1 %{
   }
 }
 
-def grab_buffer_in_viewport -params 1 %{
+def grab-buffer -params 1 %{
   eval -save-regs 't' %{
     exec -client %arg{1} '"tZ<esc>'
     exec '"tz<esc>'
   }
 }
 
-compl -menu swap_buffer_in_viewport client
-compl -menu grab_buffer_in_viewport client
+compl -menu swap-buffer client
+compl -menu grab-buffer client
 
 def -docstring '
-usage: open_scratch_buffer
+usage: new-buffer
 description: create a new scratch buffer.
 config_options: []
-aliases: ["n", "new-buffer"]
-' open_scratch_buffer %{
+aliases: ["n"]
+' new-buffer %{
   edit -scratch '*scratch*'
 }
 
-alias global n open_scratch_buffer
-alias global new-buffer open_scratch_buffer
+alias global n new-buffer
 
 def edit_readonly -params .. %{
   edit -readonly -- %arg{@}

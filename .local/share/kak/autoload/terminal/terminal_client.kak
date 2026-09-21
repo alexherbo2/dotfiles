@@ -1,10 +1,13 @@
-def open_terminal_with_new_client -params .. %{
+decl -hidden str-list terminal_client_command
+
+def new-terminal-client -params .. %{
+  set global terminal_client_command %arg{@}
   terminal kak -c %val{session} -e %exp{
-    grab_buffer_in_viewport %val{client}
-    %arg{@}
+    grab-buffer %val{client}
+    eval -verbatim -- %%opt{terminal_client_command}
   }
 }
 
-compl open_terminal_with_new_client command
+compl new-terminal-client command
 
-alias global new-client open_terminal_with_new_client
+alias global new-client new-terminal-client

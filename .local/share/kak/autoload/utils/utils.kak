@@ -10,17 +10,6 @@ def build_regex_highlighter_from_selections %{
   exec -save-regs '' 'y:edit -scratch<ret><a-R>a<ret><esc><a-_>|sort -u | awk ''{ print length, $0 }'' | sort -n -r | cut -d " " -f 2-<ret><a-s>H*'
 }
 
-def -override toggle_readonly_flag %{
-  set-option buffer readonly %sh{
-    if [ "$kak_opt_readonly" = true ]
-    then
-      printf false
-    else
-      printf true
-    fi
-  }
-}
-
 def convert_selected_text_to_ascii %{
   exec '|iconv -f UTF-8 -t ASCII//TRANSLIT//IGNORE<ret>'
 }
@@ -51,21 +40,6 @@ def delete_all_buffers %{
   eval -buffer * delete-buffer
 }
 alias global dba delete_all_buffers
-
-# VS Code keyboard shortcuts
-# https://code.visualstudio.com/docs/getstarted/keybindings#_default-keyboard-shortcuts
-# https://code.visualstudio.com/docs/getstarted/keybindings#_basic-editing
-def evaluate_selected_text %{
-  exec -with-hooks ':<c-r><a-.><ret>'
-}
-
-alias global = evaluate_selected_text
-
-def reload_selected_commands %{
-  echo -to-shell-script "sed 's/def /def -override /g' | kak -p %val{session}" -- %val{selections}
-}
-
-alias global == reload_selected_commands
 
 def show_character_info %{
   eval -draft %{
@@ -189,36 +163,6 @@ def quit_other_clients %{
     done
   }
 }
-
-def swap-buffer -params 1 %{
-  eval -save-regs 'st' %{
-    exec '"sZ'
-    exec -client %arg{1} '"tZ'
-    exec '"tz<esc>'
-    exec -client %arg{1} '"sz<esc>'
-  }
-}
-
-def grab-buffer -params 1 %{
-  eval -save-regs 't' %{
-    exec -client %arg{1} '"tZ<esc>'
-    exec '"tz<esc>'
-  }
-}
-
-compl -menu swap-buffer client
-compl -menu grab-buffer client
-
-def -docstring '
-usage: new-buffer
-description: create a new scratch buffer.
-config_options: []
-aliases: ["n"]
-' new-buffer %{
-  edit -scratch '*scratch*'
-}
-
-alias global n new-buffer
 
 def edit_readonly -params .. %{
   edit -readonly -- %arg{@}

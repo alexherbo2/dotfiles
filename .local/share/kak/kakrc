@@ -27,6 +27,7 @@ eval %sh{
     hook -once global ClientCreate ".*" %{
       try %{
         eval -buffer "*scratch*" ""
+        info -style modal ""
         echo ""
       }
     }

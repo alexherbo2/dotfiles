@@ -72,7 +72,7 @@ set-face global WrapMarker "white" # Kakoune ⇒ add-highlighter -override globa
 
 # Custom faces
 set-face global PrimaryCursorPlus ",,bright-blue+ua@PrimaryCursor"
-set-face global PrimaryCursorEolPlus ",,bright-blue+ua@PrimaryCursorEol"
+set-face global PrimaryCursorEolPlus ",,blue+ua@PrimaryCursorEol"
 set-face global PrimaryCursorInsertMode "white,black+fg"
 set-face global PrimaryCursorPendingMode ",,black+ua@PrimarySelection"
 set-face global Ruler ""

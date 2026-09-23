@@ -159,3 +159,4 @@ define-command show_session_info %{
 }
 
 alias global info-session show_session_info
+def 1 ""

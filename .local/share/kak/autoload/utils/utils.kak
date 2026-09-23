@@ -10,22 +10,6 @@ def build_regex_highlighter_from_selections %{
   exec -save-regs '' 'y:edit -scratch<ret><a-R>a<ret><esc><a-_>|sort -u | awk ''{ print length, $0 }'' | sort -n -r | cut -d " " -f 2-<ret><a-s>H*'
 }
 
-def convert_selected_text_to_ascii %{
-  exec '|iconv -f UTF-8 -t ASCII//TRANSLIT//IGNORE<ret>'
-}
-
-def align_selections_to_main_cursor %{
-  eval -itersel -save-regs '^' %exp{
-    exec -save-regs '' 'Z'
-    select "%%val{cursor_line}.%val{cursor_char_column},%%val{cursor_line}.%val{cursor_char_column}"
-    exec '<a-z>u'
-  }
-}
-
-def convert_selected_dates_to_iso_8601 %{
-  exec '|date -I -d "$kak_selection"<ret>'
-}
-
 def delete_buffers_matching_glob_pattern -params 1 %{
   eval -buffer * %{
     eval %sh{

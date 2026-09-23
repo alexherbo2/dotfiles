@@ -45,6 +45,7 @@ map -docstring 'open file explorer' global normal <c-e> ':explore-file-directory
 map -docstring 'list buffers' global normal <c-E> ':list-buffers<ret>'
 map -docstring 'open a new shell' global normal <c-space> ':sh<ret>'
 map -docstring 'show character info' global normal <c-v> ':show_character_info<ret>'
+map -docstring 'select visual block' global normal <c-v> ':select_visual_block<ret>'
 map -docstring 'enter window mode' global normal <c-w> ':enter_window_mode<ret>'
 map -docstring 'open text finder' global normal <a-space> ':open_text_finder<ret>'
 map global normal G ''

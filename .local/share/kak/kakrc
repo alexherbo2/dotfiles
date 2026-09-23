@@ -27,7 +27,7 @@ eval %sh{
     hook -once global ClientCreate ".*" %{
       try %{
         eval -buffer "*scratch*" ""
-        show_splash_screen
+        echo ""
       }
     }
   '

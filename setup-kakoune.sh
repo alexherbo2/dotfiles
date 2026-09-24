@@ -9,6 +9,7 @@
 # docs: no
 # tests: no
 set -e
+PINNED_COMMIT="7fe3bff486b35904cc079f8291d54289d1a54d29"
 TREE_SITTER_LANGUAGES="
 awk
 bash
@@ -56,6 +57,7 @@ case "$(gum choose --show-help="no" --header="setup-kakoune:" "install" "uninsta
     else
       gum spin --show-error="yes" --title="git clone kakoune-config" -- git clone https://github.com/alexherbo2/dotfiles.git ~/~kakoune/kakoune-config
     fi
+    gum spin --show-error="yes" --title="git reset kakoune-config" -- git -C ~/~kakoune/kakoune-config reset --hard "$PINNED_COMMIT"
     gum log -s -l "info" "kakoune-config installed" path ~/~kakoune/kakoune-config
     if [ -d ~/~kakoune/kakoune ]
     then

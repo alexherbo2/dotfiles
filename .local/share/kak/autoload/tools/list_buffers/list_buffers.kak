@@ -40,7 +40,7 @@ config_options: []
 }
 
 def -hidden enter_buffer_command %{
-  prompt "(b):" %{
+  prompt "(b):" --command-completion %{
     eval -draft %{
       select_buffer_list_entries 1
       eval -itersel %{

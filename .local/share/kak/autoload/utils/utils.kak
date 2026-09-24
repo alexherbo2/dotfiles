@@ -10,21 +10,6 @@ def build_regex_highlighter_from_selections %{
   exec -save-regs '' 'y:edit -scratch<ret><a-R>a<ret><esc><a-_>|sort -u | awk ''{ print length, $0 }'' | sort -n -r | cut -d " " -f 2-<ret><a-s>H*'
 }
 
-def delete_buffers_matching_glob_pattern -params 1 %{
-  eval -buffer * %{
-    eval %sh{
-      case "$kak_buffile" in $1) echo delete-buffer ;; esac
-    }
-  }
-}
-alias global db* delete_buffers_matching_glob_pattern
-compl delete_buffers_matching_glob_pattern buffer
-
-def delete_all_buffers %{
-  eval -buffer * delete-buffer
-}
-alias global dba delete_all_buffers
-
 def show_character_info %{
   eval -draft %{
     exec ',;'

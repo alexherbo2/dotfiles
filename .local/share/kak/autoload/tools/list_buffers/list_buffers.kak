@@ -39,6 +39,17 @@ config_options: []
   }
 }
 
+def -hidden enter_buffer_command %{
+  prompt "(b):" %{
+    eval -draft %{
+      select_buffer_list_entries 1
+      eval -itersel %{
+        eval -buffer %val{selection} -- %val{text}
+      }
+    }
+  }
+}
+
 def -hidden jump_to_buffers %{
   eval -draft %{
     select_buffer_list_entries 1

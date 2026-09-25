@@ -50,7 +50,7 @@ def -hidden enter_buffer_command %{
   }
 }
 
-def -hidden jump_to_buffers %{
+def -hidden open_selected_buffers %{
   eval -draft %{
     select_buffer_list_entries 1
     eval -itersel %{

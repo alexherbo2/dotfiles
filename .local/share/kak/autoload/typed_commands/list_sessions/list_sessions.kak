@@ -12,7 +12,9 @@ usage: list-sessions
 config_options: []
 ' list-sessions %{
   fifo -name '*sessions*' kak -l
-  exec "ge/^\Q%%val{session}<a-!>\E\n<ret>vv<esc>"
+  hook -always -once buffer NormalIdle ".*" %{
+    exec "ge/^\Q%%val{session}<a-!>\E\n<ret>vv<esc>"
+  }
 }
 
 def -hidden enter_session_command %{
@@ -20,7 +22,7 @@ def -hidden enter_session_command %{
     eval -draft %{
       select_session_list_entries 1
       eval -itersel %{
-        eval echo -to-shell-script """kak -p %val{session}""" -- %val{text}
+        echo -to-shell-script "kak -p %val{selection}" -- %val{text}
       }
     }
   }

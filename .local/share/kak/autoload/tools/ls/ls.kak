@@ -53,11 +53,8 @@ def -hidden ls_file_impl -params 1 %{
   set buffer ls_file_entry %sh{
     basename -- "$1"
   }
-  hook -always -once buffer NormalIdle '.*' %{
-    eval -save-regs '/' %{
-      reg / "^\Q%opt{ls_file_entry}\E\n"
-      exec 'genvv<esc>'
-    }
+  hook -always -once buffer NormalIdle ".*" %{
+    exec "ge/^\Q%%opt{ls_file_entry}<a-!>\E\n<ret>vv<esc>"
   }
 }
 

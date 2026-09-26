@@ -11,12 +11,11 @@ def -docstring '
 usage: list-clients
 config_options: []
 ' list-clients %{
-  eval -save-regs """/" %{
+  eval -save-regs """" %{
     new-buffer "*clients*"
     reg """" %val{client_list}
     exec "<a-R>a<ret><esc>"
-    reg / "^\Q%val{client}\E\n"
-    exec "genvv<esc>"
+    exec "ge/^\Q%%val{client}<a-!>\E\n<ret>vv<esc>"
   }
 }
 
@@ -35,11 +34,11 @@ def -hidden focus_selected_clients %{
   eval -draft %{
     select_client_list_entries 1
     eval -itersel %{
-      focus %val{selection}
+      focus-client %val{selection}
     }
   }
 }
 
 def -hidden select_client_list_entries -params 1 %{
-  exec "x<a-s>%arg{1}s\A(.+?)( \(.+?\))?\n\z<ret>"
+  exec "x<a-s>%arg{1}s\A(.+?)\n\z<ret>"
 }

@@ -1,7 +1,3 @@
-decl str session_completion %{
-  kak -l | grep -v '^.\+\s(dead)$'
-}
-
 def build_static_words_from_selections %{
   exec -save-regs '' 'y:edit -scratch<ret><a-R>a<ret><esc><a-_>|sort -u<ret><a-s>H'
 }
@@ -24,55 +20,6 @@ alias global char show_character_info
 def show_definition_preview_hover %{
   lsp-hover
 }
-
-def send_handshake_to_client -params 1 %{
-  try %{
-    eval -client %arg{1} ''
-  } catch %{
-    fail "client handshake failed: %arg{1}"
-  }
-}
-
-compl send_handshake_to_client client
-
-def send_handshake_to_session -params 1 %{
-  eval %sh{
-    printf '' | kak -p "$1" ||
-    echo 'fail "session handshake failed: %arg{1}"'
-  }
-}
-
-def send_selected_text_to_session -params 1 %{
-  send_handshake_to_session %arg{1}
-  echo -quoting kakoune -to-shell-script "kak -p %arg{1}" reg '"' %val{selections}
-}
-
-def send_search_register_to_session -params 1 %{
-  send_handshake_to_session %arg{1}
-  echo -quoting kakoune -to-shell-script "kak -p %arg{1}" reg '/' %reg{/}
-}
-
-def send_current_buffer_to_session -params 1 %{
-  send_handshake_to_session %arg{1}
-  echo -quoting kakoune -to-shell-script "kak -p %arg{1}" edit -existing -- %val{buffile}
-}
-
-def send_buffer_list_to_session -params 1 %{
-  send_handshake_to_session %arg{1}
-  eval -buffer '*' %{
-    send_current_buffer_to_session %arg{1}
-  }
-}
-
-alias global @selections send_selected_text_to_session
-alias global @search send_search_register_to_session
-alias global @buffile send_current_buffer_to_session
-alias global @buflist send_buffer_list_to_session
-
-compl send_handshake_to_session shell-script-candidates %opt{session_completion}
-compl send_selected_text_to_session shell-script-candidates %opt{session_completion}
-compl send_current_buffer_to_session shell-script-candidates %opt{session_completion}
-compl send_buffer_list_to_session shell-script-candidates %opt{session_completion}
 
 compl rename-session shell-script-candidates %{
   if [ -r "$kak_config/friendly_session_names.txt" ]
@@ -121,15 +68,6 @@ def find_friendly_client_name %{
       grep -Fxv -f "$client_list_file" -- "$kak_runtime/friendly_client_names.txt" |
       shuf -n 1
     fi
-  }
-}
-
-def quit_other_clients %{
-  eval %sh{
-    echo "$kak_client_list" | tr ' ' '\n' | grep -Fxv -- "$kak_client" |
-    while read kak_client
-    do echo "eval -client '$kak_client' quit"
-    done
   }
 }
 

@@ -32,7 +32,7 @@ def -hidden open_selected_sessions %{
   eval -draft %{
     select_session_list_entries 1
     eval -itersel %{
-      terminal kak -c %val{selection}
+      eval -client %val{client} terminal kak -c %val{selection}
     }
   }
 }

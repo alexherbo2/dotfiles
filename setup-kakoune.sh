@@ -9,7 +9,7 @@
 # docs: no
 # tests: no
 set -e
-PINNED_COMMIT="7fe3bff486b35904cc079f8291d54289d1a54d29"
+PINNED_COMMIT="HEAD"
 TREE_SITTER_LANGUAGES="
 awk
 bash

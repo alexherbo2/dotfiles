@@ -33,5 +33,8 @@ hook -once global ClientCreate ".*" %{
     eval -buffer "*scratch*" ""
     info -style modal ""
     echo ""
+    hook -once window NormalKey ".*" %{
+      info -style modal
+    }
   }
 }

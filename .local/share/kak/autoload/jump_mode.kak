@@ -41,7 +41,7 @@ decl str-list jump_labels \
 
 face global JumpLabel 'black,bright-yellow+F'
 
-def enter_jump_mode_with_replace_select_mode %{
+def -docstring 'enter jump mode (select mode: replace)' enter_jump_mode_with_replace_select_mode %{
   enter_jump_mode 'jump (replace):' %{
     try %{
       exec -save-regs 's' '<esc><a-,>"sZz"s<a-z>a<esc>'
@@ -51,13 +51,13 @@ def enter_jump_mode_with_replace_select_mode %{
   }
 }
 
-def enter_jump_mode_with_extend_select_mode %{
+def -docstring 'enter jump mode (select mode: extend)' enter_jump_mode_with_extend_select_mode %{
   enter_jump_mode 'jump (extend):' %{
     exec -save-regs 's' '<esc>"sZ,<a-z>u"s<a-z>a<esc>'
   }
 }
 
-def enter_jump_mode_with_append_select_mode %{
+def -docstring 'enter jump mode (select mode: append)' enter_jump_mode_with_append_select_mode %{
   enter_jump_mode 'jump (append):' %{
     exec -save-regs 's' '<esc>"sZz"s<a-z>a<esc>'
   }

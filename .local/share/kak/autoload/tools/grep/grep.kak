@@ -17,6 +17,7 @@ grep_args: ["-R", "-I", "-H", "-n"]
 
 def -docstring '
 usage: grep [options] [pattern] [paths]
+description: search files for a pattern.
 config_options: ["grep_command", "grep_args"]
 ' grep -params .. %{
   fifo -append -name '*grep*' -- %opt{grep_command} %opt{grep_args} %arg{@}

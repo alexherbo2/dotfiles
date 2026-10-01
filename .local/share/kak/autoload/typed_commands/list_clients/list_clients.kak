@@ -30,15 +30,6 @@ def -hidden enter_client_command %{
   }
 }
 
-def -hidden focus_selected_clients %{
-  eval -draft %{
-    select_client_list_entries 1
-    eval -itersel %{
-      focus-client %val{selection}
-    }
-  }
-}
-
 def -hidden select_client_list_entries -params 1 %{
   exec "x<a-s>%arg{1}s\A(.+?)\n\z<ret>"
 }

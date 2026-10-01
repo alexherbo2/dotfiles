@@ -10,7 +10,6 @@ set global indentwidth 2
 # .local/share/kak/autoload/config/commands/typed_commands.kak
 # .local/share/kak/autoload/config/commands/user_commands.kak
 # .local/share/kak/autoload/config/commands/view_commands.kak
-set global startup_info_version 20261231
 set global ui_options terminal_set_title=no terminal_assistant=none
 set global matching_pairs ( ) { } [ ] < > “ ” « » ‹ ›
 set global modelinefmt "{{mode_info}} {{context_info}} %%val{timestamp} %%val{bufname}:%%val{cursor_line}:%%val{cursor_char_column} %%val{buf_line_count}L"

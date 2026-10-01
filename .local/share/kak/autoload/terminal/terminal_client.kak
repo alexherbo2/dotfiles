@@ -4,7 +4,9 @@ def new-terminal-client -params .. %{
   set global terminal_client_command %arg{@}
   terminal kak -c %val{session} -e %exp{
     grab-buffer %val{client}
-    eval -verbatim -- %%opt{terminal_client_command}
+    try %%{
+      eval -verbatim -- %%opt{terminal_client_command}
+    }
   }
 }
 

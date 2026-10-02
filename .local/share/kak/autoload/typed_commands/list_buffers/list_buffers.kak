@@ -9,6 +9,7 @@
 # tests: no
 def -docstring '
 usage: list-buffers
+description: list buffers.
 config_options: []
 ' list-buffers %{
   eval -save-regs '"b' %{

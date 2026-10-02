@@ -1,3 +1,4 @@
+# This script provides the functionality to manage indent style.
 # Implementation reference:
 # https://github.com/helix-editor/helix/blob/master/helix-core/src/indent.rs
 define-command set_current_buffer_indent_style -params 1 %{

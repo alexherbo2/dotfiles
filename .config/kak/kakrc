@@ -2,12 +2,6 @@
 # https://kakoune.org
 # https://github.com/mawww/kakoune
 
-hook global ClientCreate .* %{
-  find_friendly_client_name
-}
-
-find_friendly_session_name
-
 # Appearance -------------------------------------------------------------------
 
 theme macos_light

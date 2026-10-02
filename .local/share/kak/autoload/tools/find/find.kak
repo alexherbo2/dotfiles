@@ -57,6 +57,7 @@ find_args: ["-c", "find...", "--"]
 
 def -docstring '
 usage: find [options] [pattern] [paths]
+description: find files.
 config_options: ["find_command", "find_args"]
 ' find -params .. %{
   fifo -append -name '*find*' -- %opt{find_command} %opt{find_args} %arg{@}

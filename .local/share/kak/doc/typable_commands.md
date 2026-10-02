@@ -4,7 +4,8 @@ TODO: Document typable commands.
 
 Command | Description
 --- | ---
-:grep [options] [pattern] [paths] | search files for a pattern
+:grep | search files for a pattern
+:find | find files
 
 See also:
 

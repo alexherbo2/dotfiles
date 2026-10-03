@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>~kakoune</title>
+    <link rel="icon" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main>
+      <h1>
+        ~kakoune
+      </h1>
+      <p>
+        taupiqueur’s experiment for a better Kakoune stdlib.
+      </p>
+      <h2>
+        Features
+      </h2>
+      <p>
+        Become a sponsor to taupiqueur
+        at <a href="https://github.com/sponsors/taupiqueur" target="_blank">https://github<wbr>.com<wbr>/sponsors<wbr>/taupiqueur</a>.
+        Once logged in, select one of the available tiers or choose a custom amount.
+        If you are new to GitHub, you will need to create an account.
+      </p>
+      <p>
+        Amount must be at least $1.
+        One-time sponsorships are active for 30 days.
+      </p>
+      <ul>
+        <li>
+          Multiple selections—Core Kakoune feature.
+        </li>
+        <li>
+          Powerful code manipulation—Core Kakoune feature.
+        </li>
+        <li>
+          Language server support—Type <code>:initialize_lsp enter</code> to initialize the LSP client.
+        </li>
+        <li>
+          Tree-sitter integration—Type <code>:initialize_tree_sitter enter</code> to initialize Tree-sitter.
+        </li>
+        <li>
+          Extension to common UNIX tools—such as the <code>:cp</code>, <code>:mv</code> and <code>:rm</code> commands.
+        </li>
+        <li>
+          Integrated terminal—Kamux comes with an integrated terminal emulator that uses tmux as its backend.
+          Press <code>ctrl-space</code> to open the terminal and <code>ctrl-z</code> to dismiss it.
+        </li>
+        <li>
+          File finder—Press <code>space f</code> to find files.
+        </li>
+        <li>
+          Text finder—Press <code>alt-space</code> to quickly find text in the current document.
+        </li>
+        <li>
+          Multi-buffers—Uses a grep-like buffer interface to write changes to multiple buffers.
+          Simply select the lines you’d like to change in a <code>*grep*</code> buffer and type <code>:w enter</code>.
+        </li>
+        <li>
+          File explorer—Press <code>ctrl-e</code> to explore directory of current file.
+        </li>
+        <li>
+          Project-wide search—Press <code>space slash</code> to search your entire project.
+        </li>
+        <li>
+          Splitting panes—To split a pane, press <code>ctrl-w ctrl-h</code> for horizontal split or <code>ctrl-w ctrl-v</code> for vertical split. To cycle focus among different panes, press <code>ctrl-w ctrl-w</code> to cycle forwards.
+          Note: These commands requires Kamux.
+        </li>
+        <li>
+          Themes—To choose a theme, type <code>:theme <theme_name> enter</code>.
+        </li>
+        <li>
+          Surround mode—Press <code>m s "</code> to surround selected text with double quote string.
+        </li>
+        <li>
+          Jump mode—Press <code>g w</code> to jump to a two-character label.
+        </li>
+        <li>
+          Extend mode—Press <code>v n</code> to add next search matches, rather than replace them.
+        </li>
+      </ul>
+      <p>
+        Kamux prerequisites:
+      </p>
+      <ol>
+        <li>
+          Install Kamux with the <code>:install_kamux</code> command.
+        </li>
+        <li>
+          Run <code>kamux</code> in your terminal.
+        </li>
+      </ol>
+      <h2>
+        Installation
+      </h2>
+      <p>
+        Install Gum, curl, Git, a C/C++ compiler, and Rust with the cargo command.
+        Run the following in your terminal, then follow the on-screen instructions.
+      </p>
+      <pre><code>curl https://raw.githubusercontent.com/alexherbo2/dotfiles/master/setup-kakoune.sh | sh
+</code></pre>
+      <p>
+        Note: For language server support and Tree-sitter integration,
+        you may want to add <code>:initialize_lsp</code> and <code>:initialize_tree_sitter</code> to your kakrc.
+      </p>
+      <h2>
+        Support
+      </h2>
+      <p>
+        If you are using ~kakoune, consider supporting its development at <a href="https://github.com/sponsors/taupiqueur">https://github.com/sponsors/taupiqueur</a>.
+        Once logged in, select one of the available tiers or choose a custom amount.
+        If you are new to GitHub, you will need to create an account.
+      </p>
+      <h2>
+        Contributing
+      </h2>
+      <p>
+        Report bugs, ask questions, discuss patches on Discord at <a href="https://discord.gg/uzZZG2X">https://discord.gg/uzZZG2X</a>.
+      </p>
+    </main>
+  </body>
+</html>

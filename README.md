@@ -2,6 +2,10 @@
 
 taupiqueur’s experiment for a better Kakoune stdlib—https://alexherbo2.github.io/dotfiles/setup-kakoune.html.
 
+## Screenshots
+
+Coming soon at https://imgur.com/a/0000000.
+
 ## Features
 
 - Multiple selections—Core Kakoune feature.

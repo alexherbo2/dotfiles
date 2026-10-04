@@ -4,12 +4,19 @@ TODO: Document keyboard mappings.
 
 Command | Description
 --- | ---
-~ | enter letter case mode
-... | ...
+w | move selected text to next word start
+e | move selected text to next word end
+b | move selected text to previous word start
+shift-w | extend selected text to next word start
+shift-e | extend selected text to next word end
+shift-b | extend selected text to previous word start
 m | enter match mode
 m m | select next matching brackets
 m shift-m | select previous matching brackets
 m i | select inner surrounding objects
+m i w | select inner words
+m i shift-w | select inner long words
+m i ... | ...
 m a | select whole surrounding objects
 m shift-i | select inner nested objects
 m shift-a | select whole nested objects
@@ -30,8 +37,8 @@ ctrl-n | iterate next selection
 ctrl-p | iterate previous selection
 ctrl-e | open file explorer
 space e | open file explorer
-w | select inner words
-shift-w | select inner long words
+~ | enter letter case mode
+~ ... | ...
 i | enter insert mode
 i ctrl-k | enter digraphs mode
 [ | enter unimpaired left mode

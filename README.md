@@ -41,15 +41,15 @@ curl https://raw.githubusercontent.com/alexherbo2/dotfiles/master/setup-kakoune.
 > For language server support and Tree-sitter integration,
 > you may want to add `:initialize_lsp` and `:initialize_tree_sitter` to your kakrc.
 
-## Development
-
-Development occurs at https://github.com/alexherbo2/dotfiles/tree/master/.local/share/kak.
-
 ## Support
 
 If you are using ~kakoune, consider supporting its development at https://github.com/sponsors/taupiqueur.
 Once logged in, select one of the available tiers or choose a custom amount.
 If you are new to GitHub, you will need to create an account.
+
+## Development
+
+Development occurs at https://github.com/alexherbo2/dotfiles/tree/master/.local/share/kak.
 
 ## Contributing
 

@@ -1,6 +1,6 @@
 # ~kakoune
 
-taupiqueur’s experiment for a better Kakoune stdlib.
+taupiqueur’s experiment for a better Kakoune stdlib—https://alexherbo2.github.io/dotfiles/setup-kakoune.html.
 
 ## Features
 

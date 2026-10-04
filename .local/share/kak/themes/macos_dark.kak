@@ -111,7 +111,7 @@ set-face global WrapMarker "rgb:%opt{non_text_color}" # Kakoune ⇒ add-highligh
 
 # Custom faces
 set-face global PrimaryCursorPlus "default,rgba:%opt{red_color}%opt{cursor_opacity}@PrimaryCursor"
-set-face global PrimaryCursorEolPlus "default,rgb:%opt{red_color}@PrimaryCursorEol"
+set-face global PrimaryCursorEolPlus "rgb:%opt{white_color},rgb:%opt{red_color}+fg"
 set-face global PrimaryCursorInsertMode "rgb:%opt{text_background_color},rgb:%opt{text_color}+fg"
 set-face global PrimaryCursorPendingMode ",,rgb:%opt{text_color}+ua@PrimarySelection"
 set-face global Ruler "default,rgba:%opt{selection_color}%opt{selection_low_opacity}"

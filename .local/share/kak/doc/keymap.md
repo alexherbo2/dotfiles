@@ -16,6 +16,7 @@ m shift-a | select whole nested objects
 m s | enter surround mode
 m s " | surround selected text with double quote string
 m s ... | ...
+g a | goto last accessed buffer
 g w | enter jump mode (select mode: replace)
 g shift-w | enter jump mode (select mode: extend)
 g alt-w | enter jump mode (select mode: append)
@@ -32,8 +33,6 @@ space e | open file explorer
 w | select inner words
 shift-w | select inner long words
 i | enter insert mode
-i ctrl-n | iterate next selection
-i ctrl-p | iterate previous selection
 i ctrl-k | enter digraphs mode
 [ | enter unimpaired left mode
 ] | enter unimpaired right mode

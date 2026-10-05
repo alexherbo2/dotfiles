@@ -4,6 +4,10 @@ TODO: Document keyboard mappings.
 
 Command | Description
 --- | ---
+j | move cursor visual line down
+k | move cursor visual line up
+shift-j | extend cursor visual line down
+shift-k | extend cursor visual line up
 w | move selected text to next word start
 e | move selected text to next word end
 b | move selected text to previous word start

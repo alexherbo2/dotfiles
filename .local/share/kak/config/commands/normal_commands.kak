@@ -7,7 +7,7 @@ map -docstring 'extend selected text to line begin' global normal <a-h> '<a-:><a
 map -docstring 'extend selected text to line end' global normal <a-l> '<a-:><a-;><a-l>'
 map -docstring 'extend selected text to line begin' global normal <home> '<a-:><a-h>'
 map -docstring 'extend selected text to line end' global normal <end> '<a-:><a-;><a-l>'
-map -docstring 'search backward for regex pattern' global normal ? '<a-/>'
+map -docstring 'search backward for {pattern}' global normal ? '<a-/>'
 map -docstring 'search backward for {char}' global normal F <a-f>
 map -docstring 'search backward ’til {char}' global normal T <a-t>
 map -docstring 'select whole lines' global normal X x

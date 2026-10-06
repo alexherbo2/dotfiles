@@ -14,6 +14,14 @@ b | move selected text to previous word start
 shift-w | extend selected text to next word start
 shift-e | extend selected text to next word end
 shift-b | extend selected text to previous word start
+/ | search forward for {pattern}
+? | search backward for {pattern}
+f | search forward for {char}
+shift-f | search backward for {char}
+t | search forward ’til {char}
+shift-t | search backward ’til {char}
+n | select next search match
+shift-n | select previous search match
 m | enter match mode
 m m | select next matching brackets
 m shift-m | select previous matching brackets
@@ -32,10 +40,8 @@ g w | enter jump mode (select mode: replace)
 g shift-w | enter jump mode (select mode: extend)
 g alt-w | enter jump mode (select mode: append)
 v | enter extend mode
-shift-n | select previous search match
-? | search backward for regex pattern
-shift-f | search backward for {char}
-shift-t | search backward ’til {char}
+v n | add next search match
+v ... | ...
 shift-y | save selections in append mode
 ctrl-n | iterate next selection
 ctrl-p | iterate previous selection

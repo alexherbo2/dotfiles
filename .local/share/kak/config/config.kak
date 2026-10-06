@@ -29,7 +29,9 @@ hook global BufOpenFile ".*" %{
 }
 hook -once global ClientCreate ".*" %{
   try %{
-    eval -buffer "*scratch*" ""
+    eval -buffer "*scratch*" %{
+      cat "%val{runtime}/scratch.txt" "%val{config}/scratch.txt"
+    }
     info -style modal ""
     echo ""
     hook -once window NormalKey ".*" %{

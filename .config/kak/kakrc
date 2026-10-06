@@ -11,23 +11,7 @@ set-face global Newline Whitespace
 set-face global NonBreakingSpace WhitespaceDiagnosticError
 set-face global Indent Whitespace
 
-# Options ----------------------------------------------------------------------
-
-set-option global terminal_command alacritty
-set-option global terminal_args msg create-window -e
-set-option global grep_command rg
-set-option global grep_args -. -H -n
-set-option global find_command fd
-set-option global find_args -H -t file
-set-option global lsp_command kak-lsp
-set-option global lsp_args --kakoune --session %val{session}
-set-option global tree_sitter_command kak-tree-sitter
-set-option global tree_sitter_args -dks --init %val{session}
-
 # Language support -------------------------------------------------------------
-
-set-option global tabstop 4
-set-option global indentwidth 2
 
 hook global BufCreate '.+/i3status/config|.+/sway/config|.+/tmux\.conf|.+/kamux\.conf' %{
   set-option buffer filetype sh

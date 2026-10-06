@@ -6,6 +6,8 @@ map -docstring 'double angle quotation mark' global object <a-G> 'c«,»<ret>'
 map -docstring 'single angle quotation mark' global object <a-g> 'c‹,›<ret>'
 map -docstring 'line' global object x 'c<a-;>x^\h*,\h*\n<ret>'
 map -docstring 'tag' global object t 'c<lt>\w[\w-]*\h*[^<gt>]*?(?<lt>!/)<gt>,<lt>/\w[\w-]*(?<lt>!/)<gt><ret>'
+map -docstring 'next double quotation mark' global object '"' 'c<a-;>f"","<ret>'
+map -docstring 'next single quotation mark' global object "'" "c<a-;>f'','<ret>"
 map -docstring 'previous parenthesis blocks' global object ( 'c<a-;><a-f>(\(,\)<ret>'
 map -docstring 'next parenthesis blocks' global object ) 'c<a-;>f(\(,\)<ret>'
 map -docstring 'previous brace blocks' global object { 'c<a-;><a-f>{\{,\}<ret>'

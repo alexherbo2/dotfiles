@@ -1,6 +1,6 @@
 def fd -params .. %{
-  set local find_command "fd"
-  set local find_args "-H" "-t" "file"
+  set l find_command "fd"
+  set l find_args "-H" "-t" "file"
   find %arg{@}
 }
 

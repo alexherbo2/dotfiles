@@ -1,6 +1,6 @@
 def rg -params .. %{
-  set local grep_command "rg"
-  set local grep_args "-." "-H" "-n"
+  set l grep_command "rg"
+  set l grep_args "-." "-H" "-n"
   grep %arg{@}
 }
 

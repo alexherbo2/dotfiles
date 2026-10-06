@@ -1,6 +1,6 @@
 def git-grep -params .. %{
-  set local grep_command "git"
-  set local grep_args "grep" "-n"
+  set l grep_command "git"
+  set l grep_args "grep" "-n"
   grep %arg{@}
 }
 

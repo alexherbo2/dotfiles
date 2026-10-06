@@ -1,6 +1,6 @@
 def ag -params .. %{
-  set local grep_command "ag"
-  set local grep_args "--hidden"
+  set l grep_command "ag"
+  set l grep_args "--hidden"
   grep %arg{@}
 }
 

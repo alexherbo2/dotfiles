@@ -1,5 +1,6 @@
 eval %sh{
   find -L -- "$kak_runtime/autoload" "$kak_runtime/config" -type f -name '*.kak' -exec printf "source '%s';" {} +
+  echo "set global platform_name '$(uname)'"
   if [ -d "$kak_config/autoload" ]
   then
     find -L -- "$kak_config/autoload" -type f -name '*.kak' -exec printf "source '%s';" {} +
@@ -8,5 +9,4 @@ eval %sh{
   then
     echo 'source "%val{config}/kakrc"'
   fi
-  echo "set global platform_name '$(uname)'"
 }

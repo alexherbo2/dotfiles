@@ -2,6 +2,30 @@
 # https://kakoune.org
 # https://github.com/mawww/kakoune
 
+set global initial_scratch_message %{
+cd ~/code/chrome-shell
+cd ~/code/batch
+cd ~/code/pw
+cd ~/code/chrome-shortcuts
+cd ~/code/chrome-dmenu
+cd ~/code/chrome-mpv
+cd ~/code/mpv-clip
+cd ~/code/chrome-pandoc
+cd ~/code/chrome-nano
+cd ~/code/taupiqueur.github.io
+cd ~/notes
+cd ~/shorts
+e ~/notes.txt
+e ~/todo.txt
+e ~/games/info.txt
+e ~/shorts/ytdlp_list.sh
+e ~/books/list.txt
+e ~/manga/list.txt
+e ~/series/list.txt
+e ~/anime/list.txt
+e ~/movies/list.txt
+}
+
 # Appearance -------------------------------------------------------------------
 
 theme macos_light

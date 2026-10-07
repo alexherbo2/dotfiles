@@ -12,6 +12,7 @@ Command | Description
 :set-indent-style | TODO
 :detect-indent-style | TODO
 :show-indent-style | TODO
+:= | evaluate selected text
 TODO | TODO
 
 See also:

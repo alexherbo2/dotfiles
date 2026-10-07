@@ -476,8 +476,12 @@ pw -l 10 paypal.com taupiqueur.kanto@gmail.com
 pw -l 10 libera.chat taupiqueur
 pw -l 10 amazon.com taupiqueur.kanto@gmail.com
 pw -l 10 reddit.com taupiqueur_kanto
+kak ~/todo.txt
+cat ~/todo.txt
 kak ~/docs/todo.txt
 cat ~/docs/todo.txt
+kak ~/notes.txt
+cat ~/notes.txt
 kak ~/docs/notes.txt
 cat ~/docs/notes.txt
 kak ~/manga/list.txt
@@ -497,6 +501,7 @@ kak -l
 kak -ro
 kak -clear
 nnn
+cd ~/notes
 cd ~/docs/notes
 cd ~/Downloads
 cd ~/Desktop

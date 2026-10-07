@@ -22,7 +22,7 @@ Simply select the lines you’d like to change in a `*grep*` buffer and type `:w
 - File explorer—Press `ctrl-e` to explore directory of current file.
 - Project-wide search—Press `space slash` to search your entire project.
 - Splitting panes—To split a pane, press `ctrl-w ctrl-s` for horizontal split or `ctrl-w ctrl-v` for vertical split. To cycle focus among different panes, press `ctrl-w ctrl-w` to cycle forwards.
-Note: These commands requires Kamux.
+Note: These commands require Kamux.
 - Themes—To choose a theme, type `:theme <theme_name> enter`.
 - Surround mode—Press `m s "` to surround selected text with double quote string.
 - Jump mode—Press `g w` to jump to a two-character label.

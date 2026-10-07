@@ -1,7 +1,3 @@
-# Kakoune
-# https://kakoune.org
-# https://github.com/mawww/kakoune
-
 set global initial_scratch_message %{
 cd ~/code/chrome-shell
 cd ~/code/batch
@@ -25,18 +21,10 @@ e ~/series/list.txt
 e ~/anime/list.txt
 e ~/movies/list.txt
 }
-
-# Appearance -------------------------------------------------------------------
-
-theme macos_light
-
-set-face global Tab WhitespaceDiagnosticError
-set-face global Newline Whitespace
-set-face global NonBreakingSpace WhitespaceDiagnosticError
-set-face global Indent Whitespace
-
-# Language support -------------------------------------------------------------
-
+face global Tab WhitespaceDiagnosticError
+face global Newline Whitespace
+face global NonBreakingSpace WhitespaceDiagnosticError
+face global Indent Whitespace
 hook global BufCreate '.+/i3status/config|.+/sway/config|.+/tmux\.conf|.+/kamux\.conf' %{
   set-option buffer filetype sh
 }

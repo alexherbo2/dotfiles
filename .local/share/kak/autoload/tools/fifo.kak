@@ -56,7 +56,7 @@ config_options: []
     then
       echo > "$kak_command_fifo" "
         try %{
-          eval -buffer '$buffer_name' -verbatim write -- '$buffer_content'
+          eval -buffer '$buffer_name' -verbatim write! -- '$buffer_content'
         }
       "
     fi

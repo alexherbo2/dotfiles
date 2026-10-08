@@ -1,5 +1,4 @@
-set global initial_scratch_message %{
-cd ~/code/chrome-shell
+set global initial_scratch_message "cd ~/code/chrome-shell
 cd ~/code/batch
 cd ~/code/pw
 cd ~/code/chrome-shortcuts
@@ -19,8 +18,7 @@ e ~/books/list.txt
 e ~/manga/list.txt
 e ~/series/list.txt
 e ~/anime/list.txt
-e ~/movies/list.txt
-}
+e ~/movies/list.txt"
 face global Tab WhitespaceDiagnosticError
 face global Newline Whitespace
 face global NonBreakingSpace WhitespaceDiagnosticError

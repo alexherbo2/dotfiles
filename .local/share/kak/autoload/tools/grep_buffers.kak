@@ -7,7 +7,7 @@
 # dependencies: []
 # doc: no
 # tests: no
-def grep_buffers -params 1 %{
+def grep-buffers -params 1 %{
   eval -save-regs '/"' %{
     reg / %arg{1}
     try %{

@@ -13,10 +13,10 @@ description: list buffers.
 config_options: []
 ' list-buffers %{
   eval -save-regs '"b' %{
-    set-register b %val{bufname}
+    reg b %val{bufname}
     edit! -scratch '*buffers*'
     eval -no-hooks -buffer '*' %{
-      set-register dquote "%val{bufname}:readonly=%opt{readonly}:modified=%val{modified}"
+      reg dquote "%val{bufname}:readonly=%opt{readonly}:modified=%val{modified}"
       exec -buffer '*buffers*' 'gep'
     }
     exec 'd'

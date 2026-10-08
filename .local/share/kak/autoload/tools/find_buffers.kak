@@ -7,26 +7,13 @@
 # dependencies: []
 # doc: no
 # tests: no
-def find_buffers -params 1 %{
-  eval -save-regs '"' %{
-    try %{
-      exec -buffer '*find*' -save-regs '' '%y'
-    } catch %{
-      reg '"'
-    }
-    edit! -scratch '*find*'
-    eval -save-regs '"/' %{
-      reg '"' %val{buflist}
-      exec '<a-R>a<ret><esc>'
-      try %{
-        reg / %arg{1}
-        exec '<a-k><ret>y%<a-R>gg'
-      } catch %{
-        exec '%d'
-      }
-    }
-    exec -buffer '*find*' 'P'
+def find-buffers -params 1 %{
+  edit -scratch '*find*'
+  eval -save-regs '"/' %{
+    reg '"' %val{buflist}
+    reg / %arg{1}
+    exec 'ge<a-P>i<ret><esc><a-K><ret>dgg'
   }
 }
 
-complete-command find_buffers buffer
+compl find-buffers buffer

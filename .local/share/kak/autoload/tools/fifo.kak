@@ -50,36 +50,25 @@ config_options: []
       esac
     done
     fifo_name=$(mktemp -u)
+    buffer_content=$(mktemp)
     mkfifo -- "$fifo_name"
-    { trap - INT QUIT; exec "$@" > "$fifo_name" 2>&1; } < /dev/null > /dev/null 2>&1 &
-    if [ -z "$append_mode" ]
+    if [ -n "$append_mode" ]
     then
-      cat <<EOF
-        edit! ${edit_flags} -fifo "$fifo_name" -- "$buffer_name"
-        hook -always -once buffer BufCloseFifo "" %{
-          nop %sh{
-            unlink -- "$fifo_name"
-          }
+      echo > "$kak_command_fifo" "
+        try %{
+          eval -buffer '$buffer_name' -verbatim write -- '$buffer_content'
         }
-EOF
-    else
-      cat <<EOF
-        eval -save-regs '"' %{
-          try %{
-            exec -buffer "$buffer_name" -save-regs '' '%y'
-          } catch %{
-            reg '"'
-          }
-          edit! ${edit_flags} -fifo "$fifo_name" -- "$buffer_name"
-          exec -buffer "$buffer_name" 'P'
-        }
-        hook -always -once buffer BufCloseFifo "" %{
-          nop %sh{
-            unlink -- "$fifo_name"
-          }
-        }
-EOF
+      "
     fi
+    { trap - INT QUIT; { cat -- "$buffer_content"; exec "$@"; } > "$fifo_name" 2>&1; } < /dev/null > /dev/null 2>&1 &
+    echo "
+      edit! ${edit_flags} -fifo '$fifo_name' -- '$buffer_name'
+      hook -always -once buffer BufCloseFifo '' %{
+        nop %sh{
+          rm -- '$fifo_name' '$buffer_content'
+        }
+      }
+    "
   }
 }
 

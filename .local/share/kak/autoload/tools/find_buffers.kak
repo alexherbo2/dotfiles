@@ -12,7 +12,7 @@ def find-buffers -params 1 %{
   eval -save-regs '"/' %{
     reg '"' %val{buflist}
     reg / %arg{1}
-    exec 'ge<a-P>i<ret><esc><a-K><ret>dgg'
+    exec 'ge<a-P>i<ret><esc><a-K><ret>xdgg'
   }
 }
 

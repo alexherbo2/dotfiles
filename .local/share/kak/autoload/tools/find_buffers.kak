@@ -8,11 +8,18 @@
 # doc: no
 # tests: no
 def find-buffers -params 1 %{
-  edit -scratch '*find*'
-  eval -save-regs '"/' %{
-    reg '"' %val{buflist}
+  edit -scratch "*find*"
+  eval -save-regs """/" %{
+    reg """" %val{buflist}
     reg / %arg{1}
-    exec 'ge<a-P>i<ret><esc><a-K><ret>xdgg'
+    exec "ge<a-P>i<ret><esc>"
+    try %{
+      exec "<a-K><ret>xd"
+    }
+    exec "gg"
+    try %{
+      exec "<a-k>\n<ret>d"
+    }
   }
 }
 

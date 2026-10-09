@@ -986,3 +986,9 @@ set -e
 exit 0
 exit 1
 exit
+echo >> ~/.bashrc~ ""
+echo >> ~/.bash_profile~ ""
+echo >> ~/.bash_history~ ""
+rm ~/.bashrc~
+rm ~/.bash_profile~
+rm ~/.bash_history~

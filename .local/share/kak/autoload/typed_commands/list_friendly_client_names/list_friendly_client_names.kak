@@ -276,7 +276,7 @@ config_options: [""friendly_client_names""]
 def -hidden rename_client_to_selected_friendly_client_name %{
   eval -draft %{
     select_friendly_client_name_entries 1
-    rename-client -- %val{selection}
+    eval -client %val{client} -verbatim rename-client -- %val{selection}
   }
 }
 

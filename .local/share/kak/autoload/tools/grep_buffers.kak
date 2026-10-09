@@ -8,23 +8,22 @@
 # doc: no
 # tests: no
 def grep-buffers -params 1 %{
-  eval -save-regs '/"' %{
+  eval -save-regs "/""" %{
     reg / %arg{1}
+    reg """"
     try %{
-      exec -buffer '*grep*' -save-regs '' '%y'
-    } catch %{
-      reg '"'
+      exec -buffer "*grep*" -save-regs "" "%%y"
     }
-    edit! -scratch '*grep*'
-    edit! -scratch -debug 'kakoune://debug/grep'
-    eval -no-hooks -buffer '*' -verbatim -- try %{
-      exec '%s<ret>x<a-s>'
-      eval -itersel -save-regs '"' %{
-        reg '"' "%val{bufname}:%val{cursor_line}:%reg{.}"
-        exec -buffer 'kakoune://debug/grep' 'gep'
+    edit! -scratch "*grep*"
+    edit! -scratch -debug "kakoune://debug/grep"
+    eval -no-hooks -buffer "*" -verbatim -- try %{
+      exec "%%s<ret>x<a-s>"
+      eval -itersel -save-regs """" %{
+        reg """" "%val{bufname}:%val{cursor_line}:%reg{.}"
+        exec -buffer "kakoune://debug/grep" "gep"
       }
     }
-    exec 'd%y:db<ret>Rgg'
-    exec -buffer '*grep*' 'P'
+    exec "d%%y:db<ret>Rgg"
+    exec -buffer "*grep*" "P"
   }
 }

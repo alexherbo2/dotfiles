@@ -15,4 +15,6 @@ config_options: []
   edit -existing -readonly -- %arg{1}
 }
 
+compl view file
+
 alias global v view

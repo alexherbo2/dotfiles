@@ -64,4 +64,9 @@ ctrl-enter | *find* select entries; use count for field selection
 ctrl-enter | *ls* select entries; use count for field selection
 ctrl-enter | *git_status* select entries; use count for field selection
 ctrl-enter | *git_blame* select entries; use count for field selection
+ctrl-enter | *buffers* select entries; use count for field selection
+ctrl-enter | *sessions* select entries; use count for field selection
+ctrl-enter | *clients* select entries; use count for field selection
+ctrl-enter | *friendly_session_names* select entries; use count for field selection
+ctrl-enter | *friendly_client_names* select entries; use count for field selection
 TODO | TODO

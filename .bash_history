@@ -989,6 +989,10 @@ exit
 echo >> ~/.bashrc~ ""
 echo >> ~/.bash_profile~ ""
 echo >> ~/.bash_history~ ""
+echo >> ~/.bashrc~ "export KAKOUNE_POSIX_SHELL=/opt/homebrew/bin/dash"
+echo >> ~/.bash_profile~ ". /opt/homebrew/etc/profile.d/bash_completion.sh"
+echo >> ~/.bash_profile~ "eval \"\$(/opt/homebrew/bin/brew shellenv)\""
+eval "$(/opt/homebrew/bin/brew shellenv)" >> ~/.bash_profile~
 rm ~/.bashrc~
 rm ~/.bash_profile~
 rm ~/.bash_history~

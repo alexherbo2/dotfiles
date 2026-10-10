@@ -94,7 +94,9 @@ case "$(gum choose --show-help="no" --header="setup-kakoune:" "install" "uninsta
     gum format "KAKOUNE_RUNTIME=~/~kakoune/kakoune-config/.local/share/kak"
     gum format "You may want to add the following environment variables from your shell profile:"
     gum format "KAKOUNE_POSIX_SHELL=/bin/dash"
+    gum format "KAKOUNE_POSIX_SHELL=/opt/homebrew/bin/dash"
     gum format "KAKOUNE_CONFIG_DIR=~/.config/kak"
+    gum format "KAKOUNE_CONFIG_DIR=/dev/null"
     ;;
   "uninstall")
     if [ -d ~/~kakoune/kakoune-config ]

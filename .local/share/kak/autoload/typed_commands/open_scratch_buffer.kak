@@ -10,7 +10,7 @@
 def -docstring "
 usage: open-scratch-buffer
 description: open scratch buffer.
-config_options: [""""]
+config_options: []
 " open-scratch-buffer %{
   edit -scratch "*scratch*"
 }

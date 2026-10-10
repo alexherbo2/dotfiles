@@ -59,4 +59,9 @@ ctrl-w | enter window mode
 ctrl-w ctrl-h | new horizontal split
 ctrl-w ctrl-v | new vertical split
 ctrl-w ... | ...
+ctrl-enter | *grep* select entries; use count for field selection
+ctrl-enter | *find* select entries; use count for field selection
+ctrl-enter | *ls* select entries; use count for field selection
+ctrl-enter | *git_status* select entries; use count for field selection
+ctrl-enter | *git_blame* select entries; use count for field selection
 TODO | TODO

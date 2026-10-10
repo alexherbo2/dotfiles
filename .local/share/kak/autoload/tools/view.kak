@@ -11,7 +11,7 @@ def -docstring "
 usage: view
 description: open file in read-only mode.
 config_options: []
-" view %{
+" view -params 1 %{
   edit -existing -readonly -- %arg{1}
 }
 

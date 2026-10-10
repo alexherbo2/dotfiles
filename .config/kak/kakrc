@@ -19,6 +19,10 @@ e ~/manga/list.txt
 e ~/series/list.txt
 e ~/anime/list.txt
 e ~/movies/list.txt"
+hook global BufCreate '\*scratch\*' %{
+  set buffer filetype kakrc
+  map -docstring 'evaluate selected text' buffer normal <ret> ':evaluate_selected_text<ret>'
+}
 face global Tab WhitespaceDiagnosticError
 face global Newline Whitespace
 face global NonBreakingSpace WhitespaceDiagnosticError

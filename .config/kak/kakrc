@@ -1,4 +1,6 @@
 set global initial_scratch_message "cd ~/code/chrome-shell
+list-friendly-session-names
+list-friendly-client-names
 cd ~/code/batch
 cd ~/code/pw
 cd ~/code/chrome-shortcuts
@@ -10,15 +12,15 @@ cd ~/code/chrome-nano
 cd ~/code/taupiqueur.github.io
 cd ~/notes
 cd ~/shorts
-e ~/notes.txt
-e ~/todo.txt
-e ~/games/info.txt
-e ~/shorts/ytdlp_list.sh
-e ~/books/list.txt
-e ~/manga/list.txt
-e ~/series/list.txt
-e ~/anime/list.txt
-e ~/movies/list.txt"
+view ~/notes.txt
+view ~/todo.txt
+view ~/games/info.txt
+view ~/shorts/ytdlp_list.sh
+view ~/books/list.txt
+view ~/manga/list.txt
+view ~/series/list.txt
+view ~/anime/list.txt
+view ~/movies/list.txt"
 hook global BufCreate '\*scratch\*' %{
   set buffer filetype kakrc
   map -docstring 'evaluate selected text' buffer normal <ret> ':evaluate_selected_text<ret>'

@@ -59,6 +59,14 @@ ctrl-w | enter window mode
 ctrl-w ctrl-h | new horizontal split
 ctrl-w ctrl-v | new vertical split
 ctrl-w ... | ...
+enter | *grep* jump to references
+enter | *find* jump to files
+enter | *ls* jump to files or directories
+enter | *git_status* jump to files
+enter | *git_blame* show patches
+enter | *buffers* jump to buffers
+enter | *friendly_session_names* rename session
+enter | *friendly_client_names* rename client
 ctrl-enter | *grep* select entries; use count for field selection
 ctrl-enter | *find* select entries; use count for field selection
 ctrl-enter | *ls* select entries; use count for field selection
@@ -69,4 +77,7 @@ ctrl-enter | *sessions* select entries; use count for field selection
 ctrl-enter | *clients* select entries; use count for field selection
 ctrl-enter | *friendly_session_names* select entries; use count for field selection
 ctrl-enter | *friendly_client_names* select entries; use count for field selection
+alt-: | *buffers* enter buffer command
+alt-: | *sessions* enter session command
+alt-: | *clients* enter client command
 TODO | TODO

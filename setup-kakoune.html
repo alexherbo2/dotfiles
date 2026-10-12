@@ -98,6 +98,12 @@
       <pre><code>curl https://raw<wbr>.githubusercontent<wbr>.com<wbr>/alexherbo2<wbr>/dotfiles<wbr>/master<wbr>/setup-kakoune<wbr>.sh | sh
 </code></pre>
       <p>
+        or without installing anything:
+      </p>
+      <pre><code>git clone https://github<wbr>.com<wbr>/alexherbo2<wbr>/dotfiles<wbr>.git ~<wbr>/~kakoune<wbr>/kakoune-config
+KAKOUNE_POSIX_SHELL=<wbr>/bin<wbr>/sh KAKOUNE_RUNTIME=~<wbr>/~kakoune<wbr>/kakoune-config<wbr>/.local<wbr>/share<wbr>/kak KAKOUNE_CONFIG_DIR=<wbr>/dev<wbr>/null kak
+</code></pre>
+      <p>
         Note: For language server support and Tree-sitter integration,
         you may want to add <code>:initialize_lsp</code> and <code>:initialize_tree_sitter</code> to your kakrc.
       </p>

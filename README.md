@@ -41,7 +41,7 @@ Run the following in your terminal, then follow the on-screen instructions.
 curl https://raw.githubusercontent.com/alexherbo2/dotfiles/master/setup-kakoune.sh | sh
 ```
 
-or without installing anything:
+Alternatively, without installing anything:
 
 ```sh
 git clone https://github.com/alexherbo2/dotfiles.git ~/~kakoune/kakoune-config

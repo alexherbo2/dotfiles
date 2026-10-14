@@ -30,7 +30,7 @@ map -docstring 'show hex color code highlights' global unimpaired_right x ':show
 map -docstring 'show whitespace characters' global unimpaired_right w ':show_whitespace_characters<ret>'
 map -docstring 'enable read-only mode' global unimpaired_right r ':enable_readonly_mode<ret>'
 map -docstring 'enable soft-wrap mode' global unimpaired_right <tab> ':enable_soft_wrap<ret>'
-map -docstring 'add new line below' global unimpaired_right <space> <a-o>
+map -docstring 'add new line below selection' global unimpaired_right <space> <a-o>
 map -docstring 'jump to next buffer' global unimpaired_right b ':buffer-next<ret>'
 map -docstring 'jump to next file in directory' global unimpaired_right n ':jump_to_next_file_or_directory<ret>'
 map -docstring 'jump to next reference' global unimpaired_right g ':jump_to_next_reference<ret>'

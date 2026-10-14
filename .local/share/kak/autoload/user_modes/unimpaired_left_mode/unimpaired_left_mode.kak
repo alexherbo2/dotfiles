@@ -30,7 +30,7 @@ map -docstring 'hide hex color code highlights' global unimpaired_left x ':hide_
 map -docstring 'hide whitespace characters' global unimpaired_left w ':hide_whitespace_characters<ret>'
 map -docstring 'disable read-only mode' global unimpaired_left r ':disable_readonly_mode<ret>'
 map -docstring 'disable soft-wrap' global unimpaired_left <tab> ':disable_soft_wrap<ret>'
-map -docstring 'add new line above' global unimpaired_left <space> <a-O>
+map -docstring 'add new line above selection' global unimpaired_left <space> <a-O>
 map -docstring 'jump to previous buffer' global unimpaired_left b ':buffer-previous<ret>'
 map -docstring 'jump to previous file in directory' global unimpaired_left n ':jump_to_previous_file_or_directory<ret>'
 map -docstring 'jump to previous reference' global unimpaired_left g ':jump_to_previous_reference<ret>'

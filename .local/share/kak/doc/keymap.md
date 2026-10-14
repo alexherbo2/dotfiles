@@ -63,7 +63,11 @@ alt-space | open text finder
 i | enter insert mode
 i ctrl-k | enter digraphs mode
 [ | enter unimpaired left mode
+space | add new line above selection
+[ ... | ...
 ] | enter unimpaired right mode
+space | add new line below selection
+] ... | ...
 { | enter sticky unimpaired left mode
 } | enter sticky unimpaired right mode
 ctrl-w | enter window mode

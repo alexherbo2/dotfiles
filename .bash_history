@@ -996,3 +996,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)" >> ~/.bash_profile~
 rm ~/.bashrc~
 rm ~/.bash_profile~
 rm ~/.bash_history~
+. ~/.bashrc
+. ~/.bashrc~
+. ~/.bash_profile
+. ~/.bash_profile~

@@ -15,9 +15,7 @@ shift-w | extend selected text to next word start
 shift-e | extend selected text to next word end
 shift-b | extend selected text to previous word start
 shift-c | copy selection line down
-alt-shift-c | copy selection line up
 shift-d | copy selected lines down
-alt-shift-d | copy selected lines up
 / | search forward for {pattern}
 ? | search backward for {pattern}
 f | search forward for {char}
@@ -63,10 +61,14 @@ alt-space | open text finder
 i | enter insert mode
 i ctrl-k | enter digraphs mode
 [ | enter unimpaired left mode
-space | add new line above selection
+[ space | add new line above selection
+[ c | copy selection line up
+[ d | copy selected lines up
 [ ... | ...
 ] | enter unimpaired right mode
-space | add new line below selection
+] space | add new line below selection
+] c | copy selection line down
+] d | copy selected lines down
 ] ... | ...
 { | enter sticky unimpaired left mode
 } | enter sticky unimpaired right mode

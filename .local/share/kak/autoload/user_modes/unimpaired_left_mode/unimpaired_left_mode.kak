@@ -31,6 +31,8 @@ map -docstring 'hide whitespace characters' global unimpaired_left w ':hide_whit
 map -docstring 'disable read-only mode' global unimpaired_left r ':disable_readonly_mode<ret>'
 map -docstring 'disable soft-wrap' global unimpaired_left <tab> ':disable_soft_wrap<ret>'
 map -docstring 'add new line above selection' global unimpaired_left <space> <a-O>
+map -docstring 'copy selection line up' global unimpaired_left c <a-C>
+map -docstring 'copy selected lines up' global unimpaired_left d ':copy_selected_lines_up %val{count}<ret>'
 map -docstring 'jump to previous buffer' global unimpaired_left b ':buffer-previous<ret>'
 map -docstring 'jump to previous file in directory' global unimpaired_left n ':jump_to_previous_file_or_directory<ret>'
 map -docstring 'jump to previous reference' global unimpaired_left g ':jump_to_previous_reference<ret>'

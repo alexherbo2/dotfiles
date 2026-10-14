@@ -14,6 +14,10 @@ b | move selected text to previous word start
 shift-w | extend selected text to next word start
 shift-e | extend selected text to next word end
 shift-b | extend selected text to previous word start
+shift-c | copy selection line down
+alt-shift-c | copy selection line up
+shift-d | copy selected lines down
+alt-shift-d | copy selected lines up
 / | search forward for {pattern}
 ? | search backward for {pattern}
 f | search forward for {char}
@@ -35,6 +39,11 @@ m shift-a | select whole nested objects
 m s | enter surround mode
 m s " | surround selected text with double quote string
 m s ... | ...
+g | enter goto mode
+g j | move cursor line down
+g k | move cursor line up
+g shift-j | extend cursor line down
+g shift-k | extend cursor line up
 g a | goto last accessed buffer
 g w | enter jump mode (select mode: replace)
 g shift-w | enter jump mode (select mode: extend)
@@ -47,6 +56,8 @@ ctrl-n | iterate next selection
 ctrl-p | iterate previous selection
 ctrl-e | open file explorer
 space e | open file explorer
+space f | open file picker
+alt-space | open text finder
 ~ | enter letter case mode
 ~ ... | ...
 i | enter insert mode

@@ -30,6 +30,7 @@ map -docstring 'show hex color code highlights' global unimpaired_right x ':show
 map -docstring 'show whitespace characters' global unimpaired_right w ':show_whitespace_characters<ret>'
 map -docstring 'enable read-only mode' global unimpaired_right r ':enable_readonly_mode<ret>'
 map -docstring 'enable soft-wrap mode' global unimpaired_right <tab> ':enable_soft_wrap<ret>'
+map -docstring "move selection face forward" global unimpaired_right ";" "<a-:>"
 map -docstring 'add new line below selection' global unimpaired_right <space> <a-o>
 map -docstring 'copy selection line down' global unimpaired_right c C
 map -docstring 'copy selected lines down' global unimpaired_right d ':copy_selected_lines_down %val{count}<ret>'

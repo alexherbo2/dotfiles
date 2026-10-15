@@ -24,6 +24,7 @@ Command | Description
 `shift-t` | search backward ’til `{char}`
 `n` | select next search match
 `shift-n` | select previous search match
+`alt-;` | flip selection direction
 `m` | enter match mode
 `m m` | select next matching brackets
 `m shift-m` | select previous matching brackets
@@ -61,11 +62,13 @@ Command | Description
 `i` | enter insert mode
 `i ctrl-k` | enter digraphs mode
 `[` | enter unimpaired left mode
+`[ ;` | move selection face backward
 `[ space` | add new line above selection
 `[ c` | copy selection line up
 `[ d` | copy selected lines up
 `[` ... | ...
 `]` | enter unimpaired right mode
+`] ;` | move selection face forward
 `] space` | add new line below selection
 `] c` | copy selection line down
 `] d` | copy selected lines down

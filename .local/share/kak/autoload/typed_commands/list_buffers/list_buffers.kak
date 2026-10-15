@@ -40,7 +40,7 @@ config_options: []
   }
 }
 
-def -hidden enter_buffer_command %{
+def -hidden enter_command_mode_with_buffer_context %{
   prompt "(b):" -command-completion %{
     eval -draft %{
       select_buffer_list_entries 1

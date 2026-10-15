@@ -19,7 +19,7 @@ config_options: []
   }
 }
 
-def -hidden enter_client_command %{
+def -hidden enter_command_mode_with_client_context %{
   prompt "(c):" -command-completion %{
     eval -draft %{
       select_client_list_entries 1

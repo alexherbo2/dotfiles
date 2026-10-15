@@ -17,7 +17,7 @@ config_options: []
   }
 }
 
-def -hidden enter_session_command %{
+def -hidden enter_command_mode_with_session_context %{
   prompt "(s):" -command-completion %{
     eval -draft %{
       select_session_list_entries 1

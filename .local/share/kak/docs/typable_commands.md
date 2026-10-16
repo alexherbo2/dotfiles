@@ -11,7 +11,15 @@ Command | Description
 `:ls` | list directory contents
 `:grep` | search files for a pattern
 `:find` | find files
+`:git` | TODO
 `:git-blame` | TODO
+`:git-rm` | TODO
+`:git-add` | TODO
+`:git-commit` | TODO
+`:git-status` | TODO
+`:git-ls-files` | TODO
+`:git-grep` | TODO
+`:git-mv` | TODO
 `:set-indent-style` | TODO
 `:detect-indent-style` | TODO
 `:show-indent-style` | TODO
@@ -22,6 +30,8 @@ Command | Description
 `:sidetree` | TODO
 `:vifm` | TODO
 `:broot` | TODO
+`:nnn` | TODO
+`:yazi` | TODO
 TODO | TODO
 
 See also:

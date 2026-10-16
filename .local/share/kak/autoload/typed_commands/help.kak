@@ -11,7 +11,7 @@ config_options: []
     then
       echo 'view "%val{runtime}/docs/%arg{1}.md"'
     else
-      echo 'fail "No such topic: “%arg{1}”"'
+      echo 'fail "No such subject: “%arg{1}”"'
       exit 1
     fi
   }
@@ -20,3 +20,5 @@ config_options: []
 compl -menu help shell-script-candidates %{
   find -L -- "$kak_config/docs" "$kak_runtime/docs" -type f -name "*.md" -exec basename -a -s ".md" -- {} +
 }
+
+alias global h help

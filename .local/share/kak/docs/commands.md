@@ -3,11 +3,11 @@
 ## Typable commands
 
 ```
-:doc typable_commands.md
+:help typable_commands
 ```
 
 ## Static commands
 
 ```
-:doc static_commands.md
+:help static_commands
 ```

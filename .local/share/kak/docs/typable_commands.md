@@ -4,7 +4,7 @@ TODO: Document typable commands.
 
 Command | Description
 --- | ---
-:doc | open doc
+:help | open docs
 :theme | load theme
 :list-buffers | list buffers
 :ls | list directory contents
@@ -20,5 +20,5 @@ TODO | TODO
 See also:
 
 ```
-:doc commands.md
+:help commands
 ```

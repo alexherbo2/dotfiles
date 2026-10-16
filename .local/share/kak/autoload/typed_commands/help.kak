@@ -1,6 +1,6 @@
 def -docstring "
 usage: help [subject]
-description: open docs.
+description: open documentation.
 config_options: []
 " help -params 1 %{
   eval %sh{

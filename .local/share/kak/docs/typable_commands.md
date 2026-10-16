@@ -16,6 +16,12 @@ Command | Description
 `:detect-indent-style` | TODO
 `:show-indent-style` | TODO
 `:=` | evaluate selected text
+`:glow` | TODO
+`:ranger` | TODO
+`:lf` | TODO
+`:sidetree` | TODO
+`:vifm` | TODO
+`:broot` | TODO
 TODO | TODO
 
 See also:

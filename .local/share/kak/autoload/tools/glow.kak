@@ -1,5 +1,3 @@
-def glow -params .. %{
-  terminal glow -t %val{buffile} %arg{@}
+def glow %{
+  terminal glow -t -- %val{buffile}
 }
-
-compl glow file

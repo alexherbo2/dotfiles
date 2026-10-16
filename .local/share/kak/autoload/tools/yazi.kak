@@ -1,5 +1,3 @@
-def yazi -params .. %{
-  terminal env "kak_session=%val{session}" "kak_client=%val{client}" "VISUAL=sh %val{runtime}/assets/editor.sh" "EDITOR=sh %val{runtime}/assets/editor.sh" yazi %val{buffile} %arg{@}
+def yazi %{
+  terminal env "kak_session=%val{session}" "kak_client=%val{client}" "VISUAL=sh %val{runtime}/assets/editor.sh" "EDITOR=sh %val{runtime}/assets/editor.sh" yazi -- %val{buffile}
 }
-
-compl yazi file

@@ -7,10 +7,10 @@
 # dependencies: []
 # doc: yes
 # tests: no
-def -docstring '
+def -docstring "
 usage: pwd
 description: show the current working directory name.
 config_options: []
-' pwd %{
+" pwd %{
   echo -- %sh{pwd}
 }

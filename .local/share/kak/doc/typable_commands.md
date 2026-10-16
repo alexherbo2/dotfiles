@@ -4,6 +4,8 @@ TODO: Document typable commands.
 
 Command | Description
 --- | ---
+:doc | open doc
+:theme | load theme
 :list-buffers | list buffers
 :ls | list directory contents
 :grep | search files for a pattern

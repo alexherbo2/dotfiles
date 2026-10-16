@@ -1,5 +1,9 @@
-define-command load_theme -params 1 -docstring 'load theme' %{
-  evaluate-commands %sh{
+def -docstring "
+usage: theme [theme_name]
+description: load theme.
+config_options: []
+" theme -params 1 %{
+  eval %sh{
     if [ -r "$kak_config/themes/$1.kak" ]
     then
       echo 'source "%val{config}/themes/%arg{1}.kak"; trigger-user-hook "ThemeChanged=%arg{1}"'
@@ -13,16 +17,6 @@ define-command load_theme -params 1 -docstring 'load theme' %{
   }
 }
 
-complete-command -menu load_theme shell-script-candidates %{
-  find -L -- "$kak_config/themes" "$kak_runtime/themes" -type f -name '*.kak' -exec basename -a -s '.kak' -- {} +
-}
-
-alias global theme load_theme
-
-define-command open_theme -params 1 -docstring 'open theme' %{
-  edit -existing -readonly %arg{1}
-}
-
-complete-command -menu open_theme shell-script-candidates %{
-  find -L -- "$kak_config/themes" "$kak_runtime/themes" -type f -name '*.kak'
+compl -menu theme shell-script-candidates %{
+  find -L -- "$kak_config/themes" "$kak_runtime/themes" -type f -name "*.kak" -exec basename -a -s ".kak" -- {} +
 }

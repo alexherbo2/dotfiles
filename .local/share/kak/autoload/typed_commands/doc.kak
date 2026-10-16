@@ -1,17 +1,22 @@
-define-command open_doc -params 1 -docstring 'open doc' %{
-  edit -existing -readonly %arg{1}
+def -docstring "
+usage: doc [topic_name]
+description: open doc.
+config_options: []
+" doc -params 1 %{
+  eval %sh{
+    if [ -r "$kak_config/doc/$1.md" ]
+    then
+      echo 'view "%val{config}/doc/%arg{1}.md"'
+    elif [ -r "$kak_runtime/doc/$1.md" ]
+    then
+      echo 'view "%val{runtime}/doc/%arg{1}.md"'
+    else
+      echo 'fail "No such topic: “%arg{1}”"'
+      exit 1
+    fi
+  }
 }
 
-complete-command -menu open_doc shell-script-candidates %{
-  find -L -- "$kak_config/doc" "$kak_runtime/doc" -type f '(' -name '*.asciidoc' -or -name '*.md' ')'
-}
-
-alias global doc open_doc
-
-define-command grep_doc -params 1 -docstring 'grep doc' %{
-  grep %arg{1} "%val{config}/doc" "%val{runtime}/doc"
-}
-
-complete-command grep_doc shell-script-candidates %{
-  find -L -- "$kak_config/doc" "$kak_runtime/doc" -type f '(' -name '*.asciidoc' -or -name '*.md' ')' -exec grep -o -h -w '[[:alpha:]][[:alnum:]_-]\+' -- {} + | sort -u
+compl -menu doc shell-script-candidates %{
+  find -L -- "$kak_config/doc" "$kak_runtime/doc" -type f -name "*.md" -exec basename -a -s ".md" -- {} +
 }

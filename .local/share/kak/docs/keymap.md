@@ -16,6 +16,9 @@ Command | Description
 `shift-b` | extend selected text to previous word start
 `shift-c` | copy selection line down
 `shift-d` | copy selected lines down
+`alt-shift-d` | move selected lines down
+`x` | select whole lines or extend line down
+`shift-x` | select whole lines
 `/` | search forward for `{pattern}`
 `?` | search backward for `{pattern}`
 `f` | search forward for `{char}`
@@ -66,12 +69,14 @@ Command | Description
 `[ space` | add new line above selection
 `[ c` | copy selection line up
 `[ d` | copy selected lines up
+`[ shift-d` | move selected lines up
 `[` ... | ...
 `]` | enter unimpaired right mode
 `] ;` | move selection face forward
 `] space` | add new line below selection
 `] c` | copy selection line down
 `] d` | copy selected lines down
+`] shift-d` | move selected lines down
 `]` ... | ...
 `{` | enter sticky unimpaired left mode
 `}` | enter sticky unimpaired right mode

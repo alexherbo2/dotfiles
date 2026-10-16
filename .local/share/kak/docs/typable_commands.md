@@ -6,6 +6,7 @@ Command | Description
 --- | ---
 `:help` | open documentation
 `:theme` | load theme
+`:open-config` | open config file
 `:list-buffers` | list buffers
 `:ls` | list directory contents
 `:grep` | search files for a pattern

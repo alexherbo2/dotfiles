@@ -1,4 +1,5 @@
 set global initial_scratch_message "pwd
+list-themes
 list-friendly-session-names
 list-friendly-client-names
 cd ~/code/chrome-shell

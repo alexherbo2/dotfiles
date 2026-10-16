@@ -34,6 +34,7 @@ map -docstring "move selection face backward" global unimpaired_left ";" "<a-:><
 map -docstring 'add new line above selection' global unimpaired_left <space> <a-O>
 map -docstring 'copy selection line up' global unimpaired_left c <a-C>
 map -docstring 'copy selected lines up' global unimpaired_left d ':copy_selected_lines_up %val{count}<ret>'
+map -docstring 'move selected lines up' global unimpaired_left D ':move_selected_lines_up %val{count}<ret>'
 map -docstring 'jump to previous buffer' global unimpaired_left b ':buffer-previous<ret>'
 map -docstring 'jump to previous file in directory' global unimpaired_left n ':jump_to_previous_file_or_directory<ret>'
 map -docstring 'jump to previous reference' global unimpaired_left g ':jump_to_previous_reference<ret>'

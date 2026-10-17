@@ -8,22 +8,39 @@
 # doc: yes
 # tests: no
 decl -hidden range-specs man_range_specs
-addhl shared/man-highlights ranges man_range_specs
+decl -hidden str-list man_impl_range_specs
 def -docstring "
 usage: man [section] [name]
 description: display system documentation.
 config_options: []
-" man -params 2 %{
-  fifo -name "*%arg{2}(%arg{1})*" man -- %arg{1} %arg{2}
-  addhl b/man-highlights ref man-highlights
-  hook -always -once b BufCloseFifo ".*" %{
-    exec "%%s.\x08<ret>d<a-_>"
-    set b man_range_specs %val{timestamp}
-    eval -itersel %{
-      set -add b man_range_specs "%val{selection_desc}|keyword"
-    }
-  }
-  hook -always -once b BufClose ".*" %{
-    rmhl b/man-highlights
+" man -params 1..2 %{
+  eval %sh{
+    case "$#" in
+      2)
+        echo "man_impl %arg{1} %arg{2}"
+        ;;
+      1)
+        echo "man_impl 1 %arg{1}"
+        ;;
+    esac
   }
 }
+def -hidden man_impl -params 2 %{
+  fifo -name "*%arg{2}(%arg{1})*" man -- %arg{1} %arg{2}
+  addhl b/man-highlights ranges man_range_specs
+  set b man_impl_range_specs
+  hook -always b BufReadFifo ".*" %{
+    try %{
+      select "%val{hook_param}"
+      exec "s.\x08<ret>d<a-_>"
+      eval -itersel %{
+        set -add b man_impl_range_specs "%val{selection_desc}|keyword"
+      }
+    }
+  }
+  hook -always -once b BufCloseFifo ".*" %{
+    set b man_range_specs %val{timestamp} %opt{man_impl_range_specs}
+    set b readonly yes
+  }
+}
+compl man shell

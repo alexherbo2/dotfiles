@@ -53,8 +53,15 @@ def -hidden ls_file_impl -params 1 %{
   set buffer ls_file_entry %sh{
     basename -- "$1"
   }
-  hook -always -once buffer NormalIdle ".*" %{
-    exec "ge/^\Q%%opt{ls_file_entry}<a-!>\E\n<ret>vv<esc>"
+  hook -always b BufReadFifo ".*" %{
+    try %{
+      select "%val{hook_param}"
+      exec "s^\Q%%opt{ls_file_entry}<a-!>\E\n<ret>"
+      hook -always -once buffer NormalIdle ".*" %exp{
+        select "%val{selection_desc}"
+        exec "vv<esc>"
+      }
+    }
   }
 }
 

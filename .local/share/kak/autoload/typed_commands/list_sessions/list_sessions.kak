@@ -15,6 +15,16 @@ config_options: []
   hook -always -once buffer NormalIdle ".*" %{
     exec "ge/^\Q%%val{session}<a-!>\E\n<ret>vv<esc>"
   }
+  hook -always b BufReadFifo ".*" %{
+    try %{
+      select "%val{hook_param}"
+      exec "s^\Q%%val{session}<a-!>\E\n<ret>"
+      hook -always -once buffer NormalIdle ".*" %exp{
+        select "%val{selection_desc}"
+        exec "vv<esc>"
+      }
+    }
+  }
 }
 
 def -hidden enter_command_mode_with_session_context %{

@@ -27,6 +27,7 @@ set-face global deleted red # https://github.com/dracula/visual-studio-code/blob
 set-face global changed yellow
 
 # For markup
+face g mark "black,bright-yellow"
 set-face global title blue+b # AsciiDoc ⇒ = Document title — https://spec.draculatheme.com#MarkupHeading
 set-face global header cyan+b # AsciiDoc ⇒ == Section title — https://spec.draculatheme.com#MarkupHeading
 set-face global mono green # AsciiDoc ⇒ `code` — https://spec.draculatheme.com#MarkupInlineCode

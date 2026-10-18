@@ -8,6 +8,7 @@ Command | Description
 `:theme` | load theme
 `:open-config` | open config file
 `:list-buffers` | list buffers
+`:man` | display system documentation
 `:ls` | list directory contents
 `:grep` | search files for a pattern
 `:find` | find files

@@ -26,7 +26,7 @@ config_options: []
   }
 }
 def -hidden man_impl -params 2 %{
-  fifo -name "*%arg{2}(%arg{1})*" man -- %arg{1} %arg{2}
+  fifo -name "*man %arg{1} %arg{2}*" man -- %arg{1} %arg{2}
   addhl b/man-highlights ranges man_range_specs
   set b man_impl_range_specs
   hook -always b BufReadFifo ".*" %{

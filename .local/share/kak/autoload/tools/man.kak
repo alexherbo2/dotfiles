@@ -9,10 +9,13 @@
 # tests: no
 decl -hidden range-specs man_range_specs
 decl -hidden str-list man_impl_range_specs
+decl -docstring "
+man_env: [""MAN_KEEP_FORMATTING=1"", ""GROFF_NO_SGR=1""]
+" str-list man_env "MAN_KEEP_FORMATTING=1" "GROFF_NO_SGR=1"
 def -docstring "
 usage: man [section] [name]
 description: display system documentation.
-config_options: []
+config_options: [""man_env""]
 " man -params 1..2 %{
   eval %sh{
     case "$#" in
@@ -26,7 +29,7 @@ config_options: []
   }
 }
 def -hidden man_impl -params 2 %{
-  fifo -name "*man %arg{1} %arg{2}*" man -- %arg{1} %arg{2}
+  fifo -name "*man %arg{1} %arg{2}*" env %opt{man_env} man -- %arg{1} %arg{2}
   addhl -override b/man-highlights ranges man_range_specs
   set b man_impl_range_specs
   hook -always b BufReadFifo ".*" %{

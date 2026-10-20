@@ -37,7 +37,7 @@ def -hidden man_impl -params 2 %{
       select "%val{hook_param}"
       exec "s.\x08<ret>d<a-_>"
       eval -itersel %{
-        set -add b man_impl_range_specs "%val{selection_desc}|mark"
+        set -add b man_impl_range_specs "%val{selection_desc}|emphasis"
       }
     }
   }

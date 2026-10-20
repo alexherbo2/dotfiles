@@ -86,7 +86,7 @@ set-face global deleted "rgb:%opt{red_color},rgba:%opt{red_color}50" # https://g
 set-face global changed "rgb:%opt{yellow_color}"
 
 # For markup
-face g mark "rgb:%opt{black_color},rgb:%opt{bright_yellow_color}"
+face g emphasis "rgb:%opt{blue_color}"
 set-face global title "rgb:%opt{blue_color}+b" # AsciiDoc ⇒ = Document title — https://spec.draculatheme.com#MarkupHeading
 set-face global header "rgb:%opt{cyan_color}+b" # AsciiDoc ⇒ == Section title — https://spec.draculatheme.com#MarkupHeading
 set-face global mono "rgb:%opt{green_color}" # AsciiDoc ⇒ `code` — https://spec.draculatheme.com#MarkupInlineCode

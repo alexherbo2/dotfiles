@@ -28,6 +28,10 @@ Command | Description
 `n` | select next search match
 `shift-n` | select previous search match
 `alt-;` | flip selection direction
+`,` | keep primary selection
+`alt-,` | remove primary selection
+`;` | collapse selections
+`escape` | keep primary selection and collapse selections
 `m` | enter match mode
 `m m` | select next matching brackets
 `m shift-m` | select previous matching brackets
@@ -66,14 +70,14 @@ Command | Description
 `i ctrl-k` | enter digraphs mode
 `[` | enter unimpaired left mode
 `[ ;` | move selection face backward
-`[ space` | add new line above selection
+`[ space` | add new line above selected text
 `[ c` | copy selection line up
 `[ d` | copy selected lines up
 `[ shift-d` | move selected lines up
 `[` ... | ...
 `]` | enter unimpaired right mode
 `] ;` | move selection face forward
-`] space` | add new line below selection
+`] space` | add new line below selected text
 `] c` | copy selection line down
 `] d` | copy selected lines down
 `] shift-d` | move selected lines down

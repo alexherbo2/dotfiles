@@ -31,7 +31,7 @@ map -docstring 'hide whitespace characters' global unimpaired_left w ':hide_whit
 map -docstring 'disable read-only mode' global unimpaired_left r ':disable_readonly_mode<ret>'
 map -docstring 'disable soft-wrap' global unimpaired_left <tab> ':disable_soft_wrap<ret>'
 map -docstring "move selection face backward" global unimpaired_left ";" "<a-:><a-;>"
-map -docstring 'add new line above selection' global unimpaired_left <space> <a-O>
+map -docstring 'add new line above selected text' global unimpaired_left <space> <a-O>
 map -docstring 'copy selection line up' global unimpaired_left c <a-C>
 map -docstring 'copy selected lines up' global unimpaired_left d ':copy_selected_lines_up %val{count}<ret>'
 map -docstring 'move selected lines up' global unimpaired_left D ':move_selected_lines_up %val{count}<ret>'

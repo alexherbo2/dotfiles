@@ -10,6 +10,7 @@ Command | Description
 `:list-buffers` | list buffers
 `:man` | display system documentation
 `:ls` | list directory contents
+`:cat` | concatenate and insert the content of files below selected text
 `:grep` | search files for a pattern
 `:find` | find files
 `:git` | TODO

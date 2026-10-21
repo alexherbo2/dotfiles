@@ -1,5 +1,8 @@
 def new-terminal-client -params .. %{
-  terminal kak -c %val{session} -e "%arg{@}" "+%val{cursor_line}:%val{cursor_char_column}" -- "%val{buffile}"
+  terminal kak -c %val{session} -e %exp{
+    grab-buffer %val{client}
+    %arg{@}
+  }
 }
 
 compl new-terminal-client command

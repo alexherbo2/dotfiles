@@ -1,13 +1,5 @@
-decl -hidden str-list terminal_client_command
-
 def new-terminal-client -params .. %{
-  set global terminal_client_command %arg{@}
-  terminal kak -c %val{session} -e %exp{
-    grab-buffer %val{client}
-    try %%{
-      eval -verbatim -- %%opt{terminal_client_command}
-    }
-  }
+  terminal kak -c %val{session} -e "%arg{@}" "+%val{cursor_line}:%val{cursor_char_column}" -- "%val{buffile}"
 }
 
 compl new-terminal-client command

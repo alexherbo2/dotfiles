@@ -5,7 +5,7 @@
 # authors: ["Mathieu Ablasou <taupiqueur.kanto@gmail.com>"]
 # kakoune: 2023-12-12
 # license: MIT
-# dependencies: ["nohup", "grab-buffer"]
+# dependencies: ["nohup"]
 # doc: yes
 # tests: no
 def tmux -params 1.. %{
@@ -65,31 +65,19 @@ def tmux_toggle_fullscreen %{
 }
 
 def tmux_split_view_down -params .. %{
-  tmux split-window -v kak -c %val{session} -e %exp{
-    grab-buffer %val{client}
-    %arg{@}
-  }
+  tmux split-window -v kak -c %val{session} -e "%arg{@}" "+%val{cursor_line}:%val{cursor_char_column}" -- "%val{buffile}"
 }
 
 def tmux_split_view_right -params .. %{
-  tmux split-window -h kak -c %val{session} -e %exp{
-    grab-buffer %val{client}
-    %arg{@}
-  }
+  tmux split-window -h kak -c %val{session} -e "%arg{@}" "+%val{cursor_line}:%val{cursor_char_column}" -- "%val{buffile}"
 }
 
 def tmux_create_view_in_new_window -params .. %{
-  tmux new-window kak -c %val{session} -e %exp{
-    grab-buffer %val{client}
-    %arg{@}
-  }
+  tmux new-window kak -c %val{session} -e "%arg{@}" "+%val{cursor_line}:%val{cursor_char_column}" -- "%val{buffile}"
 }
 
 def tmux_create_view_in_new_window_right -params .. %{
-  tmux new-window -a kak -c %val{session} -e %exp{
-    grab-buffer %val{client}
-    %arg{@}
-  }
+  tmux new-window -a kak -c %val{session} -e "%arg{@}" "+%val{cursor_line}:%val{cursor_char_column}" -- "%val{buffile}"
 }
 
 def tmux_move_view_to_new_window %{

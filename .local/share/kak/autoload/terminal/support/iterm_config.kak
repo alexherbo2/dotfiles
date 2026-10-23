@@ -1,7 +1,7 @@
 # iTerm2
 hook global User 'TERM_PROGRAM=iTerm.app' %{
-  set window terminal_command 'osascript'
-  set window terminal_args '-e' %{
+  set global terminal_command 'osascript'
+  set global terminal_args '-e' %{
     on run argv
       set kak_client_tty to system attribute "kak_opt_terminal_tty"
       set kak_session_env_PWD to system attribute "PWD"
@@ -15,7 +15,7 @@ hook global User 'TERM_PROGRAM=iTerm.app' %{
       end tell
     end run
   } '--'
-  set window terminal_tty %sh{
+  set global terminal_tty %sh{
     ps -o 'tty=' -p "$kak_client_pid" |
     xargs printf '/dev/%s\n'
   }

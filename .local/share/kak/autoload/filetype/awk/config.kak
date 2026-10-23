@@ -1,4 +1,4 @@
-hook global BufCreate ".+\.(awk|gawk|nawk|mawk)" %{
+hook global BufCreate ".+\.(?:awk|gawk|nawk|mawk)" %{
   set buffer filetype "awk"
 }
 

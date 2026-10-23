@@ -9,6 +9,8 @@ Command | Description
 `:open-config` | open config file
 `:list-buffers` | list buffers
 `:new-buffer` | create a new scratch buffer
+`:grab-buffer` | grab buffer in a client
+`:swap-buffer` | swap buffer in a client
 `:man` | display system documentation
 `:ls` | list directory contents
 `:cat` | concatenate and insert the content of files below selected text

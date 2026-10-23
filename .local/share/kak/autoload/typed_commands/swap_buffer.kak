@@ -1,4 +1,9 @@
-def swap-buffer -params 1 %{
+def -docstring "
+usage: swap-buffer [client_name]
+description: swap buffer in a client.
+config_options: []
+aliases: []
+" swap-buffer -params 1 %{
   eval -save-regs 'st' %{
     exec '"sZ'
     exec -client %arg{1} '"tZ'

@@ -15,6 +15,7 @@ Command | Description
 `:man` | display system documentation
 `:fifo` | create a new fifo buffer from command output
 `:ls` | list directory contents
+`:explore-file-directory` | open file explorer
 `:cat` | concatenate and insert the content of files below selected text
 `:grep` | search files for a pattern
 `:find` | find files

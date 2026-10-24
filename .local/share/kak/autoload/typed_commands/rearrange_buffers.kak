@@ -1,5 +1,6 @@
 def -docstring "
 usage: rearrange-buffers
+description: rearrange buffers in the buffer list.
 config_options: []
 " rearrange-buffers %{
   buffer "*buffers*"

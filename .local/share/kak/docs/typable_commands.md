@@ -8,10 +8,12 @@ Command | Description
 `:theme` | load theme
 `:open-config` | open config file
 `:list-buffers` | list buffers
+`:rearrange-buffers` | rearrange buffers in the buffer list
 `:new-buffer` | create a new scratch buffer
 `:grab-buffer` | grab buffer in a client
 `:swap-buffer` | swap buffer in a client
 `:man` | display system documentation
+`:fifo` | create a new fifo buffer from command output
 `:ls` | list directory contents
 `:cat` | concatenate and insert the content of files below selected text
 `:grep` | search files for a pattern

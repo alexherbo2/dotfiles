@@ -7,6 +7,7 @@
 # dependencies: ["fifo"]
 # doc: yes
 # tests: no
+decl -hidden str-list find_selected_entries
 decl -docstring '
 find_command: "sh"
 ' str find_command 'sh'
@@ -64,6 +65,19 @@ config_options: ["find_command", "find_args"]
 }
 
 compl find file
+
+def -hidden enter_command_mode_with_find_context %{
+  prompt "(find):" -command-completion %{
+    set b find_selected_entries
+    eval -draft %{
+      select_find_entries 1
+      eval -itersel %{
+        set -add b find_selected_entries "%val{selection}"
+      }
+    }
+    eval -- %val{text} "%%opt{find_selected_entries}"
+  }
+}
 
 def -hidden jump_to_files %{
   eval -draft %{

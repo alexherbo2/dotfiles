@@ -9,6 +9,7 @@
 # tests: no
 decl -hidden str ls_working_directory
 decl -hidden str ls_file_entry
+decl -hidden str-list ls_selected_entries
 
 def -docstring '
 usage: ls [path]
@@ -66,6 +67,19 @@ def -hidden ls_file_impl -params 1 %{
 }
 
 compl ls file
+
+def -hidden enter_command_mode_with_ls_context %{
+  prompt "(ls):" -command-completion %{
+    set b ls_selected_entries
+    eval -draft %{
+      select_ls_entries 1
+      eval -itersel %{
+        set -add b ls_selected_entries "%opt{ls_working_directory}/%val{selection}"
+      }
+    }
+    eval -- %val{text} "%%opt{ls_selected_entries}"
+  }
+}
 
 def -hidden jump_to_files_or_directories %{
   eval -draft %{

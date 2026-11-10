@@ -4,6 +4,7 @@ TODO: Document keyboard mappings.
 
 Command | Description
 --- | ---
+`'` | execute next key as alt key
 `j` | move cursor visual line down
 `k` | move cursor visual line up
 `shift-j` | extend cursor visual line down
@@ -97,18 +98,20 @@ Command | Description
 `enter` | `*themes*` load theme
 `enter` | `*friendly_session_names*` rename session
 `enter` | `*friendly_client_names*` rename client
-`ctrl-enter` | `*grep*` select entries; use count for field selection
-`ctrl-enter` | `*find*` select entries; use count for field selection
-`ctrl-enter` | `*ls*` select entries; use count for field selection
-`ctrl-enter` | `*git_status*` select entries; use count for field selection
-`ctrl-enter` | `*git_blame*` select entries; use count for field selection
-`ctrl-enter` | `*buffers*` select entries; use count for field selection
-`ctrl-enter` | `*sessions*` select entries; use count for field selection
-`ctrl-enter` | `*clients*` select entries; use count for field selection
-`ctrl-enter` | `*themes*` select entries; use count for field selection
-`ctrl-enter` | `*friendly_session_names*` select entries; use count for field selection
-`ctrl-enter` | `*friendly_client_names*` select entries; use count for field selection
+`alt-0` | `*grep*` select entries; use count for field selection
+`alt-0` | `*find*` select entries; use count for field selection
+`alt-0` | `*ls*` select entries; use count for field selection
+`alt-0` | `*git_status*` select entries; use count for field selection
+`alt-0` | `*git_blame*` select entries; use count for field selection
+`alt-0` | `*buffers*` select entries; use count for field selection
+`alt-0` | `*sessions*` select entries; use count for field selection
+`alt-0` | `*clients*` select entries; use count for field selection
+`alt-0` | `*themes*` select entries; use count for field selection
+`alt-0` | `*friendly_session_names*` select entries; use count for field selection
+`alt-0` | `*friendly_client_names*` select entries; use count for field selection
 `alt-:` | `*buffers*` enter command mode with buffer context
 `alt-:` | `*sessions*` enter command mode with session context
 `alt-:` | `*clients*` enter command mode with client context
+`alt-:` | `*ls*` enter command mode with ls context
+`alt-:` | `*find*` enter command mode with find context
 TODO | TODO

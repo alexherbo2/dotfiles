@@ -42,4 +42,5 @@ map -docstring 'show character info' global normal <c-v> ':show_character_info<r
 map -docstring 'select visual block' global normal <c-v> ':select_visual_block<ret>'
 map -docstring 'enter window mode' global normal <c-w> ':enter_window_mode<ret>'
 map -docstring 'open text finder' global normal <a-space> ':open_text_finder<ret>'
+map -docstring "execute next key as alt key" global normal "'" ":execute_next_key_as_alt_key<ret>"
 map global normal G ''

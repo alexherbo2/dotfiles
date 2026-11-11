@@ -2,6 +2,7 @@ set global initial_scratch_message "pwd
 list-themes
 list-friendly-session-names
 list-friendly-client-names
+cd ~/config
 cd ~/code/chrome-shell
 cd ~/code/batch
 cd ~/code/pw

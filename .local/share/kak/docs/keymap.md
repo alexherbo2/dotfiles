@@ -98,17 +98,35 @@ Command | Description
 `enter` | `*themes*` load theme
 `enter` | `*friendly_session_names*` rename session
 `enter` | `*friendly_client_names*` rename client
-`alt-0` | `*grep*` select entries; use count for field selection
-`alt-0` | `*find*` select entries; use count for field selection
-`alt-0` | `*ls*` select entries; use count for field selection
-`alt-0` | `*git_status*` select entries; use count for field selection
-`alt-0` | `*git_blame*` select entries; use count for field selection
-`alt-0` | `*buffers*` select entries; use count for field selection
-`alt-0` | `*sessions*` select entries; use count for field selection
-`alt-0` | `*clients*` select entries; use count for field selection
-`alt-0` | `*themes*` select entries; use count for field selection
-`alt-0` | `*friendly_session_names*` select entries; use count for field selection
-`alt-0` | `*friendly_client_names*` select entries; use count for field selection
+`alt-0` | `*grep*` select whole entries; use `alt-1` through `alt-9` for field selection
+`alt-1` | `*grep*` select first field of entries
+`alt-2` | `*grep*` select second field of entries
+`alt-3` | `*grep*` select third field of entries
+`alt-0` | `*find*` select whole entries; use `alt-1` through `alt-9` for field selection
+`alt-1` | `*find*` select first field of entries
+`alt-0` | `*ls*` select whole entries; use `alt-1` through `alt-9` for field selection
+`alt-1` | `*ls*` select first field of entries
+`alt-0` | `*git_status*` select whole entries; use `alt-1` through `alt-9` for field selection
+`alt-1` | `*git_status*` select first field of entries
+`alt-2` | `*git_status*` select second field of entries
+`alt-0` | `*git_blame*` select whole entries; use `alt-1` through `alt-9` for field selection
+`alt-1` | `*git_blame*` select first field of entries
+`alt-2` | `*git_blame*` select second field of entries
+`alt-3` | `*git_blame*` select third field of entries
+`alt-4` | `*git_blame*` select fourth field of entries
+`alt-0` | `*buffers*` select whole entries; use `alt-1` through `alt-9` for field selection
+`alt-1` | `*buffers*` select first field of entries
+`alt-2` | `*buffers*` select second field of entries
+`alt-0` | `*sessions*` select whole entries; use `alt-1` through `alt-9` for field selection
+`alt-1` | `*sessions*` select first field of entries
+`alt-0` | `*clients*` select whole entries; use `alt-1` through `alt-9` for field selection
+`alt-1` | `*clients*` select first field of entries
+`alt-0` | `*themes*` select whole entries; use `alt-1` through `alt-9` for field selection
+`alt-1` | `*themes*` select first field of entries
+`alt-0` | `*friendly_session_names*` select whole entries; use `alt-1` through `alt-9` for field selection
+`alt-1` | `*friendly_session_names*` select first field of entries
+`alt-0` | `*friendly_client_names*` select whole entries; use `alt-1` through `alt-9` for field selection
+`alt-1` | `*friendly_client_names*` select first field of entries
 `alt-:` | `*buffers*` enter command mode with buffer context
 `alt-:` | `*sessions*` enter command mode with session context
 `alt-:` | `*clients*` enter command mode with client context

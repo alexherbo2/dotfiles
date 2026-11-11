@@ -8,11 +8,9 @@ config_options: []
       case "$kak_key" in
         "<"*">")
           echo "<a-${kak_key#<}"
-          break
           ;;
         *)
           echo "<a-$kak_key>"
-          break
           ;;
       esac
     }

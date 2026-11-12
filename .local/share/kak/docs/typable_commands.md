@@ -6,6 +6,7 @@ Command | Description
 --- | ---
 `:help` | open documentation
 `:theme` | load theme
+`:open` | open files in the user’s preferred application
 `:open-config` | open config file
 `:list-buffers` | list buffers
 `:rearrange-buffers` | rearrange buffers in the buffer list

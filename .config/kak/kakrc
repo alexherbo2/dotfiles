@@ -23,7 +23,27 @@ view ~/books/list.txt
 view ~/manga/list.txt
 view ~/series/list.txt
 view ~/anime/list.txt
-view ~/movies/list.txt"
+view ~/movies/list.txt
+view ~/config
+view ~/code/chrome-shell
+view ~/code/batch
+view ~/code/pw
+view ~/code/chrome-shortcuts
+view ~/code/chrome-dmenu
+view ~/code/chrome-mpv
+view ~/code/mpv-clip
+view ~/code/chrome-pandoc
+view ~/code/chrome-nano
+view ~/code/taupiqueur.github.io
+view ~/notes
+view ~/shorts
+view ~/games
+view ~/shorts
+view ~/books
+view ~/manga
+view ~/series
+view ~/anime
+view ~/movies"
 face global Tab WhitespaceDiagnosticError
 face global Newline Whitespace
 face global NonBreakingSpace WhitespaceDiagnosticError

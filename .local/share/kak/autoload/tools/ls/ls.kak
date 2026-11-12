@@ -45,6 +45,7 @@ def -hidden ls_impl -params 1 %{
   set buffer ls_working_directory %sh{
     realpath -- "$1"
   }
+  trigger-user-hook "BufOpenDir=%opt{ls_working_directory}"
 }
 
 def -hidden ls_file_impl -params 1 %{

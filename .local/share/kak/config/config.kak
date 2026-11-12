@@ -20,7 +20,10 @@ source "%val{runtime}/themes/default.kak"
 source "%val{runtime}/themes/macos_light.kak"
 add_inactive_client_indicators
 add_insert_chars_user_hook global
-add_buffer_open_directory_user_hook global
+hook g RuntimeError "(?:\d+:\d+: '(?:.+?)': )*\d+:\d+: '(?:e|edit|o|open)': (.+): is a directory" %{
+  ls %val{hook_param_capture_1}
+  echo ""
+}
 hook global InsertChar ".*" indent_on_inserted_character_with_indentation_rules
 hook global BufOpenFile ".*" %{
   hook -always -once buffer NormalIdle ".*" %{

@@ -20,7 +20,7 @@ source "%val{runtime}/themes/default.kak"
 source "%val{runtime}/themes/macos_light.kak"
 add_inactive_client_indicators
 add_insert_chars_user_hook global
-hook g RuntimeError "(?:\d+:\d+: '(?:.+?)': )*\d+:\d+: '(?:e|edit|o|open)': (.+): is a directory" %{
+hook g RuntimeError "(?:\d+:\d+: '(?:.+?)': )*\d+:\d+: '(?:e|edit)': (.+): is a directory" %{
   ls %val{hook_param_capture_1}
   echo ""
 }

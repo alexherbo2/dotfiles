@@ -8,4 +8,5 @@ hook global BufSetOption 'filetype=ls' %{
   map -docstring 'select whole entries' buffer normal <a-0> ':select_ls_entries 0<ret>'
   map -docstring 'select first field of entries' buffer normal <a-1> ':select_ls_entries 1<ret>'
   map -docstring "enter command mode with ls context" buffer normal <a-:> ":enter_command_mode_with_ls_context<ret>"
+  map -docstring "open selected files" buffer normal <a-ret> ":enter_command_mode_with_ls_context<ret>open<ret>"
 }

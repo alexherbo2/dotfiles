@@ -4,7 +4,7 @@ description: execute next key as alt key.
 config_options: []
 " execute_next_key_as_alt_key %{
   on-key %{
-    exec -with-maps -with-hooks %sh{
+    exec -with-maps -with-hooks -save-regs "" %sh{
       case "$kak_key" in
         "<"*">")
           echo "<a-${kak_key#<}"

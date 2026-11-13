@@ -16,8 +16,9 @@ cd ~/code/chrome-nano
 cd ~/code/taupiqueur.github.io
 cd ~/notes
 cd ~/shorts
-view ~/Documents
+view ~/Desktop
 view ~/Downloads
+view ~/Documents
 view ~/notes.txt
 view ~/todo.txt
 view ~/games/info.txt

@@ -2,26 +2,6 @@
 # https://gnu.org/software/bash/
 # https://gnu.org/software/bash/manual/bash.html
 
-# Homebrew
-# https://brew.sh
-if [ -x /opt/homebrew/bin/brew ]
-then
-  eval "$(brew shellenv)"
-fi
-
-# Enable Bash completion on macOS.
-if [ -r /opt/homebrew/etc/profile.d/bash_completion.sh ]
-then
-  . /opt/homebrew/etc/profile.d/bash_completion.sh
-fi
-
-# Nix
-# https://nixos.org
-if [ -r /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]
-then
-  . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-fi
-
 # Prompt -----------------------------------------------------------------------
 
 export PS1='\[\e[32m\]\u@\h\[\e[36m\](\l)\[\e[0m\] \[\e[34m\]\w\[\e[0m\] \[\e[34m\][$?]\[\e[0m\]\n\[\e[90m\]>>>\[\e[0m\] '
@@ -287,12 +267,6 @@ alias apk-uninstall='apk list -Iq | fzy | xargs doas apk del'
 alias apk-clean='doas apk cache clean'
 
 # macOS ------------------------------------------------------------------------
-
-# macOS POSIX shell
-if [ -x /opt/homebrew/bin/dash ]
-then
-  export KAKOUNE_POSIX_SHELL=/opt/homebrew/bin/dash
-fi
 
 # Keep MacBook awake with lid closed
 # https://caffeinated.app/keep-macbook-awake-with-lid-closed/

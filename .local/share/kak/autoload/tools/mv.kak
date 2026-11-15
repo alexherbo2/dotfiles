@@ -7,3 +7,15 @@ def mv -params 1 %{
 }
 
 compl mv file
+
+def -hidden mv_f -params 1 %{
+  eval %sh{
+    mv -f -- "$kak_buffile" "$1" ||
+    echo "abort 'mv' '$?'"
+  }
+  rename-buffer -- %arg{1}
+}
+
+compl mv_f file
+
+alias g mv! mv_f

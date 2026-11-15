@@ -5,11 +5,11 @@ def git-add %{
   }
 }
 
-def git-add-f %{
+def -hidden git_add_f %{
   eval %sh{
     git add -f -- "$kak_buffile" ||
     echo "abort 'git-add' '$?'"
   }
 }
 
-alias global git-add! git-add-f
+alias g git-add! git_add_f

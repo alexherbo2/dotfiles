@@ -72,6 +72,14 @@ config_options: []
   }
 }
 
-complete-command fifo shell
+compl fifo shell
 
-alias global ! fifo
+alias g !! fifo
+
+def -hidden fifo_append -params 1.. %{
+  fifo -append %arg{@}
+}
+
+compl fifo_append shell
+
+alias g ! fifo_append

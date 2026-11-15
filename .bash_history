@@ -986,6 +986,13 @@ set -e
 exit 0
 exit 1
 exit
+export HOMEBREW_NO_ANALYTICS=1
+export HOMEBREW_NO_AUTO_UPDATE=1
+/opt/homebrew/bin/brew analytics off
+echo >> ~/.bash_profile~ "export HOMEBREW_NO_ANALYTICS=1"
+echo >> ~/.bash_profile~ "export HOMEBREW_NO_AUTO_UPDATE=1"
+echo >> ~/.zprofile "export HOMEBREW_NO_ANALYTICS=1"
+echo >> ~/.zprofile "export HOMEBREW_NO_AUTO_UPDATE=1"
 echo >> ~/.bashrc~ ""
 echo >> ~/.bash_profile~ ""
 echo >> ~/.bash_history~ ""

@@ -31,7 +31,6 @@ map -docstring 'select whole lines or extend line down' global normal x ':select
 map -docstring 'quit current client' global normal <c-q> ':quit<ret>'
 map -docstring 'delete current buffer' global normal <c-w> ':delete-buffer<ret>'
 map -docstring 'save current buffer to its file' global normal <c-s> ':write<ret>'
-map -docstring 'toggle read-only flag' global normal <c-r> ':toggle_readonly_flag<ret>'
 map -docstring 'goto last accessed buffer' global normal <c-l> 'ga'
 map -docstring 'keep primary selection and collapse selections' global normal <esc> ',;<esc>'
 map -docstring 'enter command mode' global normal <ret> :

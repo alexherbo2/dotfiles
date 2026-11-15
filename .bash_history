@@ -382,7 +382,7 @@ brew link --overwrite node
 brew link --force curl
 brew link --force ncurses
 alacritty msg create-window
-rsync 'host:Library/Application Support/Google/Chrome/.' .config/chromium
+rsync -azH --info=progress2 --delete 'host:Library/Application Support/Google/Chrome/.' .config/chromium
 rm -Rf .config/chromium
 open -a 'Google Chrome' --args --disable-features='ExtensionManifestV2Unsupported,ExtensionManifestV2Disabled' --silent-debugger-extension-api
 open 'Applications/Google Chrome'
@@ -588,7 +588,7 @@ caffeinate -d
 tmux new-session caffeinate -d
 caffeinate-lid
 decaffeinate-lid
-nginx
+sudo nginx -c /etc/nginx/nginx.conf
 ifconfig
 ifconfig | grep 192.168
 ifconfig | grep inet
@@ -703,12 +703,12 @@ mkdir docs
 scp ~/docs/notes.txt phaazon:docs
 scp phaazon:docs/notes.txt ~/storage/downloads/notes.txt
 scp phaazon:docs/notes.txt ~/Downloads/notes.txt
-rsync --exclude=.git/ ~/storage/shorts phaazon:
+rsync -azH --info=progress2 --delete --exclude=.git/ ~/storage/shorts phaazon:
 git remote add origin git@phaazon:shorts.git
 mkdir bin
 install ffmpeg-git-20240629-amd64-static/ffmpeg bin
 export PATH=~/bin:$PATH
-rsync home guest:
+rsync -azH --info=progress2 --delete home guest:
 sshfs host: shared/kanto
 ngrok tcp 22
 ngrok http 80
@@ -741,10 +741,10 @@ doas mount /dev/disk/by-label/Disk mnt/Disk
 doas mount /dev/disk/by-label/USB mnt/USB
 doas umount mnt/Disk
 doas umount mnt/USB
-rsync home storage shared guest:mnt/Disk
-rsync home shared guest:mnt/USB
-rsync home storage shared /Volumes/Disk
-rsync home shared /Volumes/USB
+rsync -azH --info=progress2 --delete home storage shared guest:mnt/Disk
+rsync -azH --info=progress2 --delete home shared guest:mnt/USB
+rsync -azH --info=progress2 --delete home storage shared /Volumes/Disk
+rsync -azH --info=progress2 --delete home shared /Volumes/USB
 rm -R /Volumes/Disk/.fseventsd
 rm -R /Volumes/USB/.fseventsd
 shutdown now

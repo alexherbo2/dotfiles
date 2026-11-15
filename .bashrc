@@ -87,24 +87,11 @@ alias hk='history -a'
 alias hj='history -n'
 alias hc='history -cr ~/.bash_history~ && history -w'
 
-# Navigation
-alias n=nnn
-alias br=broot
-alias ..='cd ..'
-alias -- -='cd -'
-
 # ssh
 # Note: Runs command with aliases.
 alias @host='ssh host -t '
 alias @guest='ssh guest -t '
 alias @phaazon='ssh phaazon -t tmux attach-session'
-
-# Run commands with aliases.
-alias sudo='sudo '
-
-# Application launcher
-# Note: Runs command with aliases.
-alias '@=swaymsg -- exec '
 
 # Make
 alias m=make
@@ -121,35 +108,11 @@ alias ci='cargo install --path .'
 alias cu='cargo uninstall'
 alias cc='cargo clean'
 
-# ifconfig.co
-# https://ifconfig.co
-alias ipd='curl ifconfig.co'
-
-# nginx
-# https://nginx.org
-alias nginx='sudo nginx -c /etc/nginx/nginx.conf'
-
-# procs
-# https://github.com/dalance/procs
-alias ps=procs
-
-# rsync
-# https://rsync.samba.org
-alias rsync='rsync -azH --info=progress2 --delete'
-
 # tar.xz
 txz() {
   tar caf "$1.tar.xz" "$1"
 }
 alias untar='tar xvf'
-
-# bat
-# https://github.com/sharkdp/bat
-alias cat=bat
-
-# curl
-# https://curl.haxx.se
-alias curl='curl -sSL'
 
 # tmux
 # https://github.com/tmux/tmux
@@ -208,12 +171,6 @@ alias gsquash^='git reset --soft HEAD^'
 alias grb='git reset --hard'
 alias grb^='git reset --hard HEAD^'
 
-# eza
-# https://eza.rocks
-alias ls='eza --group-directories-first -a'
-alias ll='eza --group-directories-first -a -l --git'
-alias tree='eza -T -a -I .git'
-
 # batch
 # https://github.com/taupiqueur/batch
 # interactive mv
@@ -234,14 +191,6 @@ ffmpeg_x265() {
 ffmpeg_sub() {
   ffmpeg -i "$1" -map "0:s:${2:-0}" -- "$1.srt"
 }
-
-# yt-dlp
-# https://github.com/yt-dlp/yt-dlp
-alias y=yt-dlp
-
-# Pandoc
-# https://pandoc.org
-alias pandoc='pandoc --pdf-engine tectonic'
 
 # Package managers -------------------------------------------------------------
 

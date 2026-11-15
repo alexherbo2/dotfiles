@@ -18,4 +18,4 @@ def -hidden git_mv_f -params 1 %{
 
 compl git_mv_f file
 
-alias g git-mv git_mv_f
+alias g git-mv! git_mv_f

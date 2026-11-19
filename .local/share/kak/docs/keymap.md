@@ -64,6 +64,12 @@ Command | Description
 `ctrl-e` | open file explorer
 `space e` | open file explorer
 `space f` | open file picker
+`space w` | enter window mode
+`space o` | open files in the user’s preferred application
+`space enter` | `*find*` open selected files in the user’s preferred application
+`space m` | `*find*` open selected files in mpv
+`space enter` | `*ls*` open selected files in the user’s preferred application
+`space m` | `*ls*` open selected files in mpv
 `alt-space` | open text finder
 `~` | enter letter case mode
 `~` ... | ...

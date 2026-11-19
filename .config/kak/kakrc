@@ -53,12 +53,6 @@ face g Tab WhitespaceDiagnosticError
 face g Newline Whitespace
 face g NonBreakingSpace WhitespaceDiagnosticError
 face g Indent Whitespace
-hook g BufSetOption "filetype=ls" %{
-  map -docstring "open selected files in mpv" b user m ":enter_command_mode_with_ls_context<ret>open -a mpv --<ret>"
-}
-hook g BufSetOption "filetype=find" %{
-  map -docstring "open selected files in mpv" b user m ":enter_command_mode_with_find_context<ret>open -a mpv --<ret>"
-}
 hook global BufCreate ".+/i3status/config|.+/sway/config|.+/tmux\.conf|.+/kamux\.conf" %{
   set b filetype sh
 }

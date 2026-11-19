@@ -7,8 +7,14 @@
 # dependencies: []
 # doc: yes
 # tests: no
-def nohup -params 1.. %{
+def -docstring "
+usage: nohup [command] [args]
+description: invoke a utility immune to hangups.
+config_options: []
+" nohup -params 1.. %{
   nop %sh{
     exec nohup -- "$@" < /dev/null > /dev/null 2>&1 &
   }
 }
+
+compl nohup shell

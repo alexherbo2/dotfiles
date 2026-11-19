@@ -38,3 +38,4 @@ map -docstring '“' global digraphs '<lt>' ':insert_text “<ret>'
 map -docstring '”' global digraphs '<gt>' ':insert_text ”<ret>'
 map -docstring '—' global digraphs '<minus>' ':insert_text —<ret>'
 map -docstring '–' global digraphs '_' ':insert_text –<ret>'
+map -docstring "€" g digraphs "$" ":insert_text €<ret>"

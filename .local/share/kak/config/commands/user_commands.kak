@@ -4,6 +4,7 @@ map -docstring 'convert selected text to ASCII' global user @ ':convert_selected
 map -docstring 'get character info' global user u ':get_character_info<ret>'
 map -docstring 'open file explorer' global user e ':explore-file-directory<ret>'
 map -docstring 'enter window mode' global user w ':enter_window_mode<ret>'
+map -docstring "open files in the user’s preferred application" global user o ":enter_open_mode<ret>"
 map -docstring 'open file picker' global user f ':open_file_picker<ret>'
 map -docstring 'open changed file picker' global user g ':open_changed_file_picker<ret>'
 map -docstring 'open buffer picker' global user b ':open_buffer_picker<ret>'

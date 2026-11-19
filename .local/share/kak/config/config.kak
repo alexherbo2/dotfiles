@@ -40,3 +40,6 @@ hook -once global ClientCreate ".*" %{
     }
   }
 }
+hook g KakBegin ".*" %{
+  trigger-user-hook "CONFIG_PLATFORM=%opt{platform_name}"
+}

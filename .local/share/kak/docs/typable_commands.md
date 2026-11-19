@@ -15,6 +15,7 @@ Command | Description
 `:swap-buffer` | swap buffer in a client
 `:man` | display system documentation
 `:fifo` | create a new fifo buffer from command output
+`:nohup` | invoke a utility immune to hangups
 `:ls` | list directory contents
 `:explore-file-directory` | open file explorer
 `:cat` | concatenate and insert the content of files below selected text

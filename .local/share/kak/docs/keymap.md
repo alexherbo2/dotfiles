@@ -106,6 +106,7 @@ Command | Description
 `enter` | `*friendly_client_names*` rename client
 `alt-enter` | `*find*` open selected files in the user’s preferred application
 `alt-enter` | `*ls*` open selected files in the user’s preferred application
+`alt-y` | `*ls*` copy selected files as pathnames
 `alt-0` | `*grep*` select whole entries; use `alt-1` through `alt-9` for field selection
 `alt-1` | `*grep*` select first field of entries
 `alt-2` | `*grep*` select second field of entries

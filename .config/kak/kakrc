@@ -16,6 +16,7 @@ cd ~/code/chrome-nano
 cd ~/code/taupiqueur.github.io
 cd ~/notes
 cd ~/shorts
+view ~
 view ~/Desktop
 view ~/Downloads
 view ~/Documents
@@ -28,7 +29,9 @@ view ~/manga/list.txt
 view ~/series/list.txt
 view ~/anime/list.txt
 view ~/movies/list.txt
+view ~/shared/clipboard.txt
 view ~/config
+view ~/code
 view ~/code/chrome-shell
 view ~/code/batch
 view ~/code/pw
@@ -39,8 +42,14 @@ view ~/code/mpv-clip
 view ~/code/chrome-pandoc
 view ~/code/chrome-nano
 view ~/code/taupiqueur.github.io
+view ~/home
+view ~/storage
+view ~/shared
+view ~/cloud
+view ~/tmp
 view ~/docs
 view ~/notes
+view ~/youtube
 view ~/shorts
 view ~/games
 view ~/shorts

@@ -88,10 +88,8 @@ alias hj='history -n'
 alias hc='history -cr ~/.bash_history~ && history -w'
 
 # ssh
-# Note: Runs command with aliases.
 alias @host='ssh host -t '
 alias @guest='ssh guest -t '
-alias @phaazon='ssh phaazon -t tmux attach-session'
 
 # Make
 alias m=make

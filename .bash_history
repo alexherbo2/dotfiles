@@ -382,6 +382,7 @@ brew link --overwrite node
 brew link --force curl
 brew link --force ncurses
 alacritty msg create-window
+rsync -azH --info=progress2 --delete 'taupiqueur@192.168.64.1:Library/Application Support/Google/Chrome/.' .config/chromium
 rsync -azH --info=progress2 --delete 'host:Library/Application Support/Google/Chrome/.' .config/chromium
 rm -Rf .config/chromium
 open -a 'Google Chrome' --args --disable-features='ExtensionManifestV2Unsupported,ExtensionManifestV2Disabled' --silent-debugger-extension-api
@@ -686,29 +687,33 @@ rm .git/COMMIT_EDITMSG
 rm .git/gitui
 sudo kak /private/var/db/dhcpd_leases
 find /private/var/folders -name '*icon*' -print -exec rm -Ri -- {} +
+ssh taupiqueur@192.168.64.1
 ssh host
+ssh taupiqueur@192.168.64.2
 ssh guest
-ssh mawww
-ssh phaazon
+ssh taupiqueur@tamiok.kakoune.org
+ssh taupiqueur@strongly-typed-thoughts.net
 uname -a
 uname -m
 curl -O https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-amd64-static.tar.xz
 tar xvf ffmpeg-git-amd64-static.tar.xz
-ssh phaazon -t tmux attach-session
+ssh taupiqueur@strongly-typed-thoughts.net -t tmux attach-session
 xattr -rc ~/shorts
 sudo xattr -rc ~/shorts
 find ~/shorts -name '*.DS_Store'
-scp -r ~/storage/shorts phaazon:
+scp -r ~/storage/shorts taupiqueur@strongly-typed-thoughts.net:
 mkdir docs
-scp ~/docs/notes.txt phaazon:docs
-scp phaazon:docs/notes.txt ~/storage/downloads/notes.txt
-scp phaazon:docs/notes.txt ~/Downloads/notes.txt
-rsync -azH --info=progress2 --delete --exclude=.git/ ~/storage/shorts phaazon:
-git remote add origin git@phaazon:shorts.git
+scp ~/docs/notes.txt taupiqueur@strongly-typed-thoughts.net:docs
+scp taupiqueur@strongly-typed-thoughts.net:docs/notes.txt ~/storage/downloads/notes.txt
+scp taupiqueur@strongly-typed-thoughts.net:docs/notes.txt ~/Downloads/notes.txt
+rsync -azH --info=progress2 --delete --exclude=.git/ ~/storage/shorts taupiqueur@strongly-typed-thoughts.net:
+git remote add origin taupiqueur@strongly-typed-thoughts.net:shorts.git
 mkdir bin
 install ffmpeg-git-20240629-amd64-static/ffmpeg bin
 export PATH=~/bin:$PATH
+rsync -azH --info=progress2 --delete home taupiqueur@192.168.64.2:
 rsync -azH --info=progress2 --delete home guest:
+sshfs taupiqueur@192.168.64.1: shared/kanto
 sshfs host: shared/kanto
 ngrok tcp 22
 ngrok http 80
@@ -741,7 +746,9 @@ doas mount /dev/disk/by-label/Disk mnt/Disk
 doas mount /dev/disk/by-label/USB mnt/USB
 doas umount mnt/Disk
 doas umount mnt/USB
+rsync -azH --info=progress2 --delete home storage shared taupiqueur@192.168.64.2:mnt/Disk
 rsync -azH --info=progress2 --delete home storage shared guest:mnt/Disk
+rsync -azH --info=progress2 --delete home shared taupiqueur@192.168.64.2:mnt/USB
 rsync -azH --info=progress2 --delete home shared guest:mnt/USB
 rsync -azH --info=progress2 --delete home storage shared /Volumes/Disk
 rsync -azH --info=progress2 --delete home shared /Volumes/USB

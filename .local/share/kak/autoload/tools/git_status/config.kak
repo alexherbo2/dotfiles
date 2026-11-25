@@ -8,4 +8,5 @@ hook global BufSetOption 'filetype=git_status' %{
   map -docstring 'select whole entries' buffer normal <a-0> ':select_git_status_entries 0<ret>'
   map -docstring 'select first field of entries' buffer normal <a-1> ':select_git_status_entries 1<ret>'
   map -docstring 'select second field of entries' buffer normal <a-2> ':select_git_status_entries 2<ret>'
+  map -docstring "enter command mode with git status context" b normal <a-:> ":enter_command_mode_with_git_status_context<ret>"
 }

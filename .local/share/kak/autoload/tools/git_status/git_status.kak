@@ -7,6 +7,7 @@
 # dependencies: ["fifo", "ls"]
 # doc: no
 # tests: no
+decl -hidden str-list git_status_selected_entries
 def git-status -params .. %{
   fifo -name '*git_status*' sh -c %{
     git status -z --no-renames -- "$@" |
@@ -16,6 +17,19 @@ def git-status -params .. %{
 
 compl git-status shell-script-candidates %{
   git ls-files
+}
+
+def -hidden enter_command_mode_with_git_status_context %{
+  prompt "(git_status):" -command-completion %{
+    set b git_status_selected_entries
+    eval -draft %{
+      select_git_status_entries 2
+      eval -itersel %{
+        set -add b git_status_selected_entries "%val{selection}"
+      }
+    }
+    eval -- %val{text} "%%opt{git_status_selected_entries}"
+  }
 }
 
 def -hidden git_status_jump_to_files %{

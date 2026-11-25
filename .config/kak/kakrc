@@ -1,4 +1,6 @@
 set g initial_scratch_message "pwd
+ls
+list-buffers
 list-themes
 list-friendly-session-names
 list-friendly-client-names

@@ -66,10 +66,10 @@ Command | Description
 `space f` | open file picker
 `space w` | enter window mode
 `space o` | open files in the user’s preferred application
-`space enter` | `*find*` open selected files in the user’s preferred application
-`space m` | `*find*` open selected files in mpv
-`space enter` | `*ls*` open selected files in the user’s preferred application
-`space m` | `*ls*` open selected files in mpv
+`space o enter` | `*find*` open selected files in the user’s preferred application
+`space o m` | `*find*` open selected files in mpv
+`space o enter` | `*ls*` open selected files in the user’s preferred application
+`space o m` | `*ls*` open selected files in mpv
 `alt-space` | open text finder
 `~` | enter letter case mode
 `~` ... | ...
@@ -141,4 +141,5 @@ Command | Description
 `alt-:` | `*clients*` enter command mode with client context
 `alt-:` | `*ls*` enter command mode with ls context
 `alt-:` | `*find*` enter command mode with find context
+`alt-:` | `*git_status*` enter command mode with git status context
 TODO | TODO

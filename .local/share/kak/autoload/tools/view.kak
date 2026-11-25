@@ -8,9 +8,10 @@
 # doc: yes
 # tests: no
 def -docstring "
-usage: view
+usage: view [file]
 description: open file in read-only mode.
 config_options: []
+aliases: [""v""]
 " view -params 1 %{
   edit -existing -readonly -- %arg{1}
 }

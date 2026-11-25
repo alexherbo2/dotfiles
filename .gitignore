@@ -1,8 +1,10 @@
+.DS_STORE
+.config/mpv/scripts
+.config/mpv/watch_later
 .config/env
 .config/google-chrome
 .config/chromium
 .config/mozilla
-.config/mpv/watch_later
 .ssh/id_ed25519
 .ssh/id_ed25519_*
 .ssh/known_hosts
